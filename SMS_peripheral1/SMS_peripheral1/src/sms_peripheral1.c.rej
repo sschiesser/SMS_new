@@ -1,0 +1,19 @@
+diff a/Projects/SMS_new/SMS_peripheral1/SMS_peripheral1/src/sms_peripheral1.c b/Projects/SMS_new/SMS_peripheral1/SMS_peripheral1/src/sms_peripheral1.c	(rejected hunks)
+@@ -54,6 +54,17 @@
+ /*- Includes ---------------------------------------------------------------*/
+ #include "sms_peripheral1.h"
+ 
++void sms_init_flags(void)
++{
++    ble_current_state = BLE_STATE_POWEROFF;
++    button_current_state = BUTTON_STATE_NONE;
++    ms58_device.current_state = MS58_STATE_NONE;
++    timer1_current_mode = TIMER1_MODE_NONE;
++    timer2_current_mode = TIMER2_MODE_NONE;
++    sms_working_mode = SMS_MODE_BUTTON_SOLO;
++}
++
++
+ void sms_sensors_switch(bool en)
+ {
+     if(en) {
