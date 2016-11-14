@@ -115,7 +115,7 @@ void sms_dualtimer2_cb(void)
 
 void sms_dualtimer1_fn(void)
 {
-    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
+    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
     switch(timer1_current_mode) {
         /* Timer1 mode = MS58_RESET */
         case TIMER1_MODE_MS58_RESET:
@@ -131,7 +131,7 @@ void sms_dualtimer1_fn(void)
                     ms58_device.current_state = MS58_STATE_NONE;
                     sms_working_mode = SMS_MODE_BUTTON_SOLO;
                     // Init IMU device...
-                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
                         ulp_ready = true;
@@ -148,9 +148,9 @@ void sms_dualtimer1_fn(void)
                 sms_working_mode = SMS_MODE_BUTTON_PRESSURE;
                 //DBG_LOG_DEV("[sms_dualtimer1_fn]\tPressure sensor initialized. Working mode = BUTTON_PRESSURE");
                 DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (MS58 reset)...");
-                sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                sms_sensors_interrupt_toggle(false, true);
                 // Init IMU device...
-                //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                 if(timer2_current_mode == TIMER2_MODE_NONE) {
                     //release_sleep_lock();
                     ulp_ready = true;
@@ -165,7 +165,7 @@ void sms_dualtimer1_fn(void)
             timer1_current_mode = TIMER1_MODE_NONE;
             button_previous_state = button_current_state;
             button_current_state = sms_button_get_state();
-            sms_monitor_states("[sms_dualtimer1_fn]");
+            sms_monitor_get_states("[sms_dualtimer1_fn]");
             
             switch(button_previous_state) {
                 // --- Timer1 mode = STARTUP: switch prev_state ---
@@ -180,14 +180,14 @@ void sms_dualtimer1_fn(void)
                             sms_ble_startup();
                         }
                         else {
-                            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                             timer1_current_mode = TIMER1_MODE_STARTUP;
                             //ulp_ready = false;
                             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
                         }
                     }
                     else {
-                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
                             ulp_ready = true;
@@ -199,13 +199,13 @@ void sms_dualtimer1_fn(void)
                     case BUTTON_STATE_B1:
                     if(ble_current_state == BLE_STATE_POWEROFF) {
                         sms_btn_cnt = 0;
-                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         timer1_current_mode = TIMER1_MODE_STARTUP;
                         //ulp_ready = false;
                         sms_dualtimer_start(TIMER_UNIT_MS, SMS_BLINK_STARTUP_MS, DUALTIMER_TIMER1);
                     }
                     else {
-                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
                             ulp_ready = true;
@@ -217,7 +217,7 @@ void sms_dualtimer1_fn(void)
                     case BUTTON_STATE_BOTH:
                     case BUTTON_STATE_NONE:
                     default:
-                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
                         ulp_ready = true;
@@ -238,14 +238,14 @@ void sms_dualtimer1_fn(void)
                             sms_ble_startup();
                         }
                         else {
-                            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                             timer1_current_mode = TIMER1_MODE_STARTUP;
                             //ulp_ready = false;
                             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
                         }
                     }
                     else {
-                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
                             ulp_ready = true;
@@ -257,13 +257,13 @@ void sms_dualtimer1_fn(void)
                     case BUTTON_STATE_B0:
                     if(ble_current_state == BLE_STATE_POWEROFF) {
                         sms_btn_cnt = 0;
-                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         timer1_current_mode = TIMER1_MODE_STARTUP;
                         //ulp_ready = false;
                         sms_dualtimer_start(TIMER_UNIT_MS, SMS_BLINK_STARTUP_MS, DUALTIMER_TIMER1);
                     }
                     else {
-                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
                             ulp_ready = true;
@@ -275,7 +275,7 @@ void sms_dualtimer1_fn(void)
                     case BUTTON_STATE_NONE:
                     case BUTTON_STATE_BOTH:
                     default:
-                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
                         ulp_ready = true;
@@ -289,7 +289,7 @@ void sms_dualtimer1_fn(void)
                 case BUTTON_STATE_BOTH:
                 default:
                 {
-                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
                         ulp_ready = true;
@@ -306,7 +306,7 @@ void sms_dualtimer1_fn(void)
             //timer1_current_mode = TIMER1_MODE_NONE;
             button_previous_state = button_current_state;
             button_current_state = sms_button_get_state();
-            sms_monitor_states("[sms_dualtimer1_fn]");
+            sms_monitor_get_states("[sms_dualtimer1_fn]");
             
             if((button_previous_state == BUTTON_STATE_BOTH) && (button_current_state == BUTTON_STATE_BOTH)) {
                 sms_btn_cnt++;
@@ -314,7 +314,7 @@ void sms_dualtimer1_fn(void)
                     sms_ble_power_down();
                 }
                 else {
-                    //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
+                    //sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
                     timer1_current_mode = TIMER1_MODE_SHUTDOWN;
                     sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
                 }
@@ -322,7 +322,7 @@ void sms_dualtimer1_fn(void)
             else {
                 if(sms_pressure_state == SENSOR_STATE_STDBY) {
                     DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (shutting down)...");
-                    sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                    sms_sensors_interrupt_toggle(false, true);
                 }                    
                 timer1_current_mode = TIMER1_MODE_NONE;
                 if(timer2_current_mode == TIMER2_MODE_NONE) {
@@ -334,7 +334,7 @@ void sms_dualtimer1_fn(void)
         
         case TIMER1_MODE_NONE:
         default:
-        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
         if(timer2_current_mode == TIMER2_MODE_NONE) {
             //release_sleep_lock();
             ulp_ready = true;
@@ -345,13 +345,13 @@ void sms_dualtimer1_fn(void)
 
 void sms_dualtimer2_fn(void)
 {
-    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
-    sms_monitor_states("[sms_dualtimer2_fn]");
+    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+    sms_monitor_get_states("[sms_dualtimer2_fn]");
     switch(timer2_current_mode) {
         case TIMER2_MODE_INDICATION_TOUT:
         timer2_current_mode = TIMER2_MODE_NONE;
         if(ble_current_state == BLE_STATE_PAIRED) {
-            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             if(timer1_current_mode == TIMER1_MODE_NONE) {
                 //release_sleep_lock();
                 ulp_ready = true;
@@ -364,9 +364,9 @@ void sms_dualtimer2_fn(void)
                 //DBG_LOG_DEV("[sms_dualtimer2_fn]\tTimer1 mode: %d", timer1_current_mode);
                 timer2_current_mode = TIMER2_MODE_NONE;
                 ble_current_state = BLE_STATE_PAIRED;
-                //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                 //DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tStarting sensors...");
-                //sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                //sms_sensors_toggle_interrupt(SMS_EXTINT_ENABLE);
                 //if(timer1_current_mode == TIMER1_MODE_NONE) release_sleep_lock();
             }
             else {
@@ -375,7 +375,7 @@ void sms_dualtimer2_fn(void)
                 timer2_current_mode = TIMER2_MODE_INDICATION_TOUT;
                 //ulp_ready = false;
                 sms_dualtimer_start(TIMER_UNIT_MS, BLE_INDICATION_TOUT_MS, DUALTIMER_TIMER2);
-                //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             }
         }
         break;
@@ -386,7 +386,7 @@ void sms_dualtimer2_fn(void)
         sms_led_blink_cnt++;
         if(sms_led_blink_cnt >= SMS_BLINK_STARTUP_CNT) {
             sms_led_switch_off(SMS_LED_0_PIN);
-            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             /* Blinking done... starting ble advertisement */
             //DBG_LOG_DEV("[sms_dualtimer2_fn]\tSMS awake... starting advertisement");
             sms_ble_advertise();
@@ -408,7 +408,7 @@ void sms_dualtimer2_fn(void)
         if(sms_led_blink_cnt >= SMS_BLINK_SHTDWN_CNT) {
             sms_led_switch_off(SMS_LED_0_PIN);
             DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tPowering off...");
-            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             sms_init_variables();
             ulp_ready = true;
             //release_sleep_lock();
@@ -425,7 +425,7 @@ void sms_dualtimer2_fn(void)
         case TIMER2_MODE_LED_ADVERTISING:
         case TIMER2_MODE_LED_CONNECTION_LOST:
         case TIMER2_MODE_NONE:
-        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
         break;
     }
 }

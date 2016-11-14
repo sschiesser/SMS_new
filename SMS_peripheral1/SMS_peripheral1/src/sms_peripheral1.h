@@ -124,16 +124,6 @@ volatile sms_plf_int_t sms_current_interrupt;
 uint8_t sms_btn_cnt;
 at_ble_handle_t sms_connection_handle;
 
-enum sms_ext_interrupt_toggle {
-    SMS_EXT_INT_ENABLE,
-    SMS_EXT_INT_DISABLE
-};
-
-enum sms_sensor_state {
-    SENSOR_STATE_OFF,
-    SENSOR_STATE_STDBY,
-    SENSOR_STATE_ON
-};
 
 volatile bool ulp_ready;
 volatile bool ulp_active;
@@ -146,9 +136,5 @@ volatile uint32_t msp;
  * DECLARATIONS
  * ------------------------------------------------ */
 void sms_init_variables(void);
-void sms_set_monitor_pin(void);
-void sms_monitor_states(const char *label);
-void sms_sensors_switch(bool en);
-void sms_sensors_toggle_interrupt(enum sms_ext_interrupt_toggle toggle);
 
 #endif /* __SMS_PERIPHERAL_H__ */

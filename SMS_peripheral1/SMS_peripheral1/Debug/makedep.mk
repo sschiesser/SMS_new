@@ -8,6 +8,8 @@ src\sms_v_0_2\src\sms_ble.c
 
 src\sms_v_0_2\src\sms_button.c
 
+src\sms_v_0_2\src\sms_common.c
+
 src\sms_v_0_2\src\sms_imu.c
 
 src\sms_v_0_2\src\sms_led.c

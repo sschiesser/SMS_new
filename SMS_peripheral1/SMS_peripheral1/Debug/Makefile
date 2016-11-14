@@ -116,6 +116,7 @@ C_SRCS +=  \
 ../src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.c \
 ../src/sms_v_0_2/src/sms_ble.c \
 ../src/sms_v_0_2/src/sms_button.c \
+../src/sms_v_0_2/src/sms_common.c \
 ../src/sms_v_0_2/src/sms_imu.c \
 ../src/sms_v_0_2/src/sms_led.c \
 ../src/sms_v_0_2/src/sms_pressure.c \
@@ -160,6 +161,7 @@ OBJS +=  \
 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o \
 src/sms_v_0_2/src/sms_ble.o \
 src/sms_v_0_2/src/sms_button.o \
+src/sms_v_0_2/src/sms_common.o \
 src/sms_v_0_2/src/sms_imu.o \
 src/sms_v_0_2/src/sms_led.o \
 src/sms_v_0_2/src/sms_pressure.o \
@@ -197,6 +199,7 @@ OBJS_AS_ARGS +=  \
 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o \
 src/sms_v_0_2/src/sms_ble.o \
 src/sms_v_0_2/src/sms_button.o \
+src/sms_v_0_2/src/sms_common.o \
 src/sms_v_0_2/src/sms_imu.o \
 src/sms_v_0_2/src/sms_led.o \
 src/sms_v_0_2/src/sms_pressure.o \
@@ -234,6 +237,7 @@ C_DEPS +=  \
 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.d \
 src/sms_v_0_2/src/sms_ble.d \
 src/sms_v_0_2/src/sms_button.d \
+src/sms_v_0_2/src/sms_common.d \
 src/sms_v_0_2/src/sms_imu.d \
 src/sms_v_0_2/src/sms_led.d \
 src/sms_v_0_2/src/sms_pressure.d \
@@ -271,6 +275,7 @@ C_DEPS_AS_ARGS +=  \
 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.d \
 src/sms_v_0_2/src/sms_ble.d \
 src/sms_v_0_2/src/sms_button.d \
+src/sms_v_0_2/src/sms_common.d \
 src/sms_v_0_2/src/sms_imu.d \
 src/sms_v_0_2/src/sms_led.d \
 src/sms_v_0_2/src/sms_pressure.d \
@@ -319,6 +324,8 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

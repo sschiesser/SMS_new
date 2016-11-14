@@ -71,82 +71,17 @@ void sms_init_variables(void)
     
     btn0_instance.id = SMS_BTN_0;
     btn0_instance.gpio_pin = SMS_BTN_0_PIN;
-    btn0_instance.int_active = SMS_INT_ENABLE;
+    btn0_instance.int_enabled = true;
     btn0_instance.char_value = 0;
     
     btn1_instance.id = SMS_BTN_1;
     btn1_instance.gpio_pin = SMS_BTN_1_PIN;
-    btn1_instance.int_active = SMS_INT_ENABLE;
+    btn1_instance.int_enabled = true;
     btn1_instance.char_value = 0;
     
     sms_ble_send_cnt = 0;
 }
 
-void sms_set_monitor_pin(void)
-{
-    struct gpio_config config_gpio_pin;
-    gpio_get_config_defaults(&config_gpio_pin);
-    config_gpio_pin.direction  = GPIO_PIN_DIR_OUTPUT;
-    if(gpio_pin_set_config(DBG_PIN_1, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG("Problem while setting gpio pin");
-    }
-    gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
-}
-
-void sms_monitor_states(const char *label)
-{
-    DBG_LOG_DEV("%s...\t\tB-prev %d, B-cur %d, BLE 0x%02x, T1 %d, T2 %d, SMS %d", label, button_previous_state, button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode, sms_working_mode);
-}
-
-void sms_sensors_switch(bool en)
-{
-    if(en) {
-        /* IMU */
-        //sms_imu_startup();
-        /* Pressure */
-        ms58_device.current_state = MS58_STATE_RESETTING;
-        ms58_device.reset_done = false;
-        ms58_device.init_ok = false;
-        sms_pressure_startup();
-    }
-    else {
-        /* IMU */
-        gpio_pin_set_output_level(SMS_IMU_VCC_PIN, false);
-        /* Pressure */
-        gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
-    }
-}
-
-void sms_sensors_toggle_interrupt(enum sms_ext_interrupt_toggle toggle)
-{
-    if(toggle == SMS_EXT_INT_ENABLE) {
-        //DBG_LOG_DEV("[sms_sensors_toggle_interrupt]\tEnabling...");
-        /* IMU --> IMU_DRDY */
-        //gpio_enable_callback(SMS_IMU_DRDY_PIN);
-        /* Pressure --> AON_SLEEP_TIMER
-         * Note: Since there is no direct mechanism to simply enable and disable
-         *       the AON sleep timer interruption, we have to initialize it each
-         *       time (and it starts running) and register the corresponding
-         *       callback (and it enables the interrupt) */
-        ms58_device.current_state = MS58_STATE_CONV_PRESSURE;
-        sms_pressure_state = SENSOR_STATE_ON;
-        sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
-        sms_timer_aon_register_callback();
-        sensors_active = true;
-    }
-    else if(toggle == SMS_EXT_INT_DISABLE) {
-        //DBG_LOG_DEV("[sms_sensors_toggle_interrupt]\tDisabling...");
-        /* IMU --> IMU_DRDY */
-        //gpio_disable_callback(SMS_IMU_DRDY_PIN);
-        /* Pressure --> AON_SLEEP_TIMER
-         * Note: Because of AON timer specific mechanisms (see above), the timer
-         *       gets disabled and the corresponding callback unregistered */
-        ms58_device.current_state = MS58_STATE_READY;
-        sms_timer_aon_disable();
-        sms_timer_aon_unregister_callback();
-        sensors_active = false;
-    }
-}
 
 static void resume_cb(void)
 {
@@ -156,7 +91,7 @@ static void resume_cb(void)
     sms_button_configure_gpio(); // GPIO (AO_0 & AO_1) for the buttons
     sms_led_gpio_init();
     spi_master_configure();
-    sms_set_monitor_pin();
+    sms_monitor_configure_gpio();
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
 
@@ -213,7 +148,7 @@ int main(void)
     //ms58_device.reset_done = false;
     //ms58_device.init_ok = false;
     
-    sms_set_monitor_pin();
+    sms_monitor_configure_gpio();
     
     /* Initialize the BLE module
      * ------------------------- */
@@ -247,7 +182,7 @@ int main(void)
     
     /* Enable buttons interrupts
      * ------------------------- */
-    sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+    sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
     
@@ -275,7 +210,7 @@ int main(void)
             }                
             //ulp_ready = false;
             DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
-            sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
+            sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
             DBG_LOG_CONT_DEV(" done!");
             //psp = __get_PSP();
             //msp = __get_MSP();
@@ -285,7 +220,7 @@ int main(void)
                 case INT_NONE:
                 //sms_monitor_states("NONE");
                 DBG_LOG_DEV("\n\r...NO SOURCE!!");
-                //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
                 //if(ulp_ready) {
                     //DBG_LOG_DEV("[main]\t\t\tULP...");
                     //release_sleep_lock();
@@ -300,10 +235,10 @@ int main(void)
                     //if(ble_current_state == BLE_STATE_PAIRED) {
                     //if(sensors_active) {
                         //DBG_LOG_DEV("[main]\t\t\t\tDisabling sensor int...");
-                        //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
+                        //sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     //}                        
-                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_0) < 0) {
                         DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
                     }
@@ -317,10 +252,10 @@ int main(void)
                     //if(ble_current_state == BLE_STATE_PAIRED)
                     //if(sensors_active) {
                         //DBG_LOG_DEV("[main]\t\t\t\tDisabling sensor int...");
-                        //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
+                        //sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     //}                        
-                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_1) < 0) {
                         DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
                     }
@@ -331,9 +266,9 @@ int main(void)
                 //sms_monitor_states("INT_IMU_DRDY");
                 DBG_LOG_DEV("\n\r...IMU_DRDY");
                 if((sms_working_mode == SMS_MODE_BUTTON_IMU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_IMU_SOLO) || (sms_working_mode == SMS_MODE_IMU_PRESSURE)) {
-                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
                     //DBG_LOG_DEV("[main]\t\t\tIMU data ready");
-                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
                 }                    
                 break;
                 
@@ -343,13 +278,13 @@ int main(void)
                 if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_IMU_PRESSURE)) {
                     if(ble_current_state == BLE_STATE_PAIRED) {
                         //DBG_LOG_DEV("[main]\t\t\tDisabling button int...");
-                        //sms_button_toggle_interrupt(SMS_EXT_INT_DISABLE);
+                        //sms_button_toggle_interrupt(SMS_EXTINT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                         DBG_LOG_DEV("[main]\t\t\t\tPolling pressure data...");
                         sms_pressure_poll_data();
                         DBG_LOG_CONT_DEV(" done!");
                         //DBG_LOG_DEV("[main]\t\t\tEnabling button int...");
-                        //sms_button_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_EXTINT_ENABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     }
                     else if(ble_current_state == BLE_STATE_INDICATING) {
@@ -383,7 +318,7 @@ int main(void)
             }
             
             DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
-            sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
+            sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
             DBG_LOG_CONT_DEV(" done!");
             sms_current_interrupt.int_on = false;
             sms_current_interrupt.source = INT_NONE;

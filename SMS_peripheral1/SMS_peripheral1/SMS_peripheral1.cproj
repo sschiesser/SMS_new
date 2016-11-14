@@ -721,6 +721,9 @@
     <Compile Include="src\sms_v_0_2\src\sms_button.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\sms_v_0_2\src\sms_common.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\sms_v_0_2\src\sms_imu.c">
       <SubType>compile</SubType>
     </Compile>
