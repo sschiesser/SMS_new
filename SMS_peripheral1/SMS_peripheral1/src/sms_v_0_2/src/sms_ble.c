@@ -318,14 +318,14 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         //DBG_LOG_DEV("- char value handle: 0x%04x\r\n- char value: 0x%02x", sms_button_service_handler.serv_chars.char_val_handle, send_val);
         
         printf("\r\ncnt: %d", sms_ble_send_cnt);
-        gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
+        gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 #   if SMS_SENDING_WITH_ACK == true
         sms_ble_ind_retry = 0;
         status = at_ble_indication_send(sms_connection_handle, val_handle);
 #   else
         status = at_ble_notification_send(sms_connection_handle, val_handle);
 #   endif
-        gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
+        gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
         //psp = __get_PSP();
         //msp = __get_MSP();
         //printf("\r\n\@ sending: psp 0x%lx, msp 0x%lx", psp, msp);

@@ -348,7 +348,7 @@ void sms_dualtimer2_fn(void)
     //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
     switch(timer2_current_mode) {
         case TIMER2_MODE_INDICATION_TOUT:
-        sms_monitor_states("[sms_dualtimer2_fn]");
+        sms_monitor_states("[sms_dualtimer2_fn]\t\t");
         timer2_current_mode = TIMER2_MODE_NONE;
         if(ble_current_state == BLE_STATE_PAIRED) {
             sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
@@ -405,7 +405,7 @@ void sms_dualtimer2_fn(void)
         sms_led_blink_cnt++;
         if(sms_led_blink_cnt >= SMS_BLINK_SHTDWN_CNT) {
             sms_led_switch_off(SMS_LED_0_PIN);
-            DBG_LOG_DEV("[sms_dualtimer2_fn]\tPowering off...");
+            DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tPowering off...");
             sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
             sms_init_variables();
             ulp_ready = true;

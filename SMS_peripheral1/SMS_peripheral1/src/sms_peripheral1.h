@@ -85,6 +85,7 @@
 /** @brief APP_ADV_TIMEOUT Advertising time-out between 0x0001 and 0x028F in seconds, 0x0000 disables time-out.*/
 #define APP_ADV_TIMEOUT						(655)
 
+#define DBG_PIN_1                           (PIN_LP_GPIO_2)
 #define DBG_PIN_HIGH                        (true)
 #define DBG_PIN_LOW                         (false)
 
@@ -131,7 +132,6 @@ volatile bool ulp_ready;
 volatile bool ulp_active;
 volatile bool sensors_active;
 
-uint8_t dbg_pin;
 volatile uint32_t psp;
 volatile uint32_t msp;
 
@@ -139,7 +139,7 @@ volatile uint32_t msp;
  * DECLARATIONS
  * ------------------------------------------------ */
 void sms_init_variables(void);
-void sms_set_debug_pin(void);
+void sms_set_monitor_pin(void);
 void sms_monitor_states(const char *label);
 void sms_sensors_switch(bool en);
 void sms_sensors_toggle_interrupt(enum sms_ext_interrupt_toggle toggle);

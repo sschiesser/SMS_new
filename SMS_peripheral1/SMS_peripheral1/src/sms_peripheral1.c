@@ -65,7 +65,6 @@ void sms_init_variables(void)
     
     sms_button_char_value[SMS_BTN_0] = 0;
     sms_button_char_value[SMS_BTN_1] = 0;
-    dbg_pin = PIN_LP_GPIO_2;
     
     ulp_ready = false;
     
@@ -82,15 +81,15 @@ void sms_init_variables(void)
     sms_ble_send_cnt = 0;
 }
 
-void sms_set_debug_pin(void)
+void sms_set_monitor_pin(void)
 {
     struct gpio_config config_gpio_pin;
     gpio_get_config_defaults(&config_gpio_pin);
     config_gpio_pin.direction  = GPIO_PIN_DIR_OUTPUT;
-    if(gpio_pin_set_config(dbg_pin, &config_gpio_pin) != STATUS_OK) {
+    if(gpio_pin_set_config(DBG_PIN_1, &config_gpio_pin) != STATUS_OK) {
         DBG_LOG("Problem while setting gpio pin");
     }
-    gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
+    gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 }
 
 void sms_monitor_states(const char *label)
@@ -155,7 +154,7 @@ static void resume_cb(void)
     sms_button_configure_gpio(); // GPIO (AO_0 & AO_1) for the buttons
     sms_led_gpio_init();
     spi_master_configure();
-    sms_set_debug_pin();
+    sms_set_monitor_pin();
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
 
@@ -182,11 +181,7 @@ int main(void)
      * ----------- */
 	acquire_sleep_lock();
     
-    //register int n11 asm("sp");
-    //register int n12 asm("lr");
-    //register int n13 asm("r15");
-    //DBG_LOG("at pre-init: sp 0x%x, lr 0x%x", n11, n12);
-    
+
     /* Initialize SMS flags
      * -------------------- */
     sms_init_variables();
@@ -194,32 +189,29 @@ int main(void)
     
     /* Initialize hardware components
      * ------------------------------ */
-    //DBG_LOG_DEV("[main]\t\t\tInitializing hardware...");
-	// Dualtimer (AON_SLEEP_TIMER starts on init... so do it later)
-    //DBG_LOG_CONT_DEV(" dualtimer,");
+    // Dualtimer
     sms_dualtimer_init();
 	
 	// Buttons
-    //DBG_LOG_CONT_DEV(" buttons,");
     sms_button_configure_gpio();
     
     // LED
-    //DBG_LOG_CONT_DEV(" LEDs,");
     sms_led_gpio_init();
     
-    // IMU
+    // I2C
     
     // SPI
-    //DBG_LOG_CONT_DEV(" SPI,");
     spi_master_configure();
     
+    // IMU
+    sms_imu_configure_gpio();
+    
     // MS58
-    //DBG_LOG_CONT_DEV(" MS58");
     ms58_device.current_state = MS58_STATE_NONE;
     //ms58_device.reset_done = false;
     //ms58_device.init_ok = false;
     
-    sms_set_debug_pin();
+    sms_set_monitor_pin();
     
     /* Initialize the BLE module
      * ------------------------- */
@@ -400,7 +392,7 @@ int main(void)
             DBG_LOG_DEV("[main]\t\t\t\tULP...");
             //ulp_active = true;
             //release_sleep_lock()
-            DBG_LOG_CONT_DEV(" zzzz");
+            DBG_LOG_CONT_DEV(" !!");
         }            
         else {
             ulp_active = false;
