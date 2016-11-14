@@ -21,10 +21,10 @@
  * MACROS
  * ------ */
 
-#define SMS_BTN_SERVICE_UUID_1	            (0x1C570000)
-#define SMS_BTN_SERVICE_UUID_2	            (0x5ABE0000)
-#define SMS_BTN_SERVICE_UUID_3	            (0x50300000)
-#define SMS_BTN_SERVICE_UUID_4	            (0xBBBB0000)
+#define SMS_BUTTON_SERVICE_UUID_1           (0x1C570000)
+#define SMS_BUTTON_SERVICE_UUID_2	        (0x5ABE0000)
+#define SMS_BUTTON_SERVICE_UUID_3	        (0x50300000)
+#define SMS_BUTTON_SERVICE_UUID_4	        (0xBBBB0000)
 
 ///** characteristic presentation format value */
 //#define SMS_BTN_PRESENTATION_FORMAT_VALUE 0x04
@@ -99,6 +99,5 @@ int sms_button_fn(enum sms_btn_ids btn);
 enum sms_button_state sms_button_get_state(void);
 
 void sms_button_define_services(void);
-void sms_button_service_init(gatt_service_handler_t *sms_button_serv, uint16_t *sms_button_value);
 
 #endif /* SMS_BUTTON_H_ */

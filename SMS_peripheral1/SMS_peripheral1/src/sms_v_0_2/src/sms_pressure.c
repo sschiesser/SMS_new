@@ -119,7 +119,7 @@ void sms_pressure_poll_data(void)
                 sms_pressure_ms58_calculate();
                 //ms58_device.temperature = ( (ms58_device.temperature >= (int32_t)0xffffffff) ? (ms58_device.temperature = 0) : (ms58_device.temperature + 1) );
                 //ms58_device.pressure = ( (ms58_device.pressure < 0) ? (ms58_device.pressure = 0xffffffff) : (ms58_device.pressure - 1) );
-                sms_ble_send_characteristic(BLE_CHAR_PRESSURE);
+                sms_ble_send_characteristic(BLE_CHAR_PRESS);
         }
     }
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
@@ -246,57 +246,11 @@ void sms_pressure_define_services(void)
 {
     at_ble_status_t status;
     uint8_t init_value = 0;
-    sms_pressure_service_init(&pressure_device.service_handler, &init_value);
+    sms_ble_service_init(BLE_SERV_PRESSURE, &pressure_device.service_handler, &init_value);
     if((status = sms_ble_primary_service_define(&pressure_device.service_handler)) != AT_BLE_SUCCESS) {
         DBG_LOG("[sms_pressure_define_services]\tServices defining failed, reason 0x%x", status);
     }
     else {
         DBG_LOG_DEV("[sms_pressure_define_services]\tServices defined, SMS pressure handle: %d", pressure_device.service_handler.serv_handle);
     }
-}
-
-
-void sms_pressure_service_init(gatt_service_handler_t *sms_pressure_serv, uint8_t *sms_pressure_value)
-{
-    uint8_t init_value = 0;
-    //SMS button service characteristic
-    sms_pressure_serv->serv_handle = 1;
-    sms_pressure_serv->serv_uuid.type = AT_BLE_UUID_128;
-    sms_pressure_serv->serv_uuid.uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 8) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[7] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[8] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[9] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 8) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[10] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 16) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[11] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 24) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
-    sms_pressure_serv->serv_uuid.uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
-    
-#   if SMS_SENDING_WITH_ACK == true
-    sms_pressure_serv->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_INDICATE); /* Properties */
-#   else
-    sms_pressure_serv->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_NOTIFY); /* Properties */
-#   endif
-    sms_pressure_serv->serv_chars.init_value = &init_value;             /* value */
-    sms_pressure_serv->serv_chars.value_init_len = 8 * sizeof(uint8_t);
-    sms_pressure_serv->serv_chars.value_max_len = 8 * sizeof(uint8_t);
-    sms_pressure_serv->serv_chars.value_permissions = (AT_BLE_ATTR_READABLE_NO_AUTHN_NO_AUTHR | AT_BLE_ATTR_WRITABLE_NO_AUTHN_NO_AUTHR);   /* permissions */
-    sms_pressure_serv->serv_chars.user_desc = NULL;           /* user defined name */
-    sms_pressure_serv->serv_chars.user_desc_len = 0;
-    sms_pressure_serv->serv_chars.user_desc_max_len = 0;
-    sms_pressure_serv->serv_chars.user_desc_permissions = AT_BLE_ATTR_NO_PERMISSIONS;             /*user description permissions*/
-    sms_pressure_serv->serv_chars.client_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS;         /*client config permissions*/
-    sms_pressure_serv->serv_chars.server_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS;         /*server config permissions*/
-    sms_pressure_serv->serv_chars.user_desc_handle = 0;             /*user description handles*/
-    sms_pressure_serv->serv_chars.client_config_handle = 0;         /*client config handles*/
-    sms_pressure_serv->serv_chars.server_config_handle = 0;         /*server config handles*/
-    
-    sms_pressure_serv->serv_chars.presentation_format = NULL;       /* presentation format */
 }

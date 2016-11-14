@@ -62,6 +62,5 @@ enum status_code sms_pressure_ms58_read_data(void);
 void sms_pressure_ms58_calculate(void);
 
 void sms_pressure_define_services(void);
-void sms_pressure_service_init(gatt_service_handler_t *sms_pressure_serv, uint8_t *sms_pressure_value);
 
 #endif /* SMS_PRESSURE_H_ */

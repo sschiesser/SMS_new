@@ -40,8 +40,8 @@ int sms_button_fn(enum sms_btn_ids btn)
             }
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
-            if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BUTTON0);
-            else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BUTTON1);
+            if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN0);
+            else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN1);
             else return -1;
             break;
             
@@ -80,8 +80,8 @@ int sms_button_fn(enum sms_btn_ids btn)
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
             //sms_ble_ind_retry = 0;
-            if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BUTTON0);
-            else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BUTTON1);
+            if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN0);
+            else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN1);
             else return -1;
             break;
             
@@ -334,59 +334,12 @@ void sms_button_bt1_callback(void)
 void sms_button_define_services(void)
 {
     at_ble_status_t status;
-    uint16_t init_value = 0;
-    sms_button_service_init(&button_instance.service_handler, &init_value);
+    uint8_t init_value = 0;
+    sms_ble_service_init(BLE_SERV_BUTTON, &button_instance.service_handler, &init_value);
     if((status = sms_ble_primary_service_define(&button_instance.service_handler)) != AT_BLE_SUCCESS) {
         DBG_LOG("[sms_button_define_services]\tServices defining failed, reason 0x%x", status);
     }
     else {
         DBG_LOG_DEV("[sms_button_define_services]\tServices defined, SMS button handle: %d", button_instance.service_handler.serv_handle);
     }
-}
-
-/* Initialize BLE service for buttons */
-void sms_button_service_init(gatt_service_handler_t *sms_button_serv, uint16_t *sms_button_value)
-{
-    uint8_t init_value = 0;
-    //DBG_LOG_DEV("[sms_button_service_init]\tInitializing SMS button service");
-    //SMS button service characteristic
-    sms_button_serv->serv_handle = 0;
-    sms_button_serv->serv_uuid.type = AT_BLE_UUID_128;
-    sms_button_serv->serv_uuid.uuid[0] = (uint8_t) ((SMS_BTN_SERVICE_UUID_1) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[1] = (uint8_t) ((SMS_BTN_SERVICE_UUID_1 >> 8) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[2] = (uint8_t) ((SMS_BTN_SERVICE_UUID_1 >> 16) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[3] = (uint8_t) ((SMS_BTN_SERVICE_UUID_1 >> 24) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[4] = (uint8_t) ((SMS_BTN_SERVICE_UUID_2) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[5] = (uint8_t) ((SMS_BTN_SERVICE_UUID_2 >> 8) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[6] = (uint8_t) ((SMS_BTN_SERVICE_UUID_2 >> 16) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[7] = (uint8_t) ((SMS_BTN_SERVICE_UUID_2 >> 24) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[8] = (uint8_t) ((SMS_BTN_SERVICE_UUID_3) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[9] = (uint8_t) ((SMS_BTN_SERVICE_UUID_3 >> 8) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[10] = (uint8_t) ((SMS_BTN_SERVICE_UUID_3 >> 16) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[11] = (uint8_t) ((SMS_BTN_SERVICE_UUID_3 >> 24) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[12] = (uint8_t) ((SMS_BTN_SERVICE_UUID_4) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[13] = (uint8_t) ((SMS_BTN_SERVICE_UUID_4 >> 8) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[14] = (uint8_t) ((SMS_BTN_SERVICE_UUID_4 >> 16) & 0xFF);
-    sms_button_serv->serv_uuid.uuid[15] = (uint8_t) ((SMS_BTN_SERVICE_UUID_4 >> 24) & 0xFF);
-    
-#   if SMS_SENDING_WITH_ACK == true
-    sms_button_serv->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_INDICATE); /* Properties */
-#   else
-    sms_button_serv->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_NOTIFY); /* Properties */
-#   endif
-    sms_button_serv->serv_chars.init_value = &init_value;             /* value */
-    sms_button_serv->serv_chars.value_init_len = (sizeof(uint8_t));
-    sms_button_serv->serv_chars.value_max_len = (sizeof(uint8_t));
-    sms_button_serv->serv_chars.value_permissions = (AT_BLE_ATTR_READABLE_NO_AUTHN_NO_AUTHR | AT_BLE_ATTR_WRITABLE_NO_AUTHN_NO_AUTHR);   /* permissions */
-    sms_button_serv->serv_chars.user_desc = NULL;           /* user defined name */
-    sms_button_serv->serv_chars.user_desc_len = 0;
-    sms_button_serv->serv_chars.user_desc_max_len = 0;
-    sms_button_serv->serv_chars.user_desc_permissions = AT_BLE_ATTR_NO_PERMISSIONS;             /*user description permissions*/
-    sms_button_serv->serv_chars.client_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS;         /*client config permissions*/
-    sms_button_serv->serv_chars.server_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS;         /*server config permissions*/
-    sms_button_serv->serv_chars.user_desc_handle = 0;             /*user description handles*/
-    sms_button_serv->serv_chars.client_config_handle = 0;         /*client config handles*/
-    sms_button_serv->serv_chars.server_config_handle = 0;         /*server config handles*/
-    
-    sms_button_serv->serv_chars.presentation_format = NULL;       /* presentation format */
 }

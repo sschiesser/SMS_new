@@ -54,10 +54,16 @@ typedef enum sms_ble_state {
 }sms_ble_state_t;
 volatile sms_ble_state_t ble_current_state;
 
+enum sms_ble_serv_type {
+    BLE_SERV_BUTTON,
+    BLE_SERV_PRESSURE,
+    BLE_SERV_IMU
+};
+
 enum sms_ble_char_type {
-    BLE_CHAR_BUTTON0,
-    BLE_CHAR_BUTTON1,
-    BLE_CHAR_PRESSURE,
+    BLE_CHAR_BTN0,
+    BLE_CHAR_BTN1,
+    BLE_CHAR_PRESS,
     BLE_CHAR_IMU
 };
 
@@ -86,6 +92,7 @@ const ble_event_callback_t sms_ble_gap_cb[GAP_HANDLE_FUNC_MAX];
 const ble_event_callback_t sms_ble_gatt_server_cb[GATT_SERVER_HANDLER_FUNC_MAX];
 
 at_ble_status_t sms_ble_primary_service_define(gatt_service_handler_t *service);
+void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *service, uint8_t *value);
 at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch);
 
 #endif /* SMS_BLE_H_ */

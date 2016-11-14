@@ -279,21 +279,21 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     sms_ble_send_cnt++;
     
     switch(ch) {
-        case BLE_CHAR_BUTTON0:
+        case BLE_CHAR_BTN0:
         btn0_instance.char_value = ((btn0_instance.char_value >= 0x7f) ? 0 : (btn0_instance.char_value + 1));
         send_val[0] = btn0_instance.char_value;
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = 1;
         break;
         
-        case BLE_CHAR_BUTTON1:
+        case BLE_CHAR_BTN1:
         btn1_instance.char_value = ((btn1_instance.char_value >= 0xff) ? 0 : (btn1_instance.char_value + 1));
         send_val[0] = btn1_instance.char_value + 0x80;
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = 1;
         break;
         
-        case BLE_CHAR_PRESSURE:
+        case BLE_CHAR_PRESS:
         send_val[0] = (uint8_t)(pressure_device.ms58_device.temperature & 0xff);
         send_val[1] = (uint8_t)((pressure_device.ms58_device.temperature >> 8) & 0xff);
         send_val[2] = (uint8_t)((pressure_device.ms58_device.temperature >> 16) & 0xff);
@@ -353,4 +353,102 @@ at_ble_status_t sms_ble_primary_service_define(gatt_service_handler_t *service)
 {
     //DBG_LOG_DEV("[sms_ble_primary_service_define]\n\r  defining primary service\r\n- uuid: 0x%02x\r\n- handle: 0x%02x\r\n- char uuid: 0x%02x%02x\r\n- char init value: %d", (unsigned int)service->serv_uuid.uuid, service->serv_handle, service->serv_chars.uuid.uuid[1], service->serv_chars.uuid.uuid[0], service->serv_chars.value_init_len);
     return(at_ble_primary_service_define(&service->serv_uuid, &service->serv_handle, NULL, 0, &service->serv_chars, 1));
+}
+
+
+void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *service, uint8_t *value)
+{
+    at_ble_handle_t handle = 0;
+    uint8_t uuid[16] = {0};
+    uint8_t char_size = 0;
+    switch(type) {
+        case BLE_SERV_BUTTON:
+        handle = 1;
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 8) & 0xFF);
+        uuid[6] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
+        uuid[7] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[8] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3) & 0xFF);
+        uuid[9] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 8) & 0xFF);
+        uuid[10] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 16) & 0xFF);
+        uuid[11] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 24) & 0xFF);
+        uuid[12] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 24) & 0xFF);
+        char_size = 1;
+        break;
+        
+        case BLE_SERV_PRESSURE:
+        handle = 2;
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 8) & 0xFF);
+        uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
+        uuid[7] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[8] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3) & 0xFF);
+        uuid[9] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 8) & 0xFF);
+        uuid[10] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 16) & 0xFF);
+        uuid[11] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 24) & 0xFF);
+        uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
+        char_size = 8;
+        break;
+        
+        case BLE_SERV_IMU:
+        handle = 3;
+        break;
+        
+        default:
+        break;
+    }
+    //SMS button service characteristic
+    service->serv_handle = handle;
+    service->serv_uuid.type = AT_BLE_UUID_128;
+    service->serv_uuid.uuid[0] = uuid[0];
+    service->serv_uuid.uuid[1] = uuid[1];
+    service->serv_uuid.uuid[2] = uuid[2];
+    service->serv_uuid.uuid[3] = uuid[3];
+    service->serv_uuid.uuid[4] = uuid[4];
+    service->serv_uuid.uuid[5] = uuid[5];
+    service->serv_uuid.uuid[6] = uuid[6];
+    service->serv_uuid.uuid[7] = uuid[7];
+    service->serv_uuid.uuid[8] = uuid[8];
+    service->serv_uuid.uuid[9] = uuid[9];
+    service->serv_uuid.uuid[10] = uuid[10];
+    service->serv_uuid.uuid[11] = uuid[11];
+    service->serv_uuid.uuid[12] = uuid[12];
+    service->serv_uuid.uuid[13] = uuid[13];
+    service->serv_uuid.uuid[14] = uuid[14];
+    service->serv_uuid.uuid[15] = uuid[15];
+    
+    #   if SMS_SENDING_WITH_ACK == true
+    service->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_INDICATE); // properties
+    #   else
+    service->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_NOTIFY); // properties
+    #   endif
+    service->serv_chars.init_value = value; // value
+    service->serv_chars.value_init_len = char_size * sizeof(uint8_t);
+    service->serv_chars.value_max_len = char_size * sizeof(uint8_t);
+    service->serv_chars.value_permissions = (AT_BLE_ATTR_READABLE_NO_AUTHN_NO_AUTHR | AT_BLE_ATTR_WRITABLE_NO_AUTHN_NO_AUTHR); // permissions
+    service->serv_chars.user_desc = NULL; //user defined name
+    service->serv_chars.user_desc_len = 0;
+    service->serv_chars.user_desc_max_len = 0;
+    service->serv_chars.user_desc_permissions = AT_BLE_ATTR_NO_PERMISSIONS; // user description permissions
+    service->serv_chars.client_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS; // client config permissions
+    service->serv_chars.server_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS; // server config permissions
+    service->serv_chars.user_desc_handle = 0; // user description handles
+    service->serv_chars.client_config_handle = 0; // client config handles
+    service->serv_chars.server_config_handle = 0; // server config handles
+    
+    service->serv_chars.presentation_format = NULL; //presentation format
 }
