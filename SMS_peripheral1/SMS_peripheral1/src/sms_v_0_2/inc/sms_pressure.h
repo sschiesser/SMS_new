@@ -45,6 +45,8 @@ uint8_t sms_pressure_char_values[8];
 //volatile bool ms58_reset_done;
 
 volatile sms_ms58_instance_t ms58_device;
+enum sms_sensor_state sms_pressure_state;
+
 //struct sms_pressure_ms58_inst {
     //bool device_init_ok;
     //uint8_t osr;

@@ -66,6 +66,7 @@ void sms_init_variables(void)
     sms_button_char_value[SMS_BTN_0] = 0;
     sms_button_char_value[SMS_BTN_1] = 0;
     
+    sms_pressure_state = SENSOR_STATE_OFF;
     ulp_ready = false;
     
     btn0_instance.id = SMS_BTN_0;
@@ -128,6 +129,7 @@ void sms_sensors_toggle_interrupt(enum sms_ext_interrupt_toggle toggle)
          *       time (and it starts running) and register the corresponding
          *       callback (and it enables the interrupt) */
         ms58_device.current_state = MS58_STATE_CONV_PRESSURE;
+        sms_pressure_state = SENSOR_STATE_ON;
         sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
         sms_timer_aon_register_callback();
         sensors_active = true;

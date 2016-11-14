@@ -47,6 +47,7 @@ void sms_ble_power_down(void)
             
             case BLE_STATE_INDICATING:
             DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
+            sms_pressure_state = SENSOR_STATE_OFF;
             sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
             //#pragma TBD: switch-off sensors to save current
             //sms_sensors_switch(false);
@@ -124,6 +125,7 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 {
     at_ble_disconnected_t *disconnect = (at_ble_disconnected_t *)params;
     if(ble_current_state == BLE_STATE_PAIRED) {
+        sms_pressure_state = SENSOR_STATE_OFF;
         sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
         sms_sensors_switch(false);
     }

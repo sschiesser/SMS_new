@@ -128,6 +128,12 @@ enum sms_ext_interrupt_toggle {
     SMS_EXT_INT_DISABLE
 };
 
+enum sms_sensor_state {
+    SENSOR_STATE_OFF,
+    SENSOR_STATE_STDBY,
+    SENSOR_STATE_ON
+};
+
 volatile bool ulp_ready;
 volatile bool ulp_active;
 volatile bool sensors_active;
