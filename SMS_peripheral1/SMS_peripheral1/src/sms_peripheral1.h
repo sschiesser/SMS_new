@@ -65,6 +65,7 @@
 //#include "mpu.h"
 //#include "log.h"
 /* SMS include */
+#include "sms_common.h"
 #include "sms_button.h"
 #include "sms_spi.h"
 //#include "sms_i2c.h"

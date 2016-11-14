@@ -115,10 +115,11 @@ src/sms_v_0_2/src/sms_button.d src/sms_v_0_2/src/sms_button.o: \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
- ../src/sms_v_0_2/inc/sms_button.h ../src/sms_v_0_2/inc/sms_spi.h \
- ../src/sms_v_0_2/inc/sms_pressure.h ../src/sms_v_0_2/inc/ms58.h \
- ../src/sms_v_0_2/inc/sms_imu.h ../src/sms_v_0_2/inc/sms_timer.h \
- ../src/sms_v_0_2/inc/sms_led.h ../src/sms_v_0_2/inc/sms_ble.h
+ ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_button.h \
+ ../src/sms_v_0_2/inc/sms_spi.h ../src/sms_v_0_2/inc/sms_pressure.h \
+ ../src/sms_v_0_2/inc/ms58.h ../src/sms_v_0_2/inc/sms_imu.h \
+ ../src/sms_v_0_2/inc/sms_timer.h ../src/sms_v_0_2/inc/sms_led.h \
+ ../src/sms_v_0_2/inc/sms_ble.h
 
 ../src/sms_peripheral1.h:
 
@@ -359,6 +360,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h:
 
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
+
+../src/sms_v_0_2/inc/sms_common.h:
 
 ../src/sms_v_0_2/inc/sms_button.h:
 

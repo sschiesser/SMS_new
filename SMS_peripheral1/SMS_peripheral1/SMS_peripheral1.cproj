@@ -697,6 +697,9 @@
     <Compile Include="src\sms_v_0_2\inc\sms_button.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\sms_v_0_2\inc\sms_common.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\sms_v_0_2\inc\sms_imu.h">
       <SubType>compile</SubType>
     </Compile>

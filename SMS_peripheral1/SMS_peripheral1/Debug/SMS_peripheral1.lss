@@ -25,13 +25,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  10 .debug_ranges 000009a0  00000000  00000000  00057752  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  00024165  00000000  00000000  000580f2  2**0
+ 11 .debug_macro  00024198  00000000  00000000  000580f2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00011353  00000000  00000000  0007c257  2**0
+ 12 .debug_line   000113e3  00000000  00000000  0007c28a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    0013f7b9  00000000  00000000  0008d5aa  2**0
+ 13 .debug_str    0013f7c4  00000000  00000000  0008d66d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  0000230c  00000000  00000000  001ccd64  2**2
+ 14 .debug_frame  0000230c  00000000  00000000  001cce34  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -639,7 +639,7 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
 100082da:	3222      	adds	r2, #34	; 0x22
 100082dc:	4b07      	ldr	r3, [pc, #28]	; (100082fc <sms_ble_indication_confirmed_fn+0x30>)
 100082de:	701a      	strb	r2, [r3, #0]
-    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
     //sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
     
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
@@ -673,7 +673,7 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
 void sms_ble_startup(void)
 {
 10008308:	b510      	push	{r4, lr}
-    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
     timer2_current_mode = TIMER2_MODE_LED_STARTUP;
 1000830a:	2202      	movs	r2, #2
 1000830c:	4b02      	ldr	r3, [pc, #8]	; (10008318 <sms_ble_startup+0x10>)
@@ -702,7 +702,7 @@ void sms_ble_power_down(void)
 1000832c:	2b00      	cmp	r3, #0
 1000832e:	d105      	bne.n	1000833c <sms_ble_power_down+0x1c>
         /* If already power off state, then go back sleeping */
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         ulp_ready = true;
 10008330:	2201      	movs	r2, #1
 10008332:	4b2a      	ldr	r3, [pc, #168]	; (100083dc <sms_ble_power_down+0xbc>)
@@ -714,7 +714,7 @@ void sms_ble_power_down(void)
     }
     else {
         /* Disable button interrupts */
-        //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);        
+        //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);        
         /* Disconnect if necessary from BLE network */
         switch(ble_current_state) {
 1000833c:	4b26      	ldr	r3, [pc, #152]	; (100083d8 <sms_ble_power_down+0xb8>)
@@ -961,7 +961,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 100084b8:	4b06      	ldr	r3, [pc, #24]	; (100084d4 <sms_ble_paired_fn+0x34>)
 100084ba:	4798      	blx	r3
 100084bc:	e001      	b.n	100084c2 <sms_ble_paired_fn+0x22>
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
     }
     else {
         sms_ble_power_down();
@@ -1769,7 +1769,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008960:	4b65      	ldr	r3, [pc, #404]	; (10008af8 <sms_button_fn+0x208>)
 10008962:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -1818,7 +1818,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008996:	4b60      	ldr	r3, [pc, #384]	; (10008b18 <sms_button_fn+0x228>)
 10008998:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -1840,7 +1840,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 100089aa:	4b5b      	ldr	r3, [pc, #364]	; (10008b18 <sms_button_fn+0x228>)
 100089ac:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -1863,7 +1863,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 100089be:	2001      	movs	r0, #1
 100089c0:	4240      	negs	r0, r0
 100089c2:	e084      	b.n	10008ace <sms_button_fn+0x1de>
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         break;
         
         // --- current state ---
@@ -1898,7 +1898,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 100089ec:	4b42      	ldr	r3, [pc, #264]	; (10008af8 <sms_button_fn+0x208>)
 100089ee:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -1947,7 +1947,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008a22:	4b3d      	ldr	r3, [pc, #244]	; (10008b18 <sms_button_fn+0x228>)
 10008a24:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -1968,7 +1968,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008a34:	4b38      	ldr	r3, [pc, #224]	; (10008b18 <sms_button_fn+0x228>)
 10008a36:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -1991,7 +1991,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008a48:	2001      	movs	r0, #1
 10008a4a:	4240      	negs	r0, r0
 10008a4c:	e03f      	b.n	10008ace <sms_button_fn+0x1de>
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         break;
         
         // --- current state ---
@@ -2012,7 +2012,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008a60:	4b32      	ldr	r3, [pc, #200]	; (10008b2c <sms_button_fn+0x23c>)
 10008a62:	701a      	strb	r2, [r3, #0]
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -2020,7 +2020,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008a64:	2000      	movs	r0, #0
 10008a66:	e032      	b.n	10008ace <sms_button_fn+0x1de>
             ulp_ready = true;
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             //release_sleep_lock();
         }
         else {
@@ -2068,7 +2068,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008aa2:	4b15      	ldr	r3, [pc, #84]	; (10008af8 <sms_button_fn+0x208>)
 10008aa4:	4798      	blx	r3
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -2084,7 +2084,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008aaa:	2201      	movs	r2, #1
 10008aac:	4b1f      	ldr	r3, [pc, #124]	; (10008b2c <sms_button_fn+0x23c>)
 10008aae:	701a      	strb	r2, [r3, #0]
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -2093,7 +2093,7 @@ int sms_button_fn(enum sms_btn_ids btn)
         // --- current state ---
         case BUTTON_STATE_NONE:
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
 10008ab2:	e00c      	b.n	10008ace <sms_button_fn+0x1de>
@@ -2107,7 +2107,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 10008ab6:	4240      	negs	r0, r0
 10008ab8:	e009      	b.n	10008ace <sms_button_fn+0x1de>
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -2140,7 +2140,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             else return -1;
 10008aca:	2001      	movs	r0, #1
 10008acc:	4240      	negs	r0, r0
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -2177,11 +2177,11 @@ int sms_button_fn(enum sms_btn_ids btn)
 }
 
 /* En- or disable button interrupts */
-void sms_button_toggle_interrupt(enum sms_btn_int_toggle en0, enum sms_btn_int_toggle en1)
+void sms_button_toggle_interrupt(enum sms_int_toggle en0, enum sms_int_toggle en1)
 {
 10008b30:	b510      	push	{r4, lr}
 10008b32:	000c      	movs	r4, r1
-    if(en0 == BTN_INT_ENABLE) {
+    if(en0 == SMS_INT_ENABLE) {
 10008b34:	2800      	cmp	r0, #0
 10008b36:	d104      	bne.n	10008b42 <sms_button_toggle_interrupt+0x12>
         gpio_enable_callback(btn0_instance.gpio_pin);
@@ -2191,7 +2191,7 @@ void sms_button_toggle_interrupt(enum sms_btn_int_toggle en0, enum sms_btn_int_t
 10008b3e:	4798      	blx	r3
 10008b40:	e005      	b.n	10008b4e <sms_button_toggle_interrupt+0x1e>
     }
-    else if(en0 == BTN_INT_DISABLE) {
+    else if(en0 == SMS_INT_DISABLE) {
 10008b42:	2801      	cmp	r0, #1
 10008b44:	d103      	bne.n	10008b4e <sms_button_toggle_interrupt+0x1e>
         gpio_disable_callback(btn0_instance.gpio_pin);
@@ -2201,7 +2201,7 @@ void sms_button_toggle_interrupt(enum sms_btn_int_toggle en0, enum sms_btn_int_t
 10008b4c:	4798      	blx	r3
     }
     
-    if(en1 == BTN_INT_ENABLE) {
+    if(en1 == SMS_INT_ENABLE) {
 10008b4e:	2c00      	cmp	r4, #0
 10008b50:	d104      	bne.n	10008b5c <sms_button_toggle_interrupt+0x2c>
         gpio_enable_callback(btn1_instance.gpio_pin);
@@ -2211,7 +2211,7 @@ void sms_button_toggle_interrupt(enum sms_btn_int_toggle en0, enum sms_btn_int_t
 10008b58:	4798      	blx	r3
 10008b5a:	e005      	b.n	10008b68 <sms_button_toggle_interrupt+0x38>
     }
-    else if(en1 == BTN_INT_DISABLE) {
+    else if(en1 == SMS_INT_DISABLE) {
 10008b5c:	2c01      	cmp	r4, #1
 10008b5e:	d103      	bne.n	10008b68 <sms_button_toggle_interrupt+0x38>
         gpio_disable_callback(btn1_instance.gpio_pin);
@@ -2713,7 +2713,7 @@ void sms_pressure_startup(void)
 10008df0:	4798      	blx	r3
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true); // switch on MS58 pressure sensor
     /* Disable buttons for reset time (~3 ms) to avoid conflict with dualtimer1 */
-    sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+    sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
 10008df2:	2101      	movs	r1, #1
 10008df4:	2001      	movs	r0, #1
 10008df6:	4b0d      	ldr	r3, [pc, #52]	; (10008e2c <sms_pressure_startup+0x48>)
@@ -3979,7 +3979,7 @@ void sms_dualtimer2_cb(void)
 void sms_dualtimer1_fn(void)
 {
 100094a0:	b570      	push	{r4, r5, r6, lr}
-    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
     switch(timer1_current_mode) {
 100094a2:	4bab      	ldr	r3, [pc, #684]	; (10009750 <sms_dualtimer1_fn+0x2b0>)
 100094a4:	781b      	ldrb	r3, [r3, #0]
@@ -4048,7 +4048,7 @@ void sms_dualtimer1_fn(void)
 10009508:	4b99      	ldr	r3, [pc, #612]	; (10009770 <sms_dualtimer1_fn+0x2d0>)
 1000950a:	701a      	strb	r2, [r3, #0]
                     // Init IMU device...
-                    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
 1000950c:	4b99      	ldr	r3, [pc, #612]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 1000950e:	781b      	ldrb	r3, [r3, #0]
@@ -4100,7 +4100,7 @@ void sms_dualtimer1_fn(void)
 1000954a:	4b8e      	ldr	r3, [pc, #568]	; (10009784 <sms_dualtimer1_fn+0x2e4>)
 1000954c:	4798      	blx	r3
                 // Init IMU device...
-                //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                 if(timer2_current_mode == TIMER2_MODE_NONE) {
 1000954e:	4b89      	ldr	r3, [pc, #548]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 10009550:	781b      	ldrb	r3, [r3, #0]
@@ -4182,7 +4182,7 @@ void sms_dualtimer1_fn(void)
 100095ba:	e0c8      	b.n	1000974e <sms_dualtimer1_fn+0x2ae>
                         }
                         else {
-                            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                             timer1_current_mode = TIMER1_MODE_STARTUP;
 100095bc:	2201      	movs	r2, #1
 100095be:	4b64      	ldr	r3, [pc, #400]	; (10009750 <sms_dualtimer1_fn+0x2b0>)
@@ -4198,7 +4198,7 @@ void sms_dualtimer1_fn(void)
                         }
                     }
                     else {
-                        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
 100095ce:	4b69      	ldr	r3, [pc, #420]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 100095d0:	781b      	ldrb	r3, [r3, #0]
@@ -4225,7 +4225,7 @@ void sms_dualtimer1_fn(void)
 100095e8:	2200      	movs	r2, #0
 100095ea:	4b6d      	ldr	r3, [pc, #436]	; (100097a0 <sms_dualtimer1_fn+0x300>)
 100095ec:	701a      	strb	r2, [r3, #0]
-                        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                         timer1_current_mode = TIMER1_MODE_STARTUP;
 100095ee:	3201      	adds	r2, #1
 100095f0:	4b57      	ldr	r3, [pc, #348]	; (10009750 <sms_dualtimer1_fn+0x2b0>)
@@ -4240,7 +4240,7 @@ void sms_dualtimer1_fn(void)
 100095fe:	e0a6      	b.n	1000974e <sms_dualtimer1_fn+0x2ae>
                     }
                     else {
-                        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
 10009600:	4b5c      	ldr	r3, [pc, #368]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 10009602:	781b      	ldrb	r3, [r3, #0]
@@ -4257,7 +4257,7 @@ void sms_dualtimer1_fn(void)
                     case BUTTON_STATE_BOTH:
                     case BUTTON_STATE_NONE:
                     default:
-                    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
 10009612:	4b58      	ldr	r3, [pc, #352]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 10009614:	781b      	ldrb	r3, [r3, #0]
@@ -4309,7 +4309,7 @@ void sms_dualtimer1_fn(void)
 10009652:	e07c      	b.n	1000974e <sms_dualtimer1_fn+0x2ae>
                         }
                         else {
-                            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                             timer1_current_mode = TIMER1_MODE_STARTUP;
 10009654:	2201      	movs	r2, #1
 10009656:	4b3e      	ldr	r3, [pc, #248]	; (10009750 <sms_dualtimer1_fn+0x2b0>)
@@ -4325,7 +4325,7 @@ void sms_dualtimer1_fn(void)
                         }
                     }
                     else {
-                        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
 10009666:	4b43      	ldr	r3, [pc, #268]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 10009668:	781b      	ldrb	r3, [r3, #0]
@@ -4351,7 +4351,7 @@ void sms_dualtimer1_fn(void)
 1000967e:	2200      	movs	r2, #0
 10009680:	4b47      	ldr	r3, [pc, #284]	; (100097a0 <sms_dualtimer1_fn+0x300>)
 10009682:	701a      	strb	r2, [r3, #0]
-                        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                         timer1_current_mode = TIMER1_MODE_STARTUP;
 10009684:	3201      	adds	r2, #1
 10009686:	4b32      	ldr	r3, [pc, #200]	; (10009750 <sms_dualtimer1_fn+0x2b0>)
@@ -4366,7 +4366,7 @@ void sms_dualtimer1_fn(void)
 10009694:	e05b      	b.n	1000974e <sms_dualtimer1_fn+0x2ae>
                     }
                     else {
-                        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
 10009696:	4b37      	ldr	r3, [pc, #220]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 10009698:	781b      	ldrb	r3, [r3, #0]
@@ -4382,7 +4382,7 @@ void sms_dualtimer1_fn(void)
                     case BUTTON_STATE_NONE:
                     case BUTTON_STATE_BOTH:
                     default:
-                    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
 100096a6:	4b33      	ldr	r3, [pc, #204]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 100096a8:	781b      	ldrb	r3, [r3, #0]
@@ -4398,7 +4398,7 @@ void sms_dualtimer1_fn(void)
                 case BUTTON_STATE_BOTH:
                 default:
                 {
-                    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
 100096b6:	4b2f      	ldr	r3, [pc, #188]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 100096b8:	781b      	ldrb	r3, [r3, #0]
@@ -4503,7 +4503,7 @@ void sms_dualtimer1_fn(void)
         
         case TIMER1_MODE_NONE:
         default:
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         if(timer2_current_mode == TIMER2_MODE_NONE) {
 10009740:	4b0c      	ldr	r3, [pc, #48]	; (10009774 <sms_dualtimer1_fn+0x2d4>)
 10009742:	781b      	ldrb	r3, [r3, #0]
@@ -4550,7 +4550,7 @@ void sms_dualtimer1_fn(void)
 void sms_dualtimer2_fn(void)
 {
 100097b4:	b510      	push	{r4, lr}
-    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
     sms_monitor_states("[sms_dualtimer2_fn]");
 100097b6:	4846      	ldr	r0, [pc, #280]	; (100098d0 <sms_dualtimer2_fn+0x11c>)
 100097b8:	4b46      	ldr	r3, [pc, #280]	; (100098d4 <sms_dualtimer2_fn+0x120>)
@@ -4575,7 +4575,7 @@ void sms_dualtimer2_fn(void)
 100097d6:	781b      	ldrb	r3, [r3, #0]
 100097d8:	2b22      	cmp	r3, #34	; 0x22
 100097da:	d107      	bne.n	100097ec <sms_dualtimer2_fn+0x38>
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             if(timer1_current_mode == TIMER1_MODE_NONE) {
 100097dc:	4b40      	ldr	r3, [pc, #256]	; (100098e0 <sms_dualtimer2_fn+0x12c>)
 100097de:	781b      	ldrb	r3, [r3, #0]
@@ -4666,7 +4666,7 @@ void sms_dualtimer2_fn(void)
 1000984a:	2016      	movs	r0, #22
 1000984c:	4b2f      	ldr	r3, [pc, #188]	; (1000990c <sms_dualtimer2_fn+0x158>)
 1000984e:	4798      	blx	r3
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             /* Blinking done... starting ble advertisement */
             //DBG_LOG_DEV("[sms_dualtimer2_fn]\tSMS awake... starting advertisement");
             sms_ble_advertise();
@@ -4733,7 +4733,7 @@ void sms_dualtimer2_fn(void)
 100098a4:	481d      	ldr	r0, [pc, #116]	; (1000991c <sms_dualtimer2_fn+0x168>)
 100098a6:	4b12      	ldr	r3, [pc, #72]	; (100098f0 <sms_dualtimer2_fn+0x13c>)
 100098a8:	4798      	blx	r3
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             sms_init_variables();
 100098aa:	4b1d      	ldr	r3, [pc, #116]	; (10009920 <sms_dualtimer2_fn+0x16c>)
 100098ac:	4798      	blx	r3
@@ -4764,7 +4764,7 @@ void sms_dualtimer2_fn(void)
 100098cc:	4798      	blx	r3
         case TIMER2_MODE_LED_CONNECTION_LOST:
         case TIMER2_MODE_NONE:
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         break;
     }
 100098ce:	bd10      	pop	{r4, pc}
@@ -19676,7 +19676,7 @@ void sms_init_variables(void)
     btn0_instance.gpio_pin = SMS_BTN_0_PIN;
 1000d718:	241f      	movs	r4, #31
 1000d71a:	704c      	strb	r4, [r1, #1]
-    btn0_instance.int_active = BTN_INT_ENABLE;
+    btn0_instance.int_active = SMS_INT_ENABLE;
 1000d71c:	708a      	strb	r2, [r1, #2]
     btn0_instance.char_value = 0;
 1000d71e:	70ca      	strb	r2, [r1, #3]
@@ -19687,7 +19687,7 @@ void sms_init_variables(void)
     btn1_instance.gpio_pin = SMS_BTN_1_PIN;
 1000d724:	301c      	adds	r0, #28
 1000d726:	7048      	strb	r0, [r1, #1]
-    btn1_instance.int_active = BTN_INT_ENABLE;
+    btn1_instance.int_active = SMS_INT_ENABLE;
 1000d728:	708a      	strb	r2, [r1, #2]
     btn1_instance.char_value = 0;
 1000d72a:	70ca      	strb	r2, [r1, #3]
@@ -20111,7 +20111,7 @@ int main(void)
     
     /* Enable buttons interrupts
      * ------------------------- */
-    sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+    sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
 1000d96a:	2100      	movs	r1, #0
 1000d96c:	2000      	movs	r0, #0
 1000d96e:	4ba0      	ldr	r3, [pc, #640]	; (1000dbf0 <main+0x300>)
@@ -20181,7 +20181,7 @@ int main(void)
 1000d9aa:	489b      	ldr	r0, [pc, #620]	; (1000dc18 <main+0x328>)
 1000d9ac:	4f98      	ldr	r7, [pc, #608]	; (1000dc10 <main+0x320>)
 1000d9ae:	47b8      	blx	r7
-            sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+            sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
 1000d9b0:	2101      	movs	r1, #1
 1000d9b2:	2001      	movs	r0, #1
 1000d9b4:	4b8e      	ldr	r3, [pc, #568]	; (1000dbf0 <main+0x300>)
@@ -20252,7 +20252,7 @@ int main(void)
                         //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     //}                        
-                    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_0) < 0) {
 1000da0c:	2000      	movs	r0, #0
 1000da0e:	4b87      	ldr	r3, [pc, #540]	; (1000dc2c <main+0x33c>)
@@ -20301,7 +20301,7 @@ int main(void)
                         //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     //}                        
-                    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_1) < 0) {
 1000da52:	2001      	movs	r0, #1
 1000da54:	4b75      	ldr	r3, [pc, #468]	; (1000dc2c <main+0x33c>)
@@ -20481,7 +20481,7 @@ int main(void)
 1000db40:	4849      	ldr	r0, [pc, #292]	; (1000dc68 <main+0x378>)
 1000db42:	4f33      	ldr	r7, [pc, #204]	; (1000dc10 <main+0x320>)
 1000db44:	47b8      	blx	r7
-            sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
 1000db46:	2100      	movs	r1, #0
 1000db48:	2000      	movs	r0, #0
 1000db4a:	4b29      	ldr	r3, [pc, #164]	; (1000dbf0 <main+0x300>)

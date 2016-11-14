@@ -71,12 +71,12 @@ void sms_init_variables(void)
     
     btn0_instance.id = SMS_BTN_0;
     btn0_instance.gpio_pin = SMS_BTN_0_PIN;
-    btn0_instance.int_active = BTN_INT_ENABLE;
+    btn0_instance.int_active = SMS_INT_ENABLE;
     btn0_instance.char_value = 0;
     
     btn1_instance.id = SMS_BTN_1;
     btn1_instance.gpio_pin = SMS_BTN_1_PIN;
-    btn1_instance.int_active = BTN_INT_ENABLE;
+    btn1_instance.int_active = SMS_INT_ENABLE;
     btn1_instance.char_value = 0;
     
     sms_ble_send_cnt = 0;
@@ -247,7 +247,7 @@ int main(void)
     
     /* Enable buttons interrupts
      * ------------------------- */
-    sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+    sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
     
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
     
@@ -275,7 +275,7 @@ int main(void)
             }                
             //ulp_ready = false;
             DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
-            sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+            sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
             DBG_LOG_CONT_DEV(" done!");
             //psp = __get_PSP();
             //msp = __get_MSP();
@@ -285,7 +285,7 @@ int main(void)
                 case INT_NONE:
                 //sms_monitor_states("NONE");
                 DBG_LOG_DEV("\n\r...NO SOURCE!!");
-                //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                 //if(ulp_ready) {
                     //DBG_LOG_DEV("[main]\t\t\tULP...");
                     //release_sleep_lock();
@@ -303,7 +303,7 @@ int main(void)
                         //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     //}                        
-                    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_0) < 0) {
                         DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
                     }
@@ -320,7 +320,7 @@ int main(void)
                         //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
                     //}                        
-                    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_1) < 0) {
                         DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
                     }
@@ -331,9 +331,9 @@ int main(void)
                 //sms_monitor_states("INT_IMU_DRDY");
                 DBG_LOG_DEV("\n\r...IMU_DRDY");
                 if((sms_working_mode == SMS_MODE_BUTTON_IMU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_IMU_SOLO) || (sms_working_mode == SMS_MODE_IMU_PRESSURE)) {
-                    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
                     //DBG_LOG_DEV("[main]\t\t\tIMU data ready");
-                    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                    //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
                 }                    
                 break;
                 
@@ -383,7 +383,7 @@ int main(void)
             }
             
             DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
-            sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             DBG_LOG_CONT_DEV(" done!");
             sms_current_interrupt.int_on = false;
             sms_current_interrupt.source = INT_NONE;

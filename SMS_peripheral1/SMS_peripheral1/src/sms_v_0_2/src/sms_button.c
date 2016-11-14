@@ -58,7 +58,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             return -1;
             break;
         }
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         break;
         
         // --- current state ---
@@ -97,7 +97,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             return -1;
             break;
         }
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         break;
         
         // --- current state ---
@@ -106,7 +106,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
             ulp_ready = true;
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             //release_sleep_lock();
         }
         else {
@@ -122,14 +122,14 @@ int sms_button_fn(enum sms_btn_ids btn)
             sms_btn_cnt = 0;
             //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         }
         break;
         
         // --- current state ---
         case BUTTON_STATE_NONE:
         ulp_ready = true;
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
@@ -170,7 +170,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             //default:
             //break;
         //}
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //break;
         //
         //// --- current state ---
@@ -200,7 +200,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             //default:
             //break;
         //}
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //break;
         //
         //// --- current state ---
@@ -208,7 +208,7 @@ int sms_button_fn(enum sms_btn_ids btn)
         //if(ble_current_state == BLE_STATE_POWEROFF) {
             //timer1_current_mode = TIMER1_MODE_NONE;
             //timer2_current_mode = TIMER2_MODE_NONE;
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
             //release_sleep_lock();
         //}
         //else {
@@ -217,13 +217,13 @@ int sms_button_fn(enum sms_btn_ids btn)
             //timer2_current_mode = TIMER2_MODE_NONE;
             //sms_btn_cnt = 0;
             //sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
-            //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+            //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //}
         //break;
 //
         //// --- current state ---
         //case BUTTON_STATE_NONE:
-        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(SMS_INT_ENABLE, SMS_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         //break;
     //}
@@ -300,19 +300,19 @@ sms_button_state_t sms_button_get_state(void)
 }
 
 /* En- or disable button interrupts */
-void sms_button_toggle_interrupt(enum sms_btn_int_toggle en0, enum sms_btn_int_toggle en1)
+void sms_button_toggle_interrupt(enum sms_int_toggle en0, enum sms_int_toggle en1)
 {
-    if(en0 == BTN_INT_ENABLE) {
+    if(en0 == SMS_INT_ENABLE) {
         gpio_enable_callback(btn0_instance.gpio_pin);
     }
-    else if(en0 == BTN_INT_DISABLE) {
+    else if(en0 == SMS_INT_DISABLE) {
         gpio_disable_callback(btn0_instance.gpio_pin);
     }
     
-    if(en1 == BTN_INT_ENABLE) {
+    if(en1 == SMS_INT_ENABLE) {
         gpio_enable_callback(btn1_instance.gpio_pin);
     }
-    else if(en1 == BTN_INT_DISABLE) {
+    else if(en1 == SMS_INT_DISABLE) {
         gpio_disable_callback(btn1_instance.gpio_pin);
     }
 }

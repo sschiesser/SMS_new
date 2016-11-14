@@ -801,7 +801,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_v_0_2/src/sms_button.o
  .debug_macro   0x00000000       0xb8 src/sms_v_0_2/src/sms_button.o
  .debug_macro   0x00000000      0x527 src/sms_v_0_2/src/sms_button.o
- .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_button.o
+ .debug_macro   0x00000000       0x4c src/sms_v_0_2/src/sms_button.o
  .debug_macro   0x00000000       0x52 src/sms_v_0_2/src/sms_button.o
  .debug_macro   0x00000000       0xdc src/sms_v_0_2/src/sms_button.o
  .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_button.o
@@ -1032,7 +1032,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_v_0_2/src/sms_imu.o
  .debug_macro   0x00000000       0xb8 src/sms_v_0_2/src/sms_imu.o
  .debug_macro   0x00000000      0x527 src/sms_v_0_2/src/sms_imu.o
- .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_imu.o
+ .debug_macro   0x00000000       0x4c src/sms_v_0_2/src/sms_imu.o
  .debug_macro   0x00000000       0x52 src/sms_v_0_2/src/sms_imu.o
  .debug_macro   0x00000000       0xdc src/sms_v_0_2/src/sms_imu.o
  .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_imu.o
@@ -1259,7 +1259,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_v_0_2/src/sms_led.o
  .debug_macro   0x00000000       0xb8 src/sms_v_0_2/src/sms_led.o
  .debug_macro   0x00000000      0x527 src/sms_v_0_2/src/sms_led.o
- .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_led.o
+ .debug_macro   0x00000000       0x4c src/sms_v_0_2/src/sms_led.o
  .debug_macro   0x00000000       0x52 src/sms_v_0_2/src/sms_led.o
  .debug_macro   0x00000000       0xdc src/sms_v_0_2/src/sms_led.o
  .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_led.o
@@ -1485,7 +1485,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_v_0_2/src/sms_pressure.o
  .debug_macro   0x00000000       0xb8 src/sms_v_0_2/src/sms_pressure.o
  .debug_macro   0x00000000      0x527 src/sms_v_0_2/src/sms_pressure.o
- .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_pressure.o
+ .debug_macro   0x00000000       0x4c src/sms_v_0_2/src/sms_pressure.o
  .debug_macro   0x00000000       0x52 src/sms_v_0_2/src/sms_pressure.o
  .debug_macro   0x00000000       0x1c src/sms_v_0_2/src/sms_pressure.o
  .debug_macro   0x00000000       0x7c src/sms_v_0_2/src/sms_pressure.o
@@ -1710,7 +1710,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_v_0_2/src/sms_spi.o
  .debug_macro   0x00000000       0xb8 src/sms_v_0_2/src/sms_spi.o
  .debug_macro   0x00000000      0x527 src/sms_v_0_2/src/sms_spi.o
- .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_spi.o
+ .debug_macro   0x00000000       0x4c src/sms_v_0_2/src/sms_spi.o
  .debug_macro   0x00000000       0xdc src/sms_v_0_2/src/sms_spi.o
  .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_spi.o
  .debug_macro   0x00000000       0x1c src/sms_v_0_2/src/sms_spi.o
@@ -1934,7 +1934,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_v_0_2/src/sms_timer.o
  .debug_macro   0x00000000       0xb8 src/sms_v_0_2/src/sms_timer.o
  .debug_macro   0x00000000      0x527 src/sms_v_0_2/src/sms_timer.o
- .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_timer.o
+ .debug_macro   0x00000000       0x4c src/sms_v_0_2/src/sms_timer.o
  .debug_macro   0x00000000       0x52 src/sms_v_0_2/src/sms_timer.o
  .debug_macro   0x00000000       0xdc src/sms_v_0_2/src/sms_timer.o
  .debug_macro   0x00000000       0x46 src/sms_v_0_2/src/sms_timer.o
@@ -5719,7 +5719,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xb8 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .debug_macro   0x00000000      0x527 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .debug_macro   0x00000000       0x16 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .debug_macro   0x00000000       0x46 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .debug_macro   0x00000000       0x4c src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .debug_macro   0x00000000       0x52 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .debug_macro   0x00000000       0xdc src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .debug_macro   0x00000000       0x46 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
@@ -7255,7 +7255,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x164 src/sms_peripheral1.o
  .debug_macro   0x00000000       0xb8 src/sms_peripheral1.o
  .debug_macro   0x00000000      0x527 src/sms_peripheral1.o
- .debug_macro   0x00000000       0x46 src/sms_peripheral1.o
+ .debug_macro   0x00000000       0x4c src/sms_peripheral1.o
  .debug_macro   0x00000000       0x52 src/sms_peripheral1.o
  .debug_macro   0x00000000       0xdc src/sms_peripheral1.o
  .debug_macro   0x00000000       0x46 src/sms_peripheral1.o
@@ -9642,7 +9642,7 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .debug_ranges  0x00000928       0x30 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
  .debug_ranges  0x00000958       0x48 src/sms_peripheral1.o
 
-.debug_macro    0x00000000    0x24165
+.debug_macro    0x00000000    0x24198
  .debug_macro   0x00000000      0x478 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
  .debug_macro   0x00000478      0x89e src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
  .debug_macro   0x00000d16      0x16d src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
@@ -9735,145 +9735,145 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .debug_macro   0x0001a11a       0x3f src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
  .debug_macro   0x0001a159      0x3df src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
  .debug_macro   0x0001a538       0x16 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
- .debug_macro   0x0001a54e      0x5cf src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001ab1d       0x4c src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001ab69       0x8d src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001abf6       0x4a src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001ac40       0x97 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001acd7       0xf6 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001adcd      0x2bf src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b08c      0x440 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b4cc       0x16 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b4e2       0x16 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b4f8       0x12 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b50a       0x16 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b520      0x164 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b684       0xb8 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001b73c      0x527 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bc63       0x46 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bca9       0x52 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bcfb       0xdc src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bdd7       0x46 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001be1d       0x1c src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001be39       0x7c src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001beb5       0x2e src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bee3       0x6a src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bf4d       0x28 src/sms_v_0_2/src/sms_ble.o
- .debug_macro   0x0001bf75      0x5d5 src/sms_v_0_2/src/sms_button.o
- .debug_macro   0x0001c54a      0x5d5 src/sms_v_0_2/src/sms_imu.o
- .debug_macro   0x0001cb1f      0x5df src/sms_v_0_2/src/sms_led.o
- .debug_macro   0x0001d0fe       0x28 src/sms_v_0_2/src/sms_led.o
- .debug_macro   0x0001d126      0x5d9 src/sms_v_0_2/src/sms_pressure.o
- .debug_macro   0x0001d6ff      0x5df src/sms_v_0_2/src/sms_spi.o
- .debug_macro   0x0001dcde       0x4c src/sms_v_0_2/src/sms_spi.o
- .debug_macro   0x0001dd2a      0x5df src/sms_v_0_2/src/sms_timer.o
- .debug_macro   0x0001e309       0x76 src/sms_v_0_2/src/sms_timer.o
- .debug_macro   0x0001e37f      0x4a7 src/ASF/sam0/drivers/spi/spi.o
- .debug_macro   0x0001e826       0x10 src/ASF/sam0/drivers/spi/spi.o
- .debug_macro   0x0001e836       0x16 src/ASF/sam0/drivers/spi/spi.o
- .debug_macro   0x0001e84c       0x1c src/ASF/sam0/drivers/spi/spi.o
- .debug_macro   0x0001e868      0x47a src/ASF/sam0/drivers/dualtimer/dualtimer.o
- .debug_macro   0x0001ece2      0x47a src/ASF/sam0/drivers/gpio/gpio.o
- .debug_macro   0x0001f15c      0x474 src/ASF/sam0/drivers/system/system_sam_b.o
- .debug_macro   0x0001f5d0       0x10 src/ASF/sam0/drivers/system/system_sam_b.o
- .debug_macro   0x0001f5e0      0x482 src/ASF/sam0/drivers/uart/uart.o
- .debug_macro   0x0001fa62      0x272 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
- .debug_macro   0x0001fcd4       0x3a src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
- .debug_macro   0x0001fd0e      0x465 src/ASF/sam0/utils/stdio/read.o
- .debug_macro   0x00020173      0x465 src/ASF/sam0/utils/stdio/write.o
- .debug_macro   0x000205d8      0x19c src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00020774       0x52 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000207c6       0x16 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000207dc       0x10 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000207ec       0x41 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0002082d      0x122 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0002094f      0x5f3 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .debug_macro   0x00020f42       0x2e src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .debug_macro   0x00020f70      0x538 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
- .debug_macro   0x000214a8       0x46 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
- .debug_macro   0x000214ee      0x12d src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
- .debug_macro   0x0002161b       0x10 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
- .debug_macro   0x0002162b      0x5b2 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_macro   0x00021bdd       0x1f src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_macro   0x00021bfc       0x36 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_macro   0x00021c32       0x46 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_macro   0x00021c78      0x106 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_macro   0x00021d7e     0x1986 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_macro   0x00023704      0x48c src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
- .debug_macro   0x00023b90      0x5d5 src/sms_peripheral1.o
+ .debug_macro   0x0001a54e      0x5d4 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001ab22       0x4c src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001ab6e       0x8d src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001abfb       0x4a src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001ac45       0x97 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001acdc       0xf6 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001add2      0x2bf src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b091      0x440 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b4d1       0x16 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b4e7       0x16 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b4fd       0x12 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b50f       0x16 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b525      0x164 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b689       0xb8 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001b741      0x527 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bc68       0x4c src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bcb4       0x52 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bd06       0xdc src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bde2       0x46 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001be28       0x1c src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001be44       0x7c src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bec0       0x2e src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001beee       0x6a src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bf58       0x28 src/sms_v_0_2/src/sms_ble.o
+ .debug_macro   0x0001bf80      0x5da src/sms_v_0_2/src/sms_button.o
+ .debug_macro   0x0001c55a      0x5da src/sms_v_0_2/src/sms_imu.o
+ .debug_macro   0x0001cb34      0x5e4 src/sms_v_0_2/src/sms_led.o
+ .debug_macro   0x0001d118       0x28 src/sms_v_0_2/src/sms_led.o
+ .debug_macro   0x0001d140      0x5de src/sms_v_0_2/src/sms_pressure.o
+ .debug_macro   0x0001d71e      0x5e4 src/sms_v_0_2/src/sms_spi.o
+ .debug_macro   0x0001dd02       0x4c src/sms_v_0_2/src/sms_spi.o
+ .debug_macro   0x0001dd4e      0x5e4 src/sms_v_0_2/src/sms_timer.o
+ .debug_macro   0x0001e332       0x76 src/sms_v_0_2/src/sms_timer.o
+ .debug_macro   0x0001e3a8      0x4a7 src/ASF/sam0/drivers/spi/spi.o
+ .debug_macro   0x0001e84f       0x10 src/ASF/sam0/drivers/spi/spi.o
+ .debug_macro   0x0001e85f       0x16 src/ASF/sam0/drivers/spi/spi.o
+ .debug_macro   0x0001e875       0x1c src/ASF/sam0/drivers/spi/spi.o
+ .debug_macro   0x0001e891      0x47a src/ASF/sam0/drivers/dualtimer/dualtimer.o
+ .debug_macro   0x0001ed0b      0x47a src/ASF/sam0/drivers/gpio/gpio.o
+ .debug_macro   0x0001f185      0x474 src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_macro   0x0001f5f9       0x10 src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_macro   0x0001f609      0x482 src/ASF/sam0/drivers/uart/uart.o
+ .debug_macro   0x0001fa8b      0x272 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
+ .debug_macro   0x0001fcfd       0x3a src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
+ .debug_macro   0x0001fd37      0x465 src/ASF/sam0/utils/stdio/read.o
+ .debug_macro   0x0002019c      0x465 src/ASF/sam0/utils/stdio/write.o
+ .debug_macro   0x00020601      0x19c src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0002079d       0x52 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000207ef       0x16 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00020805       0x10 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00020815       0x41 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00020856      0x122 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00020978      0x5f8 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .debug_macro   0x00020f70       0x2e src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .debug_macro   0x00020f9e      0x538 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_macro   0x000214d6       0x46 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_macro   0x0002151c      0x12d src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_macro   0x00021649       0x10 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_macro   0x00021659      0x5b2 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_macro   0x00021c0b       0x1f src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_macro   0x00021c2a       0x36 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_macro   0x00021c60       0x46 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_macro   0x00021ca6      0x106 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_macro   0x00021dac     0x1986 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_macro   0x00023732      0x48c src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+ .debug_macro   0x00023bbe      0x5da src/sms_peripheral1.o
 
-.debug_line     0x00000000    0x11353
+.debug_line     0x00000000    0x113e3
  .debug_line    0x00000000      0x9d7 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
- .debug_line    0x000009d7      0xed2 src/sms_v_0_2/src/sms_ble.o
- .debug_line    0x000018a9      0xf1a src/sms_v_0_2/src/sms_button.o
- .debug_line    0x000027c3      0xdaf src/sms_v_0_2/src/sms_imu.o
- .debug_line    0x00003572      0xde1 src/sms_v_0_2/src/sms_led.o
- .debug_line    0x00004353      0xe88 src/sms_v_0_2/src/sms_pressure.o
- .debug_line    0x000051db      0xd94 src/sms_v_0_2/src/sms_spi.o
- .debug_line    0x00005f6f      0xf0e src/sms_v_0_2/src/sms_timer.o
- .debug_line    0x00006e7d      0xb4f src/ASF/sam0/drivers/spi/spi.o
- .debug_line    0x000079cc      0xa23 src/ASF/sam0/drivers/dualtimer/dualtimer.o
- .debug_line    0x000083ef      0xb4a src/ASF/sam0/drivers/gpio/gpio.o
- .debug_line    0x00008f39     0x10ac src/ASF/sam0/drivers/system/system_sam_b.o
- .debug_line    0x00009fe5      0xc1a src/ASF/sam0/drivers/uart/uart.o
- .debug_line    0x0000abff      0x644 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
- .debug_line    0x0000b243      0x8c9 src/ASF/sam0/utils/stdio/read.o
- .debug_line    0x0000bb0c      0x8bf src/ASF/sam0/utils/stdio/write.o
- .debug_line    0x0000c3cb      0x3d0 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_line    0x0000c79b     0x141f src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .debug_line    0x0000dbba      0xc8f src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
- .debug_line    0x0000e849      0x3b2 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
- .debug_line    0x0000ebfb      0xe93 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_line    0x0000fa8e      0xa20 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
- .debug_line    0x000104ae      0xea5 src/sms_peripheral1.o
+ .debug_line    0x000009d7      0xee2 src/sms_v_0_2/src/sms_ble.o
+ .debug_line    0x000018b9      0xf2a src/sms_v_0_2/src/sms_button.o
+ .debug_line    0x000027e3      0xdbf src/sms_v_0_2/src/sms_imu.o
+ .debug_line    0x000035a2      0xdf1 src/sms_v_0_2/src/sms_led.o
+ .debug_line    0x00004393      0xe98 src/sms_v_0_2/src/sms_pressure.o
+ .debug_line    0x0000522b      0xda4 src/sms_v_0_2/src/sms_spi.o
+ .debug_line    0x00005fcf      0xf1e src/sms_v_0_2/src/sms_timer.o
+ .debug_line    0x00006eed      0xb4f src/ASF/sam0/drivers/spi/spi.o
+ .debug_line    0x00007a3c      0xa23 src/ASF/sam0/drivers/dualtimer/dualtimer.o
+ .debug_line    0x0000845f      0xb4a src/ASF/sam0/drivers/gpio/gpio.o
+ .debug_line    0x00008fa9     0x10ac src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_line    0x0000a055      0xc1a src/ASF/sam0/drivers/uart/uart.o
+ .debug_line    0x0000ac6f      0x644 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
+ .debug_line    0x0000b2b3      0x8c9 src/ASF/sam0/utils/stdio/read.o
+ .debug_line    0x0000bb7c      0x8bf src/ASF/sam0/utils/stdio/write.o
+ .debug_line    0x0000c43b      0x3d0 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_line    0x0000c80b     0x142f src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .debug_line    0x0000dc3a      0xc8f src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_line    0x0000e8c9      0x3b2 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_line    0x0000ec7b      0xe93 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_line    0x0000fb0e      0xa20 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+ .debug_line    0x0001052e      0xeb5 src/sms_peripheral1.o
 
-.debug_str      0x00000000   0x13f7b9
+.debug_str      0x00000000   0x13f7c4
  .debug_str     0x00000000   0x11b19d src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
                              0x11b4fb (size before relaxing)
- .debug_str     0x0011b19d     0xa233 src/sms_v_0_2/src/sms_ble.o
-                             0x124a9a (size before relaxing)
- .debug_str     0x001253d0      0x479 src/sms_v_0_2/src/sms_button.o
-                             0x124847 (size before relaxing)
- .debug_str     0x00125849       0x89 src/sms_v_0_2/src/sms_imu.o
-                             0x124691 (size before relaxing)
- .debug_str     0x001258d2       0x91 src/sms_v_0_2/src/sms_led.o
-                             0x1246b3 (size before relaxing)
- .debug_str     0x00125963      0x19a src/sms_v_0_2/src/sms_pressure.o
-                             0x12480d (size before relaxing)
- .debug_str     0x00125afd      0x1b6 src/sms_v_0_2/src/sms_spi.o
-                             0x1246cb (size before relaxing)
- .debug_str     0x00125cb3      0x629 src/sms_v_0_2/src/sms_timer.o
-                             0x124d0e (size before relaxing)
- .debug_str     0x001262dc      0x771 src/ASF/sam0/drivers/spi/spi.o
+ .debug_str     0x0011b19d     0xa23e src/sms_v_0_2/src/sms_ble.o
+                             0x124aa5 (size before relaxing)
+ .debug_str     0x001253db      0x479 src/sms_v_0_2/src/sms_button.o
+                             0x124852 (size before relaxing)
+ .debug_str     0x00125854       0x89 src/sms_v_0_2/src/sms_imu.o
+                             0x12469c (size before relaxing)
+ .debug_str     0x001258dd       0x91 src/sms_v_0_2/src/sms_led.o
+                             0x1246be (size before relaxing)
+ .debug_str     0x0012596e      0x19a src/sms_v_0_2/src/sms_pressure.o
+                             0x124818 (size before relaxing)
+ .debug_str     0x00125b08      0x1b6 src/sms_v_0_2/src/sms_spi.o
+                             0x1246d6 (size before relaxing)
+ .debug_str     0x00125cbe      0x629 src/sms_v_0_2/src/sms_timer.o
+                             0x124d19 (size before relaxing)
+ .debug_str     0x001262e7      0x771 src/ASF/sam0/drivers/spi/spi.o
                              0x11b87a (size before relaxing)
- .debug_str     0x00126a4d     0x3014 src/ASF/sam0/drivers/dualtimer/dualtimer.o
+ .debug_str     0x00126a58     0x3014 src/ASF/sam0/drivers/dualtimer/dualtimer.o
                              0x11e559 (size before relaxing)
- .debug_str     0x00129a61      0xc84 src/ASF/sam0/drivers/gpio/gpio.o
+ .debug_str     0x00129a6c      0xc84 src/ASF/sam0/drivers/gpio/gpio.o
                              0x11ee82 (size before relaxing)
- .debug_str     0x0012a6e5      0x9b3 src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_str     0x0012a6f0      0x9b3 src/ASF/sam0/drivers/system/system_sam_b.o
                              0x11f013 (size before relaxing)
- .debug_str     0x0012b098      0x618 src/ASF/sam0/drivers/uart/uart.o
+ .debug_str     0x0012b0a3      0x618 src/ASF/sam0/drivers/uart/uart.o
                              0x11be4f (size before relaxing)
- .debug_str     0x0012b6b0       0x94 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
+ .debug_str     0x0012b6bb       0x94 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
                              0x105ca8 (size before relaxing)
- .debug_str     0x0012b744       0x2a src/ASF/sam0/utils/stdio/read.o
+ .debug_str     0x0012b74f       0x2a src/ASF/sam0/utils/stdio/read.o
                              0x11a619 (size before relaxing)
- .debug_str     0x0012b76e       0x24 src/ASF/sam0/utils/stdio/write.o
+ .debug_str     0x0012b779       0x24 src/ASF/sam0/utils/stdio/write.o
                              0x11a61b (size before relaxing)
- .debug_str     0x0012b792      0x72d src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x0012b79d      0x72d src/ASF/sam0/utils/syscalls/gcc/syscalls.o
                                0x6964 (size before relaxing)
- .debug_str     0x0012bebf     0x1cd6 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                             0x12649c (size before relaxing)
- .debug_str     0x0012db95      0x33e src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_str     0x0012beca     0x1cd6 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                             0x1264a7 (size before relaxing)
+ .debug_str     0x0012dba0      0x33e src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
                              0x11d4c4 (size before relaxing)
- .debug_str     0x0012ded3      0x210 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_str     0x0012dede      0x210 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
                                0x6013 (size before relaxing)
- .debug_str     0x0012e0e3    0x11411 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_str     0x0012e0ee    0x11411 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
                              0x12e3e5 (size before relaxing)
- .debug_str     0x0013f4f4      0x226 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+ .debug_str     0x0013f4ff      0x226 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
                              0x11b6df (size before relaxing)
- .debug_str     0x0013f71a       0x9f src/sms_peripheral1.o
-                             0x1247d1 (size before relaxing)
+ .debug_str     0x0013f725       0x9f src/sms_peripheral1.o
+                             0x1247dc (size before relaxing)
 
 .debug_frame    0x00000000     0x230c
  .debug_frame   0x00000000       0xb8 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o

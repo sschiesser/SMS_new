@@ -55,14 +55,10 @@ enum sms_btn_ids {
     SMS_BTN_0 = 0,
     SMS_BTN_1 = 1
 };
-enum sms_btn_int_toggle {
-    BTN_INT_ENABLE,
-    BTN_INT_DISABLE
-};
 typedef struct sms_btn_struct {
     enum sms_btn_ids id;
     uint8_t gpio_pin;
-    enum sms_btn_int_toggle int_active;
+    enum sms_int_toggle int_active;
     uint8_t char_value;
 }sms_btn_struct_t;
 sms_btn_struct_t btn0_instance;
@@ -98,7 +94,7 @@ uint16_t sms_button_char_value[SMS_BTN_NUMBER];
 void sms_button_configure_gpio(void);
 void sms_button_register_callbacks(void);
 void sms_button_disable_callbacks(void);
-void sms_button_toggle_interrupt(enum sms_btn_int_toggle en1, enum sms_btn_int_toggle en2);
+void sms_button_toggle_interrupt(enum sms_int_toggle en1, enum sms_int_toggle en2);
 void sms_button_bt0_callback(void);
 void sms_button_bt1_callback(void);
 int sms_button_fn(enum sms_btn_ids btn);

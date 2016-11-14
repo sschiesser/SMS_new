@@ -25,7 +25,7 @@ void sms_pressure_startup(void)
     DBG_LOG_DEV("[sms_pressure_startup]\t\tStarting pressure sensor");
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true); // switch on MS58 pressure sensor
     /* Disable buttons for reset time (~3 ms) to avoid conflict with dualtimer1 */
-    sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+    sms_button_toggle_interrupt(SMS_INT_DISABLE, SMS_INT_DISABLE);
     ms58_device.current_state = MS58_STATE_RESETTING;
     ms58_device.reset_done = false;
     /* Write the reset command to MS58 */
