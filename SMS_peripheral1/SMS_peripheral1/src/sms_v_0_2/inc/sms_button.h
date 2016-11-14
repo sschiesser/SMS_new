@@ -37,15 +37,15 @@
 ///**  @brief Characteristic presentation format descriptor */
 //#define SMS_BTN_PRESENTATION_FORMAT_DESCRIPTOR 0x1000
 
-#define SMS_BTN_0_PIN       PIN_AO_GPIO_0
-#define SMS_BTN_1_PIN       PIN_AO_GPIO_2
+#define SMS_BTN_0_PIN                       (PIN_AO_GPIO_0)
+#define SMS_BTN_1_PIN                       (PIN_AO_GPIO_2)
 
-#define SMS_BTN_NUMBER      2
+#define SMS_BTN_NUMBER                      (2)
 
-#define SMS_BTN_SHTDWN_MS   250
-#define SMS_BTN_SHTDWN_CNT  10
-#define SMS_BTN_STARTUP_MS  250
-#define SMS_BTN_STARTUP_CNT 16
+#define SMS_BTN_SHTDWN_MS                   (250)
+#define SMS_BTN_SHTDWN_CNT                  (10)
+#define SMS_BTN_STARTUP_MS                  (250)
+#define SMS_BTN_STARTUP_CNT                 (16)
 
 
 /* ---------
@@ -70,28 +70,20 @@ sms_btn_struct_t btn0_instance;
 sms_btn_struct_t btn1_instance;
 
 /* sms_button_... -> variable assigned to the global button service */
-typedef enum sms_button_state {
+enum sms_button_state {
     BUTTON_STATE_NONE,
     BUTTON_STATE_B0,
     BUTTON_STATE_B1,
     BUTTON_STATE_BOTH
-}sms_button_state_t;
-volatile sms_button_state_t button_current_state;
-volatile sms_button_state_t button_previous_state;
+};
 
 typedef struct sms_button_struct {
-    sms_button_state_t button_previous_state;
-    sms_button_state_t button_current_state;
-    gatt_service_handler_t button_service_handler;
+    enum sms_button_state previous_state;
+    enum sms_button_state current_state;
+    gatt_service_handler_t service_handler;
 }sms_button_struct_t;
+sms_button_struct_t button_instance;
 
-/* GATT service handler */
-gatt_service_handler_t sms_button_service_handler;
-/* Button characteristic */
-uint16_t sms_button_char_value[SMS_BTN_NUMBER];
-
-/* externs...
- * ---------- */
 
 /* ------------
  * DECLARATIONS
@@ -104,7 +96,7 @@ void sms_button_bt0_callback(void);
 void sms_button_bt1_callback(void);
 int sms_button_fn(enum sms_btn_ids btn);
 
-sms_button_state_t sms_button_get_state(void);
+enum sms_button_state sms_button_get_state(void);
 
 void sms_button_define_services(void);
 void sms_button_service_init(gatt_service_handler_t *sms_button_serv, uint16_t *sms_button_value);

@@ -13,14 +13,14 @@
 /* BUTTON_0 */
 int sms_button_fn(enum sms_btn_ids btn)
 {
-    button_previous_state = button_current_state;
-    button_current_state = sms_button_get_state();
+    button_instance.previous_state = button_instance.current_state;
+    button_instance.current_state = sms_button_get_state();
     
     if(btn == SMS_BTN_0) sms_monitor_get_states("[sms_button_fn]-0");
     else if(btn == SMS_BTN_1) sms_monitor_get_states("[sms_button_fn]-1");
     else return -1;
     
-    switch(button_current_state) {
+    switch(button_instance.current_state) {
         // --- current state ---
         case BUTTON_STATE_B0:
         switch(ble_current_state) {
@@ -138,11 +138,11 @@ int sms_button_fn(enum sms_btn_ids btn)
 /* BUTTON_1 */
 //void sms_button_bt1_fn(void)
 //{
-    //button_previous_state = button_current_state;
-    //button_current_state = sms_button_get_state();
+    //button_instance.previous_state = button_instance.current_state;
+    //button_instance.current_state = sms_button_get_state();
     //sms_monitor_states("[sms_button_bt1_fn]");
 //
-    //switch(button_current_state) {
+    //switch(button_instance.current_state) {
         //// --- current state ---
         //case BUTTON_STATE_B1:
         //switch(ble_current_state) {
@@ -288,7 +288,7 @@ void sms_button_disable_callbacks(void)
 }
 
 /* Get current buttons state */
-sms_button_state_t sms_button_get_state(void)
+enum sms_button_state sms_button_get_state(void)
 {
     bool b0 = gpio_pin_get_input_level(SMS_BTN_0_PIN);
     bool b1 = gpio_pin_get_input_level(SMS_BTN_1_PIN);
@@ -335,12 +335,12 @@ void sms_button_define_services(void)
 {
     at_ble_status_t status;
     uint16_t init_value = 0;
-    sms_button_service_init(&sms_button_service_handler, &init_value);
-    if((status = sms_ble_primary_service_define(&sms_button_service_handler)) != AT_BLE_SUCCESS) {
+    sms_button_service_init(&button_instance.service_handler, &init_value);
+    if((status = sms_ble_primary_service_define(&button_instance.service_handler)) != AT_BLE_SUCCESS) {
         DBG_LOG("[sms_button_define_services]\tServices defining failed, reason 0x%x", status);
     }
     else {
-        DBG_LOG_DEV("[sms_button_define_services]\tServices defined, SMS button handle: %d", sms_button_service_handler.serv_handle);
+        DBG_LOG_DEV("[sms_button_define_services]\tServices defined, SMS button handle: %d", button_instance.service_handler.serv_handle);
     }
 }
 

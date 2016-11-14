@@ -130,7 +130,7 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
         sms_sensors_switch(false, false);
     }
     ble_current_state = BLE_STATE_DISCONNECTED;
-    DBG_LOG_DEV("[sms_ble_disconnected_fn]\tPeer disconnected... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+    DBG_LOG_DEV("[sms_ble_disconnected_fn]\tPeer disconnected... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- reason: 0x%02x", disconnect->handle, disconnect->reason);
     switch(disconnect->reason) {
         case AT_BLE_AUTH_FAILURE: //0x05
@@ -160,7 +160,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
         ble_current_state = BLE_STATE_PAIRED;
         at_ble_pair_done_t *pair_status = (at_ble_pair_done_t *)params;
         sms_monitor_get_states("[sms_ble_paired_fn]");
-        //DBG_LOG_DEV("[sms_ble_paired_fn]\t\tDevices paired... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+        //DBG_LOG_DEV("[sms_ble_paired_fn]\t\tDevices paired... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
         sms_sensors_switch(false, true); // ! Release sleep lock & enable buttons interrupt after reset done!
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
@@ -175,7 +175,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 at_ble_status_t sms_ble_pair_request_fn(void *params)
 {
     at_ble_pair_request_t *request = (at_ble_pair_request_t *)params;
-    DBG_LOG_DEV("[sms_ble_pair_request_fn]\tPairing request... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+    DBG_LOG_DEV("[sms_ble_pair_request_fn]\tPairing request... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- peer features: 0x%02x", request->handle, request->peer_features);
     return AT_BLE_SUCCESS;
 }
@@ -186,8 +186,8 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
     
     at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
-    //button_current_state = sms_button_get_state();
-    //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+    //button_instance.current_state = sms_button_get_state();
+    //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
     sms_dualtimer_stop(DUALTIMER_TIMER2);
     timer2_current_mode = TIMER2_MODE_NONE;
@@ -214,8 +214,8 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
     
     at_ble_indication_confirmed_t *indication_status = (at_ble_indication_confirmed_t *)params;
-    //button_current_state = sms_button_get_state();
-    //DBG_LOG_DEV("[sms_ble_indication_confirmed]\tIndication confirmed... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+    //button_instance.current_state = sms_button_get_state();
+    //DBG_LOG_DEV("[sms_ble_indication_confirmed]\tIndication confirmed... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- char handle: 0x%04x\r\n- status: 0x%02x", indication_status->conn_handle, indication_status->char_handle, indication_status->status);
     sms_dualtimer_stop(DUALTIMER_TIMER2);
     timer2_current_mode = TIMER2_MODE_NONE;
@@ -280,16 +280,16 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     
     switch(ch) {
         case BLE_CHAR_BUTTON0:
-        sms_button_char_value[btn0_instance.id] = ((sms_button_char_value[btn0_instance.id] >= 0x7f) ? 0 : (sms_button_char_value[btn0_instance.id] + 1));
-        send_val[0] = sms_button_char_value[btn0_instance.id];
-        val_handle = sms_button_service_handler.serv_chars.char_val_handle;
+        btn0_instance.char_value = ((btn0_instance.char_value >= 0x7f) ? 0 : (btn0_instance.char_value + 1));
+        send_val[0] = btn0_instance.char_value;
+        val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = 1;
         break;
         
         case BLE_CHAR_BUTTON1:
-        sms_button_char_value[btn1_instance.id] = ((sms_button_char_value[btn1_instance.id] >= 0xff) ? 0 : (sms_button_char_value[btn1_instance.id] + 1));
-        send_val[0] = sms_button_char_value[btn1_instance.id] + 0x80;
-        val_handle = sms_button_service_handler.serv_chars.char_val_handle;
+        btn1_instance.char_value = ((btn1_instance.char_value >= 0xff) ? 0 : (btn1_instance.char_value + 1));
+        send_val[0] = btn1_instance.char_value + 0x80;
+        val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = 1;
         break;
         

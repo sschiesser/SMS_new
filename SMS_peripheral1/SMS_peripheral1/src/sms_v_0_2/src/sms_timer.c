@@ -163,14 +163,14 @@ void sms_dualtimer1_fn(void)
         case TIMER1_MODE_STARTUP:
         {
             timer1_current_mode = TIMER1_MODE_NONE;
-            button_previous_state = button_current_state;
-            button_current_state = sms_button_get_state();
+            button_instance.previous_state = button_instance.current_state;
+            button_instance.current_state = sms_button_get_state();
             sms_monitor_get_states("[sms_dualtimer1_fn]");
             
-            switch(button_previous_state) {
+            switch(button_instance.previous_state) {
                 // --- Timer1 mode = STARTUP: switch prev_state ---
                 case BUTTON_STATE_B0:
-                switch(button_current_state) {
+                switch(button_instance.current_state) {
                     // --- prev_state = b0: switch current_state ---
                     case BUTTON_STATE_B0:
                     if(ble_current_state == BLE_STATE_POWEROFF) {
@@ -228,7 +228,7 @@ void sms_dualtimer1_fn(void)
                 
                 // --- Timer1 mode = STARTUP: switch prev_state ---
                 case BUTTON_STATE_B1:
-                switch(button_current_state) {
+                switch(button_instance.current_state) {
                     // --- prev_state = b1: switch current_state ---
                     case BUTTON_STATE_B1:
                     if(ble_current_state == BLE_STATE_POWEROFF) {
@@ -304,11 +304,11 @@ void sms_dualtimer1_fn(void)
         case TIMER1_MODE_SHUTDOWN:
         {
             //timer1_current_mode = TIMER1_MODE_NONE;
-            button_previous_state = button_current_state;
-            button_current_state = sms_button_get_state();
+            button_instance.previous_state = button_instance.current_state;
+            button_instance.current_state = sms_button_get_state();
             sms_monitor_get_states("[sms_dualtimer1_fn]");
             
-            if((button_previous_state == BUTTON_STATE_BOTH) && (button_current_state == BUTTON_STATE_BOTH)) {
+            if((button_instance.previous_state == BUTTON_STATE_BOTH) && (button_instance.current_state == BUTTON_STATE_BOTH)) {
                 sms_btn_cnt++;
                 if(sms_btn_cnt >= SMS_BTN_SHTDWN_CNT) {
                     sms_ble_power_down();
