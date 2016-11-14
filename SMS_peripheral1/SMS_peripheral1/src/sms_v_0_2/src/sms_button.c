@@ -33,18 +33,18 @@ int sms_button_fn(enum sms_btn_ids btn)
             break;
             
             case BLE_STATE_PAIRED:
+            case BLE_STATE_INDICATING:
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
-            //sms_ble_ind_retry = 0;
             if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BUTTON0);
             else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BUTTON1);
             else return -1;
             break;
             
-            case BLE_STATE_INDICATING:
-            DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
-            return -1;
-            break;
+            //case BLE_STATE_INDICATING:
+            //DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
+            //return -1;
+            //break;
             
             case BLE_STATE_DISCONNECTED:
             case BLE_STATE_ADVERTISING:

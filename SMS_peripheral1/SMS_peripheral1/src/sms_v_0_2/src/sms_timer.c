@@ -315,19 +315,15 @@ void sms_dualtimer1_fn(void)
                 }
                 else {
                     //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
-                    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
                     timer1_current_mode = TIMER1_MODE_SHUTDOWN;
-                    //ulp_ready = false;
                     sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
                 }
             }
             else {
                 //DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (shutting down)...");
-                //sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
-                //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+                sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
                 timer1_current_mode = TIMER1_MODE_NONE;
                 if(timer2_current_mode == TIMER2_MODE_NONE) {
-                    //release_sleep_lock();
                     ulp_ready = true;
                 }                    
             }
@@ -348,7 +344,7 @@ void sms_dualtimer1_fn(void)
 void sms_dualtimer2_fn(void)
 {
     //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
-    sms_monitor_states("[sms_dualtimer2_fn]\t\t");
+    sms_monitor_states("[sms_dualtimer2_fn]");
     switch(timer2_current_mode) {
         case TIMER2_MODE_INDICATION_TOUT:
         timer2_current_mode = TIMER2_MODE_NONE;

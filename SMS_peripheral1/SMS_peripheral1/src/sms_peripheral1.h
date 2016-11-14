@@ -78,7 +78,7 @@
 /* ------------------------------------------------
  * MACROS
  * ------------------------------------------------ */
-#define SMS_SENDING_WITH_ACK                (false)
+#define SMS_SENDING_WITH_ACK                (true)
 /** @brief APP_FAST_ADV between 0x0020 and 0x4000 in 0.625 ms units (20ms to 10.24s). */
 #define APP_FAST_ADV						(1600)
 
