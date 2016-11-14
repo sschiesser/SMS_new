@@ -11,7 +11,7 @@
 
 void sms_ble_startup(void)
 {
-    sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
+    //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
     timer2_current_mode = TIMER2_MODE_LED_STARTUP;
     sms_led_blink_start(SMS_LED_0_PIN);
 }
@@ -27,7 +27,7 @@ void sms_ble_power_down(void)
     }
     else {
         /* Disable button interrupts */
-        sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);        
+        //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);        
         /* Disconnect if necessary from BLE network */
         switch(ble_current_state) {
             case BLE_STATE_ADVERTISING:
@@ -161,7 +161,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
         //DBG_LOG_DEV("[sms_ble_paired_fn]\t\tDevices paired... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
         sms_sensors_switch(true); // ! Release sleep lock & enable buttons interrupt after reset done!
-        sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
     }
     else {
         sms_ble_power_down();
@@ -218,8 +218,8 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
     sms_dualtimer_stop(DUALTIMER_TIMER2);
     timer2_current_mode = TIMER2_MODE_NONE;
     ble_current_state = BLE_STATE_PAIRED;
-    sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
-    sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+    //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+    //sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
     
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
     
