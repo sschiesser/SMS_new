@@ -115,7 +115,13 @@ src/ASF/thirdparty/sensor/mpu9250/inv_mpu.d \
  ../src/ASF/sam0/drivers/timer/timer.h \
  ../src/ASF/common/services/delay/sam/systick_counter.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
- ../src/include.h
+ ../src/include.h \
+ ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h \
+ ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h \
+ ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
+ ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h \
+ ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
@@ -354,3 +360,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
 
 ../src/include.h:
+
+../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h:
+
+../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h:
+
+../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h:
+
+../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h:
+
+../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h:

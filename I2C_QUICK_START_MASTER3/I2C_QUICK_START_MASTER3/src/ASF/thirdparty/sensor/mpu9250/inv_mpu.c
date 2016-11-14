@@ -42,17 +42,16 @@ $
 */
 static int i2c_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t const *data)
 {
-    DBG_LOG("i2c writing to 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
+    //DBG_LOG("i2c writing to 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
     volatile uint16_t timeout = 0;
-    struct i2c_master_packet packet;
-    packet.address = (uint8_t)slave_addr;
-    packet.data_length = (uint8_t)(data_len + 1);
-    packet.data[0] = (uint8_t)reg_addr;
+    i2c_wpacket.address = (uint8_t)slave_addr;
+    i2c_wpacket.data_length = (uint8_t)(data_len + 1);
+    i2c_wpacket.data[0] = (uint8_t)reg_addr;
     for(uint8_t i = 0; i < data_len; i++) {
-        packet.data[i+1] = (uint8_t)data[i];
+        i2c_wpacket.data[i+1] = (uint8_t)data[i];
         //DBG_LOG_CONT("0x%02x ", packet.data[i+1]);
     }
-    while (i2c_master_write_packet_wait(&i2c_master_instance, &packet) != STATUS_OK) {
+    while (i2c_master_write_packet_wait(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
         if (timeout++ >= I2C_TIMEOUT) {
             return -1;
@@ -62,30 +61,29 @@ static int i2c_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uin
 }
 static int i2c_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t *data)
 {
-    DBG_LOG("i2c reading from 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
+    //DBG_LOG("i2c reading from 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
     volatile uint16_t timeout;
-    struct i2c_master_packet w_packet, r_packet;
-    w_packet.address = (uint8_t)slave_addr;
-    w_packet.data_length = 1;
-    w_packet.data[0] = (uint8_t)reg_addr;
-    r_packet.address = (uint8_t)slave_addr;
-    r_packet.data_length = (uint8_t)data_len;
+    i2c_wpacket.address = (uint8_t)slave_addr;
+    i2c_wpacket.data_length = 1;
+    i2c_wpacket.data[0] = (uint8_t)reg_addr;
+    i2c_rpacket.address = (uint8_t)slave_addr;
+    i2c_rpacket.data_length = (uint8_t)data_len;
     
     timeout = 0;
-    while(i2c_master_write_packet_wait_no_stop(&i2c_master_instance, &w_packet) != STATUS_OK) {
+    while(i2c_master_write_packet_wait_no_stop(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
         if(timeout++ >= I2C_TIMEOUT) {
             return -1;
         }
     }
     
     timeout = 0;
-    while(i2c_master_read_packet_wait(&i2c_master_instance, &r_packet) != STATUS_OK) {
+    while(i2c_master_read_packet_wait(&i2c_master_instance, &i2c_rpacket) != STATUS_OK) {
         if(timeout++ >= I2C_TIMEOUT) {
             return -1;
         }
     }
     for(uint8_t i = 0; i < data_len; i++) {
-        data[i] = r_packet.data[i];
+        data[i] = i2c_rpacket.data[i];
         //DBG_LOG("0x%02x ", data[i]);
     }
     return 0;

@@ -1,5 +1,5 @@
 src/qs_i2c_master_basic_use.d src/qs_i2c_master_basic_use.o: \
- ../src/qs_i2c_master_basic_use.c ../src/asf.h \
+ ../src/qs_i2c_master_basic_use.c ../src/include.h ../src/asf.h \
  ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\5.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
@@ -116,7 +116,9 @@ src/qs_i2c_master_basic_use.d src/qs_i2c_master_basic_use.o: \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
  ../src/ASF/common/services/delay/delay.h \
  ../src/ASF/common/services/delay/sam/systick_counter.h \
- ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h ../src/include.h
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h
+
+../src/include.h:
 
 ../src/asf.h:
 
@@ -359,5 +361,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common/services/delay/sam/systick_counter.h:
 
 ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h:
-
-../src/include.h:

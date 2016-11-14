@@ -365,7 +365,7 @@ static enum status_code _i2c_master_write_packet(
 	i2c_module->TRANSMIT_DATA.reg = I2C_TRANSMIT_DATA_ADDRESS_FLAG_1 | 
 			((packet->address) << 1) | I2C_TRANSFER_WRITE;
 	do {
-        printf(".");
+        //printf(".");
 		status = i2c_module->TRANSMIT_STATUS.reg;
 		if (status & I2C_TRANSMIT_STATUS_TX_FIFO_NOT_FULL_Msk) {
 			i2c_module->TRANSMIT_DATA.reg = packet->data[counter++];
