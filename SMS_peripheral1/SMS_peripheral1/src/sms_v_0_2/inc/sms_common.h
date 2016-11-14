@@ -24,11 +24,11 @@
 /* ---------
  * VARIABLES
  * --------- */
-enum sms_sensor_state {
-    SENSOR_STATE_OFF,
-    SENSOR_STATE_STDBY,
-    SENSOR_STATE_ON
-};
+//enum sms_sensor_state {
+    //PRESSURE_STATE_OFF,
+    //PRESSURE_STATE_STDBY,
+    //PRESSURE_STATE_ON
+//};
 
 typedef enum sms_extint_toggle {
     SMS_EXTINT_ENABLE,

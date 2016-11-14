@@ -121,14 +121,14 @@ void sms_dualtimer1_fn(void)
         case TIMER1_MODE_MS58_RESET:
         {
             timer1_current_mode = TIMER1_MODE_NONE;
-            ms58_device.reset_done = true;
-            ms58_device.init_retry = 0;
+            pressure_device.ms58_device.reset_done = true;
+            pressure_device.ms58_device.init_retry = 0;
             if(sms_pressure_init() != STATUS_OK) {
                 DBG_LOG_DEV("[sms_dualtimer1_fn]\tFailed to init ms58 device");
-                ms58_device.init_retry++;
-                if(ms58_device.init_retry >= MS58_INIT_RETRY_MAX) {
+                pressure_device.ms58_device.init_retry++;
+                if(pressure_device.ms58_device.init_retry >= MS58_INIT_RETRY_MAX) {
                     DBG_LOG_DEV("[sms_dualtimer1_fn]\tFailed to initialize pressure sensor. Working mode = BUTTON_SOLO");
-                    ms58_device.current_state = MS58_STATE_NONE;
+                    pressure_device.ms58_device.current_state = MS58_STATE_NONE;
                     sms_working_mode = SMS_MODE_BUTTON_SOLO;
                     // Init IMU device...
                     //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
@@ -144,7 +144,7 @@ void sms_dualtimer1_fn(void)
                 }
             }
             else {
-                ms58_device.current_state = MS58_STATE_READY;
+                pressure_device.ms58_device.current_state = MS58_STATE_READY;
                 sms_working_mode = SMS_MODE_BUTTON_PRESSURE;
                 //DBG_LOG_DEV("[sms_dualtimer1_fn]\tPressure sensor initialized. Working mode = BUTTON_PRESSURE");
                 DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (MS58 reset)...");
@@ -320,7 +320,7 @@ void sms_dualtimer1_fn(void)
                 }
             }
             else {
-                if(sms_pressure_state == SENSOR_STATE_STDBY) {
+                if(pressure_device.state == PRESSURE_STATE_STDBY) {
                     DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (shutting down)...");
                     sms_sensors_interrupt_toggle(false, true);
                 }                    

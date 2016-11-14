@@ -47,7 +47,7 @@ void sms_ble_power_down(void)
             
             case BLE_STATE_INDICATING:
             DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
-            sms_pressure_state = SENSOR_STATE_OFF;
+            pressure_device.state = PRESSURE_STATE_OFF;
             sms_sensors_interrupt_toggle(false, false);
             //#pragma TBD: switch-off sensors to save current
             //sms_sensors_switch(false);
@@ -125,7 +125,7 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 {
     at_ble_disconnected_t *disconnect = (at_ble_disconnected_t *)params;
     if(ble_current_state == BLE_STATE_PAIRED) {
-        sms_pressure_state = SENSOR_STATE_OFF;
+        pressure_device.state = PRESSURE_STATE_OFF;
         sms_sensors_interrupt_toggle(false, false);
         sms_sensors_switch(false, false);
     }
@@ -294,15 +294,15 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
         
         case BLE_CHAR_PRESSURE:
-        send_val[0] = (uint8_t)(ms58_device.temperature & 0xff);
-        send_val[1] = (uint8_t)((ms58_device.temperature >> 8) & 0xff);
-        send_val[2] = (uint8_t)((ms58_device.temperature >> 16) & 0xff);
-        send_val[3] = (uint8_t)((ms58_device.temperature >> 24) & 0xff);
-        send_val[4] = (uint8_t)(ms58_device.pressure & 0xff);
-        send_val[5] = (uint8_t)((ms58_device.pressure >> 8) & 0xff);
-        send_val[6] = (uint8_t)((ms58_device.pressure >> 16) & 0xff);
-        send_val[7] = (uint8_t)((ms58_device.pressure >> 24) & 0xff);
-        val_handle = sms_pressure_service_handler.serv_chars.char_val_handle;
+        send_val[0] = (uint8_t)(pressure_device.ms58_device.temperature & 0xff);
+        send_val[1] = (uint8_t)((pressure_device.ms58_device.temperature >> 8) & 0xff);
+        send_val[2] = (uint8_t)((pressure_device.ms58_device.temperature >> 16) & 0xff);
+        send_val[3] = (uint8_t)((pressure_device.ms58_device.temperature >> 24) & 0xff);
+        send_val[4] = (uint8_t)(pressure_device.ms58_device.pressure & 0xff);
+        send_val[5] = (uint8_t)((pressure_device.ms58_device.pressure >> 8) & 0xff);
+        send_val[6] = (uint8_t)((pressure_device.ms58_device.pressure >> 16) & 0xff);
+        send_val[7] = (uint8_t)((pressure_device.ms58_device.pressure >> 24) & 0xff);
+        val_handle = pressure_device.service_handler.serv_chars.char_val_handle;
         length = 8;
         break;
         

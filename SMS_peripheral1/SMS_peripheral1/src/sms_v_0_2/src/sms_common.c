@@ -43,14 +43,14 @@ void sms_sensors_interrupt_toggle(bool imu_int, bool press_int) {
      *       callback (and it enables the interrupt)
      */
     if(press_int) {
-        ms58_device.current_state = MS58_STATE_CONV_PRESSURE;
-        sms_pressure_state = SENSOR_STATE_ON;
+        pressure_device.ms58_device.current_state = MS58_STATE_CONV_PRESSURE;
+        pressure_device.state = PRESSURE_STATE_ON;
         sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
         sms_timer_aon_register_callback();
         sensors_active = true;
     }
     else {
-        ms58_device.current_state = MS58_STATE_READY;
+        pressure_device.ms58_device.current_state = MS58_STATE_READY;
         sms_timer_aon_disable();
         sms_timer_aon_unregister_callback();
         sensors_active = false;
@@ -70,9 +70,9 @@ void sms_sensors_switch(bool imu_en, bool press_en)
     
     /* Pressure */
     if(press_en) {                
-        ms58_device.current_state = MS58_STATE_RESETTING;
-        ms58_device.reset_done = false;
-        ms58_device.init_ok = false;
+        pressure_device.ms58_device.current_state = MS58_STATE_RESETTING;
+        pressure_device.ms58_device.reset_done = false;
+        pressure_device.ms58_device.init_ok = false;
         sms_pressure_startup();
     }
     else {

@@ -59,7 +59,7 @@ void sms_init_variables(void)
     // states
     ble_current_state = BLE_STATE_POWEROFF;
     button_instance.current_state = BUTTON_STATE_NONE;
-    ms58_device.current_state = MS58_STATE_NONE;
+    pressure_device.ms58_device.current_state = MS58_STATE_NONE;
     timer1_current_mode = TIMER1_MODE_NONE;
     timer2_current_mode = TIMER2_MODE_NONE;
     sms_working_mode = SMS_MODE_BUTTON_SOLO;
@@ -70,7 +70,7 @@ void sms_init_variables(void)
     btn0_instance.int_enabled = true;
     btn0_instance.char_value = 0;
     
-    sms_pressure_state = SENSOR_STATE_OFF;
+    pressure_device.state = PRESSURE_STATE_OFF;
     ulp_ready = false;
     
     
@@ -144,7 +144,7 @@ int main(void)
     sms_imu_configure_gpio();
     
     // MS58
-    ms58_device.current_state = MS58_STATE_NONE;
+    pressure_device.ms58_device.current_state = MS58_STATE_NONE;
     //ms58_device.reset_done = false;
     //ms58_device.init_ok = false;
     

@@ -35,29 +35,19 @@
 /* ---------
  * VARIABLES
  * --------- */
-/* GATT service handler */
-gatt_service_handler_t sms_pressure_service_handler;
-/* Pressure characteristic */
-uint8_t sms_pressure_char_values[8];
-//uint8_t sms_pressure_char_init_values[8];
-//
-//volatile sms_ms58_state_t ms58_current_state;
-//volatile bool ms58_reset_done;
+enum sms_pressure_state {
+    PRESSURE_STATE_OFF,
+    PRESSURE_STATE_STDBY,
+    PRESSURE_STATE_ON
+};
+typedef struct sms_pressure_struct {
+    sms_ms58_instance_t ms58_device;
+    enum sms_pressure_state state;
+    gatt_service_handler_t service_handler;
+    uint8_t char_values[8];
+}sms_pressure_struct_t;
+sms_pressure_struct_t pressure_device;
 
-volatile sms_ms58_instance_t ms58_device;
-enum sms_sensor_state sms_pressure_state;
-
-//struct sms_pressure_ms58_inst {
-    //bool device_init_ok;
-    //uint8_t osr;
-    //uint16_t prom_values[MS58_PROM_VALUES_MAX];
-    //uint32_t adc_values[MS58_ADC_VALUES_MAX];
-    //int32_t pressure;
-    //int32_t temperature;
-    //bool conv_d1_done;
-//};
-//
-//struct sms_pressure_ms58_inst ms58_device;
 
 /* ------------
  * DECLARATIONS
