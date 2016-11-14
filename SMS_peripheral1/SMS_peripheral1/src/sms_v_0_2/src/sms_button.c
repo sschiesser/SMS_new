@@ -35,6 +35,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             case BLE_STATE_PAIRED:
             case BLE_STATE_INDICATING:
             if(sms_pressure_state == SENSOR_STATE_STDBY) {
+                DBG_LOG_DEV("[sms_button_fn]\t\tStarting sensors (B0)");
                 sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
             }
             timer1_current_mode = TIMER1_MODE_NONE;
@@ -73,6 +74,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             
             case BLE_STATE_PAIRED:
             if(sms_pressure_state == SENSOR_STATE_STDBY) {
+                DBG_LOG_DEV("[sms_button_fn]\t\tStarting sensors (B1)");
                 sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
             }
             timer1_current_mode = TIMER1_MODE_NONE;
@@ -108,7 +110,12 @@ int sms_button_fn(enum sms_btn_ids btn)
             //release_sleep_lock();
         }
         else {
-            sms_pressure_state = SENSOR_STATE_STDBY;
+            if((ble_current_state == BLE_STATE_PAIRED) || (ble_current_state == BLE_STATE_INDICATING)) {
+                sms_pressure_state = SENSOR_STATE_STDBY;
+            }
+            else {
+                sms_pressure_state = SENSOR_STATE_OFF;
+            }
             sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
             timer1_current_mode = TIMER1_MODE_SHUTDOWN;
             timer2_current_mode = TIMER2_MODE_NONE;

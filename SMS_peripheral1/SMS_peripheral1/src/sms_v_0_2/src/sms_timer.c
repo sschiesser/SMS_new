@@ -320,8 +320,10 @@ void sms_dualtimer1_fn(void)
                 }
             }
             else {
-                //DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (shutting down)...");
-                sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                if(sms_pressure_state == SENSOR_STATE_STDBY) {
+                    DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (shutting down)...");
+                    sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                }                    
                 timer1_current_mode = TIMER1_MODE_NONE;
                 if(timer2_current_mode == TIMER2_MODE_NONE) {
                     ulp_ready = true;
@@ -363,8 +365,8 @@ void sms_dualtimer2_fn(void)
                 timer2_current_mode = TIMER2_MODE_NONE;
                 ble_current_state = BLE_STATE_PAIRED;
                 //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
-                DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tStarting sensors...");
-                sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
+                //DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tStarting sensors...");
+                //sms_sensors_toggle_interrupt(SMS_EXT_INT_ENABLE);
                 //if(timer1_current_mode == TIMER1_MODE_NONE) release_sleep_lock();
             }
             else {
