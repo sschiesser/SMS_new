@@ -19,10 +19,10 @@ void sms_ble_startup(void)
 void sms_ble_power_down(void)
 {
     sms_monitor_states("[sms_ble_power_down]");
-    ulp_ready = true;
     if(ble_current_state == BLE_STATE_POWEROFF) {
         /* If already power off state, then go back sleeping */
         //sms_button_toggle_interrupt(BTN_INT_ENABLE, BTN_INT_ENABLE);
+        ulp_ready = true;
         release_sleep_lock();
     }
     else {

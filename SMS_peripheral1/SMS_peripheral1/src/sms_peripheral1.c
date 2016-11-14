@@ -313,11 +313,11 @@ int main(void)
                 DBG_LOG_DEV("\n\r...BTN1");
                 if((sms_working_mode == SMS_MODE_BUTTON_IMU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_BUTTON_SOLO) || (sms_working_mode == SMS_MODE_BUTTON_PRESSURE)) {
                     //if(ble_current_state == BLE_STATE_PAIRED)
-                    if(sensors_active) {
-                        DBG_LOG_DEV("[main]\t\t\t\tDisabling sensor int...");
-                        sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
-                        DBG_LOG_CONT_DEV(" done!");
-                    }                        
+                    //if(sensors_active) {
+                        //DBG_LOG_DEV("[main]\t\t\t\tDisabling sensor int...");
+                        //sms_sensors_toggle_interrupt(SMS_EXT_INT_DISABLE);
+                        //DBG_LOG_CONT_DEV(" done!");
+                    //}                        
                     //sms_button_toggle_interrupt(BTN_INT_DISABLE, BTN_INT_DISABLE);
                     if(sms_button_fn(SMS_BTN_1) < 0) {
                         DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
@@ -390,8 +390,9 @@ int main(void)
         
         if(ulp_ready) {
             DBG_LOG_DEV("[main]\t\t\t\tULP...");
-            //ulp_active = true;
-            //release_sleep_lock()
+            ulp_active = true;
+            //release_sleep_lock();
+            //DBG_LOG_CONT_DEV(" zzzz");
             DBG_LOG_CONT_DEV(" !!");
         }            
         else {
