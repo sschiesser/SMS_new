@@ -48,7 +48,7 @@
 static inline int reg_int_cb(struct int_param_s *int_param)
 {
     return msp430_reg_int_cb(int_param->cb, int_param->pin, int_param->lp_exit,
-        int_param->active_low);
+    int_param->active_low);
 }
 #define log_i(...)     do {} while (0)
 #define log_e(...)     do {} while (0)
@@ -56,6 +56,7 @@ static inline int reg_int_cb(struct int_param_s *int_param)
 /* fabs is for doubles. fabsf is for floats. */
 #define fabs        fabsf
 #define min(a,b) ((a<b)?a:b)
+
 #elif defined EMPL_TARGET_MSP430
 #include "msp430.h"
 #include "msp430_i2c.h"
@@ -69,7 +70,7 @@ static inline int reg_int_cb(struct int_param_s *int_param)
 static inline int reg_int_cb(struct int_param_s *int_param)
 {
     return msp430_reg_int_cb(int_param->cb, int_param->pin, int_param->lp_exit,
-        int_param->active_low);
+    int_param->active_low);
 }
 #define log_i       MPL_LOGI
 #define log_e       MPL_LOGE
@@ -77,10 +78,11 @@ static inline int reg_int_cb(struct int_param_s *int_param)
 /* fabs is for doubles. fabsf is for floats. */
 #define fabs        fabsf
 #define min(a,b) ((a<b)?a:b)
+
 #elif defined EMPL_TARGET_UC3L0
 /* Instead of using the standard TWI driver from the ASF library, we're using
- * a TWI driver that follows the slave address + register address convention.
- */
+* a TWI driver that follows the slave address + register address convention.
+*/
 #include "twi.h"
 #include "delay.h"
 #include "sysclk.h"
@@ -101,6 +103,73 @@ static inline int reg_int_cb(struct int_param_s *int_param)
 /* UC3 is a 32-bit processor, so abs and labs are equivalent. */
 #define labs        abs
 #define fabs(x)     (((x)>0)?(x):-(x))
+
+#elif defined EMPL_TARGET_SAMB11
+#include "include.h"
+#define I2C_TIMEOUT 1000
+static int i2c_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t const *data)
+{
+    //DBG_LOG("i2c writing to 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
+    uint16_t timeout = 0;
+    i2c_wpacket.address = (uint8_t)slave_addr;
+    i2c_wpacket.data_length = (uint8_t)(data_len + 1);
+    i2c_wpacket.data[0] = (uint8_t)reg_addr;
+    for(uint8_t i = 0; i < data_len; i++) {
+        i2c_wpacket.data[i+1] = (uint8_t)data[i];
+        //DBG_LOG_CONT("0x%02x ", packet.data[i+1]);
+    }
+    while (i2c_master_write_packet_wait(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
+        /* Increment timeout counter and check if timed out. */
+        if (timeout++ >= I2C_TIMEOUT) {
+            return -1;
+        }
+    }
+    return 0;
+}
+static int i2c_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t *data)
+{
+    //DBG_LOG("i2c reading from 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
+    uint16_t timeout;
+    i2c_wpacket.address = (uint8_t)slave_addr;
+    i2c_wpacket.data_length = 1;
+    i2c_wpacket.data[0] = (uint8_t)reg_addr;
+    i2c_rpacket.address = (uint8_t)slave_addr;
+    i2c_rpacket.data_length = (uint8_t)data_len;
+    
+    timeout = 0;
+    while(i2c_master_write_packet_wait_no_stop(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
+        if(timeout++ >= I2C_TIMEOUT) {
+            return -1;
+        }
+    }
+    
+    timeout = 0;
+    while(i2c_master_read_packet_wait(&i2c_master_instance, &i2c_rpacket) != STATUS_OK) {
+        if(timeout++ >= I2C_TIMEOUT) {
+            return -1;
+        }
+    }
+    for(uint8_t i = 0; i < data_len; i++) {
+        data[i] = i2c_rpacket.data[i];
+        //DBG_LOG("0x%02x ", data[i]);
+    }
+    return 0;
+}
+static inline void get_ms(uint32_t *count)
+{
+    uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
+    count = (uint32_t *)(load / 26000);
+}
+static inline int reg_int_cb(struct int_param_s *int_param)
+{
+    gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
+    return 0;
+}
+#define log_i       DBG_LOG
+#define log_e       DBG_LOG
+#define labs        abs
+#define fabs(x)     (((x)>0)?(x):-(x))
+
 #else
 #error  Gyro driver is missing the system layer implementations.
 #endif
@@ -571,7 +640,7 @@ const struct gyro_reg_s reg = {
 #endif
 };
 const struct hw_s hw = {
-    .addr           = 0x68,
+    .addr           = 0x69,
     .max_fifo       = 1024,
     .num_reg        = 128,
     .temp_sens      = 321,
@@ -741,7 +810,7 @@ int mpu_init(struct int_param_s *int_param)
     /* mpu_set_sensors always preserves this setting. */
     st.chip_cfg.clk_src = INV_CLK_PLL;
     /* Handled in next call to mpu_set_bypass. */
-    st.chip_cfg.active_low_int = 1;
+    st.chip_cfg.active_low_int = 0; // --> interrupt active high!!
     st.chip_cfg.latched_int = 0;
     st.chip_cfg.int_motion_only = 0;
     st.chip_cfg.lp_accel_mode = 0;

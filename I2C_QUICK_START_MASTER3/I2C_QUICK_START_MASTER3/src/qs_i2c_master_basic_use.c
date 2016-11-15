@@ -60,19 +60,41 @@ DMP_FEATURE_SEND_CAL_GYRO)
 
 
 /* Init software module. */
-//! [dev_inst]
-struct i2c_master_module i2c_master_instance;
-static struct hal_s hal = {0};
 volatile bool imu_interrupt = false;
 
-struct dmp_s {
-    void (*tap_cb)(unsigned char count, unsigned char direction);
-    void (*android_orient_cb)(unsigned char orientation);
-    unsigned short orient;
-    unsigned short feature_mask;
-    unsigned short fifo_rate;
-    unsigned char packet_length;
+static struct hal_s hal = {0};
+unsigned char *mpl_key = (unsigned char *)"eMPL 5.1";
+/* Platform-specific information. Kinda like a boardfile. */
+struct platform_data_s {
+    signed char orientation[9];
+};    
+/* The sensors can be mounted onto the board in any orientation. The mounting
+ * matrix seen below tells the MPL how to rotate the raw data from the
+ * driver(s).
+ * TODO: The following matrices refer to the configuration on internal test
+ * boards at Invensense. If needed, please modify the matrices to match the
+ * chip-to-body matrix for your particular set up.
+ */
+static struct platform_data_s gyro_pdata = {
+    .orientation = { 1, 0, 0,
+                     0, 1, 0,
+                     0, 0, 1}
 };
+static struct platform_data_s compass_pdata = {
+    .orientation = { 0, 1, 0,
+        1, 0, 0,
+    0, 0,-1}
+};
+#define COMPASS_ENABLED 1
+
+//struct dmp_s {
+    //void (*tap_cb)(unsigned char count, unsigned char direction);
+    //void (*android_orient_cb)(unsigned char orientation);
+    //unsigned short orient;
+    //unsigned short feature_mask;
+    //unsigned short fifo_rate;
+    //unsigned char packet_length;
+//};
 
 //static struct dmp_s dmp = {
     //.tap_cb = NULL,
@@ -161,13 +183,13 @@ static void configure_imu(void)
 
 void imu_poll_data(void)
 {
-    st.chip_cfg.dmp_on = 1;
-    short gyro[3], accel_short[3], sensors;
-    unsigned char more;
-    long accel[3], quaternion[4];
-    unsigned long *timestamp;
-    int res;
-    res = dmp_read_fifo(gyro, accel_short, quaternion, &timestamp, &sensors, &more);
+    //st.chip_cfg.dmp_on = 1;
+    //short gyro[3], accel_short[3], sensors;
+    //unsigned char more;
+    //long accel[3], quaternion[4];
+    //unsigned long *timestamp;
+    //int res;
+    //res = dmp_read_fifo(gyro, accel_short, quaternion, &timestamp, &sensors, &more);
 }
 
 int main(void)

@@ -38,6 +38,10 @@ struct int_param_s {
     unsigned long pin;
     void (*cb)(volatile void*);
     void *arg;
+#elif defined EMPL_TARGET_SAMB11
+    unsigned short pin;
+    void (*cb)(void*);
+    unsigned char active_low;
 #endif
 };
 

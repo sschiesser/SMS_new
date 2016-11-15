@@ -62,6 +62,17 @@
 #define log_i       MPL_LOGI
 #define log_e       MPL_LOGE
 
+#elif defined EMPL_TARGET_SAMB11
+#include "include.h"
+static inline void get_ms(uint32_t *count)
+{
+    uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
+    count = (uint32_t *)(load / 26000);
+}
+#define log_i       MPL_LOGI
+#define log_e       MPL_LOGE
+#define __no_operation nop
+
 #else
 #error  Gyro driver is missing the system layer implementations.
 #endif
