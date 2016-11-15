@@ -8,6 +8,8 @@ src\ASF\sam0\drivers\dualtimer\dualtimer.c
 
 src\ASF\thirdparty\sensor\mpu9250\inv_mpu.c
 
+src\ASF\thirdparty\sensor\mpu9250\inv_mpu_dmp_motion_driver.c
+
 src\ASF\thirdparty\sensor\mpu9250\mpu9250.c
 
 src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\ble_mgr\ble_manager.c

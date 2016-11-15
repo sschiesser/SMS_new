@@ -116,7 +116,8 @@ src/qs_i2c_master_basic_use.d src/qs_i2c_master_basic_use.o: \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
  ../src/ASF/common/services/delay/delay.h \
  ../src/ASF/common/services/delay/sam/systick_counter.h \
- ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h
 
 ../src/include.h:
 
@@ -361,3 +362,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common/services/delay/sam/systick_counter.h:
 
 ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h:

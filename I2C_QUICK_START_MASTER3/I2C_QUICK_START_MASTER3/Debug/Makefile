@@ -108,6 +108,7 @@ C_SRCS +=  \
 ../src/ASF/common/services/delay/sam/systick_counter.c \
 ../src/ASF/sam0/drivers/dualtimer/dualtimer.c \
 ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.c \
+../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.c \
 ../src/ASF/thirdparty/sensor/mpu9250/mpu9250.c \
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.c \
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.c \
@@ -142,6 +143,7 @@ OBJS +=  \
 src/ASF/common/services/delay/sam/systick_counter.o \
 src/ASF/sam0/drivers/dualtimer/dualtimer.o \
 src/ASF/thirdparty/sensor/mpu9250/inv_mpu.o \
+src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.o \
 src/ASF/thirdparty/sensor/mpu9250/mpu9250.o \
 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o \
 src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.o \
@@ -169,6 +171,7 @@ OBJS_AS_ARGS +=  \
 src/ASF/common/services/delay/sam/systick_counter.o \
 src/ASF/sam0/drivers/dualtimer/dualtimer.o \
 src/ASF/thirdparty/sensor/mpu9250/inv_mpu.o \
+src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.o \
 src/ASF/thirdparty/sensor/mpu9250/mpu9250.o \
 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o \
 src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.o \
@@ -196,6 +199,7 @@ C_DEPS +=  \
 src/ASF/common/services/delay/sam/systick_counter.d \
 src/ASF/sam0/drivers/dualtimer/dualtimer.d \
 src/ASF/thirdparty/sensor/mpu9250/inv_mpu.d \
+src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.d \
 src/ASF/thirdparty/sensor/mpu9250/mpu9250.d \
 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.d \
 src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.d \
@@ -223,6 +227,7 @@ C_DEPS_AS_ARGS +=  \
 src/ASF/common/services/delay/sam/systick_counter.d \
 src/ASF/sam0/drivers/dualtimer/dualtimer.d \
 src/ASF/thirdparty/sensor/mpu9250/inv_mpu.d \
+src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.d \
 src/ASF/thirdparty/sensor/mpu9250/mpu9250.d \
 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.d \
 src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.d \
@@ -261,6 +266,8 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

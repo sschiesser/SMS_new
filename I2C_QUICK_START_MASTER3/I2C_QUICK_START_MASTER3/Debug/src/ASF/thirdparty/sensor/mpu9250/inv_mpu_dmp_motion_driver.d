@@ -1,6 +1,6 @@
-src/ASF/thirdparty/sensor/mpu9250/inv_mpu.d \
- src/ASF/thirdparty/sensor/mpu9250/inv_mpu.o: \
- ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.c \
+src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.d \
+ src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.o: \
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\newlib.h \
@@ -35,11 +35,8 @@ src/ASF/thirdparty/sensor/mpu9250/inv_mpu.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h \
- ../src/ASF/thirdparty/sensor/mpu9250/mpu9250.h \
- ../src/ASF/common/services/delay/delay.h ../src/asf.h \
- ../src/ASF/sam0/utils/compiler.h ../src/ASF/common/utils/parts.h \
- ../src/ASF/sam0/utils/status_codes.h \
+ ../src/include.h ../src/asf.h ../src/ASF/sam0/utils/compiler.h \
+ ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  ../src/ASF/sam0/utils/preprocessor/preprocessor.h \
  ../src/ASF/sam0/utils/preprocessor/tpaste.h \
  ../src/ASF/sam0/utils/preprocessor/stringz.h \
@@ -113,16 +110,20 @@ src/ASF/thirdparty/sensor/mpu9250/inv_mpu.d \
  ../src/ASF/common/services/serial/samb_uart/uart_serial.h \
  ../src/ASF/sam0/drivers/uart/uart.h \
  ../src/ASF/sam0/drivers/timer/timer.h \
- ../src/ASF/common/services/delay/sam/systick_counter.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
- ../src/include.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h \
+ ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
+ ../src/ASF/common/services/delay/delay.h \
+ ../src/ASF/common/services/delay/sam/systick_counter.h \
  ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h \
- ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/dmpKey.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/dmpmap.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
@@ -192,11 +193,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
-../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h:
-
-../src/ASF/thirdparty/sensor/mpu9250/mpu9250.h:
-
-../src/ASF/common/services/delay/delay.h:
+../src/include.h:
 
 ../src/asf.h:
 
@@ -356,12 +353,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 
 ../src/ASF/sam0/drivers/timer/timer.h:
 
-../src/ASF/common/services/delay/sam/systick_counter.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
-
-../src/include.h:
-
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h:
 
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h:
@@ -372,6 +363,20 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h:
 
+../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
+
+../src/ASF/common/services/delay/delay.h:
+
+../src/ASF/common/services/delay/sam/systick_counter.h:
+
 ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h:
 
 ../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/inv_mpu.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/inv_mpu_dmp_motion_driver.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/dmpKey.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/dmpmap.h:

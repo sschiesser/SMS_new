@@ -603,10 +603,22 @@
     <Compile Include="src\ASF\sam0\drivers\dualtimer\dualtimer.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\dmpKey.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\dmpmap.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\ASF\thirdparty\sensor\mpu9250\inv_mpu.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\thirdparty\sensor\mpu9250\inv_mpu.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\inv_mpu_dmp_motion_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\inv_mpu_dmp_motion_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpu9250.c">

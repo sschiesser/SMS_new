@@ -340,24 +340,23 @@ static int set_int_enable(unsigned char enable)
     unsigned char tmp;
 
     if (st.chip_cfg.dmp_on) {
-        if (enable)
-        tmp = BIT_DMP_INT_EN;
-        else
-        tmp = 0x00;
-        if (i2c_write(st.hw->addr, st.reg->int_enable, 1, &tmp))
-        return -1;
+        if (enable) tmp = BIT_DMP_INT_EN; 
+        else tmp = 0x00;        
+        
+        if (i2c_write(st.hw->addr, st.reg->int_enable, 1, &tmp)) return -1;
+        
         st.chip_cfg.int_enable = tmp;
-        } else {
-        if (!st.chip_cfg.sensors)
-        return -1;
-        if (enable && st.chip_cfg.int_enable)
-        return 0;
-        if (enable)
-        tmp = BIT_DATA_RDY_EN;
-        else
-        tmp = 0x00;
-        if (i2c_write(st.hw->addr, st.reg->int_enable, 1, &tmp))
-        return -1;
+    }
+    else {
+        if (!st.chip_cfg.sensors) return -1;
+        
+        if (enable && st.chip_cfg.int_enable) return 0;
+        
+        if (enable) tmp = BIT_DATA_RDY_EN;
+        else tmp = 0x00;
+        
+        if (i2c_write(st.hw->addr, st.reg->int_enable, 1, &tmp)) return -1;
+        
         st.chip_cfg.int_enable = tmp;
     }
     return 0;
@@ -415,17 +414,15 @@ int mpu_init(struct int_param_s *int_param)
 {
     unsigned char data[6];
 
-    DBG_LOG("Entering mpu_init...");
-    
     /* Reset device. */
     data[0] = BIT_RESET;
-    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data)) // w 6b 80
     return -1;
     delay_ms(100);
 
-    /* Wake up chip. */
+    /* Wake up chip (w 6B 00). */
     data[0] = 0x00;
-    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data)) // w 6b 00
     return -1;
 
     st.chip_cfg.accel_half = 0;
@@ -435,7 +432,7 @@ int mpu_init(struct int_param_s *int_param)
     * first 3kB are needed by the DMP, we'll use the last 1kB for the FIFO.
     */
     data[0] = BIT_FIFO_SIZE_1024 | 0x8;
-    if (i2c_write(st.hw->addr, st.reg->accel_cfg2, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->accel_cfg2, 1, data)) // w 1d 48
     return -1;
     #endif
 
@@ -463,19 +460,17 @@ int mpu_init(struct int_param_s *int_param)
     st.chip_cfg.dmp_sample_rate = 0;
     mpu_set_int_level(0); // 0 --> active low disabled => active high
 
-    if (mpu_set_gyro_fsr(250)) return -1; // 1B
-    if (mpu_set_accel_fsr(4)) return -1; // 1B
-    if (mpu_set_lpf(42)) return -1; // 1B
-    if (mpu_set_sample_rate(50)) return -1;
-    if (mpu_configure_fifo(0)) return -1;
+    if (mpu_set_gyro_fsr(250)) return -1; // w 1b 00
+    if (mpu_set_accel_fsr(4)) return -1; // w 1c 08
+    if (mpu_set_lpf(42)) return -1; // w 1a 03
+    if (mpu_set_sample_rate(50)) return -1; // w 19 13 - w 1a 04
+    if (mpu_configure_fifo(0)) return -1; // w 38 00
 
-    #ifndef EMPL_TARGET_STM32F4
     if (int_param)
     reg_int_cb(int_param);
-    #endif
 
-    setup_compass();
-    if (mpu_set_compass_sample_rate(10)) return -1;
+    setup_compass(); // set_bypass - set_akm - set_bypass - set_compass
+    if (mpu_set_compass_sample_rate(10)) return -1; // w 34 04
 
     mpu_set_sensors(0);
     
@@ -1019,7 +1014,6 @@ int mpu_set_sample_rate(unsigned short rate)
         st.chip_cfg.sample_rate = 1000 / (1 + data);
 
         #ifdef AK89xx_SECONDARY
-        DBG_LOG("Compass sample rate");
         mpu_set_compass_sample_rate(min(st.chip_cfg.compass_sample_rate, MAX_COMPASS_SAMPLE_RATE));
         #endif
 
@@ -1225,7 +1219,7 @@ int mpu_set_sensors(unsigned char sensors)
     data = 0;
     else
     data = BIT_SLEEP;
-    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, &data)) {
+    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, &data)) { // w 6b xx
         st.chip_cfg.sensors = 0;
         return -1;
     }
@@ -1240,7 +1234,7 @@ int mpu_set_sensors(unsigned char sensors)
     data |= BIT_STBY_ZG;
     if (!(sensors & INV_XYZ_ACCEL))
     data |= BIT_STBY_XYZA;
-    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_2, 1, &data)) {
+    if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_2, 1, &data)) { // w 6c xx
         st.chip_cfg.sensors = 0;
         return -1;
     }
@@ -1256,7 +1250,7 @@ int mpu_set_sensors(unsigned char sensors)
     else
     mpu_set_bypass(0);
     #else
-    if (i2c_read(st.hw->addr, st.reg->user_ctrl, 1, &user_ctrl))
+    if (i2c_read(st.hw->addr, st.reg->user_ctrl, 1, &user_ctrl)) // w 6a r xx (xx)
     return -1;
     /* Handle AKM power management. */
     if (sensors & INV_XYZ_COMPASS) {
@@ -1270,10 +1264,10 @@ int mpu_set_sensors(unsigned char sensors)
     user_ctrl |= BIT_DMP_EN;
     else
     user_ctrl &= ~BIT_DMP_EN;
-    if (i2c_write(st.hw->addr, st.reg->s1_do, 1, &data))
+    if (i2c_write(st.hw->addr, st.reg->s1_do, 1, &data)) // w 64 xx
     return -1;
     /* Enable/disable I2C master mode. */
-    if (i2c_write(st.hw->addr, st.reg->user_ctrl, 1, &user_ctrl))
+    if (i2c_write(st.hw->addr, st.reg->user_ctrl, 1, &user_ctrl)) // w 6a xx
     return -1;
     #endif
     #endif
@@ -1449,21 +1443,16 @@ int mpu_set_bypass(unsigned char bypass_on)
     return 0;
 
     if (bypass_on) {
-        if (i2c_read(st.hw->addr, st.reg->user_ctrl, 1, &tmp))
-        return -1;
+        if (i2c_read(st.hw->addr, st.reg->user_ctrl, 1, &tmp)) return -1;
         tmp &= ~BIT_AUX_IF_EN;
         //if(st.chip_cfg.spi_mode)
         //tmp |= 0x10;
-        if (i2c_write(st.hw->addr, st.reg->user_ctrl, 1, &tmp))
-        return -1;
+        if (i2c_write(st.hw->addr, st.reg->user_ctrl, 1, &tmp)) return -1;
         delay_ms(3);
         tmp = BIT_BYPASS_EN;
-        if (st.chip_cfg.active_low_int)
-        tmp |= BIT_ACTL;
-        if (st.chip_cfg.latched_int)
-        tmp |= BIT_LATCH_EN | BIT_ANY_RD_CLR;
-        if (i2c_write(st.hw->addr, st.reg->int_pin_cfg, 1, &tmp))
-        return -1;
+        if (st.chip_cfg.active_low_int) (tmp |= BIT_ACTL);
+        if (st.chip_cfg.latched_int) (tmp |= BIT_LATCH_EN | BIT_ANY_RD_CLR);
+        if (i2c_write(st.hw->addr, st.reg->int_pin_cfg, 1, &tmp)) return -1;
     }
     else {
         /* Enable I2C master mode if compass is being used. */
@@ -2453,12 +2442,12 @@ static int setup_compass(void)
 {
     uint8_t data[4], akm_addr;
 
-    mpu_set_bypass(1);
+    mpu_set_bypass(1); // w 6a r x x - w 6a 20 - 3ms - w 37 02
 
     /* Find compass. Possible addresses range from 0x0C to 0x0F. */
     for (akm_addr = 0x0C; akm_addr <= 0x0F; akm_addr++) {
         int result;
-        result = i2c_read(akm_addr, AKM_REG_WHOAMI, 1, data);
+        result = i2c_read(akm_addr, AKM_REG_WHOAMI, 1, data); // w_ 00 r 48 9a
         if (!result && (data[0] == AKM_WHOAMI))
         break;
     }
@@ -2472,72 +2461,72 @@ static int setup_compass(void)
     st.chip_cfg.compass_addr = akm_addr;
 
     data[0] = AKM_POWER_DOWN;
-    if (i2c_write(st.chip_cfg.compass_addr, AKM_REG_CNTL, 1, data))
+    if (i2c_write(st.chip_cfg.compass_addr, AKM_REG_CNTL, 1, data)) // w_ 0a 10
     return -1;
     delay_ms(1);
 
     data[0] = AKM_FUSE_ROM_ACCESS;
-    if (i2c_write(st.chip_cfg.compass_addr, AKM_REG_CNTL, 1, data))
+    if (i2c_write(st.chip_cfg.compass_addr, AKM_REG_CNTL, 1, data)) // w_ 0a 1f
     return -1;
     delay_ms(1);
 
     /* Get sensitivity adjustment data from fuse ROM. */
-    if (i2c_read(st.chip_cfg.compass_addr, AKM_REG_ASAX, 3, data))
+    if (i2c_read(st.chip_cfg.compass_addr, AKM_REG_ASAX, 3, data)) // w_ 10 r ad ad a3
     return -1;
     st.chip_cfg.mag_sens_adj[0] = (long)data[0] + 128;
     st.chip_cfg.mag_sens_adj[1] = (long)data[1] + 128;
     st.chip_cfg.mag_sens_adj[2] = (long)data[2] + 128;
 
     data[0] = AKM_POWER_DOWN;
-    if (i2c_write(st.chip_cfg.compass_addr, AKM_REG_CNTL, 1, data))
+    if (i2c_write(st.chip_cfg.compass_addr, AKM_REG_CNTL, 1, data)) // w_ 0a 10
     return -1;
     delay_ms(1);
 
-    mpu_set_bypass(0);
+    mpu_set_bypass(0); // w 6a r x x - w a4 20 - 3ms - w 37 00
 
     /* Set up master mode, master clock, and ES bit. */
     data[0] = 0x40;
-    if (i2c_write(st.hw->addr, st.reg->i2c_mst, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->i2c_mst, 1, data)) // w 24 40
     return -1;
 
     /* Slave 0 reads from AKM data registers. */
     data[0] = BIT_I2C_READ | st.chip_cfg.compass_addr;
-    if (i2c_write(st.hw->addr, st.reg->s0_addr, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s0_addr, 1, data)) // w 25 8c
     return -1;
 
     /* Compass reads start at this register. */
     data[0] = AKM_REG_ST1;
-    if (i2c_write(st.hw->addr, st.reg->s0_reg, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s0_reg, 1, data)) // w 26 02
     return -1;
 
     /* Enable slave 0, 8-byte reads. */
     data[0] = BIT_SLAVE_EN | 8;
-    if (i2c_write(st.hw->addr, st.reg->s0_ctrl, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s0_ctrl, 1, data)) // w 27 88
     return -1;
 
     /* Slave 1 changes AKM measurement mode. */
     data[0] = st.chip_cfg.compass_addr;
-    if (i2c_write(st.hw->addr, st.reg->s1_addr, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s1_addr, 1, data)) // w 28 0c
     return -1;
 
     /* AKM measurement mode register. */
     data[0] = AKM_REG_CNTL;
-    if (i2c_write(st.hw->addr, st.reg->s1_reg, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s1_reg, 1, data)) // w 29 0a
     return -1;
 
     /* Enable slave 1, 1-byte writes. */
     data[0] = BIT_SLAVE_EN | 1;
-    if (i2c_write(st.hw->addr, st.reg->s1_ctrl, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s1_ctrl, 1, data)) // w 2a 81
     return -1;
 
     /* Set slave 1 data. */
     data[0] = AKM_SINGLE_MEASUREMENT;
-    if (i2c_write(st.hw->addr, st.reg->s1_do, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->s1_do, 1, data)) // w 64 11
     return -1;
 
     /* Trigger slave 0 and slave 1 actions at each sample. */
     data[0] = 0x03;
-    if (i2c_write(st.hw->addr, st.reg->i2c_delay_ctrl, 1, data))
+    if (i2c_write(st.hw->addr, st.reg->i2c_delay_ctrl, 1, data)) // w 67 03
     return -1;
 
     #ifdef MPU9150
