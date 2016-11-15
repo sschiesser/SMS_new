@@ -300,6 +300,9 @@ extern "C" {
 #elif defined __KERNEL__
 #define MPL_LOG_PRI(priority, tag, fmt, ...) \
 	pr_debug(MPL_##priority tag fmt, ##__VA_ARGS__)
+#elif defined EMPL_TARGET_SAMB11
+#define MPL_LOG_PRI(priority, tag, fmt, ...) \
+    NULL
 #else
 #define MPL_LOG_PRI(priority, tag, fmt, ...) \
 	_MLPrintLog(MPL_##priority, tag, fmt, ##__VA_ARGS__)

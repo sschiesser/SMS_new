@@ -277,7 +277,6 @@
       <Value>libarm_cortexM0l_math</Value>
       <Value>libm</Value>
       <Value>liblibmplmpu.a</Value>
-      <Value>libmpllib.a</Value>
     </ListValues>
   </armgcc.linker.libraries.Libraries>
   <armgcc.linker.libraries.LibrarySearchPaths>
@@ -380,6 +379,7 @@
       <Value>MPU9250</Value>
       <Value>USE_DMP</Value>
       <Value>EMPL</Value>
+      <Value>MPL_LOG_NDEBUG=0</Value>
     </ListValues>
   </armgcc.compiler.symbols.DefSymbols>
   <armgcc.compiler.directories.IncludePaths>
@@ -433,7 +433,6 @@
       <Value>libarm_cortexM0l_math</Value>
       <Value>libm</Value>
       <Value>liblibmplmpu.a</Value>
-      <Value>libmpllib.a</Value>
     </ListValues>
   </armgcc.linker.libraries.Libraries>
   <armgcc.linker.libraries.LibrarySearchPaths>

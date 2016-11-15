@@ -183,17 +183,26 @@ static void configure_imu(void)
 
 void imu_poll_data(void)
 {
-    //st.chip_cfg.dmp_on = 1;
-    //short gyro[3], accel_short[3], sensors;
-    //unsigned char more;
-    //long accel[3], quaternion[4];
-    //unsigned long *timestamp;
-    //int res;
-    //res = dmp_read_fifo(gyro, accel_short, quaternion, &timestamp, &sensors, &more);
+    long msg, data[9];
+    int8_t accuracy;
+    unsigned long timestamp;
+    float float_data[3] = {0};
+    inv_get_sensor_type_accel(data, &accuracy, (inv_time_t*)&timestamp);
+    DBG_LOG("ACCEL: ");
+    for(uint8_t i = 0; i < 9; i++) {
+        DBG_LOG_CONT("%d, ", data[i]);
+    }
 }
 
 int main(void)
 {
+    inv_error_t result;
+    unsigned char accel_fsr, new_temp = 0;
+    unsigned short gyro_rate, gyro_fsr;
+    unsigned long timestamp;
+    unsigned char new_compass = 0;
+    unsigned short compass_fsr;
+    
 	//system_clock_config(CLOCK_RESOURCE_XO_26_MHZ, CLOCK_FREQ_26_MHZ);
  	//! [init]
     platform_driver_init();
@@ -211,7 +220,134 @@ int main(void)
 	//! [config]
     
     init_imu();
-    configure_imu();
+    
+    /* If you're not using an MPU9150 AND you're not using DMP features, this
+     * function will place all slaves on the primary bus.
+     * mpu_set_bypass(1);
+     */
+    result = inv_init_mpl();
+    if(result) {
+        DBG_LOG_DEV("Could not initialize MPL.");
+        system_global_reset();
+    }
+    
+    /* Compute 6-axis and 9-axis quaternions. */
+    inv_enable_quaternion();
+    inv_enable_9x_sensor_fusion();
+    
+    /* The MPL expects compass data at a constant rate (matching the rate
+     * passed to inv_set_compass_sample_rate). If this is an issue for your
+     * application, call this function, and the MPL will depend on the
+     * timestamps passed to inv_build_compass instead.
+     *
+     * inv_9x_fusion_use_timestamps(1);
+     */
+
+    /* Update gyro biases when not in motion.
+     * WARNING: These algorithms are mutually exclusive.
+     */
+    inv_enable_fast_nomot();
+    /* inv_enable_motion_no_motion(); */
+    /* inv_set_no_motion_time(1000); */
+
+    /* Update gyro biases when temperature changes. */
+    inv_enable_gyro_tc();
+
+    /* This algorithm updates the accel biases when in motion. A more accurate
+     * bias measurement can be made when running the self-test (see case 't' in
+     * handle_input), but this algorithm can be enabled if the self-test can't
+     * be executed in your application.
+     *
+     * inv_enable_in_use_auto_calibration();
+     */
+    /* Compass calibration algorithms. */
+    //inv_enable_vector_compass_cal();
+    //inv_enable_magnetic_disturbance();
+
+    /* If you need to estimate your heading before the compass is calibrated,
+     * enable this algorithm. It becomes useless after a good figure-eight is
+     * detected, so we'll just leave it out to save memory.
+     * inv_enable_heading_from_gyro();
+     */
+
+    /* Allows use of the MPL APIs in read_from_mpl. */
+    //inv_enable_eMPL_outputs();
+
+    result = inv_start_mpl();
+    if (result == INV_ERROR_NOT_AUTHORIZED) {
+        while (1) {
+            MPL_LOGE("Not authorized.\n");
+            delay_ms(5000);
+        }
+    }
+    if (result) {
+        MPL_LOGE("Could not start the MPL.\n");
+        system_global_reset();
+    }
+
+    /* Get/set hardware configuration. Start gyro. */
+    /* Wake up all sensors. */
+    mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS);
+
+    /* Push both gyro and accel data into the FIFO. */
+    mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
+    mpu_set_sample_rate(DEFAULT_MPU_HZ);
+    /* The compass sampling rate can be less than the gyro/accel sampling rate.
+     * Use this function for proper power management.
+     */
+    mpu_set_compass_sample_rate(1000 / COMPASS_READ_MS);
+
+    /* Read back configuration in case it was set improperly. */
+    mpu_get_sample_rate(&gyro_rate);
+    mpu_get_gyro_fsr(&gyro_fsr);
+    mpu_get_accel_fsr(&accel_fsr);
+    mpu_get_compass_fsr(&compass_fsr);
+
+    /* Sync driver configuration with MPL. */
+    /* Sample rate expected in microseconds. */
+    inv_set_gyro_sample_rate(1000000L / gyro_rate);
+    inv_set_accel_sample_rate(1000000L / gyro_rate);
+    /* The compass rate is independent of the gyro and accel rates. As long as
+     * inv_set_compass_sample_rate is called with the correct value, the 9-axis
+     * fusion algorithm's compass correction gain will work properly.
+     */
+    inv_set_compass_sample_rate(COMPASS_READ_MS * 1000L);
+
+    /* Set chip-to-body orientation matrix.
+     * Set hardware units to dps/g's/degrees scaling factor.
+     */
+    inv_set_gyro_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)gyro_fsr<<15);
+    inv_set_accel_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)accel_fsr<<15);
+    inv_set_compass_orientation_and_scale(inv_orientation_matrix_to_scalar(compass_pdata.orientation), (long)compass_fsr<<15);
+
+    /* Initialize HAL state variables. */
+    hal.sensors = ACCEL_ON | GYRO_ON | COMPASS_ON;
+    hal.dmp_on = 0;
+    hal.report = 0;
+    hal.rx.cmd = 0;
+    hal.next_pedo_ms = 0;
+    hal.next_compass_ms = 0;
+    hal.next_temp_ms = 0;
+
+    /* Compass reads are handled by scheduler. */
+    uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
+    timestamp = (uint32_t *)(load / 26000);
+    DBG_LOG_DEV("Timestamp: %lld", timestamp);
+
+    if (dmp_load_motion_driver_firmware()) {
+        MPL_LOGE("Could not download DMP.\n");
+        system_global_reset();
+    }
+    dmp_set_orientation(
+    inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
+
+    hal.dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL;
+    dmp_enable_feature(hal.dmp_features);
+    dmp_set_fifo_rate(DEFAULT_MPU_HZ);
+    inv_set_quat_sample_rate(1000000L / DEFAULT_MPU_HZ);
+    mpu_set_dmp_state(1);
+    hal.dmp_on = 1;
+
     gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
     gpio_enable_callback(PIN_AO_GPIO_2);
     //while(1){}

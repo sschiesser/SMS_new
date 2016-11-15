@@ -162,7 +162,8 @@ static inline void get_ms(uint32_t *count)
 }
 static inline int reg_int_cb(struct int_param_s *int_param)
 {
-    gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
+    
+    gpio_register_callback(int_param->pin, int_param->cb, GPIO_CALLBACK_RISING);
     return 0;
 }
 #define log_i       DBG_LOG
