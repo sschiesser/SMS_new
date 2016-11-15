@@ -153,6 +153,8 @@ static void configure_imu(void)
     mpu_get_gyro_fsr(&gyro_fsr);
     mpu_get_accel_fsr(&accel_fsr);
     
+    //inv_set_gyro_sample_rate
+    
     hal.dmp_features = (DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_RAW_GYRO);
     dmp_enable_feature(hal.dmp_features);
 }

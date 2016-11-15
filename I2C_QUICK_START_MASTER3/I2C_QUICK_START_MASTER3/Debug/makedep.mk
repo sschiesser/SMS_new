@@ -6,11 +6,29 @@ src\ASF\common\services\delay\sam\systick_counter.c
 
 src\ASF\sam0\drivers\dualtimer\dualtimer.c
 
-src\ASF\thirdparty\sensor\mpu9250\inv_mpu.c
+src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu.c
 
-src\ASF\thirdparty\sensor\mpu9250\inv_mpu_dmp_motion_driver.c
+src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu_dmp_motion_driver.c
 
-src\ASF\thirdparty\sensor\mpu9250\mpu9250.c
+src\ASF\thirdparty\sensor\mpu9250\eMPL-hal\eMPL_outputs.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\data_builder.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\hal_outputs.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\message_layer.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\mlmath.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\ml_math_func.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\mpl.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\results_holder.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\start_manager.c
+
+src\ASF\thirdparty\sensor\mpu9250\mllite\storage_manager.c
 
 src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\ble_mgr\ble_manager.c
 
