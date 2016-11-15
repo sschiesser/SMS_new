@@ -163,35 +163,15 @@ static void init_imu(void)
     int_param.pin = PIN_AO_GPIO_2;
     mpu_init(&int_param);
 }
-static void configure_imu(void)
-{
-    mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL);
-    mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
-    mpu_set_sample_rate(10);
-    
-    uint16_t gyro_rate, gyro_fsr;
-    uint8_t accel_fsr;
-    mpu_get_sample_rate(&gyro_rate);
-    mpu_get_gyro_fsr(&gyro_fsr);
-    mpu_get_accel_fsr(&accel_fsr);
-    
-    //inv_set_gyro_sample_rate
-    
-    hal.dmp_features = (DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_RAW_GYRO);
-    dmp_enable_feature(hal.dmp_features);
-}
 
 void imu_poll_data(void)
 {
-    long msg, data[9];
-    int8_t accuracy;
-    unsigned long timestamp;
-    float float_data[3] = {0};
-    inv_get_sensor_type_accel(data, &accuracy, (inv_time_t*)&timestamp);
-    DBG_LOG("ACCEL: ");
-    for(uint8_t i = 0; i < 9; i++) {
-        DBG_LOG_CONT("%d, ", data[i]);
-    }
+    static unsigned long sensor_timestamp;
+    short gyro[3], accel_short[3], sensors;
+    unsigned char more;
+    long accel[3], quat[4], temperature;
+    dmp_read_fifo(gyro, accel_short, quat, &sensor_timestamp, &sensors, &more);
+    DBG_LOG("FIFO: %d %d %d, %d %d %d, %ld %ld %ld %ld", gyro[0], gyro[1], gyro[2], accel_short[0], accel_short[1], accel_short[2], quat[0], quat[1], quat[2], quat[3]);
 }
 
 int main(void)
