@@ -1,48 +1,48 @@
 /**
- * \file
- *
- * \brief I2C Master Quick Start Guide for SAMB
- *
- * Copyright (c) 2015 Atmel Corporation. All rights reserved.
- *
- * \asf_license_start
- *
- * \page License
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- *
- * 3. The name of Atmel may not be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * 4. This software may only be redistributed and used in connection with an
- *    Atmel microcontroller product.
- *
- * THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
- * EXPRESSLY AND SPECIFICALLY DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
- * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
- * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- * \asf_license_stop
- *
- */
+* \file
+*
+* \brief I2C Master Quick Start Guide for SAMB
+*
+* Copyright (c) 2015 Atmel Corporation. All rights reserved.
+*
+* \asf_license_start
+*
+* \page License
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*
+* 1. Redistributions of source code must retain the above copyright notice,
+*    this list of conditions and the following disclaimer.
+*
+* 2. Redistributions in binary form must reproduce the above copyright notice,
+*    this list of conditions and the following disclaimer in the documentation
+*    and/or other materials provided with the distribution.
+*
+* 3. The name of Atmel may not be used to endorse or promote products derived
+*    from this software without specific prior written permission.
+*
+* 4. This software may only be redistributed and used in connection with an
+*    Atmel microcontroller product.
+*
+* THIS SOFTWARE IS PROVIDED BY ATMEL "AS IS" AND ANY EXPRESS OR IMPLIED
+* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE
+* EXPRESSLY AND SPECIFICALLY DISCLAIMED. IN NO EVENT SHALL ATMEL BE LIABLE FOR
+* ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+* OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+* HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+* STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+* ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+* POSSIBILITY OF SUCH DAMAGE.
+*
+* \asf_license_stop
+*
+*/
 /*
- * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
- */
+* Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
+*/
 
 #include "include.h"
 
@@ -67,54 +67,47 @@ unsigned char *mpl_key = (unsigned char *)"eMPL 5.1";
 /* Platform-specific information. Kinda like a boardfile. */
 struct platform_data_s {
     signed char orientation[9];
-};    
+};
 /* The sensors can be mounted onto the board in any orientation. The mounting
- * matrix seen below tells the MPL how to rotate the raw data from the
- * driver(s).
- * TODO: The following matrices refer to the configuration on internal test
- * boards at Invensense. If needed, please modify the matrices to match the
- * chip-to-body matrix for your particular set up.
- */
+* matrix seen below tells the MPL how to rotate the raw data from the
+* driver(s).
+* TODO: The following matrices refer to the configuration on internal test
+* boards at Invensense. If needed, please modify the matrices to match the
+* chip-to-body matrix for your particular set up.
+*/
 static struct platform_data_s gyro_pdata = {
     .orientation = { 1, 0, 0,
-                     0, 1, 0,
-                     0, 0, 1}
+        0, 1, 0,
+    0, 0, 1}
 };
 static struct platform_data_s compass_pdata = {
     .orientation = { 0, 1, 0,
-                     1, 0, 0,
-                     0, 0,-1}
+        1, 0, 0,
+    0, 0,-1}
 };
+
 #define COMPASS_ENABLED 1
 
-//struct dmp_s {
-    //void (*tap_cb)(unsigned char count, unsigned char direction);
-    //void (*android_orient_cb)(unsigned char orientation);
-    //unsigned short orient;
-    //unsigned short feature_mask;
-    //unsigned short fifo_rate;
-    //unsigned char packet_length;
-//};
-
-//static struct dmp_s dmp = {
-    //.tap_cb = NULL,
-    //.android_orient_cb = NULL,
-    //.orient = 0,
-    //.feature_mask = 0,
-    //.fifo_rate = 0,
-    //.packet_length = 0
-//};
-
-//! [dev_inst]
+static inline void get_ms(uint32_t *count)
+{
+    static uint32_t old_val = 0;
+    volatile uint32_t val = (uint32_t)((0xffffffff - dualtimer_get_value(DUALTIMER_TIMER2)) / (uint32_t)26000);
+    volatile uint32_t delta;
+    if(val >= old_val) delta = val - old_val;
+    else delta = (uint32_t)(0xffffffff/(uint32_t)26000) - old_val + val;
+    //DBG_LOG("old_val %lu, val %lu, delta %lu", old_val, val, delta);
+    old_val = val;
+    count[0] = delta;
+}
 
 void configure_i2c_master(void)
 {
     i2c_wpacket.data = malloc(16 * sizeof(uint8_t));
     i2c_rpacket.data = malloc(16 * sizeof(uint8_t));
     
-	/* Initialize config structure and software module. */
-	struct i2c_master_config config_i2c_master;
-	i2c_master_get_config_defaults(&config_i2c_master);
+    /* Initialize config structure and software module. */
+    struct i2c_master_config config_i2c_master;
+    i2c_master_get_config_defaults(&config_i2c_master);
     /* 26 MHz / 65 = 400 kHz */
     config_i2c_master.clock_source = I2C_CLK_INPUT_0;
     config_i2c_master.clock_divider = 65;
@@ -125,10 +118,10 @@ void configure_i2c_master(void)
     config_i2c_master.pin_number_pad1 = PIN_LP_GPIO_9;
     config_i2c_master.pinmux_sel_pad0 = MUX_LP_GPIO_8_I2C0_SDA;
     config_i2c_master.pinmux_sel_pad1 = MUX_LP_GPIO_9_I2C0_SCL;
-	/* Initialize and enable device with config, and enable i2c. */
-	while(i2c_master_init(&i2c_master_instance, I2C0, &config_i2c_master) != STATUS_OK);
-	
-	i2c_enable(i2c_master_instance.hw);
+    /* Initialize and enable device with config, and enable i2c. */
+    while(i2c_master_init(&i2c_master_instance, I2C0, &config_i2c_master) != STATUS_OK);
+    
+    i2c_enable(i2c_master_instance.hw);
 }
 
 void init_dualtimer(void)
@@ -137,13 +130,12 @@ void init_dualtimer(void)
     dualtimer_get_config_defaults(&config_dualtimer);
     
     config_dualtimer.timer1.load_value = 26000;
-    config_dualtimer.timer2.load_value = 26000;
-    config_dualtimer.timer1.timer_enable = false;
-    config_dualtimer.timer2.timer_enable = false;
+    config_dualtimer.timer2.load_value = 0xffffffff;
+    config_dualtimer.timer2.interrup_enable = false;
     
     dualtimer_init(&config_dualtimer);
-    //dualtimer_disable(DUALTIMER_TIMER1);
-    //dualtimer_disable(DUALTIMER_TIMER2);
+    dualtimer_disable(DUALTIMER_TIMER1);
+    dualtimer_disable(DUALTIMER_TIMER2);
 }
 void interrupt_cb(void)
 {
@@ -160,13 +152,6 @@ static void configure_imu_gpio(void)
     config_gpio_pin.aon_wakeup = true;
     gpio_pin_set_config(PIN_AO_GPIO_2, &config_gpio_pin);
 }
-//static void init_imu(void)
-//{
-    //struct int_param_s int_param;
-    //int_param.cb = interrupt_cb;
-    //int_param.pin = PIN_AO_GPIO_2;
-    //mpu_init(&int_param);
-//}
 
 void imu_poll_data(void)
 {
@@ -184,10 +169,10 @@ int main(void)
 {
     inv_error_t result;
     unsigned char accel_fsr = 0;
-    //unsigned char new_temp = 0;
+    unsigned char new_temp = 0;
     unsigned short gyro_rate, gyro_fsr;
-    //unsigned long timestamp;
-    //unsigned char new_compass = 0;
+    unsigned long timestamp = 0;
+    unsigned char new_compass = 0;
     unsigned short compass_fsr;
     
     platform_driver_init();
@@ -200,7 +185,7 @@ int main(void)
     delay_init();
 
     configure_imu_gpio();
-	configure_i2c_master();
+    configure_i2c_master();
     
     struct int_param_s int_param;
     int_param.cb = (void*)interrupt_cb;
@@ -212,9 +197,9 @@ int main(void)
     }
     
     /* If you're not using an MPU9150 AND you're not using DMP features, this
-     * function will place all slaves on the primary bus.
-     * mpu_set_bypass(1);
-     */
+    * function will place all slaves on the primary bus.
+    * mpu_set_bypass(1);
+    */
     result = inv_init_mpl();
     if(result) {
         DBG_LOG_DEV("Could not initialize MPL.");
@@ -226,16 +211,16 @@ int main(void)
     inv_enable_9x_sensor_fusion();
     
     /* The MPL expects compass data at a constant rate (matching the rate
-     * passed to inv_set_compass_sample_rate). If this is an issue for your
-     * application, call this function, and the MPL will depend on the
-     * timestamps passed to inv_build_compass instead.
-     *
-     * inv_9x_fusion_use_timestamps(1);
-     */
+    * passed to inv_set_compass_sample_rate). If this is an issue for your
+    * application, call this function, and the MPL will depend on the
+    * timestamps passed to inv_build_compass instead.
+    *
+    * inv_9x_fusion_use_timestamps(1);
+    */
 
     /* Update gyro biases when not in motion.
-     * WARNING: These algorithms are mutually exclusive.
-     */
+    * WARNING: These algorithms are mutually exclusive.
+    */
     inv_enable_fast_nomot();
     /* inv_enable_motion_no_motion(); */
     /* inv_set_no_motion_time(1000); */
@@ -244,21 +229,21 @@ int main(void)
     inv_enable_gyro_tc();
 
     /* This algorithm updates the accel biases when in motion. A more accurate
-     * bias measurement can be made when running the self-test (see case 't' in
-     * handle_input), but this algorithm can be enabled if the self-test can't
-     * be executed in your application.
-     *
-     * inv_enable_in_use_auto_calibration();
-     */
+    * bias measurement can be made when running the self-test (see case 't' in
+    * handle_input), but this algorithm can be enabled if the self-test can't
+    * be executed in your application.
+    *
+    * inv_enable_in_use_auto_calibration();
+    */
     /* Compass calibration algorithms. */
     //inv_enable_vector_compass_cal();
     //inv_enable_magnetic_disturbance();
 
     /* If you need to estimate your heading before the compass is calibrated,
-     * enable this algorithm. It becomes useless after a good figure-eight is
-     * detected, so we'll just leave it out to save memory.
-     * inv_enable_heading_from_gyro();
-     */
+    * enable this algorithm. It becomes useless after a good figure-eight is
+    * detected, so we'll just leave it out to save memory.
+    * inv_enable_heading_from_gyro();
+    */
 
     /* Allows use of the MPL APIs in read_from_mpl. */
     //inv_enable_eMPL_outputs();
@@ -283,8 +268,8 @@ int main(void)
     mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
     mpu_set_sample_rate(DEFAULT_MPU_HZ);
     /* The compass sampling rate can be less than the gyro/accel sampling rate.
-     * Use this function for proper power management.
-     */
+    * Use this function for proper power management.
+    */
     mpu_set_compass_sample_rate(1000 / COMPASS_READ_MS);
 
     /* Read back configuration in case it was set improperly. */
@@ -298,14 +283,14 @@ int main(void)
     inv_set_gyro_sample_rate(1000000L / gyro_rate);
     inv_set_accel_sample_rate(1000000L / gyro_rate);
     /* The compass rate is independent of the gyro and accel rates. As long as
-     * inv_set_compass_sample_rate is called with the correct value, the 9-axis
-     * fusion algorithm's compass correction gain will work properly.
-     */
+    * inv_set_compass_sample_rate is called with the correct value, the 9-axis
+    * fusion algorithm's compass correction gain will work properly.
+    */
     inv_set_compass_sample_rate(COMPASS_READ_MS * 1000L);
 
     /* Set chip-to-body orientation matrix.
-     * Set hardware units to dps/g's/degrees scaling factor.
-     */
+    * Set hardware units to dps/g's/degrees scaling factor.
+    */
     inv_set_gyro_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)gyro_fsr<<15);
     inv_set_accel_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)accel_fsr<<15);
     inv_set_compass_orientation_and_scale(inv_orientation_matrix_to_scalar(compass_pdata.orientation), (long)compass_fsr<<15);
@@ -319,11 +304,10 @@ int main(void)
     hal.next_compass_ms = 0;
     hal.next_temp_ms = 0;
 
-    ///* Compass reads are handled by scheduler. */
-    //uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
-    //timestamp = (uint32_t *)(load / 26000);
-    //DBG_LOG_DEV("Timestamp: %lld", timestamp);
-
+    /* Compass reads are handled by scheduler. */
+    dualtimer_enable(DUALTIMER_TIMER2);
+    get_ms(&timestamp);
+    
     if (dmp_load_motion_driver_firmware()) {
         MPL_LOGE("Could not download DMP.\n");
         system_global_reset();
@@ -343,8 +327,12 @@ int main(void)
 
 
     uint8_t compass_cnt = 0;
-	while (true) {
-		ble_event_task(BLE_EVENT_TIMEOUT);
+    while (true) {
+        ble_event_task(BLE_EVENT_TIMEOUT);
+
+        get_ms(&timestamp);
+        DBG_LOG("Timestamp: %ld", timestamp);
+        
         if(imu_interrupt) {
             //imu_poll_data();
             compass_cnt++;
@@ -366,7 +354,7 @@ int main(void)
                 }
             }
             imu_interrupt = false;
-        }            
-	}
-	//! [main_loop]
+        }
+    }
+    //! [main_loop]
 }
