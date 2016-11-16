@@ -90,14 +90,14 @@ static struct platform_data_s compass_pdata = {
 
 static inline void get_ms(uint32_t *count)
 {
-    static uint32_t old_val = 0;
+    //static uint32_t old_val = 0;
     volatile uint32_t val = (uint32_t)((0xffffffff - dualtimer_get_value(DUALTIMER_TIMER2)) / (uint32_t)26000);
-    volatile uint32_t delta;
-    if(val >= old_val) delta = val - old_val;
-    else delta = (uint32_t)(0xffffffff/(uint32_t)26000) - old_val + val;
-    //DBG_LOG("old_val %lu, val %lu, delta %lu", old_val, val, delta);
-    old_val = val;
-    count[0] = delta;
+    //volatile uint32_t delta;
+    //if(val >= old_val) delta = val - old_val;
+    //else delta = (uint32_t)(0xffffffff/(uint32_t)26000) - old_val + val;
+    //old_val = val;
+    //count[0] = delta;
+    count[0] = val;
 }
 
 void configure_i2c_master(void)
