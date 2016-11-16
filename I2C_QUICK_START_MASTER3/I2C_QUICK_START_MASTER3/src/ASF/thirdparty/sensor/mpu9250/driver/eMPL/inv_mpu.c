@@ -36,81 +36,13 @@
  * fabsf(float x)
  * min(int a, int b)
  */
-#if defined MOTION_DRIVER_TARGET_MSP430
-#include "msp430.h"
-#include "msp430_i2c.h"
-#include "msp430_clock.h"
-#include "msp430_interrupt.h"
-#define i2c_write   msp430_i2c_write
-#define i2c_read    msp430_i2c_read
-#define delay_ms    msp430_delay_ms
-#define get_ms      msp430_get_clock_ms
-static inline int reg_int_cb(struct int_param_s *int_param)
-{
-    return msp430_reg_int_cb(int_param->cb, int_param->pin, int_param->lp_exit,
-    int_param->active_low);
-}
-#define log_i(...)     do {} while (0)
-#define log_e(...)     do {} while (0)
-/* labs is already defined by TI's toolchain. */
-/* fabs is for doubles. fabsf is for floats. */
-#define fabs        fabsf
-#define min(a,b) ((a<b)?a:b)
-
-#elif defined EMPL_TARGET_MSP430
-#include "msp430.h"
-#include "msp430_i2c.h"
-#include "msp430_clock.h"
-#include "msp430_interrupt.h"
-#include "log.h"
-#define i2c_write   msp430_i2c_write
-#define i2c_read    msp430_i2c_read
-#define delay_ms    msp430_delay_ms
-#define get_ms      msp430_get_clock_ms
-static inline int reg_int_cb(struct int_param_s *int_param)
-{
-    return msp430_reg_int_cb(int_param->cb, int_param->pin, int_param->lp_exit,
-    int_param->active_low);
-}
-#define log_i       MPL_LOGI
-#define log_e       MPL_LOGE
-/* labs is already defined by TI's toolchain. */
-/* fabs is for doubles. fabsf is for floats. */
-#define fabs        fabsf
-#define min(a,b) ((a<b)?a:b)
-
-#elif defined EMPL_TARGET_UC3L0
-/* Instead of using the standard TWI driver from the ASF library, we're using
-* a TWI driver that follows the slave address + register address convention.
-*/
-#include "twi.h"
-#include "delay.h"
-#include "sysclk.h"
-#include "log.h"
-#include "sensors_xplained.h"
-#include "uc3l0_clock.h"
-#define i2c_write(a, b, c, d)   twi_write(a, b, d, c)
-#define i2c_read(a, b, c, d)    twi_read(a, b, d, c)
-/* delay_ms is a function already defined in ASF. */
-#define get_ms  uc3l0_get_clock_ms
-static inline int reg_int_cb(struct int_param_s *int_param)
-{
-    sensor_board_irq_connect(int_param->pin, int_param->cb, int_param->arg);
-    return 0;
-}
-#define log_i       MPL_LOGI
-#define log_e       MPL_LOGE
-/* UC3 is a 32-bit processor, so abs and labs are equivalent. */
-#define labs        abs
-#define fabs(x)     (((x)>0)?(x):-(x))
-
-#elif defined EMPL_TARGET_SAMB11
+#if defined EMPL_TARGET_SAMB11
 #include "include.h"
 #define I2C_TIMEOUT 1000
 static int i2c_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t const *data)
 {
     //DBG_LOG("i2c writing to 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
-    uint16_t timeout = 0;
+    volatile uint16_t timeout = 0;
     i2c_wpacket.address = (uint8_t)slave_addr;
     i2c_wpacket.data_length = (uint8_t)(data_len + 1);
     i2c_wpacket.data[0] = (uint8_t)reg_addr;
@@ -118,12 +50,8 @@ static int i2c_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uin
         i2c_wpacket.data[i+1] = (uint8_t)data[i];
         //DBG_LOG_CONT("0x%02x ", packet.data[i+1]);
     }
-    while (i2c_master_write_packet_wait(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
-        /* Increment timeout counter and check if timed out. */
-        if (timeout++ >= I2C_TIMEOUT) {
-            return -1;
-        }
-    }
+    if(i2c_master_write_packet_wait(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) return -1;
+
     return 0;
 }
 static int i2c_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t *data)
@@ -137,18 +65,10 @@ static int i2c_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint
     i2c_rpacket.data_length = (uint8_t)data_len;
     
     timeout = 0;
-    while(i2c_master_write_packet_wait_no_stop(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
-        if(timeout++ >= I2C_TIMEOUT) {
-            return -1;
-        }
-    }
+    if(i2c_master_write_packet_wait_no_stop(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) return -1;
     
     timeout = 0;
-    while(i2c_master_read_packet_wait(&i2c_master_instance, &i2c_rpacket) != STATUS_OK) {
-        if(timeout++ >= I2C_TIMEOUT) {
-            return -1;
-        }
-    }
+    if(i2c_master_read_packet_wait(&i2c_master_instance, &i2c_rpacket) != STATUS_OK) return -1;
     for(uint8_t i = 0; i < data_len; i++) {
         data[i] = i2c_rpacket.data[i];
         //DBG_LOG("0x%02x ", data[i]);
