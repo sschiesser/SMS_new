@@ -82,8 +82,8 @@ static struct platform_data_s gyro_pdata = {
 };
 static struct platform_data_s compass_pdata = {
     .orientation = { 0, 1, 0,
-        1, 0, 0,
-    0, 0,-1}
+                     1, 0, 0,
+                     0, 0,-1}
 };
 #define COMPASS_ENABLED 1
 
@@ -160,20 +160,22 @@ static void configure_imu_gpio(void)
     config_gpio_pin.aon_wakeup = true;
     gpio_pin_set_config(PIN_AO_GPIO_2, &config_gpio_pin);
 }
-static void init_imu(void)
-{
-    struct int_param_s int_param;
-    int_param.cb = interrupt_cb;
-    int_param.pin = PIN_AO_GPIO_2;
-    mpu_init(&int_param);
-}
+//static void init_imu(void)
+//{
+    //struct int_param_s int_param;
+    //int_param.cb = interrupt_cb;
+    //int_param.pin = PIN_AO_GPIO_2;
+    //mpu_init(&int_param);
+//}
 
 void imu_poll_data(void)
 {
     static unsigned long sensor_timestamp;
     short gyro[3], accel_short[3], sensors;
     unsigned char more;
-    long accel[3], quat[4], temperature;
+    //long accel[3];
+    long quat[4];
+    //long temperature;
     dmp_read_fifo(gyro, accel_short, quat, &sensor_timestamp, &sensors, &more);
     DBG_LOG("FIFO: %d %d %d, %d %d %d, %ld %ld %ld %ld", gyro[0], gyro[1], gyro[2], accel_short[0], accel_short[1], accel_short[2], quat[0], quat[1], quat[2], quat[3]);
 }
@@ -181,14 +183,13 @@ void imu_poll_data(void)
 int main(void)
 {
     inv_error_t result;
-    unsigned char accel_fsr, new_temp = 0;
+    unsigned char accel_fsr = 0;
+    //unsigned char new_temp = 0;
     unsigned short gyro_rate, gyro_fsr;
-    unsigned long timestamp;
-    unsigned char new_compass = 0;
+    //unsigned long timestamp;
+    //unsigned char new_compass = 0;
     unsigned short compass_fsr;
     
-	//system_clock_config(CLOCK_RESOURCE_XO_26_MHZ, CLOCK_FREQ_26_MHZ);
- 	//! [init]
     platform_driver_init();
     gpio_init();
     acquire_sleep_lock();
@@ -197,13 +198,18 @@ int main(void)
 
     init_dualtimer();
     delay_init();
-	//! [init]
-	//! [config]
+
     configure_imu_gpio();
 	configure_i2c_master();
-	//! [config]
     
-    init_imu();
+    struct int_param_s int_param;
+    int_param.cb = (void*)interrupt_cb;
+    int_param.pin = PIN_AO_GPIO_2;
+    result = mpu_init(&int_param);
+    if(result) {
+        DBG_LOG_DEV("Could not initialize MPU!");
+        system_global_reset();
+    }
     
     /* If you're not using an MPU9150 AND you're not using DMP features, this
      * function will place all slaves on the primary bus.
@@ -313,17 +319,16 @@ int main(void)
     hal.next_compass_ms = 0;
     hal.next_temp_ms = 0;
 
-    /* Compass reads are handled by scheduler. */
-    uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
-    timestamp = (uint32_t *)(load / 26000);
-    DBG_LOG_DEV("Timestamp: %lld", timestamp);
+    ///* Compass reads are handled by scheduler. */
+    //uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
+    //timestamp = (uint32_t *)(load / 26000);
+    //DBG_LOG_DEV("Timestamp: %lld", timestamp);
 
     if (dmp_load_motion_driver_firmware()) {
         MPL_LOGE("Could not download DMP.\n");
         system_global_reset();
     }
-    dmp_set_orientation(
-    inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
+    dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
 
     hal.dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL;
     dmp_enable_feature(hal.dmp_features);
@@ -332,17 +337,34 @@ int main(void)
     mpu_set_dmp_state(1);
     hal.dmp_on = 1;
 
-    gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
+    //gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
     gpio_enable_callback(PIN_AO_GPIO_2);
     //while(1){}
 
 
-	//! [main_loop]
+    uint8_t compass_cnt = 0;
 	while (true) {
 		ble_event_task(BLE_EVENT_TIMEOUT);
         if(imu_interrupt) {
-            DBG_LOG("IMU INTERRUPT!");
-            imu_poll_data();
+            //imu_poll_data();
+            compass_cnt++;
+            if(compass_cnt > 2) {
+                compass_cnt = 0;
+                short compass_short[3];
+                long compass[3];
+                if(!mpu_get_compass_reg(compass_short, NULL)) {
+                    compass[0] = (long)compass_short[0];
+                    compass[1] = (long)compass_short[1];
+                    compass[2] = (long)compass_short[2];
+                    DBG_LOG("Compass: %ld %ld %ld", compass[0], compass[1], compass[2]);
+                    inv_build_compass(compass, 0, (inv_time_t)NULL);
+                    inv_execute_on_data();
+                    //long data[9];
+                    //int8_t accuracy;
+                    //inv_get_sensor_type_quat(data, &accuracy, NULL);
+                    //DBG_LOG("Quat: %ld %ld %ld %ld", data[0], data[1], data[2], data[3]);
+                }
+            }
             imu_interrupt = false;
         }            
 	}
