@@ -115,8 +115,12 @@ void configure_i2c_master(void)
 	/* Initialize config structure and software module. */
 	struct i2c_master_config config_i2c_master;
 	i2c_master_get_config_defaults(&config_i2c_master);
+    /* 26 MHz / 65 = 400 kHz */
     config_i2c_master.clock_source = I2C_CLK_INPUT_0;
-    config_i2c_master.clock_divider = 65; // 26 MHz / 65 = 400000
+    config_i2c_master.clock_divider = 65;
+    /* 3 MHz / 30 = 100 kHz */
+    //config_i2c_master.clock_source = I2C_CLK_INPUT_3;
+    //config_i2c_master.clock_divider = 30;
     config_i2c_master.pin_number_pad0 = PIN_LP_GPIO_8;
     config_i2c_master.pin_number_pad1 = PIN_LP_GPIO_9;
     config_i2c_master.pinmux_sel_pad0 = MUX_LP_GPIO_8_I2C0_SDA;
@@ -256,7 +260,7 @@ int main(void)
     result = inv_start_mpl();
     if (result == INV_ERROR_NOT_AUTHORIZED) {
         while (1) {
-            MPL_LOGE("Not authorized.\n");
+            DBG_LOG("Not authorized.\n");
             delay_ms(5000);
         }
     }

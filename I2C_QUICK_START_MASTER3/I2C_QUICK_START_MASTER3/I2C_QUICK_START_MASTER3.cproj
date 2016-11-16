@@ -873,9 +873,6 @@
     <Compile Include="src\ASF\sam0\utils\stdio\write.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\config\mpu9250_addr.h">
-      <SubType>compile</SubType>
-    </Compile>
     <None Include="src\ASF\common\services\serial\serial.h">
       <SubType>compile</SubType>
     </None>
