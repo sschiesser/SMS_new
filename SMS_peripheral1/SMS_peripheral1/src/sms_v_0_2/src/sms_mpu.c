@@ -7,7 +7,7 @@
 
 #include "sms_peripheral1.h"
 
-static struct hal_s hal = {0};
+//static struct hal_s hal = {0};
     
 void sms_mpu_configure_gpio(void)
 {
@@ -53,11 +53,11 @@ void sms_mpu_interrupt_callback(void)
 
 int sms_mpu_initialize(void) {
     int res;
-    unsigned char accel_fsr = 0;
-    unsigned short gyro_rate, gyro_fsr, compass_fsr;
+    //unsigned char accel_fsr = 0;
+    //unsigned short gyro_rate, gyro_fsr, compass_fsr;
     
-    /* Initialize MPU-9250 without interrupt parameter since this has to be set independantly */
-    DBG_LOG_DEV("Starting up MPU...");
+    /* Initialize MPU-9250 without interrupt parameter since this has to be set independently */
+    DBG_LOG_DEV("Initializing MPU...");
     res = mpu_init(NULL);
     if(res) {
         DBG_LOG_CONT_DEV(" failed!");
@@ -68,102 +68,43 @@ int sms_mpu_initialize(void) {
     mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
     mpu_set_sample_rate(SMS_MPU_SAMPLE_RATE_HZ);
     mpu_set_compass_sample_rate(SMS_MPU_COMPASS_RATE_HZ);
-    mpu_get_sample_rate(&gyro_rate);
-    mpu_get_accel_fsr(&accel_fsr);
-    mpu_get_compass_fsr(&compass_fsr);
+    mpu_get_sample_rate(&mpu_device.hal.sample_rate);
+    mpu_get_accel_fsr(&mpu_device.hal.accel_fsr);
+    mpu_get_compass_fsr(&mpu_device.hal.compass_fsr);
     
-    hal.sensors = (SMS_MPU_ACCEL_ON | SMS_MPU_GYRO_ON | SMS_MPU_COMPASS_ON);
-    hal.dmp_features = (DMP_FEATURE_GYRO_CAL | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_ANY_GYRO);
-    dmp_enable_feature(hal.dmp_features);
+    mpu_device.hal.sensors = (SMS_MPU_ACCEL_ON | SMS_MPU_GYRO_ON | SMS_MPU_COMPASS_ON);
+    mpu_device.hal.dmp_features = (DMP_FEATURE_GYRO_CAL | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_ANY_GYRO);
+    dmp_enable_feature(mpu_device.hal.dmp_features);
     dmp_set_fifo_rate(SMS_MPU_SAMPLE_RATE_HZ);
     mpu_set_dmp_state(1);
-    hal.dmp_on = 1;
+    mpu_device.hal.dmp_on = 1;
     
     return 0;
 }
-//
-///* Initialize IMU... based on Invensense API */
-//int sms_imu_initialize(void)
-//{
-    //DBG_LOG_DEV("[sms_imu_initialize]\n\r  initializing IMU...");
-    //
-    ///* Initialize MPU with default settings and register data ready interrupt */
-    //struct int_param_s int_param;
-    //int_param.cb = sms_imu_interrupt_callback;
-    //int_param.pin = SMS_IMU_INTERRUPT_PIN;
-    //return mpu_init(&int_param);
-//}
-//
-///* Configure IMU:
-//* - start Motion Processing Library
-//* - set which sensors are used
-//* - configure FIFO
-//* - set sample rate
-//* - enable selected DMP features
-//* - start DMP
-//* - enable GPIO interrupt callback
-//*/
-//int sms_imu_configure(void)
-//{
-    //if(mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL) != 0) return -1;
-    //if(mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL) != 0) return -1;
-    //if(mpu_set_sample_rate(4) != 0) return -1;
-//
-    //uint16_t gyro_rate, gyro_fsr;
-    //uint8_t accel_fsr;
-    //if(mpu_get_sample_rate(&gyro_rate) != 0) return -1;
-    //if(mpu_get_gyro_fsr(&gyro_fsr) != 0) return -1;
-    //if(mpu_get_accel_fsr(&accel_fsr) != 0) return -1;
-    ////DBG_LOG_DEV("[sms_imu_configure]  retrieved values:");
-    ////DBG_LOG_DEV("  - gyro rate = %d", gyro_rate);
-    ////DBG_LOG_DEV("  - gyro fsr  = %d", gyro_fsr);
-    ////DBG_LOG_DEV("  - accel fsr = %d", accel_fsr);
-//
-    ////inv_set_gyro_sample_rate(1000000L / gyro_rate);
-    ////inv_set_accel_sample_rate(1000000L / gyro_rate);
-    ////
-    ////inv_set_gyro_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)gyro_fsr<<15);
-    ////inv_set_accel_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)accel_fsr<<15);
-//
-    ////dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
-//
-    //hal.dmp_features = (DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_RAW_GYRO);
-    //if(dmp_enable_feature(hal.dmp_features) != 0) {
-        //DBG_LOG_DEV("[sms_imu_configure]  error while enabling dmp features");
-        //return -1;
-    //}        
-    //gpio_enable_callback(SMS_IMU_INTERRUPT_PIN);
-    ////st.chip_cfg.dmp_sample_rate = 4;
-    ////st.chip_cfg.dmp_loaded = 1;
-    ////if(mpu_set_dmp_state(1) != 0) {
-        ////DBG_LOG_DEV("[sms_imu_configure]  error while setting dmp state");
-        ////return -1;
-    ////}        
-//
-    //return 0;
-//}
-//
-///* Extract available IMU data */
-//int sms_imu_poll_data(void)
-//{
-    ////DBG_LOG_DEV("[sms_imu_receive_data]\n\r  reading...");
+
+/* Extract available IMU data */
+int sms_mpu_poll_data(void)
+{
+    //DBG_LOG_DEV("[sms_imu_receive_data]\n\r  reading...");
     //st.chip_cfg.dmp_on = 1;
-    //short gyro[3],accel_short[3], sensors;
-    //unsigned char more;
-    //long accel[3], quaternion[4];
-    //unsigned long *timestamp;
-    //int res;
-    //if((res = dmp_read_fifo(gyro, accel_short, quaternion, &timestamp, &sensors, &more)) != 0) {
+    short sensors;
+    unsigned char more;
+    unsigned long sensor_timestamp;
+    int res;
+    mpu_read_fifo(mpu_device.hal.gyro, mpu_device.hal.accel, &sensor_timestamp, &sensors, &more);
+    
+    if(more) {
+        mpu_device.hal.new_data = 1;
+    }        
         //DBG_LOG_DEV("ERROR! returned: %d", res);
         ///* -1 returned in case of a.o. i2c communication error */
         //if(res == -1) {
-            //mpu9250_device.comm_error = true;
             //DBG_LOG_DEV("[sms_imu_poll_data]  comm_error = true");
         //}
         ///* -2 returned in case of fifo overflow */
         //if(res == -2) {
-            //hal.dmp_features = (DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_RAW_GYRO);
-            //if(dmp_enable_feature(hal.dmp_features) != 0) return -1;
+            //mpu_device.hal.dmp_features = (DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_RAW_GYRO);
+            //if(dmp_enable_feature(mpu_device.hal.dmp_features) != 0) return -1;
             //if(mpu_set_dmp_state(1) != 0) return -1;
         //}
     //}
@@ -180,9 +121,9 @@ int sms_mpu_initialize(void) {
         //sms_imu_char_values[9] = (uint8_t)((gyro[1] >> 8) & 0xff);
         //sms_imu_char_values[10] = (uint8_t)(gyro[2] & 0xff);
         //sms_imu_char_values[11] = (uint8_t)((gyro[2] >> 8) & 0xff);
-        ////for(uint8_t i = 0; i < 12; i++) {
-        ////DBG_LOG_DEV("[sms_imu_receive_data]  value[%d]: 0x%02x", i, sms_imu_char_values[i]);
-        ////}
+        //for(uint8_t i = 0; i < 12; i++) {
+        //DBG_LOG_DEV("[sms_imu_receive_data]  value[%d]: 0x%02x", i, sms_imu_char_values[i]);
+        //}
         //at_ble_status_t status = at_ble_characteristic_value_set(sms_imu_service_handler.serv_chars.char_val_handle, &sms_imu_char_values, (12 * sizeof(uint8_t)));
         //if(status != AT_BLE_SUCCESS) {
             //DBG_LOG_DEV("[sms_imu_receive_data]  updating the characteristic failed, reason %d", status);
@@ -198,11 +139,11 @@ int sms_mpu_initialize(void) {
         //}
     //}
     //gpio_enable_callback(SMS_IMU_INTERRUPT_PIN);
-//
-//
-    //return 0;
-//}
-//
+
+
+    return 0;
+}
+
 //void sms_imu_service_init(gatt_service_handler_t *sms_imu_serv, uint8_t *sms_imu_value)
 //{
     ////SMS button service characteristic

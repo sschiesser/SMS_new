@@ -44,16 +44,23 @@
 /* ---------
  * VARIABLES
  * --------- */
-typedef struct sms_mpu9250_instance {
+struct mpu9250_hal_s {
     bool int_active;
     bool reset_done;
     bool init_ok;
-    bool new_data;
+    unsigned char accel_fsr;
+    unsigned short gyro_fsr;
+    unsigned short compass_fsr;
+    unsigned short sample_rate;
     short gyro[3];
     short accel[3];
     short compass[3];
     long temperature;
-}sms_mpu9250_instance_t;
+    bool new_data;
+    unsigned char sensors;
+    unsigned char dmp_on;
+    unsigned short dmp_features;
+};
 
 enum sms_mpu_state {
     MPU_STATE_OFF,
@@ -61,7 +68,7 @@ enum sms_mpu_state {
     MPU_STATE_ON
 };
 typedef struct sms_mpu_struct {
-    sms_mpu9250_instance_t mpu9250_device;
+    struct mpu9250_hal_s hal;
     enum sms_mpu_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[12];
@@ -139,6 +146,7 @@ void sms_mpu_register_callbacks(void);
 void sms_mpu_unregister_callbacks(void);
 void sms_mpu_interrupt_callback(void);
 int sms_mpu_initialize(void);
+int sms_mpu_poll_data(void);
 
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);

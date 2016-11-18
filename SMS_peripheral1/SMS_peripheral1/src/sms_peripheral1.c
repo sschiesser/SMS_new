@@ -284,11 +284,9 @@ int main(void)
                 case INT_MPU_DRDY:
                 //sms_monitor_states("INT_IMU_DRDY");
                 DBG_LOG_DEV("\n\r...MPU_DRDY");
-                if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-                    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-                    //DBG_LOG_DEV("[main]\t\t\tIMU data ready");
-                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-                }                    
+                //if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
+                    sms_mpu_poll_data();
+                //}                    
                 break;
                 
                 case INT_AON_TIMER:
