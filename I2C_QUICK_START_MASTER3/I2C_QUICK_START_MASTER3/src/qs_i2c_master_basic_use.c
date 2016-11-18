@@ -318,10 +318,10 @@ int main(void)
     //hal.dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL;
     hal.dmp_features = DMP_FEATURE_GYRO_CAL  | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_ANY_GYRO;
     dmp_enable_feature(hal.dmp_features);
-    //dmp_set_fifo_rate(DEFAULT_MPU_HZ);
+    dmp_set_fifo_rate(DEFAULT_MPU_HZ);
     //inv_set_quat_sample_rate(1000000L / DEFAULT_MPU_HZ);
-    //mpu_set_dmp_state(1);
-    //hal.dmp_on = 1;
+    mpu_set_dmp_state(1);
+    hal.dmp_on = 1;
 
     //gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
     gpio_enable_callback(PIN_AO_GPIO_2);
