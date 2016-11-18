@@ -60,7 +60,7 @@ DMP_FEATURE_SEND_CAL_GYRO)
 
 
 /* Init software module. */
-volatile bool imu_interrupt = false;
+//volatile bool imu_interrupt = false;
 
 static struct hal_s hal = {0};
 unsigned char *mpl_key = (unsigned char *)"eMPL 5.1";
@@ -139,7 +139,8 @@ void init_dualtimer(void)
 }
 void interrupt_cb(void)
 {
-    imu_interrupt = true;
+    //imu_interrupt = true;
+    hal.new_gyro = 1;
     send_plf_int_msg_ind(PIN_AO_GPIO_2, GPIO_CALLBACK_RISING, NULL, 0);
 }
 
@@ -169,11 +170,11 @@ int main(void)
 {
     inv_error_t result;
     unsigned char accel_fsr = 0;
-    unsigned char new_temp = 0;
     unsigned short gyro_rate, gyro_fsr;
     unsigned long timestamp = 0;
-    unsigned char new_compass = 0;
     unsigned short compass_fsr;
+    uint8_t temp_cnt = 0;
+    uint8_t compass_cnt = 0;
     
     platform_driver_init();
     gpio_init();
@@ -280,20 +281,20 @@ int main(void)
 
     /* Sync driver configuration with MPL. */
     /* Sample rate expected in microseconds. */
-    inv_set_gyro_sample_rate(1000000L / gyro_rate);
-    inv_set_accel_sample_rate(1000000L / gyro_rate);
+    //inv_set_gyro_sample_rate(1000000L / gyro_rate);
+    //inv_set_accel_sample_rate(1000000L / gyro_rate);
     /* The compass rate is independent of the gyro and accel rates. As long as
     * inv_set_compass_sample_rate is called with the correct value, the 9-axis
     * fusion algorithm's compass correction gain will work properly.
     */
-    inv_set_compass_sample_rate(COMPASS_READ_MS * 1000L);
+    //inv_set_compass_sample_rate(COMPASS_READ_MS * 1000L);
 
     /* Set chip-to-body orientation matrix.
     * Set hardware units to dps/g's/degrees scaling factor.
     */
-    inv_set_gyro_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)gyro_fsr<<15);
-    inv_set_accel_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)accel_fsr<<15);
-    inv_set_compass_orientation_and_scale(inv_orientation_matrix_to_scalar(compass_pdata.orientation), (long)compass_fsr<<15);
+    //inv_set_gyro_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)gyro_fsr<<15);
+    //inv_set_accel_orientation_and_scale(inv_orientation_matrix_to_scalar(gyro_pdata.orientation), (long)accel_fsr<<15);
+    //inv_set_compass_orientation_and_scale(inv_orientation_matrix_to_scalar(compass_pdata.orientation), (long)compass_fsr<<15);
 
     /* Initialize HAL state variables. */
     hal.sensors = ACCEL_ON | GYRO_ON | COMPASS_ON;
@@ -308,53 +309,87 @@ int main(void)
     dualtimer_enable(DUALTIMER_TIMER2);
     get_ms(&timestamp);
     
-    if (dmp_load_motion_driver_firmware()) {
-        MPL_LOGE("Could not download DMP.\n");
-        system_global_reset();
-    }
-    dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
+    //if (dmp_load_motion_driver_firmware()) {
+        //MPL_LOGE("Could not download DMP.\n");
+        //system_global_reset();
+    //}
+    //dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
 
     hal.dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL;
     dmp_enable_feature(hal.dmp_features);
-    dmp_set_fifo_rate(DEFAULT_MPU_HZ);
-    inv_set_quat_sample_rate(1000000L / DEFAULT_MPU_HZ);
-    mpu_set_dmp_state(1);
-    hal.dmp_on = 1;
+    //dmp_set_fifo_rate(DEFAULT_MPU_HZ);
+    //inv_set_quat_sample_rate(1000000L / DEFAULT_MPU_HZ);
+    //mpu_set_dmp_state(1);
+    //hal.dmp_on = 1;
 
     //gpio_register_callback(PIN_AO_GPIO_2, interrupt_cb, GPIO_CALLBACK_RISING);
     gpio_enable_callback(PIN_AO_GPIO_2);
-    //while(1){}
 
-
-    uint8_t compass_cnt = 0;
     while (true) {
+        unsigned long sensor_timestamp;
+        
         ble_event_task(BLE_EVENT_TIMEOUT);
 
         get_ms(&timestamp);
-        DBG_LOG("Timestamp: %ld", timestamp);
         
-        if(imu_interrupt) {
-            //imu_poll_data();
+        if (hal.new_gyro) {
+            short gyro[3], accel_short[3], compass_short[3];
+            unsigned char sensors, more;
+            long temperature;
+            
+            hal.new_gyro = 0;
             compass_cnt++;
-            if(compass_cnt > 2) {
+            temp_cnt++;
+            
+            mpu_read_fifo(gyro, accel_short, &sensor_timestamp, &sensors, &more);
+            
+            if (more) {
+                hal.new_gyro = 1;
+            }
+            
+            //if(sensors & INV_XYZ_GYRO) {
+                DBG_LOG("Gyro: %d %d %d", gyro[0], gyro[1], gyro[2]);
+                if (temp_cnt >= 10) {
+                    temp_cnt = 0;
+                    /* Temperature only used for gyro temp comp. */
+                    mpu_get_temperature(&temperature, &sensor_timestamp);
+                    DBG_LOG("Temp: %ld", temperature);
+                }
+            //}
+            //if(sensors & INV_XYZ_ACCEL) {
+                DBG_LOG("Accel: %d %d %d", accel_short[0], accel_short[1], accel_short[2]);
+            //}                
+
+            if(compass_cnt > 10) {
                 compass_cnt = 0;
-                short compass_short[3];
-                long compass[3];
-                if(!mpu_get_compass_reg(compass_short, NULL)) {
-                    compass[0] = (long)compass_short[0];
-                    compass[1] = (long)compass_short[1];
-                    compass[2] = (long)compass_short[2];
-                    DBG_LOG("Compass: %ld %ld %ld", compass[0], compass[1], compass[2]);
-                    inv_build_compass(compass, 0, (inv_time_t)NULL);
-                    inv_execute_on_data();
-                    //long data[9];
-                    //int8_t accuracy;
-                    //inv_get_sensor_type_quat(data, &accuracy, NULL);
-                    //DBG_LOG("Quat: %ld %ld %ld %ld", data[0], data[1], data[2], data[3]);
+                if(!mpu_get_compass_reg(compass_short, &sensor_timestamp)) {
+                    DBG_LOG("Compass: %d %d %d", compass_short[0], compass_short[1], compass_short[2]);
                 }
             }
-            imu_interrupt = false;
         }
+
+
+        //if(imu_interrupt) {
+            ////imu_poll_data();
+            //compass_cnt++;
+            //if(compass_cnt > 2) {
+                //compass_cnt = 0;
+                //short compass_short[3];
+                //long compass[3];
+                //if(!mpu_get_compass_reg(compass_short, NULL)) {
+                    //compass[0] = (long)compass_short[0];
+                    //compass[1] = (long)compass_short[1];
+                    //compass[2] = (long)compass_short[2];
+                    //DBG_LOG("Compass: %ld %ld %ld", compass[0], compass[1], compass[2]);
+                    //inv_build_compass(compass, 0, (inv_time_t)NULL);
+                    //inv_execute_on_data();
+                    ////long data[9];
+                    ////int8_t accuracy;
+                    ////inv_get_sensor_type_quat(data, &accuracy, NULL);
+                    ////DBG_LOG("Quat: %ld %ld %ld %ld", data[0], data[1], data[2], data[3]);
+                //}
+            //}
+            //imu_interrupt = false;
+        //}
     }
-    //! [main_loop]
 }

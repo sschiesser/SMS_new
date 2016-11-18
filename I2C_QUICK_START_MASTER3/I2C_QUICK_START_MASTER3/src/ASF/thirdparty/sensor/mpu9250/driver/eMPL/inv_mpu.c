@@ -89,12 +89,11 @@ static int i2c_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint
 }
 static inline void get_ms(uint32_t *count)
 {
-    uint32_t load = (uint32_t)(26000 - dualtimer_get_value(DUALTIMER_TIMER2));
+    volatile uint32_t load = (uint32_t)(0xffffffff - dualtimer_get_value(DUALTIMER_TIMER2));
     count = (uint32_t *)(load / 26000);
 }
 static inline int reg_int_cb(struct int_param_s *int_param)
 {
-    
     gpio_register_callback(int_param->pin, int_param->cb, GPIO_CALLBACK_RISING);
     return 0;
 }
