@@ -201,15 +201,15 @@ int main(void)
     * function will place all slaves on the primary bus.
     * mpu_set_bypass(1);
     */
-    result = inv_init_mpl();
-    if(result) {
-        DBG_LOG_DEV("Could not initialize MPL.");
-        system_global_reset();
-    }
+    //result = inv_init_mpl();
+    //if(result) {
+        //DBG_LOG_DEV("Could not initialize MPL.");
+        //system_global_reset();
+    //}
     
     /* Compute 6-axis and 9-axis quaternions. */
-    inv_enable_quaternion();
-    inv_enable_9x_sensor_fusion();
+    //inv_enable_quaternion();
+    //inv_enable_9x_sensor_fusion();
     
     /* The MPL expects compass data at a constant rate (matching the rate
     * passed to inv_set_compass_sample_rate). If this is an issue for your
@@ -222,12 +222,12 @@ int main(void)
     /* Update gyro biases when not in motion.
     * WARNING: These algorithms are mutually exclusive.
     */
-    inv_enable_fast_nomot();
+    //inv_enable_fast_nomot();
     /* inv_enable_motion_no_motion(); */
     /* inv_set_no_motion_time(1000); */
 
     /* Update gyro biases when temperature changes. */
-    inv_enable_gyro_tc();
+    //inv_enable_gyro_tc();
 
     /* This algorithm updates the accel biases when in motion. A more accurate
     * bias measurement can be made when running the self-test (see case 't' in
@@ -249,17 +249,17 @@ int main(void)
     /* Allows use of the MPL APIs in read_from_mpl. */
     //inv_enable_eMPL_outputs();
 
-    result = inv_start_mpl();
-    if (result == INV_ERROR_NOT_AUTHORIZED) {
-        while (1) {
-            DBG_LOG("Not authorized.\n");
-            delay_ms(5000);
-        }
-    }
-    if (result) {
-        MPL_LOGE("Could not start the MPL.\n");
-        system_global_reset();
-    }
+    //result = inv_start_mpl();
+    //if (result == INV_ERROR_NOT_AUTHORIZED) {
+        //while (1) {
+            //DBG_LOG("Not authorized.\n");
+            //delay_ms(5000);
+        //}
+    //}
+    //if (result) {
+        //MPL_LOGE("Could not start the MPL.\n");
+        //system_global_reset();
+    //}
 
     /* Get/set hardware configuration. Start gyro. */
     /* Wake up all sensors. */
@@ -315,7 +315,8 @@ int main(void)
     //}
     //dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_pdata.orientation));
 
-    hal.dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL;
+    //hal.dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP | DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL;
+    hal.dmp_features = DMP_FEATURE_GYRO_CAL  | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_ANY_GYRO;
     dmp_enable_feature(hal.dmp_features);
     //dmp_set_fifo_rate(DEFAULT_MPU_HZ);
     //inv_set_quat_sample_rate(1000000L / DEFAULT_MPU_HZ);
