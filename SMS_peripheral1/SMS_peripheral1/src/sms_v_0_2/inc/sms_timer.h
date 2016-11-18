@@ -101,6 +101,8 @@ void sms_timer_aon_unregister_callback(void);
 /* Callback function for the AON timer --> send a platform interruption with
  * corresponding parameters */
 void sms_timer_aon_callback(void);
+void sms_timer_aon_get_ms(uint32_t *count);
+
 
 void sms_dualtimer_init(void);
 void sms_dualtimer_register_callback(enum dualtimer_timer tmr, sms_dualtimer_callback_t cb_ptr);

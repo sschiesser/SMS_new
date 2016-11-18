@@ -59,18 +59,20 @@
 #include "timer_hw.h"
 #include "ble_manager.h"
 #include "ble_utils.h"
+#include "delay.h"
 /* MPU9250 include */
-//#include "inv_mpu.h"
-//#include "inv_mpu_dmp_motion_driver.h"
+#include "inv_mpu.h"
+#include "inv_mpu_dmp_motion_driver.h"
 //#include "mpu.h"
 //#include "log.h"
 /* SMS include */
 #include "sms_common.h"
 #include "sms_button.h"
 #include "sms_spi.h"
+#include "sms_i2c.h"
 //#include "sms_i2c.h"
 #include "sms_pressure.h"
-#include "sms_imu.h"
+#include "sms_mpu.h"
 #include "sms_timer.h"
 #include "sms_led.h"
 #include "sms_ble.h"
@@ -97,11 +99,11 @@
 typedef enum sms_mode {
     SMS_MODE_NONE,
     SMS_MODE_BUTTON_SOLO,
-    SMS_MODE_IMU_SOLO,
+    SMS_MODE_MPU_SOLO,
     SMS_MODE_PRESSURE_SOLO,
-    SMS_MODE_BUTTON_IMU,
+    SMS_MODE_BUTTON_MPU,
     SMS_MODE_BUTTON_PRESSURE,
-    SMS_MODE_IMU_PRESSURE,
+    SMS_MODE_MPU_PRESSURE,
     SMS_MODE_COMPLETE
 }sms_mode_t;
 volatile sms_mode_t sms_working_mode;
@@ -110,7 +112,7 @@ typedef enum sms_plf_int_src {
     INT_NONE,
     INT_BTN0,
     INT_BTN1,
-    INT_IMU_DRDY,
+    INT_MPU_DRDY,
     INT_AON_TIMER,
     INT_DUALTIMER1,
     INT_DUALTIMER2

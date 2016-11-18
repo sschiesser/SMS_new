@@ -66,7 +66,7 @@ uint8_t spi_rdata[SPI_DATA_LENGTH];
 /* ------------
  * DECLARATIONS
  * ------------ */
-void spi_master_configure(void);
-enum status_code spi_master_transceive(struct spi_module *const module, struct spi_slave_inst *const slave, uint8_t *tx_data, uint8_t *rx_data, uint16_t len);
+void sms_spi_master_configure(void);
+enum status_code sms_spi_master_transceive(struct spi_module *const module, struct spi_slave_inst *const slave, uint8_t *tx_data, uint8_t *rx_data, uint16_t len);
 
 #endif

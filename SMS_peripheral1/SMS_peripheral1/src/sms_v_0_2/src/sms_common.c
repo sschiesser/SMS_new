@@ -27,13 +27,13 @@ void sms_monitor_get_states(const char *label)
 
 
 /* Sensors-related functions */
-void sms_sensors_interrupt_toggle(bool imu_int, bool press_int) {
+void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
     /* IMU --> IMU_DRDY */
-    if(imu_int) {
-        //gpio_enable_callbacks(SMS_IMU_DRDY_PIN);
+    if(mpu_int) {
+        gpio_enable_callback(SMS_MPU_DRDY_PIN);
     }
     else {
-        //gpio_disable_callback(SMS_IMU_DRDY_PIN);
+        gpio_disable_callback(SMS_MPU_DRDY_PIN);
     }
     
     /* Pressure --> AON_SLEEP_TIMER
@@ -58,11 +58,11 @@ void sms_sensors_interrupt_toggle(bool imu_int, bool press_int) {
 }
     
 
-void sms_sensors_switch(bool imu_en, bool press_en)
+void sms_sensors_switch(bool mpu_en, bool press_en)
 {
     /* IMU */
-    if(imu_en) {
-        //sms_imu_startup();
+    if(mpu_en) {
+        sms_mpu_startup();
     }
     else {
         //gpio_pin_set_output_level(SMS_IMU_VCC_PIN, false);

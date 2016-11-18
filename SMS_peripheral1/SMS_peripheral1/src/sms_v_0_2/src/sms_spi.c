@@ -15,7 +15,7 @@
  * - assign SS pin for each slave device
  * - enable SPI
  */ 
-void spi_master_configure(void)
+void sms_spi_master_configure(void)
 {
     //DBG_LOG_DEV("[spi_master_configure]\tconfiguring SPI masters and attaching slaves...");
 
@@ -73,7 +73,7 @@ void spi_master_configure(void)
  * - start transceive blocking job
  * - when job returned, disable selected slave
  */
-enum status_code spi_master_transceive(struct spi_module *const module, struct spi_slave_inst *const slave, uint8_t *tx_data, uint8_t *rx_data, uint16_t len) {
+enum status_code sms_spi_master_transceive(struct spi_module *const module, struct spi_slave_inst *const slave, uint8_t *tx_data, uint8_t *rx_data, uint16_t len) {
     enum status_code retVal;
     /* Enable slave */
     //DBG_LOG_CONT_DEV(" selecting slave...");

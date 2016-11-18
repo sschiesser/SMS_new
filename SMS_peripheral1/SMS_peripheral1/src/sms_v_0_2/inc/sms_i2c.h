@@ -18,18 +18,18 @@
  * MACROS
  * ------ */
 /* I2C master settings for MPU9250 IMU */
-#define I2C_MASTER_MPU9250_PORT     I2C0
-#define I2C_MASTER_MPU9250_CLK_SRC  I2C_CLK_INPUT_3
-#define I2C_MASTER_MPU9250_CLK_DIV  0x08
+#define SMS_I2C_MASTER_PORT             (I2C1)
+#define SMS_I2C_MASTER_CLK_SRC          (I2C_CLK_INPUT_0)
+#define SMS_I2C_MASTER_CLK_DIV          (65)
 /* Pins */
-#define I2C_MASTER_MPU9250_PIN_SDA  PIN_LP_GPIO_8
-#define I2C_MASTER_MPU9250_PIN_SCL  PIN_LP_GPIO_9
+#define SMS_I2C_MASTER_PIN_SDA          (PIN_LP_GPIO_14)
+#define SMS_I2C_MASTER_PIN_SCL          (PIN_LP_GPIO_15)
 /* Mux */
-#define I2C_MASTER_MPU9250_MUX_SDA  MUX_LP_GPIO_8_I2C0_SDA
-#define I2C_MASTER_MPU9250_MUX_SCL  MUX_LP_GPIO_9_I2C0_SCL
+#define SMS_I2C_MASTER_MUX_SDA          (MUX_LP_GPIO_14_I2C1_SDA)
+#define SMS_I2C_MASTER_MUX_SCL          (MUX_LP_GPIO_15_I2C1_SCL)
 
 #define I2C_DATA_LENGTH                 (16)
-#define I2C_TIMEOUT_CNT                 (1000)
+#define I2C_TIMEOUT                     (1000)
 
 /* ---------
  * VARIABLES
@@ -37,13 +37,15 @@
 //uint8_t i2c_wdata[I2C_DATA_LENGTH];
 //uint8_t i2c_rdata[I2C_DATA_LENGTH];
 
-struct i2c_master_module i2c_master_mpu9250_instance;
+struct i2c_master_module i2c_master_instance;
 struct i2c_master_packet i2c_wpacket;
 struct i2c_master_packet i2c_rpacket;
 
 /* ------------
  * DECLARATIONS
  * ------------ */
-void i2c_master_configure(void);
+void sms_i2c_master_configure(void);
+int sms_i2c_master_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t const *data);
+int sms_i2c_master_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t *data);
 
 #endif /* SMS_I2C_H_ */

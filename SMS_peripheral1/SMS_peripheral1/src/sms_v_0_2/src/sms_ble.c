@@ -162,7 +162,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
         sms_monitor_get_states("[sms_ble_paired_fn]");
         //DBG_LOG_DEV("[sms_ble_paired_fn]\t\tDevices paired... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
-        sms_sensors_switch(false, true); // ! Release sleep lock & enable buttons interrupt after reset done!
+        sms_sensors_switch(true, true); // ! Release sleep lock & enable buttons interrupt after reset done!
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     }
     else {

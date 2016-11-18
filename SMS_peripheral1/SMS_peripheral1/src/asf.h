@@ -68,6 +68,10 @@
 // From module: Generic board support
 #include <board.h>
 
+// From module: I2C -Inter-Integrated Circuit for SAMB
+#include <i2c_common.h>
+#include <i2c_master.h>
+
 // From module: Interrupt management - SAM implementation
 #include <interrupt.h>
 

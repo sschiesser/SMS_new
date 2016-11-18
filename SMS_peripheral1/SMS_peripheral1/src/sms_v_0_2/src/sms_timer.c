@@ -40,6 +40,10 @@ void sms_timer_aon_unregister_callback(void)
     NVIC_DisableIRQ(AON_SLEEP_TIMER0_IRQn);
 }
 
+void sms_timer_aon_get_ms(uint32_t *count)
+{
+    count = (uint32_t *)0;
+}
 
 /* DUALTIMER */
 void sms_dualtimer_init(void)

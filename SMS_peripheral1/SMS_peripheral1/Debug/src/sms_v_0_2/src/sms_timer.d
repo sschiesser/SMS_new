@@ -100,7 +100,10 @@ src/sms_v_0_2/src/sms_timer.d src/sms_v_0_2/src/sms_timer.o: \
  ../src/ASF/sam0/drivers/dualtimer/dualtimer.h \
  ../src/ASF/sam0/drivers/gpio/gpio.h ../src/ASF/common/boards/board.h \
  ../src/ASF/sam0/boards/samb11_xplained_pro/samb11_xplained_pro.h \
- ../src/config/conf_board.h ../src/ASF/sam0/drivers/spi/spi.h \
+ ../src/config/conf_board.h ../src/ASF/sam0/drivers/i2c/i2c_common.h \
+ ../src/ASF/sam0/drivers/i2c/i2c_master.h \
+ ../src/ASF/sam0/drivers/i2c/i2c_common.h \
+ ../src/ASF/sam0/drivers/spi/spi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../src/config/conf_spi.h \
@@ -116,11 +119,15 @@ src/sms_v_0_2/src/sms_timer.d src/sms_v_0_2/src/sms_timer.o: \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
+ ../src/ASF/common/services/delay/delay.h \
+ ../src/ASF/common/services/delay/sam/systick_counter.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.h \
+ ../src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.h \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_button.h \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_spi.h \
- ../src/sms_v_0_2/inc/sms_pressure.h ../src/sms_v_0_2/inc/ms58.h \
- ../src/sms_v_0_2/inc/sms_imu.h ../src/sms_v_0_2/inc/sms_led.h \
- ../src/sms_v_0_2/inc/sms_ble.h
+ ../src/sms_v_0_2/inc/sms_i2c.h ../src/sms_v_0_2/inc/sms_pressure.h \
+ ../src/sms_v_0_2/inc/ms58.h ../src/sms_v_0_2/inc/sms_mpu.h \
+ ../src/sms_v_0_2/inc/sms_led.h ../src/sms_v_0_2/inc/sms_ble.h
 
 ../src/sms_v_0_2/inc/sms_timer.h:
 
@@ -332,6 +339,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/config/conf_board.h:
 
+../src/ASF/sam0/drivers/i2c/i2c_common.h:
+
+../src/ASF/sam0/drivers/i2c/i2c_master.h:
+
+../src/ASF/sam0/drivers/i2c/i2c_common.h:
+
 ../src/ASF/sam0/drivers/spi/spi.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
@@ -364,6 +377,14 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
 
+../src/ASF/common/services/delay/delay.h:
+
+../src/ASF/common/services/delay/sam/systick_counter.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.h:
+
+../src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.h:
+
 ../src/sms_v_0_2/inc/sms_common.h:
 
 ../src/sms_v_0_2/inc/sms_button.h:
@@ -372,11 +393,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/sms_v_0_2/inc/sms_spi.h:
 
+../src/sms_v_0_2/inc/sms_i2c.h:
+
 ../src/sms_v_0_2/inc/sms_pressure.h:
 
 ../src/sms_v_0_2/inc/ms58.h:
 
-../src/sms_v_0_2/inc/sms_imu.h:
+../src/sms_v_0_2/inc/sms_mpu.h:
 
 ../src/sms_v_0_2/inc/sms_led.h:
 
