@@ -24,6 +24,16 @@
 
 #define SMS_MPU_I2C_SLAVE_ADDR      (0x69)
 
+#define SMS_MPU_SAMPLE_RATE_HZ      10
+#define SMS_MPU_COMPASS_RATE_HZ     (SMS_MPU_SAMPLE_RATE_HZ / 10)
+
+#define SMS_MPU_ACCEL_ON            (0x01)
+#define SMS_MPU_GYRO_ON             (0x02)
+#define SMS_MPU_COMPASS_ON          (0x04)
+
+#define SMS_MPU_MOTION              (0)
+#define SMS_MPU_NO_MOTION           (1)
+
 //#define SMS_IMU_INTERRUPT_PIN PIN_AO_GPIO_2
 //#define SMS_IMU_INIT_DATA_LEN 8
 //#define SMS_IMU_READ_DATA_LEN 12
@@ -34,6 +44,30 @@
 /* ---------
  * VARIABLES
  * --------- */
+typedef struct sms_mpu9250_instance {
+    bool int_active;
+    bool reset_done;
+    bool init_ok;
+    bool new_data;
+    short gyro[3];
+    short accel[3];
+    short compass[3];
+    long temperature;
+}sms_mpu9250_instance_t;
+
+enum sms_mpu_state {
+    MPU_STATE_OFF,
+    MPU_STATE_STDBY,
+    MPU_STATE_ON
+};
+typedef struct sms_mpu_struct {
+    sms_mpu9250_instance_t mpu9250_device;
+    enum sms_mpu_state state;
+    gatt_service_handler_t service_handler;
+    uint8_t char_values[12];
+}sms_mpu_struct_t;
+sms_mpu_struct_t mpu_device;
+
 ///* GATT service handler */
 //gatt_service_handler_t sms_imu_service_handler;
 ///* Button characteristic */
@@ -72,26 +106,26 @@
 //
 //sms_imu_device_t mpu9250_device;
 //
-//struct rx_s {
-    //unsigned char header[3];
-    //unsigned char cmd;
-//};
-//struct hal_s {
-    //unsigned char lp_accel_mode;
-    //unsigned char sensors;
-    //unsigned char dmp_on;
-    //unsigned char wait_for_tap;
-    //volatile unsigned char new_gyro;
-    //unsigned char motion_int_mode;
-    //unsigned long no_dmp_hz;
-    //unsigned long next_pedo_ms;
-    //unsigned long next_temp_ms;
-    //unsigned long next_compass_ms;
-    //unsigned int report;
-    //unsigned short dmp_features;
-    //struct rx_s rx;
-//};
-//
+struct rx_s {
+    unsigned char header[3];
+    unsigned char cmd;
+};
+struct hal_s {
+    unsigned char lp_accel_mode;
+    unsigned char sensors;
+    unsigned char dmp_on;
+    unsigned char wait_for_tap;
+    volatile unsigned char new_gyro;
+    unsigned char motion_int_mode;
+    unsigned long no_dmp_hz;
+    unsigned long next_pedo_ms;
+    unsigned long next_temp_ms;
+    unsigned long next_compass_ms;
+    unsigned int report;
+    unsigned short dmp_features;
+    struct rx_s rx;
+};
+
 //
 //extern struct chip_cfg_s chip_cfg;
 //extern struct gyro_state_s st;
@@ -104,7 +138,7 @@ void sms_mpu_configure_gpio(void);
 void sms_mpu_register_callbacks(void);
 void sms_mpu_unregister_callbacks(void);
 void sms_mpu_interrupt_callback(void);
-void sms_mpu_startup(void);
+int sms_mpu_initialize(void);
 
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);

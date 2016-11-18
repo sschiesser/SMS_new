@@ -92,11 +92,11 @@ static inline void get_ms(uint32_t *count)
     volatile uint32_t load = (uint32_t)(0xffffffff - dualtimer_get_value(DUALTIMER_TIMER2));
     count = (uint32_t *)(load / 26000);
 }
-static inline int reg_int_cb(struct int_param_s *int_param)
-{
-    gpio_register_callback(int_param->pin, int_param->cb, GPIO_CALLBACK_RISING);
-    return 0;
-}
+//static inline int reg_int_cb(struct int_param_s *int_param)
+//{
+    //gpio_register_callback(int_param->pin, int_param->cb, GPIO_CALLBACK_RISING);
+    //return 0;
+//}
 #define i2c_write       (sms_i2c_master_write)
 #define i2c_read        (sms_i2c_master_read)
 #define get_ms          (sms_timer_aon_get_ms)
@@ -766,8 +766,8 @@ int mpu_init(struct int_param_s *int_param)
     if (mpu_configure_fifo(0))
         return -1;
 
-    if (int_param)
-        reg_int_cb(int_param);
+    //if (int_param)
+        //reg_int_cb(int_param);
 
 #ifdef AK89xx_SECONDARY
     setup_compass();

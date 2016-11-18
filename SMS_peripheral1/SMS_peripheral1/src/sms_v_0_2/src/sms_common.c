@@ -30,9 +30,11 @@ void sms_monitor_get_states(const char *label)
 void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
     /* IMU --> IMU_DRDY */
     if(mpu_int) {
+        mpu_device.state = MPU_STATE_ON;
         gpio_enable_callback(SMS_MPU_DRDY_PIN);
     }
     else {
+        mpu_device.state = MPU_STATE_OFF;
         gpio_disable_callback(SMS_MPU_DRDY_PIN);
     }
     
@@ -62,7 +64,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 {
     /* IMU */
     if(mpu_en) {
-        sms_mpu_startup();
+        sms_mpu_initialize();
     }
     else {
         //gpio_pin_set_output_level(SMS_IMU_VCC_PIN, false);

@@ -106,6 +106,8 @@ static void sms_plf_event_cb(void)
 
 int main(void)
 {
+    int res;
+    
     /* Define current BLE state
      * ------------------------ */
     ble_current_state = BLE_STATE_STARTING;
@@ -200,12 +202,16 @@ int main(void)
     //register int n23 asm("r15");
     //DBG_LOG("at post-init: sp 0x%x, lr 0x%x", n21, n22);
     
-    sms_mpu_startup();
-    while(1) {}
-        
+    res = sms_mpu_initialize();
+    if(res) {
+        DBG_LOG("Could not initialize MPU!");
+        while(1) {}
+    }
+    sms_sensors_interrupt_toggle(true, false);
+    
     /* Goto sleep
      * ---------- */
-    sms_ble_power_down();
+    //sms_ble_power_down();
 
     
 	while(true)

@@ -7,6 +7,8 @@
 
 #include "sms_peripheral1.h"
 
+static struct hal_s hal = {0};
+    
 void sms_mpu_configure_gpio(void)
 {
     struct gpio_config config_gpio_pin;
@@ -49,17 +51,35 @@ void sms_mpu_interrupt_callback(void)
     send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
 }
 
-void sms_mpu_startup(void) {
-    /* Initialize & configure MPU-9250 */
-    struct int_param_s int_param;
-    int_param.cb = (void*)sms_mpu_interrupt_callback;
-    int_param.pin = SMS_MPU_DRDY_PIN;
-    DBG_LOG("Starting up MPU...");
-    int result = mpu_init(&int_param);
-    if(result) {
-        DBG_LOG("Could not initialize MPU");
-        while(1) {}
+int sms_mpu_initialize(void) {
+    int res;
+    unsigned char accel_fsr = 0;
+    unsigned short gyro_rate, gyro_fsr, compass_fsr;
+    
+    /* Initialize MPU-9250 without interrupt parameter since this has to be set independantly */
+    DBG_LOG_DEV("Starting up MPU...");
+    res = mpu_init(NULL);
+    if(res) {
+        DBG_LOG_CONT_DEV(" failed!");
+        return -1;
     }
+    DBG_LOG_DEV("Setting up MPU...");
+    mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL | INV_XYZ_COMPASS);
+    mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
+    mpu_set_sample_rate(SMS_MPU_SAMPLE_RATE_HZ);
+    mpu_set_compass_sample_rate(SMS_MPU_COMPASS_RATE_HZ);
+    mpu_get_sample_rate(&gyro_rate);
+    mpu_get_accel_fsr(&accel_fsr);
+    mpu_get_compass_fsr(&compass_fsr);
+    
+    hal.sensors = (SMS_MPU_ACCEL_ON | SMS_MPU_GYRO_ON | SMS_MPU_COMPASS_ON);
+    hal.dmp_features = (DMP_FEATURE_GYRO_CAL | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_ANY_GYRO);
+    dmp_enable_feature(hal.dmp_features);
+    dmp_set_fifo_rate(SMS_MPU_SAMPLE_RATE_HZ);
+    mpu_set_dmp_state(1);
+    hal.dmp_on = 1;
+    
+    return 0;
 }
 //
 ///* Initialize IMU... based on Invensense API */
