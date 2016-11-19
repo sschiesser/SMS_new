@@ -1546,7 +1546,7 @@ at_ble_status_t ble_encryption_request_handler(void *params)
 
 void ble_event_manager(at_ble_events_t events, void *event_params)
 {
-	DBG_LOG_DEV("BLE-Event:%d", events);
+	DBG_LOG_DEV("\r\nBLE-Event:%d", events);
 	switch(events)
 	{		
 	 /* GAP events */

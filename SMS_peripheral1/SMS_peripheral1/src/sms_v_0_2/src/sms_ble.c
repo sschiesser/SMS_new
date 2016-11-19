@@ -201,7 +201,7 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
     
-    DBG_LOG_DEV("Timer1 current mode: %d", timer1_current_mode);
+    //DBG_LOG_DEV("Timer1 current mode: %d", timer1_current_mode);
     if(timer1_current_mode == TIMER1_MODE_NONE) {
         ulp_ready = true;
     }
@@ -307,9 +307,55 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
         
         case BLE_CHAR_MPU:
+        send_val[0] = (uint8_t)(mpu_device.hal.accel[0] & 0xff);
+        send_val[1] = (uint8_t)((mpu_device.hal.accel[0] >> 8) & 0xff);
+        send_val[2] = (uint8_t)(mpu_device.hal.accel[1] & 0xff);
+        send_val[3] = (uint8_t)((mpu_device.hal.accel[1] >> 8) & 0xff);
+        send_val[4] = (uint8_t)(mpu_device.hal.accel[2] & 0xff);
+        send_val[5] = (uint8_t)((mpu_device.hal.accel[2] >> 8) & 0xff);
+        send_val[6] = (uint8_t)(mpu_device.hal.gyro[0] & 0xff);
+        send_val[7] = (uint8_t)((mpu_device.hal.gyro[0] >> 8) & 0xff);
+        send_val[8] = (uint8_t)(mpu_device.hal.gyro[1] & 0xff);
+        send_val[9] = (uint8_t)((mpu_device.hal.gyro[1] >> 8) & 0xff);
+        send_val[10] = (uint8_t)(mpu_device.hal.gyro[2] & 0xff);
+        send_val[11] = (uint8_t)((mpu_device.hal.gyro[2] >> 8) & 0xff);
+        val_handle = mpu_device.service_handler.serv_chars.char_val_handle;
+        length = 12;
+        
+        if(mpu_device.new_compass) {
+            send_val[12] = (uint8_t)(mpu_device.hal.compass[0] & 0xff);
+            send_val[13] = (uint8_t)((mpu_device.hal.compass[0] >> 8) & 0xff);
+            send_val[14] = (uint8_t)(mpu_device.hal.compass[1] & 0xff);
+            send_val[15] = (uint8_t)((mpu_device.hal.compass[1] >> 8) & 0xff);
+            send_val[16] = (uint8_t)(mpu_device.hal.compass[2] & 0xff);
+            send_val[17] = (uint8_t)((mpu_device.hal.compass[2] >> 8) & 0xff);
+            length = 18;
+            mpu_device.new_compass = false;
+        }
+        else {
+            for(uint8_t i = 0; i < 6; i++) {
+                send_val[12+i] = 0;
+            }
+        }
+        
+        if(mpu_device.new_temp) {
+            send_val[18] = (uint8_t)(mpu_device.hal.temperature & 0xff);
+            send_val[19] = (uint8_t)((mpu_device.hal.temperature >> 8) & 0xff);
+            length = 20;
+            mpu_device.new_temp = false;
+        }
+        else {
+            for(uint8_t i = 0; i < 2; i++) {
+                send_val[18+i] = 0;
+            }
+        }
         break;
     }
     
+    DBG_LOG_DEV("Sending: ");
+    for(int i = 0; i < 20; i += 2) {
+        DBG_LOG_CONT_DEV("0x%02x%02x ", send_val[i], send_val[i+1]);
+    }
     status = at_ble_characteristic_value_set(val_handle, send_val, (length * sizeof(uint8_t)));
     if(status == AT_BLE_SUCCESS) {
         //DBG_LOG_DEV("[sms_ble_send_characteristic]\tSending char value... BLE 0x%02x, T1 %d, T2 %d, cnt = %d", ble_current_state, timer1_current_mode, timer2_current_mode, sms_ble_send_cnt);
@@ -337,8 +383,10 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         //printf("\r\n\@ sending: sp 0x%x, lr 0x%x", n41, n42);
         
         if(status == AT_BLE_SUCCESS) {
+#   if SMS_SENDING_WITH_ACK == true
             timer2_current_mode = TIMER2_MODE_INDICATION_TOUT;
             sms_dualtimer_start(TIMER_UNIT_MS, BLE_INDICATION_TOUT_MS, DUALTIMER_TIMER2);
+#   endif
             //ulp_ready = false;
         }
         else {
@@ -404,8 +452,25 @@ void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *s
         char_size = 8;
         break;
         
-        case BLE_SERV_IMU:
+        case BLE_SERV_MPU:
         handle = 3;
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 8) & 0xFF);
+        uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
+        uuid[7] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[8] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3) & 0xFF);
+        uuid[9] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 8) & 0xFF);
+        uuid[10] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 16) & 0xFF);
+        uuid[11] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 24) & 0xFF);
+        uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 24) & 0xFF);
+        char_size = 20;
         break;
         
         default:

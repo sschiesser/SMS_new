@@ -167,6 +167,7 @@ int main(void)
      * ------------------- */
     sms_button_define_services();
     sms_pressure_define_services();
+    sms_mpu_define_services();
     
     
     /* Register callbacks
@@ -228,7 +229,7 @@ int main(void)
                 DBG_LOG_CONT_DEV(" done!");
             }                
             //ulp_ready = false;
-            DBG_LOG_DEV("\r\n[main]\t\t\t\tDisabling button int...");
+            DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
             sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
             DBG_LOG_CONT_DEV(" done!");
             //psp = __get_PSP();

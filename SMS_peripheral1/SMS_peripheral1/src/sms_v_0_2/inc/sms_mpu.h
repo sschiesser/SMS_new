@@ -19,22 +19,27 @@
 /* ------
  * MACROS
  * ------ */
-#define SMS_MPU_DRDY_PIN            (PIN_AO_GPIO_1)
-#define SMS_MPU_VCC_PIN             (PIN_LP_GPIO_6)
+#define SMS_MPU_SERVICE_UUID_1              (0x1C570000)
+#define SMS_MPU_SERVICE_UUID_2              (0x5ABE0000)
+#define SMS_MPU_SERVICE_UUID_3              (0x50300000)
+#define SMS_MPU_SERVICE_UUID_4              (0x11110000)
 
-#define SMS_MPU_I2C_SLAVE_ADDR      (0x69)
+#define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1)
+#define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6)
 
-#define SMS_MPU_SAMPLE_RATE_HZ      10
-#define SMS_MPU_TEMP_MULTIPLIER     10
-#define SMS_MPU_COMPASS_MULTIPLIER  10
-#define SMS_MPU_COMPASS_RATE_HZ     (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
+#define SMS_MPU_I2C_SLAVE_ADDR              (0x69)
 
-#define SMS_MPU_ACCEL_ON            (0x01)
-#define SMS_MPU_GYRO_ON             (0x02)
-#define SMS_MPU_COMPASS_ON          (0x04)
+#define SMS_MPU_SAMPLE_RATE_HZ              (20)
+#define SMS_MPU_TEMP_MULTIPLIER             (17)
+#define SMS_MPU_COMPASS_MULTIPLIER          (11)
+#define SMS_MPU_COMPASS_RATE_HZ             (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
 
-#define SMS_MPU_MOTION              (0)
-#define SMS_MPU_NO_MOTION           (1)
+#define SMS_MPU_ACCEL_ON                    (0x01)
+#define SMS_MPU_GYRO_ON                     (0x02)
+#define SMS_MPU_COMPASS_ON                  (0x04)
+
+#define SMS_MPU_MOTION                      (0)
+#define SMS_MPU_NO_MOTION                   (1)
 
 //#define SMS_IMU_INTERRUPT_PIN PIN_AO_GPIO_2
 //#define SMS_IMU_INIT_DATA_LEN 8
@@ -152,6 +157,7 @@ void sms_mpu_unregister_callbacks(void);
 void sms_mpu_interrupt_callback(void);
 int sms_mpu_initialize(void);
 int sms_mpu_poll_data(void);
+void sms_mpu_define_services(void);
 
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);

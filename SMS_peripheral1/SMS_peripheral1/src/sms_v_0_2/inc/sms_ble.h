@@ -59,7 +59,7 @@ volatile sms_ble_state_t ble_current_state;
 enum sms_ble_serv_type {
     BLE_SERV_BUTTON,
     BLE_SERV_PRESSURE,
-    BLE_SERV_IMU
+    BLE_SERV_MPU
 };
 
 enum sms_ble_char_type {
