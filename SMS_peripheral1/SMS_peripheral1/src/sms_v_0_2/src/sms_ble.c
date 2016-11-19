@@ -352,10 +352,10 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
     }
     
-    DBG_LOG_DEV("Sending: ");
-    for(int i = 0; i < 20; i += 2) {
-        DBG_LOG_CONT_DEV("0x%02x%02x ", send_val[i], send_val[i+1]);
-    }
+    //DBG_LOG_DEV("Sending: ");
+    //for(int i = 0; i < 20; i += 2) {
+        //DBG_LOG_CONT_DEV("0x%02x%02x ", send_val[i], send_val[i+1]);
+    //}
     status = at_ble_characteristic_value_set(val_handle, send_val, (length * sizeof(uint8_t)));
     if(status == AT_BLE_SUCCESS) {
         //DBG_LOG_DEV("[sms_ble_send_characteristic]\tSending char value... BLE 0x%02x, T1 %d, T2 %d, cnt = %d", ble_current_state, timer1_current_mode, timer2_current_mode, sms_ble_send_cnt);

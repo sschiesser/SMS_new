@@ -113,7 +113,7 @@ int sms_mpu_poll_data(void)
     if(mpu_device.compass_cnt++ > SMS_MPU_COMPASS_MULTIPLIER) {
         mpu_device.compass_cnt = 0;
         mpu_get_compass_reg(&mpu_device.hal.compass, &sensor_timestamp);
-        mpu_device.new_compass = true;   
+        mpu_device.new_compass = true;
     }
     sms_ble_send_characteristic(BLE_CHAR_MPU);    
 
