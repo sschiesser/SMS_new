@@ -25,7 +25,9 @@
 #define SMS_MPU_I2C_SLAVE_ADDR      (0x69)
 
 #define SMS_MPU_SAMPLE_RATE_HZ      10
-#define SMS_MPU_COMPASS_RATE_HZ     (SMS_MPU_SAMPLE_RATE_HZ / 10)
+#define SMS_MPU_TEMP_MULTIPLIER     10
+#define SMS_MPU_COMPASS_MULTIPLIER  10
+#define SMS_MPU_COMPASS_RATE_HZ     (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
 
 #define SMS_MPU_ACCEL_ON            (0x01)
 #define SMS_MPU_GYRO_ON             (0x02)
@@ -45,8 +47,6 @@
  * VARIABLES
  * --------- */
 struct mpu9250_hal_s {
-    bool int_active;
-    bool reset_done;
     bool init_ok;
     unsigned char accel_fsr;
     unsigned short gyro_fsr;
@@ -68,7 +68,12 @@ enum sms_mpu_state {
     MPU_STATE_ON
 };
 typedef struct sms_mpu_struct {
+    bool int_active;
     struct mpu9250_hal_s hal;
+    uint8_t compass_cnt;
+    uint8_t temp_cnt;
+    bool new_compass;
+    bool new_temp;
     enum sms_mpu_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[12];
@@ -113,25 +118,25 @@ sms_mpu_struct_t mpu_device;
 //
 //sms_imu_device_t mpu9250_device;
 //
-struct rx_s {
-    unsigned char header[3];
-    unsigned char cmd;
-};
-struct hal_s {
-    unsigned char lp_accel_mode;
-    unsigned char sensors;
-    unsigned char dmp_on;
-    unsigned char wait_for_tap;
-    volatile unsigned char new_gyro;
-    unsigned char motion_int_mode;
-    unsigned long no_dmp_hz;
-    unsigned long next_pedo_ms;
-    unsigned long next_temp_ms;
-    unsigned long next_compass_ms;
-    unsigned int report;
-    unsigned short dmp_features;
-    struct rx_s rx;
-};
+//struct rx_s {
+    //unsigned char header[3];
+    //unsigned char cmd;
+//};
+//struct hal_s {
+    //unsigned char lp_accel_mode;
+    //unsigned char sensors;
+    //unsigned char dmp_on;
+    //unsigned char wait_for_tap;
+    //volatile unsigned char new_gyro;
+    //unsigned char motion_int_mode;
+    //unsigned long no_dmp_hz;
+    //unsigned long next_pedo_ms;
+    //unsigned long next_temp_ms;
+    //unsigned long next_compass_ms;
+    //unsigned int report;
+    //unsigned short dmp_features;
+    //struct rx_s rx;
+//};
 
 //
 //extern struct chip_cfg_s chip_cfg;

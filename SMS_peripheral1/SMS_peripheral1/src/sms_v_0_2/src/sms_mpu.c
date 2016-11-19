@@ -78,6 +78,10 @@ int sms_mpu_initialize(void) {
     dmp_set_fifo_rate(SMS_MPU_SAMPLE_RATE_HZ);
     mpu_set_dmp_state(1);
     mpu_device.hal.dmp_on = 1;
+    mpu_device.temp_cnt = 0;
+    mpu_device.compass_cnt = 0;
+    mpu_device.new_compass = false;
+    mpu_device.new_temp = false;
     
     return 0;
 }
@@ -91,11 +95,26 @@ int sms_mpu_poll_data(void)
     unsigned char more;
     unsigned long sensor_timestamp;
     int res;
+    
+    mpu_device.hal.new_data = 0;
+    
     mpu_read_fifo(mpu_device.hal.gyro, mpu_device.hal.accel, &sensor_timestamp, &sensors, &more);
     
-    if(more) {
-        mpu_device.hal.new_data = 1;
-    }        
+    //if(more) {
+        //mpu_device.hal.new_data = 1;
+    //}
+    
+    if(mpu_device.temp_cnt++ > SMS_MPU_TEMP_MULTIPLIER) {
+        mpu_device.temp_cnt = 0;
+        mpu_get_temperature(&mpu_device.hal.temperature, &sensor_timestamp);
+        mpu_device.new_temp = true;
+    }
+    
+    if(mpu_device.compass_cnt++ > SMS_MPU_COMPASS_MULTIPLIER) {
+        mpu_device.compass_cnt = 0;
+        mpu_get_compass_reg(&mpu_device.hal.compass, &sensor_timestamp);
+        mpu_device.new_compass = true;   
+    }         
         //DBG_LOG_DEV("ERROR! returned: %d", res);
         ///* -1 returned in case of a.o. i2c communication error */
         //if(res == -1) {

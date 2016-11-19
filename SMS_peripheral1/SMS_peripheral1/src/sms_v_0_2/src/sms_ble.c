@@ -306,7 +306,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         length = 8;
         break;
         
-        case BLE_CHAR_IMU:
+        case BLE_CHAR_MPU:
         break;
     }
     

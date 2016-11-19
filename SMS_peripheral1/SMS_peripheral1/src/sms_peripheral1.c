@@ -228,7 +228,7 @@ int main(void)
                 DBG_LOG_CONT_DEV(" done!");
             }                
             //ulp_ready = false;
-            DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
+            DBG_LOG_DEV("\r\n[main]\t\t\t\tDisabling button int...");
             sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
             DBG_LOG_CONT_DEV(" done!");
             //psp = __get_PSP();
@@ -238,7 +238,7 @@ int main(void)
             {
                 case INT_NONE:
                 //sms_monitor_states("NONE");
-                DBG_LOG_DEV("\n\r...NO SOURCE!!");
+                DBG_LOG_DEV("...NO SOURCE!!");
                 //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
                 //if(ulp_ready) {
                     //DBG_LOG_DEV("[main]\t\t\tULP...");
@@ -249,7 +249,7 @@ int main(void)
                 
                 case INT_BTN0:
                 //sms_monitor_states("INT_BTN0");
-                DBG_LOG_DEV("\n\r...BTN0");
+                DBG_LOG_DEV("...BTN0");
                 if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_BUTTON_SOLO) || (sms_working_mode == SMS_MODE_BUTTON_PRESSURE)) {
                     //if(ble_current_state == BLE_STATE_PAIRED) {
                     //if(sensors_active) {
@@ -266,7 +266,7 @@ int main(void)
                 
                 case INT_BTN1:
                 //sms_monitor_states("INT_BTN1");
-                DBG_LOG_DEV("\n\r...BTN1");
+                DBG_LOG_DEV("...BTN1");
                 if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_BUTTON_SOLO) || (sms_working_mode == SMS_MODE_BUTTON_PRESSURE)) {
                     //if(ble_current_state == BLE_STATE_PAIRED)
                     //if(sensors_active) {
@@ -283,7 +283,7 @@ int main(void)
                 
                 case INT_MPU_DRDY:
                 //sms_monitor_states("INT_IMU_DRDY");
-                DBG_LOG_DEV("\n\r...MPU_DRDY");
+                DBG_LOG_DEV("...MPU_DRDY");
                 //if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
                     sms_mpu_poll_data();
                 //}                    
@@ -291,7 +291,7 @@ int main(void)
                 
                 case INT_AON_TIMER:
                 //sms_monitor_states("INT_AON_TIMER");
-                DBG_LOG_DEV("\n\r...AON_TIMER");
+                DBG_LOG_DEV("...AON_TIMER");
                 if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
                     if(ble_current_state == BLE_STATE_PAIRED) {
                         //DBG_LOG_DEV("[main]\t\t\tDisabling button int...");
@@ -316,20 +316,20 @@ int main(void)
                 
                 case INT_DUALTIMER1:
                 //sms_monitor_states("INT_DUALTIMER1");
-                DBG_LOG_DEV("\n\r...DUALTIMER1");
+                DBG_LOG_DEV("...DUALTIMER1");
                 sms_dualtimer_stop(DUALTIMER_TIMER1);
                 sms_dualtimer1_fn();
                 break;
                 
                 case INT_DUALTIMER2:
                 //sms_monitor_states("INT_DUALTIMER2");
-                DBG_LOG_DEV("\n\r...DUALTIMER2");
+                DBG_LOG_DEV("...DUALTIMER2");
                 sms_dualtimer_stop(DUALTIMER_TIMER2);
                 sms_dualtimer2_fn();
                 break;
                 
                 default:
-                DBG_LOG_DEV("\n\r...??");
+                DBG_LOG_DEV("...??");
                 //sms_monitor_states("ERROR!!");
                 break;
             }

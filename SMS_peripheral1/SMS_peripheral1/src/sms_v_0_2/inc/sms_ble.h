@@ -36,8 +36,10 @@
 
 #define BLE_CHAR_SIZE_BUTTON                            (1)
 #define BLE_CHAR_SIZE_PRESSURE                          (8)
-#define BLE_CHAR_SIZE_IMU                               (12)
-#define BLE_CHAR_SIZE_MAX                               BLE_CHAR_SIZE_IMU
+#define BLE_CHAR_SIZE_MPU_G_A                           (12)
+#define BLE_CHAR_SIZE_MPU_G_A_C                         (14)
+#define BLE_CHAR_SIZE_MPU_G_A_C_T                       (18)
+#define BLE_CHAR_SIZE_MAX                               BLE_CHAR_SIZE_MPU_G_A_C_T
 
 /* ---------
 * VARIABLES
@@ -64,7 +66,7 @@ enum sms_ble_char_type {
     BLE_CHAR_BTN0,
     BLE_CHAR_BTN1,
     BLE_CHAR_PRESS,
-    BLE_CHAR_IMU
+    BLE_CHAR_MPU
 };
 
 uint8_t sms_ble_ind_retry;
