@@ -86,16 +86,17 @@ void sms_init_variables(void)
 static void resume_cb(void)
 {
     init_port_list(); // re-initialize all ports
+	platform_driver_init();
+	gpio_init(); // GPIO
     serial_console_init(); // GPIO (UART) for the console
     sms_dualtimer_init();
-    delay_init();
+    //delay_init();
     sms_button_configure_gpio(); // GPIO (AO_0 & AO_1) for the buttons
-    sms_led_gpio_init();
-    sms_spi_master_configure();
-    sms_i2c_master_configure();
-    sms_mpu_configure_gpio();
-    sms_monitor_configure_gpio();
-    //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
+    //sms_led_gpio_init();
+    //sms_spi_master_configure();
+    //sms_i2c_master_configure();
+    //sms_mpu_configure_gpio();
+    //sms_monitor_configure_gpio();
 }
 
 static void sms_plf_event_cb(void)
@@ -118,6 +119,10 @@ int main(void)
 	gpio_init(); // GPIO
 	serial_console_init(); // serial console for debugging
     
+    /* Initialize the BLE module
+     * ------------------------- */
+	ble_device_init(NULL); // initialize the BLE chip and set the device address 
+
     /* Disable ULP
      * ----------- */
 	acquire_sleep_lock();
@@ -149,19 +154,14 @@ int main(void)
     sms_spi_master_configure();
     
     // MPU
-    sms_mpu_configure_gpio();
+    //sms_mpu_configure_gpio();
     
     // MS58
     pressure_device.ms58_device.current_state = MS58_STATE_NONE;
     //ms58_device.reset_done = false;
     //ms58_device.init_ok = false;
     
-    sms_monitor_configure_gpio();
-    
-    /* Initialize the BLE module
-     * ------------------------- */
-	ble_device_init(NULL); // initialize the BLE chip and set the device address 
-	
+    sms_monitor_configure_gpio();	
     
     /* Define BLE services
      * ------------------- */
@@ -176,14 +176,14 @@ int main(void)
     register_resume_callback(resume_cb); // register resume callback
 
     // Dualtimer (AON timer enables on registration... so do it later)    
-    sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
-    sms_dualtimer_register_callback(DUALTIMER_TIMER2, sms_dualtimer2_cb); // LED blinking timer
+    //sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
+    //sms_dualtimer_register_callback(DUALTIMER_TIMER2, sms_dualtimer2_cb); // LED blinking timer
 
     // Buttons
     sms_button_register_callbacks();
     
     // MPU
-    sms_mpu_register_callbacks();
+    //sms_mpu_register_callbacks();
 
     // BLE
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
@@ -194,7 +194,7 @@ int main(void)
     
     /* Enable buttons interrupts
      * ------------------------- */
-    sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
     
@@ -203,12 +203,13 @@ int main(void)
     //register int n23 asm("r15");
     //DBG_LOG("at post-init: sp 0x%x, lr 0x%x", n21, n22);
     
-    res = sms_mpu_initialize();
-    if(res) {
-        DBG_LOG("Could not initialize MPU!");
-        while(1) {}
-    }
-    sms_sensors_interrupt_toggle(true, false);
+    sms_dualtimer_start(TIMER_UNIT_MS, 10000, DUALTIMER_TIMER1);
+    DBG_LOG("value: %u", dualtimer_get_value(DUALTIMER_TIMER1));
+    sms_timer_aon_init((5*SMS_TIMER_AON_COUNT_100MS), AON_SLEEP_TIMER_RELOAD_MODE);
+    sms_timer_aon_register_callback();
+    ulp_ready = true;
+    ulp_active = true;
+    release_sleep_lock();
     
     /* Goto sleep
      * ---------- */
@@ -220,18 +221,22 @@ int main(void)
 		/* BLE Event task */
 		ble_event_task(BLE_EVENT_TIMEOUT);
 		
+        DBG_LOG("value: %u", dualtimer_get_value(DUALTIMER_TIMER1));
+        
 		/* Write application task */
         if(sms_current_interrupt.int_on)
         {
             if(ulp_active) {
                 DBG_LOG_DEV("[main]\t\t\t\tWaking up...");
                 acquire_sleep_lock();
+                sms_dualtimer_start(TIMER_UNIT_MS, 10000, DUALTIMER_TIMER1);
+                ulp_active = false;
                 DBG_LOG_CONT_DEV(" done!");
             }                
             //ulp_ready = false;
-            DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
-            sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-            DBG_LOG_CONT_DEV(" done!");
+            //DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
+            //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+            //DBG_LOG_CONT_DEV(" done!");
             //psp = __get_PSP();
             //msp = __get_MSP();
             //printf("\r\n\@ main: psp 0x%lx, msp 0x%lx", psp, msp);
@@ -293,26 +298,28 @@ int main(void)
                 case INT_AON_TIMER:
                 //sms_monitor_states("INT_AON_TIMER");
                 DBG_LOG_DEV("...AON_TIMER");
-                if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-                    if(ble_current_state == BLE_STATE_PAIRED) {
+                DBG_LOG_DEV("value: %u", dualtimer_get_value(DUALTIMER_TIMER1));
+                ulp_ready = true;
+                //if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
+                    //if(ble_current_state == BLE_STATE_PAIRED) {
                         //DBG_LOG_DEV("[main]\t\t\tDisabling button int...");
                         //sms_button_toggle_interrupt(SMS_EXTINT_DISABLE);
                         //DBG_LOG_CONT_DEV(" done!");
-                        DBG_LOG_DEV("[main]\t\t\t\tPolling pressure data...");
-                        sms_pressure_poll_data();
-                        DBG_LOG_CONT_DEV(" done!");
+                        //DBG_LOG_DEV("[main]\t\t\t\tPolling pressure data...");
+                        //sms_pressure_poll_data();
+                        //DBG_LOG_CONT_DEV(" done!");
                         //DBG_LOG_DEV("[main]\t\t\tEnabling button int...");
                         //sms_button_toggle_interrupt(SMS_EXTINT_ENABLE);
                         //DBG_LOG_CONT_DEV(" done!");
-                    }
-                    else if(ble_current_state == BLE_STATE_INDICATING) {
-                        DBG_LOG_DEV("[main]\t\t\t\tAON timer ready while indicating... skipping");
-                    }
-                    else {
-                        sms_timer_aon_disable();
-                        sms_ble_power_down();
-                    }                        
-                }                    
+                    //}
+                    //else if(ble_current_state == BLE_STATE_INDICATING) {
+                        //DBG_LOG_DEV("[main]\t\t\t\tAON timer ready while indicating... skipping");
+                    //}
+                    //else {
+                        //sms_timer_aon_disable();
+                        //sms_ble_power_down();
+                    //}                        
+                //}                    
                 break;
                 
                 case INT_DUALTIMER1:
@@ -335,9 +342,10 @@ int main(void)
                 break;
             }
             
-            DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
-            sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-            DBG_LOG_CONT_DEV(" done!");
+            //DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
+            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+            //DBG_LOG_CONT_DEV(" done!");
+            
             sms_current_interrupt.int_on = false;
             sms_current_interrupt.source = INT_NONE;
         }
@@ -346,9 +354,10 @@ int main(void)
         if(ulp_ready) {
             DBG_LOG_DEV("[main]\t\t\t\tULP...");
             ulp_active = true;
-            //release_sleep_lock();
-            //DBG_LOG_CONT_DEV(" zzzz");
-            DBG_LOG_CONT_DEV(" !!");
+            ulp_ready = false;
+            release_sleep_lock();
+            DBG_LOG_CONT_DEV(" zzzz");
+            //DBG_LOG_CONT_DEV(" !!");
         }            
         else {
             ulp_active = false;

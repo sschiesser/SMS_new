@@ -19,14 +19,14 @@ void sms_mpu_configure_gpio(void)
     config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
     config_gpio_pin.aon_wakeup = true;
     if(gpio_pin_set_config(SMS_MPU_DRDY_PIN, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG("[sms_imu_configure_gpio]\tProblem while setting up IMU DRDY pin");
+        DBG_LOG("[sms_mpu_configure_gpio]\tProblem while setting up IMU DRDY pin");
     }
 
     /* Pin output to supply IMU */
     gpio_get_config_defaults(&config_gpio_pin);
     config_gpio_pin.direction = GPIO_PIN_DIR_OUTPUT;
     if(!gpio_pin_set_config(SMS_MPU_VCC_PIN, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG("[sms_imu_configure_gpio]\tProblem while setting up IMU VCC pin");
+        DBG_LOG("[sms_mpu_configure_gpio]\tProblem while setting up IMU VCC pin");
     }
     gpio_pin_set_output_level(SMS_MPU_VCC_PIN, true);
 }

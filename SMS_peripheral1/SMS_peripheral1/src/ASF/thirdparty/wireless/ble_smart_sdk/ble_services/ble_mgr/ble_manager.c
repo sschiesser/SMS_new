@@ -311,8 +311,8 @@ static void ble_init(at_ble_init_config_t * args)
 	/* Init BLE device */
 	if(at_ble_init(args) != AT_BLE_SUCCESS)
 	{
-		DBG_LOG("[ble_init]\t\tSAMB11 Initialization failed");
-		DBG_LOG("[ble_init]\t\tPlease check the power and connection / hardware connector");	
+		DBG_LOG("[ble_init]\t\t\tSAMB11 Initialization failed");
+		DBG_LOG("[ble_init]\t\t\tPlease check the power and connection / hardware connector");	
 		while(1);
 	}
 }

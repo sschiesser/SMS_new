@@ -51,8 +51,9 @@ void sms_dualtimer_init(void)
     struct dualtimer_config config_dualtimer;
     dualtimer_get_config_defaults(&config_dualtimer);
 
-    config_dualtimer.timer1.load_value = SMS_DUALTIMER_LOAD_S;
-    config_dualtimer.timer1.counter_mode = DUALTIMER_ONE_SHOT_MODE;
+    config_dualtimer.timer1.load_value = SMS_DUALTIMER_LOAD_MS;
+    config_dualtimer.timer1.counter_mode = DUALTIMER_FREE_RUNNING_MODE;
+    config_dualtimer.timer1.interrup_enable = false;
     config_dualtimer.timer2.load_value = SMS_DUALTIMER_LOAD_S;
     config_dualtimer.timer2.counter_mode = DUALTIMER_ONE_SHOT_MODE;
 
