@@ -90,13 +90,13 @@ static void resume_cb(void)
 	gpio_init(); // GPIO
     serial_console_init(); // GPIO (UART) for the console
     sms_dualtimer_init();
-    //delay_init();
+    delay_init();
     sms_button_configure_gpio(); // GPIO (AO_0 & AO_1) for the buttons
-    //sms_led_gpio_init();
-    //sms_spi_master_configure();
-    //sms_i2c_master_configure();
-    //sms_mpu_configure_gpio();
-    //sms_monitor_configure_gpio();
+    sms_led_gpio_init();
+    sms_spi_master_configure();
+    sms_i2c_master_configure();
+    //sms_mpu_configure_gpio(); // MPU GPIO cannot be re-initialized since it uses a AON GPIO
+    sms_monitor_configure_gpio();
 }
 
 static void sms_plf_event_cb(void)
@@ -155,7 +155,7 @@ int main(void)
     sms_spi_master_configure();
     
     // MPU
-    //sms_mpu_configure_gpio();
+    sms_mpu_configure_gpio();
     
     // MS58
     pressure_device.ms58_device.current_state = MS58_STATE_NONE;
@@ -177,25 +177,23 @@ int main(void)
     register_resume_callback(resume_cb); // register resume callback
 
     // Dualtimer (AON timer enables on registration... so do it later)    
-    //sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
-    //sms_dualtimer_register_callback(DUALTIMER_TIMER2, sms_dualtimer2_cb); // LED blinking timer
+    sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
+    sms_dualtimer_register_callback(DUALTIMER_TIMER2, sms_dualtimer2_cb); // LED blinking timer
 
     // Buttons
     sms_button_register_callbacks();
     
     // MPU
-    //sms_mpu_register_callbacks();
+    sms_mpu_register_callbacks();
 
     // BLE
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_SERVER_EVENT_TYPE, sms_ble_gatt_server_cb);
     register_ble_user_event_cb(sms_plf_event_cb);
 
-    //ble_set_ulp_mode(BLE_ULP_MODE_SET);
-    
     /* Enable buttons interrupts
      * ------------------------- */
-    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+    sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
     
@@ -209,21 +207,17 @@ int main(void)
     sms_timer_aon_init((5*SMS_TIMER_AON_COUNT_100MS), AON_SLEEP_TIMER_RELOAD_MODE);
     sms_timer_aon_register_callback();
     ulp_ready = true;
-    //ulp_active = true;
-    //release_sleep_lock();
     
     /* Goto sleep
      * ---------- */
-    //sms_ble_power_down();
+    sms_ble_power_down();
 
     
 	while(true)
 	{
 		/* BLE Event task */
 		ble_event_task(BLE_EVENT_TIMEOUT);
-		
-        DBG_LOG("value: %u", dualtimer_get_value(DUALTIMER_TIMER1));
-        
+		        
 		/* Write application task */
         if(sms_current_interrupt.int_on)
         {
