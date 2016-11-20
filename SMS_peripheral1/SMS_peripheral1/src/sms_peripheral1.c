@@ -108,6 +108,7 @@ static void sms_plf_event_cb(void)
 int main(void)
 {
     int res;
+    volatile uint32_t sleep_value;
     
     /* Define current BLE state
      * ------------------------ */
@@ -208,8 +209,8 @@ int main(void)
     sms_timer_aon_init((5*SMS_TIMER_AON_COUNT_100MS), AON_SLEEP_TIMER_RELOAD_MODE);
     sms_timer_aon_register_callback();
     ulp_ready = true;
-    ulp_active = true;
-    release_sleep_lock();
+    //ulp_active = true;
+    //release_sleep_lock();
     
     /* Goto sleep
      * ---------- */
@@ -229,7 +230,8 @@ int main(void)
             if(ulp_active) {
                 DBG_LOG_DEV("[main]\t\t\t\tWaking up...");
                 acquire_sleep_lock();
-                sms_dualtimer_start(TIMER_UNIT_MS, 10000, DUALTIMER_TIMER1);
+                dualtimer_set_counter(DUALTIMER_TIMER1, DUALTIMER_SET_CURRUNT_REG, sleep_value);
+                dualtimer_enable(DUALTIMER_TIMER1);
                 ulp_active = false;
                 DBG_LOG_CONT_DEV(" done!");
             }                
@@ -353,6 +355,8 @@ int main(void)
         
         if(ulp_ready) {
             DBG_LOG_DEV("[main]\t\t\t\tULP...");
+            sleep_value = dualtimer_get_value(DUALTIMER_TIMER1);
+            DBG_LOG("sleep_value: %u", sleep_value);
             ulp_active = true;
             ulp_ready = false;
             release_sleep_lock();
