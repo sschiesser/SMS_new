@@ -93,7 +93,7 @@ static void resume_cb(void)
     sms_led_gpio_init();
     sms_spi_master_configure();
     sms_i2c_master_configure();
-    sms_mpu_configure_gpio();
+    //sms_mpu_configure_gpio();
     sms_monitor_configure_gpio();
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
@@ -209,10 +209,11 @@ int main(void)
         while(1) {}
     }
     sms_sensors_interrupt_toggle(true, false);
+    while(1) {}
     
     /* Goto sleep
      * ---------- */
-    //sms_ble_power_down();
+    sms_ble_power_down();
 
     
 	while(true)

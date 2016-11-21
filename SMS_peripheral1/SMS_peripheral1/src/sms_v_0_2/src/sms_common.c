@@ -64,10 +64,17 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 {
     /* IMU */
     if(mpu_en) {
-        sms_mpu_initialize();
+        if(sms_mpu_initialize()) {
+            DBG_LOG_DEV("[sms_sensors_switch]\t\t\tCouldn't initialize MPU");
+            gpio_pin_set_output_level(SMS_MPU_VCC_PIN, false);
+        }
+        else {
+            mpu_device.hal.init_ok = true;
+            sms_sensors_interrupt_toggle(true, false);
+        }
     }
     else {
-        //gpio_pin_set_output_level(SMS_IMU_VCC_PIN, false);
+        gpio_pin_set_output_level(SMS_MPU_VCC_PIN, false);
     }
     
     /* Pressure */

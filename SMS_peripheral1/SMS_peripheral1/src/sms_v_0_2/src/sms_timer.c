@@ -149,10 +149,10 @@ void sms_dualtimer1_fn(void)
             }
             else {
                 pressure_device.ms58_device.current_state = MS58_STATE_READY;
-                sms_working_mode = SMS_MODE_BUTTON_PRESSURE;
+                sms_working_mode = SMS_MODE_COMPLETE;
                 //DBG_LOG_DEV("[sms_dualtimer1_fn]\tPressure sensor initialized. Working mode = BUTTON_PRESSURE");
                 DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (MS58 reset)...");
-                sms_sensors_interrupt_toggle(false, true);
+                sms_sensors_interrupt_toggle(true, true);
                 // Init IMU device...
                 //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                 if(timer2_current_mode == TIMER2_MODE_NONE) {

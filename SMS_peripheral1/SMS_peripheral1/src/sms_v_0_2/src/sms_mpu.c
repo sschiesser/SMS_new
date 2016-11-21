@@ -26,7 +26,7 @@ void sms_mpu_configure_gpio(void)
     gpio_get_config_defaults(&config_gpio_pin);
     config_gpio_pin.direction = GPIO_PIN_DIR_OUTPUT;
     if(!gpio_pin_set_config(SMS_MPU_VCC_PIN, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG("[sms_imu_configure_gpio]\tProblem while setting up IMU VCC pin");
+        DBG_LOG("[sms_imu_configure_gpio]\tProblem while setting up MPU VCC pin");
     }
     gpio_pin_set_output_level(SMS_MPU_VCC_PIN, true);
 }
@@ -91,7 +91,7 @@ int sms_mpu_poll_data(void)
 {
     //DBG_LOG_DEV("[sms_imu_receive_data]\n\r  reading...");
     //st.chip_cfg.dmp_on = 1;
-    short sensors;
+    unsigned char sensors;
     unsigned char more;
     unsigned long sensor_timestamp;
     int res;
@@ -112,7 +112,7 @@ int sms_mpu_poll_data(void)
     
     if(mpu_device.compass_cnt++ > SMS_MPU_COMPASS_MULTIPLIER) {
         mpu_device.compass_cnt = 0;
-        mpu_get_compass_reg(&mpu_device.hal.compass, &sensor_timestamp);
+        mpu_get_compass_reg(mpu_device.hal.compass, &sensor_timestamp);
         mpu_device.new_compass = true;
     }
     sms_ble_send_characteristic(BLE_CHAR_MPU);    
