@@ -29,9 +29,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_line   00018dd2  00000000  00000000  000a5141  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    0014710e  00000000  00000000  000bdf13  2**0
+ 13 .debug_str    00147105  00000000  00000000  000bdf13  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002fc8  00000000  00000000  00205024  2**2
+ 14 .debug_frame  00002fc8  00000000  00000000  00205018  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -8762,13 +8762,13 @@ void sms_i2c_master_configure(void)
 1000aa56:	3381      	adds	r3, #129	; 0x81
 1000aa58:	8063      	strh	r3, [r4, #2]
     config_i2c_master.pin_number_pad0 = SMS_I2C_MASTER_PIN_SDA;
-1000aa5a:	3b74      	subs	r3, #116	; 0x74
+1000aa5a:	3b7a      	subs	r3, #122	; 0x7a
 1000aa5c:	6063      	str	r3, [r4, #4]
     config_i2c_master.pin_number_pad1 = SMS_I2C_MASTER_PIN_SCL;
 1000aa5e:	3301      	adds	r3, #1
 1000aa60:	60e3      	str	r3, [r4, #12]
     config_i2c_master.pinmux_sel_pad0 = SMS_I2C_MASTER_MUX_SDA;
-1000aa62:	3b0b      	subs	r3, #11
+1000aa62:	3b07      	subs	r3, #7
 1000aa64:	60a3      	str	r3, [r4, #8]
     config_i2c_master.pinmux_sel_pad1 = SMS_I2C_MASTER_MUX_SCL;
 1000aa66:	6123      	str	r3, [r4, #16]
@@ -8812,7 +8812,7 @@ static inline void i2c_enable(I2c *const i2c_module)
 1000aa98:	100083b1 	.word	0x100083b1
 1000aa9c:	1001a334 	.word	0x1001a334
 1000aaa0:	100083c9 	.word	0x100083c9
-1000aaa4:	40003400 	.word	0x40003400
+1000aaa4:	40003000 	.word	0x40003000
 
 1000aaa8 <sms_i2c_master_write>:
 
@@ -9284,7 +9284,7 @@ int sms_mpu_initialize(void) {
 1000ad18:	4b1f      	ldr	r3, [pc, #124]	; (1000ad98 <sms_mpu_initialize+0xb8>)
 1000ad1a:	4798      	blx	r3
     mpu_set_sample_rate(SMS_MPU_SAMPLE_RATE_HZ);
-1000ad1c:	2005      	movs	r0, #5
+1000ad1c:	2001      	movs	r0, #1
 1000ad1e:	4b1f      	ldr	r3, [pc, #124]	; (1000ad9c <sms_mpu_initialize+0xbc>)
 1000ad20:	4798      	blx	r3
     mpu_set_compass_sample_rate(SMS_MPU_COMPASS_RATE_HZ);
@@ -9325,7 +9325,7 @@ int sms_mpu_initialize(void) {
 1000ad4a:	4b1a      	ldr	r3, [pc, #104]	; (1000adb4 <sms_mpu_initialize+0xd4>)
 1000ad4c:	4798      	blx	r3
     dmp_set_fifo_rate(SMS_MPU_SAMPLE_RATE_HZ);
-1000ad4e:	2005      	movs	r0, #5
+1000ad4e:	2001      	movs	r0, #1
 1000ad50:	4b19      	ldr	r3, [pc, #100]	; (1000adb8 <sms_mpu_initialize+0xd8>)
 1000ad52:	4798      	blx	r3
     mpu_set_dmp_state(1);
@@ -9413,7 +9413,7 @@ int sms_mpu_poll_data(void)
     if(mpu_device.temp_cnt++ > SMS_MPU_TEMP_MULTIPLIER) {
 1000ade4:	232d      	movs	r3, #45	; 0x2d
 1000ade6:	5ce3      	ldrb	r3, [r4, r3]
-1000ade8:	2b05      	cmp	r3, #5
+1000ade8:	2b01      	cmp	r3, #1
 1000adea:	d804      	bhi.n	1000adf6 <sms_mpu_poll_data+0x36>
 1000adec:	3301      	adds	r3, #1
 1000adee:	222d      	movs	r2, #45	; 0x2d
@@ -9441,7 +9441,7 @@ int sms_mpu_poll_data(void)
 1000ae0e:	232c      	movs	r3, #44	; 0x2c
 1000ae10:	4a0d      	ldr	r2, [pc, #52]	; (1000ae48 <sms_mpu_poll_data+0x88>)
 1000ae12:	5cd3      	ldrb	r3, [r2, r3]
-1000ae14:	2b05      	cmp	r3, #5
+1000ae14:	2b01      	cmp	r3, #1
 1000ae16:	d804      	bhi.n	1000ae22 <sms_mpu_poll_data+0x62>
 1000ae18:	3301      	adds	r3, #1
 1000ae1a:	222c      	movs	r2, #44	; 0x2c
@@ -10472,11 +10472,11 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
         mpu_device.state = MPU_STATE_ON;
 1000b400:	2102      	movs	r1, #2
 1000b402:	2330      	movs	r3, #48	; 0x30
-1000b404:	4a15      	ldr	r2, [pc, #84]	; (1000b45c <sms_sensors_interrupt_toggle+0x64>)
+1000b404:	4a16      	ldr	r2, [pc, #88]	; (1000b460 <sms_sensors_interrupt_toggle+0x68>)
 1000b406:	54d1      	strb	r1, [r2, r3]
         gpio_enable_callback(SMS_MPU_DRDY_PIN);
 1000b408:	201e      	movs	r0, #30
-1000b40a:	4b15      	ldr	r3, [pc, #84]	; (1000b460 <sms_sensors_interrupt_toggle+0x68>)
+1000b40a:	4b16      	ldr	r3, [pc, #88]	; (1000b464 <sms_sensors_interrupt_toggle+0x6c>)
 1000b40c:	4798      	blx	r3
 1000b40e:	e006      	b.n	1000b41e <sms_sensors_interrupt_toggle+0x26>
     }
@@ -10484,11 +10484,11 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
         mpu_device.state = MPU_STATE_OFF;
 1000b410:	2100      	movs	r1, #0
 1000b412:	2330      	movs	r3, #48	; 0x30
-1000b414:	4a11      	ldr	r2, [pc, #68]	; (1000b45c <sms_sensors_interrupt_toggle+0x64>)
+1000b414:	4a12      	ldr	r2, [pc, #72]	; (1000b460 <sms_sensors_interrupt_toggle+0x68>)
 1000b416:	54d1      	strb	r1, [r2, r3]
         gpio_disable_callback(SMS_MPU_DRDY_PIN);
 1000b418:	201e      	movs	r0, #30
-1000b41a:	4b12      	ldr	r3, [pc, #72]	; (1000b464 <sms_sensors_interrupt_toggle+0x6c>)
+1000b41a:	4b13      	ldr	r3, [pc, #76]	; (1000b468 <sms_sensors_interrupt_toggle+0x70>)
 1000b41c:	4798      	blx	r3
      * Note: Since there is no direct mechanism to simply enable and disable
      *       the AON sleep timer interruption, we have to initialize it each
@@ -10497,9 +10497,9 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
      */
     if(press_int) {
 1000b41e:	2c00      	cmp	r4, #0
-1000b420:	d010      	beq.n	1000b444 <sms_sensors_interrupt_toggle+0x4c>
+1000b420:	d011      	beq.n	1000b446 <sms_sensors_interrupt_toggle+0x4e>
         pressure_device.hal.current_state = MS58_STATE_CONV_PRESSURE;
-1000b422:	4b11      	ldr	r3, [pc, #68]	; (1000b468 <sms_sensors_interrupt_toggle+0x70>)
+1000b422:	4b12      	ldr	r3, [pc, #72]	; (1000b46c <sms_sensors_interrupt_toggle+0x74>)
 1000b424:	2103      	movs	r1, #3
 1000b426:	2225      	movs	r2, #37	; 0x25
 1000b428:	5499      	strb	r1, [r3, r2]
@@ -10509,42 +10509,43 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
 1000b42e:	5499      	strb	r1, [r3, r2]
         sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
 1000b430:	2100      	movs	r1, #0
-1000b432:	480e      	ldr	r0, [pc, #56]	; (1000b46c <sms_sensors_interrupt_toggle+0x74>)
-1000b434:	4b0e      	ldr	r3, [pc, #56]	; (1000b470 <sms_sensors_interrupt_toggle+0x78>)
-1000b436:	4798      	blx	r3
+1000b432:	2080      	movs	r0, #128	; 0x80
+1000b434:	0200      	lsls	r0, r0, #8
+1000b436:	4b0e      	ldr	r3, [pc, #56]	; (1000b470 <sms_sensors_interrupt_toggle+0x78>)
+1000b438:	4798      	blx	r3
         sms_timer_aon_register_callback();
-1000b438:	4b0e      	ldr	r3, [pc, #56]	; (1000b474 <sms_sensors_interrupt_toggle+0x7c>)
-1000b43a:	4798      	blx	r3
+1000b43a:	4b0e      	ldr	r3, [pc, #56]	; (1000b474 <sms_sensors_interrupt_toggle+0x7c>)
+1000b43c:	4798      	blx	r3
         sensors_active = true;
-1000b43c:	2201      	movs	r2, #1
-1000b43e:	4b0e      	ldr	r3, [pc, #56]	; (1000b478 <sms_sensors_interrupt_toggle+0x80>)
-1000b440:	701a      	strb	r2, [r3, #0]
-1000b442:	e00a      	b.n	1000b45a <sms_sensors_interrupt_toggle+0x62>
+1000b43e:	2201      	movs	r2, #1
+1000b440:	4b0d      	ldr	r3, [pc, #52]	; (1000b478 <sms_sensors_interrupt_toggle+0x80>)
+1000b442:	701a      	strb	r2, [r3, #0]
+1000b444:	e00a      	b.n	1000b45c <sms_sensors_interrupt_toggle+0x64>
     }
     else {
         pressure_device.hal.current_state = MS58_STATE_READY;
-1000b444:	2102      	movs	r1, #2
-1000b446:	2325      	movs	r3, #37	; 0x25
-1000b448:	4a07      	ldr	r2, [pc, #28]	; (1000b468 <sms_sensors_interrupt_toggle+0x70>)
-1000b44a:	54d1      	strb	r1, [r2, r3]
+1000b446:	2102      	movs	r1, #2
+1000b448:	2325      	movs	r3, #37	; 0x25
+1000b44a:	4a08      	ldr	r2, [pc, #32]	; (1000b46c <sms_sensors_interrupt_toggle+0x74>)
+1000b44c:	54d1      	strb	r1, [r2, r3]
         sms_timer_aon_disable();
-1000b44c:	4b0b      	ldr	r3, [pc, #44]	; (1000b47c <sms_sensors_interrupt_toggle+0x84>)
-1000b44e:	4798      	blx	r3
+1000b44e:	4b0b      	ldr	r3, [pc, #44]	; (1000b47c <sms_sensors_interrupt_toggle+0x84>)
+1000b450:	4798      	blx	r3
         sms_timer_aon_unregister_callback();
-1000b450:	4b0b      	ldr	r3, [pc, #44]	; (1000b480 <sms_sensors_interrupt_toggle+0x88>)
-1000b452:	4798      	blx	r3
+1000b452:	4b0b      	ldr	r3, [pc, #44]	; (1000b480 <sms_sensors_interrupt_toggle+0x88>)
+1000b454:	4798      	blx	r3
         sensors_active = false;
-1000b454:	2200      	movs	r2, #0
-1000b456:	4b08      	ldr	r3, [pc, #32]	; (1000b478 <sms_sensors_interrupt_toggle+0x80>)
-1000b458:	701a      	strb	r2, [r3, #0]
+1000b456:	2200      	movs	r2, #0
+1000b458:	4b07      	ldr	r3, [pc, #28]	; (1000b478 <sms_sensors_interrupt_toggle+0x80>)
+1000b45a:	701a      	strb	r2, [r3, #0]
     }
 }
-1000b45a:	bd10      	pop	{r4, pc}
-1000b45c:	1001a194 	.word	0x1001a194
-1000b460:	1000c665 	.word	0x1000c665
-1000b464:	1000c6c1 	.word	0x1000c6c1
-1000b468:	1001a2a0 	.word	0x1001a2a0
-1000b46c:	00000cc6 	.word	0x00000cc6
+1000b45c:	bd10      	pop	{r4, pc}
+1000b45e:	46c0      	nop			; (mov r8, r8)
+1000b460:	1001a194 	.word	0x1001a194
+1000b464:	1000c665 	.word	0x1000c665
+1000b468:	1000c6c1 	.word	0x1000c6c1
+1000b46c:	1001a2a0 	.word	0x1001a2a0
 1000b470:	1000b5dd 	.word	0x1000b5dd
 1000b474:	1000b611 	.word	0x1000b611
 1000b478:	1001a330 	.word	0x1001a330
