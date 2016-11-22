@@ -901,6 +901,9 @@
     <Compile Include="src\sms_v_0_2\inc\sms_pressure.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\sms_v_0_2\inc\sms_sensors.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\sms_v_0_2\inc\sms_spi.h">
       <SubType>compile</SubType>
     </Compile>
@@ -926,6 +929,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\sms_v_0_2\src\sms_pressure.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\sms_v_0_2\src\sms_sensors.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\sms_v_0_2\src\sms_spi.c">

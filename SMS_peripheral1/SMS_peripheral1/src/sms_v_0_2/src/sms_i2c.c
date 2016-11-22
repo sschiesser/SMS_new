@@ -29,14 +29,14 @@ void sms_i2c_master_configure(void)
 
 int sms_i2c_master_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t const *data)
 {
-    //DBG_LOG("i2c writing to 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
+    DBG_LOG_DEV("i2c writing to 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
     uint16_t timeout = 0;
     i2c_wpacket.address = (uint8_t)slave_addr;
     i2c_wpacket.data_length = (uint8_t)(data_len + 1);
     i2c_wpacket.data[0] = (uint8_t)reg_addr;
     for(uint8_t i = 0; i < data_len; i++) {
         i2c_wpacket.data[i+1] = (uint8_t)data[i];
-        //DBG_LOG_CONT("0x%02x ", packet.data[i+1]);
+        DBG_LOG_CONT_DEV("0x%02x ", i2c_wpacket.data[i+1]);
     }
     while (i2c_master_write_packet_wait(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
@@ -49,7 +49,7 @@ int sms_i2c_master_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len,
 
 int sms_i2c_master_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, uint8_t *data)
 {
-    //DBG_LOG("i2c reading from 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
+    DBG_LOG("i2c reading from 0x%02x at 0x%02x... data: ", slave_addr, reg_addr);
     uint16_t timeout;
     i2c_wpacket.address = (uint8_t)slave_addr;
     i2c_wpacket.data_length = 1;
@@ -72,7 +72,7 @@ int sms_i2c_master_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, 
     }
     for(uint8_t i = 0; i < data_len; i++) {
         data[i] = i2c_rpacket.data[i];
-        //DBG_LOG("0x%02x ", data[i]);
+        DBG_LOG("0x%02x ", data[i]);
     }
     return 0;
 }

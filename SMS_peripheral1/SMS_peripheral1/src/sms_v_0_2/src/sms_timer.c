@@ -121,48 +121,6 @@ void sms_dualtimer1_fn(void)
 {
     //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
     switch(timer1_current_mode) {
-        /* Timer1 mode = MS58_RESET */
-        case TIMER1_MODE_MS58_RESET:
-        {
-            timer1_current_mode = TIMER1_MODE_NONE;
-            pressure_device.ms58_device.reset_done = true;
-            pressure_device.ms58_device.init_retry = 0;
-            if(sms_pressure_init() != STATUS_OK) {
-                DBG_LOG_DEV("[sms_dualtimer1_fn]\tFailed to init ms58 device");
-                pressure_device.ms58_device.init_retry++;
-                if(pressure_device.ms58_device.init_retry >= MS58_INIT_RETRY_MAX) {
-                    DBG_LOG_DEV("[sms_dualtimer1_fn]\tFailed to initialize pressure sensor. Working mode = BUTTON_SOLO");
-                    pressure_device.ms58_device.current_state = MS58_STATE_NONE;
-                    sms_working_mode = SMS_MODE_BUTTON_SOLO;
-                    // Init IMU device...
-                    //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
-                    if(timer2_current_mode == TIMER2_MODE_NONE) {
-                        //release_sleep_lock();
-                        ulp_ready = true;
-                    }                        
-                }
-                else {
-                    timer1_current_mode = TIMER1_MODE_MS58_RESET;
-                    //ulp_ready = false;
-                    sms_dualtimer_start(TIMER_UNIT_MS, MS58_RESET_WAIT_MS, DUALTIMER_TIMER1);
-                }
-            }
-            else {
-                pressure_device.ms58_device.current_state = MS58_STATE_READY;
-                sms_working_mode = SMS_MODE_COMPLETE;
-                //DBG_LOG_DEV("[sms_dualtimer1_fn]\tPressure sensor initialized. Working mode = BUTTON_PRESSURE");
-                DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (MS58 reset)...");
-                sms_sensors_interrupt_toggle(true, true);
-                // Init IMU device...
-                //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
-                if(timer2_current_mode == TIMER2_MODE_NONE) {
-                    //release_sleep_lock();
-                    ulp_ready = true;
-                }                    
-            }
-            break; // Timer1 mode = MS58_RESET
-        }
-        
         /* Timer1 mode = STARTUP */
         case TIMER1_MODE_STARTUP:
         {

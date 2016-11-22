@@ -46,6 +46,8 @@ src\sms_v_0_2\src\sms_led.c
 
 src\sms_v_0_2\src\sms_pressure.c
 
+src\sms_v_0_2\src\sms_sensors.c
+
 src\sms_v_0_2\src\sms_spi.c
 
 src\sms_v_0_2\src\sms_timer.c

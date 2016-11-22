@@ -43,8 +43,4 @@ typedef enum sms_extint_toggle {
 void sms_monitor_configure_gpio(void);
 void sms_monitor_get_states(const char *label);
 
-/* Sensors-related functions */
-void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int);
-void sms_sensors_switch(bool mpu_en, bool press_en);
-
 #endif /* SMS_COMMON_H_ */

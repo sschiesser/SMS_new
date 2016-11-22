@@ -59,7 +59,7 @@ void sms_init_variables(void)
     // states
     ble_current_state = BLE_STATE_POWEROFF;
     button_instance.current_state = BUTTON_STATE_NONE;
-    pressure_device.ms58_device.current_state = MS58_STATE_NONE;
+    pressure_device.hal.current_state = MS58_STATE_NONE;
     timer1_current_mode = TIMER1_MODE_NONE;
     timer2_current_mode = TIMER2_MODE_NONE;
     sms_working_mode = SMS_MODE_BUTTON_SOLO;
@@ -152,7 +152,7 @@ int main(void)
     sms_mpu_configure_gpio();
     
     // MS58
-    pressure_device.ms58_device.current_state = MS58_STATE_NONE;
+    pressure_device.hal.current_state = MS58_STATE_NONE;
     //ms58_device.reset_done = false;
     //ms58_device.init_ok = false;
     
@@ -203,13 +203,13 @@ int main(void)
     //register int n23 asm("r15");
     //DBG_LOG("at post-init: sp 0x%x, lr 0x%x", n21, n22);
     
-    res = sms_mpu_initialize();
-    if(res) {
-        DBG_LOG("Could not initialize MPU!");
-        while(1) {}
-    }
-    sms_sensors_interrupt_toggle(true, false);
-    while(1) {}
+    //res = sms_mpu_initialize();
+    //if(res) {
+        //DBG_LOG("Could not initialize MPU!");
+        //while(1) {}
+    //}
+    //sms_sensors_interrupt_toggle(true, false);
+    //while(1) {}
     
     /* Goto sleep
      * ---------- */

@@ -147,6 +147,7 @@ C_SRCS +=  \
 ../src/sms_v_0_2/src/sms_mpu.c \
 ../src/sms_v_0_2/src/sms_led.c \
 ../src/sms_v_0_2/src/sms_pressure.c \
+../src/sms_v_0_2/src/sms_sensors.c \
 ../src/sms_v_0_2/src/sms_spi.c \
 ../src/sms_v_0_2/src/sms_timer.c \
 ../src/ASF/sam0/drivers/spi/spi.c \
@@ -207,6 +208,7 @@ src/sms_v_0_2/src/sms_i2c.o \
 src/sms_v_0_2/src/sms_mpu.o \
 src/sms_v_0_2/src/sms_led.o \
 src/sms_v_0_2/src/sms_pressure.o \
+src/sms_v_0_2/src/sms_sensors.o \
 src/sms_v_0_2/src/sms_spi.o \
 src/sms_v_0_2/src/sms_timer.o \
 src/ASF/sam0/drivers/spi/spi.o \
@@ -260,6 +262,7 @@ src/sms_v_0_2/src/sms_i2c.o \
 src/sms_v_0_2/src/sms_mpu.o \
 src/sms_v_0_2/src/sms_led.o \
 src/sms_v_0_2/src/sms_pressure.o \
+src/sms_v_0_2/src/sms_sensors.o \
 src/sms_v_0_2/src/sms_spi.o \
 src/sms_v_0_2/src/sms_timer.o \
 src/ASF/sam0/drivers/spi/spi.o \
@@ -313,6 +316,7 @@ src/sms_v_0_2/src/sms_i2c.d \
 src/sms_v_0_2/src/sms_mpu.d \
 src/sms_v_0_2/src/sms_led.d \
 src/sms_v_0_2/src/sms_pressure.d \
+src/sms_v_0_2/src/sms_sensors.d \
 src/sms_v_0_2/src/sms_spi.d \
 src/sms_v_0_2/src/sms_timer.d \
 src/ASF/sam0/drivers/spi/spi.d \
@@ -366,6 +370,7 @@ src/sms_v_0_2/src/sms_i2c.d \
 src/sms_v_0_2/src/sms_mpu.d \
 src/sms_v_0_2/src/sms_led.d \
 src/sms_v_0_2/src/sms_pressure.d \
+src/sms_v_0_2/src/sms_sensors.d \
 src/sms_v_0_2/src/sms_spi.d \
 src/sms_v_0_2/src/sms_timer.d \
 src/ASF/sam0/drivers/spi/spi.d \
@@ -411,6 +416,8 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

@@ -65,9 +65,9 @@ typedef enum sms_ms58_state {
     MS58_STATE_CONV_TEMPERATURE
 }sms_ms58_state_t;
 
-typedef struct sms_ms58_instance {
+typedef struct ms58_instance {
     bool int_active; // external interrupt from this device enabled
-    bool reset_done; // reset command has been successfully sent
+    //bool reset_done; // reset command has been successfully sent
     bool init_ok; // PROM value have been successfully read
     uint8_t osr;
     uint16_t prom_values[MS58_PROM_VALUES_MAX];
@@ -76,8 +76,8 @@ typedef struct sms_ms58_instance {
     int32_t temperature; // calculated temperature value
     bool data_complete;
     sms_ms58_state_t current_state;
-    uint8_t init_retry;
-}sms_ms58_instance_t;
+    //uint8_t init_retry;
+}ms58_instance_t;
 
 
 #endif

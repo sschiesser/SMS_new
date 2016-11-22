@@ -53,7 +53,7 @@
 typedef enum timer1_modes {
     TIMER1_MODE_NONE = 0x00,
     TIMER1_MODE_STARTUP,
-    TIMER1_MODE_MS58_RESET,
+    //TIMER1_MODE_MS58_RESET,
     TIMER1_MODE_SHUTDOWN
 }timer1_modes_t;
 volatile timer1_modes_t timer1_current_mode;

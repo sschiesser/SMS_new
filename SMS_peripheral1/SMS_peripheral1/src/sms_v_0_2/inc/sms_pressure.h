@@ -41,7 +41,7 @@ enum sms_pressure_state {
     PRESSURE_STATE_ON
 };
 typedef struct sms_pressure_struct {
-    sms_ms58_instance_t ms58_device;
+    ms58_instance_t hal;
     enum sms_pressure_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[8];
