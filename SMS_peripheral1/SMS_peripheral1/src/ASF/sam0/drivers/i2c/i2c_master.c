@@ -349,7 +349,7 @@ static enum status_code _i2c_master_write_packet(
 	Assert(packet);
 	
 	I2c *const i2c_module = (module->hw);
-	uint16_t counter = 0;
+	volatile uint16_t counter = 0;
 	uint32_t status  = 0;
 
 	uint16_t length = packet->data_length;

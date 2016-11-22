@@ -282,14 +282,14 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         btn0_instance.char_value = ((btn0_instance.char_value >= 0x7f) ? 0 : (btn0_instance.char_value + 1));
         send_val[0] = btn0_instance.char_value;
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
-        length = 1;
+        length = BLE_CHAR_SIZE_BUTTON;
         break;
         
         case BLE_CHAR_BTN1:
         btn1_instance.char_value = ((btn1_instance.char_value >= 0xff) ? 0 : (btn1_instance.char_value + 1));
         send_val[0] = btn1_instance.char_value + 0x80;
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
-        length = 1;
+        length = BLE_CHAR_SIZE_BUTTON;
         break;
         
         case BLE_CHAR_PRESS:
@@ -302,7 +302,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         send_val[6] = (uint8_t)((pressure_device.hal.pressure >> 16) & 0xff);
         send_val[7] = (uint8_t)((pressure_device.hal.pressure >> 24) & 0xff);
         val_handle = pressure_device.service_handler.serv_chars.char_val_handle;
-        length = 8;
+        length = BLE_CHAR_SIZE_PRESSURE;
         break;
         
         case BLE_CHAR_MPU:
@@ -319,7 +319,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         send_val[10] = (uint8_t)(mpu_device.hal.gyro[2] & 0xff);
         send_val[11] = (uint8_t)((mpu_device.hal.gyro[2] >> 8) & 0xff);
         val_handle = mpu_device.service_handler.serv_chars.char_val_handle;
-        length = 12;
+        length = BLE_CHAR_SIZE_MPU_G_A;
         
         if(mpu_device.new_compass) {
             send_val[12] = (uint8_t)(mpu_device.hal.compass[0] & 0xff);
@@ -328,7 +328,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
             send_val[15] = (uint8_t)((mpu_device.hal.compass[1] >> 8) & 0xff);
             send_val[16] = (uint8_t)(mpu_device.hal.compass[2] & 0xff);
             send_val[17] = (uint8_t)((mpu_device.hal.compass[2] >> 8) & 0xff);
-            length = 18;
+            length = BLE_CHAR_SIZE_MPU_G_A_C;
             mpu_device.new_compass = false;
         }
         else {
@@ -340,7 +340,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         if(mpu_device.new_temp) {
             send_val[18] = (uint8_t)(mpu_device.hal.temperature & 0xff);
             send_val[19] = (uint8_t)((mpu_device.hal.temperature >> 8) & 0xff);
-            length = 20;
+            length = BLE_CHAR_SIZE_MPU_G_A_C_T;
             mpu_device.new_temp = false;
         }
         else {

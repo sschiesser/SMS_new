@@ -24,6 +24,10 @@
 #define SMS_MPU_SERVICE_UUID_3              (0x50300000)
 #define SMS_MPU_SERVICE_UUID_4              (0x11110000)
 
+#define SMS_MPU_BLE_CHAR_LEN_G_A            (12)
+#define SMS_MPU_BLE_CHAR_LEN_G_A_C          (18)
+#define SMS_MPU_BLE_CHAR_LEN_G_A_C_T        (20)
+
 #define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1)
 #define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6)
 

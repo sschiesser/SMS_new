@@ -23,6 +23,8 @@
 #define SMS_PRESSURE_SERVICE_UUID_3             (0x50300000)
 #define SMS_PRESSURE_SERVICE_UUID_4             (0xEEEE0000)
 
+#define SMS_PRESSURE_BLE_CHAR_LEN               (8)
+
 #define SMS_PRESSURE_VCC_PIN                    (PIN_LP_GPIO_7)
 #define SMS_PRESSURE_SPI_SS_PIN                 (PIN_LP_GPIO_16)
 

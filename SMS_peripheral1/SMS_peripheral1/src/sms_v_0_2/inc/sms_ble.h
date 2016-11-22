@@ -34,12 +34,12 @@
 #define BLE_INDICATION_TOUT_MS                          (100)
 #define BLE_INDICATION_RETRY_MAX                        (1)
 
-#define BLE_CHAR_SIZE_BUTTON                            (1)
-#define BLE_CHAR_SIZE_PRESSURE                          (8)
-#define BLE_CHAR_SIZE_MPU_G_A                           (12)
-#define BLE_CHAR_SIZE_MPU_G_A_C                         (14)
-#define BLE_CHAR_SIZE_MPU_G_A_C_T                       (18)
-#define BLE_CHAR_SIZE_MAX                               BLE_CHAR_SIZE_MPU_G_A_C_T
+#define BLE_CHAR_SIZE_BUTTON                            (SMS_BUTTON_BLE_CHAR_LEN)
+#define BLE_CHAR_SIZE_PRESSURE                          (SMS_PRESSURE_BLE_CHAR_LEN)
+#define BLE_CHAR_SIZE_MPU_G_A                           (SMS_MPU_BLE_CHAR_LEN_G_A)
+#define BLE_CHAR_SIZE_MPU_G_A_C                         (SMS_MPU_BLE_CHAR_LEN_G_A_C)
+#define BLE_CHAR_SIZE_MPU_G_A_C_T                       (SMS_MPU_BLE_CHAR_LEN_G_A_C_T)
+#define BLE_CHAR_SIZE_MAX                               (BLE_CHAR_SIZE_MPU_G_A_C_T)
 
 /* ---------
 * VARIABLES
