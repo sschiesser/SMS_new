@@ -98,10 +98,10 @@ static void resume_cb(void)
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
 
-static void sms_plf_event_cb(void)
-{
-    sms_current_interrupt.int_on = true;
-}
+//static void sms_plf_event_cb(void)
+//{
+    //sms_current_interrupt.int_on = true;
+//}
 
 
 int main(void)
@@ -188,7 +188,7 @@ int main(void)
     // BLE
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_SERVER_EVENT_TYPE, sms_ble_gatt_server_cb);
-    register_ble_user_event_cb(sms_plf_event_cb);
+    //register_ble_user_event_cb(sms_plf_event_cb);
 
     //ble_set_ulp_mode(BLE_ULP_MODE_SET);
     

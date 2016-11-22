@@ -2,6 +2,18 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\sms_v_0_2\src\sms_ble.c
+
+src\sms_v_0_2\src\sms_button.c
+
+src\sms_v_0_2\src\sms_led.c
+
+src\sms_v_0_2\src\sms_spi.c
+
+src\sms_v_0_2\src\sms_timer.c
+
+src\ASF\common\services\delay\sam\systick_counter.c
+
 src\ASF\sam0\drivers\spi\spi.c
 
 src\ASF\thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_monitor\pxp_monitor.c

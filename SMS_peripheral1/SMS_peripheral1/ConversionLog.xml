@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type='text/xsl' href='ConversionLog.xslt'?>
+<conversion conversiontitle="Upgrade Report - Atmel Software Framework Upgrade Log" subtitle1="Upgrading Modules From" subtitle2="to" date="Dienstag, 22. November 2016" time="11:51">
+  <general>
+    <log timestamp="11-22-2016 11-51-18">
+      <message>Unloading project</message>
+    </log>
+    <log timestamp="11-22-2016 11-51-18">
+      <message>Project unload complete.</message>
+    </log>
+    <log timestamp="11-22-2016 11-51-38">
+      <message>Reloading project after backup.</message>
+    </log>
+    <log timestamp="11-22-2016 11-51-46">
+      <message>Project reload complete.</message>
+    </log>
+    <log timestamp="11-22-2016 11-51-47">
+      <message>Upgrading of project started.</message>
+    </log>
+    <log timestamp="11-22-2016 11-52-39">
+      <message>Project upgrade complete</message>
+    </log>
+  </general>
+  <revert versiontext="3.32.0" description="Reverting from version">
+    <moduleinfo name="SAM B11 Xplained Pro">
+      <action description="Delete framework file 'src\ASF\sam0\boards\samb11_xplained_pro\board_init.c'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\boards\samb11_xplained_pro\samb11_xplained_pro.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/boards/samb11_xplained_pro' from include search path." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/boards' from include search path." result="SUCCESS" resulttext="" />
+      <action description="Remove defined symbol '__SAMB11G18A__'." result="SUCCESS" resulttext="" />
+      <action description="Remove defined symbol 'BOARD=SAMB11_XPLAINED_PRO'." result="SUCCESS" resulttext="" />
+      <action description="Remove Assembler Flag '-D__SAMB11G18A__'." result="SUCCESS" resulttext="" />
+      <action description="Remove Assembler Flag '-DBOARD=SAMB11_XPLAINED_PRO'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 startup code">
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.c'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\source\gcc\startup_samb11.c'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/utils/cmsis/samb11/include' from include search path." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/utils/cmsis/samb11/source' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Common SAM0 compiler driver">
+      <action description="Delete framework file 'src\ASF\sam0\utils\compiler.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\header_files\io.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\status_codes.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/utils' from include search path." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/utils/header_files' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="sam0.utils.preprocessor">
+      <action description="Delete framework file 'src\ASF\sam0\utils\preprocessor\tpaste.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\preprocessor\mrepeat.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\preprocessor\mrecursion.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\preprocessor\preprocessor.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\preprocessor\stringz.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/utils/preprocessor' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Generic Makefile for SAM0 products">
+      <action description="Delete framework file 'src\ASF\sam0\utils\make\Makefile.sam.in'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="CMSIS thirdparty sources">
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\Include\arm_math.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\Include\core_cm0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\Include\core_cmFunc.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\Include\core_cmInstr.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/thirdparty/CMSIS/Include' from include search path." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/thirdparty/CMSIS/Lib/GCC' from include search path." result="SUCCESS" resulttext="" />
+      <action description="Remove defined symbol 'ARM_MATH_CM0PLUS=true'." result="SUCCESS" resulttext="" />
+      <action description="Remove Assembler Flag '-DARM_MATH_CM0PLUS=true'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\Lib\GCC\libarm_cortexM0l_math.a'." result="SUCCESS" resulttext="" />
+      <action description="Remove library 'libarm_cortexM0l_math' from included libraries." result="SUCCESS" resulttext="" />
+      <action description="Remove '../src/ASF/thirdparty/CMSIS/Lib/GCC from library search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="CMSIS license">
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\CMSIS_END_USER_LICENCE_AGREEMENT.pdf'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\README.txt'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\ATMEL-disclaimer.txt'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\thirdparty\CMSIS\Lib\license.txt'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Syscalls for C library">
+      <action description="Delete framework file 'src\ASF\sam0\utils\syscalls\gcc\syscalls.c'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Interrupt management - SAM implementation">
+      <action description="Delete framework file 'src\ASF\common\utils\interrupt\interrupt_sam_nvic.c'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\common\utils\interrupt.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\common\utils\interrupt\interrupt_sam_nvic.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/common/utils' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Part identification macros">
+      <action description="Delete framework file 'src\ASF\common\utils\parts.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/common/utils' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 part definitions">
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\samb11zr.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\samb11g18a.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\samb11.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\btlc1000wlcsp.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/sam0/utils/cmsis/samb11/include' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 component definitions">
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\spi.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\uart.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\timer.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\gpio.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\aon_sleep_timer.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_rom.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_sysctrl.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\aon_pwr_seq.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\i2c.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\lp_clk_cal_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\aon_gp_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\wdt.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_bpu.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\efuse_misc_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\prov_dma_ctrl.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_dwt.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\lpmcu_misc_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\spi_flash.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\component\dualtimer.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 instance definitions">
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\spi0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\spi1.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\uart0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\aon_sleep_timer0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\uart1.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\gpio1.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\gpio2.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\gpio0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\dualtimer0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\prov_dma_ctrl0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\aon_gp_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\spi_flash0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\wdt0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\wdt1.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\efuse_misc_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_bpu0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\timer0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\lp_clk_cal_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_dwt0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_rom0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\aon_pwr_seq0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\i2c0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\i2c1.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\lpmcu_misc_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_sysctrl0.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 PIO definitions">
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\pio\samb11zr.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\pio\btlc1000wlcsp.h'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\utils\cmsis\samb11\include\pio\samb11g18a.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Generic board support">
+      <action description="Delete framework file 'src\ASF\common\boards\board.h'." result="SUCCESS" resulttext="" />
+      <action description="Remove folder '../src/ASF/common/boards' from include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+  </revert>
+  <revert versiontext="3.32.0" description="Reverting from version">
+    <moduleinfo name="CMSIS thirdparty sources">
+      <action description="Remove defined symbol 'ARM_MATH_CM0PLUS=true'." result="SUCCESS" resulttext="" />
+      <action description="Remove Assembler Flag '-DARM_MATH_CM0PLUS=true'." result="SUCCESS" resulttext="" />
+      <action description="Remove library 'libarm_cortexM0l_math' from included libraries." result="SUCCESS" resulttext="" />
+      <action description="Remove '../src/ASF/thirdparty/CMSIS/Lib/GCC from library search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+  </revert>
+  <update versiontext="3.33.0" description="Upgrading to version">
+    <moduleinfo name="SAM B11 Xplained Pro">
+      <action description="Import framework file as 'src\ASF\sam0\boards\samb11_xplained_pro\board_init.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\boards\samb11_xplained_pro\samb11_xplained_pro.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/boards/samb11_xplained_pro' to include search path." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/boards' to include search path." result="SUCCESS" resulttext="" />
+      <action description="Define symbol '__SAMB11G18A__'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'BOARD=SAMB11_XPLAINED_PRO'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-D__SAMB11G18A__'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DBOARD=SAMB11_XPLAINED_PRO'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 startup code">
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\source\gcc\startup_samb11.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/utils/cmsis/samb11/include' to include search path." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/utils/cmsis/samb11/source' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Common SAM0 compiler driver">
+      <action description="Import framework file as 'src\ASF\sam0\utils\compiler.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\header_files\io.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\status_codes.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/utils' to include search path." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/utils/header_files' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="sam0.utils.preprocessor">
+      <action description="Import framework file as 'src\ASF\sam0\utils\preprocessor\tpaste.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\preprocessor\mrepeat.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\preprocessor\mrecursion.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\preprocessor\preprocessor.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\preprocessor\stringz.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/utils/preprocessor' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Generic Makefile for SAM0 products">
+      <action description="Import framework file as 'src\ASF\sam0\utils\make\Makefile.sam.in'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="CMSIS thirdparty sources">
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\Include\arm_math.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\Include\core_cm0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\Include\core_cmFunc.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\Include\core_cmInstr.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/thirdparty/CMSIS/Include' to include search path." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/thirdparty/CMSIS/Lib/GCC' to include search path." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'ARM_MATH_CM0PLUS=true'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DARM_MATH_CM0PLUS=true'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\Lib\GCC\libarm_cortexM0l_math.a'." result="SUCCESS" resulttext="" />
+      <action description="Add library 'libarm_cortexM0l_math' to included libraries." result="SUCCESS" resulttext="" />
+      <action description="Add '../src/ASF/thirdparty/CMSIS/Lib/GCC' to library search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="CMSIS license">
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\CMSIS_END_USER_LICENCE_AGREEMENT.pdf'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\README.txt'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\ATMEL-disclaimer.txt'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\CMSIS\Lib\license.txt'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Syscalls for C library">
+      <action description="Import framework file as 'src\ASF\sam0\utils\syscalls\gcc\syscalls.c'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Interrupt management - SAM implementation">
+      <action description="Import framework file as 'src\ASF\common\utils\interrupt\interrupt_sam_nvic.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\common\utils\interrupt.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\common\utils\interrupt\interrupt_sam_nvic.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/common/utils' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Part identification macros">
+      <action description="Import framework file as 'src\ASF\common\utils\parts.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/common/utils' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 part definitions">
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\samb11zr.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\samb11g18a.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\samb11.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\btlc1000wlcsp.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/sam0/utils/cmsis/samb11/include' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 component definitions">
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\spi.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\uart.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\timer.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\gpio.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\aon_sleep_timer.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_rom.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_sysctrl.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\aon_pwr_seq.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\i2c.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\lp_clk_cal_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\aon_gp_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\wdt.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_bpu.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\efuse_misc_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\prov_dma_ctrl.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\arm_dwt.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\lpmcu_misc_regs.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\spi_flash.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\component\dualtimer.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 instance definitions">
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\spi0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\spi1.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\uart0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\aon_sleep_timer0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\uart1.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\gpio1.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\gpio2.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\gpio0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\dualtimer0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\prov_dma_ctrl0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\aon_gp_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\spi_flash0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\wdt0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\wdt1.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\efuse_misc_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_bpu0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\timer0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\lp_clk_cal_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_dwt0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_rom0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\aon_pwr_seq0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\i2c0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\i2c1.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\lpmcu_misc_regs0.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\instance\arm_sysctrl0.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SAMB11 PIO definitions">
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\pio\samb11zr.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\pio\btlc1000wlcsp.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\utils\cmsis\samb11\include\pio\samb11g18a.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="Generic board support">
+      <action description="Import framework file as 'src\ASF\common\boards\board.h'." result="SUCCESS" resulttext="" />
+      <action description="Add folder '../src/ASF/common/boards' to include search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+  </update>
+  <update versiontext="3.33.0" description="Upgrading to version">
+    <moduleinfo name="Aon Sleep Timer - Always-on Sleep Timer for SAMB">
+      <action description="Import framework file as 'src\ASF\sam0\drivers\aon_sleep_timer\aon_sleep_timer.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\aon_sleep_timer\quick_start\qs_aon_sleep_timer_basic.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\aon_sleep_timer\aon_sleep_timer.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE-Proximity Reporter Profile">
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_reporter\pxp_reporter.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_reporter\pxp_reporter.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'LLS_GATT_SERVER'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'IAS_GATT_SERVER'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'PROXIMITY_REPORTER'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'TXPS_GATT_SERVER'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DLLS_GATT_SERVER'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DIAS_GATT_SERVER'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DPROXIMITY_REPORTER'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DTXPS_GATT_SERVER'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE-Battery Services">
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\battery\battery.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\battery\battery.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'BATTERY_SERVICE'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DBATTERY_SERVICE'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE-Immediate Alert Services">
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\immediate_alert\immediate_alert.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\immediate_alert\immediate_alert.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'IMMEDIATE_ALERT_SERVICE'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DIMMEDIATE_ALERT_SERVICE'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE-Link Loss Services">
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\link_loss\link_loss.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\link_loss\link_loss.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'LINK_LOSS_SERVICE'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DLINK_LOSS_SERVICE'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE-Tx Power Services">
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\tx_power\tx_power.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\thirdparty\wireless\ble_smart_sdk\ble_services\tx_power\tx_power.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'TX_POWER_SERVICE'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DTX_POWER_SERVICE'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="I2C - Inter-Integrated Circuit for SAMB">
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\i2c_master.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\i2c_master_interrupt.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\i2c_master_interrupt.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\quick_start_master\qs_i2c_master_basic_use.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\i2c_master.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\i2c_common.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\i2c\quick_start_master_callback\qs_i2c_master_callback.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'I2C_MASTER_CALLBACK_MODE=true'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DI2C_MASTER_CALLBACK_MODE=true'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="SPI - Serial Peripheral Interface for SAMB">
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\spi.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\spi_callback.c'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\quick_start_master_callback\qs_spi_master_callback.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\quick_start_slave_callback\qs_spi_slave_callback.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\quick_start_slave\qs_spi_slave_basic.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\spi.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\spi_callback.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\ASF\sam0\drivers\spi\quick_start_master\qs_spi_master_basic.h'." result="SUCCESS" resulttext="" />
+      <action description="Import framework file as 'src\Config\conf_spi.h'." result="SUCCESS" resulttext="" />
+      <action description="Define symbol 'SPI_CALLBACK_MODE=true'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DSPI_CALLBACK_MODE=true'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE SMART SDK Lib">
+      <action description="Define symbol 'CHIPVERSION_B0'." result="SUCCESS" resulttext="" />
+      <action description="Add Assembler Flag '-DCHIPVERSION_B0'." result="SUCCESS" resulttext="" />
+      <action description="Add library 'libblusdk' to included libraries." result="SUCCESS" resulttext="" />
+      <action description="Add '../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc' to library search path." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE_SMART_STACK driver - dualtimer">
+      <action description="Import framework file as 'src\Config\conf_dualtimer.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+    <moduleinfo name="BLE_SMART_STACK driver - uart">
+      <action description="Import framework file as 'src\Config\conf_console_serial.h'." result="SUCCESS" resulttext="" />
+    </moduleinfo>
+  </update>
+</conversion>

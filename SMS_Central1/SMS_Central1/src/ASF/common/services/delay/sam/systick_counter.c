@@ -1,9 +1,9 @@
 /**
  * \file
  *
- * \brief Startup Template declarations
+ * \brief ARM functions for busy-wait delay loops
  *
- * Copyright (c) 2014-2016 Atmel Corporation. All rights reserved.
+ * Copyright (c) 2012-2015 Atmel Corporation. All rights reserved.
  *
  * \asf_license_start
  *
@@ -40,56 +40,55 @@
  * \asf_license_stop
  *
  */
-
 /*
- * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel
- * Support</a>
+ * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
  */
 
-#ifndef __SMS_CENTRAL_H__
-#define __SMS_CENTRAL_H__
-
-
-/* ------------------------------------------------
- * INCLUDE
- * ------------------------------------------------ */
-#include <asf.h>
-#include "platform.h"
-#include "at_ble_api.h"
-#include "console_serial.h"
-//#include "timer_hw.h"
-#include "ble_manager.h"
-#include "ble_utils.h"
-//#include "button.h"
-#include "pxp_monitor.h"
 #include "delay.h"
-/* SMS include */
-//#include "sms_common.h"
-#include "sms_button.h"
-#include "sms_spi.h"
-#include "sms_timer.h"
-#include "sms_led.h"
-#include "sms_ble.h"
 
+/**
+ * Value used to calculate ms delay. Default to be used with a 8MHz clock;
+ */
+static uint32_t cycles_per_ms = 8000000UL / 1000;
+static uint32_t cycles_per_us = 8000000UL / 1000000;
 
-/* ------------------------------------------------
- * MACROS
- * ------------------------------------------------ */
-/** @brief APP_FAST_ADV between 0x0020 and 0x4000 in 0.625 ms units (20ms to 10.24s). */
-#define APP_FAST_ADV						(1600)
+/**
+ * \brief Initialize the delay driver.
+ *
+ * This must be called during start up to initialize the delay routine with
+ * the current used main clock. It must run any time the main CPU clock is changed.
+ */
+void delay_init(void)
+{
+	cycles_per_ms = system_clock_get_value();
+	cycles_per_ms /= 1000;
+	cycles_per_us = cycles_per_ms / 1000;
 
-/** @brief APP_ADV_TIMEOUT Advertising time-out between 0x0001 and 0x028F in seconds, 0x0000 disables time-out.*/
-#define APP_ADV_TIMEOUT						(655)
+	SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk | SysTick_CTRL_ENABLE_Msk;
+}
 
+/**
+ * \brief Delay loop to delay at least n number of microseconds
+ *
+ * \param n  Number of microseconds to wait
+ */
+void delay_cycles_us(uint32_t n)
+{
+	while (n--) {
+		/* Divide up to blocks of 10u */
+		delay_cycles(cycles_per_us);
+	}
+}
 
-/* ------------------------------------------------
- * VARIABLES
- * ------------------------------------------------ */
-
-
-/* ------------------------------------------------
- * DECLARATIONS
- * ------------------------------------------------ */
-
-
-#endif /* __STARTUP_TEMPLATE_H__ */
+/**
+ * \brief Delay loop to delay at least n number of milliseconds
+ *
+ * \param n  Number of milliseconds to wait
+ */
+void delay_cycles_ms(uint32_t n)
+{
+	while (n--) {
+		/* Devide up to blocks of 1ms */
+		delay_cycles(cycles_per_ms);
+	}
+}

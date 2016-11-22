@@ -10,6 +10,7 @@
 /* AON SLEEP TIMER */
 void sms_timer_aon_callback(void)
 {
+    sms_current_interrupt.int_on = true;
     sms_current_interrupt.source = INT_AON_TIMER;
     send_plf_int_msg_ind(AON_SLEEP_TIMER_EXPIRY_CALLBACK, AON_TIMER_EXPIRED, NULL, 0);
 }
@@ -106,12 +107,14 @@ void sms_dualtimer_stop(enum dualtimer_timer tmr)
 
 void sms_dualtimer1_cb(void)
 {
+    sms_current_interrupt.int_on = true;
     sms_current_interrupt.source = INT_DUALTIMER1;
     send_plf_int_msg_ind(DUALTIMER_TIMER1_CALLBACK, TIMER_EXPIRED_CALLBACK_TYPE_DETECT, NULL, 0);
 }
 
 void sms_dualtimer2_cb(void)
 {
+    sms_current_interrupt.int_on = true;
     sms_current_interrupt.source = INT_DUALTIMER2;
     send_plf_int_msg_ind(DUALTIMER_TIMER2_CALLBACK, TIMER_EXPIRED_CALLBACK_TYPE_DETECT, NULL, 0);
 }

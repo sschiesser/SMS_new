@@ -1,4 +1,5 @@
-src/sms_central1.d src/sms_central1.o: ../src/sms_central1.c \
+src/sms_v_0_2/src/sms_spi.d src/sms_v_0_2/src/sms_spi.o: \
+ ../src/sms_v_0_2/src/sms_spi.c ../src/sms_v_0_2/inc/sms_spi.h \
  ../src/sms_central1.h ../src/asf.h ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\5.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
@@ -115,9 +116,10 @@ src/sms_central1.d src/sms_central1.o: ../src/sms_central1.c \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_monitor/pxp_monitor.h \
  ../src/ASF/common/services/delay/delay.h \
  ../src/ASF/common/services/delay/sam/systick_counter.h \
- ../src/sms_v_0_2/inc/sms_button.h ../src/sms_central1.h \
- ../src/sms_v_0_2/inc/sms_spi.h ../src/sms_v_0_2/inc/sms_timer.h \
+ ../src/sms_v_0_2/inc/sms_button.h ../src/sms_v_0_2/inc/sms_timer.h \
  ../src/sms_v_0_2/inc/sms_led.h ../src/sms_v_0_2/inc/sms_ble.h
+
+../src/sms_v_0_2/inc/sms_spi.h:
 
 ../src/sms_central1.h:
 
@@ -362,10 +364,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/common/services/delay/sam/systick_counter.h:
 
 ../src/sms_v_0_2/inc/sms_button.h:
-
-../src/sms_central1.h:
-
-../src/sms_v_0_2/inc/sms_spi.h:
 
 ../src/sms_v_0_2/inc/sms_timer.h:
 

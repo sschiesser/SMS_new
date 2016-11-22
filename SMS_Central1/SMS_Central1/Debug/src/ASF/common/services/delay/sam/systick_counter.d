@@ -1,5 +1,8 @@
-src/sms_central1.d src/sms_central1.o: ../src/sms_central1.c \
- ../src/sms_central1.h ../src/asf.h ../src/ASF/sam0/utils/compiler.h \
+src/ASF/common/services/delay/sam/systick_counter.d \
+ src/ASF/common/services/delay/sam/systick_counter.o: \
+ ../src/ASF/common/services/delay/sam/systick_counter.c \
+ ../src/ASF/common/services/delay/delay.h ../src/asf.h \
+ ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\5.3.1\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gcc\arm-none-eabi\5.3.1\include\stdint.h \
@@ -106,20 +109,9 @@ src/sms_central1.d src/sms_central1.o: ../src/sms_central1.c \
  ../src/ASF/common/services/serial/samb_uart/uart_serial.h \
  ../src/ASF/sam0/drivers/uart/uart.h \
  ../src/ASF/sam0/drivers/timer/timer.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
- ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_monitor/pxp_monitor.h \
- ../src/ASF/common/services/delay/delay.h \
- ../src/ASF/common/services/delay/sam/systick_counter.h \
- ../src/sms_v_0_2/inc/sms_button.h ../src/sms_central1.h \
- ../src/sms_v_0_2/inc/sms_spi.h ../src/sms_v_0_2/inc/sms_timer.h \
- ../src/sms_v_0_2/inc/sms_led.h ../src/sms_v_0_2/inc/sms_ble.h
+ ../src/ASF/common/services/delay/sam/systick_counter.h
 
-../src/sms_central1.h:
+../src/ASF/common/services/delay/delay.h:
 
 ../src/asf.h:
 
@@ -343,32 +335,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/timer/timer.h:
 
-../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
-
-../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_monitor/pxp_monitor.h:
-
-../src/ASF/common/services/delay/delay.h:
-
 ../src/ASF/common/services/delay/sam/systick_counter.h:
-
-../src/sms_v_0_2/inc/sms_button.h:
-
-../src/sms_central1.h:
-
-../src/sms_v_0_2/inc/sms_spi.h:
-
-../src/sms_v_0_2/inc/sms_timer.h:
-
-../src/sms_v_0_2/inc/sms_led.h:
-
-../src/sms_v_0_2/inc/sms_ble.h:

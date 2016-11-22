@@ -54,112 +54,72 @@
 /*- Includes ---------------------------------------------------------------*/
 #include "sms_central1.h"
 
-/* timer callback function */
-static void timer_callback_fn(void)
-{
-    DBG_LOG_DEV("[timer_callback_fn]");
-	/* Add timer callback functionality here */
-}
-
-static void button_cb(void)
-{
-    DBG_LOG_DEV("[button_cb]");
-	/* Add button callback functionality here */
-}
-
-/* AT_BLE_SCAN_REPORT (#2) */
-static at_ble_status_t sms_central_scan_report_fn(void *params)
-{
-    DBG_LOG_DEV("[sms_central_scan_report_fn]");
-	return AT_BLE_SUCCESS;
-}
-
-/* AT_BLE_CONNECTED (#5) */
-static at_ble_status_t sms_central_connected_fn(void *params)
-{
-    DBG_LOG_DEV("[sms_central_connected_fn]");
-    return AT_BLE_SUCCESS;
-}
-
-/* AT_BLE_DISCONNECTED (#7) */
-static at_ble_status_t sms_central_disconnected_fn(void *params)
-{
-    DBG_LOG_DEV("[sms_central_disconnected_fn]");
-    return AT_BLE_SUCCESS;
-}
-
-/* AT_BLE_PAIR_DONE (#9) */
-static at_ble_status_t sms_central_pair_done_fn(void *params)
-{
-    DBG_LOG_DEV("[sms_central_pair_done_fn]");
-    return AT_BLE_SUCCESS;
-}
-
-/* AT_BLE_ENCRYPTION_STATUS_CHANGED (#14) */
-static at_ble_status_t sms_central_encryption_status_changed_fn(void *params)
-{
-    DBG_LOG_DEV("[sms_central_encryption_status_changed_fn]");
-    return AT_BLE_SUCCESS;
-}
-
-static const ble_event_callback_t sms_central_gap_cb[] = {
-    NULL, // AT_BLE_UNDEFINED_EVENT
-    NULL, // AT_BLE_SCAN_INFO
-    sms_central_scan_report_fn,
-    NULL, // AT_BLE_ADV_REPORT
-    NULL, // AT_BLE_RAND_ADDR_CHANGED
-    sms_central_connected_fn, // AT_BLE_CONNECTED
-    sms_central_disconnected_fn, // AT_BLE_DISCONNECTED
-    NULL, // AT_BLE_CONN_PARAM_UPDATE_DONE
-    NULL, // AT_BLE_CONN_PARAM_UPDATE_REQUEST
-    sms_central_pair_done_fn, // AT_BLE_PAIR_DONE
-    NULL, // AT_BLE_PAIR_REQUEST
-    NULL, // AT_BLE_SLAVE_SEC_REQUEST
-    NULL, // AT_BLE_PAIR_KEY_REQUEST
-    NULL, // AT_BLE_ENCRYPTION_REQUEST
-    sms_central_encryption_status_changed_fn, // AT_BLE_ENCRYPTION_STATUS_CHANGED
-    NULL, // AT_BLE_RESOLV_RAND_ADDR_STATUS
-    NULL, // AT_BLE_SIGN_COUNTERS_IND
-    NULL, // AT_BLE_PEER_ATT_INFO_IND
-    NULL // AT_BLE_CON_CHANNEL_MAP_IND
-};
-
 int main(void)
 {
+    /* Initialize platform
+     * ------------------- */
 	platform_driver_init();
+	gpio_init();
+	serial_console_init();
+
+    /* Disable ULP
+     * ----------- */
 	acquire_sleep_lock();
 
-	/* Initialize serial console */
-	serial_console_init();
+    /* Initialize hardware components
+     * ------------------------------ */
+    // Dualtimer
+    sms_dualtimer_init();
 	
-	/* Hardware timer */
-	hw_timer_init();
-	
-	/* button initialization */
-	gpio_init();
-	button_init();
-	button_register_callback(button_cb);
-	
-	hw_timer_register_callback(timer_callback_fn);
+    // Blocking delay (hacked from other SAM platforms)
+    delay_init();
 
-	DBG_LOG("Initializing BLE Application");
-	
-	/* initialize the BLE chip  and Set the Device Address */
+	// Buttons
+    sms_button_configure_gpio();
+
+    // LED
+    sms_led_gpio_init();
+
+    // SPI
+    sms_spi_master_configure();
+
+    /* Initialize the BLE module
+     * ------------------------- */
+	DBG_LOG_DEV("Initializing BLE Application");	
 	ble_device_init(NULL);
 	
-    pxp_monitor_init(NULL);
+    /* Register callbacks
+     * ------------------ */
+    // Dualtimer
+    sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb);
+    sms_dualtimer_register_callback(DUALTIMER_TIMER2, sms_dualtimer2_cb);
+
+    // Buttons
+    sms_button_register_callbacks();
     
-    register_hw_timer_start_func_cb((hw_timer_start_func_cb_t)hw_timer_start);
-    register_hw_timer_start_func_cb(hw_timer_stop);
+    // BLE
+    ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
+    ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_CLIENT_EVENT_TYPE, sms_ble_gatt_client_cb);
+    //register_ble_user_event_cb(sms_plf_event_cb);
+
+    //pxp_monitor_init(NULL);
     
-	gap_dev_scan();
+    
+	//gap_dev_scan();
 	
 	while(true)
 	{
 		/* BLE Event task */
-		ble_event_task(BLE_EVENT_TIMEOUT);
+		//ble_event_task(BLE_EVENT_TIMEOUT);
 		
 		/* Write application task */
+        for(uint8_t i = 0; i < SPI_DATA_LENGTH; i++) {
+            spi_wdata[i] = (uint8_t)rand();
+            DBG_LOG_DEV("rand? %d %d", spi_wdata[i], spi_rdata[i]);
+        }
+        sms_spi_master_transceive(&spi_master_instance, &spi_slave_instance, spi_wdata, spi_rdata, SPI_DATA_LENGTH);
+        
+        delay_ms(1000);         
 	}
 
 }

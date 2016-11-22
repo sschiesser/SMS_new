@@ -320,12 +320,14 @@ void sms_button_toggle_interrupt(enum sms_btn_int_tog tog0, enum sms_btn_int_tog
 void sms_button_bt0_callback(void)
 {
     //gpio_disable_callback(SMS_BTN_0_PIN);
+    sms_current_interrupt.int_on = true;
     sms_current_interrupt.source = INT_BTN0;
     send_plf_int_msg_ind(btn0_instance.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
 }
 void sms_button_bt1_callback(void)
 {
     //gpio_disable_callback(SMS_BTN_1_PIN);
+    sms_current_interrupt.int_on = true;
     sms_current_interrupt.source = INT_BTN1;
     send_plf_int_msg_ind(btn1_instance.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
 }
