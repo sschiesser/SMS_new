@@ -98,6 +98,7 @@
 #include "ethernet.h"
 //#include "httpd.h"
 #include "udp.h"
+#include "conf_OSC.h"
 
 #define OSC_HEADER      ("/sabre/pressure\00,ii")
 #define OSC_HEADER_LEN  sizeof(OSC_HEADER)
@@ -169,7 +170,7 @@ static void udp_sender(struct udp_pcb *pcb)
     pbuf_free(pb);
 }
 
-static void udp_receiver(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port) {
+static void udp_receiver_echo(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port) {
     LWIP_UNUSED_ARG(arg);
     if(p == NULL) {
         return;
@@ -200,7 +201,6 @@ int main(void)
 
     struct ip_addr remote_ip;
     struct udp_pcb *pcb;
-    err_t err;
     char msg[100] = OSC_HEADER;
     struct pbuf *pb;
     
@@ -208,28 +208,16 @@ int main(void)
     
 
     pcb = udp_new();
-    //if((err = udp_bind(pcb, IP_ADDR_ANY, 11998)) != ERR_OK) {
-        //printf("Failed to bind to port 11998\n\r");
-    //}
-    //else {
-        //printf("UDP bound to port 11998\n\r");
-    //}
-    if((err = udp_connect(pcb, &remote_ip, 11999)) != ERR_OK) {
-        printf("Failed to connect to port 11999\n\r");
+    err_t err = ERR_CONN;
+    uint32_t snd_port = SMS_UDP_SEND_PORT1;
+    while(err != ERR_OK) {
+        if((err = udp_connect(pcb, &remote_ip, snd_port)) != ERR_OK) {
+            printf("Failed to connect to port %ld\n\r", snd_port);
+            snd_port
     }
     else {
-        printf("UDP connected to port 11999\n\r");
+        printf("UDP connected to port %ld\n\r", SMS_UDP_SEND_PORT1);
     }
-    //if((err = udp_bind(pcb, IP_ADDR_ANY, 6667)) != ERR_OK) {
-        //printf("Failed to bind to port 6667\n\r");
-    //}
-    //else {
-        //printf("UDP bound to port 6667\n\r");
-    //}
-    udp_recv(pcb, udp_receiver, pcb);
-
-	///* Bring up the web server. */
-	//httpd_init();
 
 	/* Program main loop. */
 	while (1) {

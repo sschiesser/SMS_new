@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      00000059  00000000  00000000  000208d2  2**0
                   CONTENTS, READONLY
-  7 .debug_info   0001a3c4  00000000  00000000  0002092b  2**0
+  7 .debug_info   0001a3c3  00000000  00000000  0002092b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00004de4  00000000  00000000  0003acef  2**0
+  8 .debug_abbrev 00004de4  00000000  00000000  0003acee  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000e26a  00000000  00000000  0003fad3  2**0
+  9 .debug_loc    0000e26a  00000000  00000000  0003fad2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00000ec0  00000000  00000000  0004dd3d  2**0
+ 10 .debug_aranges 00000ec0  00000000  00000000  0004dd3c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000f88  00000000  00000000  0004ebfd  2**0
+ 11 .debug_ranges 00000f88  00000000  00000000  0004ebfc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0002148a  00000000  00000000  0004fb85  2**0
+ 12 .debug_macro  00021d8a  00000000  00000000  0004fb84  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   0001991a  00000000  00000000  0007100f  2**0
+ 13 .debug_line   00019928  00000000  00000000  0007190e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    0006b793  00000000  00000000  0008a929  2**0
+ 14 .debug_str    0006b985  00000000  00000000  0008b236  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  000031a0  00000000  00000000  000f60bc  2**2
+ 15 .debug_frame  000031a0  00000000  00000000  000f6bbc  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -22146,7 +22146,6 @@ static inline void usart_serial_init(usart_if p_usart,
   40619e:	4648      	mov	r0, r9
   4061a0:	4b4d      	ldr	r3, [pc, #308]	; (4062d8 <main+0x1e4>)
   4061a2:	4798      	blx	r3
-	//httpd_init();
 
 	/* Program main loop. */
 	while (1) {
@@ -22170,7 +22169,7 @@ static inline void usart_serial_init(usart_if p_usart,
     	for(uint8_t i = 0; i < sizeof(msg); i++) {
         	printf("%c", msg[i]);
   4061ae:	4f4b      	ldr	r7, [pc, #300]	; (4062dc <main+0x1e8>)
-	//httpd_init();
+    udp_recv(pcb, udp_receiver, pcb);
 
 	/* Program main loop. */
 	while (1) {
@@ -27327,8 +27326,8 @@ static inline void usart_serial_init(usart_if p_usart,
   409678:	7761 4820 5454 2050 6142 6973 2063 7845     aw HTTP Basic Ex
   409688:	6d61 6c70 2065 2d2d 0a0d 2d2d 5320 4d41     ample --..-- SAM
   409698:	4534 582d 5250 204f 2d2d 0a0d 2d2d 4320     4E-XPRO --..-- C
-  4096a8:	6d6f 6970 656c 3a64 4e20 766f 3220 2038     ompiled: Nov 28 
-  4096b8:	3032 3631 3120 3a34 3334 353a 2039 2d2d     2016 14:43:59 --
+  4096a8:	6d6f 6970 656c 3a64 4e20 766f 3220 2039     ompiled: Nov 29 
+  4096b8:	3032 3631 3120 3a30 3330 303a 2032 2d2d     2016 10:03:02 --
   4096c8:	0a0d 0000 6146 6c69 6465 7420 206f 6f63     ....Failed to co
   4096d8:	6e6e 6365 2074 6f74 7020 726f 2074 3131     nnect to port 11
   4096e8:	3939 0a39 000d 0000 4455 2050 6f63 6e6e     999.....UDP conn

@@ -408,7 +408,6 @@ Discarded input sections
                 0x00000000        0x4 src/ASF/common/services/clock/sam4e/sysclk.o
  .bss.cpu_irq_prev_interrupt_state
                 0x00000000        0x1 src/ASF/common/services/clock/sam4e/sysclk.o
- .debug_macro   0x00000000      0x8aa src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_macro   0x00000000      0x64b src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_macro   0x00000000       0x28 src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_macro   0x00000000      0x16d src/ASF/common/services/clock/sam4e/sysclk.o
@@ -14859,6 +14858,7 @@ Discarded input sections
  .group         0x00000000        0x8 src/SMS_Gateway1.o
  .group         0x00000000        0x8 src/SMS_Gateway1.o
  .group         0x00000000        0x8 src/SMS_Gateway1.o
+ .group         0x00000000        0x8 src/SMS_Gateway1.o
  .text          0x00000000        0x0 src/SMS_Gateway1.o
  .data          0x00000000        0x0 src/SMS_Gateway1.o
  .bss           0x00000000        0x0 src/SMS_Gateway1.o
@@ -16489,7 +16489,7 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/network/timer_mgt.o
  .comment       0x00000059       0x5a src/SMS_Gateway1.o
 
-.debug_info     0x00000000    0x1a3c4
+.debug_info     0x00000000    0x1a3c3
  .debug_info    0x00000000     0x1c11 src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_info    0x00001c11      0x77a src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_info    0x0000238b      0x1e4 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -16525,7 +16525,7 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_info    0x00015f06     0x1d89 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
  .debug_info    0x00017c8f      0x6bc src/network/ethernet.o
  .debug_info    0x0001834b      0x897 src/network/timer_mgt.o
- .debug_info    0x00018be2     0x17e2 src/SMS_Gateway1.o
+ .debug_info    0x00018be2     0x17e1 src/SMS_Gateway1.o
 
 .debug_abbrev   0x00000000     0x4de4
  .debug_abbrev  0x00000000      0x1f9 src/ASF/sam/boards/sam4e_xplained_pro/init.o
@@ -16712,7 +16712,7 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_ranges  0x00000f08       0x28 src/network/timer_mgt.o
  .debug_ranges  0x00000f30       0x58 src/SMS_Gateway1.o
 
-.debug_macro    0x00000000    0x2148a
+.debug_macro    0x00000000    0x21d8a
  .debug_macro   0x00000000      0x612 src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_macro   0x00000612      0x8aa src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_macro   0x00000ebc      0x16d src/ASF/sam/boards/sam4e_xplained_pro/init.o
@@ -16839,105 +16839,107 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_macro   0x00011ae9       0x82 src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_macro   0x00011b6b       0x82 src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_macro   0x00011bed      0x5e0 src/ASF/common/services/clock/sam4e/sysclk.o
- .debug_macro   0x000121cd      0x2c0 src/ASF/common/services/clock/sam4e/sysclk.o
- .debug_macro   0x0001248d      0x55d src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_macro   0x000129ea      0x55d src/ASF/common/utils/stdio/read.o
- .debug_macro   0x00012f47      0x55d src/ASF/common/utils/stdio/write.o
- .debug_macro   0x000134a4      0x590 src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
- .debug_macro   0x00013a34      0x181 src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
- .debug_macro   0x00013bb5      0x12c src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
- .debug_macro   0x00013ce1       0x94 src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
- .debug_macro   0x00013d75      0x590 src/ASF/sam/drivers/gmac/gmac_phy.o
- .debug_macro   0x00014305       0x16 src/ASF/sam/drivers/gmac/gmac_phy.o
- .debug_macro   0x0001431b       0x8e src/ASF/sam/drivers/gmac/gmac_phy.o
- .debug_macro   0x000143a9      0x572 src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x0001491b       0x52 src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x0001496d      0x573 src/ASF/sam/drivers/tc/tc.o
- .debug_macro   0x00014ee0       0x4c src/ASF/sam/drivers/tc/tc.o
- .debug_macro   0x00014f2c       0x8d src/ASF/sam/drivers/tc/tc.o
- .debug_macro   0x00014fb9       0x16 src/ASF/sam/drivers/tc/tc.o
- .debug_macro   0x00014fcf       0x4a src/ASF/sam/drivers/tc/tc.o
- .debug_macro   0x00015019       0x1c src/ASF/sam/drivers/tc/tc.o
- .debug_macro   0x00015035      0x56c src/ASF/sam/drivers/uart/uart.o
- .debug_macro   0x000155a1       0x16 src/ASF/sam/drivers/uart/uart.o
- .debug_macro   0x000155b7      0x5a2 src/ASF/sam/drivers/usart/usart.o
- .debug_macro   0x00015b59       0x28 src/ASF/sam/drivers/usart/usart.o
- .debug_macro   0x00015b81      0x38f src/ASF/sam/utils/cmsis/sam4e/source/templates/exceptions.o
- .debug_macro   0x00015f10      0x576 src/ASF/sam/utils/cmsis/sam4e/source/templates/gcc/startup_sam4e.o
- .debug_macro   0x00016486       0x10 src/ASF/sam/utils/cmsis/sam4e/source/templates/gcc/startup_sam4e.o
- .debug_macro   0x00016496      0x39d src/ASF/sam/utils/cmsis/sam4e/source/templates/system_sam4e.o
- .debug_macro   0x00016833      0x19c src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x000169cf       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016a66       0xf6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016b5c       0x52 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016bae       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016bc4       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016bd4       0x41 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016c15      0x122 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x00016d37      0x5cc src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/def.o
- .debug_macro   0x00017303       0x52 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/def.o
- .debug_macro   0x00017355      0x681 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x000179d6       0x76 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017a4c       0x4f src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017a9b      0x175 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017c10       0x62 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017c72       0x5e src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017cd0       0x1c src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017cec      0x13b src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017e27       0x22 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017e49       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017e59       0x3a src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017e93      0x11c src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x00017faf      0x321 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
- .debug_macro   0x000182d0      0x62f src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/inet_chksum.o
- .debug_macro   0x000188ff       0x16 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/inet_chksum.o
- .debug_macro   0x00018915      0x6e5 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x00018ffa      0x135 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x0001912f       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x0001913f       0x64 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x000191a3       0x3d src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x000191e0       0xb2 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x00019292      0x1be src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x00019450       0x16 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
- .debug_macro   0x00019466      0x623 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
- .debug_macro   0x00019a89       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
- .debug_macro   0x00019a99       0x55 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
- .debug_macro   0x00019aee       0x56 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
- .debug_macro   0x00019b44      0x697 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_frag.o
- .debug_macro   0x0001a1db      0x6f7 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
- .debug_macro   0x0001a8d2       0x46 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
- .debug_macro   0x0001a918       0xbf src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
- .debug_macro   0x0001a9d7       0xac src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
- .debug_macro   0x0001aa83       0x16 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
- .debug_macro   0x0001aa99       0x86 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
- .debug_macro   0x0001ab1f      0x6b1 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_timers_141.o
- .debug_macro   0x0001b1d0       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_timers_141.o
- .debug_macro   0x0001b1e0      0x674 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/mem.o
- .debug_macro   0x0001b854      0x761 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/memp.o
- .debug_macro   0x0001bfb5       0x37 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/memp.o
- .debug_macro   0x0001bfec      0x122 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/memp.o
- .debug_macro   0x0001c10e      0x686 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/netif.o
- .debug_macro   0x0001c794      0x6a1 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/pbuf.o
- .debug_macro   0x0001ce35      0x6a9 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp.o
- .debug_macro   0x0001d4de      0x31b src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp.o
- .debug_macro   0x0001d7f9      0x1c4 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp.o
- .debug_macro   0x0001d9bd      0x67a src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp_in.o
- .debug_macro   0x0001e037      0x69b src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp_out.o
- .debug_macro   0x0001e6d2      0x6ab src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/udp.o
- .debug_macro   0x0001ed7d      0x6c7 src/ASF/thirdparty/lwip/lwip-1.4.1/src/netif/etharp.o
- .debug_macro   0x0001f444      0x74e src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
- .debug_macro   0x0001fb92       0x80 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
- .debug_macro   0x0001fc12      0x187 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
- .debug_macro   0x0001fd99      0x725 src/network/ethernet.o
- .debug_macro   0x000204be       0x10 src/network/ethernet.o
- .debug_macro   0x000204ce       0xdc src/network/ethernet.o
- .debug_macro   0x000205aa      0x672 src/network/timer_mgt.o
- .debug_macro   0x00020c1c       0x40 src/network/timer_mgt.o
- .debug_macro   0x00020c5c       0x6a src/network/timer_mgt.o
- .debug_macro   0x00020cc6      0x73c src/SMS_Gateway1.o
- .debug_macro   0x00021402       0x88 src/SMS_Gateway1.o
+ .debug_macro   0x000121cd      0x8aa src/ASF/common/services/clock/sam4e/sysclk.o
+ .debug_macro   0x00012a77      0x2c0 src/ASF/common/services/clock/sam4e/sysclk.o
+ .debug_macro   0x00012d37      0x55d src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_macro   0x00013294      0x55d src/ASF/common/utils/stdio/read.o
+ .debug_macro   0x000137f1      0x55d src/ASF/common/utils/stdio/write.o
+ .debug_macro   0x00013d4e      0x590 src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
+ .debug_macro   0x000142de      0x181 src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
+ .debug_macro   0x0001445f      0x12c src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
+ .debug_macro   0x0001458b       0x94 src/ASF/sam/components/ethernet_phy/ksz8051mnl/ethernet_phy.o
+ .debug_macro   0x0001461f      0x590 src/ASF/sam/drivers/gmac/gmac_phy.o
+ .debug_macro   0x00014baf       0x16 src/ASF/sam/drivers/gmac/gmac_phy.o
+ .debug_macro   0x00014bc5       0x8e src/ASF/sam/drivers/gmac/gmac_phy.o
+ .debug_macro   0x00014c53      0x572 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x000151c5       0x52 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x00015217      0x573 src/ASF/sam/drivers/tc/tc.o
+ .debug_macro   0x0001578a       0x4c src/ASF/sam/drivers/tc/tc.o
+ .debug_macro   0x000157d6       0x8d src/ASF/sam/drivers/tc/tc.o
+ .debug_macro   0x00015863       0x16 src/ASF/sam/drivers/tc/tc.o
+ .debug_macro   0x00015879       0x4a src/ASF/sam/drivers/tc/tc.o
+ .debug_macro   0x000158c3       0x1c src/ASF/sam/drivers/tc/tc.o
+ .debug_macro   0x000158df      0x56c src/ASF/sam/drivers/uart/uart.o
+ .debug_macro   0x00015e4b       0x16 src/ASF/sam/drivers/uart/uart.o
+ .debug_macro   0x00015e61      0x5a2 src/ASF/sam/drivers/usart/usart.o
+ .debug_macro   0x00016403       0x28 src/ASF/sam/drivers/usart/usart.o
+ .debug_macro   0x0001642b      0x38f src/ASF/sam/utils/cmsis/sam4e/source/templates/exceptions.o
+ .debug_macro   0x000167ba      0x576 src/ASF/sam/utils/cmsis/sam4e/source/templates/gcc/startup_sam4e.o
+ .debug_macro   0x00016d30       0x10 src/ASF/sam/utils/cmsis/sam4e/source/templates/gcc/startup_sam4e.o
+ .debug_macro   0x00016d40      0x39d src/ASF/sam/utils/cmsis/sam4e/source/templates/system_sam4e.o
+ .debug_macro   0x000170dd      0x19c src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00017279       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00017310       0xf6 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00017406       0x52 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x00017458       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001746e       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001747e       0x41 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000174bf      0x122 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x000175e1      0x5cc src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/def.o
+ .debug_macro   0x00017bad       0x52 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/def.o
+ .debug_macro   0x00017bff      0x681 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x00018280       0x76 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x000182f6       0x4f src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x00018345      0x175 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x000184ba       0x62 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x0001851c       0x5e src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x0001857a       0x1c src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x00018596      0x13b src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x000186d1       0x22 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x000186f3       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x00018703       0x3a src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x0001873d      0x11c src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x00018859      0x321 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/icmp.o
+ .debug_macro   0x00018b7a      0x62f src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/inet_chksum.o
+ .debug_macro   0x000191a9       0x16 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/inet_chksum.o
+ .debug_macro   0x000191bf      0x6e5 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x000198a4      0x135 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x000199d9       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x000199e9       0x64 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x00019a4d       0x3d src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x00019a8a       0xb2 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x00019b3c      0x1be src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x00019cfa       0x16 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip.o
+ .debug_macro   0x00019d10      0x623 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
+ .debug_macro   0x0001a333       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
+ .debug_macro   0x0001a343       0x55 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
+ .debug_macro   0x0001a398       0x56 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_addr.o
+ .debug_macro   0x0001a3ee      0x697 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/ipv4/ip_frag.o
+ .debug_macro   0x0001aa85      0x6f7 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
+ .debug_macro   0x0001b17c       0x46 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
+ .debug_macro   0x0001b1c2       0xbf src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
+ .debug_macro   0x0001b281       0xac src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
+ .debug_macro   0x0001b32d       0x16 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
+ .debug_macro   0x0001b343       0x86 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_init.o
+ .debug_macro   0x0001b3c9      0x6b1 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_timers_141.o
+ .debug_macro   0x0001ba7a       0x10 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/lwip_timers_141.o
+ .debug_macro   0x0001ba8a      0x674 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/mem.o
+ .debug_macro   0x0001c0fe      0x761 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/memp.o
+ .debug_macro   0x0001c85f       0x37 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/memp.o
+ .debug_macro   0x0001c896      0x122 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/memp.o
+ .debug_macro   0x0001c9b8      0x686 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/netif.o
+ .debug_macro   0x0001d03e      0x6a1 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/pbuf.o
+ .debug_macro   0x0001d6df      0x6a9 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp.o
+ .debug_macro   0x0001dd88      0x31b src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp.o
+ .debug_macro   0x0001e0a3      0x1c4 src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp.o
+ .debug_macro   0x0001e267      0x67a src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp_in.o
+ .debug_macro   0x0001e8e1      0x69b src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/tcp_out.o
+ .debug_macro   0x0001ef7c      0x6ab src/ASF/thirdparty/lwip/lwip-1.4.1/src/core/udp.o
+ .debug_macro   0x0001f627      0x6c7 src/ASF/thirdparty/lwip/lwip-1.4.1/src/netif/etharp.o
+ .debug_macro   0x0001fcee      0x74e src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
+ .debug_macro   0x0002043c       0x80 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
+ .debug_macro   0x000204bc      0x187 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
+ .debug_macro   0x00020643      0x725 src/network/ethernet.o
+ .debug_macro   0x00020d68       0x10 src/network/ethernet.o
+ .debug_macro   0x00020d78       0xdc src/network/ethernet.o
+ .debug_macro   0x00020e54      0x672 src/network/timer_mgt.o
+ .debug_macro   0x000214c6       0x40 src/network/timer_mgt.o
+ .debug_macro   0x00021506       0x6a src/network/timer_mgt.o
+ .debug_macro   0x00021570      0x746 src/SMS_Gateway1.o
+ .debug_macro   0x00021cb6       0x88 src/SMS_Gateway1.o
+ .debug_macro   0x00021d3e       0x4c src/SMS_Gateway1.o
 
-.debug_line     0x00000000    0x1991a
+.debug_line     0x00000000    0x19928
  .debug_line    0x00000000      0xbb5 src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_line    0x00000bb5      0xa2e src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_line    0x000015e3      0x8f8 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -16973,9 +16975,9 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_line    0x00016586      0xde1 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
  .debug_line    0x00017367      0xc7d src/network/ethernet.o
  .debug_line    0x00017fe4      0xb5b src/network/timer_mgt.o
- .debug_line    0x00018b3f      0xddb src/SMS_Gateway1.o
+ .debug_line    0x00018b3f      0xde9 src/SMS_Gateway1.o
 
-.debug_str      0x00000000    0x6b793
+.debug_str      0x00000000    0x6b985
  .debug_str     0x00000000    0x5d32d src/ASF/sam/boards/sam4e_xplained_pro/init.o
                               0x5d8a6 (size before relaxing)
  .debug_str     0x0005d32d      0x2c0 src/ASF/common/services/clock/sam4e/sysclk.o
@@ -17046,8 +17048,8 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
                               0x6366b (size before relaxing)
  .debug_str     0x0006b11f       0x57 src/network/timer_mgt.o
                               0x5feee (size before relaxing)
- .debug_str     0x0006b176      0x61d src/SMS_Gateway1.o
-                              0x61b41 (size before relaxing)
+ .debug_str     0x0006b176      0x80f src/SMS_Gateway1.o
+                              0x61d33 (size before relaxing)
 
 .debug_frame    0x00000000     0x31a0
  .debug_frame   0x00000000       0x2c src/ASF/sam/boards/sam4e_xplained_pro/init.o

@@ -46,6 +46,15 @@
 
 #include "gmac.h"
 
+#define SMS_UDP_SEND_PORT1                          11999
+#define SMS_UDP_SEND_PORT2                          12000
+#define SMS_UDP_SEND_PORT3                          12001
+#define SMS_UDP_SEND_PORT4                          12002
+#define SMS_UDP_RCV_PORT1                           12999
+#define SMS_UDP_RCV_PORT2                           13000
+#define SMS_UDP_RCV_PORT3                           13001
+#define SMS_UDP_RCV_PORT4                           13002
+
 /**
  * LWIP_NETIF_TX_SINGLE_PBUF: if this is set to 1, lwIP tries to put all data
  * to be sent into one single pbuf. This is for compatibility with DMA-enabled
