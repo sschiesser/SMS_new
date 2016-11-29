@@ -237,21 +237,25 @@ int main(void)
         static uint8_t batt = 0;
         static uint32_t d1, d2, d3 = 0;
     	pb = pbuf_alloc(PBUF_TRANSPORT, SMS_OSC_MSG_MAX_LEN, PBUF_POOL);
-        uint8_t hdr_len = sizeof(SMS_OSC_ADDR_ACCEL(0));
-        memcpy(msg, SMS_OSC_ADDR_ACCEL(0), hdr_len);
-        msg[hdr_len] = (uint8_t)(ax & 0xff);
-        msg[hdr_len + 1] = (uint8_t)((ax >> 8) & 0xff);
-        msg[hdr_len + 2] = (uint8_t)(ay & 0xff);
-        msg[hdr_len + 3] = (uint8_t)((ay >> 8) & 0xff);
-        msg[hdr_len + 4] = (uint8_t)(az & 0xff);
-        msg[hdr_len + 5] = (uint8_t)((az >> 8) & 0xff);
-        msg[hdr_len + 6] = (uint8_t)(asum & 0xff);
-        msg[hdr_len + 7] = (uint8_t)((asum >> 8) & 0xff);
-        msg[hdr_len + 8] = SMS_OSC_TERMINATION;
-        memcpy(pb->payload, msg, (hdr_len + 9));
+        uint8_t pos = sizeof(SMS_OSC_ADDR_ACCEL(0));
+        memcpy(msg, SMS_OSC_ADDR_ACCEL(0), pos);
+        for(uint8_t i = 0; i < 4; i++) {
+            msg[pos++] = (uint8_t)((ax >> (8*i)) & 0xff);
+        }
+        for(uint8_t i = 0; i < 4; i++) {
+            msg[pos++] = (uint8_t)((ay >> (8*i)) & 0xff);
+        }
+        for(uint8_t i = 0; i < 4; i++) {
+            msg[pos++] = (uint8_t)((az >> (8*i)) & 0xff);
+        }
+        for(uint8_t i = 0; i < 4; i++) {
+            msg[pos++] = (uint8_t)((asum >> (8*i)) & 0xff);
+        }
+        msg[pos] = SMS_OSC_TERMINATION;
+        memcpy(pb->payload, msg, (pos + 1));
     	
     	printf("Sending to %d.%d.%d.%d on port 11999: ", (remote_ip.addr & 0xff), ((remote_ip.addr >> 8) & 0xff), ((remote_ip.addr >> 16) & 0xff), ((remote_ip.addr >> 24) & 0xff));
-    	for(uint8_t i = 0; i < (hdr_len + 9); i++) {
+    	for(uint8_t i = 0; i < (pos + 1); i++) {
         	printf("%c", msg[i]);
     	}
     	printf("\n\r");
