@@ -228,7 +228,10 @@ int main(void)
     	
         ////////////////////////////////////////////////
         struct pbuf *pb;
-        static int16_t ax, ay, az, asum = 1234;
+        static uint32_t ax = 0;
+        static uint32_t ay = 1000;
+        static uint32_t az = 2000;
+        static uint32_t asum = 3000;
         static int16_t gx, gy, gz, gsum = 0;
         static int16_t head, pitch = 0;
         static int32_t q1, q2, q3, q4 = 0;
@@ -237,22 +240,28 @@ int main(void)
         static uint8_t batt = 0;
         static uint32_t d1, d2, d3 = 0;
     	pb = pbuf_alloc(PBUF_TRANSPORT, SMS_OSC_MSG_MAX_LEN, PBUF_POOL);
-        uint8_t pos = sizeof(SMS_OSC_ADDR_ACCEL(0));
-        memcpy(msg, SMS_OSC_ADDR_ACCEL(0), pos);
+        //uint8_t pos = sizeof(SMS_OSC_ADDR_ACCEL(0));
+        //memcpy(msg, SMS_OSC_ADDR_ACCEL(0), pos);
+        uint8_t pos = 30;
+        memcpy(msg, "/sabre/'1'/pressure\0000,iiii", pos);
         for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((ax >> (8*i)) & 0xff);
+            msg[pos++] = (uint8_t)((ax >> (8*(3-i))) & 0xff);
         }
         for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((ay >> (8*i)) & 0xff);
+            msg[pos++] = (uint8_t)((ay >> (8*(3-i))) & 0xff);
         }
         for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((az >> (8*i)) & 0xff);
+            msg[pos++] = (uint8_t)((az >> (8*(3-i))) & 0xff);
         }
         for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((asum >> (8*i)) & 0xff);
+            msg[pos++] = (uint8_t)((asum >> (8*(3-i))) & 0xff);
         }
         msg[pos] = SMS_OSC_TERMINATION;
         memcpy(pb->payload, msg, (pos + 1));
+        ax++;
+        ay++;
+        az++;
+        asum++;
     	
     	printf("Sending to %d.%d.%d.%d on port 11999: ", (remote_ip.addr & 0xff), ((remote_ip.addr >> 8) & 0xff), ((remote_ip.addr >> 16) & 0xff), ((remote_ip.addr >> 24) & 0xff));
     	for(uint8_t i = 0; i < (pos + 1); i++) {

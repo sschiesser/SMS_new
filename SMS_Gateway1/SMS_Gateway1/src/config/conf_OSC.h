@@ -21,7 +21,8 @@
 #define STR_HELPER(x)                   #x
 #define STR(x)                          STR_HELPER(x)
 /* OSC addresses, with device instance numbers */
-#define SMS_OSC_ADDR_ACCEL(x)           "/sms/" STR(x) "/mpu/accel\0,iiii" //x, y, z, sum
+#define SMS_OSC_ADDR_ACCEL(x)           "/sms/pressure\0,iiii"
+//#define SMS_OSC_ADDR_ACCEL(x)           "/sms/" STR(x) "/mpu/accel\0,iiii" //x, y, z, sum
 #define SMS_OSC_ADDR_GYRO(x)            "/sms/" STR(x) "/mpu/gyro\0,iiii" //x, y, z, sum
 #define SMS_OSC_ADDR_JOYSTICK(x)        "/sms/" STR(x) "/mpu/joystick\0,ii" //heading, pitch
 #define SMS_OSC_ADDR_AHRS(x)            "/sms/" STR(x) "/mpu/ahrs\0,iiii" //4 quaternions
