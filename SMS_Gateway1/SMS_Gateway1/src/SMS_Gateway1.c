@@ -367,8 +367,9 @@ void SPI_Handler(void)
 	uint32_t new_cmd = 0;
 	static uint16_t data;
 	uint8_t uc_pcs;
+	static uint16_t cnt = 0;
 
-	printf("SPI message received\n\r");
+	printf("SPI message received #%d\n\r", cnt++);
 
 	if (spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
 		spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
