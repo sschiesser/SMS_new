@@ -68,7 +68,7 @@
  * LWIP_RAW==1: Enable application layer to hook into the IP layer itself.
  * Used to implement custom transport protocol (!= than Raw API).
  */
-#define LWIP_RAW                  	0
+#define LWIP_RAW                  	1
 
 /**
  * SYS_LIGHTWEIGHT_PROT==1: if you want inter-task protection for certain

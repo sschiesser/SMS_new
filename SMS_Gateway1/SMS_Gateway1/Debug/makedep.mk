@@ -102,6 +102,8 @@ src\ASF\thirdparty\lwip\lwip-1.4.1\src\core\udp.c
 
 src\ASF\thirdparty\lwip\lwip-1.4.1\src\netif\etharp.c
 
+src\ASF\thirdparty\lwip\lwip-port-1.4.1\ping\ping.c
+
 src\ASF\thirdparty\lwip\lwip-port-1.4.1\sam\netif\sam4e_gmac.c
 
 src\network\ethernet.c

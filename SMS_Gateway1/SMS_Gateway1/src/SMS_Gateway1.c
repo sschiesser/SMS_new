@@ -99,6 +99,7 @@
 #include "ethernet.h"
 //#include "httpd.h"
 #include "udp.h"
+#include "ping.h"
 #include "conf_OSC.h"
 
 #define OSC_HEADER      ("/sabre/pressure\00,ii")
@@ -107,6 +108,7 @@
 #define STRING_HEADER "-- Raw HTTP Basic Example --"STRING_EOL \
 		"-- "BOARD_NAME" --"STRING_EOL \
 		"-- Compiled: "__DATE__" "__TIME__" --"STRING_EOL
+
 
 /**
  *  \brief Configure UART console.
@@ -199,14 +201,26 @@ int main(void)
 
 	/* Bring up the ethernet interface & initialize timer0, channel0. */
 	init_ethernet();
+	//printf("Default netif: 0x%x\n\r", netif_default->ip_addr.addr);
 
-    struct ip_addr remote_ip;
+	//TODO LATER: ping the 169.254.x.x range to find the communication partner
+	//ping_init();
+	//while(1) {
+		//ping_send_now();
+		//
+		//uint32_t i = 100000000;
+		//while(i > 0) {
+			//i--;
+		//};
+	//};
+
+    struct ip_addr remote_ip, broadcast_ip;
     struct udp_pcb *pcb;
     char msg[100];
-    IP4_ADDR(&remote_ip, 169, 254, 14, 49);
-    
-
+    IP4_ADDR(&remote_ip, 169, 254, 206, 139);
+	
     pcb = udp_new();
+
     err_t err = ERR_CONN;
     uint32_t snd_port = SMS_UDP_SEND_PORT1;
     while(err != ERR_OK) {
@@ -239,11 +253,10 @@ int main(void)
         static int16_t p1, p2 = 0;
         static uint8_t batt = 0;
         static uint32_t d1, d2, d3 = 0;
-    	pb = pbuf_alloc(PBUF_TRANSPORT, SMS_OSC_MSG_MAX_LEN, PBUF_POOL);
         //uint8_t pos = sizeof(SMS_OSC_ADDR_ACCEL(0));
         //memcpy(msg, SMS_OSC_ADDR_ACCEL(0), pos);
-        uint8_t pos = 30;
-        memcpy(msg, "/sabre/'1'/pressure\0000,iiii", pos);
+        uint8_t pos = 28;
+        memcpy(msg, "sabre/1/pressure\0\0\0\0,iiii\0\0", pos);
         for(uint8_t i = 0; i < 4; i++) {
             msg[pos++] = (uint8_t)((ax >> (8*(3-i))) & 0xff);
         }
@@ -256,8 +269,9 @@ int main(void)
         for(uint8_t i = 0; i < 4; i++) {
             msg[pos++] = (uint8_t)((asum >> (8*(3-i))) & 0xff);
         }
-        msg[pos] = SMS_OSC_TERMINATION;
-        memcpy(pb->payload, msg, (pos + 1));
+    	pb = pbuf_alloc(PBUF_TRANSPORT, (pos), PBUF_POOL);
+        //msg[pos] = SMS_OSC_TERMINATION;
+        memcpy(pb->payload, msg, (pos));
         ax++;
         ay++;
         az++;
