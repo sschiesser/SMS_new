@@ -363,7 +363,7 @@
   <Value>NDEBUG</Value>
   <Value>BOARD=SAM4E_EK</Value>
 </ListValues></armgcc.compiler.symbols.DefSymbols>
-  <armgcc.compiler.directories.IncludePaths><ListValues><Value>../src</Value><Value>../src/network/httpserver</Value><Value>../src/network</Value><Value>../src/ASF/sam/utils/cmsis/sam4e/include</Value><Value>../src/ASF/sam/utils/cmsis/sam4e/source/templates</Value><Value>../src/ASF/sam/components/ethernet_phy/ksz8051mnl</Value><Value>../src/ASF/sam/drivers/gmac</Value><Value>../src/ASF/sam/utils</Value><Value>../src/ASF/sam/utils/header_files</Value><Value>../src/ASF/sam/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/sam/utils/fpu</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/sam/drivers/uart</Value><Value>../src/ASF/common/services/ioport</Value><Value>../src/ASF/common/services/clock</Value><Value>../src/ASF/sam/drivers/pmc</Value><Value>../src/ASF/common/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial/sam_uart</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam/drivers/usart</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4</Value><Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/include</Value><Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/include/netif</Value><Value>../src/ASF/sam/drivers/tc</Value><Value>../src/ASF/sam/boards/sam4e_ek</Value><Value>../src/ASF/sam/boards</Value><Value>../src/ASF/common/boards</Value><Value>../src/config</Value><Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/ping</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip</Value></ListValues></armgcc.compiler.directories.IncludePaths>
+  <armgcc.compiler.directories.IncludePaths><ListValues><Value>../src</Value><Value>../src/network/httpserver</Value><Value>../src/network</Value><Value>../src/ASF/sam/utils/cmsis/sam4e/include</Value><Value>../src/ASF/sam/utils/cmsis/sam4e/source/templates</Value><Value>../src/ASF/sam/components/ethernet_phy/ksz8051mnl</Value><Value>../src/ASF/sam/drivers/gmac</Value><Value>../src/ASF/sam/utils</Value><Value>../src/ASF/sam/utils/header_files</Value><Value>../src/ASF/sam/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/sam/utils/fpu</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/sam/drivers/uart</Value><Value>../src/ASF/common/services/ioport</Value><Value>../src/ASF/common/services/clock</Value><Value>../src/ASF/sam/drivers/pmc</Value><Value>../src/ASF/common/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial/sam_uart</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam/drivers/usart</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4</Value><Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/include</Value><Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/include/netif</Value><Value>../src/ASF/sam/drivers/tc</Value><Value>../src/ASF/sam/boards/sam4e_ek</Value><Value>../src/ASF/sam/boards</Value><Value>../src/ASF/common/boards</Value><Value>../src/config</Value><Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/ping</Value><Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip</Value><Value>../src/ASF/thirdparty/OSC/inc/OSC</Value></ListValues></armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
@@ -431,6 +431,7 @@
   <Value>../src/config</Value>
   <Value>../src/ASF/thirdparty/lwip/lwip-port-1.4.1/ping</Value>
   <Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip</Value>
+  <Value>../src/ASF/thirdparty/OSC/inc/OSC</Value>
   <Value>../src/ASF/sam/boards/sam4e_xplained_pro</Value>
 </ListValues></armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
@@ -529,6 +530,11 @@
     <Folder Include="src\ASF\thirdparty\lwip\lwip-port-1.4.1\sam\include\arch\" />
     <Folder Include="src\ASF\thirdparty\lwip\lwip-port-1.4.1\sam\include\netif\" />
     <Folder Include="src\ASF\thirdparty\lwip\lwip-port-1.4.1\sam\netif\" />
+    <Folder Include="src\ASF\thirdparty\OSC" />
+    <Folder Include="src\ASF\thirdparty\OSC\inc" />
+    <Folder Include="src\ASF\thirdparty\OSC\inc\OSC" />
+    <Folder Include="src\ASF\thirdparty\OSC\src" />
+    <Folder Include="src\ASF\thirdparty\OSC\src\OSC" />
     <Folder Include="src\config\" />
     <Folder Include="src\network\" />
     <Folder Include="src\network\httpserver\" />
@@ -1327,6 +1333,36 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\thirdparty\lwip\lwip-port-1.4.1\sam\netif\sam4e_gmac.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\inc\OSC\OSC.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\inc\OSC\OSCBundle.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\inc\OSC\OSCMessage.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\inc\OSC\OSCMisc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\inc\OSC\OSCPacketStream.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\inc\OSC\OSCServer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\src\OSC\OSCBundle.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\src\OSC\OSCMessage.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\src\OSC\OSCMisc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\OSC\src\OSC\OSCServer.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\config\conf_OSC.h">

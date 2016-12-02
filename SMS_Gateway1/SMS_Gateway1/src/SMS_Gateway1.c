@@ -101,6 +101,7 @@
 #include "udp.h"
 #include "ping.h"
 #include "conf_OSC.h"
+#include "OSCMessage.h"
 
 #define OSC_HEADER      ("/sabre/pressure\00,ii")
 #define OSC_HEADER_LEN  sizeof(OSC_HEADER)
@@ -109,6 +110,31 @@
 		"-- "BOARD_NAME" --"STRING_EOL \
 		"-- Compiled: "__DATE__" "__TIME__" --"STRING_EOL
 
+OSCPacketStream osc_stream;
+struct ip_addr remote_ip, broadcast_ip;
+struct udp_pcb *pcb;
+
+void osc_write(uint8_t *buf, uint32_t size) {
+	err_t err;
+	struct pbuf *pb = pbuf_alloc(PBUF_TRANSPORT, size, PBUF_RAM);
+	memcpy(pb->payload, buf, size);
+    
+    err = udp_send(pcb, pb);
+    if(err == ERR_MEM) {
+	    printf("ERROR: out of memory\n\r");
+    }
+    else if(err == ERR_RTE) {
+	    printf("ERROR: route not found\n\r");
+    }
+    else if(err != ERR_OK) {
+	    printf("ERROR: %d\n\r", err);
+    }
+    else {
+	    printf("Packet sent!\n\r");
+    }
+    
+    pbuf_free(pb);
+}
 
 /**
  *  \brief Configure UART console.
@@ -173,15 +199,15 @@ static void configure_console(void)
     //pbuf_free(pb);
 //}
 
-static void udp_receiver_echo(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port) {
-    LWIP_UNUSED_ARG(arg);
-    if(p == NULL) {
-        return;
-    }
-    printf("Sending back to %d.%d.%d.%d on port 11999\n\r", ((addr->addr >> 0) & 0xff), ((addr->addr >> 8) & 0xff), ((addr->addr >> 16) & 0xff), ((addr->addr >> 24) & 0xff));
-    udp_sendto(pcb, p, addr, 11999);
-    pbuf_free(p);
-}
+//static void udp_receiver_echo(void *arg, struct udp_pcb *pcb, struct pbuf *p, struct ip_addr *addr, u16_t port) {
+    //LWIP_UNUSED_ARG(arg);
+    //if(p == NULL) {
+        //return;
+    //}
+    //printf("Sending back to %ld.%ld.%ld.%ld on port 11999\n\r", ((addr->addr >> 0) & 0xff), ((addr->addr >> 8) & 0xff), ((addr->addr >> 16) & 0xff), ((addr->addr >> 24) & 0xff));
+    //udp_sendto(pcb, p, addr, 11999);
+    //pbuf_free(p);
+//}
 
 /**
  * \brief Main program function. Configure the hardware, initialize lwIP
@@ -214,8 +240,6 @@ int main(void)
 		//};
 	//};
 
-    struct ip_addr remote_ip, broadcast_ip;
-    struct udp_pcb *pcb;
     char msg[100];
     IP4_ADDR(&remote_ip, 169, 254, 206, 139);
 	
@@ -235,72 +259,34 @@ int main(void)
     
     printf("Current sysclk: %ld\n\r", sysclk_get_cpu_hz());
     
+	osc_stream.writePacket = &osc_write;
+
 	/* Program main loop. */
 	while (1) {
     	/* Check for input packet and process it. */
     	ethernet_task();
     	
         ////////////////////////////////////////////////
-        struct pbuf *pb;
+        //struct pbuf *pb;
         static uint32_t ax = 0;
         static uint32_t ay = 1000;
         static uint32_t az = 2000;
         static uint32_t asum = 3000;
-        static int16_t gx, gy, gz, gsum = 0;
-        static int16_t head, pitch = 0;
-        static int32_t q1, q2, q3, q4 = 0;
-        static int32_t press = 0;
-        static int16_t p1, p2 = 0;
-        static uint8_t batt = 0;
-        static uint32_t d1, d2, d3 = 0;
-        //uint8_t pos = sizeof(SMS_OSC_ADDR_ACCEL(0));
-        //memcpy(msg, SMS_OSC_ADDR_ACCEL(0), pos);
-        uint8_t pos = 28;
-        memcpy(msg, "sabre/1/pressure\0\0\0\0,iiii\0\0", pos);
-        for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((ax >> (8*(3-i))) & 0xff);
-        }
-        for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((ay >> (8*(3-i))) & 0xff);
-        }
-        for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((az >> (8*(3-i))) & 0xff);
-        }
-        for(uint8_t i = 0; i < 4; i++) {
-            msg[pos++] = (uint8_t)((asum >> (8*(3-i))) & 0xff);
-        }
-    	pb = pbuf_alloc(PBUF_TRANSPORT, (pos), PBUF_POOL);
-        //msg[pos] = SMS_OSC_TERMINATION;
-        memcpy(pb->payload, msg, (pos));
-        ax++;
-        ay++;
-        az++;
-        asum++;
-    	
-    	printf("Sending to %d.%d.%d.%d on port 11999: ", (remote_ip.addr & 0xff), ((remote_ip.addr >> 8) & 0xff), ((remote_ip.addr >> 16) & 0xff), ((remote_ip.addr >> 24) & 0xff));
-    	for(uint8_t i = 0; i < (pos + 1); i++) {
-        	printf("%c", msg[i]);
-    	}
-    	printf("\n\r");
-    	
-    	err = udp_send(pcb, pb);
-        
-    	if(err == ERR_MEM) {
-        	printf("ERROR: out of memory\n\r");
-    	}
-    	else if(err == ERR_RTE) {
-        	printf("ERROR: route not found\n\r");
-    	}
-    	else if(err != ERR_OK) {
-        	printf("ERROR: %d\n\r", err);
-    	}
-    	else {
-        	printf("Packet sent!\n\r");
-    	}
-    	
-    	pbuf_free(pb);
-        
-    	uint32_t i = 10000000;
+		OSCMessage *osc_msg = OSCMessage_new();
+		OSCMessage_setAddress(osc_msg, "sabre/1/button/4/service/merci");
+		OSCMessage_addArgument_int32(osc_msg, ax);
+		OSCMessage_addArgument_int32(osc_msg, ay);
+		OSCMessage_addArgument_int32(osc_msg, az);
+		OSCMessage_addArgument_int32(osc_msg, asum);
+		OSCMessage_sendMessage(osc_msg, &osc_stream);
+		OSCMessage_delete(osc_msg);
+
+		ax++;
+		ay++;
+		az++;
+		asum++;
+
+    	uint32_t i = 5000000;
     	while(i > 0) {
         	i--;
     	};

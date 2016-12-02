@@ -106,6 +106,14 @@ src\ASF\thirdparty\lwip\lwip-port-1.4.1\ping\ping.c
 
 src\ASF\thirdparty\lwip\lwip-port-1.4.1\sam\netif\sam4e_gmac.c
 
+src\ASF\thirdparty\OSC\src\OSC\OSCBundle.c
+
+src\ASF\thirdparty\OSC\src\OSC\OSCMessage.c
+
+src\ASF\thirdparty\OSC\src\OSC\OSCMisc.c
+
+src\ASF\thirdparty\OSC\src\OSC\OSCServer.c
+
 src\network\ethernet.c
 
 src\network\httpserver\fs.c
