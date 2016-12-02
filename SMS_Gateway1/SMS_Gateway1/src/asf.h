@@ -97,19 +97,14 @@
 // From module: SAM4E startup code
 #include <exceptions.h>
 
-// From module: Stand-alone port(no OS) of the lwIP v141 stack on SAM hardware module.
-#include <arch/cc.h>
-#include <arch/perf.h>
-#include <sam4e_gmac.h>
+// From module: SPI - Serial Peripheral Interface
+#include <spi.h>
 
 // From module: Standard serial I/O (stdio) - SAM implementation
 #include <stdio_serial.h>
 
 // From module: System Clock Control - SAM4E implementation
 #include <sysclk.h>
-
-// From module: TC - Timer Counter
-#include <tc.h>
 
 // From module: UART - Univ. Async Rec/Trans
 #include <uart.h>

@@ -45,6 +45,9 @@
 /* Configure UART pins */
 #define CONF_BOARD_UART_CONSOLE
 
+/** Usart Hw ID used by the console (UART0). */
+#define CONSOLE_UART_ID          ID_UART0
+
 /* Configure ADC example pins */
 //#define CONF_BOARD_ADC
 
@@ -58,11 +61,18 @@
 //#define CONF_BOARD_PWM_LED2
 
 /* Configure SPI pins */
-//#define CONF_BOARD_SPI
-//#define CONF_BOARD_SPI_NPCS0
+#define CONF_BOARD_SPI
+#define CONF_BOARD_SPI_NPCS0
 //#define CONF_BOARD_SPI_NPCS1
 //#define CONF_BOARD_SPI_NPCS2
 //#define CONF_BOARD_SPI_NPCS3
+/** Spi Hw ID . */
+#define SPI_ID          ID_SPI
+
+/** SPI base address for SPI master mode*/
+#define SPI_MASTER_BASE      SPI
+/** SPI base address for SPI slave mode, (on different board) */
+#define SPI_SLAVE_BASE       SPI
 
 /* Configure USART RXD pin */
 //#define CONF_BOARD_USART_RXD
@@ -105,5 +115,6 @@
 
 /* Enable ETH PHY: KSZ8051MNL feature */
 #define CONF_BOARD_KSZ8051MNL
+
 
 #endif // CONF_BOARD_H
