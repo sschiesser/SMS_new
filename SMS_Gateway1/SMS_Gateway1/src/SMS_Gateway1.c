@@ -277,87 +277,87 @@ static void spi_slave_transfer(void *p_buf, uint32_t size)
 	spi_write(SPI_SLAVE_BASE, gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
 }
 
-/**
- * \brief  SPI command block process.
- */
-static void spi_slave_command_process(void)
-{
-	if (gs_ul_spi_cmd == CMD_END) {
-		gs_ul_spi_state = SLAVE_STATE_IDLE;
-		gs_spi_status.ul_total_block_number = 0;
-		gs_spi_status.ul_total_command_number = 0;
-	} else {
-		switch (gs_ul_spi_state) {
-		case SLAVE_STATE_IDLE:
-			/* Only CMD_TEST accepted. */
-			if (gs_ul_spi_cmd == CMD_TEST) {
-				gs_ul_spi_state = SLAVE_STATE_TEST;
-			}
-			break;
+///**
+ //* \brief  SPI command block process.
+ //*/
+//static void spi_slave_command_process(void)
+//{
+	//if (gs_ul_spi_cmd == CMD_END) {
+		//gs_ul_spi_state = SLAVE_STATE_IDLE;
+		//gs_spi_status.ul_total_block_number = 0;
+		//gs_spi_status.ul_total_command_number = 0;
+	//} else {
+		//switch (gs_ul_spi_state) {
+		//case SLAVE_STATE_IDLE:
+			///* Only CMD_TEST accepted. */
+			//if (gs_ul_spi_cmd == CMD_TEST) {
+				//gs_ul_spi_state = SLAVE_STATE_TEST;
+			//}
+			//break;
+//
+		//case SLAVE_STATE_TEST:
+			///* Only CMD_DATA accepted. */
+			//if ((gs_ul_spi_cmd & CMD_DATA_MSK) == CMD_DATA) {
+				//gs_ul_spi_state = SLAVE_STATE_DATA;
+			//}
+			//gs_ul_test_block_number = gs_ul_spi_cmd & DATA_BLOCK_MSK;
+			//break;
+//
+		//case SLAVE_STATE_DATA:
+			//gs_spi_status.ul_total_block_number++;
+//
+			//if (gs_spi_status.ul_total_block_number == 
+					//gs_ul_test_block_number) {
+				//gs_ul_spi_state = SLAVE_STATE_STATUS_ENTRY;
+			//}
+			//break;
+//
+		//case SLAVE_STATE_STATUS_ENTRY:
+			//gs_ul_spi_state = SLAVE_STATE_STATUS;
+			//break;
+//
+		//case SLAVE_STATE_END:
+			//break;
+		//}
+	//}
+//}
 
-		case SLAVE_STATE_TEST:
-			/* Only CMD_DATA accepted. */
-			if ((gs_ul_spi_cmd & CMD_DATA_MSK) == CMD_DATA) {
-				gs_ul_spi_state = SLAVE_STATE_DATA;
-			}
-			gs_ul_test_block_number = gs_ul_spi_cmd & DATA_BLOCK_MSK;
-			break;
-
-		case SLAVE_STATE_DATA:
-			gs_spi_status.ul_total_block_number++;
-
-			if (gs_spi_status.ul_total_block_number == 
-					gs_ul_test_block_number) {
-				gs_ul_spi_state = SLAVE_STATE_STATUS_ENTRY;
-			}
-			break;
-
-		case SLAVE_STATE_STATUS_ENTRY:
-			gs_ul_spi_state = SLAVE_STATE_STATUS;
-			break;
-
-		case SLAVE_STATE_END:
-			break;
-		}
-	}
-}
-
-/**
- * \brief  Start waiting new command.
- */
-static void spi_slave_new_command(void)
-{
-	switch (gs_ul_spi_state) {
-	case SLAVE_STATE_IDLE:
-	case SLAVE_STATE_END:
-		gs_ul_spi_cmd = RC_SYN;
-		spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-		break;
-
-	case SLAVE_STATE_TEST:
-		gs_ul_spi_cmd = RC_RDY;
-		spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-		break;
-
-	case SLAVE_STATE_DATA:
-		if (gs_spi_status.ul_total_block_number < gs_ul_test_block_number) {
-			spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
-		}
-		break;
-
-	case SLAVE_STATE_STATUS_ENTRY:
-		gs_ul_spi_cmd = RC_RDY;
-		spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-		gs_ul_spi_state = SLAVE_STATE_STATUS;
-		break;
-
-	case SLAVE_STATE_STATUS:
-		gs_ul_spi_cmd = RC_SYN;
-		spi_slave_transfer(&gs_spi_status, sizeof(struct status_block_t));
-		gs_ul_spi_state = SLAVE_STATE_END;
-		break;
-	}
-}
+///**
+ //* \brief  Start waiting new command.
+ //*/
+//static void spi_slave_new_command(void)
+//{
+	//switch (gs_ul_spi_state) {
+	//case SLAVE_STATE_IDLE:
+	//case SLAVE_STATE_END:
+		//gs_ul_spi_cmd = RC_SYN;
+		//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+		//break;
+//
+	//case SLAVE_STATE_TEST:
+		//gs_ul_spi_cmd = RC_RDY;
+		//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+		//break;
+//
+	//case SLAVE_STATE_DATA:
+		//if (gs_spi_status.ul_total_block_number < gs_ul_test_block_number) {
+			//spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
+		//}
+		//break;
+//
+	//case SLAVE_STATE_STATUS_ENTRY:
+		//gs_ul_spi_cmd = RC_RDY;
+		//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+		//gs_ul_spi_state = SLAVE_STATE_STATUS;
+		//break;
+//
+	//case SLAVE_STATE_STATUS:
+		//gs_ul_spi_cmd = RC_SYN;
+		//spi_slave_transfer(&gs_spi_status, sizeof(struct status_block_t));
+		//gs_ul_spi_state = SLAVE_STATE_END;
+		//break;
+	//}
+//}
 
 /**
  * \brief Interrupt handler for the SPI slave.
@@ -369,31 +369,32 @@ void SPI_Handler(void)
 	uint8_t uc_pcs;
 	static uint16_t cnt = 0;
 
-	printf("SPI message received #%d\n\r", cnt++);
-
 	if (spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
 		spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
 		gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
+		spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
+		printf("SPI message received #%d: 0x%02x at index %d\n\r", cnt++, gs_puc_transfer_buffer[gs_ul_transfer_index], gs_ul_transfer_index);
 		gs_ul_transfer_index++;
-		gs_ul_transfer_length--;
-		if (gs_ul_transfer_length) {
-			spi_write(SPI_SLAVE_BASE,
-					gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
-		}
+		//gs_ul_transfer_length--;
+		//if (gs_ul_transfer_length) {
+			//printf("SPI message received #%d: 0x%02x\n\r", cnt++, gs_puc_transfer_buffer[gs_ul_transfer_index-1]);
+			//spi_write(SPI_SLAVE_BASE,
+					//gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
+		//}
 
-		if (!gs_ul_transfer_length) {
-			spi_slave_command_process();
-			new_cmd = 1;
-		}
+		//if (!gs_ul_transfer_length) {
+			//spi_slave_command_process();
+			//new_cmd = 1;
+		//}
 
-		if (new_cmd) {
-			if (gs_ul_spi_cmd != CMD_END) {
-				gs_spi_status.ul_cmd_list[gs_spi_status.ul_total_command_number]
-				= gs_ul_spi_cmd;
-				gs_spi_status.ul_total_command_number++;
-			}
-			spi_slave_new_command();
-		}
+		//if (new_cmd) {
+			//if (gs_ul_spi_cmd != CMD_END) {
+				//gs_spi_status.ul_cmd_list[gs_spi_status.ul_total_command_number]
+				//= gs_ul_spi_cmd;
+				//gs_spi_status.ul_total_command_number++;
+			//}
+			//spi_slave_new_command();
+		//}
 	}
 }
 
@@ -452,12 +453,22 @@ static int send_osc_msg(uint8_t node, enum sensor_types sens, uint32_t *values) 
 		break;
 		
 		case SMS_SENS_PRESS:
+		OSCMessage_setAddress(msg, "sabre/1/pressure");
+		OSCMessage_addArgument_int32(msg, values[0]);
+		OSCMessage_addArgument_int32(msg, values[1]);
 		break;
 		
 		case SMS_SENS_BUTTON:
+		OSCMessage_setAddress(msg, "sabre/1/button");
+		OSCMessage_addArgument_int32(msg, values[0]);
 		break;
 		
 		case SMS_SENS_QUAT:
+		OSCMessage_setAddress(msg, "sabre/1/quat");
+		OSCMessage_addArgument_int32(msg, values[0]);
+		OSCMessage_addArgument_int32(msg, values[1]);
+		OSCMessage_addArgument_int32(msg, values[2]);
+		OSCMessage_addArgument_int32(msg, values[3]);
 		break;
 		
 		default:
@@ -488,12 +499,12 @@ int main(void)
 	puts(STRING_HEADER);
 
 	/* Bring up the ethernet interface & initialize timer0, channel0. */
-	//init_ethernet();
+	init_ethernet();
 
 	/* Search for a communication partner and setup UDP connection */
-	//init_udp();
+	init_udp();
 	
-	//init_osc();
+	init_osc();
 	
 	/* Configure SPI interrupts for slave only. */
 	NVIC_DisableIRQ(SPI_IRQn);
@@ -506,9 +517,9 @@ int main(void)
 	
 	/* Program main loop. */
 	while (1) {
-		scanf("%c", (char*)&uc_key);
+		//scanf("%c", (char*)&uc_key);
 		/* Check for input packet and process it. */
-		//ethernet_task();
+		ethernet_task();
 		
 		////////////////////////////////////////////////
 		//struct pbuf *pb;

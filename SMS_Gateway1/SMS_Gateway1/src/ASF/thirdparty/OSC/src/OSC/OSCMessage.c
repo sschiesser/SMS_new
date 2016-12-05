@@ -36,6 +36,7 @@
 #include <string.h>
 
 //#include <MemoryManager/MemoryManager.h>
+#include "mem.h"
 
 #include "OSCMisc.h"
 
@@ -150,11 +151,11 @@ OSCResult OSCMessage_setAddress(OSCMessage *oscMessage, const char* str) {
 
 	if (oscMessage->addressSize < len+1) {
 		uint32_t newSize = OSC_PREALLOC_SIZE*(len/OSC_PREALLOC_SIZE + 1); // TODO: make it faster (replace div and mult with bit shifts)
-		char* newAddress = (char*)malloc(newSize);
+		char* newAddress = (char*)mem_malloc(newSize);
 
 		if (newAddress == NULL) return OSC_ALLOC_FAILED;
 
-		free(oscMessage->address);
+		mem_free(oscMessage->address);
 		oscMessage->address = newAddress;
 		oscMessage->addressSize = newSize;
 	}
