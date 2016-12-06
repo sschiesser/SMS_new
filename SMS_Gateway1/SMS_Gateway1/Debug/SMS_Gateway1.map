@@ -17079,10 +17079,10 @@ Discarded input sections
                 0x00000000       0x84 src/SMS_Gateway1.o
  .text.osc_read
                 0x00000000       0x14 src/SMS_Gateway1.o
- .bss.cpu_irq_critical_section_counter
-                0x00000000        0x4 src/SMS_Gateway1.o
  .bss.cpu_irq_prev_interrupt_state
                 0x00000000        0x1 src/SMS_Gateway1.o
+ .bss.cpu_irq_critical_section_counter
+                0x00000000        0x4 src/SMS_Gateway1.o
  .debug_macro   0x00000000      0x8aa src/SMS_Gateway1.o
  .debug_macro   0x00000000       0x22 src/SMS_Gateway1.o
  .debug_macro   0x00000000       0x4c src/SMS_Gateway1.o
@@ -17714,30 +17714,30 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .text.usart_serial_putchar
                 0x00400bd0       0x80 src/SMS_Gateway1.o
  .text.SPI_Handler
-                0x00400c50       0xb4 src/SMS_Gateway1.o
+                0x00400c50       0xbc src/SMS_Gateway1.o
                 0x00400c50                SPI_Handler
- .text.main     0x00400d04      0x158 src/SMS_Gateway1.o
-                0x00400d04                main
+ .text.main     0x00400d0c      0x160 src/SMS_Gateway1.o
+                0x00400d0c                main
  .text.__libc_init_array
-                0x00400e5c       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-init.o)
-                0x00400e5c                __libc_init_array
- .text.iprintf  0x00400eac       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-iprintf.o)
-                0x00400eac                iprintf
- .text          0x00400ed4      0x134 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memcpy.o)
-                0x00400ed4                memcpy
- .text.memmove  0x00401008       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memmove.o)
-                0x00401008                memmove
- .text.memset   0x004010d0       0x9c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memset.o)
-                0x004010d0                memset
- .text._puts_r  0x0040116c       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-puts.o)
-                0x0040116c                _puts_r
- .text.puts     0x004011d4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-puts.o)
-                0x004011d4                puts
- .text.setbuf   0x004011e4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-setbuf.o)
-                0x004011e4                setbuf
- .text.setvbuf  0x004011f4      0x150 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-setvbuf.o)
-                0x004011f4                setvbuf
- *fill*         0x00401344       0x3c 
+                0x00400e6c       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-init.o)
+                0x00400e6c                __libc_init_array
+ .text.iprintf  0x00400ebc       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-iprintf.o)
+                0x00400ebc                iprintf
+ .text          0x00400ee4      0x134 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memcpy.o)
+                0x00400ee4                memcpy
+ .text.memmove  0x00401018       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memmove.o)
+                0x00401018                memmove
+ .text.memset   0x004010e0       0x9c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memset.o)
+                0x004010e0                memset
+ .text._puts_r  0x0040117c       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-puts.o)
+                0x0040117c                _puts_r
+ .text.puts     0x004011e4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-puts.o)
+                0x004011e4                puts
+ .text.setbuf   0x004011f4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-setbuf.o)
+                0x004011f4                setbuf
+ .text.setvbuf  0x00401204      0x150 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-setvbuf.o)
+                0x00401204                setvbuf
+ *fill*         0x00401354       0x2c 
  .text          0x00401380       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-strlen.o)
                 0x00401380                strlen
  .text.__sprint_r.part.0
@@ -18004,7 +18004,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x2000086c                . = ALIGN (0x4)
                 0x2000086c                _erelocate = .
 
-.bss            0x2000086c       0xb4 load address 0x00404938
+.bss            0x2000086c       0xb8 load address 0x00404938
                 0x2000086c                . = ALIGN (0x4)
                 0x2000086c                _sbss = .
                 0x2000086c                _szero = .
@@ -18014,48 +18014,51 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x20000888        0x4 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .bss.gs_ul_clk_tick
                 0x2000088c        0x4 src/network/timer_mgt.o
- .bss.my_spi_buffer
-                0x20000890       0x40 src/SMS_Gateway1.o
  .bss.gs_ul_transfer_length
-                0x200008d0        0x4 src/SMS_Gateway1.o
- .bss.data.9394
-                0x200008d4        0x2 src/SMS_Gateway1.o
- *fill*         0x200008d6        0x2 
+                0x20000890        0x4 src/SMS_Gateway1.o
+ .bss.gs_uc_spi_buffer
+                0x20000894       0x40 src/SMS_Gateway1.o
+ .bss.gs_puc_transfer_buffer
+                0x200008d4        0x4 src/SMS_Gateway1.o
+ .bss.data.9393
+                0x200008d8        0x2 src/SMS_Gateway1.o
+ *fill*         0x200008da        0x2 
  .bss.gs_ul_transfer_index
-                0x200008d8        0x4 src/SMS_Gateway1.o
+                0x200008dc        0x4 src/SMS_Gateway1.o
  .bss.__malloc_max_total_mem
-                0x200008dc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008dc                __malloc_max_total_mem
- .bss.__malloc_max_sbrked_mem
                 0x200008e0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008e0                __malloc_max_sbrked_mem
- .bss.__malloc_top_pad
+                0x200008e0                __malloc_max_total_mem
+ .bss.__malloc_max_sbrked_mem
                 0x200008e4        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008e4                __malloc_top_pad
+                0x200008e4                __malloc_max_sbrked_mem
+ .bss.__malloc_top_pad
+                0x200008e8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x200008e8                __malloc_top_pad
  .bss.__malloc_current_mallinfo
-                0x200008e8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-mallocr.o)
-                0x200008e8                __malloc_current_mallinfo
+                0x200008ec       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-mallocr.o)
+                0x200008ec                __malloc_current_mallinfo
  *(COMMON)
- COMMON         0x20000910        0x4 src/ASF/common/utils/stdio/read.o
-                0x20000910                ptr_get
- COMMON         0x20000914        0x8 src/ASF/common/utils/stdio/write.o
-                0x20000914                ptr_put
-                0x20000918                stdio_base
- COMMON         0x2000091c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-reent.o)
-                0x2000091c                errno
-                0x20000920                . = ALIGN (0x4)
-                0x20000920                _ebss = .
-                0x20000920                _ezero = .
+ COMMON         0x20000914        0x4 src/ASF/common/utils/stdio/read.o
+                0x20000914                ptr_get
+ COMMON         0x20000918        0x8 src/ASF/common/utils/stdio/write.o
+                0x20000918                ptr_put
+                0x2000091c                stdio_base
+ COMMON         0x20000920        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-reent.o)
+                0x20000920                errno
+                0x20000924                . = ALIGN (0x4)
+                0x20000924                _ebss = .
+                0x20000924                _ezero = .
 
-.stack          0x20000920     0x3000 load address 0x004049ec
-                0x20000920                . = ALIGN (0x8)
-                0x20000920                _sstack = .
-                0x20003920                . = (. + __stack_size__)
- *fill*         0x20000920     0x3000 
-                0x20003920                . = ALIGN (0x8)
-                0x20003920                _estack = .
-                0x20003920                . = ALIGN (0x4)
-                0x20003920                _end = .
+.stack          0x20000924     0x3004 load address 0x004049f0
+                0x20000928                . = ALIGN (0x8)
+ *fill*         0x20000924        0x4 
+                0x20000928                _sstack = .
+                0x20003928                . = (. + __stack_size__)
+ *fill*         0x20000928     0x3000 
+                0x20003928                . = ALIGN (0x8)
+                0x20003928                _estack = .
+                0x20003928                . = ALIGN (0x4)
+                0x20003928                _end = .
 OUTPUT(SMS_Gateway1.elf elf32-littlearm)
 
 .ARM.attributes
@@ -18208,7 +18211,7 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/network/timer_mgt.o
  .comment       0x00000059       0x5a src/SMS_Gateway1.o
 
-.debug_info     0x00000000     0xc04c
+.debug_info     0x00000000     0xc047
  .debug_info    0x00000000     0x1f45 src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_info    0x00001f45      0x77a src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_info    0x000026bf      0x1e4 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -18224,7 +18227,7 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_info    0x00007327      0x427 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_info    0x0000774e     0x1d89 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
  .debug_info    0x000094d7      0x897 src/network/timer_mgt.o
- .debug_info    0x00009d6e     0x22de src/SMS_Gateway1.o
+ .debug_info    0x00009d6e     0x22d9 src/SMS_Gateway1.o
 
 .debug_abbrev   0x00000000     0x209d
  .debug_abbrev  0x00000000      0x20a src/ASF/sam/boards/sam4e_xplained_pro/init.o
@@ -18474,7 +18477,7 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_macro   0x000176a9       0x16 src/SMS_Gateway1.o
  .debug_macro   0x000176bf       0x16 src/SMS_Gateway1.o
 
-.debug_line     0x00000000     0xa617
+.debug_line     0x00000000     0xa619
  .debug_line    0x00000000      0xbfa src/ASF/sam/boards/sam4e_xplained_pro/init.o
  .debug_line    0x00000bfa      0xa2e src/ASF/common/services/clock/sam4e/sysclk.o
  .debug_line    0x00001628      0x8f8 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -18490,9 +18493,9 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
  .debug_line    0x000079e9      0x3d0 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_line    0x00007db9      0xde1 src/ASF/thirdparty/lwip/lwip-port-1.4.1/sam/netif/sam4e_gmac.o
  .debug_line    0x00008b9a      0xb5b src/network/timer_mgt.o
- .debug_line    0x000096f5      0xf22 src/SMS_Gateway1.o
+ .debug_line    0x000096f5      0xf24 src/SMS_Gateway1.o
 
-.debug_str      0x00000000    0x67848
+.debug_str      0x00000000    0x6783a
  .debug_str     0x00000000    0x5d388 src/ASF/sam/boards/sam4e_xplained_pro/init.o
                               0x5d901 (size before relaxing)
  .debug_str     0x0005d388      0x2c0 src/ASF/common/services/clock/sam4e/sysclk.o
@@ -18523,8 +18526,8 @@ OUTPUT(SMS_Gateway1.elf elf32-littlearm)
                               0x63b4a (size before relaxing)
  .debug_str     0x000668de      0x351 src/network/timer_mgt.o
                               0x5ffb2 (size before relaxing)
- .debug_str     0x00066c2f      0xc19 src/SMS_Gateway1.o
-                              0x6258f (size before relaxing)
+ .debug_str     0x00066c2f      0xc0b src/SMS_Gateway1.o
+                              0x62581 (size before relaxing)
 
 .debug_frame    0x00000000     0x1c5c
  .debug_frame   0x00000000       0x30 src/ASF/sam/boards/sam4e_xplained_pro/init.o

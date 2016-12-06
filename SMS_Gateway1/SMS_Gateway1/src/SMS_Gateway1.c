@@ -186,7 +186,7 @@ static uint32_t gs_ul_transfer_length;
 static struct status_block_t gs_spi_status;
 static uint32_t gs_ul_test_block_number;
 
-static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
+//static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
 
 void osc_write(uint8_t *buf, uint32_t size) {
 	err_t err;
@@ -373,11 +373,11 @@ void SPI_Handler(void)
 	if(spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
 		read_done = false;
 		spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
-		//gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
-		my_spi_buffer[gs_ul_transfer_index] = data;
+		gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
+		//my_spi_buffer[gs_ul_transfer_index] = data;
 		gs_ul_transfer_length--;
 		if(gs_ul_transfer_length) {
-			spi_write(SPI_SLAVE_BASE, gs_ul_transfer_index, 0, 0);
+			spi_write(SPI_SLAVE_BASE, gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
 		}
 		else {
 			read_done = true;
@@ -385,11 +385,11 @@ void SPI_Handler(void)
 		gs_ul_transfer_index++;
 	
 		if(read_done) {
-			for(uint8_t i = 0; i < 64; i++) {
-				printf("%02x ", my_spi_buffer[i]);
+			for(uint8_t i = 0; i < COMM_BUFFER_SIZE; i++) {
+				printf("%02x ", gs_uc_spi_buffer[i]);
 			}
 			printf("READING COMPLETE\n\r");
-			spi_slave_transfer(my_spi_buffer, COMM_BUFFER_SIZE);
+			spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
 			read_done = false;
 		}
 	}
@@ -458,7 +458,7 @@ static void spi_slave_initialize(void)
 
 	/* Start waiting command. */
 	//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-	spi_slave_transfer(my_spi_buffer, COMM_BUFFER_SIZE);
+	spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
 }
 
 
