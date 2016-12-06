@@ -71,7 +71,7 @@ void OSCServer_handleStoredMessages(OSCServer *server);
 void OSCServer_handleParsedMessages(OSCServer *server);
 
 OSCServer*	OSCServer_new(OSCTimetag_get func) {
-	OSCServer *server = (OSCServer*)mem_malloc(sizeof(OSCServer));
+	OSCServer *server = (OSCServer*)malloc(sizeof(OSCServer));
 
 	if (server == NULL)
 		return NULL;
@@ -91,16 +91,16 @@ void OSCServer_delete(OSCServer *oscServer) {
 	if (oscServer->handlers != NULL) {
 		uint32_t i;
 		for (i=0; i<oscServer->handlerCount; i++) {
-			mem_free(oscServer->handlers[i].address);
+			free(oscServer->handlers[i].address);
 		}
-		mem_free(oscServer->handlers);
+		free(oscServer->handlers);
 	}
 
 	OSCMessageLinkedListEntry *entry = oscServer->storedMessages;
 	while (entry != NULL) {
 		OSCMessage_delete(entry->message);
 		OSCMessageLinkedListEntry *nextEntry = entry->nextEntry;
-		mem_free(entry);
+		free(entry);
 		entry = nextEntry;
 	}
 
@@ -108,11 +108,11 @@ void OSCServer_delete(OSCServer *oscServer) {
 	while (entry != NULL) {
 		OSCMessage_delete(entry->message);
 		OSCMessageLinkedListEntry *nextEntry = entry->nextEntry;
-		mem_free(entry);
+		free(entry);
 		entry = nextEntry;
 	}
 
-	mem_free(oscServer);
+	free(oscServer);
 }
 
 /*
@@ -122,15 +122,15 @@ void OSCServer_delete(OSCServer *oscServer) {
 OSCResult OSCServer_addMessageHandler(OSCServer *oscServer, const char* address, OSCMethod method) {
 	//TODO: check if address is valid
 	uint32_t len = strlen(address);
-	char *addrCopy = (char*)mem_malloc(len+1); // include the null character
+	char *addrCopy = (char*)malloc(len+1); // include the null character
 
 	if (addrCopy == NULL)
 		return OSC_ALLOC_FAILED;
 
-	OSCMessageHandlerEntry *newHandlers = (OSCMessageHandlerEntry*)mem_trim(oscServer->handlers, sizeof(OSCMessageHandlerEntry)*(oscServer->handlerCount+1));
+	OSCMessageHandlerEntry *newHandlers = (OSCMessageHandlerEntry*)realloc(oscServer->handlers, sizeof(OSCMessageHandlerEntry)*(oscServer->handlerCount+1));
 
 	if (newHandlers == NULL) {
-		mem_free(addrCopy);
+		free(addrCopy);
 		return OSC_ALLOC_FAILED;
 	}
 
@@ -155,13 +155,13 @@ OSCResult OSCServer_removeMessageHandler(OSCServer *oscServer, const char* addre
 	if (i == oscServer->handlerCount)	// handler not found
 		return OSC_ERROR;
 
-	mem_free(oscServer->handlers[i].address);
+	free(oscServer->handlers[i].address);
 
 	if (i+1 < oscServer->handlerCount) { // if it's not the last handler
 		memmove(&oscServer->handlers[i], &oscServer->handlers[i+1], sizeof(OSCMessageHandlerEntry)*(oscServer->handlerCount-i-1));
 	}
 
-	OSCMessageHandlerEntry *newHandlers = (OSCMessageHandlerEntry*)mem_trim(oscServer->handlers, sizeof(OSCMessageHandlerEntry)*(oscServer->handlerCount-1));
+	OSCMessageHandlerEntry *newHandlers = (OSCMessageHandlerEntry*)realloc(oscServer->handlers, sizeof(OSCMessageHandlerEntry)*(oscServer->handlerCount-1));
 
 	if (newHandlers == NULL) {
 		// TODO: make a better handling, as this should NEVER happen
@@ -181,7 +181,7 @@ OSCResult OSCServer_removeMessageHandler(OSCServer *oscServer, const char* addre
  */
 
 OSCResult OSCServer_addParsedMessage(OSCServer *server, OSCMessage *message, uint64_t timetag) {
-	OSCMessageLinkedListEntry *entry = (OSCMessageLinkedListEntry*)mem_malloc(sizeof(OSCMessageLinkedListEntry));
+	OSCMessageLinkedListEntry *entry = (OSCMessageLinkedListEntry*)malloc(sizeof(OSCMessageLinkedListEntry));
 
 	if (entry == NULL)
 		return OSC_ALLOC_FAILED;
@@ -379,7 +379,7 @@ void OSCServer_handleStoredMessages(OSCServer *server) {
 				prevEntry->nextEntry = entry->nextEntry;
 
 			OSCMessage_delete(entry->message);
-			mem_free(entry);
+			free(entry);
 		} else {
 			prevEntry = entry;
 		}
@@ -420,7 +420,7 @@ void OSCServer_handleParsedMessages(OSCServer *server) {
 				prevEntry->nextEntry = entry->nextEntry;
 
 			OSCMessage_delete(entry->message);
-			mem_free(entry);
+			free(entry);
 		} else {
 			prevEntry = entry;
 		}
@@ -438,7 +438,7 @@ void OSCServer_cycle(OSCServer *oscServer, OSCPacketStream *stream) {
 
 	uint32_t size;
 	while ((size=stream->getPacketSize()) > 0) {
-		uint8_t *data = (uint8_t*)mem_malloc(size);
+		uint8_t *data = (uint8_t*)malloc(size);
 
 		if (data == NULL)
 			break;
@@ -448,7 +448,7 @@ void OSCServer_cycle(OSCServer *oscServer, OSCPacketStream *stream) {
 		 */
 		stream->readPacket(data);
 		OSCResult res = OSCServer_parsePacket(oscServer, data, size, OSCTimetag_immediately);
-		mem_free(data);
+		free(data);
 
 		/*
 		 * Handle or store parsed messages OR delete them on packet failure
@@ -467,9 +467,9 @@ void OSCServer_cycle(OSCServer *oscServer, OSCPacketStream *stream) {
 		} else {	// delete parsed messages
 			OSCMessageLinkedListEntry *entry = oscServer->parsedMessages;
 			while (entry != NULL) {
-				mem_free(entry->message);
+				free(entry->message);
 				OSCMessageLinkedListEntry * nextEntry = entry->nextEntry;
-				mem_free(entry);
+				free(entry);
 				entry = nextEntry;
 			}
 			oscServer->parsedMessages = NULL;

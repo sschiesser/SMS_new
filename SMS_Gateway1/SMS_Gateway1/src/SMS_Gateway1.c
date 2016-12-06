@@ -186,6 +186,7 @@ static uint32_t gs_ul_transfer_length;
 static struct status_block_t gs_spi_status;
 static uint32_t gs_ul_test_block_number;
 
+bool udp_forward = false;
 //static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
 
 void osc_write(uint8_t *buf, uint32_t size) {
@@ -240,7 +241,7 @@ static void configure_console(void)
 
 static void init_udp(void) {
 	//TODO LATER: ping the 169.254.x.x range to find the communication partner
-	IP4_ADDR(&remote_ip, 169, 254, 206, 139);
+	IP4_ADDR(&remote_ip, 169, 254, 41, 18);
 
 	pcb = udp_new();
 
@@ -368,62 +369,30 @@ void SPI_Handler(void)
 	uint32_t new_cmd = 0;
 	static uint16_t data;
 	uint8_t uc_pcs;
-	bool read_done;
+	bool data_ready = false;
 
 	if(spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
-		read_done = false;
 		spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
 		gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
-		//my_spi_buffer[gs_ul_transfer_index] = data;
 		gs_ul_transfer_length--;
 		if(gs_ul_transfer_length) {
 			spi_write(SPI_SLAVE_BASE, gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
 		}
 		else {
-			read_done = true;
-		}
-		gs_ul_transfer_index++;
-	
-		if(read_done) {
+			udp_forward = true;
+			data_ready = true;
 			for(uint8_t i = 0; i < COMM_BUFFER_SIZE; i++) {
 				printf("%02x ", gs_uc_spi_buffer[i]);
 			}
+		}
+		gs_ul_transfer_index++;
+		
+		if(data_ready) {
 			printf("READING COMPLETE\n\r");
 			spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
-			read_done = false;
+			data_ready = false;
 		}
 	}
-	//if (spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
-		//spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
-		//uint8_t size = gs_ul_transfer_length;
-		//gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
-		//gs_ul_transfer_index++;
-		//gs_ul_transfer_length--;
-		//if (gs_ul_transfer_length) {
-			//spi_write(SPI_SLAVE_BASE,
-					//gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
-		//}
-//
-		//if (!gs_ul_transfer_length) {
-			//printf("Command received: 0x");
-			//for(uint8_t i = 0; i < size; i++) {
-				//printf("%02x ");
-			//}
-			//printf("\n\r");
-			//spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
-			////spi_slave_command_process();
-			////new_cmd = 1;
-		//}
-//
-		//if (new_cmd) {
-			//if (gs_ul_spi_cmd != CMD_END) {
-				//gs_spi_status.ul_cmd_list[gs_spi_status.ul_total_command_number]
-				//= gs_ul_spi_cmd;
-				//gs_spi_status.ul_total_command_number++;
-			//}
-			//spi_slave_new_command();
-		//}
-	//}
 }
 
 /**
@@ -518,12 +487,12 @@ int main(void)
 	puts(STRING_HEADER);
 
 	/* Bring up the ethernet interface & initialize timer0, channel0. */
-	//init_ethernet();
+	init_ethernet();
 
 	/* Search for a communication partner and setup UDP connection */
-	//init_udp();
+	init_udp();
 	
-	//init_osc();
+	init_osc();
 	
 	/* Configure SPI interrupts for slave only. */
 	NVIC_DisableIRQ(SPI_IRQn);
@@ -538,23 +507,43 @@ int main(void)
 	while (1) {
 		//scanf("%c", (char*)&uc_key);
 		/* Check for input packet and process it. */
-		//ethernet_task();
+		ethernet_task();
 		
-		////////////////////////////////////////////////
+		if(udp_forward) {
+			OSCMessage *osc_msg = OSCMessage_new();
+			OSCMessage_setAddress(osc_msg, "sabre/1");
+			//OSCMessage_addArgument_int32(osc_msg, 0x01234567);
+			//OSCMessage_addArgument_int32(osc_msg, 0xFEDCBA98);
+			uint32_t udp_data[16];
+			for(uint8_t i = 0; i < 16; i++) {
+				udp_data[i] = ((uint32_t)gs_uc_spi_buffer[4*i] << 24) & 0xff000000;
+				udp_data[i] |= ((uint32_t)gs_uc_spi_buffer[(4*i)+1] << 16) & 0xff0000;
+				udp_data[i] |= ((uint32_t)gs_uc_spi_buffer[(4*i)+2] << 8) & 0xff00;
+				udp_data[i] |= (uint32_t)gs_uc_spi_buffer[(4*i)+3] & 0xff;
+				//udp_data[i] = 0x12345670 + i;
+				OSCMessage_addArgument_int32(osc_msg, udp_data[i]);
+			}
+			
+			OSCMessage_sendMessage(osc_msg, &osc_stream);
+			OSCMessage_delete(osc_msg);
+			
+			udp_forward = false;
+		}
+		//////////////////////////////////////////////
 		//struct pbuf *pb;
 		//static uint32_t ax = 0;
 		//static uint32_t ay = 1000;
 		//static uint32_t az = 2000;
 		//static uint32_t asum = 3000;
 		//OSCMessage *osc_msg = OSCMessage_new();
-		//OSCMessage_setAddress(osc_msg, "sabre/1/button/4/service/merci");
+		//OSCMessage_setAddress(osc_msg, "sabre/1");
 		//OSCMessage_addArgument_int32(osc_msg, ax);
 		//OSCMessage_addArgument_int32(osc_msg, ay);
 		//OSCMessage_addArgument_int32(osc_msg, az);
 		//OSCMessage_addArgument_int32(osc_msg, asum);
 		//OSCMessage_sendMessage(osc_msg, &osc_stream);
 		//OSCMessage_delete(osc_msg);
-
+//
 		//ax++;
 		//ay++;
 		//az++;
