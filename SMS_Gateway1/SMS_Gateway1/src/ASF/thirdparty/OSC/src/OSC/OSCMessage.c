@@ -75,7 +75,7 @@ OSCResult OSCMessage_addArgument(OSCMessage *oscMessage, char type, OSCArgument 
  */
 
 OSCMessage* OSCMessage_new(void) {
-	OSCMessage *msg = (OSCMessage*)malloc(sizeof(OSCMessage));
+	OSCMessage *msg = (OSCMessage*)mem_malloc(sizeof(OSCMessage));
 
 	if (msg == NULL)
 		return NULL;
@@ -95,7 +95,7 @@ OSCMessage* OSCMessage_new(void) {
 }
 
 OSCMessage* OSCMessage_clone(OSCMessage *oscMessage) {
-	OSCMessage *msg = (OSCMessage*) malloc(sizeof(OSCMessage));
+	OSCMessage *msg = (OSCMessage*) mem_malloc(sizeof(OSCMessage));
 
 	if (msg == NULL)
 		return NULL;
@@ -109,7 +109,7 @@ OSCMessage* OSCMessage_clone(OSCMessage *oscMessage) {
 
 	uint32_t i;
 	for (i=0; i<oscMessage->argumentCount; i++) {
-		OSCArgument* argument = (OSCArgument*) malloc(sizeof(OSCArgument));
+		OSCArgument* argument = (OSCArgument*) mem_malloc(sizeof(OSCArgument));
 
 		if (argument == NULL ) {
 			OSCMessage_delete(msg);
@@ -131,19 +131,19 @@ OSCMessage* OSCMessage_clone(OSCMessage *oscMessage) {
 }
 
 void OSCMessage_delete(OSCMessage *oscMessage) {
-	free(oscMessage->address);
+	mem_free(oscMessage->address);
 
 	uint32_t i;
 	for (i=0; i<oscMessage->argumentCount; i++) {
 		if (oscMessage->types[i] == 'b' || oscMessage->types[i] == 's') {
-			free(oscMessage->arguments[i]->data.b);
+			mem_free(oscMessage->arguments[i]->data.b);
 		}
-		free(oscMessage->arguments[i]);
+		mem_free(oscMessage->arguments[i]);
 	}
-	free(oscMessage->arguments);
-	free(oscMessage->types);
+	mem_free(oscMessage->arguments);
+	mem_free(oscMessage->types);
 
-	free(oscMessage);
+	mem_free(oscMessage);
 }
 
 OSCResult OSCMessage_setAddress(OSCMessage *oscMessage, const char* str) {
@@ -174,7 +174,7 @@ char* OSCMessage_getAddress(OSCMessage *oscMessage) {
 OSCResult OSCMessage_addArgument(OSCMessage *oscMessage, char type, OSCArgument *oscArgument) {
 	if (oscMessage->typesSize < oscMessage->argumentCount + 1) {
 		uint32_t newSize = oscMessage->typesSize + OSC_PREALLOC_SIZE;
-		char* newTypes = (char*)realloc(oscMessage->types, newSize);
+		char* newTypes = (char*)mem_trim(oscMessage->types, newSize);
 
 		if (newTypes == NULL) return OSC_ALLOC_FAILED;
 
@@ -182,7 +182,7 @@ OSCResult OSCMessage_addArgument(OSCMessage *oscMessage, char type, OSCArgument 
 		oscMessage->types = newTypes;
 	}
 
-	OSCArgument** newArguments = (OSCArgument**)realloc(oscMessage->arguments, sizeof(OSCArgument*)*(oscMessage->argumentCount+1));
+	OSCArgument** newArguments = (OSCArgument**)mem_trim(oscMessage->arguments, sizeof(OSCArgument*)*(oscMessage->argumentCount+1));
 
 	if (newArguments == NULL) return OSC_ALLOC_FAILED;
 
@@ -199,7 +199,7 @@ OSCResult OSCMessage_addArgument(OSCMessage *oscMessage, char type, OSCArgument 
 
 
 OSCResult OSCMessage_addArgument_int32(OSCMessage *oscMessage, int32_t i) {
-	OSCArgument* oscArgument = (OSCArgument*)malloc(sizeof(OSCArgument));
+	OSCArgument* oscArgument = (OSCArgument*)mem_malloc(sizeof(OSCArgument));
 
 	if (oscArgument == NULL) return OSC_ALLOC_FAILED;
 
@@ -209,13 +209,13 @@ OSCResult OSCMessage_addArgument_int32(OSCMessage *oscMessage, int32_t i) {
 	OSCResult res = OSCMessage_addArgument(oscMessage, 'i', oscArgument);
 
 	if (res != OSC_OK)
-		free(oscArgument);
+		mem_free(oscArgument);
 
 	return res;
 }
 
 OSCResult OSCMessage_addArgument_float(OSCMessage *oscMessage, float f) {
-	OSCArgument* oscArgument = (OSCArgument*)malloc(sizeof(OSCArgument));
+	OSCArgument* oscArgument = (OSCArgument*)mem_malloc(sizeof(OSCArgument));
 
 	if (oscArgument == NULL)
 		return OSC_ALLOC_FAILED;
@@ -226,24 +226,24 @@ OSCResult OSCMessage_addArgument_float(OSCMessage *oscMessage, float f) {
 	OSCResult res = OSCMessage_addArgument(oscMessage, 'f', oscArgument);
 
 	if (res != OSC_OK)
-		free(oscArgument);
+		mem_free(oscArgument);
 
 	return res;
 }
 
 OSCResult OSCMessage_addArgument_string(OSCMessage *oscMessage, const char* s) {
 	/* Allocate OSCArgument */
-	OSCArgument* oscArgument = (OSCArgument*)malloc(sizeof(OSCArgument));
+	OSCArgument* oscArgument = (OSCArgument*)mem_malloc(sizeof(OSCArgument));
 
 	if (oscArgument == NULL)
 		return OSC_ALLOC_FAILED;
 
 	/* Allocate string */
 	uint32_t len = strlen(s);
-	char* stringCopy = (char*)malloc(len+1);
+	char* stringCopy = (char*)mem_malloc(len+1);
 
 	if (stringCopy == NULL) {
-		free(oscArgument);
+		mem_free(oscArgument);
 		return OSC_ALLOC_FAILED;
 	}
 
@@ -256,23 +256,23 @@ OSCResult OSCMessage_addArgument_string(OSCMessage *oscMessage, const char* s) {
 	OSCResult res = OSCMessage_addArgument(oscMessage, 's', oscArgument);
 
 	if (res != OSC_OK)
-		free(oscArgument);
+		mem_free(oscArgument);
 
 	return res;
 }
 
 OSCResult OSCMessage_addArgument_blob(OSCMessage *oscMessage, uint8_t *blob, int32_t size) {
 	/* Allocate OSCArgument */
-	OSCArgument *oscArgument = (OSCArgument*)malloc(sizeof(OSCArgument));
+	OSCArgument *oscArgument = (OSCArgument*)mem_malloc(sizeof(OSCArgument));
 
 	if (oscArgument == NULL)
 		return OSC_ALLOC_FAILED;
 
 	/* Allocate blob memory */
-	uint8_t *newBlob = (uint8_t*)malloc(size);
+	uint8_t *newBlob = (uint8_t*)mem_malloc(size);
 
 	if (newBlob == NULL) {
-		free(oscArgument);
+		mem_free(oscArgument);
 		return OSC_ALLOC_FAILED;
 	}
 
@@ -285,7 +285,7 @@ OSCResult OSCMessage_addArgument_blob(OSCMessage *oscMessage, uint8_t *blob, int
 	OSCResult res = OSCMessage_addArgument(oscMessage, 'b', oscArgument);
 
 	if (res != OSC_OK)
-		free(oscArgument);
+		mem_free(oscArgument);
 
 	return res;
 }
@@ -342,7 +342,7 @@ uint8_t* OSCMessage_getArgument_blob(OSCMessage *oscMessage, uint32_t position, 
 OSCResult OSCMessage_sendMessage(OSCMessage *oscMessage, OSCPacketStream *stream) {
 	uint32_t size = OSCMessage_getPaddedLength(oscMessage);
 
-	uint8_t *data = (uint8_t*)malloc(size);
+	uint8_t *data = (uint8_t*)mem_malloc(size);
 
 	if (data == NULL)
 		return OSC_ALLOC_FAILED;
@@ -350,7 +350,7 @@ OSCResult OSCMessage_sendMessage(OSCMessage *oscMessage, OSCPacketStream *stream
 	OSCMessage_dump(oscMessage, data);
 
 	stream->writePacket(data, size);
-	free(data);
+	mem_free(data);
 
 	return OSC_OK;
 }

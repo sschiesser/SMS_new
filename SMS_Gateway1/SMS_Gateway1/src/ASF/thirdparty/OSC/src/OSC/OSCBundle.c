@@ -33,6 +33,7 @@
 #include "OSCBundle.h"
 
 //#include <MemoryManager/MemoryManager.h>
+#include "mem.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -55,7 +56,7 @@ typedef struct _OSCBundle {
 
 
 OSCBundle* OSCBundle_new(void) {
-	OSCBundle *bundle = (OSCBundle*) malloc(sizeof(OSCBundle));
+	OSCBundle *bundle = (OSCBundle*) mem_malloc(sizeof(OSCBundle));
 
 	if (bundle == NULL)
 		return NULL;
@@ -69,7 +70,7 @@ OSCBundle* OSCBundle_new(void) {
 }
 
 OSCBundle*	OSCBundle_clone(OSCBundle *oscBundle) {
-	OSCBundle *bundle = (OSCBundle*) malloc(sizeof(OSCBundle));
+	OSCBundle *bundle = (OSCBundle*) mem_malloc(sizeof(OSCBundle));
 
 	if (bundle == NULL )
 		return NULL;
@@ -100,12 +101,12 @@ OSCBundle*	OSCBundle_clone(OSCBundle *oscBundle) {
 void OSCBundle_delete(OSCBundle *oscBundle) {
 	uint32_t i;
 	for (i=0; i<oscBundle->elementCount; i++) {
-		free(oscBundle->elements[i]->contents.ptr);
-		free(oscBundle->elements[i]);
+		mem_free(oscBundle->elements[i]->contents.ptr);
+		mem_free(oscBundle->elements[i]);
 	}
-	free(oscBundle->elements);
+	mem_free(oscBundle->elements);
 
-	free(oscBundle);
+	mem_free(oscBundle);
 }
 
 void OSCBundle_setTimetag(OSCBundle *oscBundle, uint64_t timetag) {
@@ -113,7 +114,7 @@ void OSCBundle_setTimetag(OSCBundle *oscBundle, uint64_t timetag) {
 }
 
 OSCResult OSCBundle_addElement(OSCBundle *oscBundle, OSCElement *oscElement) {
-	OSCElement **elements = (OSCElement**)realloc(oscBundle->elements, sizeof(OSCElement*)*(oscBundle->elementCount+1));
+	OSCElement **elements = (OSCElement**)mem_trim(oscBundle->elements, sizeof(OSCElement*)*(oscBundle->elementCount+1));
 
 	if (elements == NULL)
 		return OSC_ALLOC_FAILED;
@@ -132,10 +133,10 @@ OSCResult OSCBundle_addMessage(OSCBundle *oscBundle, OSCMessage *oscMessage) {
 	if (msg == NULL)
 		return OSC_ALLOC_FAILED;
 
-	OSCElement *element = (OSCElement*)malloc(sizeof(OSCElement));
+	OSCElement *element = (OSCElement*)mem_malloc(sizeof(OSCElement));
 
 	if (element == NULL) {
-		free(msg);
+		mem_free(msg);
 		return OSC_ALLOC_FAILED;
 	}
 
@@ -145,8 +146,8 @@ OSCResult OSCBundle_addMessage(OSCBundle *oscBundle, OSCMessage *oscMessage) {
 	OSCResult res = OSCBundle_addElement(oscBundle, element);
 
 	if (res != OSC_OK) {
-		free(msg);
-		free(element);
+		mem_free(msg);
+		mem_free(element);
 		return res;
 	}
 
@@ -159,10 +160,10 @@ OSCResult OSCBundle_addBundle(OSCBundle *oscBundle, OSCBundle *oscBundleIn) {
 	if (bundle == NULL )
 		return OSC_ALLOC_FAILED;
 
-	OSCElement *element = (OSCElement*) malloc(sizeof(OSCElement));
+	OSCElement *element = (OSCElement*) mem_malloc(sizeof(OSCElement));
 
 	if (element == NULL ) {
-		free(bundle);
+		mem_free(bundle);
 		return OSC_ALLOC_FAILED;
 	}
 
@@ -172,8 +173,8 @@ OSCResult OSCBundle_addBundle(OSCBundle *oscBundle, OSCBundle *oscBundleIn) {
 	OSCResult res = OSCBundle_addElement(oscBundle, element);
 
 	if (res != OSC_OK) {
-		free(bundle);
-		free(element);
+		mem_free(bundle);
+		mem_free(element);
 		return res;
 	}
 
@@ -189,7 +190,7 @@ OSCResult OSCBundle_sendBundle(OSCBundle *bundle, OSCPacketStream *stream) {
 
 	uint32_t size = OSCBundle_getPaddedLength(bundle);
 
-	uint8_t *data = (uint8_t*)malloc(size);
+	uint8_t *data = (uint8_t*)mem_malloc(size);
 
 	if (data == NULL)
 		return OSC_ALLOC_FAILED;
@@ -197,7 +198,7 @@ OSCResult OSCBundle_sendBundle(OSCBundle *bundle, OSCPacketStream *stream) {
 	OSCBundle_dump(bundle, data);
 
 	stream->writePacket(data, size);
-	free(data);
+	mem_free(data);
 
 	return OSC_OK;
 }

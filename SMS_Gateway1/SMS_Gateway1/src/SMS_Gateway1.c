@@ -120,7 +120,7 @@
 /* Clock polarity. */
 #define SPI_CLK_POLARITY 0
 /* Clock phase. */
-#define SPI_CLK_PHASE 0
+#define SPI_CLK_PHASE 1
 /* Delay before SPCK. */
 #define SPI_DLYBS 0x40
 /* Delay between consecutive transfers. */
@@ -171,7 +171,7 @@ struct status_block_t {
 /* SPI clock setting (Hz). */
 static uint32_t gs_ul_spi_clock = 500000;
 /* Current SPI return code. */
-static uint32_t gs_ul_spi_cmd = RC_SYN;
+static uint32_t gs_ul_spi_cmd = 0x11AABBCC; //RC_SYN;
 /* Current SPI state. */
 static uint32_t gs_ul_spi_state = 0;
 /* 64 bytes data buffer for SPI transfer and receive. */
@@ -186,6 +186,7 @@ static uint32_t gs_ul_transfer_length;
 static struct status_block_t gs_spi_status;
 static uint32_t gs_ul_test_block_number;
 
+static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
 
 void osc_write(uint8_t *buf, uint32_t size) {
 	err_t err;
@@ -277,87 +278,87 @@ static void spi_slave_transfer(void *p_buf, uint32_t size)
 	spi_write(SPI_SLAVE_BASE, gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
 }
 
-///**
- //* \brief  SPI command block process.
- //*/
-//static void spi_slave_command_process(void)
-//{
-	//if (gs_ul_spi_cmd == CMD_END) {
-		//gs_ul_spi_state = SLAVE_STATE_IDLE;
-		//gs_spi_status.ul_total_block_number = 0;
-		//gs_spi_status.ul_total_command_number = 0;
-	//} else {
-		//switch (gs_ul_spi_state) {
-		//case SLAVE_STATE_IDLE:
-			///* Only CMD_TEST accepted. */
-			//if (gs_ul_spi_cmd == CMD_TEST) {
-				//gs_ul_spi_state = SLAVE_STATE_TEST;
-			//}
-			//break;
-//
-		//case SLAVE_STATE_TEST:
-			///* Only CMD_DATA accepted. */
-			//if ((gs_ul_spi_cmd & CMD_DATA_MSK) == CMD_DATA) {
-				//gs_ul_spi_state = SLAVE_STATE_DATA;
-			//}
-			//gs_ul_test_block_number = gs_ul_spi_cmd & DATA_BLOCK_MSK;
-			//break;
-//
-		//case SLAVE_STATE_DATA:
-			//gs_spi_status.ul_total_block_number++;
-//
-			//if (gs_spi_status.ul_total_block_number == 
-					//gs_ul_test_block_number) {
-				//gs_ul_spi_state = SLAVE_STATE_STATUS_ENTRY;
-			//}
-			//break;
-//
-		//case SLAVE_STATE_STATUS_ENTRY:
-			//gs_ul_spi_state = SLAVE_STATE_STATUS;
-			//break;
-//
-		//case SLAVE_STATE_END:
-			//break;
-		//}
-	//}
-//}
+/**
+ * \brief  SPI command block process.
+ */
+static void spi_slave_command_process(void)
+{
+	if (gs_ul_spi_cmd == CMD_END) {
+		gs_ul_spi_state = SLAVE_STATE_IDLE;
+		gs_spi_status.ul_total_block_number = 0;
+		gs_spi_status.ul_total_command_number = 0;
+	} else {
+		switch (gs_ul_spi_state) {
+		case SLAVE_STATE_IDLE:
+			/* Only CMD_TEST accepted. */
+			if (gs_ul_spi_cmd == CMD_TEST) {
+				gs_ul_spi_state = SLAVE_STATE_TEST;
+			}
+			break;
 
-///**
- //* \brief  Start waiting new command.
- //*/
-//static void spi_slave_new_command(void)
-//{
-	//switch (gs_ul_spi_state) {
-	//case SLAVE_STATE_IDLE:
-	//case SLAVE_STATE_END:
-		//gs_ul_spi_cmd = RC_SYN;
-		//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-		//break;
-//
-	//case SLAVE_STATE_TEST:
-		//gs_ul_spi_cmd = RC_RDY;
-		//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-		//break;
-//
-	//case SLAVE_STATE_DATA:
-		//if (gs_spi_status.ul_total_block_number < gs_ul_test_block_number) {
-			//spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
-		//}
-		//break;
-//
-	//case SLAVE_STATE_STATUS_ENTRY:
-		//gs_ul_spi_cmd = RC_RDY;
-		//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
-		//gs_ul_spi_state = SLAVE_STATE_STATUS;
-		//break;
-//
-	//case SLAVE_STATE_STATUS:
-		//gs_ul_spi_cmd = RC_SYN;
-		//spi_slave_transfer(&gs_spi_status, sizeof(struct status_block_t));
-		//gs_ul_spi_state = SLAVE_STATE_END;
-		//break;
-	//}
-//}
+		case SLAVE_STATE_TEST:
+			/* Only CMD_DATA accepted. */
+			if ((gs_ul_spi_cmd & CMD_DATA_MSK) == CMD_DATA) {
+				gs_ul_spi_state = SLAVE_STATE_DATA;
+			}
+			gs_ul_test_block_number = gs_ul_spi_cmd & DATA_BLOCK_MSK;
+			break;
+
+		case SLAVE_STATE_DATA:
+			gs_spi_status.ul_total_block_number++;
+
+			if (gs_spi_status.ul_total_block_number == 
+					gs_ul_test_block_number) {
+				gs_ul_spi_state = SLAVE_STATE_STATUS_ENTRY;
+			}
+			break;
+
+		case SLAVE_STATE_STATUS_ENTRY:
+			gs_ul_spi_state = SLAVE_STATE_STATUS;
+			break;
+
+		case SLAVE_STATE_END:
+			break;
+		}
+	}
+}
+
+/**
+ * \brief  Start waiting new command.
+ */
+static void spi_slave_new_command(void)
+{
+	switch (gs_ul_spi_state) {
+	case SLAVE_STATE_IDLE:
+	case SLAVE_STATE_END:
+		gs_ul_spi_cmd = RC_SYN;
+		spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+		break;
+
+	case SLAVE_STATE_TEST:
+		gs_ul_spi_cmd = RC_RDY;
+		spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+		break;
+
+	case SLAVE_STATE_DATA:
+		if (gs_spi_status.ul_total_block_number < gs_ul_test_block_number) {
+			spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
+		}
+		break;
+
+	case SLAVE_STATE_STATUS_ENTRY:
+		gs_ul_spi_cmd = RC_RDY;
+		spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+		gs_ul_spi_state = SLAVE_STATE_STATUS;
+		break;
+
+	case SLAVE_STATE_STATUS:
+		gs_ul_spi_cmd = RC_SYN;
+		spi_slave_transfer(&gs_spi_status, sizeof(struct status_block_t));
+		gs_ul_spi_state = SLAVE_STATE_END;
+		break;
+	}
+}
 
 /**
  * \brief Interrupt handler for the SPI slave.
@@ -367,26 +368,53 @@ void SPI_Handler(void)
 	uint32_t new_cmd = 0;
 	static uint16_t data;
 	uint8_t uc_pcs;
-	static uint16_t cnt = 0;
+	bool read_done;
 
-	if (spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
+	if(spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
+		read_done = false;
 		spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
-		gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
-		spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
-		printf("SPI message received #%d: 0x%02x at index %d\n\r", cnt++, gs_puc_transfer_buffer[gs_ul_transfer_index], gs_ul_transfer_index);
+		//gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
+		my_spi_buffer[gs_ul_transfer_index] = data;
+		gs_ul_transfer_length--;
+		if(gs_ul_transfer_length) {
+			spi_write(SPI_SLAVE_BASE, gs_ul_transfer_index, 0, 0);
+		}
+		else {
+			read_done = true;
+		}
 		gs_ul_transfer_index++;
+	
+		if(read_done) {
+			for(uint8_t i = 0; i < 64; i++) {
+				printf("%02x ", my_spi_buffer[i]);
+			}
+			printf("READING COMPLETE\n\r");
+			spi_slave_transfer(my_spi_buffer, COMM_BUFFER_SIZE);
+			read_done = false;
+		}
+	}
+	//if (spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
+		//spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
+		//uint8_t size = gs_ul_transfer_length;
+		//gs_puc_transfer_buffer[gs_ul_transfer_index] = data;
+		//gs_ul_transfer_index++;
 		//gs_ul_transfer_length--;
 		//if (gs_ul_transfer_length) {
-			//printf("SPI message received #%d: 0x%02x\n\r", cnt++, gs_puc_transfer_buffer[gs_ul_transfer_index-1]);
 			//spi_write(SPI_SLAVE_BASE,
 					//gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
 		//}
-
+//
 		//if (!gs_ul_transfer_length) {
-			//spi_slave_command_process();
-			//new_cmd = 1;
+			//printf("Command received: 0x");
+			//for(uint8_t i = 0; i < size; i++) {
+				//printf("%02x ");
+			//}
+			//printf("\n\r");
+			//spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
+			////spi_slave_command_process();
+			////new_cmd = 1;
 		//}
-
+//
 		//if (new_cmd) {
 			//if (gs_ul_spi_cmd != CMD_END) {
 				//gs_spi_status.ul_cmd_list[gs_spi_status.ul_total_command_number]
@@ -395,7 +423,7 @@ void SPI_Handler(void)
 			//}
 			//spi_slave_new_command();
 		//}
-	}
+	//}
 }
 
 /**
@@ -429,7 +457,8 @@ static void spi_slave_initialize(void)
 	spi_enable(SPI_SLAVE_BASE);
 
 	/* Start waiting command. */
-	spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+	//spi_slave_transfer(&gs_ul_spi_cmd, sizeof(gs_ul_spi_cmd));
+	spi_slave_transfer(my_spi_buffer, COMM_BUFFER_SIZE);
 }
 
 
@@ -453,22 +482,12 @@ static int send_osc_msg(uint8_t node, enum sensor_types sens, uint32_t *values) 
 		break;
 		
 		case SMS_SENS_PRESS:
-		OSCMessage_setAddress(msg, "sabre/1/pressure");
-		OSCMessage_addArgument_int32(msg, values[0]);
-		OSCMessage_addArgument_int32(msg, values[1]);
 		break;
 		
 		case SMS_SENS_BUTTON:
-		OSCMessage_setAddress(msg, "sabre/1/button");
-		OSCMessage_addArgument_int32(msg, values[0]);
 		break;
 		
 		case SMS_SENS_QUAT:
-		OSCMessage_setAddress(msg, "sabre/1/quat");
-		OSCMessage_addArgument_int32(msg, values[0]);
-		OSCMessage_addArgument_int32(msg, values[1]);
-		OSCMessage_addArgument_int32(msg, values[2]);
-		OSCMessage_addArgument_int32(msg, values[3]);
 		break;
 		
 		default:
@@ -499,12 +518,12 @@ int main(void)
 	puts(STRING_HEADER);
 
 	/* Bring up the ethernet interface & initialize timer0, channel0. */
-	init_ethernet();
+	//init_ethernet();
 
 	/* Search for a communication partner and setup UDP connection */
-	init_udp();
+	//init_udp();
 	
-	init_osc();
+	//init_osc();
 	
 	/* Configure SPI interrupts for slave only. */
 	NVIC_DisableIRQ(SPI_IRQn);
@@ -519,7 +538,7 @@ int main(void)
 	while (1) {
 		//scanf("%c", (char*)&uc_key);
 		/* Check for input packet and process it. */
-		ethernet_task();
+		//ethernet_task();
 		
 		////////////////////////////////////////////////
 		//struct pbuf *pb;
