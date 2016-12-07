@@ -148,8 +148,10 @@ src/SMS_Gateway1.d src/SMS_Gateway1.o: ../src/SMS_Gateway1.c \
  ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip/ip_addr.h \
  ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/def.h \
  ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/pbuf.h \
- ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/udp.h \
+ ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/netif.h \
+ ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/netif/etharp.h \
  ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip/ip.h \
+ ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/udp.h \
  ../src/ASF/thirdparty/lwip/lwip-port-1.4.1/ping/ping.h \
  ../src/config/conf_OSC.h ../src/ASF/thirdparty/OSC/inc/OSC/OSCMessage.h \
  ../src/ASF/thirdparty/OSC/inc/OSC/OSCPacketStream.h \
@@ -466,9 +468,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\lib\gc
 
 ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/pbuf.h:
 
-../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/udp.h:
+../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/netif.h:
+
+../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/netif/etharp.h:
 
 ../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip/ip.h:
+
+../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/lwip/udp.h:
 
 ../src/ASF/thirdparty/lwip/lwip-port-1.4.1/ping/ping.h:
 

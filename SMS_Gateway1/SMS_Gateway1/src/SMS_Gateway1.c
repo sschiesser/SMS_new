@@ -97,6 +97,8 @@
 #include "ioport.h"
 #include "stdio_serial.h"
 #include "ethernet.h"
+#include "netif.h"
+#include "netif/etharp.h"
 //#include "httpd.h"
 #include "udp.h"
 #include "ping.h"
@@ -155,6 +157,7 @@
 #define NB_STATUS_CMD   20
 
 OSCPacketStream osc_stream;
+struct eth_addr remote_eth;
 struct ip_addr remote_ip, broadcast_ip;
 struct udp_pcb *pcb;
 char msg[SMS_OSC_MSG_MAX_LEN];
@@ -188,6 +191,8 @@ static uint32_t gs_ul_test_block_number;
 
 bool udp_forward = false;
 //static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
+
+extern struct netif gs_net_if;
 
 void osc_write(uint8_t *buf, uint32_t size) {
 	err_t err;
@@ -241,7 +246,7 @@ static void configure_console(void)
 
 static void init_udp(void) {
 	//TODO LATER: ping the 169.254.x.x range to find the communication partner
-	IP4_ADDR(&remote_ip, 169, 254, 41, 18);
+	IP4_ADDR(&remote_ip, 169, 254, 19, 40);
 
 	pcb = udp_new();
 
@@ -501,6 +506,11 @@ int main(void)
 	NVIC_EnableIRQ(SPI_IRQn);
 
 	spi_slave_initialize();
+	
+	while((ip4_addr1_16(&remote_ip) != 169) && (ip4_addr2_16(&remote_ip) != 254)) {
+		ethernet_task();
+	}
+	printf("Remote device found! eth %02x:%02x:%02x:%02x:%02x:%02x, ip %d.%d.%d.%d", remote_eth.addr[0], remote_eth.addr[1], remote_eth.addr[2], remote_eth.addr[3], remote_eth.addr[4], remote_eth.addr[5], ip4_addr1_16(&remote_ip), ip4_addr2_16(&remote_ip), ip4_addr3_16(&remote_ip), ip4_addr4_16(&remote_ip));
 
 	
 	/* Program main loop. */
