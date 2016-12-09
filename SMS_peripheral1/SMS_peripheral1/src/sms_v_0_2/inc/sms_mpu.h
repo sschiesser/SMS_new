@@ -19,10 +19,10 @@
 /* ------
  * MACROS
  * ------ */
-#define SMS_MPU_SERVICE_UUID_1              (0x1C570000)
-#define SMS_MPU_SERVICE_UUID_2              (0x5ABE0000)
-#define SMS_MPU_SERVICE_UUID_3              (0x50300000)
-#define SMS_MPU_SERVICE_UUID_4              (0x11110000)
+#define SMS_MPU_SERVICE_UUID_1              (0x1C575ABE)
+#define SMS_MPU_SERVICE_UUID_2              (0x53501111)
+#define SMS_MPU_SERVICE_UUID_3              (0x00000000)
+#define SMS_MPU_SERVICE_UUID_4              (0x00000000)
 
 #define SMS_MPU_BLE_CHAR_LEN_G_A            (12)
 #define SMS_MPU_BLE_CHAR_LEN_G_A_C          (18)

@@ -21,10 +21,10 @@
  * MACROS
  * ------ */
 
-#define SMS_BUTTON_SERVICE_UUID_1           (0x1C570000)
-#define SMS_BUTTON_SERVICE_UUID_2	        (0x5ABE0000)
-#define SMS_BUTTON_SERVICE_UUID_3	        (0x53500000)
-#define SMS_BUTTON_SERVICE_UUID_4	        (0xBBBB0000)
+#define SMS_BUTTON_SERVICE_UUID_1           (0x1C575ABE)
+#define SMS_BUTTON_SERVICE_UUID_2	        (0x5350BBBB)
+#define SMS_BUTTON_SERVICE_UUID_3	        (0x000000000)
+#define SMS_BUTTON_SERVICE_UUID_4	        (0x00000000)
 
 #define SMS_BUTTON_BLE_CHAR_LEN             (1)
 

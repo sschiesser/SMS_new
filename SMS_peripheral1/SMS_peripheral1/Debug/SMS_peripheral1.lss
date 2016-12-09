@@ -3,35 +3,35 @@ SMS_peripheral1.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00010600  10008000  10008000  00008000  2**2
+  0 .text         000105fc  10008000  10008000  00008000  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .relocate     000000ac  10018600  10018600  00018600  2**2
+  1 .relocate     000000ac  100185fc  100185fc  000185fc  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00002ea0  100186ac  100186ac  000186ac  2**2
+  2 .bss          00002ea0  100186a8  100186a8  000186a8  2**2
                   ALLOC
-  3 .stack        00001804  1001b54c  1001b54c  000186ac  2**0
+  3 .stack        00001800  1001b548  1001b548  000186a8  2**0
                   ALLOC
-  4 .ARM.attributes 00000028  00000000  00000000  000186ac  2**0
+  4 .ARM.attributes 00000028  00000000  00000000  000186a8  2**0
                   CONTENTS, READONLY
-  5 .comment      000000b4  00000000  00000000  000186d4  2**0
+  5 .comment      000000b4  00000000  00000000  000186d0  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00050e78  00000000  00000000  00018788  2**0
+  6 .debug_info   00050e78  00000000  00000000  00018784  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000058ff  00000000  00000000  00069600  2**0
+  7 .debug_abbrev 000058ff  00000000  00000000  000695fc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    0000b986  00000000  00000000  0006eeff  2**0
+  8 .debug_loc    0000b9ff  00000000  00000000  0006eefb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000d68  00000000  00000000  0007a885  2**0
+  9 .debug_aranges 00000d68  00000000  00000000  0007a8fa  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000de0  00000000  00000000  0007b5ed  2**0
+ 10 .debug_ranges 00000de0  00000000  00000000  0007b662  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  00028e7a  00000000  00000000  0007c3cd  2**0
+ 11 .debug_macro  00028d0e  00000000  00000000  0007c442  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00018dbf  00000000  00000000  000a5247  2**0
+ 12 .debug_line   00018dc3  00000000  00000000  000a5150  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    001472e4  00000000  00000000  000be006  2**0
+ 13 .debug_str    001471ff  00000000  00000000  000bdf13  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002fb8  00000000  00000000  002052ec  2**2
+ 14 .debug_frame  00002fb8  00000000  00000000  00205114  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -144,13 +144,13 @@ void app_entry(void)
     return;
 }
 10008062:	bd10      	pop	{r4, pc}
-10008064:	10018600 	.word	0x10018600
-10008068:	10018600 	.word	0x10018600
-1000806c:	100186ac 	.word	0x100186ac
-10008070:	1001b54c 	.word	0x1001b54c
-10008074:	100186ac 	.word	0x100186ac
-10008078:	10018604 	.word	0x10018604
-1000807c:	100186b0 	.word	0x100186b0
+10008064:	100185fc 	.word	0x100185fc
+10008068:	100185fc 	.word	0x100185fc
+1000806c:	100186a8 	.word	0x100186a8
+10008070:	1001b548 	.word	0x1001b548
+10008074:	100186a8 	.word	0x100186a8
+10008078:	10018600 	.word	0x10018600
+1000807c:	100186ac 	.word	0x100186ac
 10008080:	100151a9 	.word	0x100151a9
 10008084:	1000f981 	.word	0x1000f981
 
@@ -169,9 +169,9 @@ void app_entry(void)
 1000809e:	2301      	movs	r3, #1
 100080a0:	7023      	strb	r3, [r4, #0]
 100080a2:	bd10      	pop	{r4, pc}
-100080a4:	100186ac 	.word	0x100186ac
+100080a4:	100186a8 	.word	0x100186a8
 100080a8:	00000000 	.word	0x00000000
-100080ac:	10018600 	.word	0x10018600
+100080ac:	100185fc 	.word	0x100185fc
 
 100080b0 <frame_dummy>:
 100080b0:	4b08      	ldr	r3, [pc, #32]	; (100080d4 <frame_dummy+0x24>)
@@ -193,9 +193,9 @@ void app_entry(void)
 100080d0:	4798      	blx	r3
 100080d2:	e7f9      	b.n	100080c8 <frame_dummy+0x18>
 100080d4:	00000000 	.word	0x00000000
-100080d8:	100186b0 	.word	0x100186b0
-100080dc:	10018600 	.word	0x10018600
-100080e0:	10018600 	.word	0x10018600
+100080d8:	100186ac 	.word	0x100186ac
+100080dc:	100185fc 	.word	0x100185fc
+100080e0:	100185fc 	.word	0x100185fc
 100080e4:	00000000 	.word	0x00000000
 
 100080e8 <delay_init>:
@@ -233,9 +233,9 @@ void delay_init(void)
 1000810e:	46c0      	nop			; (mov r8, r8)
 10008110:	1000c809 	.word	0x1000c809
 10008114:	10013135 	.word	0x10013135
-10008118:	10018604 	.word	0x10018604
+10008118:	10018600 	.word	0x10018600
 1000811c:	000f4240 	.word	0x000f4240
-10008120:	10018600 	.word	0x10018600
+10008120:	100185fc 	.word	0x100185fc
 10008124:	e000e010 	.word	0xe000e010
 
 10008128 <delay_cycles_ms>:
@@ -293,7 +293,7 @@ static inline void delay_cycles(const uint32_t n)
 	}
 }
 1000814a:	bd30      	pop	{r4, r5, pc}
-1000814c:	10018604 	.word	0x10018604
+1000814c:	10018600 	.word	0x10018600
 10008150:	e000e010 	.word	0xe000e010
 
 10008154 <aon_sleep_timer_get_config_defaults>:
@@ -386,7 +386,7 @@ static void aon_sleep_timer_isr_handler(void)
 100081a4:	bd10      	pop	{r4, pc}
 100081a6:	46c0      	nop			; (mov r8, r8)
 100081a8:	10008185 	.word	0x10008185
-100081ac:	100186c8 	.word	0x100186c8
+100081ac:	100186c4 	.word	0x100186c4
 
 100081b0 <aon_sleep_timer_register_callback>:
  *
@@ -400,7 +400,7 @@ void aon_sleep_timer_register_callback(aon_sleep_timer_callback_t fun)
 }
 100081b4:	4770      	bx	lr
 100081b6:	46c0      	nop			; (mov r8, r8)
-100081b8:	100186c8 	.word	0x100186c8
+100081b8:	100186c4 	.word	0x100186c4
 
 100081bc <aon_sleep_timer_unregister_callback>:
  * Unregisters and disable a callback function implemented by the user.
@@ -414,7 +414,7 @@ void aon_sleep_timer_unregister_callback(void)
 100081c0:	601a      	str	r2, [r3, #0]
 }
 100081c2:	4770      	bx	lr
-100081c4:	100186c8 	.word	0x100186c8
+100081c4:	100186c4 	.word	0x100186c4
 
 100081c8 <aon_sleep_timer_init>:
  *
@@ -1379,7 +1379,7 @@ static int set_int_enable(unsigned char enable)
 }
 10008548:	b002      	add	sp, #8
 1000854a:	bd10      	pop	{r4, pc}
-1000854c:	10018608 	.word	0x10018608
+1000854c:	10018604 	.word	0x10018604
 10008550:	1000aab9 	.word	0x1000aab9
 
 10008554 <mpu_get_temperature>:
@@ -1490,7 +1490,7 @@ int mpu_get_temperature(long *data, unsigned long *timestamp)
 100085de:	9801      	ldr	r0, [sp, #4]
 100085e0:	b005      	add	sp, #20
 100085e2:	bdf0      	pop	{r4, r5, r6, r7, pc}
-100085e4:	10018608 	.word	0x10018608
+100085e4:	10018604 	.word	0x10018604
 100085e8:	1000ab59 	.word	0x1000ab59
 100085ec:	1000b661 	.word	0x1000b661
 100085f0:	100141cd 	.word	0x100141cd
@@ -1858,7 +1858,7 @@ int mpu_reset_fifo(void)
 100087f2:	b002      	add	sp, #8
 100087f4:	bd10      	pop	{r4, pc}
 100087f6:	46c0      	nop			; (mov r8, r8)
-100087f8:	10018608 	.word	0x10018608
+100087f8:	10018604 	.word	0x10018604
 100087fc:	1000aab9 	.word	0x1000aab9
 10008800:	10008129 	.word	0x10008129
 
@@ -2001,7 +2001,7 @@ int mpu_set_gyro_fsr(unsigned short fsr)
 }
 10008898:	b002      	add	sp, #8
 1000889a:	bd10      	pop	{r4, pc}
-1000889c:	10018608 	.word	0x10018608
+1000889c:	10018604 	.word	0x10018604
 100088a0:	1000aab9 	.word	0x1000aab9
 
 100088a4 <mpu_get_accel_fsr>:
@@ -2084,7 +2084,7 @@ int mpu_get_accel_fsr(unsigned char *fsr)
 }
 100088e8:	0018      	movs	r0, r3
 100088ea:	4770      	bx	lr
-100088ec:	10018608 	.word	0x10018608
+100088ec:	10018604 	.word	0x10018604
 
 100088f0 <mpu_set_accel_fsr>:
  *  @brief      Set the accel full-scale range.
@@ -2219,7 +2219,7 @@ int mpu_set_accel_fsr(unsigned char fsr)
 }
 10008978:	b002      	add	sp, #8
 1000897a:	bd10      	pop	{r4, pc}
-1000897c:	10018608 	.word	0x10018608
+1000897c:	10018604 	.word	0x10018604
 10008980:	1000aab9 	.word	0x1000aab9
 
 10008984 <mpu_set_lpf>:
@@ -2377,7 +2377,7 @@ int mpu_set_lpf(unsigned short lpf)
 }
 10008a34:	b002      	add	sp, #8
 10008a36:	bd10      	pop	{r4, pc}
-10008a38:	10018608 	.word	0x10018608
+10008a38:	10018604 	.word	0x10018604
 10008a3c:	1000aab9 	.word	0x1000aab9
 
 10008a40 <mpu_get_sample_rate>:
@@ -2413,7 +2413,7 @@ int mpu_get_sample_rate(unsigned short *rate)
     return 0;
 }
 10008a56:	4770      	bx	lr
-10008a58:	10018608 	.word	0x10018608
+10008a58:	10018604 	.word	0x10018604
 
 10008a5c <mpu_set_compass_sample_rate>:
  *  mpu_get_compass_sample_rate to check the actual setting.
@@ -2500,7 +2500,7 @@ int mpu_set_compass_sample_rate(unsigned short rate)
 10008abe:	b003      	add	sp, #12
 10008ac0:	bd30      	pop	{r4, r5, pc}
 10008ac2:	46c0      	nop			; (mov r8, r8)
-10008ac4:	10018608 	.word	0x10018608
+10008ac4:	10018604 	.word	0x10018604
 10008ac8:	10013135 	.word	0x10013135
 10008acc:	1000aab9 	.word	0x1000aab9
 10008ad0:	10013249 	.word	0x10013249
@@ -2631,7 +2631,7 @@ int mpu_configure_fifo(unsigned char sensors)
 }
 10008b30:	0020      	movs	r0, r4
 10008b32:	bd70      	pop	{r4, r5, r6, pc}
-10008b34:	10018608 	.word	0x10018608
+10008b34:	10018604 	.word	0x10018604
 10008b38:	100084b1 	.word	0x100084b1
 10008b3c:	1000860d 	.word	0x1000860d
 
@@ -2975,7 +2975,7 @@ int mpu_read_fifo(short *gyro, short *accel, unsigned long *timestamp,
 10008cf2:	4691      	mov	r9, r2
 10008cf4:	bdf0      	pop	{r4, r5, r6, r7, pc}
 10008cf6:	46c0      	nop			; (mov r8, r8)
-10008cf8:	10018608 	.word	0x10018608
+10008cf8:	10018604 	.word	0x10018604
 10008cfc:	1000ab59 	.word	0x1000ab59
 10008d00:	1000860d 	.word	0x1000860d
 10008d04:	1000b661 	.word	0x1000b661
@@ -3250,7 +3250,7 @@ int mpu_set_bypass(unsigned char bypass_on)
 10008e72:	b003      	add	sp, #12
 10008e74:	bd30      	pop	{r4, r5, pc}
 10008e76:	46c0      	nop			; (mov r8, r8)
-10008e78:	10018608 	.word	0x10018608
+10008e78:	10018604 	.word	0x10018604
 10008e7c:	1000ab59 	.word	0x1000ab59
 10008e80:	1000aab9 	.word	0x1000aab9
 10008e84:	10008129 	.word	0x10008129
@@ -3355,7 +3355,7 @@ int mpu_set_int_latched(unsigned char enable)
 10008efe:	b003      	add	sp, #12
 10008f00:	bd30      	pop	{r4, r5, pc}
 10008f02:	46c0      	nop			; (mov r8, r8)
-10008f04:	10018608 	.word	0x10018608
+10008f04:	10018604 	.word	0x10018604
 10008f08:	1000aab9 	.word	0x1000aab9
 
 10008f0c <mpu_lp_accel_mode>:
@@ -3606,7 +3606,7 @@ int mpu_lp_accel_mode(unsigned short rate)
 1000902c:	b002      	add	sp, #8
 1000902e:	bd10      	pop	{r4, pc}
 10009030:	10008e89 	.word	0x10008e89
-10009034:	10018608 	.word	0x10018608
+10009034:	10018604 	.word	0x10018604
 10009038:	1000aab9 	.word	0x1000aab9
 1000903c:	1000ab59 	.word	0x1000ab59
 10009040:	10008ad5 	.word	0x10008ad5
@@ -3775,7 +3775,7 @@ int mpu_set_sample_rate(unsigned short rate)
 100090f6:	b003      	add	sp, #12
 100090f8:	bd30      	pop	{r4, r5, pc}
 100090fa:	46c0      	nop			; (mov r8, r8)
-100090fc:	10018608 	.word	0x10018608
+100090fc:	10018604 	.word	0x10018604
 10009100:	10008f0d 	.word	0x10008f0d
 10009104:	100163fa 	.word	0x100163fa
 10009108:	10013249 	.word	0x10013249
@@ -4128,7 +4128,7 @@ int mpu_set_sensors(unsigned char sensors)
 100092e6:	0028      	movs	r0, r5
 100092e8:	b003      	add	sp, #12
 100092ea:	bd30      	pop	{r4, r5, pc}
-100092ec:	10018608 	.word	0x10018608
+100092ec:	10018604 	.word	0x10018604
 100092f0:	1000aab9 	.word	0x1000aab9
 100092f4:	10008e89 	.word	0x10008e89
 100092f8:	1000ab59 	.word	0x1000ab59
@@ -4728,7 +4728,7 @@ static int setup_compass(void)
 100095ea:	b005      	add	sp, #20
 100095ec:	bd30      	pop	{r4, r5, pc}
 100095ee:	46c0      	nop			; (mov r8, r8)
-100095f0:	10018608 	.word	0x10018608
+100095f0:	10018604 	.word	0x10018604
 100095f4:	1000aab9 	.word	0x1000aab9
 100095f8:	10008129 	.word	0x10008129
 100095fc:	10015239 	.word	0x10015239
@@ -4846,7 +4846,7 @@ int mpu_write_mem(unsigned short mem_addr, unsigned short length,
 }
 1000969c:	b002      	add	sp, #8
 1000969e:	bd70      	pop	{r4, r5, r6, pc}
-100096a0:	10018608 	.word	0x10018608
+100096a0:	10018604 	.word	0x10018604
 100096a4:	1000aab9 	.word	0x1000aab9
 
 100096a8 <mpu_set_dmp_state>:
@@ -4981,7 +4981,7 @@ int mpu_set_dmp_state(unsigned char enable)
 1000972e:	b002      	add	sp, #8
 10009730:	bd70      	pop	{r4, r5, r6, pc}
 10009732:	46c0      	nop			; (mov r8, r8)
-10009734:	10018608 	.word	0x10018608
+10009734:	10018604 	.word	0x10018604
 10009738:	100084b1 	.word	0x100084b1
 1000973c:	10008d0d 	.word	0x10008d0d
 10009740:	10009045 	.word	0x10009045
@@ -5139,7 +5139,7 @@ int mpu_get_compass_reg(short *data, unsigned long *timestamp)
 100097f6:	b005      	add	sp, #20
 100097f8:	bdf0      	pop	{r4, r5, r6, r7, pc}
 100097fa:	46c0      	nop			; (mov r8, r8)
-100097fc:	10018608 	.word	0x10018608
+100097fc:	10018604 	.word	0x10018604
 10009800:	1000ab59 	.word	0x1000ab59
 10009804:	1000b661 	.word	0x1000b661
 
@@ -5161,7 +5161,7 @@ int mpu_get_compass_fsr(unsigned short *fsr)
 }
 10009810:	2000      	movs	r0, #0
 10009812:	4770      	bx	lr
-10009814:	10018608 	.word	0x10018608
+10009814:	10018604 	.word	0x10018604
 
 10009818 <dmp_set_fifo_rate>:
  *  Only used when DMP is on.
@@ -5258,7 +5258,7 @@ int dmp_set_fifo_rate(unsigned short rate)
 10009884:	00000216 	.word	0x00000216
 10009888:	10009631 	.word	0x10009631
 1000988c:	00000ac1 	.word	0x00000ac1
-10009890:	100186cc 	.word	0x100186cc
+10009890:	100186c8 	.word	0x100186c8
 
 10009894 <dmp_set_tap_thresh>:
  *  @param[in]  axis    1, 2, and 4 for XYZ accel, respectively.
@@ -6390,7 +6390,7 @@ int dmp_enable_feature(unsigned short mask)
 10009e78:	0000073d 	.word	0x0000073d
 10009e7c:	10009bf1 	.word	0x10009bf1
 10009e80:	10009c35 	.word	0x10009c35
-10009e84:	100186cc 	.word	0x100186cc
+10009e84:	100186c8 	.word	0x100186c8
 10009e88:	1000860d 	.word	0x1000860d
 
 10009e8c <sms_ble_pair_request_fn>:
@@ -6429,10 +6429,10 @@ at_ble_status_t sms_ble_pair_request_fn(void *params)
 10009eb6:	bd10      	pop	{r4, pc}
 10009eb8:	10016660 	.word	0x10016660
 10009ebc:	100154a1 	.word	0x100154a1
-10009ec0:	1001a330 	.word	0x1001a330
-10009ec4:	1001a184 	.word	0x1001a184
-10009ec8:	1001a331 	.word	0x1001a331
-10009ecc:	1001a220 	.word	0x1001a220
+10009ec0:	1001a32c 	.word	0x1001a32c
+10009ec4:	1001a180 	.word	0x1001a180
+10009ec8:	1001a32d 	.word	0x1001a32d
+10009ecc:	1001a21c 	.word	0x1001a21c
 10009ed0:	100168f8 	.word	0x100168f8
 10009ed4:	10015381 	.word	0x10015381
 
@@ -6480,10 +6480,10 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 10009efc:	bd10      	pop	{r4, pc}
 10009efe:	46c0      	nop			; (mov r8, r8)
 10009f00:	1000b719 	.word	0x1000b719
-10009f04:	1001a331 	.word	0x1001a331
-10009f08:	1001a330 	.word	0x1001a330
-10009f0c:	1001a184 	.word	0x1001a184
-10009f10:	1001a219 	.word	0x1001a219
+10009f04:	1001a32d 	.word	0x1001a32d
+10009f08:	1001a32c 	.word	0x1001a32c
+10009f0c:	1001a180 	.word	0x1001a180
+10009f10:	1001a215 	.word	0x1001a215
 
 10009f14 <sms_ble_indication_confirmed_fn>:
 
@@ -6529,10 +6529,10 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
 10009f38:	bd10      	pop	{r4, pc}
 10009f3a:	46c0      	nop			; (mov r8, r8)
 10009f3c:	1000b719 	.word	0x1000b719
-10009f40:	1001a331 	.word	0x1001a331
-10009f44:	1001a330 	.word	0x1001a330
-10009f48:	1001a184 	.word	0x1001a184
-10009f4c:	1001a219 	.word	0x1001a219
+10009f40:	1001a32d 	.word	0x1001a32d
+10009f44:	1001a32c 	.word	0x1001a32c
+10009f48:	1001a180 	.word	0x1001a180
+10009f4c:	1001a215 	.word	0x1001a215
 
 10009f50 <sms_ble_startup>:
 #include <stdio.h>
@@ -6553,7 +6553,7 @@ void sms_ble_startup(void)
 10009f5c:	4798      	blx	r3
 }
 10009f5e:	bd10      	pop	{r4, pc}
-10009f60:	1001a331 	.word	0x1001a331
+10009f60:	1001a32d 	.word	0x1001a32d
 10009f64:	1000af71 	.word	0x1000af71
 
 10009f68 <sms_ble_power_down>:
@@ -6699,8 +6699,8 @@ void sms_ble_power_down(void)
 1000a01a:	46c0      	nop			; (mov r8, r8)
 1000a01c:	10016948 	.word	0x10016948
 1000a020:	1000a9e9 	.word	0x1000a9e9
-1000a024:	1001a330 	.word	0x1001a330
-1000a028:	1001a219 	.word	0x1001a219
+1000a024:	1001a32c 	.word	0x1001a32c
+1000a028:	1001a215 	.word	0x1001a215
 1000a02c:	1000f701 	.word	0x1000f701
 1000a030:	10016660 	.word	0x10016660
 1000a034:	100154a1 	.word	0x100154a1
@@ -6711,12 +6711,12 @@ void sms_ble_power_down(void)
 1000a048:	100169c0 	.word	0x100169c0
 1000a04c:	100169c8 	.word	0x100169c8
 1000a050:	10016a20 	.word	0x10016a20
-1000a054:	1001a294 	.word	0x1001a294
+1000a054:	1001a290 	.word	0x1001a290
 1000a058:	1000b409 	.word	0x1000b409
 1000a05c:	10016a4c 	.word	0x10016a4c
-1000a060:	1001a21a 	.word	0x1001a21a
+1000a060:	1001a216 	.word	0x1001a216
 1000a064:	10010a69 	.word	0x10010a69
-1000a068:	1001a331 	.word	0x1001a331
+1000a068:	1001a32d 	.word	0x1001a32d
 1000a06c:	1000af71 	.word	0x1000af71
 
 1000a070 <sms_ble_adv_report_fn>:
@@ -6747,7 +6747,7 @@ at_ble_status_t sms_ble_adv_report_fn(void *params)
 }
 1000a088:	2000      	movs	r0, #0
 1000a08a:	bd10      	pop	{r4, pc}
-1000a08c:	1001a330 	.word	0x1001a330
+1000a08c:	1001a32c 	.word	0x1001a32c
 1000a090:	10016660 	.word	0x10016660
 1000a094:	100154a1 	.word	0x100154a1
 1000a098:	10016a84 	.word	0x10016a84
@@ -6795,8 +6795,8 @@ at_ble_status_t sms_ble_connected_fn(void *params)
 }
 1000a0cc:	2000      	movs	r0, #0
 1000a0ce:	bd10      	pop	{r4, pc}
-1000a0d0:	1001a330 	.word	0x1001a330
-1000a0d4:	1001a326 	.word	0x1001a326
+1000a0d0:	1001a32c 	.word	0x1001a32c
+1000a0d4:	1001a322 	.word	0x1001a322
 1000a0d8:	10016660 	.word	0x10016660
 1000a0dc:	100154a1 	.word	0x100154a1
 1000a0e0:	10016ab8 	.word	0x10016ab8
@@ -6843,7 +6843,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 }
 1000a110:	2000      	movs	r0, #0
 1000a112:	bd10      	pop	{r4, pc}
-1000a114:	1001a330 	.word	0x1001a330
+1000a114:	1001a32c 	.word	0x1001a32c
 1000a118:	10016ae8 	.word	0x10016ae8
 1000a11c:	1000a9e9 	.word	0x1000a9e9
 1000a120:	1000b495 	.word	0x1000b495
@@ -6926,7 +6926,7 @@ at_ble_status_t sms_ble_advertise(void)
 }
 1000a188:	b004      	add	sp, #16
 1000a18a:	bd10      	pop	{r4, pc}
-1000a18c:	1001a330 	.word	0x1001a330
+1000a18c:	1001a32c 	.word	0x1001a32c
 1000a190:	1000ed49 	.word	0x1000ed49
 1000a194:	10016660 	.word	0x10016660
 1000a198:	100154a1 	.word	0x100154a1
@@ -7032,15 +7032,15 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 1000a226:	2000      	movs	r0, #0
 1000a228:	b003      	add	sp, #12
 1000a22a:	bd30      	pop	{r4, r5, pc}
-1000a22c:	1001a330 	.word	0x1001a330
-1000a230:	1001a294 	.word	0x1001a294
+1000a22c:	1001a32c 	.word	0x1001a32c
+1000a230:	1001a290 	.word	0x1001a290
 1000a234:	1000b409 	.word	0x1000b409
 1000a238:	1000b495 	.word	0x1000b495
 1000a23c:	10016660 	.word	0x10016660
 1000a240:	100154a1 	.word	0x100154a1
-1000a244:	1001a184 	.word	0x1001a184
-1000a248:	1001a331 	.word	0x1001a331
-1000a24c:	1001a220 	.word	0x1001a220
+1000a244:	1001a180 	.word	0x1001a180
+1000a248:	1001a32d 	.word	0x1001a32d
+1000a24c:	1001a21c 	.word	0x1001a21c
 1000a250:	10016ba4 	.word	0x10016ba4
 1000a254:	10015381 	.word	0x10015381
 1000a258:	1000a129 	.word	0x1000a129
@@ -7385,18 +7385,18 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 1000a3da:	b006      	add	sp, #24
 1000a3dc:	bd70      	pop	{r4, r5, r6, pc}
 1000a3de:	46c0      	nop			; (mov r8, r8)
-1000a3e0:	1001a330 	.word	0x1001a330
-1000a3e4:	1001a34c 	.word	0x1001a34c
-1000a3e8:	1001a180 	.word	0x1001a180
-1000a3ec:	1001a220 	.word	0x1001a220
-1000a3f0:	1001a21c 	.word	0x1001a21c
-1000a3f4:	1001a294 	.word	0x1001a294
-1000a3f8:	1001a188 	.word	0x1001a188
+1000a3e0:	1001a32c 	.word	0x1001a32c
+1000a3e4:	1001a348 	.word	0x1001a348
+1000a3e8:	1001a17c 	.word	0x1001a17c
+1000a3ec:	1001a21c 	.word	0x1001a21c
+1000a3f0:	1001a218 	.word	0x1001a218
+1000a3f4:	1001a290 	.word	0x1001a290
+1000a3f8:	1001a184 	.word	0x1001a184
 1000a3fc:	100111e5 	.word	0x100111e5
 1000a400:	10016bf8 	.word	0x10016bf8
 1000a404:	10015381 	.word	0x10015381
 1000a408:	1000c3d9 	.word	0x1000c3d9
-1000a40c:	1001a21a 	.word	0x1001a21a
+1000a40c:	1001a216 	.word	0x1001a216
 1000a410:	10011385 	.word	0x10011385
 
 1000a414 <sms_ble_primary_service_define>:
@@ -7447,328 +7447,340 @@ void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *s
 1000a44c:	2802      	cmp	r0, #2
 1000a44e:	d019      	beq.n	1000a484 <sms_ble_service_init+0x4c>
 1000a450:	e025      	b.n	1000a49e <sms_ble_service_init+0x66>
-        uuid[9] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 16) & 0xFF);
-        uuid[11] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 24) & 0xFF);
-        uuid[12] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 16) & 0xFF);
-1000a452:	24bb      	movs	r4, #187	; 0xbb
-        uuid[6] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
-        uuid[8] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3) & 0xFF);
-        uuid[9] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 16) & 0xFF);
-        uuid[11] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 24) & 0xFF);
-1000a454:	2550      	movs	r5, #80	; 0x50
-        uuid[5] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
-        uuid[8] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3) & 0xFF);
-        uuid[9] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 16) & 0xFF);
-1000a456:	2630      	movs	r6, #48	; 0x30
-        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
-        uuid[4] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2) & 0xFF);
-        uuid[5] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
-1000a458:	275a      	movs	r7, #90	; 0x5a
-        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
-        uuid[4] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2) & 0xFF);
-        uuid[5] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
-1000a45a:	20be      	movs	r0, #190	; 0xbe
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
+        uuid[6] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 8) & 0xFF);
+1000a452:	23bb      	movs	r3, #187	; 0xbb
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 16) & 0xFF);
+1000a454:	2450      	movs	r4, #80	; 0x50
+        handle = 1;
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_2 >> 24) & 0xFF);
+1000a456:	2553      	movs	r5, #83	; 0x53
         case BLE_SERV_BUTTON:
         handle = 1;
-        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
-        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
-1000a45c:	231c      	movs	r3, #28
-1000a45e:	4698      	mov	r8, r3
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
+1000a458:	26be      	movs	r6, #190	; 0xbe
     switch(type) {
         case BLE_SERV_BUTTON:
         handle = 1;
-        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1) & 0xFF);
-        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
-1000a460:	333b      	adds	r3, #59	; 0x3b
-1000a462:	4699      	mov	r9, r3
-        uuid[11] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3 >> 24) & 0xFF);
-        uuid[12] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 16) & 0xFF);
-        uuid[15] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 8) & 0xFF);
+1000a45a:	275a      	movs	r7, #90	; 0x5a
+    uint8_t char_size = 0;
+    switch(type) {
+        case BLE_SERV_BUTTON:
+        handle = 1;
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 16) & 0xFF);
+1000a45c:	2057      	movs	r0, #87	; 0x57
+    uint8_t uuid[16] = {0};
+    uint8_t char_size = 0;
+    switch(type) {
+        case BLE_SERV_BUTTON:
+        handle = 1;
+        uuid[0] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_1 >> 24) & 0xFF);
+1000a45e:	221c      	movs	r2, #28
+1000a460:	4690      	mov	r8, r2
+        uuid[11] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_3) & 0xFF);
+        uuid[12] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4) & 0xFF);
         char_size = 1;
-1000a464:	3b56      	subs	r3, #86	; 0x56
-1000a466:	9301      	str	r3, [sp, #4]
-1000a468:	e022      	b.n	1000a4b0 <sms_ble_service_init+0x78>
-        uuid[9] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 16) & 0xFF);
-        uuid[11] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 24) & 0xFF);
-        uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
-1000a46a:	24ee      	movs	r4, #238	; 0xee
-        uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
-        uuid[8] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3) & 0xFF);
-        uuid[9] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 16) & 0xFF);
-        uuid[11] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 24) & 0xFF);
-1000a46c:	2550      	movs	r5, #80	; 0x50
-        uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
-        uuid[8] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3) & 0xFF);
-        uuid[9] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 16) & 0xFF);
-1000a46e:	2630      	movs	r6, #48	; 0x30
-        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
-        uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2) & 0xFF);
-        uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
-1000a470:	275a      	movs	r7, #90	; 0x5a
-        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
-        uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2) & 0xFF);
-        uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
-1000a472:	20be      	movs	r0, #190	; 0xbe
+1000a462:	3a1b      	subs	r2, #27
+1000a464:	9201      	str	r2, [sp, #4]
+    at_ble_handle_t handle = 0;
+    uint8_t uuid[16] = {0};
+    uint8_t char_size = 0;
+    switch(type) {
+        case BLE_SERV_BUTTON:
+        handle = 1;
+1000a466:	4691      	mov	r9, r2
+1000a468:	e023      	b.n	1000a4b2 <sms_ble_service_init+0x7a>
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
+        uuid[6] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 8) & 0xFF);
+1000a46a:	23ee      	movs	r3, #238	; 0xee
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 16) & 0xFF);
+1000a46c:	2450      	movs	r4, #80	; 0x50
+        handle = 2;
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_2 >> 24) & 0xFF);
+1000a46e:	2553      	movs	r5, #83	; 0x53
         case BLE_SERV_PRESSURE:
         handle = 2;
-        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
-        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
-1000a474:	231c      	movs	r3, #28
-1000a476:	4698      	mov	r8, r3
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
+1000a470:	26be      	movs	r6, #190	; 0xbe
         
         case BLE_SERV_PRESSURE:
         handle = 2;
-        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1) & 0xFF);
-        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
-1000a478:	333b      	adds	r3, #59	; 0x3b
-1000a47a:	4699      	mov	r9, r3
-        uuid[11] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3 >> 24) & 0xFF);
-        uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
-        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
-        char_size = 8;
-1000a47c:	3b4f      	subs	r3, #79	; 0x4f
-1000a47e:	9301      	str	r3, [sp, #4]
-        uuid[15] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 8) & 0xFF);
+1000a472:	275a      	movs	r7, #90	; 0x5a
+        break;
+        
+        case BLE_SERV_PRESSURE:
+        handle = 2;
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 16) & 0xFF);
+1000a474:	2057      	movs	r0, #87	; 0x57
         char_size = 1;
         break;
         
         case BLE_SERV_PRESSURE:
         handle = 2;
-1000a480:	3b06      	subs	r3, #6
-        uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
-        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[0] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_1 >> 24) & 0xFF);
+1000a476:	221c      	movs	r2, #28
+1000a478:	4690      	mov	r8, r2
+        uuid[11] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_3) & 0xFF);
+        uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
+        char_size = 8;
+1000a47a:	3a14      	subs	r2, #20
+1000a47c:	9201      	str	r2, [sp, #4]
+        uuid[15] = (uint8_t) ((SMS_BUTTON_SERVICE_UUID_4) & 0xFF);
+        char_size = 1;
+        break;
+        
+        case BLE_SERV_PRESSURE:
+        handle = 2;
+1000a47e:	3a06      	subs	r2, #6
+1000a480:	4691      	mov	r9, r2
+        uuid[12] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
         char_size = 8;
         break;
-1000a482:	e015      	b.n	1000a4b0 <sms_ble_service_init+0x78>
-        uuid[9] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 16) & 0xFF);
-        uuid[11] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 24) & 0xFF);
-        uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
-1000a484:	2411      	movs	r4, #17
-        uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
-        uuid[8] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3) & 0xFF);
-        uuid[9] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 16) & 0xFF);
-        uuid[11] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 24) & 0xFF);
-1000a486:	2550      	movs	r5, #80	; 0x50
-        uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
-        uuid[8] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3) & 0xFF);
-        uuid[9] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 8) & 0xFF);
-        uuid[10] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 16) & 0xFF);
-1000a488:	2630      	movs	r6, #48	; 0x30
-        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
-        uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2) & 0xFF);
-        uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
-        uuid[7] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
-1000a48a:	275a      	movs	r7, #90	; 0x5a
-        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
-        uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2) & 0xFF);
-        uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 8) & 0xFF);
-        uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
-1000a48c:	20be      	movs	r0, #190	; 0xbe
+1000a482:	e016      	b.n	1000a4b2 <sms_ble_service_init+0x7a>
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
+        uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 8) & 0xFF);
+1000a484:	2311      	movs	r3, #17
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
+        uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
+1000a486:	2450      	movs	r4, #80	; 0x50
+        handle = 3;
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
+        uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
+1000a488:	2553      	movs	r5, #83	; 0x53
         case BLE_SERV_MPU:
         handle = 3;
-        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
-        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
-        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
-1000a48e:	231c      	movs	r3, #28
-1000a490:	4698      	mov	r8, r3
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
+        uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
+1000a48a:	26be      	movs	r6, #190	; 0xbe
         
         case BLE_SERV_MPU:
         handle = 3;
-        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
-        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
-        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
-1000a492:	333b      	adds	r3, #59	; 0x3b
-1000a494:	4699      	mov	r9, r3
-        uuid[11] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 24) & 0xFF);
-        uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
-        uuid[15] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 24) & 0xFF);
-        char_size = 20;
-1000a496:	3b43      	subs	r3, #67	; 0x43
-1000a498:	9301      	str	r3, [sp, #4]
-        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4 >> 24) & 0xFF);
-        char_size = 8;
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+        uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
+1000a48c:	275a      	movs	r7, #90	; 0x5a
         break;
         
         case BLE_SERV_MPU:
         handle = 3;
-1000a49a:	3b11      	subs	r3, #17
-        uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
-        uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
-        uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
-        uuid[15] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+        uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
+1000a48e:	2057      	movs	r0, #87	; 0x57
+        char_size = 8;
+        break;
+        
+        case BLE_SERV_MPU:
+        handle = 3;
+        uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
+1000a490:	221c      	movs	r2, #28
+1000a492:	4690      	mov	r8, r2
+        uuid[11] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3) & 0xFF);
+        uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
+        char_size = 20;
+1000a494:	3a08      	subs	r2, #8
+1000a496:	9201      	str	r2, [sp, #4]
+        uuid[15] = (uint8_t) ((SMS_PRESSURE_SERVICE_UUID_4) & 0xFF);
+        char_size = 8;
+        break;
+        
+        case BLE_SERV_MPU:
+        handle = 3;
+1000a498:	3a11      	subs	r2, #17
+1000a49a:	4691      	mov	r9, r2
+        uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 24) & 0xFF);
+        uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
+        uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
+        uuid[15] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
         char_size = 20;
         break;
-1000a49c:	e008      	b.n	1000a4b0 <sms_ble_service_init+0x78>
+1000a49c:	e009      	b.n	1000a4b2 <sms_ble_service_init+0x7a>
 
 
 void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *service, uint8_t *value)
 {
     at_ble_handle_t handle = 0;
     uint8_t uuid[16] = {0};
-1000a49e:	2400      	movs	r4, #0
-1000a4a0:	2500      	movs	r5, #0
-1000a4a2:	2600      	movs	r6, #0
-1000a4a4:	2700      	movs	r7, #0
-1000a4a6:	2000      	movs	r0, #0
-1000a4a8:	2300      	movs	r3, #0
-1000a4aa:	4698      	mov	r8, r3
-1000a4ac:	4699      	mov	r9, r3
+1000a49e:	2300      	movs	r3, #0
+1000a4a0:	2400      	movs	r4, #0
+1000a4a2:	2500      	movs	r5, #0
+1000a4a4:	2600      	movs	r6, #0
+1000a4a6:	2700      	movs	r7, #0
+1000a4a8:	2000      	movs	r0, #0
+1000a4aa:	2200      	movs	r2, #0
+1000a4ac:	4690      	mov	r8, r2
     uint8_t char_size = 0;
-1000a4ae:	9301      	str	r3, [sp, #4]
+1000a4ae:	9201      	str	r2, [sp, #4]
+}
+
+
+void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *service, uint8_t *value)
+{
+    at_ble_handle_t handle = 0;
+1000a4b0:	4691      	mov	r9, r2
         
         default:
         break;
     }
     //SMS button service characteristic
     service->serv_handle = handle;
-1000a4b0:	824b      	strh	r3, [r1, #18]
+1000a4b2:	464a      	mov	r2, r9
+1000a4b4:	824a      	strh	r2, [r1, #18]
     service->serv_uuid.type = AT_BLE_UUID_128;
-1000a4b2:	2302      	movs	r3, #2
-1000a4b4:	700b      	strb	r3, [r1, #0]
+1000a4b6:	2202      	movs	r2, #2
+1000a4b8:	700a      	strb	r2, [r1, #0]
     service->serv_uuid.uuid[0] = uuid[0];
-1000a4b6:	2300      	movs	r3, #0
-1000a4b8:	704b      	strb	r3, [r1, #1]
+1000a4ba:	4642      	mov	r2, r8
+1000a4bc:	704a      	strb	r2, [r1, #1]
     service->serv_uuid.uuid[1] = uuid[1];
-1000a4ba:	708b      	strb	r3, [r1, #2]
+1000a4be:	7088      	strb	r0, [r1, #2]
     service->serv_uuid.uuid[2] = uuid[2];
-1000a4bc:	464a      	mov	r2, r9
-1000a4be:	70ca      	strb	r2, [r1, #3]
+1000a4c0:	70cf      	strb	r7, [r1, #3]
     service->serv_uuid.uuid[3] = uuid[3];
-1000a4c0:	4642      	mov	r2, r8
-1000a4c2:	710a      	strb	r2, [r1, #4]
+1000a4c2:	710e      	strb	r6, [r1, #4]
     service->serv_uuid.uuid[4] = uuid[4];
-1000a4c4:	714b      	strb	r3, [r1, #5]
+1000a4c4:	714d      	strb	r5, [r1, #5]
     service->serv_uuid.uuid[5] = uuid[5];
-1000a4c6:	718b      	strb	r3, [r1, #6]
+1000a4c6:	718c      	strb	r4, [r1, #6]
     service->serv_uuid.uuid[6] = uuid[6];
-1000a4c8:	71c8      	strb	r0, [r1, #7]
+1000a4c8:	71cb      	strb	r3, [r1, #7]
     service->serv_uuid.uuid[7] = uuid[7];
-1000a4ca:	720f      	strb	r7, [r1, #8]
+1000a4ca:	720b      	strb	r3, [r1, #8]
     service->serv_uuid.uuid[8] = uuid[8];
-1000a4cc:	724b      	strb	r3, [r1, #9]
+1000a4cc:	2300      	movs	r3, #0
+1000a4ce:	724b      	strb	r3, [r1, #9]
     service->serv_uuid.uuid[9] = uuid[9];
-1000a4ce:	728b      	strb	r3, [r1, #10]
+1000a4d0:	728b      	strb	r3, [r1, #10]
     service->serv_uuid.uuid[10] = uuid[10];
-1000a4d0:	72ce      	strb	r6, [r1, #11]
+1000a4d2:	72cb      	strb	r3, [r1, #11]
     service->serv_uuid.uuid[11] = uuid[11];
-1000a4d2:	730d      	strb	r5, [r1, #12]
+1000a4d4:	730b      	strb	r3, [r1, #12]
     service->serv_uuid.uuid[12] = uuid[12];
-1000a4d4:	734b      	strb	r3, [r1, #13]
+1000a4d6:	734b      	strb	r3, [r1, #13]
     service->serv_uuid.uuid[13] = uuid[13];
-1000a4d6:	738b      	strb	r3, [r1, #14]
+1000a4d8:	738b      	strb	r3, [r1, #14]
     service->serv_uuid.uuid[14] = uuid[14];
-1000a4d8:	73cc      	strb	r4, [r1, #15]
+1000a4da:	73cb      	strb	r3, [r1, #15]
     service->serv_uuid.uuid[15] = uuid[15];
-1000a4da:	740c      	strb	r4, [r1, #16]
+1000a4dc:	740b      	strb	r3, [r1, #16]
     
     #   if SMS_SENDING_WITH_ACK == true
     service->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_INDICATE); // properties
     #   else
     service->serv_chars.properties = (AT_BLE_CHAR_READ | AT_BLE_CHAR_NOTIFY); // properties
-1000a4dc:	2412      	movs	r4, #18
-1000a4de:	850c      	strh	r4, [r1, #40]	; 0x28
+1000a4de:	2412      	movs	r4, #18
+1000a4e0:	850c      	strh	r4, [r1, #40]	; 0x28
     #   endif
     service->serv_chars.init_value = value; // value
-1000a4e0:	4662      	mov	r2, ip
-1000a4e2:	62ca      	str	r2, [r1, #44]	; 0x2c
+1000a4e2:	4662      	mov	r2, ip
+1000a4e4:	62ca      	str	r2, [r1, #44]	; 0x2c
     service->serv_chars.value_init_len = char_size * sizeof(uint8_t);
-1000a4e4:	466a      	mov	r2, sp
-1000a4e6:	8892      	ldrh	r2, [r2, #4]
-1000a4e8:	860a      	strh	r2, [r1, #48]	; 0x30
+1000a4e6:	466a      	mov	r2, sp
+1000a4e8:	8892      	ldrh	r2, [r2, #4]
+1000a4ea:	860a      	strh	r2, [r1, #48]	; 0x30
     service->serv_chars.value_max_len = char_size * sizeof(uint8_t);
-1000a4ea:	864a      	strh	r2, [r1, #50]	; 0x32
+1000a4ec:	864a      	strh	r2, [r1, #50]	; 0x32
     service->serv_chars.value_permissions = (AT_BLE_ATTR_READABLE_NO_AUTHN_NO_AUTHR | AT_BLE_ATTR_WRITABLE_NO_AUTHN_NO_AUTHR); // permissions
-1000a4ec:	2011      	movs	r0, #17
-1000a4ee:	2234      	movs	r2, #52	; 0x34
-1000a4f0:	5488      	strb	r0, [r1, r2]
+1000a4ee:	2011      	movs	r0, #17
+1000a4f0:	2234      	movs	r2, #52	; 0x34
+1000a4f2:	5488      	strb	r0, [r1, r2]
     service->serv_chars.user_desc = NULL; //user defined name
-1000a4f2:	638b      	str	r3, [r1, #56]	; 0x38
+1000a4f4:	638b      	str	r3, [r1, #56]	; 0x38
     service->serv_chars.user_desc_len = 0;
-1000a4f4:	2200      	movs	r2, #0
-1000a4f6:	878b      	strh	r3, [r1, #60]	; 0x3c
+1000a4f6:	2200      	movs	r2, #0
+1000a4f8:	878b      	strh	r3, [r1, #60]	; 0x3c
     service->serv_chars.user_desc_max_len = 0;
-1000a4f8:	87cb      	strh	r3, [r1, #62]	; 0x3e
+1000a4fa:	87cb      	strh	r3, [r1, #62]	; 0x3e
     service->serv_chars.user_desc_permissions = AT_BLE_ATTR_NO_PERMISSIONS; // user description permissions
-1000a4fa:	3033      	adds	r0, #51	; 0x33
-1000a4fc:	540a      	strb	r2, [r1, r0]
+1000a4fc:	3033      	adds	r0, #51	; 0x33
+1000a4fe:	540a      	strb	r2, [r1, r0]
     service->serv_chars.client_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS; // client config permissions
-1000a4fe:	3001      	adds	r0, #1
-1000a500:	540a      	strb	r2, [r1, r0]
+1000a500:	3001      	adds	r0, #1
+1000a502:	540a      	strb	r2, [r1, r0]
     service->serv_chars.server_config_permissions = AT_BLE_ATTR_NO_PERMISSIONS; // server config permissions
-1000a502:	3001      	adds	r0, #1
-1000a504:	540a      	strb	r2, [r1, r0]
+1000a504:	3001      	adds	r0, #1
+1000a506:	540a      	strb	r2, [r1, r0]
     service->serv_chars.user_desc_handle = 0; // user description handles
-1000a506:	2248      	movs	r2, #72	; 0x48
-1000a508:	528b      	strh	r3, [r1, r2]
+1000a508:	2248      	movs	r2, #72	; 0x48
+1000a50a:	528b      	strh	r3, [r1, r2]
     service->serv_chars.client_config_handle = 0; // client config handles
-1000a50a:	3202      	adds	r2, #2
-1000a50c:	528b      	strh	r3, [r1, r2]
+1000a50c:	3202      	adds	r2, #2
+1000a50e:	528b      	strh	r3, [r1, r2]
     service->serv_chars.server_config_handle = 0; // server config handles
-1000a50e:	3202      	adds	r2, #2
-1000a510:	528b      	strh	r3, [r1, r2]
+1000a510:	3202      	adds	r2, #2
+1000a512:	528b      	strh	r3, [r1, r2]
     
     service->serv_chars.presentation_format = NULL; //presentation format
-1000a512:	640b      	str	r3, [r1, #64]	; 0x40
-1000a514:	b003      	add	sp, #12
-1000a516:	bc0c      	pop	{r2, r3}
-1000a518:	4690      	mov	r8, r2
-1000a51a:	4699      	mov	r9, r3
-1000a51c:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000a51e:	46c0      	nop			; (mov r8, r8)
+1000a514:	640b      	str	r3, [r1, #64]	; 0x40
+1000a516:	b003      	add	sp, #12
+1000a518:	bc0c      	pop	{r2, r3}
+1000a51a:	4690      	mov	r8, r2
+1000a51c:	4699      	mov	r9, r3
+1000a51e:	bdf0      	pop	{r4, r5, r6, r7, pc}
 
 1000a520 <sms_button_bt0_callback>:
         gpio_disable_callback(btn1_instance.gpio_pin);
@@ -7796,8 +7808,8 @@ void sms_button_bt0_callback(void)
 }
 1000a538:	bd10      	pop	{r4, pc}
 1000a53a:	46c0      	nop			; (mov r8, r8)
-1000a53c:	1001a318 	.word	0x1001a318
-1000a540:	1001a180 	.word	0x1001a180
+1000a53c:	1001a314 	.word	0x1001a314
+1000a540:	1001a17c 	.word	0x1001a17c
 1000a544:	1000f435 	.word	0x1000f435
 
 1000a548 <sms_button_bt1_callback>:
@@ -7822,8 +7834,8 @@ void sms_button_bt1_callback(void)
 1000a560:	47a0      	blx	r4
 }
 1000a562:	bd10      	pop	{r4, pc}
-1000a564:	1001a318 	.word	0x1001a318
-1000a568:	1001a21c 	.word	0x1001a21c
+1000a564:	1001a314 	.word	0x1001a314
+1000a568:	1001a218 	.word	0x1001a218
 1000a56c:	1000f435 	.word	0x1000f435
 
 1000a570 <sms_button_configure_gpio>:
@@ -7932,13 +7944,13 @@ void sms_button_configure_gpio(void)
 1000a5f8:	bd10      	pop	{r4, pc}
 1000a5fa:	46c0      	nop			; (mov r8, r8)
 1000a5fc:	1000c171 	.word	0x1000c171
-1000a600:	1001a180 	.word	0x1001a180
+1000a600:	1001a17c 	.word	0x1001a17c
 1000a604:	1000c181 	.word	0x1000c181
 1000a608:	10016660 	.word	0x10016660
 1000a60c:	100154a1 	.word	0x100154a1
 1000a610:	10016c78 	.word	0x10016c78
 1000a614:	10015381 	.word	0x10015381
-1000a618:	1001a21c 	.word	0x1001a21c
+1000a618:	1001a218 	.word	0x1001a218
 1000a61c:	10016cb0 	.word	0x10016cb0
 1000a620:	10016ce8 	.word	0x10016ce8
 
@@ -7971,10 +7983,10 @@ void sms_button_register_callbacks(void)
 }
 1000a63c:	bd10      	pop	{r4, pc}
 1000a63e:	46c0      	nop			; (mov r8, r8)
-1000a640:	1001a180 	.word	0x1001a180
+1000a640:	1001a17c 	.word	0x1001a17c
 1000a644:	1000a521 	.word	0x1000a521
 1000a648:	1000c5b1 	.word	0x1000c5b1
-1000a64c:	1001a21c 	.word	0x1001a21c
+1000a64c:	1001a218 	.word	0x1001a218
 1000a650:	1000a549 	.word	0x1000a549
 
 1000a654 <sms_button_get_state>:
@@ -8491,29 +8503,29 @@ int sms_button_fn(enum sms_btn_ids btn)
     return 0;
 }
 1000a886:	bd70      	pop	{r4, r5, r6, pc}
-1000a888:	1001a220 	.word	0x1001a220
+1000a888:	1001a21c 	.word	0x1001a21c
 1000a88c:	1000a655 	.word	0x1000a655
 1000a890:	10016d5c 	.word	0x10016d5c
 1000a894:	1000a9e9 	.word	0x1000a9e9
 1000a898:	10016d70 	.word	0x10016d70
-1000a89c:	1001a330 	.word	0x1001a330
-1000a8a0:	1001a184 	.word	0x1001a184
-1000a8a4:	1001a331 	.word	0x1001a331
-1000a8a8:	1001a34e 	.word	0x1001a34e
+1000a89c:	1001a32c 	.word	0x1001a32c
+1000a8a0:	1001a180 	.word	0x1001a180
+1000a8a4:	1001a32d 	.word	0x1001a32d
+1000a8a8:	1001a34a 	.word	0x1001a34a
 1000a8ac:	1000b6b9 	.word	0x1000b6b9
-1000a8b0:	1001a294 	.word	0x1001a294
+1000a8b0:	1001a290 	.word	0x1001a290
 1000a8b4:	10016660 	.word	0x10016660
 1000a8b8:	100154a1 	.word	0x100154a1
 1000a8bc:	10016d84 	.word	0x10016d84
 1000a8c0:	10015381 	.word	0x10015381
 1000a8c4:	1000b409 	.word	0x1000b409
-1000a8c8:	1001a180 	.word	0x1001a180
+1000a8c8:	1001a17c 	.word	0x1001a17c
 1000a8cc:	1000a261 	.word	0x1000a261
-1000a8d0:	1001a21c 	.word	0x1001a21c
+1000a8d0:	1001a218 	.word	0x1001a218
 1000a8d4:	10016dac 	.word	0x10016dac
 1000a8d8:	10016dd4 	.word	0x10016dd4
 1000a8dc:	10016dfc 	.word	0x10016dfc
-1000a8e0:	1001a219 	.word	0x1001a219
+1000a8e0:	1001a215 	.word	0x1001a215
 
 1000a8e4 <sms_button_toggle_interrupt>:
     else return BUTTON_STATE_NONE;
@@ -8566,10 +8578,10 @@ void sms_button_toggle_interrupt(enum sms_btn_int_tog tog0, enum sms_btn_int_tog
 }
 1000a91c:	bd10      	pop	{r4, pc}
 1000a91e:	46c0      	nop			; (mov r8, r8)
-1000a920:	1001a180 	.word	0x1001a180
+1000a920:	1001a17c 	.word	0x1001a17c
 1000a924:	1000c681 	.word	0x1000c681
 1000a928:	1000c6dd 	.word	0x1000c6dd
-1000a92c:	1001a21c 	.word	0x1001a21c
+1000a92c:	1001a218 	.word	0x1001a218
 
 1000a930 <sms_button_define_services>:
     send_plf_int_msg_ind(btn1_instance.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
@@ -8621,14 +8633,14 @@ void sms_button_define_services(void)
     }
 1000a970:	b002      	add	sp, #8
 1000a972:	bd10      	pop	{r4, pc}
-1000a974:	1001a224 	.word	0x1001a224
+1000a974:	1001a220 	.word	0x1001a220
 1000a978:	1000a439 	.word	0x1000a439
 1000a97c:	1000a415 	.word	0x1000a415
 1000a980:	10016660 	.word	0x10016660
 1000a984:	100154a1 	.word	0x100154a1
 1000a988:	10016e20 	.word	0x10016e20
 1000a98c:	10015381 	.word	0x10015381
-1000a990:	1001a220 	.word	0x1001a220
+1000a990:	1001a21c 	.word	0x1001a21c
 1000a994:	10016e64 	.word	0x10016e64
 
 1000a998 <sms_monitor_configure_gpio>:
@@ -8716,11 +8728,11 @@ void sms_monitor_get_states(const char *label)
 1000aa1e:	46c0      	nop			; (mov r8, r8)
 1000aa20:	10016660 	.word	0x10016660
 1000aa24:	100154a1 	.word	0x100154a1
-1000aa28:	1001a330 	.word	0x1001a330
-1000aa2c:	1001a184 	.word	0x1001a184
-1000aa30:	1001a331 	.word	0x1001a331
-1000aa34:	1001a218 	.word	0x1001a218
-1000aa38:	1001a220 	.word	0x1001a220
+1000aa28:	1001a32c 	.word	0x1001a32c
+1000aa2c:	1001a180 	.word	0x1001a180
+1000aa30:	1001a32d 	.word	0x1001a32d
+1000aa34:	1001a214 	.word	0x1001a214
+1000aa38:	1001a21c 	.word	0x1001a21c
 1000aa3c:	10016ecc 	.word	0x10016ecc
 1000aa40:	10015381 	.word	0x10015381
 
@@ -8803,10 +8815,10 @@ static inline void i2c_enable(I2c *const i2c_module)
 1000aa98:	b007      	add	sp, #28
 1000aa9a:	bd30      	pop	{r4, r5, pc}
 1000aa9c:	100151f5 	.word	0x100151f5
-1000aaa0:	1001a338 	.word	0x1001a338
-1000aaa4:	1001a31c 	.word	0x1001a31c
+1000aaa0:	1001a334 	.word	0x1001a334
+1000aaa4:	1001a318 	.word	0x1001a318
 1000aaa8:	100083b9 	.word	0x100083b9
-1000aaac:	1001a328 	.word	0x1001a328
+1000aaac:	1001a324 	.word	0x1001a324
 1000aab0:	100083d1 	.word	0x100083d1
 1000aab4:	40003000 	.word	0x40003000
 
@@ -8917,10 +8929,10 @@ int sms_i2c_master_write(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len,
 1000ab38:	100154a1 	.word	0x100154a1
 1000ab3c:	10016f0c 	.word	0x10016f0c
 1000ab40:	10015381 	.word	0x10015381
-1000ab44:	1001a338 	.word	0x1001a338
+1000ab44:	1001a334 	.word	0x1001a334
 1000ab48:	10016f38 	.word	0x10016f38
 1000ab4c:	000003e9 	.word	0x000003e9
-1000ab50:	1001a328 	.word	0x1001a328
+1000ab50:	1001a324 	.word	0x1001a324
 1000ab54:	10008469 	.word	0x10008469
 
 1000ab58 <sms_i2c_master_read>:
@@ -9093,11 +9105,11 @@ int sms_i2c_master_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, 
 1000ac10:	100154a1 	.word	0x100154a1
 1000ac14:	10016f40 	.word	0x10016f40
 1000ac18:	10015381 	.word	0x10015381
-1000ac1c:	1001a338 	.word	0x1001a338
-1000ac20:	1001a31c 	.word	0x1001a31c
+1000ac1c:	1001a334 	.word	0x1001a334
+1000ac20:	1001a318 	.word	0x1001a318
 1000ac24:	000003e9 	.word	0x000003e9
 1000ac28:	1000848d 	.word	0x1000848d
-1000ac2c:	1001a328 	.word	0x1001a328
+1000ac2c:	1001a324 	.word	0x1001a324
 1000ac30:	10008445 	.word	0x10008445
 1000ac34:	10016f38 	.word	0x10016f38
 
@@ -9123,7 +9135,7 @@ void sms_mpu_interrupt_callback(void)
 }
 1000ac4c:	bd10      	pop	{r4, pc}
 1000ac4e:	46c0      	nop			; (mov r8, r8)
-1000ac50:	1001a318 	.word	0x1001a318
+1000ac50:	1001a314 	.word	0x1001a314
 1000ac54:	1000f435 	.word	0x1000f435
 
 1000ac58 <sms_mpu_configure_gpio>:
@@ -9362,7 +9374,7 @@ int sms_mpu_initialize(void) {
 1000ada8:	10008ad5 	.word	0x10008ad5
 1000adac:	10009045 	.word	0x10009045
 1000adb0:	10008a5d 	.word	0x10008a5d
-1000adb4:	1001a192 	.word	0x1001a192
+1000adb4:	1001a18e 	.word	0x1001a18e
 1000adb8:	10008a41 	.word	0x10008a41
 1000adbc:	100088a5 	.word	0x100088a5
 1000adc0:	10009809 	.word	0x10009809
@@ -9471,7 +9483,7 @@ int sms_mpu_poll_data(void)
 1000ae52:	b005      	add	sp, #20
 1000ae54:	bd30      	pop	{r4, r5, pc}
 1000ae56:	46c0      	nop			; (mov r8, r8)
-1000ae58:	1001a188 	.word	0x1001a188
+1000ae58:	1001a184 	.word	0x1001a184
 1000ae5c:	10008b41 	.word	0x10008b41
 1000ae60:	10008555 	.word	0x10008555
 1000ae64:	1000974d 	.word	0x1000974d
@@ -9526,14 +9538,14 @@ void sms_mpu_define_services(void)
 1000aeae:	b002      	add	sp, #8
 1000aeb0:	bd10      	pop	{r4, pc}
 1000aeb2:	46c0      	nop			; (mov r8, r8)
-1000aeb4:	1001a1bc 	.word	0x1001a1bc
+1000aeb4:	1001a1b8 	.word	0x1001a1b8
 1000aeb8:	1000a439 	.word	0x1000a439
 1000aebc:	1000a415 	.word	0x1000a415
 1000aec0:	10016660 	.word	0x10016660
 1000aec4:	100154a1 	.word	0x100154a1
 1000aec8:	10017020 	.word	0x10017020
 1000aecc:	10015381 	.word	0x10015381
-1000aed0:	1001a188 	.word	0x1001a188
+1000aed0:	1001a184 	.word	0x1001a184
 1000aed4:	10017060 	.word	0x10017060
 
 1000aed8 <sms_led_switch_on>:
@@ -9716,8 +9728,8 @@ void sms_led_blink_start(enum sms_leds led)
 1000afa0:	bd10      	pop	{r4, pc}
 1000afa2:	46c0      	nop			; (mov r8, r8)
 1000afa4:	1000aed9 	.word	0x1000aed9
-1000afa8:	1001a354 	.word	0x1001a354
-1000afac:	1001a331 	.word	0x1001a331
+1000afa8:	1001a350 	.word	0x1001a350
+1000afac:	1001a32d 	.word	0x1001a32d
 1000afb0:	1000b6b9 	.word	0x1000b6b9
 
 1000afb4 <sms_pressure_ms58_reset>:
@@ -9745,10 +9757,10 @@ void sms_pressure_ms58_reset(void)
 }
 1000afcc:	b002      	add	sp, #8
 1000afce:	bd10      	pop	{r4, pc}
-1000afd0:	1001a284 	.word	0x1001a284
-1000afd4:	1001a274 	.word	0x1001a274
-1000afd8:	1001a334 	.word	0x1001a334
-1000afdc:	1001a340 	.word	0x1001a340
+1000afd0:	1001a280 	.word	0x1001a280
+1000afd4:	1001a270 	.word	0x1001a270
+1000afd8:	1001a330 	.word	0x1001a330
+1000afdc:	1001a33c 	.word	0x1001a33c
 1000afe0:	1000b591 	.word	0x1000b591
 
 1000afe4 <sms_pressure_ms58_read_prom>:
@@ -9914,12 +9926,12 @@ enum status_code sms_pressure_ms58_read_prom(void)
 1000b0c6:	4692      	mov	sl, r2
 1000b0c8:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000b0ca:	46c0      	nop			; (mov r8, r8)
-1000b0cc:	1001a284 	.word	0x1001a284
-1000b0d0:	1001a274 	.word	0x1001a274
-1000b0d4:	1001a334 	.word	0x1001a334
-1000b0d8:	1001a340 	.word	0x1001a340
+1000b0cc:	1001a280 	.word	0x1001a280
+1000b0d0:	1001a270 	.word	0x1001a270
+1000b0d4:	1001a330 	.word	0x1001a330
+1000b0d8:	1001a33c 	.word	0x1001a33c
 1000b0dc:	1000b591 	.word	0x1000b591
-1000b0e0:	1001a294 	.word	0x1001a294
+1000b0e0:	1001a290 	.word	0x1001a290
 
 1000b0e4 <sms_pressure_init>:
     
@@ -9953,7 +9965,7 @@ enum status_code sms_pressure_init(void)
 }
 1000b0fe:	bd10      	pop	{r4, pc}
 1000b100:	1000afe5 	.word	0x1000afe5
-1000b104:	1001a294 	.word	0x1001a294
+1000b104:	1001a290 	.word	0x1001a290
 
 1000b108 <sms_pressure_startup>:
     gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
@@ -10035,14 +10047,14 @@ void sms_pressure_startup(void)
 1000b170:	10017114 	.word	0x10017114
 1000b174:	10015381 	.word	0x10015381
 1000b178:	1000a8e5 	.word	0x1000a8e5
-1000b17c:	1001a294 	.word	0x1001a294
+1000b17c:	1001a290 	.word	0x1001a290
 1000b180:	1000afb5 	.word	0x1000afb5
 1000b184:	10008129 	.word	0x10008129
 1000b188:	1000b0e5 	.word	0x1000b0e5
 1000b18c:	10017148 	.word	0x10017148
-1000b190:	1001a218 	.word	0x1001a218
+1000b190:	1001a214 	.word	0x1001a214
 1000b194:	1000b409 	.word	0x1000b409
-1000b198:	1001a219 	.word	0x1001a219
+1000b198:	1001a215 	.word	0x1001a215
 
 1000b19c <sms_pressure_ms58_read_data>:
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
@@ -10185,11 +10197,11 @@ enum status_code sms_pressure_ms58_read_data(void)
 1000b256:	469a      	mov	sl, r3
 1000b258:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000b25a:	46c0      	nop			; (mov r8, r8)
-1000b25c:	1001a294 	.word	0x1001a294
-1000b260:	1001a284 	.word	0x1001a284
-1000b264:	1001a274 	.word	0x1001a274
-1000b268:	1001a334 	.word	0x1001a334
-1000b26c:	1001a340 	.word	0x1001a340
+1000b25c:	1001a290 	.word	0x1001a290
+1000b260:	1001a280 	.word	0x1001a280
+1000b264:	1001a270 	.word	0x1001a270
+1000b268:	1001a330 	.word	0x1001a330
+1000b26c:	1001a33c 	.word	0x1001a33c
 1000b270:	1000b591 	.word	0x1000b591
 
 1000b274 <sms_pressure_ms58_calculate>:
@@ -10311,7 +10323,7 @@ void sms_pressure_ms58_calculate(void)
 1000b312:	bc04      	pop	{r2}
 1000b314:	4691      	mov	r9, r2
 1000b316:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000b318:	1001a294 	.word	0x1001a294
+1000b318:	1001a290 	.word	0x1001a290
 1000b31c:	10013511 	.word	0x10013511
 1000b320:	10016660 	.word	0x10016660
 1000b324:	100154a1 	.word	0x100154a1
@@ -10381,14 +10393,14 @@ void sms_pressure_poll_data(void)
     }        
 }
 1000b376:	bd10      	pop	{r4, pc}
-1000b378:	1001a330 	.word	0x1001a330
+1000b378:	1001a32c 	.word	0x1001a32c
 1000b37c:	10016660 	.word	0x10016660
 1000b380:	100154a1 	.word	0x100154a1
 1000b384:	100171c8 	.word	0x100171c8
 1000b388:	10015381 	.word	0x10015381
 1000b38c:	1000b19d 	.word	0x1000b19d
 1000b390:	100171f8 	.word	0x100171f8
-1000b394:	1001a294 	.word	0x1001a294
+1000b394:	1001a290 	.word	0x1001a290
 1000b398:	1000b275 	.word	0x1000b275
 1000b39c:	1000a261 	.word	0x1000a261
 
@@ -10442,14 +10454,14 @@ void sms_pressure_define_services(void)
     }
 1000b3e0:	b002      	add	sp, #8
 1000b3e2:	bd10      	pop	{r4, pc}
-1000b3e4:	1001a2c0 	.word	0x1001a2c0
+1000b3e4:	1001a2bc 	.word	0x1001a2bc
 1000b3e8:	1000a439 	.word	0x1000a439
 1000b3ec:	1000a415 	.word	0x1000a415
 1000b3f0:	10016660 	.word	0x10016660
 1000b3f4:	100154a1 	.word	0x100154a1
 1000b3f8:	10017230 	.word	0x10017230
 1000b3fc:	10015381 	.word	0x10015381
-1000b400:	1001a294 	.word	0x1001a294
+1000b400:	1001a290 	.word	0x1001a290
 1000b404:	10017278 	.word	0x10017278
 
 1000b408 <sms_sensors_interrupt_toggle>:
@@ -10538,13 +10550,13 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
 }
 1000b46c:	bd10      	pop	{r4, pc}
 1000b46e:	46c0      	nop			; (mov r8, r8)
-1000b470:	1001a188 	.word	0x1001a188
+1000b470:	1001a184 	.word	0x1001a184
 1000b474:	1000c681 	.word	0x1000c681
 1000b478:	1000c6dd 	.word	0x1000c6dd
-1000b47c:	1001a294 	.word	0x1001a294
+1000b47c:	1001a290 	.word	0x1001a290
 1000b480:	1000b5f1 	.word	0x1000b5f1
 1000b484:	1000b625 	.word	0x1000b625
-1000b488:	1001a324 	.word	0x1001a324
+1000b488:	1001a320 	.word	0x1001a320
 1000b48c:	1000b619 	.word	0x1000b619
 1000b490:	1000b645 	.word	0x1000b645
 
@@ -10631,9 +10643,9 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 1000b4fc:	100172c4 	.word	0x100172c4
 1000b500:	10015381 	.word	0x10015381
 1000b504:	1000c3d9 	.word	0x1000c3d9
-1000b508:	1001a188 	.word	0x1001a188
+1000b508:	1001a184 	.word	0x1001a184
 1000b50c:	1000b409 	.word	0x1000b409
-1000b510:	1001a294 	.word	0x1001a294
+1000b510:	1001a290 	.word	0x1001a290
 1000b514:	1000b109 	.word	0x1000b109
 
 1000b518 <sms_spi_master_configure>:
@@ -10713,10 +10725,10 @@ void sms_spi_master_configure(void)
 1000b56c:	b00d      	add	sp, #52	; 0x34
 1000b56e:	bd30      	pop	{r4, r5, pc}
 1000b570:	1000bb1d 	.word	0x1000bb1d
-1000b574:	1001a334 	.word	0x1001a334
+1000b574:	1001a330 	.word	0x1001a330
 1000b578:	1000bb55 	.word	0x1000bb55
 1000b57c:	1000bb29 	.word	0x1000bb29
-1000b580:	1001a340 	.word	0x1001a340
+1000b580:	1001a33c 	.word	0x1001a33c
 1000b584:	40007000 	.word	0x40007000
 1000b588:	1000bc25 	.word	0x1000bc25
 1000b58c:	1000bb95 	.word	0x1000bb95
@@ -10795,7 +10807,7 @@ void sms_timer_aon_callback(void)
 }
 1000b5e4:	bd10      	pop	{r4, pc}
 1000b5e6:	46c0      	nop			; (mov r8, r8)
-1000b5e8:	1001a318 	.word	0x1001a318
+1000b5e8:	1001a314 	.word	0x1001a314
 1000b5ec:	1000f435 	.word	0x1000f435
 
 1000b5f0 <sms_timer_aon_init>:
@@ -11056,7 +11068,7 @@ __STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
 1000b6fe:	bd10      	pop	{r4, pc}
 1000b700:	00006590 	.word	0x00006590
 1000b704:	018cba80 	.word	0x018cba80
-1000b708:	1001a219 	.word	0x1001a219
+1000b708:	1001a215 	.word	0x1001a215
 1000b70c:	1000be95 	.word	0x1000be95
 1000b710:	1000bebd 	.word	0x1000bebd
 1000b714:	e000e100 	.word	0xe000e100
@@ -11095,7 +11107,7 @@ void sms_dualtimer1_cb(void)
 }
 1000b73c:	bd10      	pop	{r4, pc}
 1000b73e:	46c0      	nop			; (mov r8, r8)
-1000b740:	1001a318 	.word	0x1001a318
+1000b740:	1001a314 	.word	0x1001a314
 1000b744:	1000f435 	.word	0x1000f435
 
 1000b748 <sms_dualtimer2_cb>:
@@ -11120,7 +11132,7 @@ void sms_dualtimer2_cb(void)
 }
 1000b760:	bd10      	pop	{r4, pc}
 1000b762:	46c0      	nop			; (mov r8, r8)
-1000b764:	1001a318 	.word	0x1001a318
+1000b764:	1001a314 	.word	0x1001a314
 1000b768:	1000f435 	.word	0x1000f435
 
 1000b76c <sms_dualtimer1_fn>:
@@ -11536,20 +11548,20 @@ void sms_dualtimer1_fn(void)
     } // switch(timer1_current_mode)
 }
 1000b95e:	bd10      	pop	{r4, pc}
-1000b960:	1001a184 	.word	0x1001a184
-1000b964:	1001a220 	.word	0x1001a220
+1000b960:	1001a180 	.word	0x1001a180
+1000b964:	1001a21c 	.word	0x1001a21c
 1000b968:	1000a655 	.word	0x1000a655
 1000b96c:	100172f4 	.word	0x100172f4
 1000b970:	1000a9e9 	.word	0x1000a9e9
-1000b974:	1001a330 	.word	0x1001a330
-1000b978:	1001a34e 	.word	0x1001a34e
+1000b974:	1001a32c 	.word	0x1001a32c
+1000b978:	1001a34a 	.word	0x1001a34a
 1000b97c:	10009f51 	.word	0x10009f51
 1000b980:	1000b6b9 	.word	0x1000b6b9
-1000b984:	1001a331 	.word	0x1001a331
-1000b988:	1001a219 	.word	0x1001a219
+1000b984:	1001a32d 	.word	0x1001a32d
+1000b988:	1001a215 	.word	0x1001a215
 1000b98c:	00000303 	.word	0x00000303
 1000b990:	10009f69 	.word	0x10009f69
-1000b994:	1001a294 	.word	0x1001a294
+1000b994:	1001a290 	.word	0x1001a290
 1000b998:	10016660 	.word	0x10016660
 1000b99c:	100154a1 	.word	0x100154a1
 1000b9a0:	10017308 	.word	0x10017308
@@ -11781,11 +11793,11 @@ void sms_dualtimer2_fn(void)
 1000bac6:	bd10      	pop	{r4, pc}
 1000bac8:	10017344 	.word	0x10017344
 1000bacc:	1000a9e9 	.word	0x1000a9e9
-1000bad0:	1001a331 	.word	0x1001a331
-1000bad4:	1001a330 	.word	0x1001a330
-1000bad8:	1001a184 	.word	0x1001a184
-1000badc:	1001a219 	.word	0x1001a219
-1000bae0:	1001a325 	.word	0x1001a325
+1000bad0:	1001a32d 	.word	0x1001a32d
+1000bad4:	1001a32c 	.word	0x1001a32c
+1000bad8:	1001a180 	.word	0x1001a180
+1000badc:	1001a215 	.word	0x1001a215
+1000bae0:	1001a321 	.word	0x1001a321
 1000bae4:	10017358 	.word	0x10017358
 1000bae8:	10015381 	.word	0x10015381
 1000baec:	10017368 	.word	0x10017368
@@ -11793,7 +11805,7 @@ void sms_dualtimer2_fn(void)
 1000baf4:	10016660 	.word	0x10016660
 1000baf8:	100154a1 	.word	0x100154a1
 1000bafc:	10017384 	.word	0x10017384
-1000bb00:	1001a354 	.word	0x1001a354
+1000bb00:	1001a350 	.word	0x1001a350
 1000bb04:	1000aee9 	.word	0x1000aee9
 1000bb08:	1000a129 	.word	0x1000a129
 1000bb0c:	1000af49 	.word	0x1000af49
@@ -12696,8 +12708,8 @@ void dualtimer_clear_interrupt_status(enum dualtimer_timer timer)
 1000be60:	bd10      	pop	{r4, pc}
 1000be62:	46c0      	nop			; (mov r8, r8)
 1000be64:	40001000 	.word	0x40001000
-1000be68:	100186dc 	.word	0x100186dc
-1000be6c:	100186e0 	.word	0x100186e0
+1000be68:	100186d8 	.word	0x100186d8
+1000be6c:	100186dc 	.word	0x100186dc
 
 1000be70 <dualtimer_get_config_defaults>:
  *
@@ -13077,8 +13089,8 @@ void dualtimer_register_callback(enum dualtimer_timer timer, dualtimer_callback_
 	}
 }
 1000c016:	4770      	bx	lr
-1000c018:	100186dc 	.word	0x100186dc
-1000c01c:	100186e0 	.word	0x100186e0
+1000c018:	100186d8 	.word	0x100186d8
+1000c01c:	100186dc 	.word	0x100186dc
 
 1000c020 <gpio_port0_isr_handler>:
  *
@@ -13167,7 +13179,7 @@ __STATIC_INLINE void NVIC_ClearPendingIRQ(IRQn_Type IRQn)
 }
 1000c078:	bd70      	pop	{r4, r5, r6, pc}
 1000c07a:	46c0      	nop			; (mov r8, r8)
-1000c07c:	1001a358 	.word	0x1001a358
+1000c07c:	1001a354 	.word	0x1001a354
 1000c080:	e000e100 	.word	0xe000e100
 
 1000c084 <gpio_port1_isr_handler>:
@@ -13273,7 +13285,7 @@ static void gpio_port1_isr_handler(void)
 }
 1000c0e4:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
 1000c0e6:	46c0      	nop			; (mov r8, r8)
-1000c0e8:	1001a358 	.word	0x1001a358
+1000c0e8:	1001a354 	.word	0x1001a354
 1000c0ec:	0001bc51 	.word	0x0001bc51
 1000c0f0:	e000e100 	.word	0xe000e100
 
@@ -13363,7 +13375,7 @@ static void gpio_port2_isr_handler(void)
 }
 1000c164:	bd10      	pop	{r4, pc}
 1000c166:	46c0      	nop			; (mov r8, r8)
-1000c168:	1001a358 	.word	0x1001a358
+1000c168:	1001a354 	.word	0x1001a354
 1000c16c:	e000e100 	.word	0xe000e100
 
 1000c170 <gpio_get_config_defaults>:
@@ -14388,7 +14400,7 @@ void gpio_register_callback(uint8_t gpio_pin, gpio_callback_t callback_func,
 }
 1000c678:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000c67a:	46c0      	nop			; (mov r8, r8)
-1000c67c:	1001a358 	.word	0x1001a358
+1000c67c:	1001a354 	.word	0x1001a354
 
 1000c680 <gpio_enable_callback>:
  * conditions for the callback type are met.
@@ -14465,7 +14477,7 @@ __STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
 1000c6d0:	bd30      	pop	{r4, r5, pc}
 1000c6d2:	46c0      	nop			; (mov r8, r8)
 1000c6d4:	e000e100 	.word	0xe000e100
-1000c6d8:	1001a358 	.word	0x1001a358
+1000c6d8:	1001a354 	.word	0x1001a354
 
 1000c6dc <gpio_disable_callback>:
  * The callback function will not be called from the interrupt handler.
@@ -14525,7 +14537,7 @@ void gpio_disable_callback(uint8_t gpio_pin)
 1000c710:	8499      	strh	r1, [r3, #36]	; 0x24
 }
 1000c712:	bd30      	pop	{r4, r5, pc}
-1000c714:	1001a358 	.word	0x1001a358
+1000c714:	1001a354 	.word	0x1001a354
 
 1000c718 <gpio_init>:
  *
@@ -14603,8 +14615,8 @@ void gpio_init(void)
 1000c75c:	47a0      	blx	r4
 }
 1000c75e:	bd10      	pop	{r4, pc}
-1000c760:	1001a39c 	.word	0x1001a39c
-1000c764:	1001a358 	.word	0x1001a358
+1000c760:	1001a398 	.word	0x1001a398
+1000c764:	1001a354 	.word	0x1001a354
 1000c768:	40010000 	.word	0x40010000
 1000c76c:	40011000 	.word	0x40011000
 1000c770:	40013000 	.word	0x40013000
@@ -14723,7 +14735,7 @@ enum status_code system_clock_config(enum system_clock_resource resoure, \
 1000c7f2:	4770      	bx	lr
 1000c7f4:	4000b000 	.word	0x4000b000
 1000c7f8:	018cba80 	.word	0x018cba80
-1000c7fc:	1001a430 	.word	0x1001a430
+1000c7fc:	1001a42c 	.word	0x1001a42c
 1000c800:	4000f000 	.word	0x4000f000
 1000c804:	001e8480 	.word	0x001e8480
 
@@ -14739,7 +14751,7 @@ uint32_t system_clock_get_value(void)
 }
 1000c80c:	4770      	bx	lr
 1000c80e:	46c0      	nop			; (mov r8, r8)
-1000c810:	1001a430 	.word	0x1001a430
+1000c810:	1001a42c 	.word	0x1001a42c
 
 1000c814 <system_clock_peripheral_enable>:
  * \return Status of operation.
@@ -18665,7 +18677,7 @@ static void uart_rx0_isr_handler(void)
 	}
 }
 1000d3d6:	bd70      	pop	{r4, r5, r6, pc}
-1000d3d8:	1001a434 	.word	0x1001a434
+1000d3d8:	1001a430 	.word	0x1001a430
 
 1000d3dc <uart_tx0_isr_handler>:
 
@@ -18802,7 +18814,7 @@ static void uart_tx0_isr_handler(void)
 }
 1000d460:	bd70      	pop	{r4, r5, r6, pc}
 1000d462:	46c0      	nop			; (mov r8, r8)
-1000d464:	1001a434 	.word	0x1001a434
+1000d464:	1001a430 	.word	0x1001a430
 
 1000d468 <uart_rx1_isr_handler>:
 
@@ -18937,7 +18949,7 @@ static void uart_rx1_isr_handler(void)
 	}
 }
 1000d4ea:	bd70      	pop	{r4, r5, r6, pc}
-1000d4ec:	1001a434 	.word	0x1001a434
+1000d4ec:	1001a430 	.word	0x1001a430
 
 1000d4f0 <uart_tx1_isr_handler>:
 
@@ -19074,7 +19086,7 @@ static void uart_tx1_isr_handler(void)
 }
 1000d574:	bd70      	pop	{r4, r5, r6, pc}
 1000d576:	46c0      	nop			; (mov r8, r8)
-1000d578:	1001a434 	.word	0x1001a434
+1000d578:	1001a430 	.word	0x1001a430
 
 1000d57c <uart_get_config_defaults>:
  * \param[out] config  Pointer to configuration structure to be initiated
@@ -19499,7 +19511,7 @@ enum status_code uart_init(struct uart_module *const module, Uart * const hw,
 1000d72c:	40004000 	.word	0x40004000
 1000d730:	1000cedd 	.word	0x1000cedd
 1000d734:	1000c815 	.word	0x1000c815
-1000d738:	1001a434 	.word	0x1001a434
+1000d738:	1001a430 	.word	0x1001a430
 1000d73c:	1000d355 	.word	0x1000d355
 1000d740:	1000d345 	.word	0x1000d345
 1000d744:	1000d3dd 	.word	0x1000d3dd
@@ -19769,8 +19781,8 @@ _read (int file, char * ptr, int len)
 1000d836:	bc04      	pop	{r2}
 1000d838:	4690      	mov	r8, r2
 1000d83a:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000d83c:	1001a444 	.word	0x1001a444
-1000d840:	1001a43c 	.word	0x1001a43c
+1000d83c:	1001a440 	.word	0x1001a440
+1000d840:	1001a438 	.word	0x1001a438
 
 1000d844 <_write>:
 int __attribute__((weak))
@@ -19852,8 +19864,8 @@ _write (int file, char * ptr, int len)
 1000d886:	bc04      	pop	{r2}
 1000d888:	4690      	mov	r8, r2
 1000d88a:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000d88c:	1001a444 	.word	0x1001a444
-1000d890:	1001a440 	.word	0x1001a440
+1000d88c:	1001a440 	.word	0x1001a440
+1000d890:	1001a43c 	.word	0x1001a43c
 
 1000d894 <_sbrk>:
 extern void _exit(int status);
@@ -19888,8 +19900,8 @@ extern caddr_t _sbrk(int incr)
 }
 1000d8ac:	4770      	bx	lr
 1000d8ae:	46c0      	nop			; (mov r8, r8)
-1000d8b0:	100186e4 	.word	0x100186e4
-1000d8b4:	1001cd50 	.word	0x1001cd50
+1000d8b0:	100186e0 	.word	0x100186e0
+1000d8b4:	1001cd48 	.word	0x1001cd48
 
 1000d8b8 <_close>:
 }
@@ -20287,9 +20299,9 @@ at_ble_status_t ble_disconnected_state_handler(void *params)
 1000da76:	2000      	movs	r0, #0
 1000da78:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
 1000da7a:	46c0      	nop			; (mov r8, r8)
-1000da7c:	1001a4be 	.word	0x1001a4be
+1000da7c:	1001a4ba 	.word	0x1001a4ba
 1000da80:	100176c4 	.word	0x100176c4
-1000da84:	1001a6cc 	.word	0x1001a6cc
+1000da84:	1001a6c8 	.word	0x1001a6c8
 1000da88:	10016660 	.word	0x10016660
 1000da8c:	100154a1 	.word	0x100154a1
 1000da90:	10017984 	.word	0x10017984
@@ -20486,7 +20498,7 @@ at_ble_status_t ble_encryption_status_change_handler(void *params)
 1000db62:	0028      	movs	r0, r5
 1000db64:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
 1000db66:	46c0      	nop			; (mov r8, r8)
-1000db68:	1001a460 	.word	0x1001a460
+1000db68:	1001a45c 	.word	0x1001a45c
 1000db6c:	10016660 	.word	0x10016660
 1000db70:	100154a1 	.word	0x100154a1
 1000db74:	100179e8 	.word	0x100179e8
@@ -20607,8 +20619,8 @@ at_ble_status_t ble_scan_info_handler(void *params)
 1000dc02:	0018      	movs	r0, r3
 1000dc04:	b005      	add	sp, #20
 1000dc06:	bd30      	pop	{r4, r5, pc}
-1000dc08:	10018fcc 	.word	0x10018fcc
-1000dc0c:	1001a744 	.word	0x1001a744
+1000dc08:	10018fc8 	.word	0x10018fc8
+1000dc0c:	1001a740 	.word	0x1001a740
 1000dc10:	10015227 	.word	0x10015227
 1000dc14:	10016660 	.word	0x10016660
 1000dc18:	100154a1 	.word	0x100154a1
@@ -20935,7 +20947,7 @@ at_ble_status_t ble_pair_done_handler(void *params)
 1000dda2:	46a2      	mov	sl, r4
 1000dda4:	46ab      	mov	fp, r5
 1000dda6:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000dda8:	1001a460 	.word	0x1001a460
+1000dda8:	1001a45c 	.word	0x1001a45c
 1000ddac:	10016660 	.word	0x10016660
 1000ddb0:	100154a1 	.word	0x100154a1
 1000ddb4:	10017ae0 	.word	0x10017ae0
@@ -21346,7 +21358,7 @@ at_ble_status_t ble_slave_security_request_handler(void* params)
 1000dfb4:	46a2      	mov	sl, r4
 1000dfb6:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000dfb8:	10015239 	.word	0x10015239
-1000dfbc:	1001a460 	.word	0x1001a460
+1000dfbc:	1001a45c 	.word	0x1001a45c
 1000dfc0:	1001164d 	.word	0x1001164d
 1000dfc4:	10016660 	.word	0x10016660
 1000dfc8:	100154a1 	.word	0x100154a1
@@ -21652,7 +21664,7 @@ at_ble_status_t ble_pair_request_handler(void *params)
 1000e13e:	46ab      	mov	fp, r5
 1000e140:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000e142:	46c0      	nop			; (mov r8, r8)
-1000e144:	1001a460 	.word	0x1001a460
+1000e144:	1001a45c 	.word	0x1001a45c
 1000e148:	100154b5 	.word	0x100154b5
 1000e14c:	10016660 	.word	0x10016660
 1000e150:	100154a1 	.word	0x100154a1
@@ -22189,7 +22201,7 @@ at_ble_status_t ble_encryption_request_handler(void *params)
 1000e3de:	46a3      	mov	fp, r4
 1000e3e0:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000e3e2:	46c0      	nop			; (mov r8, r8)
-1000e3e4:	1001a460 	.word	0x1001a460
+1000e3e4:	1001a45c 	.word	0x1001a45c
 1000e3e8:	10016660 	.word	0x10016660
 1000e3ec:	100154a1 	.word	0x100154a1
 1000e3f0:	10017cf8 	.word	0x10017cf8
@@ -22443,13 +22455,13 @@ bool ble_mgr_events_callback_handler(ble_mgr_event_cb_t event_cb_type,
 1000e4d4:	bd30      	pop	{r4, r5, pc}
 1000e4d6:	46c0      	nop			; (mov r8, r8)
 1000e4d8:	100176e4 	.word	0x100176e4
-1000e4dc:	1001a44c 	.word	0x1001a44c
-1000e4e0:	1001a448 	.word	0x1001a448
-1000e4e4:	1001a6d0 	.word	0x1001a6d0
-1000e4e8:	1001ac84 	.word	0x1001ac84
-1000e4ec:	1001a6e4 	.word	0x1001a6e4
-1000e4f0:	1001a6f8 	.word	0x1001a6f8
-1000e4f4:	1001a740 	.word	0x1001a740
+1000e4dc:	1001a448 	.word	0x1001a448
+1000e4e0:	1001a444 	.word	0x1001a444
+1000e4e4:	1001a6cc 	.word	0x1001a6cc
+1000e4e8:	1001ac80 	.word	0x1001ac80
+1000e4ec:	1001a6e0 	.word	0x1001a6e0
+1000e4f0:	1001a6f4 	.word	0x1001a6f4
+1000e4f4:	1001a73c 	.word	0x1001a73c
 
 1000e4f8 <ble_device_init>:
 volatile uint32_t 	event_params_memory[1024] 	= {0};
@@ -22927,28 +22939,28 @@ static void ble_set_dev_config(at_ble_addr_t *addr)
 1000e6fe:	46a2      	mov	sl, r4
 1000e700:	46ab      	mov	fp, r5
 1000e702:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000e704:	10018fc8 	.word	0x10018fc8
-1000e708:	10018fd0 	.word	0x10018fd0
+1000e704:	10018fc4 	.word	0x10018fc4
+1000e708:	10018fcc 	.word	0x10018fcc
 1000e70c:	10015239 	.word	0x10015239
-1000e710:	1001a70c 	.word	0x1001a70c
+1000e710:	1001a708 	.word	0x1001a708
 1000e714:	000004e2 	.word	0x000004e2
-1000e718:	10018ae8 	.word	0x10018ae8
-1000e71c:	10018fcc 	.word	0x10018fcc
-1000e720:	1001a744 	.word	0x1001a744
-1000e724:	1001a73c 	.word	0x1001a73c
-1000e728:	1001aa78 	.word	0x1001aa78
-1000e72c:	100186e8 	.word	0x100186e8
-1000e730:	10018fd8 	.word	0x10018fd8
-1000e734:	1001a720 	.word	0x1001a720
-1000e738:	1001a6e4 	.word	0x1001a6e4
-1000e73c:	1001a6f8 	.word	0x1001a6f8
-1000e740:	1001a44c 	.word	0x1001a44c
-1000e744:	1001a740 	.word	0x1001a740
-1000e748:	1001a448 	.word	0x1001a448
-1000e74c:	1001a6d0 	.word	0x1001a6d0
-1000e750:	1001ac84 	.word	0x1001ac84
-1000e754:	1001a460 	.word	0x1001a460
-1000e758:	1001a6cc 	.word	0x1001a6cc
+1000e718:	10018ae4 	.word	0x10018ae4
+1000e71c:	10018fc8 	.word	0x10018fc8
+1000e720:	1001a740 	.word	0x1001a740
+1000e724:	1001a738 	.word	0x1001a738
+1000e728:	1001aa74 	.word	0x1001aa74
+1000e72c:	100186e4 	.word	0x100186e4
+1000e730:	10018fd4 	.word	0x10018fd4
+1000e734:	1001a71c 	.word	0x1001a71c
+1000e738:	1001a6e0 	.word	0x1001a6e0
+1000e73c:	1001a6f4 	.word	0x1001a6f4
+1000e740:	1001a448 	.word	0x1001a448
+1000e744:	1001a73c 	.word	0x1001a73c
+1000e748:	1001a444 	.word	0x1001a444
+1000e74c:	1001a6cc 	.word	0x1001a6cc
+1000e750:	1001ac80 	.word	0x1001ac80
+1000e754:	1001a45c 	.word	0x1001a45c
+1000e758:	1001a6c8 	.word	0x1001a6c8
 1000e75c:	10016660 	.word	0x10016660
 1000e760:	100154a1 	.word	0x100154a1
 1000e764:	10017e4c 	.word	0x10017e4c
@@ -22956,7 +22968,7 @@ static void ble_set_dev_config(at_ble_addr_t *addr)
 1000e76c:	10010675 	.word	0x10010675
 1000e770:	10017e70 	.word	0x10017e70
 1000e774:	10017e9c 	.word	0x10017e9c
-1000e778:	1001824c 	.word	0x1001824c
+1000e778:	10018248 	.word	0x10018248
 1000e77c:	1000e429 	.word	0x1000e429
 1000e780:	10017800 	.word	0x10017800
 1000e784:	10017ee4 	.word	0x10017ee4
@@ -23472,22 +23484,22 @@ at_ble_status_t ble_connected_state_handler(void *params)
 1000ea00:	10018054 	.word	0x10018054
 1000ea04:	10015381 	.word	0x10015381
 1000ea08:	10018098 	.word	0x10018098
-1000ea0c:	1001a70c 	.word	0x1001a70c
+1000ea0c:	1001a708 	.word	0x1001a708
 1000ea10:	10015227 	.word	0x10015227
-1000ea14:	10018fd0 	.word	0x10018fd0
+1000ea14:	10018fcc 	.word	0x10018fcc
 1000ea18:	10015209 	.word	0x10015209
 1000ea1c:	10015239 	.word	0x10015239
-1000ea20:	1001a4a6 	.word	0x1001a4a6
+1000ea20:	1001a4a2 	.word	0x1001a4a2
 1000ea24:	10010a95 	.word	0x10010a95
 1000ea28:	100180b0 	.word	0x100180b0
 1000ea2c:	100180d4 	.word	0x100180d4
-1000ea30:	1001a460 	.word	0x1001a460
-1000ea34:	1001a6cc 	.word	0x1001a6cc
+1000ea30:	1001a45c 	.word	0x1001a45c
+1000ea34:	1001a6c8 	.word	0x1001a6c8
 1000ea38:	100180f8 	.word	0x100180f8
 1000ea3c:	10010a69 	.word	0x10010a69
 1000ea40:	1000e7b9 	.word	0x1000e7b9
 1000ea44:	10018134 	.word	0x10018134
-1000ea48:	1001a53a 	.word	0x1001a53a
+1000ea48:	1001a536 	.word	0x1001a536
 
 1000ea4c <ble_resolv_rand_addr_handler>:
 
@@ -23718,19 +23730,19 @@ at_ble_status_t ble_resolv_rand_addr_handler(void *params)
 1000eb4e:	4690      	mov	r8, r2
 1000eb50:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1000eb52:	46c0      	nop			; (mov r8, r8)
-1000eb54:	1001a4a6 	.word	0x1001a4a6
+1000eb54:	1001a4a2 	.word	0x1001a4a2
 1000eb58:	10015209 	.word	0x10015209
-1000eb5c:	1001a460 	.word	0x1001a460
-1000eb60:	1001a70c 	.word	0x1001a70c
+1000eb5c:	1001a45c 	.word	0x1001a45c
+1000eb60:	1001a708 	.word	0x1001a708
 1000eb64:	10015227 	.word	0x10015227
-1000eb68:	1001a6cc 	.word	0x1001a6cc
+1000eb68:	1001a6c8 	.word	0x1001a6c8
 1000eb6c:	1000e7b9 	.word	0x1000e7b9
 1000eb70:	10016660 	.word	0x10016660
 1000eb74:	100154a1 	.word	0x100154a1
 1000eb78:	1001815c 	.word	0x1001815c
 1000eb7c:	10015381 	.word	0x10015381
 1000eb80:	10018174 	.word	0x10018174
-1000eb84:	1001a53a 	.word	0x1001a53a
+1000eb84:	1001a536 	.word	0x1001a536
 1000eb88:	10018190 	.word	0x10018190
 
 1000eb8c <ble_event_manager>:
@@ -24054,15 +24066,15 @@ void ble_event_manager(at_ble_events_t events, void *event_params)
 1000ecbc:	100181a0 	.word	0x100181a0
 1000ecc0:	10015381 	.word	0x10015381
 1000ecc4:	10017700 	.word	0x10017700
-1000ecc8:	1001a6e4 	.word	0x1001a6e4
-1000eccc:	1001a6f8 	.word	0x1001a6f8
+1000ecc8:	1001a6e0 	.word	0x1001a6e0
+1000eccc:	1001a6f4 	.word	0x1001a6f4
 1000ecd0:	100181b0 	.word	0x100181b0
-1000ecd4:	1001a44c 	.word	0x1001a44c
-1000ecd8:	1001a740 	.word	0x1001a740
-1000ecdc:	1001a448 	.word	0x1001a448
-1000ece0:	1001a6d0 	.word	0x1001a6d0
-1000ece4:	1001ac84 	.word	0x1001ac84
-1000ece8:	10018fc8 	.word	0x10018fc8
+1000ecd4:	1001a448 	.word	0x1001a448
+1000ecd8:	1001a73c 	.word	0x1001a73c
+1000ecdc:	1001a444 	.word	0x1001a444
+1000ece0:	1001a6cc 	.word	0x1001a6cc
+1000ece4:	1001ac80 	.word	0x1001ac80
+1000ece8:	10018fc4 	.word	0x10018fc4
 1000ecec:	100181c8 	.word	0x100181c8
 
 1000ecf0 <ble_event_task>:
@@ -24141,10 +24153,10 @@ ble_ulp_mode_t ble_get_ulp_status(void)
 }
 1000ed28:	0020      	movs	r0, r4
 1000ed2a:	bd70      	pop	{r4, r5, r6, pc}
-1000ed2c:	10018fd7 	.word	0x10018fd7
+1000ed2c:	10018fd3 	.word	0x10018fd3
 1000ed30:	1000f701 	.word	0x1000f701
-1000ed34:	1001aa78 	.word	0x1001aa78
-1000ed38:	1001a73c 	.word	0x1001a73c
+1000ed34:	1001aa74 	.word	0x1001aa74
+1000ed38:	1001a738 	.word	0x1001a738
 1000ed3c:	1000fe1d 	.word	0x1000fe1d
 1000ed40:	1000f6d9 	.word	0x1000f6d9
 1000ed44:	1000eb8d 	.word	0x1000eb8d
@@ -24156,8 +24168,8 @@ ble_ulp_mode_t ble_get_ulp_status(void)
 /* Advertisement Data will be set based on the advertisement configuration */
 at_ble_status_t ble_advertisement_data_set(void)
 {
-1000ed48:	b530      	push	{r4, r5, lr}
-1000ed4a:	b091      	sub	sp, #68	; 0x44
+1000ed48:	b510      	push	{r4, lr}
+1000ed4a:	b090      	sub	sp, #64	; 0x40
 		uint8_t length_field_ind;
 		uint8_t adv_element_len;
 		adv_buf[adv_data_element.len] = adv_data_element.len;
@@ -24184,18 +24196,18 @@ at_ble_status_t ble_advertisement_data_set(void)
 		if(adv_element_len) 
 		{			
 			adv_buf[length_field_ind] = adv_element_len+ADV_TYPE_SIZE;
-1000ed6a:	2509      	movs	r5, #9
-1000ed6c:	7025      	strb	r5, [r4, #0]
+1000ed6a:	3b0f      	subs	r3, #15
+1000ed6c:	7023      	strb	r3, [r4, #0]
 	#endif
 	
 	#if (BLE_GAP_ADV_COMPLETE_LOCAL_NAME_ENABLE && !BLE_GAP_ADV_SHORTENED_LOCAL_NAME_ENABLE)
 	#if (BLE_GAP_ADV_COMPLETE_LOCAL_NAME_SCN_RSP_ENABLE != SCAN_RESPONSE_ONLY_ENABLE)
 	if((adv_data_element.len) <= (AT_BLE_ADV_MAX_SIZE - (ADV_TYPE_FLAG_SIZE + ADV_ELEMENT_SIZE + BLE_GAP_ADV_DATA_COMPLETE_LOCAL_NAME_LENGTH))) {
 		adv_buf[adv_data_element.len++] = BLE_GAP_ADV_DATA_COMPLETE_LOCAL_NAME_LENGTH + ADV_TYPE_SIZE;
-1000ed6e:	3b0e      	subs	r3, #14
-1000ed70:	72a3      	strb	r3, [r4, #10]
+1000ed6e:	3a05      	subs	r2, #5
+1000ed70:	72a2      	strb	r2, [r4, #10]
 		adv_buf[adv_data_element.len++] = COMPLETE_LOCAL_NAME;
-1000ed72:	72e5      	strb	r5, [r4, #11]
+1000ed72:	72e3      	strb	r3, [r4, #11]
 		memcpy(&adv_buf[adv_data_element.len], BLE_GAP_ADV_DATA_COMPLETE_LOCAL_NAME, BLE_GAP_ADV_DATA_COMPLETE_LOCAL_NAME_LENGTH);
 1000ed74:	aa0b      	add	r2, sp, #44	; 0x2c
 1000ed76:	4b16      	ldr	r3, [pc, #88]	; (1000edd0 <ble_advertisement_data_set+0x88>)
@@ -24235,14 +24247,14 @@ at_ble_status_t ble_advertisement_data_set(void)
 	#if ((BLE_GAP_ADV_MANUFACTURER_SPECIFIC_DATA_SCN_RSP_ENABLE == SCAN_RESPONSE_ENABLE) || (BLE_GAP_ADV_MANUFACTURER_SPECIFIC_DATA_SCN_RSP_ENABLE == SCAN_RESPONSE_ONLY_ENABLE))
 	else if((scan_resp_data_element.len) <= (AT_BLE_ADV_MAX_SIZE - (ADV_ELEMENT_SIZE + BLE_GAP_ADV_DATA_MANUFACTURER_SPECIFIC_DATA_SIZE))) {
 		scn_resp[scan_resp_data_element.len++] = BLE_GAP_ADV_DATA_MANUFACTURER_SPECIFIC_DATA_SIZE + ADV_TYPE_SIZE;
-1000ed96:	466b      	mov	r3, sp
-1000ed98:	701d      	strb	r5, [r3, #0]
+1000ed96:	2307      	movs	r3, #7
+1000ed98:	466a      	mov	r2, sp
+1000ed9a:	7013      	strb	r3, [r2, #0]
 		scn_resp[scan_resp_data_element.len++] = MANUFACTURER_SPECIFIC_DATA;
-1000ed9a:	23ff      	movs	r3, #255	; 0xff
-1000ed9c:	466a      	mov	r2, sp
+1000ed9c:	33f8      	adds	r3, #248	; 0xf8
 1000ed9e:	7053      	strb	r3, [r2, #1]
 		memcpy(&scn_resp[scan_resp_data_element.len], BLE_GAP_ADV_DATA_MANUFACTURER_SPECIFIC_DATA, BLE_GAP_ADV_DATA_MANUFACTURER_SPECIFIC_DATA_SIZE);
-1000eda0:	2208      	movs	r2, #8
+1000eda0:	2206      	movs	r2, #6
 1000eda2:	4910      	ldr	r1, [pc, #64]	; (1000ede4 <ble_advertisement_data_set+0x9c>)
 1000eda4:	466b      	mov	r3, sp
 1000eda6:	1c98      	adds	r0, r3, #2
@@ -24254,7 +24266,7 @@ at_ble_status_t ble_advertisement_data_set(void)
 	#endif
 	
 	if (at_ble_adv_data_set(adv_buf, adv_data_element.len, scn_resp,
-1000edac:	230a      	movs	r3, #10
+1000edac:	2308      	movs	r3, #8
 1000edae:	466a      	mov	r2, sp
 1000edb0:	2115      	movs	r1, #21
 1000edb2:	0020      	movs	r0, r4
@@ -24277,8 +24289,8 @@ at_ble_status_t ble_advertisement_data_set(void)
     }
 }
 1000edc8:	2000      	movs	r0, #0
-1000edca:	b011      	add	sp, #68	; 0x44
-1000edcc:	bd30      	pop	{r4, r5, pc}
+1000edca:	b010      	add	sp, #64	; 0x40
+1000edcc:	bd10      	pop	{r4, pc}
 1000edce:	46c0      	nop			; (mov r8, r8)
 1000edd0:	10017ee4 	.word	0x10017ee4
 1000edd4:	10016660 	.word	0x10016660
@@ -24288,7 +24300,7 @@ at_ble_status_t ble_advertisement_data_set(void)
 1000ede4:	1001821c 	.word	0x1001821c
 1000ede8:	10015227 	.word	0x10015227
 1000edec:	1001087d 	.word	0x1001087d
-1000edf0:	10018228 	.word	0x10018228
+1000edf0:	10018224 	.word	0x10018224
 
 1000edf4 <uart_read_complete_callback>:
 
@@ -24341,11 +24353,11 @@ static void uart_read_complete_callback(struct uart_module *const module)
 	}
 }
 1000ee2e:	bd10      	pop	{r4, pc}
-1000ee30:	10019fdc 	.word	0x10019fdc
-1000ee34:	10019fe4 	.word	0x10019fe4
-1000ee38:	1001ac88 	.word	0x1001ac88
+1000ee30:	10019fd8 	.word	0x10019fd8
+1000ee34:	10019fe0 	.word	0x10019fe0
+1000ee38:	1001ac84 	.word	0x1001ac84
 1000ee3c:	1000d7e5 	.word	0x1000d7e5
-1000ee40:	10019fe0 	.word	0x10019fe0
+1000ee40:	10019fdc 	.word	0x10019fdc
 1000ee44:	1000d789 	.word	0x1000d789
 
 1000ee48 <usart_serial_getchar>:
@@ -24490,17 +24502,17 @@ static inline bool usart_serial_init(
 }
 1000eee2:	bd70      	pop	{r4, r5, r6, pc}
 1000eee4:	1000c785 	.word	0x1000c785
-1000eee8:	1001acac 	.word	0x1001acac
+1000eee8:	1001aca8 	.word	0x1001aca8
 1000eeec:	1000d57d 	.word	0x1000d57d
-1000eef0:	1001ac88 	.word	0x1001ac88
-1000eef4:	1001a444 	.word	0x1001a444
+1000eef0:	1001ac84 	.word	0x1001ac84
+1000eef4:	1001a440 	.word	0x1001a440
 1000eef8:	1000ee61 	.word	0x1000ee61
-1000eefc:	1001a440 	.word	0x1001a440
+1000eefc:	1001a43c 	.word	0x1001a43c
 1000ef00:	1000ee49 	.word	0x1000ee49
-1000ef04:	1001a43c 	.word	0x1001a43c
+1000ef04:	1001a438 	.word	0x1001a438
 1000ef08:	40004000 	.word	0x40004000
 1000ef0c:	1000d5a9 	.word	0x1000d5a9
-1000ef10:	100186a8 	.word	0x100186a8
+1000ef10:	100186a4 	.word	0x100186a4
 1000ef14:	10015551 	.word	0x10015551
 1000ef18:	1000edf5 	.word	0x1000edf5
 1000ef1c:	1000d7b1 	.word	0x1000d7b1
@@ -24550,7 +24562,7 @@ void _time_start(unsigned int sec)
 1000ef68:	19feaec7 	.word	0x19feaec7
 1000ef6c:	3f09d8ef 	.word	0x3f09d8ef
 1000ef70:	10013599 	.word	0x10013599
-1000ef74:	10019fd8 	.word	0x10019fd8
+1000ef74:	10019fd4 	.word	0x10019fd4
 
 1000ef78 <_time_done>:
 
@@ -24564,7 +24576,7 @@ unsigned int _time_done()
 }
 1000ef80:	4770      	bx	lr
 1000ef82:	46c0      	nop			; (mov r8, r8)
-1000ef84:	10019fd8 	.word	0x10019fd8
+1000ef84:	10019fd4 	.word	0x10019fd4
 
 1000ef88 <getchar_b11_timeout>:
 
@@ -24624,12 +24636,12 @@ int getchar_b11_timeout(unsigned int sec)
 }
 1000efd0:	bd70      	pop	{r4, r5, r6, pc}
 1000efd2:	46c0      	nop			; (mov r8, r8)
-1000efd4:	10019fdc 	.word	0x10019fdc
-1000efd8:	10019fe4 	.word	0x10019fe4
-1000efdc:	1001ac88 	.word	0x1001ac88
+1000efd4:	10019fd8 	.word	0x10019fd8
+1000efd8:	10019fe0 	.word	0x10019fe0
+1000efdc:	1001ac84 	.word	0x1001ac84
 1000efe0:	1000d7c5 	.word	0x1000d7c5
 1000efe4:	1000ef21 	.word	0x1000ef21
-1000efe8:	10019fe0 	.word	0x10019fe0
+1000efe8:	10019fdc 	.word	0x10019fdc
 1000efec:	1000d789 	.word	0x1000d789
 1000eff0:	1000ef79 	.word	0x1000ef79
 
@@ -24648,7 +24660,7 @@ void platform_event_free(struct platform_event* event)
 }
 1000effc:	4770      	bx	lr
 1000effe:	46c0      	nop			; (mov r8, r8)
-1000f000:	10019fec 	.word	0x10019fec
+1000f000:	10019fe8 	.word	0x10019fe8
 
 1000f004 <platform_event_post>:
 
@@ -24714,8 +24726,8 @@ void platform_event_post(uint16_t event_type, void * data, uint16_t data_len)
 	
 }
 1000f032:	bd30      	pop	{r4, r5, pc}
-1000f034:	10019fec 	.word	0x10019fec
-1000f038:	10019fe8 	.word	0x10019fe8
+1000f034:	10019fe8 	.word	0x10019fe8
+1000f038:	10019fe4 	.word	0x10019fe4
 
 1000f03c <platform_event_init>:
 	return status;
@@ -24757,9 +24769,9 @@ void platform_event_init()
 	}
 }
 1000f05a:	bd70      	pop	{r4, r5, r6, pc}
-1000f05c:	10019fec 	.word	0x10019fec
-1000f060:	10019fe8 	.word	0x10019fe8
-1000f064:	10019ff0 	.word	0x10019ff0
+1000f05c:	10019fe8 	.word	0x10019fe8
+1000f060:	10019fe4 	.word	0x10019fe4
+1000f064:	10019fec 	.word	0x10019fec
 1000f068:	1000eff5 	.word	0x1000eff5
 
 1000f06c <at_ke_msg_send>:
@@ -24836,14 +24848,14 @@ static void at_ke_msg_send(void const * param_ptr)
 }
 1000f0be:	bd70      	pop	{r4, r5, r6, pc}
 1000f0c0:	4000b1ec 	.word	0x4000b1ec
-1000f0c4:	1001a098 	.word	0x1001a098
-1000f0c8:	1001a090 	.word	0x1001a090
-1000f0cc:	1001a0a4 	.word	0x1001a0a4
-1000f0d0:	1001a078 	.word	0x1001a078
-1000f0d4:	1001a080 	.word	0x1001a080
+1000f0c4:	1001a094 	.word	0x1001a094
+1000f0c8:	1001a08c 	.word	0x1001a08c
+1000f0cc:	1001a0a0 	.word	0x1001a0a0
+1000f0d0:	1001a074 	.word	0x1001a074
+1000f0d4:	1001a07c 	.word	0x1001a07c
 1000f0d8:	4000b020 	.word	0x4000b020
-1000f0dc:	1001a084 	.word	0x1001a084
-1000f0e0:	1001a074 	.word	0x1001a074
+1000f0dc:	1001a080 	.word	0x1001a080
+1000f0e0:	1001a070 	.word	0x1001a070
 
 1000f0e4 <samb11_plf_resume_callback>:
 	rwip_prevent_sleep_clear(APP_PREVENT_SLEEP);
@@ -24874,10 +24886,10 @@ void samb11_plf_resume_callback(void)
 	}
 }
 1000f0fe:	bd10      	pop	{r4, pc}
-1000f100:	1001acd4 	.word	0x1001acd4
+1000f100:	1001acd0 	.word	0x1001acd0
 1000f104:	4000b00c 	.word	0x4000b00c
 1000f108:	4000b010 	.word	0x4000b010
-1000f10c:	1001afb0 	.word	0x1001afb0
+1000f10c:	1001afac 	.word	0x1001afac
 
 1000f110 <init_port_list>:
 port port_list[LPGPIO_MAX];
@@ -24946,7 +24958,7 @@ void init_port_list(void)
 	//port_list[14].bit.available = 0;
 }
 1000f14a:	bd70      	pop	{r4, r5, r6, pc}
-1000f14c:	1001acf0 	.word	0x1001acf0
+1000f14c:	1001acec 	.word	0x1001acec
 1000f150:	10015239 	.word	0x10015239
 
 1000f154 <init_clock>:
@@ -24995,7 +25007,7 @@ void init_clock(void)
 1000f16e:	4770      	bx	lr
 1000f170:	4000b00c 	.word	0x4000b00c
 1000f174:	fffe0fd3 	.word	0xfffe0fd3
-1000f178:	1001acd4 	.word	0x1001acd4
+1000f178:	1001acd0 	.word	0x1001acd0
 1000f17c:	4000b010 	.word	0x4000b010
 1000f180:	ffffe7c0 	.word	0xffffe7c0
 
@@ -25253,66 +25265,66 @@ __STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
 1000f2c6:	4699      	mov	r9, r3
 1000f2c8:	46a2      	mov	sl, r4
 1000f2ca:	bdf0      	pop	{r4, r5, r6, r7, pc}
-1000f2cc:	1001a07c 	.word	0x1001a07c
+1000f2cc:	1001a078 	.word	0x1001a078
 1000f2d0:	1000f111 	.word	0x1000f111
 1000f2d4:	1000f155 	.word	0x1000f155
-1000f2d8:	1001a09c 	.word	0x1001a09c
+1000f2d8:	1001a098 	.word	0x1001a098
 1000f2dc:	e000e100 	.word	0xe000e100
-1000f2e0:	1001afa4 	.word	0x1001afa4
+1000f2e0:	1001afa0 	.word	0x1001afa0
 1000f2e4:	000007d7 	.word	0x000007d7
 1000f2e8:	000007bd 	.word	0x000007bd
-1000f2ec:	1001ace0 	.word	0x1001ace0
+1000f2ec:	1001acdc 	.word	0x1001acdc
 1000f2f0:	0001bc51 	.word	0x0001bc51
-1000f2f4:	1001afa8 	.word	0x1001afa8
+1000f2f4:	1001afa4 	.word	0x1001afa4
 1000f2f8:	100400bc 	.word	0x100400bc
-1000f2fc:	1001a070 	.word	0x1001a070
+1000f2fc:	1001a06c 	.word	0x1001a06c
 1000f300:	100400b8 	.word	0x100400b8
-1000f304:	1001a06c 	.word	0x1001a06c
+1000f304:	1001a068 	.word	0x1001a068
 1000f308:	0001b99f 	.word	0x0001b99f
-1000f30c:	1001acdc 	.word	0x1001acdc
+1000f30c:	1001acd8 	.word	0x1001acd8
 1000f310:	0001b9db 	.word	0x0001b9db
-1000f314:	1001ace8 	.word	0x1001ace8
-1000f318:	1001afb8 	.word	0x1001afb8
+1000f314:	1001ace4 	.word	0x1001ace4
+1000f318:	1001afb4 	.word	0x1001afb4
 1000f31c:	1004003c 	.word	0x1004003c
 1000f320:	10041fc0 	.word	0x10041fc0
-1000f324:	1001acec 	.word	0x1001acec
+1000f324:	1001ace8 	.word	0x1001ace8
 1000f328:	10041fc4 	.word	0x10041fc4
-1000f32c:	1001afb4 	.word	0x1001afb4
-1000f330:	1001afac 	.word	0x1001afac
+1000f32c:	1001afb0 	.word	0x1001afb0
+1000f330:	1001afa8 	.word	0x1001afa8
 1000f334:	10041fd4 	.word	0x10041fd4
 1000f338:	10041fd8 	.word	0x10041fd8
-1000f33c:	1001ace4 	.word	0x1001ace4
+1000f33c:	1001ace0 	.word	0x1001ace0
 1000f340:	0001cbe9 	.word	0x0001cbe9
-1000f344:	1001a090 	.word	0x1001a090
+1000f344:	1001a08c 	.word	0x1001a08c
 1000f348:	0001cd8f 	.word	0x0001cd8f
-1000f34c:	1001a080 	.word	0x1001a080
+1000f34c:	1001a07c 	.word	0x1001a07c
 1000f350:	0001cea3 	.word	0x0001cea3
-1000f354:	1001a0a4 	.word	0x1001a0a4
+1000f354:	1001a0a0 	.word	0x1001a0a0
 1000f358:	0001cbcf 	.word	0x0001cbcf
-1000f35c:	1001a078 	.word	0x1001a078
+1000f35c:	1001a074 	.word	0x1001a074
 1000f360:	1000f80d 	.word	0x1000f80d
 1000f364:	1000f7a1 	.word	0x1000f7a1
 1000f368:	100400e4 	.word	0x100400e4
-1000f36c:	1001a098 	.word	0x1001a098
+1000f36c:	1001a094 	.word	0x1001a094
 1000f370:	00019fe9 	.word	0x00019fe9
-1000f374:	1001a0a8 	.word	0x1001a0a8
+1000f374:	1001a0a4 	.word	0x1001a0a4
 1000f378:	0001dbdd 	.word	0x0001dbdd
-1000f37c:	1001a074 	.word	0x1001a074
+1000f37c:	1001a070 	.word	0x1001a070
 1000f380:	0001dc5b 	.word	0x0001dc5b
-1000f384:	1001a088 	.word	0x1001a088
+1000f384:	1001a084 	.word	0x1001a084
 1000f388:	100405ec 	.word	0x100405ec
-1000f38c:	1001a084 	.word	0x1001a084
+1000f38c:	1001a080 	.word	0x1001a080
 1000f390:	0001d5e3 	.word	0x0001d5e3
-1000f394:	1001a094 	.word	0x1001a094
+1000f394:	1001a090 	.word	0x1001a090
 1000f398:	10040c20 	.word	0x10040c20
-1000f39c:	1001a0ac 	.word	0x1001a0ac
+1000f39c:	1001a0a8 	.word	0x1001a0a8
 1000f3a0:	00019f09 	.word	0x00019f09
-1000f3a4:	1001a068 	.word	0x1001a068
-1000f3a8:	1001ad24 	.word	0x1001ad24
+1000f3a4:	1001a064 	.word	0x1001a064
+1000f3a8:	1001ad20 	.word	0x1001ad20
 1000f3ac:	10015239 	.word	0x10015239
-1000f3b0:	1001afbc 	.word	0x1001afbc
+1000f3b0:	1001afb8 	.word	0x1001afb8
 1000f3b4:	1000f03d 	.word	0x1000f03d
-1000f3b8:	1001afb0 	.word	0x1001afb0
+1000f3b8:	1001afac 	.word	0x1001afac
 1000f3bc:	1000f0e5 	.word	0x1000f0e5
 1000f3c0:	1000f869 	.word	0x1000f869
 1000f3c4:	1000f851 	.word	0x1000f851
@@ -25353,8 +25365,8 @@ plf_drv_status platform_register_ble_msg_handler(platform_interface_callback fp)
 }
 1000f3d8:	0018      	movs	r0, r3
 1000f3da:	4770      	bx	lr
-1000f3dc:	1001a07c 	.word	0x1001a07c
-1000f3e0:	1001a09c 	.word	0x1001a09c
+1000f3dc:	1001a078 	.word	0x1001a078
+1000f3e0:	1001a098 	.word	0x1001a098
 
 1000f3e4 <platform_interface_send>:
 
@@ -25420,8 +25432,8 @@ void platform_interface_send(uint8_t* data, uint32_t len)
 }
 1000f420:	bd70      	pop	{r4, r5, r6, pc}
 1000f422:	46c0      	nop			; (mov r8, r8)
-1000f424:	1001a070 	.word	0x1001a070
-1000f428:	1001a0a8 	.word	0x1001a0a8
+1000f424:	1001a06c 	.word	0x1001a06c
+1000f428:	1001a0a4 	.word	0x1001a0a4
 1000f42c:	1000f06d 	.word	0x1000f06d
 1000f430:	10015227 	.word	0x10015227
 
@@ -25473,7 +25485,7 @@ void send_plf_int_msg_ind(uint8_t intr_index, uint8_t callback_id, void *data, u
 	}
 }
 1000f466:	bd70      	pop	{r4, r5, r6, pc}
-1000f468:	1001a0a8 	.word	0x1001a0a8
+1000f468:	1001a0a4 	.word	0x1001a0a4
 1000f46c:	10015227 	.word	0x10015227
 1000f470:	1000f06d 	.word	0x1000f06d
 
@@ -26059,19 +26071,19 @@ static int NMI_MsgQueueDestroyOnKeID(NMI_MsgQueueHandle* pHandle, ke_msg_id_t u1
 1000f69a:	46c0      	nop			; (mov r8, r8)
 1000f69c:	10015239 	.word	0x10015239
 1000f6a0:	1000f3e5 	.word	0x1000f3e5
-1000f6a4:	1001a0ac 	.word	0x1001a0ac
-1000f6a8:	1001a094 	.word	0x1001a094
-1000f6ac:	1001a0a0 	.word	0x1001a0a0
-1000f6b0:	1001afbc 	.word	0x1001afbc
-1000f6b4:	1001ad24 	.word	0x1001ad24
+1000f6a4:	1001a0a8 	.word	0x1001a0a8
+1000f6a8:	1001a090 	.word	0x1001a090
+1000f6ac:	1001a09c 	.word	0x1001a09c
+1000f6b0:	1001afb8 	.word	0x1001afb8
+1000f6b4:	1001ad20 	.word	0x1001ad20
 1000f6b8:	10015227 	.word	0x10015227
 1000f6bc:	1000f005 	.word	0x1000f005
-1000f6c0:	1001a09c 	.word	0x1001a09c
-1000f6c4:	1001a08c 	.word	0x1001a08c
-1000f6c8:	1001a06c 	.word	0x1001a06c
-1000f6cc:	1001a068 	.word	0x1001a068
-1000f6d0:	1001a088 	.word	0x1001a088
-1000f6d4:	1001a074 	.word	0x1001a074
+1000f6c0:	1001a098 	.word	0x1001a098
+1000f6c4:	1001a088 	.word	0x1001a088
+1000f6c8:	1001a068 	.word	0x1001a068
+1000f6cc:	1001a064 	.word	0x1001a064
+1000f6d0:	1001a084 	.word	0x1001a084
+1000f6d4:	1001a070 	.word	0x1001a070
 
 1000f6d8 <acquire_sleep_lock>:
 
@@ -26096,7 +26108,7 @@ plf_drv_status acquire_sleep_lock()
 }
 1000f6e4:	2008      	movs	r0, #8
 1000f6e6:	bd10      	pop	{r4, pc}
-1000f6e8:	1001acdc 	.word	0x1001acdc
+1000f6e8:	1001acd8 	.word	0x1001acd8
 
 1000f6ec <release_message_lock>:
 
@@ -26114,7 +26126,7 @@ plf_drv_status release_message_lock()
 }
 1000f6f8:	2000      	movs	r0, #0
 1000f6fa:	bd10      	pop	{r4, pc}
-1000f6fc:	1001ace8 	.word	0x1001ace8
+1000f6fc:	1001ace4 	.word	0x1001ace4
 
 1000f700 <release_sleep_lock>:
 
@@ -26138,7 +26150,7 @@ plf_drv_status release_sleep_lock()
 }
 1000f714:	2000      	movs	r0, #0
 1000f716:	bd10      	pop	{r4, pc}
-1000f718:	1001ace8 	.word	0x1001ace8
+1000f718:	1001ace4 	.word	0x1001ace4
 
 1000f71c <register_resume_callback>:
 }
@@ -26176,7 +26188,7 @@ plf_drv_status register_resume_callback(resume_callback cb)
 	return status;
 }
 1000f72a:	4770      	bx	lr
-1000f72c:	1001afb0 	.word	0x1001afb0
+1000f72c:	1001afac 	.word	0x1001afac
 
 1000f730 <gpio1_combined_isr_handler>:
 
@@ -26490,7 +26502,7 @@ void PORT1_COMB_Handler(void)
 1000f83c:	bd10      	pop	{r4, pc}
 1000f83e:	46c0      	nop			; (mov r8, r8)
 1000f840:	40011000 	.word	0x40011000
-1000f844:	1001afa8 	.word	0x1001afa8
+1000f844:	1001afa4 	.word	0x1001afa4
 1000f848:	e000e100 	.word	0xe000e100
 1000f84c:	1000f731 	.word	0x1000f731
 
@@ -26533,7 +26545,7 @@ enum port_status_code wakeup_int_unregister_callback(enum port_wakeup_source wak
 }
 1000f860:	0018      	movs	r0, r3
 1000f862:	4770      	bx	lr
-1000f864:	1001afc0 	.word	0x1001afc0
+1000f864:	1001afbc 	.word	0x1001afbc
 
 1000f868 <wakeup_active_event_callback>:
 
@@ -26606,7 +26618,7 @@ void wakeup_active_event_callback(uint32_t wakeup_source)
 }
 1000f8b4:	bd10      	pop	{r4, pc}
 1000f8b6:	46c0      	nop			; (mov r8, r8)
-1000f8b8:	1001afc0 	.word	0x1001afc0
+1000f8b8:	1001afbc 	.word	0x1001afbc
 1000f8bc:	ffff00ff 	.word	0xffff00ff
 1000f8c0:	ff00ffff 	.word	0xff00ffff
 
@@ -26727,16 +26739,16 @@ void sms_init_variables(void)
 }
 1000f954:	bd10      	pop	{r4, pc}
 1000f956:	46c0      	nop			; (mov r8, r8)
-1000f958:	1001a330 	.word	0x1001a330
-1000f95c:	1001a220 	.word	0x1001a220
-1000f960:	1001a294 	.word	0x1001a294
-1000f964:	1001a184 	.word	0x1001a184
-1000f968:	1001a331 	.word	0x1001a331
-1000f96c:	1001a218 	.word	0x1001a218
-1000f970:	1001a180 	.word	0x1001a180
-1000f974:	1001a219 	.word	0x1001a219
-1000f978:	1001a21c 	.word	0x1001a21c
-1000f97c:	1001a34c 	.word	0x1001a34c
+1000f958:	1001a32c 	.word	0x1001a32c
+1000f95c:	1001a21c 	.word	0x1001a21c
+1000f960:	1001a290 	.word	0x1001a290
+1000f964:	1001a180 	.word	0x1001a180
+1000f968:	1001a32d 	.word	0x1001a32d
+1000f96c:	1001a214 	.word	0x1001a214
+1000f970:	1001a17c 	.word	0x1001a17c
+1000f974:	1001a215 	.word	0x1001a215
+1000f978:	1001a218 	.word	0x1001a218
+1000f97c:	1001a348 	.word	0x1001a348
 
 1000f980 <main>:
     //sms_current_interrupt.int_on = true;
@@ -27303,7 +27315,7 @@ int main(void)
 1000fbfe:	4b22      	ldr	r3, [pc, #136]	; (1000fc88 <main+0x308>)
 1000fc00:	701a      	strb	r2, [r3, #0]
 1000fc02:	e708      	b.n	1000fa16 <main+0x96>
-1000fc04:	1001a330 	.word	0x1001a330
+1000fc04:	1001a32c 	.word	0x1001a32c
 1000fc08:	1000f185 	.word	0x1000f185
 1000fc0c:	1000c719 	.word	0x1000c719
 1000fc10:	1000ee79 	.word	0x1000ee79
@@ -27316,7 +27328,7 @@ int main(void)
 1000fc2c:	1000aa45 	.word	0x1000aa45
 1000fc30:	1000b519 	.word	0x1000b519
 1000fc34:	1000ac59 	.word	0x1000ac59
-1000fc38:	1001a294 	.word	0x1001a294
+1000fc38:	1001a290 	.word	0x1001a290
 1000fc3c:	1000a999 	.word	0x1000a999
 1000fc40:	1000e4f9 	.word	0x1000e4f9
 1000fc44:	1000a931 	.word	0x1000a931
@@ -27335,38 +27347,38 @@ int main(void)
 1000fc78:	1000a8e5 	.word	0x1000a8e5
 1000fc7c:	10009f69 	.word	0x10009f69
 1000fc80:	1000ecf1 	.word	0x1000ecf1
-1000fc84:	1001a318 	.word	0x1001a318
-1000fc88:	1001a337 	.word	0x1001a337
+1000fc84:	1001a314 	.word	0x1001a314
+1000fc88:	1001a333 	.word	0x1001a333
 1000fc8c:	10016660 	.word	0x10016660
 1000fc90:	100154a1 	.word	0x100154a1
-1000fc94:	100182b4 	.word	0x100182b4
+1000fc94:	100182b0 	.word	0x100182b0
 1000fc98:	10015381 	.word	0x10015381
-1000fc9c:	100182cc 	.word	0x100182cc
-1000fca0:	100182d4 	.word	0x100182d4
-1000fca4:	10018298 	.word	0x10018298
-1000fca8:	100182f8 	.word	0x100182f8
-1000fcac:	10018308 	.word	0x10018308
-1000fcb0:	1001a218 	.word	0x1001a218
+1000fc9c:	100182c8 	.word	0x100182c8
+1000fca0:	100182d0 	.word	0x100182d0
+1000fca4:	10018294 	.word	0x10018294
+1000fca8:	100182f4 	.word	0x100182f4
+1000fcac:	10018304 	.word	0x10018304
+1000fcb0:	1001a214 	.word	0x1001a214
 1000fcb4:	1000a6a1 	.word	0x1000a6a1
-1000fcb8:	10018310 	.word	0x10018310
-1000fcbc:	10018334 	.word	0x10018334
-1000fcc0:	1001833c 	.word	0x1001833c
+1000fcb8:	1001830c 	.word	0x1001830c
+1000fcbc:	10018330 	.word	0x10018330
+1000fcc0:	10018338 	.word	0x10018338
 1000fcc4:	1000add1 	.word	0x1000add1
-1000fcc8:	10018348 	.word	0x10018348
-1000fccc:	10018358 	.word	0x10018358
+1000fcc8:	10018344 	.word	0x10018344
+1000fccc:	10018354 	.word	0x10018354
 1000fcd0:	1000b331 	.word	0x1000b331
-1000fcd4:	1001837c 	.word	0x1001837c
+1000fcd4:	10018378 	.word	0x10018378
 1000fcd8:	1000b619 	.word	0x1000b619
-1000fcdc:	100183b4 	.word	0x100183b4
+1000fcdc:	100183b0 	.word	0x100183b0
 1000fce0:	1000b719 	.word	0x1000b719
 1000fce4:	1000b76d 	.word	0x1000b76d
-1000fce8:	100183c4 	.word	0x100183c4
+1000fce8:	100183c0 	.word	0x100183c0
 1000fcec:	1000b9ad 	.word	0x1000b9ad
-1000fcf0:	100183d4 	.word	0x100183d4
-1000fcf4:	100183dc 	.word	0x100183dc
-1000fcf8:	1001a219 	.word	0x1001a219
-1000fcfc:	10018400 	.word	0x10018400
-1000fd00:	10018414 	.word	0x10018414
+1000fcf0:	100183d0 	.word	0x100183d0
+1000fcf4:	100183d8 	.word	0x100183d8
+1000fcf8:	1001a215 	.word	0x1001a215
+1000fcfc:	100183fc 	.word	0x100183fc
+1000fd00:	10018410 	.word	0x10018410
 
 1000fd04 <internal_event_post>:
 1000fd04:	b570      	push	{r4, r5, r6, lr}
@@ -27407,10 +27419,10 @@ int main(void)
 1000fd4a:	80e1      	strh	r1, [r4, #6]
 1000fd4c:	701a      	strb	r2, [r3, #0]
 1000fd4e:	bd70      	pop	{r4, r5, r6, pc}
-1000fd50:	1001a0c8 	.word	0x1001a0c8
-1000fd54:	1001a0c4 	.word	0x1001a0c4
-1000fd58:	1001a0b0 	.word	0x1001a0b0
-1000fd5c:	1001a0c0 	.word	0x1001a0c0
+1000fd50:	1001a0c4 	.word	0x1001a0c4
+1000fd54:	1001a0c0 	.word	0x1001a0c0
+1000fd58:	1001a0ac 	.word	0x1001a0ac
+1000fd5c:	1001a0bc 	.word	0x1001a0bc
 
 1000fd60 <internal_event_init>:
 1000fd60:	b510      	push	{r4, lr}
@@ -27431,8 +27443,8 @@ int main(void)
 1000fd7e:	601a      	str	r2, [r3, #0]
 1000fd80:	bd10      	pop	{r4, pc}
 1000fd82:	46c0      	nop			; (mov r8, r8)
-1000fd84:	1001a0c8 	.word	0x1001a0c8
-1000fd88:	1001a0c4 	.word	0x1001a0c4
+1000fd84:	1001a0c4 	.word	0x1001a0c4
+1000fd88:	1001a0c0 	.word	0x1001a0c0
 
 1000fd8c <special_events_handler>:
 1000fd8c:	b538      	push	{r3, r4, r5, lr}
@@ -27491,7 +27503,7 @@ int main(void)
 1000fdf6:	4158      	adcs	r0, r3
 1000fdf8:	bd38      	pop	{r3, r4, r5, pc}
 1000fdfa:	46c0      	nop			; (mov r8, r8)
-1000fdfc:	1001afcc 	.word	0x1001afcc
+1000fdfc:	1001afc8 	.word	0x1001afc8
 1000fe00:	100117e9 	.word	0x100117e9
 1000fe04:	00000e13 	.word	0x00000e13
 1000fe08:	00000e15 	.word	0x00000e15
@@ -27864,11 +27876,11 @@ int main(void)
 100100ec:	e07e      	b.n	100101ec <at_ble_event_get+0x3d0>
 100100ee:	46c0      	nop			; (mov r8, r8)
 100100f0:	10011821 	.word	0x10011821
-100100f4:	1001a0c4 	.word	0x1001a0c4
+100100f4:	1001a0c0 	.word	0x1001a0c0
 100100f8:	1000f475 	.word	0x1000f475
-100100fc:	1001a0c8 	.word	0x1001a0c8
-10010100:	1001a0c0 	.word	0x1001a0c0
-10010104:	1001a0b0 	.word	0x1001a0b0
+100100fc:	1001a0c4 	.word	0x1001a0c4
+10010100:	1001a0bc 	.word	0x1001a0bc
+10010104:	1001a0ac 	.word	0x1001a0ac
 10010108:	1000fd05 	.word	0x1000fd05
 1001010c:	10015239 	.word	0x10015239
 10010110:	0000ffff 	.word	0x0000ffff
@@ -28312,8 +28324,8 @@ int main(void)
 1001052a:	603e      	str	r6, [r7, #0]
 1001052c:	601d      	str	r5, [r3, #0]
 1001052e:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
-10010530:	1001a0c4 	.word	0x1001a0c4
-10010534:	1001a0c8 	.word	0x1001a0c8
+10010530:	1001a0c0 	.word	0x1001a0c0
+10010534:	1001a0c4 	.word	0x1001a0c4
 
 10010538 <internal_conn_flush>:
 10010538:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -28354,8 +28366,8 @@ int main(void)
 1001057e:	4663      	mov	r3, ip
 10010580:	601c      	str	r4, [r3, #0]
 10010582:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
-10010584:	1001a0c4 	.word	0x1001a0c4
-10010588:	1001a0c8 	.word	0x1001a0c8
+10010584:	1001a0c0 	.word	0x1001a0c0
+10010588:	1001a0c4 	.word	0x1001a0c4
 
 1001058c <at_ble_device_name_set>:
 1001058c:	b530      	push	{r4, r5, lr}
@@ -28382,7 +28394,7 @@ int main(void)
 100105b6:	1c18      	adds	r0, r3, #0
 100105b8:	bd30      	pop	{r4, r5, pc}
 100105ba:	46c0      	nop			; (mov r8, r8)
-100105bc:	1001b06a 	.word	0x1001b06a
+100105bc:	1001b066 	.word	0x1001b066
 
 100105c0 <at_ble_addr_get>:
 100105c0:	b510      	push	{r4, lr}
@@ -28400,7 +28412,7 @@ int main(void)
 100105d8:	bd10      	pop	{r4, pc}
 100105da:	46c0      	nop			; (mov r8, r8)
 100105dc:	100124e1 	.word	0x100124e1
-100105e0:	1001b06a 	.word	0x1001b06a
+100105e0:	1001b066 	.word	0x1001b066
 
 100105e4 <at_ble_set_dev_config>:
 100105e4:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -28469,7 +28481,7 @@ int main(void)
 10010662:	1c28      	adds	r0, r5, #0
 10010664:	b009      	add	sp, #36	; 0x24
 10010666:	bdf0      	pop	{r4, r5, r6, r7, pc}
-10010668:	1001b06a 	.word	0x1001b06a
+10010668:	1001b066 	.word	0x1001b066
 1001066c:	100123d9 	.word	0x100123d9
 10010670:	10015227 	.word	0x10015227
 
@@ -28646,12 +28658,12 @@ int main(void)
 100107c6:	1c30      	adds	r0, r6, #0
 100107c8:	b007      	add	sp, #28
 100107ca:	bdf0      	pop	{r4, r5, r6, r7, pc}
-100107cc:	10018418 	.word	0x10018418
+100107cc:	10018414 	.word	0x10018414
 100107d0:	10015227 	.word	0x10015227
-100107d4:	1001afd8 	.word	0x1001afd8
-100107d8:	1001a174 	.word	0x1001a174
-100107dc:	1001a0d4 	.word	0x1001a0d4
-100107e0:	10018640 	.word	0x10018640
+100107d4:	1001afd4 	.word	0x1001afd4
+100107d8:	1001a170 	.word	0x1001a170
+100107dc:	1001a0d0 	.word	0x1001a0d0
+100107e0:	1001863c 	.word	0x1001863c
 100107e4:	10012e29 	.word	0x10012e29
 100107e8:	10010ae5 	.word	0x10010ae5
 100107ec:	10011145 	.word	0x10011145
@@ -28664,10 +28676,10 @@ int main(void)
 10010808:	1000fd61 	.word	0x1000fd61
 1001080c:	1000fe1d 	.word	0x1000fe1d
 10010810:	10012369 	.word	0x10012369
-10010814:	1001afda 	.word	0x1001afda
-10010818:	1001b06a 	.word	0x1001b06a
+10010814:	1001afd6 	.word	0x1001afd6
+10010818:	1001b066 	.word	0x1001b066
 1001081c:	00003a98 	.word	0x00003a98
-10010820:	1001b075 	.word	0x1001b075
+10010820:	1001b071 	.word	0x1001b071
 10010824:	100105e5 	.word	0x100105e5
 
 10010828 <at_ble_addr_set>:
@@ -28704,8 +28716,8 @@ int main(void)
 10010864:	4798      	blx	r3
 10010866:	bd38      	pop	{r3, r4, r5, pc}
 10010868:	10015227 	.word	0x10015227
-1001086c:	1001b06f 	.word	0x1001b06f
-10010870:	1001b06a 	.word	0x1001b06a
+1001086c:	1001b06b 	.word	0x1001b06b
+10010870:	1001b066 	.word	0x1001b066
 10010874:	100105e5 	.word	0x100105e5
 10010878:	10011825 	.word	0x10011825
 
@@ -28766,11 +28778,11 @@ int main(void)
 100108e6:	702c      	strb	r4, [r5, #0]
 100108e8:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
 100108ea:	46c0      	nop			; (mov r8, r8)
-100108ec:	1001b09e 	.word	0x1001b09e
-100108f0:	1001b06a 	.word	0x1001b06a
+100108ec:	1001b09a 	.word	0x1001b09a
+100108f0:	1001b066 	.word	0x1001b066
 100108f4:	10015239 	.word	0x10015239
 100108f8:	10015227 	.word	0x10015227
-100108fc:	1001b0bd 	.word	0x1001b0bd
+100108fc:	1001b0b9 	.word	0x1001b0b9
 
 10010900 <at_ble_adv_start>:
 10010900:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -28918,10 +28930,10 @@ int main(void)
 10010a1e:	b011      	add	sp, #68	; 0x44
 10010a20:	bdf0      	pop	{r4, r5, r6, r7, pc}
 10010a22:	46c0      	nop			; (mov r8, r8)
-10010a24:	1001b06a 	.word	0x1001b06a
+10010a24:	1001b066 	.word	0x1001b066
 10010a28:	100128b5 	.word	0x100128b5
-10010a2c:	1001b09e 	.word	0x1001b09e
-10010a30:	1001b0bd 	.word	0x1001b0bd
+10010a2c:	1001b09a 	.word	0x1001b09a
+10010a30:	1001b0b9 	.word	0x1001b0b9
 10010a34:	10012795 	.word	0x10012795
 10010a38:	00003a98 	.word	0x00003a98
 
@@ -29001,7 +29013,7 @@ int main(void)
 10010ac6:	1c18      	adds	r0, r3, #0
 10010ac8:	4770      	bx	lr
 10010aca:	46c0      	nop			; (mov r8, r8)
-10010acc:	10018423 	.word	0x10018423
+10010acc:	1001841f 	.word	0x1001841f
 
 10010ad0 <at_ble_uuid_len2type>:
 10010ad0:	1e83      	subs	r3, r0, #2
@@ -29012,14 +29024,14 @@ int main(void)
 10010ada:	4a01      	ldr	r2, [pc, #4]	; (10010ae0 <at_ble_uuid_len2type+0x10>)
 10010adc:	5cd0      	ldrb	r0, [r2, r3]
 10010ade:	4770      	bx	lr
-10010ae0:	10018426 	.word	0x10018426
+10010ae0:	10018422 	.word	0x10018422
 
 10010ae4 <init_gatt_client_module>:
 10010ae4:	2200      	movs	r2, #0
 10010ae6:	4b01      	ldr	r3, [pc, #4]	; (10010aec <init_gatt_client_module+0x8>)
 10010ae8:	801a      	strh	r2, [r3, #0]
 10010aea:	4770      	bx	lr
-10010aec:	1001a0cc 	.word	0x1001a0cc
+10010aec:	1001a0c8 	.word	0x1001a0c8
 
 10010af0 <db_searchATT>:
 10010af0:	b570      	push	{r4, r5, r6, lr}
@@ -29050,8 +29062,8 @@ int main(void)
 10010b22:	e7ec      	b.n	10010afe <db_searchATT+0xe>
 10010b24:	2000      	movs	r0, #0
 10010b26:	bd70      	pop	{r4, r5, r6, pc}
-10010b28:	1001a0e0 	.word	0x1001a0e0
-10010b2c:	1001a0d8 	.word	0x1001a0d8
+10010b28:	1001a0dc 	.word	0x1001a0dc
+10010b2c:	1001a0d4 	.word	0x1001a0d4
 
 10010b30 <att_permissions>:
 10010b30:	b530      	push	{r4, r5, lr}
@@ -29284,10 +29296,10 @@ int main(void)
 10010cf2:	1c30      	adds	r0, r6, #0
 10010cf4:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
 10010cf6:	46c0      	nop			; (mov r8, r8)
-10010cf8:	1001a0d8 	.word	0x1001a0d8
-10010cfc:	1001a0dc 	.word	0x1001a0dc
+10010cf8:	1001a0d4 	.word	0x1001a0d4
+10010cfc:	1001a0d8 	.word	0x1001a0d8
 10010d00:	10015227 	.word	0x10015227
-10010d04:	1001a0e0 	.word	0x1001a0e0
+10010d04:	1001a0dc 	.word	0x1001a0dc
 
 10010d08 <user_description_define>:
 10010d08:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
@@ -29784,24 +29796,24 @@ int main(void)
 100110de:	373c      	adds	r7, #60	; 0x3c
 100110e0:	9502      	str	r5, [sp, #8]
 100110e2:	e787      	b.n	10010ff4 <internal_at_ble_service_define+0x26c>
-100110e4:	1001a0e8 	.word	0x1001a0e8
-100110e8:	1001afd8 	.word	0x1001afd8
+100110e4:	1001a0e4 	.word	0x1001a0e4
+100110e8:	1001afd4 	.word	0x1001afd4
 100110ec:	10015239 	.word	0x10015239
 100110f0:	10010abd 	.word	0x10010abd
 100110f4:	10015227 	.word	0x10015227
-100110f8:	1001843f 	.word	0x1001843f
+100110f8:	1001843b 	.word	0x1001843b
 100110fc:	10012f49 	.word	0x10012f49
-10011100:	10018441 	.word	0x10018441
+10011100:	1001843d 	.word	0x1001843d
 10011104:	10010b89 	.word	0x10010b89
-10011108:	1001843d 	.word	0x1001843d
+10011108:	10018439 	.word	0x10018439
 1001110c:	10010b31 	.word	0x10010b31
-10011110:	10018439 	.word	0x10018439
-10011114:	1001843b 	.word	0x1001843b
+10011110:	10018435 	.word	0x10018435
+10011114:	10018437 	.word	0x10018437
 10011118:	00008002 	.word	0x00008002
-1001111c:	10018435 	.word	0x10018435
-10011120:	10018437 	.word	0x10018437
+1001111c:	10018431 	.word	0x10018431
+10011120:	10018433 	.word	0x10018433
 10011124:	10012e3d 	.word	0x10012e3d
-10011128:	1001a0d4 	.word	0x1001a0d4
+10011128:	1001a0d0 	.word	0x1001a0d0
 1001112c:	10010c51 	.word	0x10010c51
 10011130:	10012fb9 	.word	0x10012fb9
 10011134:	10010d09 	.word	0x10010d09
@@ -29828,13 +29840,13 @@ int main(void)
 1001115e:	4a07      	ldr	r2, [pc, #28]	; (1001117c <initi_gatt_server_module+0x38>)
 10011160:	6013      	str	r3, [r2, #0]
 10011162:	4770      	bx	lr
-10011164:	1001a0d4 	.word	0x1001a0d4
-10011168:	1001a0e4 	.word	0x1001a0e4
-1001116c:	1001a0e0 	.word	0x1001a0e0
-10011170:	1001a0d0 	.word	0x1001a0d0
-10011174:	1001a0dc 	.word	0x1001a0dc
-10011178:	1001a0d8 	.word	0x1001a0d8
-1001117c:	1001a0e8 	.word	0x1001a0e8
+10011164:	1001a0d0 	.word	0x1001a0d0
+10011168:	1001a0e0 	.word	0x1001a0e0
+1001116c:	1001a0dc 	.word	0x1001a0dc
+10011170:	1001a0cc 	.word	0x1001a0cc
+10011174:	1001a0d8 	.word	0x1001a0d8
+10011178:	1001a0d4 	.word	0x1001a0d4
+1001117c:	1001a0e4 	.word	0x1001a0e4
 
 10011180 <db_init>:
 10011180:	4b0a      	ldr	r3, [pc, #40]	; (100111ac <db_init+0x2c>)
@@ -29859,12 +29871,12 @@ int main(void)
 100111a6:	601a      	str	r2, [r3, #0]
 100111a8:	4770      	bx	lr
 100111aa:	46c0      	nop			; (mov r8, r8)
-100111ac:	1001a0e8 	.word	0x1001a0e8
-100111b0:	1001a0e4 	.word	0x1001a0e4
-100111b4:	1001a0d0 	.word	0x1001a0d0
-100111b8:	1001a0dc 	.word	0x1001a0dc
-100111bc:	1001a0d8 	.word	0x1001a0d8
-100111c0:	1001a0e0 	.word	0x1001a0e0
+100111ac:	1001a0e4 	.word	0x1001a0e4
+100111b0:	1001a0e0 	.word	0x1001a0e0
+100111b4:	1001a0cc 	.word	0x1001a0cc
+100111b8:	1001a0d8 	.word	0x1001a0d8
+100111bc:	1001a0d4 	.word	0x1001a0d4
+100111c0:	1001a0dc 	.word	0x1001a0dc
 
 100111c4 <at_ble_primary_service_define>:
 100111c4:	b530      	push	{r4, r5, lr}
@@ -30002,7 +30014,7 @@ int main(void)
 100112ce:	46c0      	nop			; (mov r8, r8)
 100112d0:	10010af1 	.word	0x10010af1
 100112d4:	10015227 	.word	0x10015227
-100112d8:	10018644 	.word	0x10018644
+100112d8:	10018640 	.word	0x10018640
 100112dc:	10011221 	.word	0x10011221
 100112e0:	100111e5 	.word	0x100111e5
 100112e4:	10012abd 	.word	0x10012abd
@@ -30131,7 +30143,7 @@ int main(void)
 100113de:	009b      	lsls	r3, r3, #2
 100113e0:	449d      	add	sp, r3
 100113e2:	bdf0      	pop	{r4, r5, r6, r7, pc}
-100113e4:	1001a174 	.word	0x1001a174
+100113e4:	1001a170 	.word	0x1001a170
 100113e8:	fffffdec 	.word	0xfffffdec
 100113ec:	10010af1 	.word	0x10010af1
 100113f0:	10013045 	.word	0x10013045
@@ -30142,7 +30154,7 @@ int main(void)
 100113fa:	4b01      	ldr	r3, [pc, #4]	; (10011400 <init_l2cc_task_module+0x8>)
 100113fc:	701a      	strb	r2, [r3, #0]
 100113fe:	4770      	bx	lr
-10011400:	10018640 	.word	0x10018640
+10011400:	1001863c 	.word	0x1001863c
 
 10011404 <l2cc_data_send_rsp_handler>:
 10011404:	b510      	push	{r4, lr}
@@ -30165,7 +30177,7 @@ int main(void)
 10011426:	3301      	adds	r3, #1
 10011428:	7013      	strb	r3, [r2, #0]
 1001142a:	bd10      	pop	{r4, pc}
-1001142c:	10018640 	.word	0x10018640
+1001142c:	1001863c 	.word	0x1001863c
 
 10011430 <l2cc_data_received_handler>:
 10011430:	b508      	push	{r3, lr}
@@ -30332,11 +30344,11 @@ int main(void)
 10011570:	bdf0      	pop	{r4, r5, r6, r7, pc}
 10011572:	46c0      	nop			; (mov r8, r8)
 10011574:	10011961 	.word	0x10011961
-10011578:	1001afda 	.word	0x1001afda
+10011578:	1001afd6 	.word	0x1001afd6
 1001157c:	10011ed1 	.word	0x10011ed1
-10011580:	1001b0e8 	.word	0x1001b0e8
+10011580:	1001b0e4 	.word	0x1001b0e4
 10011584:	10015227 	.word	0x10015227
-10011588:	1001b06a 	.word	0x1001b06a
+10011588:	1001b066 	.word	0x1001b066
 1001158c:	10011cb1 	.word	0x10011cb1
 
 10011590 <at_ble_pair_key_reply>:
@@ -30429,7 +30441,7 @@ int main(void)
 1001163c:	1c18      	adds	r0, r3, #0
 1001163e:	bd70      	pop	{r4, r5, r6, pc}
 10011640:	10011961 	.word	0x10011961
-10011644:	1001afda 	.word	0x1001afda
+10011644:	1001afd6 	.word	0x1001afd6
 10011648:	10011f9d 	.word	0x10011f9d
 
 1001164c <at_ble_encryption_start>:
@@ -30484,9 +30496,9 @@ int main(void)
 100116ac:	1c18      	adds	r0, r3, #0
 100116ae:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
 100116b0:	10011961 	.word	0x10011961
-100116b4:	1001afda 	.word	0x1001afda
+100116b4:	1001afd6 	.word	0x1001afd6
 100116b8:	10015227 	.word	0x10015227
-100116bc:	1001b0e8 	.word	0x1001b0e8
+100116bc:	1001b0e4 	.word	0x1001b0e4
 100116c0:	10011fdd 	.word	0x10011fdd
 
 100116c4 <at_ble_encryption_request_reply>:
@@ -30582,9 +30594,9 @@ int main(void)
 10011774:	1000fd8d 	.word	0x1000fd8d
 10011778:	1000fd05 	.word	0x1000fd05
 1001177c:	1000f6ed 	.word	0x1000f6ed
-10011780:	1001b144 	.word	0x1001b144
-10011784:	1001a0f0 	.word	0x1001a0f0
-10011788:	1001a0ec 	.word	0x1001a0ec
+10011780:	1001b140 	.word	0x1001b140
+10011784:	1001a0ec 	.word	0x1001a0ec
+10011788:	1001a0e8 	.word	0x1001a0e8
 1001178c:	10015227 	.word	0x10015227
 
 10011790 <interface_send>:
@@ -30620,19 +30632,19 @@ int main(void)
 100117c8:	bd10      	pop	{r4, pc}
 100117ca:	46c0      	nop			; (mov r8, r8)
 100117cc:	10015239 	.word	0x10015239
-100117d0:	1001b348 	.word	0x1001b348
-100117d4:	1001b144 	.word	0x1001b144
-100117d8:	1001b148 	.word	0x1001b148
-100117dc:	10018644 	.word	0x10018644
-100117e0:	1001a0ec 	.word	0x1001a0ec
-100117e4:	1001a0f0 	.word	0x1001a0f0
+100117d0:	1001b344 	.word	0x1001b344
+100117d4:	1001b140 	.word	0x1001b140
+100117d8:	1001b144 	.word	0x1001b144
+100117dc:	10018640 	.word	0x10018640
+100117e0:	1001a0e8 	.word	0x1001a0e8
+100117e4:	1001a0ec 	.word	0x1001a0ec
 
 100117e8 <platform_cmd_cmpl_signal>:
 100117e8:	2201      	movs	r2, #1
 100117ea:	4b01      	ldr	r3, [pc, #4]	; (100117f0 <platform_cmd_cmpl_signal+0x8>)
 100117ec:	601a      	str	r2, [r3, #0]
 100117ee:	4770      	bx	lr
-100117f0:	1001a0f4 	.word	0x1001a0f4
+100117f0:	1001a0f0 	.word	0x1001a0f0
 
 100117f4 <platform_cmd_cmpl_wait>:
 100117f4:	b510      	push	{r4, lr}
@@ -30653,7 +30665,7 @@ int main(void)
 10011812:	e000      	b.n	10011816 <platform_cmd_cmpl_wait+0x22>
 10011814:	7022      	strb	r2, [r4, #0]
 10011816:	bd10      	pop	{r4, pc}
-10011818:	1001a0f4 	.word	0x1001a0f4
+10011818:	1001a0f0 	.word	0x1001a0f0
 1001181c:	1000f475 	.word	0x1000f475
 
 10011820 <start_timer>:
@@ -30709,11 +30721,11 @@ int main(void)
 1001187a:	68ab      	ldr	r3, [r5, #8]
 1001187c:	7818      	ldrb	r0, [r3, #0]
 1001187e:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
-10011880:	1001b348 	.word	0x1001b348
-10011884:	1001afd8 	.word	0x1001afd8
-10011888:	1001b350 	.word	0x1001b350
+10011880:	1001b344 	.word	0x1001b344
+10011884:	1001afd4 	.word	0x1001afd4
+10011888:	1001b34c 	.word	0x1001b34c
 1001188c:	10015227 	.word	0x10015227
-10011890:	1001afcc 	.word	0x1001afcc
+10011890:	1001afc8 	.word	0x1001afc8
 10011894:	00000329 	.word	0x00000329
 10011898:	10011791 	.word	0x10011791
 1001189c:	100117f5 	.word	0x100117f5
@@ -30801,11 +30813,11 @@ int main(void)
 1001193e:	4b07      	ldr	r3, [pc, #28]	; (1001195c <gapc_get_dev_info_cfm.constprop.1+0xbc>)
 10011940:	4798      	blx	r3
 10011942:	bd38      	pop	{r3, r4, r5, pc}
-10011944:	1001b348 	.word	0x1001b348
-10011948:	1001afd8 	.word	0x1001afd8
-1001194c:	1001b06a 	.word	0x1001b06a
-10011950:	1001b116 	.word	0x1001b116
-10011954:	1001b354 	.word	0x1001b354
+10011944:	1001b344 	.word	0x1001b344
+10011948:	1001afd4 	.word	0x1001afd4
+1001194c:	1001b066 	.word	0x1001b066
+10011950:	1001b112 	.word	0x1001b112
+10011954:	1001b350 	.word	0x1001b350
 10011958:	10015227 	.word	0x10015227
 1001195c:	10011791 	.word	0x10011791
 
@@ -30837,7 +30849,7 @@ int main(void)
 10011990:	bd70      	pop	{r4, r5, r6, pc}
 10011992:	46c0      	nop			; (mov r8, r8)
 10011994:	0000ffff 	.word	0x0000ffff
-10011998:	1001afda 	.word	0x1001afda
+10011998:	1001afd6 	.word	0x1001afd6
 
 1001199c <check_ConnData_emptyEntry>:
 1001199c:	2300      	movs	r3, #0
@@ -30856,7 +30868,7 @@ int main(void)
 100119b6:	1c18      	adds	r0, r3, #0
 100119b8:	4770      	bx	lr
 100119ba:	46c0      	nop			; (mov r8, r8)
-100119bc:	1001afda 	.word	0x1001afda
+100119bc:	1001afd6 	.word	0x1001afd6
 100119c0:	0000ffff 	.word	0x0000ffff
 
 100119c4 <gapc_cmp_evt>:
@@ -31045,11 +31057,11 @@ int main(void)
 10011b3a:	b005      	add	sp, #20
 10011b3c:	bdf0      	pop	{r4, r5, r6, r7, pc}
 10011b3e:	46c0      	nop			; (mov r8, r8)
-10011b40:	1001b348 	.word	0x1001b348
-10011b44:	1001afd8 	.word	0x1001afd8
+10011b40:	1001b344 	.word	0x1001b344
+10011b44:	1001afd4 	.word	0x1001afd4
 10011b48:	10015227 	.word	0x10015227
-10011b4c:	1001b350 	.word	0x1001b350
-10011b50:	1001b364 	.word	0x1001b364
+10011b4c:	1001b34c 	.word	0x1001b34c
+10011b50:	1001b360 	.word	0x1001b360
 10011b54:	10011791 	.word	0x10011791
 
 10011b58 <gapc_con_req_ind>:
@@ -31153,11 +31165,11 @@ int main(void)
 10011c1a:	47a0      	blx	r4
 10011c1c:	b00b      	add	sp, #44	; 0x2c
 10011c1e:	bdf0      	pop	{r4, r5, r6, r7, pc}
-10011c20:	1001b06a 	.word	0x1001b06a
+10011c20:	1001b066 	.word	0x1001b066
 10011c24:	10015227 	.word	0x10015227
 10011c28:	1001199d 	.word	0x1001199d
-10011c2c:	1001afda 	.word	0x1001afda
-10011c30:	1001a0f8 	.word	0x1001a0f8
+10011c2c:	1001afd6 	.word	0x1001afd6
+10011c30:	1001a0f4 	.word	0x1001a0f4
 10011c34:	10011a95 	.word	0x10011a95
 
 10011c38 <gapc_disconnect_cmd_handler>:
@@ -31189,8 +31201,8 @@ int main(void)
 10011c6a:	1c20      	adds	r0, r4, #0
 10011c6c:	bd10      	pop	{r4, pc}
 10011c6e:	46c0      	nop			; (mov r8, r8)
-10011c70:	1001b348 	.word	0x1001b348
-10011c74:	1001afd8 	.word	0x1001afd8
+10011c70:	1001b344 	.word	0x1001b344
+10011c74:	1001afd4 	.word	0x1001afd4
 10011c78:	10011791 	.word	0x10011791
 
 10011c7c <gapc_disconnect_ind>:
@@ -31217,7 +31229,7 @@ int main(void)
 10011ca4:	8143      	strh	r3, [r0, #10]
 10011ca6:	bd08      	pop	{r3, pc}
 10011ca8:	10011961 	.word	0x10011961
-10011cac:	1001afda 	.word	0x1001afda
+10011cac:	1001afd6 	.word	0x1001afd6
 
 10011cb0 <gapc_bond_cmd_handler>:
 10011cb0:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -31266,8 +31278,8 @@ int main(void)
 10011d06:	7282      	strb	r2, [r0, #10]
 10011d08:	4798      	blx	r3
 10011d0a:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
-10011d0c:	1001b348 	.word	0x1001b348
-10011d10:	1001afd8 	.word	0x1001afd8
+10011d0c:	1001b344 	.word	0x1001b344
+10011d10:	1001afd4 	.word	0x1001afd4
 10011d14:	10011791 	.word	0x10011791
 
 10011d18 <gapc_bond_ind>:
@@ -31371,7 +31383,7 @@ int main(void)
 10011dde:	772b      	strb	r3, [r5, #28]
 10011de0:	2000      	movs	r0, #0
 10011de2:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
-10011de4:	1001a128 	.word	0x1001a128
+10011de4:	1001a124 	.word	0x1001a124
 10011de8:	10015227 	.word	0x10015227
 10011dec:	10015239 	.word	0x10015239
 
@@ -31476,9 +31488,9 @@ int main(void)
 10011eb6:	2000      	movs	r0, #0
 10011eb8:	bd70      	pop	{r4, r5, r6, pc}
 10011eba:	46c0      	nop			; (mov r8, r8)
-10011ebc:	1001b348 	.word	0x1001b348
-10011ec0:	1001afd8 	.word	0x1001afd8
-10011ec4:	1001b06a 	.word	0x1001b06a
+10011ebc:	1001b344 	.word	0x1001b344
+10011ec0:	1001afd4 	.word	0x1001afd4
+10011ec4:	1001b066 	.word	0x1001b066
 10011ec8:	10015227 	.word	0x10015227
 10011ecc:	10011791 	.word	0x10011791
 
@@ -31539,8 +31551,8 @@ int main(void)
 10011f3a:	4798      	blx	r3
 10011f3c:	b005      	add	sp, #20
 10011f3e:	bdf0      	pop	{r4, r5, r6, r7, pc}
-10011f40:	1001b348 	.word	0x1001b348
-10011f44:	1001afd8 	.word	0x1001afd8
+10011f40:	1001b344 	.word	0x1001b344
+10011f44:	1001afd4 	.word	0x1001afd4
 10011f48:	10011791 	.word	0x10011791
 
 10011f4c <gapc_bond_cfm_handler_key_exch>:
@@ -31574,10 +31586,10 @@ int main(void)
 10011f82:	4b05      	ldr	r3, [pc, #20]	; (10011f98 <gapc_bond_cfm_handler_key_exch+0x4c>)
 10011f84:	4798      	blx	r3
 10011f86:	bd38      	pop	{r3, r4, r5, pc}
-10011f88:	1001b348 	.word	0x1001b348
-10011f8c:	1001afd8 	.word	0x1001afd8
+10011f88:	1001b344 	.word	0x1001b344
+10011f8c:	1001afd4 	.word	0x1001afd4
 10011f90:	10015227 	.word	0x10015227
-10011f94:	1001b352 	.word	0x1001b352
+10011f94:	1001b34e 	.word	0x1001b34e
 10011f98:	10011791 	.word	0x10011791
 
 10011f9c <gapc_security_cmd_handler>:
@@ -31607,8 +31619,8 @@ int main(void)
 10011fca:	4b03      	ldr	r3, [pc, #12]	; (10011fd8 <gapc_security_cmd_handler+0x3c>)
 10011fcc:	4798      	blx	r3
 10011fce:	bd08      	pop	{r3, pc}
-10011fd0:	1001b348 	.word	0x1001b348
-10011fd4:	1001afd8 	.word	0x1001afd8
+10011fd0:	1001b344 	.word	0x1001b344
+10011fd4:	1001afd4 	.word	0x1001afd4
 10011fd8:	10011791 	.word	0x10011791
 
 10011fdc <gapc_encrypt_cmd_handler>:
@@ -31674,13 +31686,13 @@ int main(void)
 10012052:	4798      	blx	r3
 10012054:	b009      	add	sp, #36	; 0x24
 10012056:	bdf0      	pop	{r4, r5, r6, r7, pc}
-10012058:	1001a108 	.word	0x1001a108
+10012058:	1001a104 	.word	0x1001a104
 1001205c:	10011a95 	.word	0x10011a95
-10012060:	1001b348 	.word	0x1001b348
-10012064:	1001afd8 	.word	0x1001afd8
+10012060:	1001b344 	.word	0x1001b344
+10012064:	1001afd4 	.word	0x1001afd4
 10012068:	10015227 	.word	0x10015227
-1001206c:	1001b352 	.word	0x1001b352
-10012070:	1001b364 	.word	0x1001b364
+1001206c:	1001b34e 	.word	0x1001b34e
+10012070:	1001b360 	.word	0x1001b360
 10012074:	10011791 	.word	0x10011791
 
 10012078 <gapc_encrypt_req_ind>:
@@ -31751,11 +31763,11 @@ int main(void)
 100120f6:	b007      	add	sp, #28
 100120f8:	bdf0      	pop	{r4, r5, r6, r7, pc}
 100120fa:	46c0      	nop			; (mov r8, r8)
-100120fc:	1001a118 	.word	0x1001a118
+100120fc:	1001a114 	.word	0x1001a114
 10012100:	10011a95 	.word	0x10011a95
-10012104:	1001b348 	.word	0x1001b348
-10012108:	1001afd8 	.word	0x1001afd8
-1001210c:	1001b351 	.word	0x1001b351
+10012104:	1001b344 	.word	0x1001b344
+10012108:	1001afd4 	.word	0x1001afd4
+1001210c:	1001b34d 	.word	0x1001b34d
 10012110:	10015227 	.word	0x10015227
 10012114:	10011791 	.word	0x10011791
 
@@ -31802,8 +31814,8 @@ int main(void)
 10012162:	1c20      	adds	r0, r4, #0
 10012164:	bd38      	pop	{r3, r4, r5, pc}
 10012166:	46c0      	nop			; (mov r8, r8)
-10012168:	1001b348 	.word	0x1001b348
-1001216c:	1001afd8 	.word	0x1001afd8
+10012168:	1001b344 	.word	0x1001b344
+1001216c:	1001afd4 	.word	0x1001afd4
 10012170:	10011791 	.word	0x10011791
 
 10012174 <gapc_param_updated_ind>:
@@ -31873,7 +31885,7 @@ int main(void)
 100121ea:	4b02      	ldr	r3, [pc, #8]	; (100121f4 <gapc_dev_info_req_ind_handler+0x24>)
 100121ec:	4798      	blx	r3
 100121ee:	bd08      	pop	{r3, pc}
-100121f0:	1001b06a 	.word	0x1001b06a
+100121f0:	1001b066 	.word	0x1001b066
 100121f4:	100118a1 	.word	0x100118a1
 
 100121f8 <gapc_sec_req_ind>:
@@ -32121,9 +32133,9 @@ int main(void)
 100123be:	1c18      	adds	r0, r3, #0
 100123c0:	bd76      	pop	{r1, r2, r4, r5, r6, pc}
 100123c2:	46c0      	nop			; (mov r8, r8)
-100123c4:	1001afd8 	.word	0x1001afd8
-100123c8:	1001b348 	.word	0x1001b348
-100123cc:	1001afcc 	.word	0x1001afcc
+100123c4:	1001afd4 	.word	0x1001afd4
+100123c8:	1001b344 	.word	0x1001b344
+100123cc:	1001afc8 	.word	0x1001afc8
 100123d0:	10011791 	.word	0x10011791
 100123d4:	100117f5 	.word	0x100117f5
 
@@ -32244,12 +32256,12 @@ int main(void)
 100124ba:	b009      	add	sp, #36	; 0x24
 100124bc:	bdf0      	pop	{r4, r5, r6, r7, pc}
 100124be:	46c0      	nop			; (mov r8, r8)
-100124c0:	1001b348 	.word	0x1001b348
-100124c4:	1001afd8 	.word	0x1001afd8
+100124c0:	1001b344 	.word	0x1001b344
+100124c4:	1001afd4 	.word	0x1001afd4
 100124c8:	10015227 	.word	0x10015227
-100124cc:	1001b354 	.word	0x1001b354
-100124d0:	1001b35a 	.word	0x1001b35a
-100124d4:	1001afcc 	.word	0x1001afcc
+100124cc:	1001b350 	.word	0x1001b350
+100124d0:	1001b356 	.word	0x1001b356
+100124d4:	1001afc8 	.word	0x1001afc8
 100124d8:	10011791 	.word	0x10011791
 100124dc:	100117f5 	.word	0x100117f5
 
@@ -32350,9 +32362,9 @@ int main(void)
 1001259a:	b005      	add	sp, #20
 1001259c:	bdf0      	pop	{r4, r5, r6, r7, pc}
 1001259e:	46c0      	nop			; (mov r8, r8)
-100125a0:	1001afd8 	.word	0x1001afd8
-100125a4:	1001b348 	.word	0x1001b348
-100125a8:	1001afcc 	.word	0x1001afcc
+100125a0:	1001afd4 	.word	0x1001afd4
+100125a4:	1001b344 	.word	0x1001b344
+100125a8:	1001afc8 	.word	0x1001afc8
 100125ac:	00000d08 	.word	0x00000d08
 100125b0:	10011791 	.word	0x10011791
 100125b4:	100117f5 	.word	0x100117f5
@@ -32406,9 +32418,9 @@ int main(void)
 10012616:	1c18      	adds	r0, r3, #0
 10012618:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}
 1001261a:	46c0      	nop			; (mov r8, r8)
-1001261c:	1001afd8 	.word	0x1001afd8
-10012620:	1001b348 	.word	0x1001b348
-10012624:	1001afcc 	.word	0x1001afcc
+1001261c:	1001afd4 	.word	0x1001afd4
+10012620:	1001b344 	.word	0x1001b344
+10012624:	1001afc8 	.word	0x1001afc8
 10012628:	10011791 	.word	0x10011791
 1001262c:	100117f5 	.word	0x100117f5
 
@@ -32579,9 +32591,9 @@ int main(void)
 1001277a:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
 1001277c:	10015239 	.word	0x10015239
 10012780:	1001199d 	.word	0x1001199d
-10012784:	1001b06a 	.word	0x1001b06a
+10012784:	1001b066 	.word	0x1001b066
 10012788:	10011961 	.word	0x10011961
-1001278c:	1001afda 	.word	0x1001afda
+1001278c:	1001afd6 	.word	0x1001afd6
 10012790:	10015227 	.word	0x10015227
 
 10012794 <gapm_start_adv_cmd_handler>:
@@ -32715,12 +32727,12 @@ int main(void)
 10012892:	1c28      	adds	r0, r5, #0
 10012894:	b009      	add	sp, #36	; 0x24
 10012896:	bdf0      	pop	{r4, r5, r6, r7, pc}
-10012898:	1001afd8 	.word	0x1001afd8
-1001289c:	1001b348 	.word	0x1001b348
-100128a0:	1001b359 	.word	0x1001b359
+10012898:	1001afd4 	.word	0x1001afd4
+1001289c:	1001b344 	.word	0x1001b344
+100128a0:	1001b355 	.word	0x1001b355
 100128a4:	10015227 	.word	0x10015227
-100128a8:	1001b35c 	.word	0x1001b35c
-100128ac:	1001b379 	.word	0x1001b379
+100128a8:	1001b358 	.word	0x1001b358
+100128ac:	1001b375 	.word	0x1001b375
 100128b0:	10011791 	.word	0x10011791
 
 100128b4 <get_gap_local_addr_type>:
@@ -32734,7 +32746,7 @@ int main(void)
 100128c2:	4158      	adcs	r0, r3
 100128c4:	0040      	lsls	r0, r0, #1
 100128c6:	4770      	bx	lr
-100128c8:	1001b06a 	.word	0x1001b06a
+100128c8:	1001b066 	.word	0x1001b066
 
 100128cc <gapm_adv_report_evt_handler>:
 100128cc:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -32845,11 +32857,11 @@ int main(void)
 1001299e:	4b06      	ldr	r3, [pc, #24]	; (100129b8 <gapm_resolv_addr_cmd_handler+0x64>)
 100129a0:	4798      	blx	r3
 100129a2:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
-100129a4:	1001b348 	.word	0x1001b348
-100129a8:	1001afd8 	.word	0x1001afd8
+100129a4:	1001b344 	.word	0x1001b344
+100129a8:	1001afd4 	.word	0x1001afd4
 100129ac:	10015227 	.word	0x10015227
-100129b0:	1001b352 	.word	0x1001b352
-100129b4:	1001b358 	.word	0x1001b358
+100129b0:	1001b34e 	.word	0x1001b34e
+100129b4:	1001b354 	.word	0x1001b354
 100129b8:	10011791 	.word	0x10011791
 
 100129bc <gapm_addr_solved_ind_handler>:
@@ -32979,9 +32991,9 @@ int main(void)
 10012aa2:	4b05      	ldr	r3, [pc, #20]	; (10012ab8 <gattc_read_cfm+0x68>)
 10012aa4:	4798      	blx	r3
 10012aa6:	bd38      	pop	{r3, r4, r5, pc}
-10012aa8:	1001b348 	.word	0x1001b348
-10012aac:	1001afd8 	.word	0x1001afd8
-10012ab0:	1001b355 	.word	0x1001b355
+10012aa8:	1001b344 	.word	0x1001b344
+10012aac:	1001afd4 	.word	0x1001afd4
+10012ab0:	1001b351 	.word	0x1001b351
 10012ab4:	10015227 	.word	0x10015227
 10012ab8:	10011791 	.word	0x10011791
 
@@ -33014,8 +33026,8 @@ int main(void)
 10012aee:	4798      	blx	r3
 10012af0:	bd10      	pop	{r4, pc}
 10012af2:	46c0      	nop			; (mov r8, r8)
-10012af4:	1001b348 	.word	0x1001b348
-10012af8:	1001afd8 	.word	0x1001afd8
+10012af4:	1001b344 	.word	0x1001b344
+10012af8:	1001afd4 	.word	0x1001afd4
 10012afc:	10011791 	.word	0x10011791
 
 10012b00 <gattc_att_info_cfm>:
@@ -33049,8 +33061,8 @@ int main(void)
 10012b36:	72e2      	strb	r2, [r4, #11]
 10012b38:	4798      	blx	r3
 10012b3a:	bd38      	pop	{r3, r4, r5, pc}
-10012b3c:	1001b348 	.word	0x1001b348
-10012b40:	1001afd8 	.word	0x1001afd8
+10012b3c:	1001b344 	.word	0x1001b344
+10012b40:	1001afd4 	.word	0x1001afd4
 10012b44:	10011791 	.word	0x10011791
 
 10012b48 <gattc_send_evt_cmd_handler>:
@@ -33102,11 +33114,11 @@ int main(void)
 10012ba2:	4798      	blx	r3
 10012ba4:	bd70      	pop	{r4, r5, r6, pc}
 10012ba6:	46c0      	nop			; (mov r8, r8)
-10012ba8:	1001b348 	.word	0x1001b348
-10012bac:	1001afd8 	.word	0x1001afd8
-10012bb0:	1001a170 	.word	0x1001a170
+10012ba8:	1001b344 	.word	0x1001b344
+10012bac:	1001afd4 	.word	0x1001afd4
+10012bb0:	1001a16c 	.word	0x1001a16c
 10012bb4:	10015227 	.word	0x10015227
-10012bb8:	1001b358 	.word	0x1001b358
+10012bb8:	1001b354 	.word	0x1001b354
 10012bbc:	10011791 	.word	0x10011791
 
 10012bc0 <gattc_event_cfm_handler>:
@@ -33136,8 +33148,8 @@ int main(void)
 10012bee:	4b03      	ldr	r3, [pc, #12]	; (10012bfc <gattc_event_cfm_handler+0x3c>)
 10012bf0:	4798      	blx	r3
 10012bf2:	bd08      	pop	{r3, pc}
-10012bf4:	1001b348 	.word	0x1001b348
-10012bf8:	1001afd8 	.word	0x1001afd8
+10012bf4:	1001b344 	.word	0x1001b344
+10012bf8:	1001afd4 	.word	0x1001afd4
 10012bfc:	10011791 	.word	0x10011791
 
 10012c00 <gattc_disc_svc_ind_parser>:
@@ -33362,7 +33374,7 @@ int main(void)
 10012dbe:	2000      	movs	r0, #0
 10012dc0:	bd00      	pop	{pc}
 10012dc2:	46c0      	nop			; (mov r8, r8)
-10012dc4:	1001a174 	.word	0x1001a174
+10012dc4:	1001a170 	.word	0x1001a170
 
 10012dc8 <gattc_event_mtu_changed_ind_parser>:
 10012dc8:	0a00      	lsrs	r0, r0, #8
@@ -33424,8 +33436,8 @@ int main(void)
 10012e2e:	4a02      	ldr	r2, [pc, #8]	; (10012e38 <init_gattc_task_module+0x10>)
 10012e30:	8013      	strh	r3, [r2, #0]
 10012e32:	4770      	bx	lr
-10012e34:	1001a16e 	.word	0x1001a16e
-10012e38:	1001a170 	.word	0x1001a170
+10012e34:	1001a16a 	.word	0x1001a16a
+10012e38:	1001a16c 	.word	0x1001a16c
 
 10012e3c <gattm_add_svc_req_handler>:
 10012e3c:	2200      	movs	r2, #0
@@ -33548,10 +33560,10 @@ int main(void)
 10012f26:	7890      	ldrb	r0, [r2, #2]
 10012f28:	b005      	add	sp, #20
 10012f2a:	bdf0      	pop	{r4, r5, r6, r7, pc}
-10012f2c:	1001b348 	.word	0x1001b348
-10012f30:	1001afd8 	.word	0x1001afd8
+10012f2c:	1001b344 	.word	0x1001b344
+10012f30:	1001afd4 	.word	0x1001afd4
 10012f34:	10015227 	.word	0x10015227
-10012f38:	1001afcc 	.word	0x1001afcc
+10012f38:	1001afc8 	.word	0x1001afc8
 10012f3c:	00000b01 	.word	0x00000b01
 10012f40:	10011791 	.word	0x10011791
 10012f44:	100117f5 	.word	0x100117f5
@@ -33605,7 +33617,7 @@ int main(void)
 10012fa2:	2300      	movs	r3, #0
 10012fa4:	1c18      	adds	r0, r3, #0
 10012fa6:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
-10012fa8:	1001a0e4 	.word	0x1001a0e4
+10012fa8:	1001a0e0 	.word	0x1001a0e0
 10012fac:	10013135 	.word	0x10013135
 10012fb0:	10015239 	.word	0x10015239
 10012fb4:	10015227 	.word	0x10015227
@@ -33665,12 +33677,12 @@ int main(void)
 1001301e:	68ab      	ldr	r3, [r5, #8]
 10013020:	7898      	ldrb	r0, [r3, #2]
 10013022:	bdfe      	pop	{r1, r2, r3, r4, r5, r6, r7, pc}
-10013024:	1001b348 	.word	0x1001b348
-10013028:	1001afd8 	.word	0x1001afd8
+10013024:	1001b344 	.word	0x1001b344
+10013028:	1001afd4 	.word	0x1001afd4
 1001302c:	10015227 	.word	0x10015227
-10013030:	1001b354 	.word	0x1001b354
+10013030:	1001b350 	.word	0x1001b350
 10013034:	00000b0d 	.word	0x00000b0d
-10013038:	1001afcc 	.word	0x1001afcc
+10013038:	1001afc8 	.word	0x1001afc8
 1001303c:	10011791 	.word	0x10011791
 10013040:	100117f5 	.word	0x100117f5
 
@@ -33739,10 +33751,10 @@ int main(void)
 100130be:	b005      	add	sp, #20
 100130c0:	bdf0      	pop	{r4, r5, r6, r7, pc}
 100130c2:	46c0      	nop			; (mov r8, r8)
-100130c4:	1001b348 	.word	0x1001b348
-100130c8:	1001afd8 	.word	0x1001afd8
+100130c4:	1001b344 	.word	0x1001b344
+100130c8:	1001afd4 	.word	0x1001afd4
 100130cc:	00000b0b 	.word	0x00000b0b
-100130d0:	1001afcc 	.word	0x1001afcc
+100130d0:	1001afc8 	.word	0x1001afc8
 100130d4:	10011791 	.word	0x10011791
 100130d8:	100117f5 	.word	0x100117f5
 100130dc:	10015227 	.word	0x10015227
@@ -35064,8 +35076,8 @@ int main(void)
 10013ae2:	4652      	mov	r2, sl
 10013ae4:	20ff      	movs	r0, #255	; 0xff
 10013ae6:	e72a      	b.n	1001393e <__aeabi_fdiv+0x7e>
-10013ae8:	10018444 	.word	0x10018444
-10013aec:	10018484 	.word	0x10018484
+10013ae8:	10018440 	.word	0x10018440
+10013aec:	10018480 	.word	0x10018480
 10013af0:	f7ffffff 	.word	0xf7ffffff
 
 10013af4 <__eqsf2>:
@@ -35521,7 +35533,7 @@ int main(void)
 10013e6e:	25ff      	movs	r5, #255	; 0xff
 10013e70:	e739      	b.n	10013ce6 <__aeabi_fmul+0x92>
 10013e72:	46c0      	nop			; (mov r8, r8)
-10013e74:	100184c4 	.word	0x100184c4
+10013e74:	100184c0 	.word	0x100184c0
 10013e78:	f7ffffff 	.word	0xf7ffffff
 
 10013e7c <__aeabi_fsub>:
@@ -36594,7 +36606,7 @@ int main(void)
 100146ce:	46c0      	nop			; (mov r8, r8)
 100146d0:	000007ff 	.word	0x000007ff
 100146d4:	fffffc01 	.word	0xfffffc01
-100146d8:	10018504 	.word	0x10018504
+100146d8:	10018500 	.word	0x10018500
 100146dc:	800fffff 	.word	0x800fffff
 100146e0:	000003f3 	.word	0x000003f3
 100146e4:	4642      	mov	r2, r8
@@ -37970,7 +37982,7 @@ int main(void)
 100151be:	4798      	blx	r3
 100151c0:	3501      	adds	r5, #1
 100151c2:	e7f8      	b.n	100151b6 <__libc_init_array+0xe>
-100151c4:	f003 fa0c 	bl	100185e0 <_init>
+100151c4:	f003 fa0a 	bl	100185dc <_init>
 100151c8:	4b08      	ldr	r3, [pc, #32]	; (100151ec <__libc_init_array+0x44>)
 100151ca:	2500      	movs	r5, #0
 100151cc:	001e      	movs	r6, r3
@@ -37985,10 +37997,10 @@ int main(void)
 100151de:	3501      	adds	r5, #1
 100151e0:	e7f8      	b.n	100151d4 <__libc_init_array+0x2c>
 100151e2:	bd70      	pop	{r4, r5, r6, pc}
-100151e4:	100185ec 	.word	0x100185ec
-100151e8:	100185ec 	.word	0x100185ec
-100151ec:	100185ec 	.word	0x100185ec
-100151f0:	100185f0 	.word	0x100185f0
+100151e4:	100185e8 	.word	0x100185e8
+100151e8:	100185e8 	.word	0x100185e8
+100151ec:	100185e8 	.word	0x100185e8
+100151f0:	100185ec 	.word	0x100185ec
 
 100151f4 <malloc>:
 100151f4:	b510      	push	{r4, lr}
@@ -37998,7 +38010,7 @@ int main(void)
 100151fc:	f000 f86a 	bl	100152d4 <_malloc_r>
 10015200:	bd10      	pop	{r4, pc}
 10015202:	46c0      	nop			; (mov r8, r8)
-10015204:	100186a8 	.word	0x100186a8
+10015204:	100186a4 	.word	0x100186a4
 
 10015208 <memcmp>:
 10015208:	b530      	push	{r4, r5, lr}
@@ -38107,7 +38119,7 @@ int main(void)
 100152ca:	6059      	str	r1, [r3, #4]
 100152cc:	bd30      	pop	{r4, r5, pc}
 100152ce:	46c0      	nop			; (mov r8, r8)
-100152d0:	1001a17c 	.word	0x1001a17c
+100152d0:	1001a178 	.word	0x1001a178
 
 100152d4 <_malloc_r>:
 100152d4:	2303      	movs	r3, #3
@@ -38189,8 +38201,8 @@ int main(void)
 10015372:	d1ee      	bne.n	10015352 <_malloc_r+0x7e>
 10015374:	e7ba      	b.n	100152ec <_malloc_r+0x18>
 10015376:	bd70      	pop	{r4, r5, r6, pc}
-10015378:	1001a17c 	.word	0x1001a17c
-1001537c:	1001a178 	.word	0x1001a178
+10015378:	1001a178 	.word	0x1001a178
+1001537c:	1001a174 	.word	0x1001a174
 
 10015380 <iprintf>:
 10015380:	b40f      	push	{r0, r1, r2, r3}
@@ -38215,7 +38227,7 @@ int main(void)
 100153aa:	b004      	add	sp, #16
 100153ac:	4718      	bx	r3
 100153ae:	46c0      	nop			; (mov r8, r8)
-100153b0:	100186a8 	.word	0x100186a8
+100153b0:	100186a4 	.word	0x100186a4
 
 100153b4 <putchar>:
 100153b4:	4b08      	ldr	r3, [pc, #32]	; (100153d8 <putchar+0x24>)
@@ -38234,7 +38246,7 @@ int main(void)
 100153d0:	0020      	movs	r0, r4
 100153d2:	f000 ff05 	bl	100161e0 <_putc_r>
 100153d6:	bd70      	pop	{r4, r5, r6, pc}
-100153d8:	100186a8 	.word	0x100186a8
+100153d8:	100186a4 	.word	0x100186a4
 
 100153dc <_puts_r>:
 100153dc:	b570      	push	{r4, r5, r6, lr}
@@ -38324,9 +38336,9 @@ int main(void)
 1001548e:	7018      	strb	r0, [r3, #0]
 10015490:	bd70      	pop	{r4, r5, r6, pc}
 10015492:	46c0      	nop			; (mov r8, r8)
-10015494:	1001854c 	.word	0x1001854c
-10015498:	1001856c 	.word	0x1001856c
-1001549c:	1001858c 	.word	0x1001858c
+10015494:	10018548 	.word	0x10018548
+10015498:	10018568 	.word	0x10018568
+1001549c:	10018588 	.word	0x10018588
 
 100154a0 <puts>:
 100154a0:	b510      	push	{r4, lr}
@@ -38336,7 +38348,7 @@ int main(void)
 100154a8:	f7ff ff98 	bl	100153dc <_puts_r>
 100154ac:	bd10      	pop	{r4, pc}
 100154ae:	46c0      	nop			; (mov r8, r8)
-100154b0:	100186a8 	.word	0x100186a8
+100154b0:	100186a4 	.word	0x100186a4
 
 100154b4 <rand>:
 100154b4:	4b15      	ldr	r3, [pc, #84]	; (1001550c <rand+0x58>)
@@ -38381,7 +38393,7 @@ int main(void)
 10015506:	0048      	lsls	r0, r1, #1
 10015508:	0840      	lsrs	r0, r0, #1
 1001550a:	bd10      	pop	{r4, pc}
-1001550c:	100186a8 	.word	0x100186a8
+1001550c:	100186a4 	.word	0x100186a4
 10015510:	0000330e 	.word	0x0000330e
 10015514:	ffffabcd 	.word	0xffffabcd
 10015518:	00001234 	.word	0x00001234
@@ -38406,7 +38418,7 @@ int main(void)
 10015546:	602b      	str	r3, [r5, #0]
 10015548:	bd70      	pop	{r4, r5, r6, pc}
 1001554a:	46c0      	nop			; (mov r8, r8)
-1001554c:	1001b548 	.word	0x1001b548
+1001554c:	1001b544 	.word	0x1001b544
 
 10015550 <setbuf>:
 10015550:	424a      	negs	r2, r1
@@ -38578,10 +38590,10 @@ int main(void)
 100156aa:	b005      	add	sp, #20
 100156ac:	bdf0      	pop	{r4, r5, r6, r7, pc}
 100156ae:	46c0      	nop			; (mov r8, r8)
-100156b0:	100186a8 	.word	0x100186a8
-100156b4:	1001854c 	.word	0x1001854c
-100156b8:	1001856c 	.word	0x1001856c
-100156bc:	1001858c 	.word	0x1001858c
+100156b0:	100186a4 	.word	0x100186a4
+100156b4:	10018548 	.word	0x10018548
+100156b8:	10018568 	.word	0x10018568
+100156bc:	10018588 	.word	0x10018588
 100156c0:	fffff35c 	.word	0xfffff35c
 
 100156c4 <__swbuf_r>:
@@ -38663,9 +38675,9 @@ int main(void)
 10015762:	0030      	movs	r0, r6
 10015764:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
 10015766:	46c0      	nop			; (mov r8, r8)
-10015768:	1001854c 	.word	0x1001854c
-1001576c:	1001856c 	.word	0x1001856c
-10015770:	1001858c 	.word	0x1001858c
+10015768:	10018548 	.word	0x10018548
+1001576c:	10018568 	.word	0x10018568
+10015770:	10018588 	.word	0x10018588
 
 10015774 <__swsetup_r>:
 10015774:	4b36      	ldr	r3, [pc, #216]	; (10015850 <__swsetup_r+0xdc>)
@@ -38775,10 +38787,10 @@ int main(void)
 1001584a:	81a3      	strh	r3, [r4, #12]
 1001584c:	3801      	subs	r0, #1
 1001584e:	bd70      	pop	{r4, r5, r6, pc}
-10015850:	100186a8 	.word	0x100186a8
-10015854:	1001854c 	.word	0x1001854c
-10015858:	1001856c 	.word	0x1001856c
-1001585c:	1001858c 	.word	0x1001858c
+10015850:	100186a4 	.word	0x100186a4
+10015854:	10018548 	.word	0x10018548
+10015858:	10018568 	.word	0x10018568
+1001585c:	10018588 	.word	0x10018588
 
 10015860 <__sflush_r>:
 10015860:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -38951,9 +38963,9 @@ int main(void)
 100159b0:	0028      	movs	r0, r5
 100159b2:	f7ff ff55 	bl	10015860 <__sflush_r>
 100159b6:	bd70      	pop	{r4, r5, r6, pc}
-100159b8:	1001854c 	.word	0x1001854c
-100159bc:	1001856c 	.word	0x1001856c
-100159c0:	1001858c 	.word	0x1001858c
+100159b8:	10018548 	.word	0x10018548
+100159bc:	10018568 	.word	0x10018568
+100159c0:	10018588 	.word	0x10018588
 
 100159c4 <_cleanup_r>:
 100159c4:	b510      	push	{r4, lr}
@@ -39061,7 +39073,7 @@ int main(void)
 10015aa2:	61a3      	str	r3, [r4, #24]
 10015aa4:	bd13      	pop	{r0, r1, r4, pc}
 10015aa6:	46c0      	nop			; (mov r8, r8)
-10015aa8:	10018548 	.word	0x10018548
+10015aa8:	10018544 	.word	0x10018544
 10015aac:	100159c5 	.word	0x100159c5
 
 10015ab0 <__sfp>:
@@ -39122,7 +39134,7 @@ int main(void)
 10015b22:	64a7      	str	r7, [r4, #72]	; 0x48
 10015b24:	64e7      	str	r7, [r4, #76]	; 0x4c
 10015b26:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
-10015b28:	10018548 	.word	0x10018548
+10015b28:	10018544 	.word	0x10018544
 
 10015b2c <_fwalk_reent>:
 10015b2c:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
@@ -39562,13 +39574,13 @@ int main(void)
 10015e9a:	b01f      	add	sp, #124	; 0x7c
 10015e9c:	bdf0      	pop	{r4, r5, r6, r7, pc}
 10015e9e:	46c0      	nop			; (mov r8, r8)
-10015ea0:	1001854c 	.word	0x1001854c
-10015ea4:	1001856c 	.word	0x1001856c
-10015ea8:	1001858c 	.word	0x1001858c
-10015eac:	100185b2 	.word	0x100185b2
-10015eb0:	100185b6 	.word	0x100185b6
+10015ea0:	10018548 	.word	0x10018548
+10015ea4:	10018568 	.word	0x10018568
+10015ea8:	10018588 	.word	0x10018588
+10015eac:	100185ae 	.word	0x100185ae
+10015eb0:	100185b2 	.word	0x100185b2
 10015eb4:	00000000 	.word	0x00000000
-10015eb8:	100185ac 	.word	0x100185ac
+10015eb8:	100185a8 	.word	0x100185a8
 10015ebc:	10015c63 	.word	0x10015c63
 
 10015ec0 <_printf_common>:
@@ -39966,8 +39978,8 @@ int main(void)
 100161d2:	b00b      	add	sp, #44	; 0x2c
 100161d4:	bdf0      	pop	{r4, r5, r6, r7, pc}
 100161d6:	46c0      	nop			; (mov r8, r8)
-100161d8:	100185bd 	.word	0x100185bd
-100161dc:	100185ce 	.word	0x100185ce
+100161d8:	100185b9 	.word	0x100185b9
+100161dc:	100185ca 	.word	0x100185ca
 
 100161e0 <_putc_r>:
 100161e0:	b570      	push	{r4, r5, r6, lr}
@@ -40016,9 +40028,9 @@ int main(void)
 10016238:	0030      	movs	r0, r6
 1001623a:	f7ff fa43 	bl	100156c4 <__swbuf_r>
 1001623e:	bd70      	pop	{r4, r5, r6, pc}
-10016240:	1001854c 	.word	0x1001854c
-10016244:	1001856c 	.word	0x1001856c
-10016248:	1001858c 	.word	0x1001858c
+10016240:	10018548 	.word	0x10018548
+10016244:	10018568 	.word	0x10018568
+10016248:	10018588 	.word	0x10018588
 
 1001624c <__sread>:
 1001624c:	b570      	push	{r4, r5, r6, lr}
@@ -40114,7 +40126,7 @@ int main(void)
 10016302:	602b      	str	r3, [r5, #0]
 10016304:	bd70      	pop	{r4, r5, r6, pc}
 10016306:	46c0      	nop			; (mov r8, r8)
-10016308:	1001b548 	.word	0x1001b548
+10016308:	1001b544 	.word	0x1001b544
 
 1001630c <_close_r>:
 1001630c:	2300      	movs	r3, #0
@@ -40132,7 +40144,7 @@ int main(void)
 10016326:	602b      	str	r3, [r5, #0]
 10016328:	bd70      	pop	{r4, r5, r6, pc}
 1001632a:	46c0      	nop			; (mov r8, r8)
-1001632c:	1001b548 	.word	0x1001b548
+1001632c:	1001b544 	.word	0x1001b544
 
 10016330 <_fstat_r>:
 10016330:	2300      	movs	r3, #0
@@ -40150,7 +40162,7 @@ int main(void)
 1001634a:	d000      	beq.n	1001634e <_fstat_r+0x1e>
 1001634c:	602b      	str	r3, [r5, #0]
 1001634e:	bd70      	pop	{r4, r5, r6, pc}
-10016350:	1001b548 	.word	0x1001b548
+10016350:	1001b544 	.word	0x1001b544
 
 10016354 <_isatty_r>:
 10016354:	2300      	movs	r3, #0
@@ -40168,7 +40180,7 @@ int main(void)
 1001636e:	602b      	str	r3, [r5, #0]
 10016370:	bd70      	pop	{r4, r5, r6, pc}
 10016372:	46c0      	nop			; (mov r8, r8)
-10016374:	1001b548 	.word	0x1001b548
+10016374:	1001b544 	.word	0x1001b544
 
 10016378 <_lseek_r>:
 10016378:	b570      	push	{r4, r5, r6, lr}
@@ -40188,7 +40200,7 @@ int main(void)
 10016396:	602b      	str	r3, [r5, #0]
 10016398:	bd70      	pop	{r4, r5, r6, pc}
 1001639a:	46c0      	nop			; (mov r8, r8)
-1001639c:	1001b548 	.word	0x1001b548
+1001639c:	1001b544 	.word	0x1001b544
 
 100163a0 <memchr>:
 100163a0:	b2c9      	uxtb	r1, r1
@@ -40222,7 +40234,7 @@ int main(void)
 100163d6:	602b      	str	r3, [r5, #0]
 100163d8:	bd70      	pop	{r4, r5, r6, pc}
 100163da:	46c0      	nop			; (mov r8, r8)
-100163dc:	1001b548 	.word	0x1001b548
+100163dc:	1001b544 	.word	0x1001b544
 100163e0:	6e756f63 	.word	0x6e756f63
 100163e4:	20726574 	.word	0x20726574
 100163e8:	00006425 	.word	0x00006425
@@ -40726,120 +40738,119 @@ int main(void)
 100181e8:	625b 656c 6d5f 6e61 6761 7265 095d 0909     [ble_manager]...
 100181f8:	614d 756e 6166 7463 7275 7265 7320 6570     Manufacturer spe
 10018208:	6963 6966 2063 6164 6174 6520 616e 6c62     cific data enabl
-10018218:	6465 0000 571c 5a2d 2dbe 5053 0000 0000     ed...W-Z.-SP....
-10018228:	4c42 2045 6441 6576 7472 7369 6d65 6e65     BLE Advertisemen
-10018238:	2074 6164 6174 7320 7465 6620 6961 656c     t data set faile
-10018248:	0064 0000                                   d...
+10018218:	6465 0000 571c 5a2d 2dbe 0000 4c42 2045     ed...W-Z.-..BLE 
+10018228:	6441 6576 7472 7369 6d65 6e65 2074 6164     Advertisement da
+10018238:	6174 7320 7465 6620 6961 656c 0064 0000     ta set failed...
 
-1001824c <ble_mgr_gap_handle>:
-1001824c:	d8d5 1000 db85 1000 d8f9 1000 d921 1000     ............!...
-1001825c:	0000 0000 e801 1000 da01 1000 da9d 1000     ................
-1001826c:	dde1 1000 dc31 1000 dfe1 1000 ddf9 1000     ....1...........
-1001827c:	e16d 1000 e2b1 1000 dac1 1000 ea4d 1000     m...........M...
+10018248 <ble_mgr_gap_handle>:
+10018248:	d8d5 1000 db85 1000 d8f9 1000 d921 1000     ............!...
+10018258:	0000 0000 e801 1000 da01 1000 da9d 1000     ................
+10018268:	dde1 1000 dc31 1000 dfe1 1000 ddf9 1000     ....1...........
+10018278:	e16d 1000 e2b1 1000 dac1 1000 ea4d 1000     m...........M...
 	...
-10018298:	fa6a 1000 fa78 1000 fac0 1000 fb04 1000     j...x...........
-100182a8:	fb16 1000 fb80 1000 fb98 1000 6d5b 6961     ............[mai
-100182b8:	5d6e 0909 0909 6157 696b 676e 7520 2e70     n]....Waking up.
-100182c8:	2e2e 0000 6420 6e6f 2165 0000 6d5b 6961     .... done!..[mai
-100182d8:	5d6e 0909 0909 6944 6173 6c62 6e69 2067     n]....Disabling 
-100182e8:	7562 7474 6e6f 6920 746e 2e2e 002e 0000     button int......
-100182f8:	2e2e 4e2e 204f 4f53 5255 4543 2121 0000     ...NO SOURCE!!..
-10018308:	2e2e 422e 4e54 0030 6d5b 6961 5d6e 0909     ...BTN0.[main]..
-10018318:	0909 7245 6f72 2072 6e69 7320 736d 625f     ..Error in sms_b
-10018328:	7475 6f74 5f6e 6e66 2928 0021 2e2e 422e     utton_fn()!....B
-10018338:	4e54 0031 2e2e 4d2e 5550 445f 4452 0059     TN1....MPU_DRDY.
-10018348:	2e2e 412e 4e4f 545f 4d49 5245 0000 0000     ...AON_TIMER....
-10018358:	6d5b 6961 5d6e 0909 0909 6f50 6c6c 6e69     [main]....Pollin
-10018368:	2067 7270 7365 7573 6572 6420 7461 2e61     g pressure data.
-10018378:	2e2e 0000 6d5b 6961 5d6e 0909 0909 4f41     ....[main]....AO
-10018388:	204e 6974 656d 2072 6572 6461 2079 6877     N timer ready wh
-10018398:	6c69 2065 6e69 6964 6163 6974 676e 2e2e     ile indicating..
-100183a8:	202e 6b73 7069 6970 676e 0000 2e2e 442e     . skipping.....D
-100183b8:	4155 544c 4d49 5245 0031 0000 2e2e 442e     UALTIMER1......D
-100183c8:	4155 544c 4d49 5245 0032 0000 2e2e 3f2e     UALTIMER2......?
-100183d8:	003f 0000 6d5b 6961 5d6e 0909 0909 6e45     ?...[main]....En
-100183e8:	6261 696c 676e 6220 7475 6f74 206e 6e69     abling button in
-100183f8:	2e74 2e2e 0000 0000 6d5b 6961 5d6e 0909     t.......[main]..
-10018408:	0909 4c55 2e50 2e2e 0000 0000 2120 0021     ..ULP....... !!.
-10018418:	7441 656d 206c 6f43 7072 022e                    Atmel Corp.
+10018294:	fa6a 1000 fa78 1000 fac0 1000 fb04 1000     j...x...........
+100182a4:	fb16 1000 fb80 1000 fb98 1000 6d5b 6961     ............[mai
+100182b4:	5d6e 0909 0909 6157 696b 676e 7520 2e70     n]....Waking up.
+100182c4:	2e2e 0000 6420 6e6f 2165 0000 6d5b 6961     .... done!..[mai
+100182d4:	5d6e 0909 0909 6944 6173 6c62 6e69 2067     n]....Disabling 
+100182e4:	7562 7474 6e6f 6920 746e 2e2e 002e 0000     button int......
+100182f4:	2e2e 4e2e 204f 4f53 5255 4543 2121 0000     ...NO SOURCE!!..
+10018304:	2e2e 422e 4e54 0030 6d5b 6961 5d6e 0909     ...BTN0.[main]..
+10018314:	0909 7245 6f72 2072 6e69 7320 736d 625f     ..Error in sms_b
+10018324:	7475 6f74 5f6e 6e66 2928 0021 2e2e 422e     utton_fn()!....B
+10018334:	4e54 0031 2e2e 4d2e 5550 445f 4452 0059     TN1....MPU_DRDY.
+10018344:	2e2e 412e 4e4f 545f 4d49 5245 0000 0000     ...AON_TIMER....
+10018354:	6d5b 6961 5d6e 0909 0909 6f50 6c6c 6e69     [main]....Pollin
+10018364:	2067 7270 7365 7573 6572 6420 7461 2e61     g pressure data.
+10018374:	2e2e 0000 6d5b 6961 5d6e 0909 0909 4f41     ....[main]....AO
+10018384:	204e 6974 656d 2072 6572 6461 2079 6877     N timer ready wh
+10018394:	6c69 2065 6e69 6964 6163 6974 676e 2e2e     ile indicating..
+100183a4:	202e 6b73 7069 6970 676e 0000 2e2e 442e     . skipping.....D
+100183b4:	4155 544c 4d49 5245 0031 0000 2e2e 442e     UALTIMER1......D
+100183c4:	4155 544c 4d49 5245 0032 0000 2e2e 3f2e     UALTIMER2......?
+100183d4:	003f 0000 6d5b 6961 5d6e 0909 0909 6e45     ?...[main]....En
+100183e4:	6261 696c 676e 6220 7475 6f74 206e 6e69     abling button in
+100183f4:	2e74 2e2e 0000 0000 6d5b 6961 5d6e 0909     t.......[main]..
+10018404:	0909 4c55 2e50 2e2e 0000 0000 2120 0021     ..ULP....... !!.
+10018414:	7441 656d 206c 6f43 7072 022e                    Atmel Corp.
 
-10018423 <CSWTCH.45>:
-10018423:	0402 0010                                        ...
+1001841f <CSWTCH.45>:
+1001841f:	0402 0010                                        ...
 
-10018426 <CSWTCH.47>:
-10018426:	0300 0301 0303 0303 0303 0303 0303 0202          ...............
+10018422 <CSWTCH.47>:
+10018422:	0300 0301 0303 0303 0303 0303 0303 0202          ...............
 
-10018435 <client_conf_uuid>:
-10018435:	2902                                        .)
+10018431 <client_conf_uuid>:
+10018431:	2902                                        .)
 
-10018437 <presentation_format_uuid>:
-10018437:	2904                                        .)
+10018433 <presentation_format_uuid>:
+10018433:	2904                                        .)
 
-10018439 <user_desc_uuid>:
-10018439:	2901                                        .)
+10018435 <user_desc_uuid>:
+10018435:	2901                                        .)
 
-1001843b <server_conf_uuid>:
-1001843b:	2903                                        .)
+10018437 <server_conf_uuid>:
+10018437:	2903                                        .)
 
-1001843d <extended_props_uuid>:
-1001843d:	2900                                        .)
+10018439 <extended_props_uuid>:
+10018439:	2900                                        .)
 
-1001843f <include_uuid>:
-1001843f:	2802                                        .(
+1001843b <include_uuid>:
+1001843b:	2802                                        .(
 
-10018441 <char_uuid>:
-10018441:	2803 1200 013a 3610 0139 f410 0139 cc10     .(..:..69...9...
-10018451:	0139 f410 0139 c010 0139 f410 0139 cc10     9...9...9...9...
-10018461:	0139 3610 0139 3610 0139 c010 0139 cc10     9..69..69...9...
-10018471:	0139 7810 013a 7810 013a 7810 013a fa10     9..x:..x:..x:...
-10018481:	0139 3610 0139 3610 0139 e010 0139 ca10     9..69..69...9...
-10018491:	0139 e010 0139 c010 0139 e010 0139 ca10     9...9...9...9...
-100184a1:	0139 3610 0139 3610 0139 c010 0139 ca10     9..69..69...9...
-100184b1:	0139 7810 013a 7810 013a 7810 013a 8410     9..x:..x:..x:...
-100184c1:	013a 7010 013d ce10 013c ce10 013c cc10     :..p=...<...<...
-100184d1:	013c 6210 013d 6210 013d 5810 013d cc10     <..b=..b=..X=...
-100184e1:	013c 6210 013d 5810 013d 6210 013d cc10     <..b=..X=..b=...
-100184f1:	013c 6810 013d 6810 013d 6810 013d f210     <..h=..h=..h=...
-10018501:	013d e410 0146 a410 0145 a410 0145 a210     =...F...E...E...
-10018511:	0145 bc10 0146 bc10 0146 ae10 0146 a210     E...F...F...F...
-10018521:	0145 bc10 0146 ae10 0146 bc10 0146 a210     E...F...F...F...
-10018531:	0145 c410 0146 c410 0146 c410 0146 c410     E...F...F...F...
-10018541:	0148 4310 0000 4800                              H..C...
+1001843d <char_uuid>:
+1001843d:	2803 1200 013a 3610 0139 f410 0139 cc10     .(..:..69...9...
+1001844d:	0139 f410 0139 c010 0139 f410 0139 cc10     9...9...9...9...
+1001845d:	0139 3610 0139 3610 0139 c010 0139 cc10     9..69..69...9...
+1001846d:	0139 7810 013a 7810 013a 7810 013a fa10     9..x:..x:..x:...
+1001847d:	0139 3610 0139 3610 0139 e010 0139 ca10     9..69..69...9...
+1001848d:	0139 e010 0139 c010 0139 e010 0139 ca10     9...9...9...9...
+1001849d:	0139 3610 0139 3610 0139 c010 0139 ca10     9..69..69...9...
+100184ad:	0139 7810 013a 7810 013a 7810 013a 8410     9..x:..x:..x:...
+100184bd:	013a 7010 013d ce10 013c ce10 013c cc10     :..p=...<...<...
+100184cd:	013c 6210 013d 6210 013d 5810 013d cc10     <..b=..b=..X=...
+100184dd:	013c 6210 013d 5810 013d 6210 013d cc10     <..b=..X=..b=...
+100184ed:	013c 6810 013d 6810 013d 6810 013d f210     <..h=..h=..h=...
+100184fd:	013d e410 0146 a410 0145 a410 0145 a210     =...F...E...E...
+1001850d:	0145 bc10 0146 bc10 0146 ae10 0146 a210     E...F...F...F...
+1001851d:	0145 bc10 0146 ae10 0146 bc10 0146 a210     E...F...F...F...
+1001852d:	0145 c410 0146 c410 0146 c410 0146 c410     E...F...F...F...
+1001853d:	0148 4310 0000 4400                              H..C...
 
-10018548 <_global_impure_ptr>:
-10018548:	8648 1001                                   H...
+10018544 <_global_impure_ptr>:
+10018544:	8644 1001                                   D...
 
-1001854c <__sf_fake_stdin>:
-	...
-
-1001856c <__sf_fake_stdout>:
+10018548 <__sf_fake_stdin>:
 	...
 
-1001858c <__sf_fake_stderr>:
+10018568 <__sf_fake_stdout>:
 	...
-100185ac:	2d23 2b30 0020 6c68 004c 6665 4567 4746     #-0+ .hlL.efgEFG
-100185bc:	3000 3231 3433 3635 3837 4139 4342 4544     .0123456789ABCDE
-100185cc:	0046 3130 3332 3534 3736 3938 6261 6463     F.0123456789abcd
-100185dc:	6665 0000                                   ef..
 
-100185e0 <_init>:
-100185e0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-100185e2:	46c0      	nop			; (mov r8, r8)
-100185e4:	bcf8      	pop	{r3, r4, r5, r6, r7}
-100185e6:	bc08      	pop	{r3}
-100185e8:	469e      	mov	lr, r3
-100185ea:	4770      	bx	lr
+10018588 <__sf_fake_stderr>:
+	...
+100185a8:	2d23 2b30 0020 6c68 004c 6665 4567 4746     #-0+ .hlL.efgEFG
+100185b8:	3000 3231 3433 3635 3837 4139 4342 4544     .0123456789ABCDE
+100185c8:	0046 3130 3332 3534 3736 3938 6261 6463     F.0123456789abcd
+100185d8:	6665 0000                                   ef..
 
-100185ec <__init_array_start>:
-100185ec:	100080b1 	.word	0x100080b1
+100185dc <_init>:
+100185dc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+100185de:	46c0      	nop			; (mov r8, r8)
+100185e0:	bcf8      	pop	{r3, r4, r5, r6, r7}
+100185e2:	bc08      	pop	{r3}
+100185e4:	469e      	mov	lr, r3
+100185e6:	4770      	bx	lr
 
-100185f0 <_fini>:
-100185f0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
-100185f2:	46c0      	nop			; (mov r8, r8)
-100185f4:	bcf8      	pop	{r3, r4, r5, r6, r7}
-100185f6:	bc08      	pop	{r3}
-100185f8:	469e      	mov	lr, r3
-100185fa:	4770      	bx	lr
+100185e8 <__init_array_start>:
+100185e8:	100080b1 	.word	0x100080b1
 
-100185fc <__fini_array_start>:
-100185fc:	10008089 	.word	0x10008089
+100185ec <_fini>:
+100185ec:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+100185ee:	46c0      	nop			; (mov r8, r8)
+100185f0:	bcf8      	pop	{r3, r4, r5, r6, r7}
+100185f2:	bc08      	pop	{r3}
+100185f4:	469e      	mov	lr, r3
+100185f6:	4770      	bx	lr
+
+100185f8 <__fini_array_start>:
+100185f8:	10008089 	.word	0x10008089

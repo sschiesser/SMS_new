@@ -18,10 +18,10 @@
 /* ------
  * MACROS
  * ------ */
-#define SMS_PRESSURE_SERVICE_UUID_1             (0x1C570000)
-#define SMS_PRESSURE_SERVICE_UUID_2             (0x5ABE0000)
-#define SMS_PRESSURE_SERVICE_UUID_3             (0x50300000)
-#define SMS_PRESSURE_SERVICE_UUID_4             (0xEEEE0000)
+#define SMS_PRESSURE_SERVICE_UUID_1             (0x1C575ABE)
+#define SMS_PRESSURE_SERVICE_UUID_2             (0x5350EEEE)
+#define SMS_PRESSURE_SERVICE_UUID_3             (0x00000000)
+#define SMS_PRESSURE_SERVICE_UUID_4             (0x00000000)
 
 #define SMS_PRESSURE_BLE_CHAR_LEN               (8)
 

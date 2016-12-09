@@ -29,7 +29,7 @@
 #define BLE_GAP_ADV_COMPLETE_LOCAL_NAME_ENABLE          (true)
 #define BLE_GAP_ADV_SHORTENED_LOCAL_NAME_ENABLE         (false)
 
-#define BLE_GAP_ADV_DATA_MANUFACTURER_SPECIFIC_DATA		"\x1C\x57\x2d\x5A\xBE\x2d\x53\x50"
+#define BLE_GAP_ADV_DATA_MANUFACTURER_SPECIFIC_DATA		"\x1C\x57\x2d\x5A\xBE\x2d" //\x53\x50"
 
 #define BLE_INDICATION_TOUT_MS                          (100)
 #define BLE_INDICATION_RETRY_MAX                        (1)
