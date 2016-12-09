@@ -286,44 +286,44 @@ static void spi_slave_transfer(void *p_buf, uint32_t size)
  */
 static void spi_slave_command_process(void)
 {
-	if (gs_ul_spi_cmd == CMD_END) {
-		gs_ul_spi_state = SLAVE_STATE_IDLE;
-		gs_spi_status.ul_total_block_number = 0;
-		gs_spi_status.ul_total_command_number = 0;
-	} else {
-		switch (gs_ul_spi_state) {
-		case SLAVE_STATE_IDLE:
-			/* Only CMD_TEST accepted. */
-			if (gs_ul_spi_cmd == CMD_TEST) {
-				gs_ul_spi_state = SLAVE_STATE_TEST;
-			}
-			break;
-
-		case SLAVE_STATE_TEST:
-			/* Only CMD_DATA accepted. */
-			if ((gs_ul_spi_cmd & CMD_DATA_MSK) == CMD_DATA) {
-				gs_ul_spi_state = SLAVE_STATE_DATA;
-			}
-			gs_ul_test_block_number = gs_ul_spi_cmd & DATA_BLOCK_MSK;
-			break;
-
-		case SLAVE_STATE_DATA:
-			gs_spi_status.ul_total_block_number++;
-
-			if (gs_spi_status.ul_total_block_number == 
-					gs_ul_test_block_number) {
-				gs_ul_spi_state = SLAVE_STATE_STATUS_ENTRY;
-			}
-			break;
-
-		case SLAVE_STATE_STATUS_ENTRY:
-			gs_ul_spi_state = SLAVE_STATE_STATUS;
-			break;
-
-		case SLAVE_STATE_END:
-			break;
-		}
-	}
+	//if (gs_ul_spi_cmd == CMD_END) {
+		//gs_ul_spi_state = SLAVE_STATE_IDLE;
+		//gs_spi_status.ul_total_block_number = 0;
+		//gs_spi_status.ul_total_command_number = 0;
+	//} else {
+		//switch (gs_ul_spi_state) {
+		//case SLAVE_STATE_IDLE:
+			///* Only CMD_TEST accepted. */
+			//if (gs_ul_spi_cmd == CMD_TEST) {
+				//gs_ul_spi_state = SLAVE_STATE_TEST;
+			//}
+			//break;
+//
+		//case SLAVE_STATE_TEST:
+			///* Only CMD_DATA accepted. */
+			//if ((gs_ul_spi_cmd & CMD_DATA_MSK) == CMD_DATA) {
+				//gs_ul_spi_state = SLAVE_STATE_DATA;
+			//}
+			//gs_ul_test_block_number = gs_ul_spi_cmd & DATA_BLOCK_MSK;
+			//break;
+//
+		//case SLAVE_STATE_DATA:
+			//gs_spi_status.ul_total_block_number++;
+//
+			//if (gs_spi_status.ul_total_block_number == 
+					//gs_ul_test_block_number) {
+				//gs_ul_spi_state = SLAVE_STATE_STATUS_ENTRY;
+			//}
+			//break;
+//
+		//case SLAVE_STATE_STATUS_ENTRY:
+			//gs_ul_spi_state = SLAVE_STATE_STATUS;
+			//break;
+//
+		//case SLAVE_STATE_END:
+			//break;
+		//}
+	//}
 }
 
 /**
@@ -392,6 +392,7 @@ void SPI_Handler(void)
 		if(data_ready) {
 			printf("READING COMPLETE\n\r");
 			spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
+			//spi_slave_command_process();
 			data_ready = false;
 		}
 	}
@@ -519,17 +520,94 @@ int main(void)
 		
 		if(udp_forward) {
 			OSCMessage *osc_msg = OSCMessage_new();
-			OSCMessage_setAddress(osc_msg, "sabre/1");
-			//OSCMessage_addArgument_int32(osc_msg, 0x01234567);
-			//OSCMessage_addArgument_int32(osc_msg, 0xFEDCBA98);
-			uint32_t udp_data[16];
-			for(uint8_t i = 0; i < 16; i++) {
-				udp_data[i] = ((uint32_t)gs_uc_spi_buffer[4*i] << 24) & 0xff000000;
-				udp_data[i] |= ((uint32_t)gs_uc_spi_buffer[(4*i)+1] << 16) & 0xff0000;
-				udp_data[i] |= ((uint32_t)gs_uc_spi_buffer[(4*i)+2] << 8) & 0xff00;
-				udp_data[i] |= (uint32_t)gs_uc_spi_buffer[(4*i)+3] & 0xff;
-				//udp_data[i] = 0x12345670 + i;
-				OSCMessage_addArgument_int32(osc_msg, udp_data[i]);
+			switch(gs_uc_spi_buffer[0]) {
+				case 0:
+				switch(gs_uc_spi_buffer[1]) {
+					case 0:
+					OSCMessage_setAddress(osc_msg, "sabre/1/button");
+					break;
+					
+					case 1:
+					OSCMessage_setAddress(osc_msg, "sabre/1/pressure");
+					break;
+					
+					case 2:
+					OSCMessage_setAddress(osc_msg, "sabre/1/mpu");
+					break;
+					
+					default:
+					break;
+				}
+				break;
+				
+				case 1:
+				switch(gs_uc_spi_buffer[1]) {
+					case 0:
+					OSCMessage_setAddress(osc_msg, "sabre/2/button");
+					break;
+					
+					case 1:
+					OSCMessage_setAddress(osc_msg, "sabre/2/pressure");
+					break;
+					
+					case 2:
+					OSCMessage_setAddress(osc_msg, "sabre/2/mpu");
+					break;
+					
+					default:
+					break;
+				}
+				break;
+				
+				case 2:
+				switch(gs_uc_spi_buffer[1]) {
+					case 0:
+					OSCMessage_setAddress(osc_msg, "sabre/3/button");
+					break;
+					
+					case 1:
+					OSCMessage_setAddress(osc_msg, "sabre/3/pressure");
+					break;
+					
+					case 2:
+					OSCMessage_setAddress(osc_msg, "sabre/3/mpu");
+					break;
+					
+					default:
+					break;
+				}
+				break;
+				
+				default:
+				break;
+			}
+			printf("OSC address = %s\n\r", OSCMessage_getAddress(osc_msg));
+			
+			uint32_t udp_data[61] = {0};
+			switch(gs_uc_spi_buffer[1]) {
+				case 0: // button message format
+				OSCMessage_addArgument_int32(osc_msg, (uint32_t)gs_uc_spi_buffer[3]);
+				break;
+				
+				case 1: // pressure message format
+				udp_data[0] = (uint32_t)gs_uc_spi_buffer[3] << 24;
+				udp_data[0] |= (uint32_t)gs_uc_spi_buffer[4] << 16;
+				udp_data[0] |= (uint32_t)gs_uc_spi_buffer[5] << 8;
+				udp_data[0] |= (uint32_t)gs_uc_spi_buffer[6];
+				OSCMessage_addArgument_int32(osc_msg, udp_data[0]);
+				udp_data[1] = (uint32_t)gs_uc_spi_buffer[7] << 24;
+				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[8] << 16;
+				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[9] << 8;
+				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[10];
+				OSCMessage_addArgument_int32(osc_msg, udp_data[1]);
+				break;
+				
+				case 2: // mpu message format
+				OSCMessage_addArgument_int32(osc_msg, 0x12345678);
+				break;
+				
+				default:
+				break;
 			}
 			
 			OSCMessage_sendMessage(osc_msg, &osc_stream);
@@ -537,29 +615,5 @@ int main(void)
 			
 			udp_forward = false;
 		}
-		//////////////////////////////////////////////
-		//struct pbuf *pb;
-		//static uint32_t ax = 0;
-		//static uint32_t ay = 1000;
-		//static uint32_t az = 2000;
-		//static uint32_t asum = 3000;
-		//OSCMessage *osc_msg = OSCMessage_new();
-		//OSCMessage_setAddress(osc_msg, "sabre/1");
-		//OSCMessage_addArgument_int32(osc_msg, ax);
-		//OSCMessage_addArgument_int32(osc_msg, ay);
-		//OSCMessage_addArgument_int32(osc_msg, az);
-		//OSCMessage_addArgument_int32(osc_msg, asum);
-		//OSCMessage_sendMessage(osc_msg, &osc_stream);
-		//OSCMessage_delete(osc_msg);
-//
-		//ax++;
-		//ay++;
-		//az++;
-		//asum++;
-//
-		//uint32_t i = 5000000;
-		//while(i > 0) {
-			//i--;
-		//};
 	}
 }
