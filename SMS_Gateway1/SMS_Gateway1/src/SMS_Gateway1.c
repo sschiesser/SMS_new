@@ -245,9 +245,6 @@ static void configure_console(void)
 }
 
 static void init_udp(void) {
-	//TODO LATER: ping the 169.254.x.x range to find the communication partner
-	IP4_ADDR(&remote_ip, 169, 254, 19, 40);
-
 	pcb = udp_new();
 
 	err_t err = ERR_CONN;
@@ -494,6 +491,13 @@ int main(void)
 	/* Bring up the ethernet interface & initialize timer0, channel0. */
 	init_ethernet();
 
+	/* Wait until remote device has sent his addresses (read with etharp_update_arp_entry) */
+	// TODO: improve the conditions to consider that the remote device has been found (currently waiting for a 169.256.x.x address)
+	while((ip4_addr1_16(&remote_ip) != 169) && (ip4_addr2_16(&remote_ip) != 254)) {
+		ethernet_task();
+	}
+	printf("Remote device found! eth %02x:%02x:%02x:%02x:%02x:%02x, ip %d.%d.%d.%d\n\r", remote_eth.addr[0], remote_eth.addr[1], remote_eth.addr[2], remote_eth.addr[3], remote_eth.addr[4], remote_eth.addr[5], ip4_addr1_16(&remote_ip), ip4_addr2_16(&remote_ip), ip4_addr3_16(&remote_ip), ip4_addr4_16(&remote_ip));
+
 	/* Search for a communication partner and setup UDP connection */
 	init_udp();
 	
@@ -506,12 +510,6 @@ int main(void)
 	NVIC_EnableIRQ(SPI_IRQn);
 
 	spi_slave_initialize();
-	
-	while((ip4_addr1_16(&remote_ip) != 169) && (ip4_addr2_16(&remote_ip) != 254)) {
-		ethernet_task();
-	}
-	printf("Remote device found! eth %02x:%02x:%02x:%02x:%02x:%02x, ip %d.%d.%d.%d", remote_eth.addr[0], remote_eth.addr[1], remote_eth.addr[2], remote_eth.addr[3], remote_eth.addr[4], remote_eth.addr[5], ip4_addr1_16(&remote_ip), ip4_addr2_16(&remote_ip), ip4_addr3_16(&remote_ip), ip4_addr4_16(&remote_ip));
-
 	
 	/* Program main loop. */
 	while (1) {
