@@ -143,13 +143,13 @@ int main(void)
     sms_led_gpio_init();
     
     // I2C
-    sms_i2c_master_configure();
+    //sms_i2c_master_configure();
     
     // SPI
     sms_spi_master_configure();
     
     // MPU
-    sms_mpu_configure_gpio();
+    //sms_mpu_configure_gpio();
     
     // MS58
     pressure_device.hal.current_state = MS58_STATE_NONE;
@@ -183,7 +183,7 @@ int main(void)
     sms_button_register_callbacks();
     
     // MPU
-    sms_mpu_register_callbacks();
+    //sms_mpu_register_callbacks();
 
     // BLE
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
@@ -287,7 +287,7 @@ int main(void)
                 //sms_monitor_states("INT_IMU_DRDY");
                 DBG_LOG_DEV("...MPU_DRDY");
                 //if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-                    sms_mpu_poll_data();
+                    //sms_mpu_poll_data();
                 //}                    
                 break;
                 

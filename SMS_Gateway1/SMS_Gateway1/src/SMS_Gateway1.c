@@ -524,15 +524,15 @@ int main(void)
 				case 0:
 				switch(gs_uc_spi_buffer[1]) {
 					case 0:
-					OSCMessage_setAddress(osc_msg, "sabre/1/button");
+					OSCMessage_setAddress(osc_msg, "sabre/1/button  ");
 					break;
 					
 					case 1:
-					OSCMessage_setAddress(osc_msg, "sabre/1/pressure");
+					OSCMessage_setAddress(osc_msg, "sabre/1/pressure  ");
 					break;
 					
 					case 2:
-					OSCMessage_setAddress(osc_msg, "sabre/1/mpu");
+					OSCMessage_setAddress(osc_msg, "sabre/1/mpu  ");
 					break;
 					
 					default:
