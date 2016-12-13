@@ -293,14 +293,14 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
         
         case BLE_CHAR_PRESS:
-        send_val[0] = (uint8_t)(pressure_device.hal.temperature & 0xff);
-        send_val[1] = (uint8_t)((pressure_device.hal.temperature >> 8) & 0xff);
-        send_val[2] = (uint8_t)((pressure_device.hal.temperature >> 16) & 0xff);
-        send_val[3] = (uint8_t)((pressure_device.hal.temperature >> 24) & 0xff);
-        send_val[4] = (uint8_t)(pressure_device.hal.pressure & 0xff);
-        send_val[5] = (uint8_t)((pressure_device.hal.pressure >> 8) & 0xff);
-        send_val[6] = (uint8_t)((pressure_device.hal.pressure >> 16) & 0xff);
-        send_val[7] = (uint8_t)((pressure_device.hal.pressure >> 24) & 0xff);
+        send_val[0] = (uint8_t)((pressure_device.hal.temperature >>24) & 0xff);
+        send_val[1] = (uint8_t)((pressure_device.hal.temperature >> 16) & 0xff);
+        send_val[2] = (uint8_t)((pressure_device.hal.temperature >> 8) & 0xff);
+        send_val[3] = (uint8_t)((pressure_device.hal.temperature) & 0xff);
+        send_val[4] = (uint8_t)((pressure_device.hal.pressure >> 24) & 0xff);
+        send_val[5] = (uint8_t)((pressure_device.hal.pressure >> 16) & 0xff);
+        send_val[6] = (uint8_t)((pressure_device.hal.pressure >> 8) & 0xff);
+        send_val[7] = (uint8_t)((pressure_device.hal.pressure) & 0xff);
         val_handle = pressure_device.service_handler.serv_chars.char_val_handle;
         length = BLE_CHAR_SIZE_PRESSURE;
         break;

@@ -189,7 +189,9 @@ static uint32_t gs_ul_transfer_length;
 static struct status_block_t gs_spi_status;
 static uint32_t gs_ul_test_block_number;
 
-bool udp_forward = false;
+bool data_ready = false;
+bool instance_create = false;
+bool instance_delete = false;
 //static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
 
 extern struct netif gs_net_if;
@@ -371,7 +373,6 @@ void SPI_Handler(void)
 	uint32_t new_cmd = 0;
 	static uint16_t data;
 	uint8_t uc_pcs;
-	bool data_ready = false;
 
 	if(spi_read_status(SPI_SLAVE_BASE) & SPI_SR_RDRF) {
 		spi_read(SPI_SLAVE_BASE, &data, &uc_pcs);
@@ -381,7 +382,6 @@ void SPI_Handler(void)
 			spi_write(SPI_SLAVE_BASE, gs_puc_transfer_buffer[gs_ul_transfer_index], 0, 0);
 		}
 		else {
-			udp_forward = true;
 			data_ready = true;
 			for(uint8_t i = 0; i < COMM_BUFFER_SIZE; i++) {
 				printf("%02x ", gs_uc_spi_buffer[i]);
@@ -393,7 +393,7 @@ void SPI_Handler(void)
 			printf("READING COMPLETE\n\r");
 			spi_slave_transfer(gs_uc_spi_buffer, COMM_BUFFER_SIZE);
 			//spi_slave_command_process();
-			data_ready = false;
+			//data_ready = false;
 		}
 	}
 }
@@ -477,7 +477,7 @@ static int send_osc_msg(uint8_t node, enum sensor_types sens, uint32_t *values) 
 */
 int main(void)
 {
-	uint8_t uc_key;
+	bool udp_forward = false;
 	
 	/* Initialize the SAM system. */
 	sysclk_init();
@@ -514,73 +514,63 @@ int main(void)
 	
 	/* Program main loop. */
 	while (1) {
-		//scanf("%c", (char*)&uc_key);
 		/* Check for input packet and process it. */
 		ethernet_task();
 		
+		if(data_ready) {
+			if(gs_uc_spi_buffer[0] > 3) {
+				printf("Adding new peripheral! #%d\n\r", gs_uc_spi_buffer[0]);
+				printf("Adding new service! #%d\n\r", gs_uc_spi_buffer[1]);
+				instance_create = true;
+			}
+			else {
+				udp_forward = true;
+			}
+			data_ready = false;
+		}
+		
+		if(instance_create) {
+			OSCMessage *osc_msg = OSCMessage_new();
+			OSCMessage_setAddress(osc_msg, "sabre/create");
+			OSCMessage_addArgument_int32(osc_msg, gs_uc_spi_buffer[0]);
+			OSCMessage_sendMessage(osc_msg, &osc_stream);
+			OSCMessage_delete(osc_msg);
+			instance_create = false;
+		}
+		
+		if(instance_delete) {
+			OSCMessage *osc_msg = OSCMessage_new();
+			OSCMessage_setAddress(osc_msg, "sabre/delete");
+			OSCMessage_addArgument_int32(osc_msg, gs_uc_spi_buffer[0]);
+			OSCMessage_sendMessage(osc_msg, &osc_stream);
+			OSCMessage_delete(osc_msg);
+			instance_delete = false;
+		}
+		
 		if(udp_forward) {
 			OSCMessage *osc_msg = OSCMessage_new();
-			switch(gs_uc_spi_buffer[0]) {
-				case 0:
-				switch(gs_uc_spi_buffer[1]) {
-					case 0:
-					OSCMessage_setAddress(osc_msg, "sabre/1/button  ");
-					break;
-					
-					case 1:
-					OSCMessage_setAddress(osc_msg, "sabre/1/pressure  ");
-					break;
-					
-					case 2:
-					OSCMessage_setAddress(osc_msg, "sabre/1/mpu  ");
-					break;
-					
-					default:
-					break;
-				}
+			char osc_addr[24] = "sabre/";
+			char periph[2];
+			itoa(gs_uc_spi_buffer[0]+1, periph, 10);
+			strcat(osc_addr, periph); // adding peripheral#
+			strcat(osc_addr, "/"); // adding separator
+			switch(gs_uc_spi_buffer[1]) { // looking for service#
+				case 0: // button
+				strcat(osc_addr, "button");
 				break;
 				
-				case 1:
-				switch(gs_uc_spi_buffer[1]) {
-					case 0:
-					OSCMessage_setAddress(osc_msg, "sabre/2/button");
-					break;
-					
-					case 1:
-					OSCMessage_setAddress(osc_msg, "sabre/2/pressure");
-					break;
-					
-					case 2:
-					OSCMessage_setAddress(osc_msg, "sabre/2/mpu");
-					break;
-					
-					default:
-					break;
-				}
+				case 1: // pressure
+				strcat(osc_addr, "pressure");
 				break;
 				
-				case 2:
-				switch(gs_uc_spi_buffer[1]) {
-					case 0:
-					OSCMessage_setAddress(osc_msg, "sabre/3/button");
-					break;
-					
-					case 1:
-					OSCMessage_setAddress(osc_msg, "sabre/3/pressure");
-					break;
-					
-					case 2:
-					OSCMessage_setAddress(osc_msg, "sabre/3/mpu");
-					break;
-					
-					default:
-					break;
-				}
+				case 2: // mpu
+				strcat(osc_addr, "mpu");
 				break;
 				
 				default:
 				break;
 			}
+			OSCMessage_setAddress(osc_msg, osc_addr);
 			printf("OSC address = %s\n\r", OSCMessage_getAddress(osc_msg));
 			
 			uint32_t udp_data[61] = {0};

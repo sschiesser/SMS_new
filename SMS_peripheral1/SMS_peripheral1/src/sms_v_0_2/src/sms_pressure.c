@@ -113,8 +113,8 @@ enum status_code sms_pressure_ms58_read_prom(void)
 
 void sms_pressure_poll_data(void)
 {
-    static uint32_t temp = 0x12345678;
-    static uint32_t press = 0xfedcba98;
+    //static uint32_t temp = 0x12345678;
+    //static uint32_t press = 0xfedcba98;
     if(ble_current_state == BLE_STATE_PAIRED) {
         DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
         if(sms_pressure_ms58_read_data() != STATUS_OK) {

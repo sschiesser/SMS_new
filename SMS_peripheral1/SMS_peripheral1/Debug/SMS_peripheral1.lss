@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      000000b4  00000000  00000000  00017e9c  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00050e64  00000000  00000000  00017f50  2**0
+  6 .debug_info   00050e46  00000000  00000000  00017f50  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000058ff  00000000  00000000  00068db4  2**0
+  7 .debug_abbrev 000058e1  00000000  00000000  00068d96  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    0000b9ff  00000000  00000000  0006e6b3  2**0
+  8 .debug_loc    0000b9ff  00000000  00000000  0006e677  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000d68  00000000  00000000  0007a0b2  2**0
+  9 .debug_aranges 00000d68  00000000  00000000  0007a076  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000de0  00000000  00000000  0007ae1a  2**0
+ 10 .debug_ranges 00000de0  00000000  00000000  0007adde  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  00028d0e  00000000  00000000  0007bbfa  2**0
+ 11 .debug_macro  00028d0e  00000000  00000000  0007bbbe  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00018dbe  00000000  00000000  000a4908  2**0
+ 12 .debug_line   00018dbe  00000000  00000000  000a48cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00147201  00000000  00000000  000bd6c6  2**0
+ 13 .debug_str    001471fb  00000000  00000000  000bd68a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002f5c  00000000  00000000  002048c8  2**2
+ 14 .debug_frame  00002f5c  00000000  00000000  00204888  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -6509,31 +6509,31 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 10009f82:	e070      	b.n	1000a066 <sms_ble_send_characteristic+0x146>
         
         case BLE_CHAR_PRESS:
-        send_val[0] = (uint8_t)(pressure_device.hal.temperature & 0xff);
+        send_val[0] = (uint8_t)((pressure_device.hal.temperature >>24) & 0xff);
 10009f84:	494b      	ldr	r1, [pc, #300]	; (1000a0b4 <sms_ble_send_characteristic+0x194>)
 10009f86:	6a0a      	ldr	r2, [r1, #32]
 10009f88:	ab01      	add	r3, sp, #4
-10009f8a:	701a      	strb	r2, [r3, #0]
-        send_val[1] = (uint8_t)((pressure_device.hal.temperature >> 8) & 0xff);
-10009f8c:	1210      	asrs	r0, r2, #8
-10009f8e:	7058      	strb	r0, [r3, #1]
-        send_val[2] = (uint8_t)((pressure_device.hal.temperature >> 16) & 0xff);
-10009f90:	1410      	asrs	r0, r2, #16
-10009f92:	7098      	strb	r0, [r3, #2]
-        send_val[3] = (uint8_t)((pressure_device.hal.temperature >> 24) & 0xff);
-10009f94:	1612      	asrs	r2, r2, #24
+10009f8a:	1610      	asrs	r0, r2, #24
+10009f8c:	7018      	strb	r0, [r3, #0]
+        send_val[1] = (uint8_t)((pressure_device.hal.temperature >> 16) & 0xff);
+10009f8e:	1410      	asrs	r0, r2, #16
+10009f90:	7058      	strb	r0, [r3, #1]
+        send_val[2] = (uint8_t)((pressure_device.hal.temperature >> 8) & 0xff);
+10009f92:	1210      	asrs	r0, r2, #8
+10009f94:	7098      	strb	r0, [r3, #2]
+        send_val[3] = (uint8_t)((pressure_device.hal.temperature) & 0xff);
 10009f96:	70da      	strb	r2, [r3, #3]
-        send_val[4] = (uint8_t)(pressure_device.hal.pressure & 0xff);
+        send_val[4] = (uint8_t)((pressure_device.hal.pressure >> 24) & 0xff);
 10009f98:	69ca      	ldr	r2, [r1, #28]
-10009f9a:	711a      	strb	r2, [r3, #4]
-        send_val[5] = (uint8_t)((pressure_device.hal.pressure >> 8) & 0xff);
-10009f9c:	1210      	asrs	r0, r2, #8
-10009f9e:	7158      	strb	r0, [r3, #5]
-        send_val[6] = (uint8_t)((pressure_device.hal.pressure >> 16) & 0xff);
-10009fa0:	1410      	asrs	r0, r2, #16
-10009fa2:	7198      	strb	r0, [r3, #6]
-        send_val[7] = (uint8_t)((pressure_device.hal.pressure >> 24) & 0xff);
-10009fa4:	1612      	asrs	r2, r2, #24
+10009f9a:	1610      	asrs	r0, r2, #24
+10009f9c:	7118      	strb	r0, [r3, #4]
+        send_val[5] = (uint8_t)((pressure_device.hal.pressure >> 16) & 0xff);
+10009f9e:	1410      	asrs	r0, r2, #16
+10009fa0:	7158      	strb	r0, [r3, #5]
+        send_val[6] = (uint8_t)((pressure_device.hal.pressure >> 8) & 0xff);
+10009fa2:	1210      	asrs	r0, r2, #8
+10009fa4:	7198      	strb	r0, [r3, #6]
+        send_val[7] = (uint8_t)((pressure_device.hal.pressure) & 0xff);
 10009fa6:	71da      	strb	r2, [r3, #7]
         val_handle = pressure_device.service_handler.serv_chars.char_val_handle;
 10009fa8:	2340      	movs	r3, #64	; 0x40
@@ -9487,8 +9487,8 @@ void sms_pressure_ms58_calculate(void)
 void sms_pressure_poll_data(void)
 {
 1000ae9c:	b510      	push	{r4, lr}
-    static uint32_t temp = 0x12345678;
-    static uint32_t press = 0xfedcba98;
+    //static uint32_t temp = 0x12345678;
+    //static uint32_t press = 0xfedcba98;
     if(ble_current_state == BLE_STATE_PAIRED) {
 1000ae9e:	4b11      	ldr	r3, [pc, #68]	; (1000aee4 <sms_pressure_poll_data+0x48>)
 1000aea0:	781b      	ldrb	r3, [r3, #0]
