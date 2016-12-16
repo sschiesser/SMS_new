@@ -434,41 +434,6 @@ static void spi_slave_initialize(void)
 }
 
 
-static int send_osc_msg(uint8_t node, enum sensor_types sens, uint32_t *values) {
-	OSCMessage *msg = OSCMessage_new();	
-	switch (sens) {
-		case SMS_SENS_ACCEL:
-		OSCMessage_setAddress(msg, "sabre/1/accel");
-		OSCMessage_addArgument_int32(msg, values[0]);
-		OSCMessage_addArgument_int32(msg, values[1]);
-		OSCMessage_addArgument_int32(msg, values[2]);
-		OSCMessage_addArgument_int32(msg, values[3]);
-		break;
-		
-		case SMS_SENS_GYRO:
-		OSCMessage_setAddress(msg, "sabre/1/gyro");
-		OSCMessage_addArgument_int32(msg, values[0]);
-		OSCMessage_addArgument_int32(msg, values[1]);
-		OSCMessage_addArgument_int32(msg, values[2]);
-		OSCMessage_addArgument_int32(msg, values[3]);
-		break;
-		
-		case SMS_SENS_PRESS:
-		break;
-		
-		case SMS_SENS_BUTTON:
-		break;
-		
-		case SMS_SENS_QUAT:
-		break;
-		
-		default:
-		break;
-	}
-	
-	OSCMessage_sendMessage(msg, &osc_stream);
-	OSCMessage_delete(msg);
-}
 
 
 /**
@@ -576,7 +541,9 @@ int main(void)
 			uint32_t udp_data[61] = {0};
 			switch(gs_uc_spi_buffer[1]) {
 				case 0: // button message format
-				OSCMessage_addArgument_int32(osc_msg, (uint32_t)gs_uc_spi_buffer[3]);
+				OSCMessage_addArgument_int32(osc_msg, (uint32_t)gs_uc_spi_buffer[3]); // button value
+				OSCMessage_addArgument_int32(osc_msg, 0x12345678); // timestamp
+				OSCMessage_addArgument_int32(osc_msg, (uint32_t)0x0f); // battery level
 				break;
 				
 				case 1: // pressure message format
@@ -584,16 +551,29 @@ int main(void)
 				udp_data[0] |= (uint32_t)gs_uc_spi_buffer[4] << 16;
 				udp_data[0] |= (uint32_t)gs_uc_spi_buffer[5] << 8;
 				udp_data[0] |= (uint32_t)gs_uc_spi_buffer[6];
-				OSCMessage_addArgument_int32(osc_msg, udp_data[0]);
+				OSCMessage_addArgument_int32(osc_msg, udp_data[0]); // pressure value
 				udp_data[1] = (uint32_t)gs_uc_spi_buffer[7] << 24;
 				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[8] << 16;
 				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[9] << 8;
 				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[10];
-				OSCMessage_addArgument_int32(osc_msg, udp_data[1]);
+				OSCMessage_addArgument_int32(osc_msg, udp_data[1]); // temperature value
+				OSCMessage_addArgument_int32(osc_msg, 0x23456789); // timestamp
+				OSCMessage_addArgument_int32(osc_msg, 0xf0); // battery level
 				break;
 				
 				case 2: // mpu message format
-				OSCMessage_addArgument_int32(osc_msg, 0x12345678);
+				OSCMessage_addArgument_int32(osc_msg, 0x10000001);
+				OSCMessage_addArgument_int32(osc_msg, 0x20000002);
+				OSCMessage_addArgument_int32(osc_msg, 0x30000003);
+				OSCMessage_addArgument_int32(osc_msg, 0x40000004);
+				OSCMessage_addArgument_int32(osc_msg, 0x50000005);
+				OSCMessage_addArgument_int32(osc_msg, 0x60000006);
+				OSCMessage_addArgument_int32(osc_msg, 0x70000007);
+				OSCMessage_addArgument_int32(osc_msg, 0x80000008);
+				OSCMessage_addArgument_int32(osc_msg, 0x90000009);
+				OSCMessage_addArgument_int32(osc_msg, 0xA000000A);
+				OSCMessage_addArgument_int32(osc_msg, 0xB000000B);
+				OSCMessage_addArgument_int32(osc_msg, 0xC000000C);
 				break;
 				
 				default:
