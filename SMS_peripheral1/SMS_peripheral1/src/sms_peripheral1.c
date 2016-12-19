@@ -63,7 +63,7 @@ void sms_init_variables(void)
     timer1_current_mode = TIMER1_MODE_NONE;
     timer2_current_mode = TIMER2_MODE_NONE;
     sms_working_mode = SMS_MODE_BUTTON_SOLO;
-    
+
     // button
     btn0_instance.id = SMS_BTN_0;
     btn0_instance.gpio_pin = SMS_BTN_0_PIN;
@@ -79,6 +79,9 @@ void sms_init_variables(void)
     btn1_instance.int_enabled = true;
     btn1_instance.char_value = 0;
     
+	for(uint8_t i = 0; i < 3; i++) {
+		ready_to_send[i] = false;
+	}
     sms_ble_send_cnt = 0;
 }
 
@@ -143,19 +146,15 @@ int main(void)
     sms_led_gpio_init();
     
     // I2C
-    //sms_i2c_master_configure();
+    sms_i2c_master_configure();
     
     // SPI
     sms_spi_master_configure();
     
     // MPU
-    //sms_mpu_configure_gpio();
+    sms_mpu_configure_gpio();
     
-    // MS58
-    pressure_device.hal.current_state = MS58_STATE_NONE;
-    //ms58_device.reset_done = false;
-    //ms58_device.init_ok = false;
-    
+	// monitoring...
     sms_monitor_configure_gpio();
     
     /* Initialize the BLE module
@@ -233,9 +232,6 @@ int main(void)
             DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
             sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
             DBG_LOG_CONT_DEV(" done!");
-            //psp = __get_PSP();
-            //msp = __get_MSP();
-            //printf("\r\n\@ main: psp 0x%lx, msp 0x%lx", psp, msp);
             switch(sms_current_interrupt.source)
             {
                 case INT_NONE:
@@ -292,26 +288,17 @@ int main(void)
                 break;
                 
                 case INT_AON_TIMER:
-                //sms_monitor_states("INT_AON_TIMER");
                 DBG_LOG_DEV("...AON_TIMER");
                 if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
                     if(ble_current_state == BLE_STATE_PAIRED) {
-                        //DBG_LOG_DEV("[main]\t\t\tDisabling button int...");
-                        //sms_button_toggle_interrupt(SMS_EXTINT_DISABLE);
-                        //DBG_LOG_CONT_DEV(" done!");
-                        DBG_LOG_DEV("[main]\t\t\t\tPolling pressure data...");
                         sms_pressure_poll_data();
-                        DBG_LOG_CONT_DEV(" done!");
-                        //DBG_LOG_DEV("[main]\t\t\tEnabling button int...");
-                        //sms_button_toggle_interrupt(SMS_EXTINT_ENABLE);
-                        //DBG_LOG_CONT_DEV(" done!");
                     }
                     else if(ble_current_state == BLE_STATE_INDICATING) {
-                        DBG_LOG_DEV("[main]\t\t\t\tAON timer ready while indicating... skipping");
+                        //DBG_LOG_DEV("[main]\t\t\t\tAON timer ready while indicating... skipping");
                     }
                     else {
-                        sms_timer_aon_disable();
-                        sms_ble_power_down();
+                        //sms_timer_aon_disable();
+                        //sms_ble_power_down();
                     }                        
                 }                    
                 break;
@@ -336,12 +323,24 @@ int main(void)
                 break;
             }
             
-            DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
+            //DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
             sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-            DBG_LOG_CONT_DEV(" done!");
+            //DBG_LOG_CONT_DEV(" done!");
             sms_current_interrupt.int_on = false;
             sms_current_interrupt.source = INT_NONE;
         }
+		
+		if(ready_to_send[RTS_BUTTON_POS]) {
+			ready_to_send[RTS_BUTTON_POS] = false;
+		}
+		if(ready_to_send[RTS_PRESSURE_POS]) {
+			sms_ble_send_characteristic(BLE_CHAR_PRESS);
+			ready_to_send[RTS_PRESSURE_POS] = false;
+		}
+		if(ready_to_send[RTS_MPU_POS]) {
+			sms_ble_send_characteristic(BLE_CHAR_MPU);
+			ready_to_send[RTS_MPU_POS] = false;
+		}
         
         
         if(ulp_ready) {

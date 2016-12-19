@@ -225,7 +225,7 @@ static enum status_code _i2c_master_read_packet(
 		status = i2c_module->RECEIVE_STATUS.reg;
 		if (status & I2C_RECEIVE_STATUS_RX_FIFO_NOT_EMPTY)
 			packet->data[counter++] = i2c_module->RECEIVE_DATA.reg;
-            printf("counter %d", (counter-1));
+            //printf("counter %d", (counter-1));
 	} while (counter < length); 
 
 	/* Now check whether the core has sent the data out and free the bus. */
@@ -369,7 +369,7 @@ static enum status_code _i2c_master_write_packet(
 		status = i2c_module->TRANSMIT_STATUS.reg;
 		if (status & I2C_TRANSMIT_STATUS_TX_FIFO_NOT_FULL_Msk) {
 			i2c_module->TRANSMIT_DATA.reg = packet->data[counter++];
-            printf("\r\ncounter %d",(counter-1));
+            //printf("\r\ncounter %d",(counter-1));
             //printf(".");
 		}
 	} while (counter < length); 

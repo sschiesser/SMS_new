@@ -41,6 +41,10 @@
 #define BLE_CHAR_SIZE_MPU_G_A_C_T                       (SMS_MPU_BLE_CHAR_LEN_G_A_C_T)
 #define BLE_CHAR_SIZE_MAX                               (BLE_CHAR_SIZE_MPU_G_A_C_T)
 
+#define RTS_BUTTON_POS									0
+#define RTS_PRESSURE_POS								1
+#define RTS_MPU_POS										2
+
 /* ---------
 * VARIABLES
 * --------- */
@@ -71,6 +75,8 @@ enum sms_ble_char_type {
 
 uint8_t sms_ble_ind_retry;
 at_ble_handle_t sms_ble_conn_handle;
+
+bool ready_to_send[3];
 
 uint16_t sms_ble_send_cnt;
 

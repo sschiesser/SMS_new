@@ -113,21 +113,17 @@ enum status_code sms_pressure_ms58_read_prom(void)
 
 void sms_pressure_poll_data(void)
 {
-    //static uint32_t temp = 0x12345678;
-    //static uint32_t press = 0xfedcba98;
     if(ble_current_state == BLE_STATE_PAIRED) {
         DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
         if(sms_pressure_ms58_read_data() != STATUS_OK) {
             DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
         }
         else {
-            ////DBG_LOG_DEV("[sms_pressure_poll_data]\tDone");
             if(pressure_device.hal.data_complete) {
                 pressure_device.hal.data_complete = false;
                 sms_pressure_ms58_calculate();
-                //ms58_device.temperature = ( (ms58_device.temperature >= (int32_t)0xffffffff) ? (ms58_device.temperature = 0) : (ms58_device.temperature + 1) );
-                //ms58_device.pressure = ( (ms58_device.pressure < 0) ? (ms58_device.pressure = 0xffffffff) : (ms58_device.pressure - 1) );
-                sms_ble_send_characteristic(BLE_CHAR_PRESS);
+				ready_to_send[RTS_PRESSURE_POS] = true;
+                //sms_ble_send_characteristic(BLE_CHAR_PRESS);
         }
     }
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();

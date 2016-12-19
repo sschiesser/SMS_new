@@ -542,7 +542,7 @@ int main(void)
 			switch(gs_uc_spi_buffer[1]) {
 				case 0: // button message format
 				OSCMessage_addArgument_int32(osc_msg, (uint32_t)gs_uc_spi_buffer[3]); // button value
-				OSCMessage_addArgument_int32(osc_msg, 0x12345678); // timestamp
+				//OSCMessage_addArgument_int32(osc_msg, 0x12345678); // timestamp
 				OSCMessage_addArgument_int32(osc_msg, (uint32_t)0x0f); // battery level
 				break;
 				
@@ -557,23 +557,23 @@ int main(void)
 				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[9] << 8;
 				udp_data[1] |= (uint32_t)gs_uc_spi_buffer[10];
 				OSCMessage_addArgument_int32(osc_msg, udp_data[1]); // temperature value
-				OSCMessage_addArgument_int32(osc_msg, 0x23456789); // timestamp
+				//OSCMessage_addArgument_int32(osc_msg, 0x23456789); // timestamp
 				OSCMessage_addArgument_int32(osc_msg, 0xf0); // battery level
 				break;
 				
 				case 2: // mpu message format
-				OSCMessage_addArgument_int32(osc_msg, 0x10000001);
-				OSCMessage_addArgument_int32(osc_msg, 0x20000002);
-				OSCMessage_addArgument_int32(osc_msg, 0x30000003);
-				OSCMessage_addArgument_int32(osc_msg, 0x40000004);
-				OSCMessage_addArgument_int32(osc_msg, 0x50000005);
-				OSCMessage_addArgument_int32(osc_msg, 0x60000006);
-				OSCMessage_addArgument_int32(osc_msg, 0x70000007);
-				OSCMessage_addArgument_int32(osc_msg, 0x80000008);
-				OSCMessage_addArgument_int32(osc_msg, 0x90000009);
-				OSCMessage_addArgument_int32(osc_msg, 0xA000000A);
-				OSCMessage_addArgument_int32(osc_msg, 0xB000000B);
-				OSCMessage_addArgument_int32(osc_msg, 0xC000000C);
+				OSCMessage_addArgument_int32(osc_msg, 0x10000001); // gyro[x]
+				OSCMessage_addArgument_int32(osc_msg, 0x20000002); // gyro[y]
+				OSCMessage_addArgument_int32(osc_msg, 0x30000003); // gyro[z]
+				OSCMessage_addArgument_int32(osc_msg, 0x40000004); // accel[x]
+				OSCMessage_addArgument_int32(osc_msg, 0x50000005); // accel[y]
+				OSCMessage_addArgument_int32(osc_msg, 0x60000006); // accel[z]
+				OSCMessage_addArgument_int32(osc_msg, 0x70000007); // compass[x]
+				OSCMessage_addArgument_int32(osc_msg, 0x80000008); // compass[y]
+				OSCMessage_addArgument_int32(osc_msg, 0x90000009); // compass[z]
+				OSCMessage_addArgument_int32(osc_msg, 0xA000000A); // temp
+				OSCMessage_addArgument_int32(osc_msg, 0xB000000B); // battery
+				//OSCMessage_addArgument_int32(osc_msg, 0xC000000C); // (timestamp)
 				break;
 				
 				default:
