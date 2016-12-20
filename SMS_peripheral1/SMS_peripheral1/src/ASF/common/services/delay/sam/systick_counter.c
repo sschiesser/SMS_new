@@ -61,7 +61,6 @@ static uint32_t cycles_per_us = 8000000UL / 1000000;
 void delay_init(void)
 {
 	cycles_per_ms = system_clock_get_value();
-	printf("system clock: %ld", cycles_per_ms);
 	cycles_per_ms /= 1000;
 	cycles_per_us = cycles_per_ms / 1000;
 
@@ -89,7 +88,9 @@ void delay_cycles_us(uint32_t n)
 void delay_cycles_ms(uint32_t n)
 {
 	while (n--) {
-		/* Devide up to blocks of 1ms */
+		printf(".");
+		/* Divide up to blocks of 1ms */
 		delay_cycles(cycles_per_ms);
 	}
+	printf("\n\r");
 }
