@@ -47,7 +47,8 @@ void sms_mpu_unregister_callbacks(void)
 /* Callback --> send interrupt message to platform */
 void sms_mpu_interrupt_callback(void)
 {
-    sms_current_interrupt.source = INT_MPU_DRDY;
+	sms_current_interrupt.int_on = true;
+	sms_current_interrupt.source = INT_MPU_DRDY;
     send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
 }
 
@@ -89,7 +90,7 @@ int sms_mpu_initialize(void) {
 /* Extract available IMU data */
 int sms_mpu_poll_data(void)
 {
-    //DBG_LOG_DEV("[sms_imu_receive_data]\n\r  reading...");
+    DBG_LOG_DEV("[sms_mpu_poll_data]\t\t\treading...");
     //st.chip_cfg.dmp_on = 1;
     unsigned char sensors;
     unsigned char more;
@@ -115,7 +116,9 @@ int sms_mpu_poll_data(void)
         mpu_get_compass_reg(mpu_device.hal.compass, &sensor_timestamp);
         mpu_device.new_compass = true;
     }
-    sms_ble_send_characteristic(BLE_CHAR_MPU);    
+	
+	ready_to_send[RTS_MPU_POS] = true;
+    //sms_ble_send_characteristic(BLE_CHAR_MPU);    
 
     return 0;
 }

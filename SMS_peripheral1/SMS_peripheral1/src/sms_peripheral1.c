@@ -103,7 +103,7 @@ static void resume_cb(void)
 
 //static void sms_plf_event_cb(void)
 //{
-    //sms_current_interrupt.int_on = true;
+	//sms_current_interrupt.int_on = true;
 //}
 
 
@@ -182,7 +182,7 @@ int main(void)
     sms_button_register_callbacks();
     
     // MPU
-    //sms_mpu_register_callbacks();
+    sms_mpu_register_callbacks();
 
     // BLE
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
@@ -283,8 +283,8 @@ int main(void)
                 //sms_monitor_states("INT_IMU_DRDY");
                 DBG_LOG_DEV("...MPU_DRDY");
                 //if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-                    //sms_mpu_poll_data();
-                //}                    
+	                sms_mpu_poll_data();
+                //}              
                 break;
                 
                 case INT_AON_TIMER:
@@ -331,13 +331,16 @@ int main(void)
         }
 		
 		if(ready_to_send[RTS_BUTTON_POS]) {
+			DBG_LOG_DEV("[main]\t\t\t\tRTS button...");
 			ready_to_send[RTS_BUTTON_POS] = false;
 		}
 		if(ready_to_send[RTS_PRESSURE_POS]) {
+			DBG_LOG_DEV("[main]\t\t\t\tRTS pressure...");
 			sms_ble_send_characteristic(BLE_CHAR_PRESS);
 			ready_to_send[RTS_PRESSURE_POS] = false;
 		}
 		if(ready_to_send[RTS_MPU_POS]) {
+			DBG_LOG_DEV("[main]\t\t\t\tRTS mpu...");
 			sms_ble_send_characteristic(BLE_CHAR_MPU);
 			ready_to_send[RTS_MPU_POS] = false;
 		}
