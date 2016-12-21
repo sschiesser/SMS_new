@@ -33,7 +33,7 @@
 
 #define SMS_MPU_I2C_SLAVE_ADDR              (0x69)
 
-#define SMS_MPU_SAMPLE_RATE_HZ              (1)
+#define SMS_MPU_SAMPLE_RATE_HZ              (10)
 #define SMS_MPU_TEMP_MULTIPLIER             (1)
 #define SMS_MPU_COMPASS_MULTIPLIER          (1)
 #define SMS_MPU_COMPASS_RATE_HZ             (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
@@ -41,6 +41,9 @@
 #define SMS_MPU_ACCEL_ON                    (0x01)
 #define SMS_MPU_GYRO_ON                     (0x02)
 #define SMS_MPU_COMPASS_ON                  (0x04)
+
+#define SMS_MPU_GYRO_FS						(2000)
+#define SMS_MPU_ACCEL_FS					(2) // 4
 
 #define SMS_MPU_MOTION                      (0)
 #define SMS_MPU_NO_MOTION                   (1)
