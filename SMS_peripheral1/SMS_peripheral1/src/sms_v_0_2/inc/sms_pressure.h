@@ -32,7 +32,7 @@
 #define SMS_PRESSURE_CONVERT1_MS                (SMS_TIMER_AON_COUNT_10MS)
 #define SMS_PRESSURE_CONVERT2_MS                (SMS_TIMER_AON_COUNT_100MS)
 #define SMS_PRESSURE_CONVERT3_MS                (SMS_TIMER_AON_COUNT_1S)
-#define SMS_PRESSURE_CONVERT_MS                 (3*SMS_PRESSURE_CONVERT2_MS)
+#define SMS_PRESSURE_CONVERT_MS                 (SMS_PRESSURE_CONVERT3_MS)
 
 /* ---------
  * VARIABLES
@@ -45,8 +45,8 @@ enum sms_pressure_state {
 typedef struct sms_pressure_struct {
     ms58_instance_t hal;
 	bool int_enabled;
-	bool new_int;
-	bool rts;
+	volatile bool new_int;
+	volatile bool rts;
     enum sms_pressure_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[8];

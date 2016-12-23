@@ -45,6 +45,8 @@
 #define RTS_PRESSURE_POS								1
 #define RTS_MPU_POS										2
 
+#define BLE_SEND_TIMEOUT								10
+
 /* ---------
 * VARIABLES
 * --------- */

@@ -109,24 +109,23 @@ typedef enum sms_mode {
 }sms_mode_t;
 volatile sms_mode_t sms_working_mode;
 
-typedef enum sms_plf_int_src {
-    INT_NONE,
-    INT_BTN0,
-    INT_BTN1,
-    INT_MPU_DRDY,
-    INT_AON_TIMER,
-    INT_DUALTIMER1,
-    INT_DUALTIMER2
-}sms_plf_int_src_t;
-typedef struct sms_plf_int {
-    sms_plf_int_src_t source;
-    volatile bool int_on;
-}sms_plf_int_t;
-volatile sms_plf_int_t sms_current_interrupt;
+//typedef enum sms_plf_int_src {
+    //INT_NONE,
+    //INT_BTN0,
+    //INT_BTN1,
+    //INT_MPU_DRDY,
+    //INT_AON_TIMER,
+    //INT_DUALTIMER1,
+    //INT_DUALTIMER2
+//}sms_plf_int_src_t;
+//typedef struct sms_plf_int {
+    //sms_plf_int_src_t source;
+    //volatile bool int_on;
+//}sms_plf_int_t;
+//volatile sms_plf_int_t sms_current_interrupt;
 
 uint8_t sms_btn_cnt;
 at_ble_handle_t sms_connection_handle;
-
 
 volatile bool ulp_ready;
 volatile bool ulp_active;

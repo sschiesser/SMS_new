@@ -359,39 +359,28 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     //}
     status = at_ble_characteristic_value_set(val_handle, send_val, (length * sizeof(uint8_t)));
     if(status == AT_BLE_SUCCESS) {
-        //DBG_LOG_DEV("[sms_ble_send_characteristic]\tSending char value... BLE 0x%02x, T1 %d, T2 %d, cnt = %d", ble_current_state, timer1_current_mode, timer2_current_mode, sms_ble_send_cnt);
-        //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- service handle: 0x%04x\r\n- service uuid: 0x", sms_connection_handle, sms_button_service_handler.serv_handle);
-        //for(uint8_t i = 0; i < AT_BLE_UUID_128_LEN; i++) {
-        //DBG_LOG_CONT_DEV("%02x", sms_button_service_handler.serv_uuid.uuid[(i)]);
-        //}
-        //DBG_LOG_DEV("- char value handle: 0x%04x\r\n- char value: 0x%02x", sms_button_service_handler.serv_chars.char_val_handle, send_val);
-        
-        //DBG_LOG_DEV("cnt: %d", sms_ble_send_cnt);
-#   if SMS_SENDING_WITH_ACK == true
-        sms_ble_ind_retry = 0;
-        status = at_ble_indication_send(sms_connection_handle, val_handle);
-#   else
+		DBG_LOG_CONT_DEV(" SET! ");
+//#   if SMS_SENDING_WITH_ACK == true
+        //sms_ble_ind_retry = 0;
+        //status = at_ble_indication_send(sms_connection_handle, val_handle);
+//#   else
         status = at_ble_notification_send(sms_connection_handle, val_handle);
-#   endif
-        //psp = __get_PSP();
-        //msp = __get_MSP();
-        //printf("\r\n\@ sending: psp 0x%lx, msp 0x%lx", psp, msp);
-        //register int n41 asm("sp");
-        //register int n42 asm("lr");
-        //register int n43 asm("r15");
-        //printf("\r\n\@ sending: sp 0x%x, lr 0x%x", n41, n42);
-        
-        if(status == AT_BLE_SUCCESS) {
-#   if SMS_SENDING_WITH_ACK == true
-            timer2_current_mode = TIMER2_MODE_INDICATION_TOUT;
-            sms_dualtimer_start(TIMER_UNIT_MS, BLE_INDICATION_TOUT_MS, DUALTIMER_TIMER2);
-#   endif
-            //ulp_ready = false;
-        }
-        else {
+		DBG_LOG_CONT_DEV(" %d GONE? %d ", sms_ble_send_cnt, status);
+//#   endif
+        //if(status == AT_BLE_SUCCESS) {
+//#   if SMS_SENDING_WITH_ACK == true
+            //timer2_current_mode = TIMER2_MODE_INDICATION_TOUT;
+            //sms_dualtimer_start(TIMER_UNIT_MS, BLE_INDICATION_TOUT_MS, DUALTIMER_TIMER2);
+//#   endif
+        //}
+        //else {
+			//DBG_LOG_DEV(" NOT gone? ");
             //#pragma TBD: handle sending error...
-        }
+        //}
     }
+	else {
+		DBG_LOG_DEV(" NOT set? ");
+	}
     return status;
 }
 

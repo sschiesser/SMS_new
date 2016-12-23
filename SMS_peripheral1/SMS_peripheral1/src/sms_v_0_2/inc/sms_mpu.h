@@ -33,7 +33,7 @@
 
 #define SMS_MPU_I2C_SLAVE_ADDR              (0x69)
 
-#define SMS_MPU_SAMPLE_RATE_HZ              (10)
+#define SMS_MPU_SAMPLE_RATE_HZ              (4)
 #define SMS_MPU_TEMP_MULTIPLIER             (1)
 #define SMS_MPU_COMPASS_MULTIPLIER          (1)
 #define SMS_MPU_COMPASS_RATE_HZ             (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
@@ -82,12 +82,12 @@ enum sms_mpu_state {
 typedef struct sms_mpu_struct {
     struct mpu9250_hal_s hal; // hardware abstraction layer
 	bool int_enabled;
-    bool new_int;
+    volatile bool new_int;
     uint8_t compass_cnt;
     uint8_t temp_cnt;
     bool new_compass;
     bool new_temp;
-	bool rts;
+	volatile bool rts;
     enum sms_mpu_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[12];
