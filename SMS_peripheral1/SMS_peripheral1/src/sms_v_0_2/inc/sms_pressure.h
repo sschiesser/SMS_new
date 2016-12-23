@@ -44,6 +44,9 @@ enum sms_pressure_state {
 };
 typedef struct sms_pressure_struct {
     ms58_instance_t hal;
+	bool int_enabled;
+	bool new_int;
+	bool rts;
     enum sms_pressure_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[8];

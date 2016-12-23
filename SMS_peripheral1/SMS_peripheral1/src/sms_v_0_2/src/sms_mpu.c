@@ -44,12 +44,27 @@ void sms_mpu_unregister_callbacks(void)
     gpio_unregister_callback(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING);
 }
 
+/* Enable MPU DRDY interrupt */
+void sms_mpu_enable_callback(void)
+{
+	gpio_enable_callback(SMS_MPU_DRDY_PIN);
+	mpu_device.int_enabled = true;
+}
+
+/* Disable MPU DRDY interrupt */
+void sms_mpu_disable_callback(void)
+{
+	gpio_disable_callback(SMS_MPU_DRDY_PIN);
+	mpu_device.int_enabled = false;
+}
+
 /* Callback --> send interrupt message to platform */
 void sms_mpu_interrupt_callback(void)
 {
-	sms_current_interrupt.int_on = true;
-	sms_current_interrupt.source = INT_MPU_DRDY;
-    send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
+	if(mpu_device.int_enabled) {
+		mpu_device.new_int = true;
+		send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
+	}
 }
 
 int sms_mpu_initialize(void) {
@@ -79,10 +94,14 @@ int sms_mpu_initialize(void) {
     dmp_set_fifo_rate(SMS_MPU_SAMPLE_RATE_HZ);
     mpu_set_dmp_state(1);
     mpu_device.hal.dmp_on = 1;
-    mpu_device.temp_cnt = 0;
+	mpu_device.int_enabled = true;
+	mpu_device.new_int = false;
     mpu_device.compass_cnt = 0;
+    mpu_device.temp_cnt = 0;
     mpu_device.new_compass = false;
     mpu_device.new_temp = false;
+	mpu_device.rts = false;
+	mpu_device.state = MPU_STATE_ON;
     
     return 0;
 }
@@ -117,8 +136,7 @@ int sms_mpu_poll_data(void)
         mpu_device.new_compass = true;
     }
 	
-	ready_to_send[RTS_MPU_POS] = true;
-    //sms_ble_send_characteristic(BLE_CHAR_MPU);    
+	mpu_device.rts = true;
 
     return 0;
 }

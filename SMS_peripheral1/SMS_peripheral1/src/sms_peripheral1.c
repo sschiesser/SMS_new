@@ -56,33 +56,34 @@
 
 void sms_init_variables(void)
 {
-    // states
-    ble_current_state = BLE_STATE_POWEROFF;
-    button_instance.current_state = BUTTON_STATE_NONE;
-    pressure_device.hal.current_state = MS58_STATE_NONE;
     timer1_current_mode = TIMER1_MODE_NONE;
     timer2_current_mode = TIMER2_MODE_NONE;
     sms_working_mode = SMS_MODE_BUTTON_SOLO;
-
-    // button
-    btn0_instance.id = SMS_BTN_0;
-    btn0_instance.gpio_pin = SMS_BTN_0_PIN;
-    btn0_instance.int_enabled = true;
-    btn0_instance.char_value = 0;
-    
-    pressure_device.state = PRESSURE_STATE_OFF;
     ulp_ready = false;
-    
-    
-    btn1_instance.id = SMS_BTN_1;
-    btn1_instance.gpio_pin = SMS_BTN_1_PIN;
-    btn1_instance.int_enabled = true;
-    btn1_instance.char_value = 0;
-    
-	for(uint8_t i = 0; i < 3; i++) {
-		ready_to_send[i] = false;
-	}
+
+	// BLE
+    ble_current_state = BLE_STATE_POWEROFF;
     sms_ble_send_cnt = 0;
+
+	// button
+    button_instance.current_state = BUTTON_STATE_NONE;
+    button_instance.btn0.id = SMS_BTN_0;
+    button_instance.btn0.gpio_pin = SMS_BTN_0_PIN;
+    button_instance.btn0.int_enabled = true;
+	button_instance.btn0.new_int = false;
+    button_instance.btn0.char_value = 0;
+    button_instance.btn1.id = SMS_BTN_1;
+    button_instance.btn1.gpio_pin = SMS_BTN_1_PIN;
+    button_instance.btn1.int_enabled = true;
+	button_instance.btn1.new_int = false;
+    button_instance.btn1.char_value = 0;
+	
+	// pressure
+    pressure_device.hal.current_state = MS58_STATE_NONE;
+    pressure_device.state = PRESSURE_STATE_OFF;
+	pressure_device.rts = false;
+	pressure_device.int_enabled = false;
+	pressure_device.new_int = false;
 }
 
 
@@ -219,152 +220,76 @@ int main(void)
 		/* BLE Event task */
 		ble_event_task(BLE_EVENT_TIMEOUT);
 		
-		/* Write application task */
-        if(sms_current_interrupt.int_on)
-        {
-            if(ulp_active) {
-                //DBG_LOG_DEV("[main]\t\t\t\tWaking up...");
-                acquire_sleep_lock();
-                //DBG_LOG_CONT_DEV(" done!");
-            }                
-            //ulp_ready = false;
-            //DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
-            sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-            //DBG_LOG_CONT_DEV(" done!");
-            switch(sms_current_interrupt.source)
-            {
-                case INT_NONE:
-                //sms_monitor_states("NONE");
-                DBG_LOG_DEV("...NO SOURCE!!");
-                //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-                //if(ulp_ready) {
-                    //DBG_LOG_DEV("[main]\t\t\tULP...");
-                    //release_sleep_lock();
-                //}
-                //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
-                break;
-                
-                case INT_BTN0:
-                //sms_monitor_states("INT_BTN0");
-                DBG_LOG_DEV("...BTN0");
-                if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_BUTTON_SOLO) || (sms_working_mode == SMS_MODE_BUTTON_PRESSURE)) {
-                    //if(ble_current_state == BLE_STATE_PAIRED) {
-                    //if(sensors_active) {
-                        //DBG_LOG_DEV("[main]\t\t\t\tDisabling sensor int...");
-                        //sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
-                        //DBG_LOG_CONT_DEV(" done!");
-                    //}                        
-                    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-                    if(sms_button_fn(SMS_BTN_0) < 0) {
-                        DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
-                    }
-                }                    
-                break;
-                
-                case INT_BTN1:
-                //sms_monitor_states("INT_BTN1");
-                DBG_LOG_DEV("...BTN1");
-                if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_BUTTON_SOLO) || (sms_working_mode == SMS_MODE_BUTTON_PRESSURE)) {
-                    //if(ble_current_state == BLE_STATE_PAIRED)
-                    //if(sensors_active) {
-                        //DBG_LOG_DEV("[main]\t\t\t\tDisabling sensor int...");
-                        //sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
-                        //DBG_LOG_CONT_DEV(" done!");
-                    //}                        
-                    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-                    if(sms_button_fn(SMS_BTN_1) < 0) {
-                        DBG_LOG("[main]\t\t\t\tError in sms_button_fn()!");
-                    }
-                }                    
-                break;
-                
-                case INT_MPU_DRDY:
-                //sms_monitor_states("INT_IMU_DRDY");
-                //DBG_LOG_DEV("...MPU_DRDY");
-                if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-					//if(ble_current_state == BLE_STATE_PAIRED) {
-						gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-						//sms_sensors_interrupt_toggle(false, false);
-		                sms_mpu_poll_data();
-						//sms_sensors_interrupt_toggle(true, true);
-						gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
-					//}
-                }              
-                break;
-                
-                case INT_AON_TIMER:
-                //DBG_LOG_DEV("...AON_TIMER");
-                if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-                    if(ble_current_state == BLE_STATE_PAIRED) {
-						gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
-						//sms_sensors_interrupt_toggle(false, false);
-                        sms_pressure_poll_data();
-						//sms_sensors_interrupt_toggle(true, true);
-						gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
-                    }
-                    else if(ble_current_state == BLE_STATE_INDICATING) {
-                        //DBG_LOG_DEV("[main]\t\t\t\tAON timer ready while indicating... skipping");
-                    }
-                    else {
-                        //sms_timer_aon_disable();
-                        //sms_ble_power_down();
-                    }                        
-                }                    
-                break;
-                
-                case INT_DUALTIMER1:
-                //sms_monitor_states("INT_DUALTIMER1");
-                DBG_LOG_DEV("...DUALTIMER1");
-                sms_dualtimer_stop(DUALTIMER_TIMER1);
-                sms_dualtimer1_fn();
-                break;
-                
-                case INT_DUALTIMER2:
-                //sms_monitor_states("INT_DUALTIMER2");
-                DBG_LOG_DEV("...DUALTIMER2");
-                sms_dualtimer_stop(DUALTIMER_TIMER2);
-                sms_dualtimer2_fn();
-                break;
-                
-                default:
-                DBG_LOG_DEV("...??");
-                //sms_monitor_states("ERROR!!");
-                break;
-            }
-            
-            //DBG_LOG_DEV("[main]\t\t\t\tEnabling button int...");
-            sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-            //DBG_LOG_CONT_DEV(" done!");
-            sms_current_interrupt.int_on = false;
-            sms_current_interrupt.source = INT_NONE;
-        }
+		/* Sensor interrupt region */
+		if(button_instance.btn0.new_int) {
+			DBG_LOG_DEV("Btn0 int... ");
+			if(sms_button_fn(SMS_BTN_0) < 0) {
+				DBG_LOG_DEV("Error in sms_button_fn()");
+			}
+			button_instance.btn0.new_int = false;
+			DBG_LOG_CONT_DEV("done");
+		}
+		if(button_instance.btn1.new_int) {
+			DBG_LOG_DEV("btn1 int... ");
+			if(sms_button_fn(SMS_BTN_1) < 0) {
+				DBG_LOG_DEV("Error in sms_button_fn()");
+			}
+			button_instance.btn1.new_int = false;
+			DBG_LOG_CONT_DEV("done");
+		}
+		if(mpu_device.new_int) {
+			DBG_LOG_DEV("MPU int... ");
+			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
+			sms_mpu_poll_data();
+			mpu_device.new_int = false;
+			mpu_device.rts = true;
+			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
+			DBG_LOG_CONT_DEV("done");
+		}
+		if(pressure_device.new_int) {
+			DBG_LOG_DEV("Press int... ");
+			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+			sms_pressure_poll_data();
+			pressure_device.new_int = false;
+			pressure_device.rts = true;
+			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+			DBG_LOG_CONT_DEV("done");
+		}
 		
-		if(ready_to_send[RTS_BUTTON_POS]) {
-			DBG_LOG_DEV("[main]\t\t\t\tRTS button...");
-			ready_to_send[RTS_BUTTON_POS] = false;
+		/* Timer interrupt region */
+		if(timer1_instance.new_int) {
+			DBG_LOG_DEV("Timer1 int... ");
+			sms_dualtimer_stop(DUALTIMER_TIMER1);
+			sms_dualtimer1_fn();
+			DBG_LOG_CONT_DEV("done");
+			timer1_instance.new_int = false;
 		}
-		if(ready_to_send[RTS_PRESSURE_POS]) {
-			//DBG_LOG_DEV("[main]\t\t\t\tRTS pressure...");
-			//sms_ble_send_characteristic(BLE_CHAR_PRESS);
-			ready_to_send[RTS_PRESSURE_POS] = false;
+		if(timer2_instance.new_int) {
+			DBG_LOG_DEV("Timer2 int... ");
+			sms_dualtimer_stop(DUALTIMER_TIMER2);
+			sms_dualtimer2_fn();
+			DBG_LOG_CONT_DEV("done");
+			timer2_instance.new_int = false;
 		}
-		if(ready_to_send[RTS_MPU_POS]) {
-			//DBG_LOG_DEV("[main]\t\t\t\tRTS mpu...");
+		
+		/* Sending region */
+		if(mpu_device.rts) {
+			DBG_LOG_DEV("MPU sending (%d)... ", sms_ble_sending);
+			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 			sms_ble_send_characteristic(BLE_CHAR_MPU);
-			ready_to_send[RTS_MPU_POS] = false;
+			mpu_device.rts = false;
+			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
+			DBG_LOG_CONT_DEV("done");
 		}
-        
-        
-        if(ulp_ready) {
-            //DBG_LOG_DEV("[main]\t\t\t\tULP...");
-            ulp_active = true;
-            //release_sleep_lock();
-            //DBG_LOG_CONT_DEV(" zzzz");
-            //DBG_LOG_CONT_DEV(" !!");
-        }            
-        else {
-            ulp_active = false;
-        }
+		if(pressure_device.rts) {
+			DBG_LOG_DEV("Press sending (%d)... ", sms_ble_sending);
+			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+			sms_ble_send_characteristic(BLE_CHAR_PRESS);
+			pressure_device.rts = false;
+			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+			DBG_LOG_CONT_DEV("done");
+		}
+
     }
 }
 

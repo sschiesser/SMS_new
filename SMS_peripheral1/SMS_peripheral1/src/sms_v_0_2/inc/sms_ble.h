@@ -76,9 +76,8 @@ enum sms_ble_char_type {
 uint8_t sms_ble_ind_retry;
 at_ble_handle_t sms_ble_conn_handle;
 
-bool ready_to_send[3];
-
 uint16_t sms_ble_send_cnt;
+volatile bool sms_ble_sending;
 
 
 /* ------------

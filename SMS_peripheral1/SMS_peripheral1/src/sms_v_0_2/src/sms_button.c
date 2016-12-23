@@ -40,8 +40,8 @@ int sms_button_fn(enum sms_btn_ids btn)
             }
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
-            if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN0);
-            else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN1);
+            if(btn == button_instance.btn0.id) sms_ble_send_characteristic(BLE_CHAR_BTN0);
+            else if(btn == button_instance.btn1.id) sms_ble_send_characteristic(BLE_CHAR_BTN1);
             else return -1;
             break;
             
@@ -80,8 +80,8 @@ int sms_button_fn(enum sms_btn_ids btn)
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
             //sms_ble_ind_retry = 0;
-            if(btn == btn0_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN0);
-            else if(btn == btn1_instance.id) sms_ble_send_characteristic(BLE_CHAR_BTN1);
+            if(btn == button_instance.btn0.id) sms_ble_send_characteristic(BLE_CHAR_BTN0);
+            else if(btn == button_instance.btn1.id) sms_ble_send_characteristic(BLE_CHAR_BTN1);
             else return -1;
             break;
             
@@ -242,7 +242,7 @@ void sms_button_configure_gpio(void)
     config_gpio_pin.direction = GPIO_PIN_DIR_INPUT;
     config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
     config_gpio_pin.aon_wakeup = true;
-    if(gpio_pin_set_config(btn0_instance.gpio_pin, &config_gpio_pin) != STATUS_OK) {
+    if(gpio_pin_set_config(button_instance.btn0.gpio_pin, &config_gpio_pin) != STATUS_OK) {
         DBG_LOG_DEV("[sms_button_configure]\tproblem while setting up button0");
     }
     
@@ -251,7 +251,7 @@ void sms_button_configure_gpio(void)
     config_gpio_pin.direction = GPIO_PIN_DIR_INPUT;
     config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
     config_gpio_pin.aon_wakeup = true;
-    if(gpio_pin_set_config(btn1_instance.gpio_pin, &config_gpio_pin) != STATUS_OK) {
+    if(gpio_pin_set_config(button_instance.btn1.gpio_pin, &config_gpio_pin) != STATUS_OK) {
         DBG_LOG("[sms_button_configure]\tProblem while setting up button1");
     }
 
@@ -268,11 +268,11 @@ void sms_button_configure_gpio(void)
 void sms_button_register_callbacks(void)
 {
     /* Button0 callback */
-    gpio_register_callback(btn0_instance.gpio_pin, sms_button_bt0_callback, GPIO_CALLBACK_RISING);
+    gpio_register_callback(button_instance.btn0.gpio_pin, sms_button_bt0_callback, GPIO_CALLBACK_RISING);
     //gpio_enable_callback(SMS_BTN_0_PIN);
     
     /* Button1 callback */
-    gpio_register_callback(btn1_instance.gpio_pin, sms_button_bt1_callback, GPIO_CALLBACK_RISING);
+    gpio_register_callback(button_instance.btn1.gpio_pin, sms_button_bt1_callback, GPIO_CALLBACK_RISING);
     //gpio_enable_callback(SMS_BTN_1_PIN);
     
     /* User button callback */
@@ -303,33 +303,29 @@ enum sms_button_state sms_button_get_state(void)
 void sms_button_toggle_interrupt(enum sms_btn_int_tog tog0, enum sms_btn_int_tog tog1)
 {
     if(tog0 == SMS_BTN_INT_ENABLE) {
-        gpio_enable_callback(btn0_instance.gpio_pin);
+        gpio_enable_callback(button_instance.btn0.gpio_pin);
     }
     else if(tog0 == SMS_BTN_INT_DISABLE) {
-        gpio_disable_callback(btn0_instance.gpio_pin);
+        gpio_disable_callback(button_instance.btn0.gpio_pin);
     }
     
     if(tog1 == SMS_BTN_INT_ENABLE) {
-        gpio_enable_callback(btn1_instance.gpio_pin);
+        gpio_enable_callback(button_instance.btn1.gpio_pin);
     }
     else if(tog1 == SMS_BTN_INT_DISABLE) {
-        gpio_disable_callback(btn1_instance.gpio_pin);
+        gpio_disable_callback(button_instance.btn1.gpio_pin);
     }
 }
 /* Callbacks --> sending interrupt message to platform */
 void sms_button_bt0_callback(void)
 {
-    //gpio_disable_callback(SMS_BTN_0_PIN);
-    sms_current_interrupt.int_on = true;
-    sms_current_interrupt.source = INT_BTN0;
-    send_plf_int_msg_ind(btn0_instance.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
+    button_instance.btn0.new_int = true;
+    send_plf_int_msg_ind(button_instance.btn0.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
 }
 void sms_button_bt1_callback(void)
 {
-    //gpio_disable_callback(SMS_BTN_1_PIN);
-    sms_current_interrupt.int_on = true;
-    sms_current_interrupt.source = INT_BTN1;
-    send_plf_int_msg_ind(btn1_instance.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
+	button_instance.btn1.new_int = true;
+    send_plf_int_msg_ind(button_instance.btn1.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
 }
 
 /* Define BLE service for buttons */

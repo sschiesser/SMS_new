@@ -49,8 +49,9 @@ enum status_code sms_pressure_init(void)
     if(sms_pressure_ms58_read_prom() == STATUS_OK) {
         pressure_device.hal.init_ok = true;
         pressure_device.hal.current_state = MS58_STATE_READY;
-        /* Enable buttons again */
-        //sms_button_toggle_interrupts(SMS_EXTINT_ENABLE);
+		pressure_device.int_enabled = true;
+		pressure_device.new_int = false;
+		pressure_device.rts = false;
         return STATUS_OK;
     }
     return STATUS_ERR_IO;
@@ -122,8 +123,7 @@ void sms_pressure_poll_data(void)
             if(pressure_device.hal.data_complete) {
                 pressure_device.hal.data_complete = false;
                 sms_pressure_ms58_calculate();
-				ready_to_send[RTS_PRESSURE_POS] = true;
-                //sms_ble_send_characteristic(BLE_CHAR_PRESS);
+				pressure_device.rts = true;
         }
     }
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();

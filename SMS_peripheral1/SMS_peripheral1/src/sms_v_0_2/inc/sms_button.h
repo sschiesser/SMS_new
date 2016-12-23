@@ -62,14 +62,13 @@ enum sms_btn_int_tog {
     SMS_BTN_INT_ENABLE,
     SMS_BTN_INT_DISABLE
 };
-typedef struct sms_btn_struct {
+struct sms_btn_struct {
     enum sms_btn_ids id;
     uint8_t gpio_pin;
     enum sms_btn_int_tog int_enabled;
+	bool new_int;
     uint8_t char_value;
-}sms_btn_struct_t;
-sms_btn_struct_t btn0_instance;
-sms_btn_struct_t btn1_instance;
+};
 
 /* sms_button_... -> variable assigned to the global button service */
 enum sms_button_state {
@@ -80,6 +79,8 @@ enum sms_button_state {
 };
 
 typedef struct sms_button_struct {
+	struct sms_btn_struct btn0;
+	struct sms_btn_struct btn1;
     enum sms_button_state previous_state;
     enum sms_button_state current_state;
     gatt_service_handler_t service_handler;

@@ -185,6 +185,7 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
     
     at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
+	sms_ble_sending = false;
     //button_instance.current_state = sms_button_get_state();
     //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
@@ -275,19 +276,20 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     ble_current_state = BLE_STATE_INDICATING;
 
     
+	sms_ble_sending = true;
     sms_ble_send_cnt++;
     
     switch(ch) {
         case BLE_CHAR_BTN0:
-        btn0_instance.char_value = ((btn0_instance.char_value >= 0x7f) ? 0 : (btn0_instance.char_value + 1));
-        send_val[0] = btn0_instance.char_value;
+        button_instance.btn0.char_value = ((button_instance.btn0.char_value >= 0x7f) ? 0 : (button_instance.btn0.char_value + 1));
+        send_val[0] = button_instance.btn0.char_value;
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = BLE_CHAR_SIZE_BUTTON;
         break;
         
         case BLE_CHAR_BTN1:
-        btn1_instance.char_value = ((btn1_instance.char_value >= 0xff) ? 0 : (btn1_instance.char_value + 1));
-        send_val[0] = btn1_instance.char_value + 0x80;
+        button_instance.btn1.char_value = ((button_instance.btn1.char_value >= 0xff) ? 0 : (button_instance.btn1.char_value + 1));
+        send_val[0] = button_instance.btn1.char_value + 0x80;
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = BLE_CHAR_SIZE_BUTTON;
         break;
@@ -365,16 +367,12 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         //DBG_LOG_DEV("- char value handle: 0x%04x\r\n- char value: 0x%02x", sms_button_service_handler.serv_chars.char_val_handle, send_val);
         
         //DBG_LOG_DEV("cnt: %d", sms_ble_send_cnt);
-        gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 #   if SMS_SENDING_WITH_ACK == true
         sms_ble_ind_retry = 0;
         status = at_ble_indication_send(sms_connection_handle, val_handle);
 #   else
-		DBG_LOG_DEV("sending...");
         status = at_ble_notification_send(sms_connection_handle, val_handle);
-		DBG_LOG_CONT_DEV("sent!");
 #   endif
-        gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
         //psp = __get_PSP();
         //msp = __get_MSP();
         //printf("\r\n\@ sending: psp 0x%lx, msp 0x%lx", psp, msp);

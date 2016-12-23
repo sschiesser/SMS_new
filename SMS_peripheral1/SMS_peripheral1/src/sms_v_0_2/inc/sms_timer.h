@@ -58,6 +58,14 @@ typedef enum timer1_modes {
 }timer1_modes_t;
 volatile timer1_modes_t timer1_current_mode;
 
+typedef struct timer_struct {
+	enum dualtimer_timer id;
+	bool int_enabled;
+	volatile bool new_int;
+}timer_struct_t;
+timer_struct_t timer1_instance;
+timer_struct_t timer2_instance;
+
 typedef enum timer2_modes {
     TIMER2_MODE_NONE,
     TIMER2_MODE_INDICATION_TOUT,

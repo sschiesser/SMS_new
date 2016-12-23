@@ -80,12 +80,14 @@ enum sms_mpu_state {
     MPU_STATE_ON
 };
 typedef struct sms_mpu_struct {
-    bool int_active;
-    struct mpu9250_hal_s hal;
+    struct mpu9250_hal_s hal; // hardware abstraction layer
+	bool int_enabled;
+    bool new_int;
     uint8_t compass_cnt;
     uint8_t temp_cnt;
     bool new_compass;
     bool new_temp;
+	bool rts;
     enum sms_mpu_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[12];
