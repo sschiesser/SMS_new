@@ -100,7 +100,10 @@ src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.d \
  ../src/ASF/sam0/drivers/dualtimer/dualtimer.h \
  ../src/ASF/sam0/drivers/gpio/gpio.h ../src/ASF/common/boards/board.h \
  ../src/ASF/sam0/boards/samb11_xplained_pro/samb11_xplained_pro.h \
- ../src/config/conf_board.h ../src/ASF/sam0/drivers/spi/spi.h \
+ ../src/config/conf_board.h ../src/ASF/sam0/drivers/i2c/i2c_common.h \
+ ../src/ASF/sam0/drivers/i2c/i2c_master.h \
+ ../src/ASF/sam0/drivers/i2c/i2c_common.h \
+ ../src/ASF/sam0/drivers/spi/spi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../src/config/conf_spi.h \
@@ -317,6 +320,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/boards/samb11_xplained_pro/samb11_xplained_pro.h:
 
 ../src/config/conf_board.h:
+
+../src/ASF/sam0/drivers/i2c/i2c_common.h:
+
+../src/ASF/sam0/drivers/i2c/i2c_master.h:
+
+../src/ASF/sam0/drivers/i2c/i2c_common.h:
 
 ../src/ASF/sam0/drivers/spi/spi.h:
 

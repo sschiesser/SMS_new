@@ -88,7 +88,8 @@
 /** @brief APP_ADV_TIMEOUT Advertising time-out between 0x0001 and 0x028F in seconds, 0x0000 disables time-out.*/
 #define APP_ADV_TIMEOUT						(655)
 
-#define DBG_PIN_1                           (PIN_LP_GPIO_2)
+#define DBG_PIN_1                           (PIN_LP_GPIO_14)
+#define DBG_PIN_2							(PIN_LP_GPIO_15)
 #define DBG_PIN_HIGH                        (true)
 #define DBG_PIN_LOW                         (false)
 

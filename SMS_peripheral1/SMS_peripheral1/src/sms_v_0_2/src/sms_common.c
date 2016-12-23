@@ -17,6 +17,13 @@ void sms_monitor_configure_gpio(void)
         DBG_LOG("Problem while setting gpio pin");
     }
     gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
+	
+	gpio_get_config_defaults(&config_gpio_pin);
+	config_gpio_pin.direction = GPIO_PIN_DIR_OUTPUT;
+	if(gpio_pin_set_config(DBG_PIN_2, &config_gpio_pin) != STATUS_OK) {
+		DBG_LOG("Problem while setting gpio pin");
+	}
+	gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 }
 
 void sms_monitor_get_states(const char *label)

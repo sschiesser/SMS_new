@@ -282,9 +282,13 @@ int main(void)
                 //sms_monitor_states("INT_IMU_DRDY");
                 //DBG_LOG_DEV("...MPU_DRDY");
                 if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
-					gpio_disable_callback(SMS_MPU_DRDY_PIN);
-	                sms_mpu_poll_data();
-					gpio_enable_callback(SMS_MPU_DRDY_PIN);
+					//if(ble_current_state == BLE_STATE_PAIRED) {
+						gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
+						//sms_sensors_interrupt_toggle(false, false);
+		                sms_mpu_poll_data();
+						//sms_sensors_interrupt_toggle(true, true);
+						gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+					//}
                 }              
                 break;
                 
@@ -292,7 +296,11 @@ int main(void)
                 //DBG_LOG_DEV("...AON_TIMER");
                 if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
                     if(ble_current_state == BLE_STATE_PAIRED) {
+						gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+						//sms_sensors_interrupt_toggle(false, false);
                         sms_pressure_poll_data();
+						//sms_sensors_interrupt_toggle(true, true);
+						gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
                     }
                     else if(ble_current_state == BLE_STATE_INDICATING) {
                         //DBG_LOG_DEV("[main]\t\t\t\tAON timer ready while indicating... skipping");
