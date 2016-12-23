@@ -67,6 +67,7 @@ struct sms_btn_struct {
     uint8_t gpio_pin;
     enum sms_btn_int_tog int_enabled;
 	bool new_int;
+	bool new_char;
     uint8_t char_value;
 };
 

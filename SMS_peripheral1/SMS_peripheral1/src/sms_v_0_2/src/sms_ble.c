@@ -280,20 +280,20 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     sms_ble_send_cnt++;
     
     switch(ch) {
-        case BLE_CHAR_BTN0:
-        button_instance.btn0.char_value = ((button_instance.btn0.char_value >= 0x7f) ? 0 : (button_instance.btn0.char_value + 1));
-        send_val[0] = button_instance.btn0.char_value;
+        case BLE_CHAR_BTN:
+		send_val[0] = 0x00;
+		if(button_instance.btn0.new_char) {
+			button_instance.btn0.char_value = ((button_instance.btn0.char_value >= 0x7f) ? 0 : (button_instance.btn0.char_value + 1));
+			send_val[0] |= button_instance.btn0.char_value;
+		}
+		if(button_instance.btn1.new_char) {
+	        button_instance.btn1.char_value = ((button_instance.btn1.char_value >= 0xff) ? 0 : (button_instance.btn1.char_value + 1));
+			send_val[0] |= button_instance.btn1.char_value + 0x80;
+		}
         val_handle = button_instance.service_handler.serv_chars.char_val_handle;
         length = BLE_CHAR_SIZE_BUTTON;
         break;
-        
-        case BLE_CHAR_BTN1:
-        button_instance.btn1.char_value = ((button_instance.btn1.char_value >= 0xff) ? 0 : (button_instance.btn1.char_value + 1));
-        send_val[0] = button_instance.btn1.char_value + 0x80;
-        val_handle = button_instance.service_handler.serv_chars.char_val_handle;
-        length = BLE_CHAR_SIZE_BUTTON;
-        break;
-        
+                
         case BLE_CHAR_PRESS:
         send_val[0] = (uint8_t)((pressure_device.hal.temperature >>24) & 0xff);
         send_val[1] = (uint8_t)((pressure_device.hal.temperature >> 16) & 0xff);

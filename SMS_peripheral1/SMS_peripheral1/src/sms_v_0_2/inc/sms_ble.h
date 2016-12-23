@@ -69,8 +69,7 @@ enum sms_ble_serv_type {
 };
 
 enum sms_ble_char_type {
-    BLE_CHAR_BTN0,
-    BLE_CHAR_BTN1,
+    BLE_CHAR_BTN,
     BLE_CHAR_PRESS,
     BLE_CHAR_MPU
 };

@@ -19,8 +19,8 @@
  * ------ */
 /* I2C master settings for MPU9250 IMU */
 #define SMS_I2C_MASTER_PORT             (I2C0)
-#define SMS_I2C_MASTER_CLK_SRC          (I2C_CLK_INPUT_1)
-#define SMS_I2C_MASTER_CLK_DIV          (130)
+#define SMS_I2C_MASTER_CLK_SRC          (I2C_CLK_INPUT_0)
+#define SMS_I2C_MASTER_CLK_DIV          (65)
 /* Pins */
 #define SMS_I2C_MASTER_PIN_SDA          (PIN_LP_GPIO_8)
 #define SMS_I2C_MASTER_PIN_SCL          (PIN_LP_GPIO_9)

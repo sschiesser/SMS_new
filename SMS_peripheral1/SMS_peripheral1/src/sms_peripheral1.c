@@ -226,6 +226,7 @@ int main(void)
 			if(sms_button_fn(SMS_BTN_0) < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
+			// here
 			button_instance.btn0.new_int = false;
 			DBG_LOG_CONT_DEV("done");
 		}
@@ -234,6 +235,7 @@ int main(void)
 			if(sms_button_fn(SMS_BTN_1) < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
+			// here
 			button_instance.btn1.new_int = false;
 			DBG_LOG_CONT_DEV("done");
 		}

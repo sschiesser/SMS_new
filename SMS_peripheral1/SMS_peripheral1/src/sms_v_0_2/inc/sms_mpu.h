@@ -33,7 +33,7 @@
 
 #define SMS_MPU_I2C_SLAVE_ADDR              (0x69)
 
-#define SMS_MPU_SAMPLE_RATE_HZ              (4)
+#define SMS_MPU_SAMPLE_RATE_HZ              (50)
 #define SMS_MPU_TEMP_MULTIPLIER             (1)
 #define SMS_MPU_COMPASS_MULTIPLIER          (1)
 #define SMS_MPU_COMPASS_RATE_HZ             (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
