@@ -364,13 +364,15 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         //}
         //DBG_LOG_DEV("- char value handle: 0x%04x\r\n- char value: 0x%02x", sms_button_service_handler.serv_chars.char_val_handle, send_val);
         
-        printf("\r\ncnt: %d", sms_ble_send_cnt);
+        //DBG_LOG_DEV("cnt: %d", sms_ble_send_cnt);
         gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 #   if SMS_SENDING_WITH_ACK == true
         sms_ble_ind_retry = 0;
         status = at_ble_indication_send(sms_connection_handle, val_handle);
 #   else
+		DBG_LOG_DEV("sending...");
         status = at_ble_notification_send(sms_connection_handle, val_handle);
+		DBG_LOG_CONT_DEV("sent!");
 #   endif
         gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
         //psp = __get_PSP();

@@ -59,6 +59,7 @@ int sms_i2c_master_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, 
     
     timeout = 0;
     while(i2c_master_write_packet_wait_no_stop(&i2c_master_instance, &i2c_wpacket) != STATUS_OK) {
+		DBG_LOG_DEV("t/o %d", timeout);
         if(timeout++ >= I2C_TIMEOUT) {
             return -1;
         }
@@ -66,6 +67,7 @@ int sms_i2c_master_read(uint8_t slave_addr, uint8_t reg_addr, uint8_t data_len, 
     
     timeout = 0;
     while(i2c_master_read_packet_wait(&i2c_master_instance, &i2c_rpacket) != STATUS_OK) {
+		DBG_LOG_DEV("t/o %d", timeout);
         if(timeout++ >= I2C_TIMEOUT) {
             return -1;
         }

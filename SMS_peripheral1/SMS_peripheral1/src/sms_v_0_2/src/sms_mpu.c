@@ -90,7 +90,7 @@ int sms_mpu_initialize(void) {
 /* Extract available IMU data */
 int sms_mpu_poll_data(void)
 {
-    DBG_LOG_DEV("[sms_mpu_poll_data]\t\t\treading...");
+    //DBG_LOG_DEV("[sms_mpu_poll_data]\t\treading...");
     //st.chip_cfg.dmp_on = 1;
     unsigned char sensors;
     unsigned char more;

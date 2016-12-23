@@ -109,8 +109,6 @@ static void resume_cb(void)
 
 int main(void)
 {
-    int res;
-    
     /* Define current BLE state
      * ------------------------ */
     ble_current_state = BLE_STATE_STARTING;
@@ -202,6 +200,7 @@ int main(void)
     //register int n23 asm("r15");
     //DBG_LOG("at post-init: sp 0x%x, lr 0x%x", n21, n22);
     
+    //int res;
     //res = sms_mpu_initialize();
     //if(res) {
         //DBG_LOG("Could not initialize MPU!");
@@ -224,14 +223,14 @@ int main(void)
         if(sms_current_interrupt.int_on)
         {
             if(ulp_active) {
-                DBG_LOG_DEV("[main]\t\t\t\tWaking up...");
+                //DBG_LOG_DEV("[main]\t\t\t\tWaking up...");
                 acquire_sleep_lock();
-                DBG_LOG_CONT_DEV(" done!");
+                //DBG_LOG_CONT_DEV(" done!");
             }                
             //ulp_ready = false;
-            DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
+            //DBG_LOG_DEV("[main]\t\t\t\tDisabling button int...");
             sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-            DBG_LOG_CONT_DEV(" done!");
+            //DBG_LOG_CONT_DEV(" done!");
             switch(sms_current_interrupt.source)
             {
                 case INT_NONE:
@@ -281,7 +280,7 @@ int main(void)
                 
                 case INT_MPU_DRDY:
                 //sms_monitor_states("INT_IMU_DRDY");
-                DBG_LOG_DEV("...MPU_DRDY");
+                //DBG_LOG_DEV("...MPU_DRDY");
                 if((sms_working_mode == SMS_MODE_BUTTON_MPU) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_MPU_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
 					gpio_disable_callback(SMS_MPU_DRDY_PIN);
 	                sms_mpu_poll_data();
@@ -290,7 +289,7 @@ int main(void)
                 break;
                 
                 case INT_AON_TIMER:
-                DBG_LOG_DEV("...AON_TIMER");
+                //DBG_LOG_DEV("...AON_TIMER");
                 if((sms_working_mode == SMS_MODE_BUTTON_PRESSURE) || (sms_working_mode == SMS_MODE_COMPLETE) || (sms_working_mode == SMS_MODE_PRESSURE_SOLO) || (sms_working_mode == SMS_MODE_MPU_PRESSURE)) {
                     if(ble_current_state == BLE_STATE_PAIRED) {
                         sms_pressure_poll_data();
@@ -337,23 +336,23 @@ int main(void)
 			ready_to_send[RTS_BUTTON_POS] = false;
 		}
 		if(ready_to_send[RTS_PRESSURE_POS]) {
-			DBG_LOG_DEV("[main]\t\t\t\tRTS pressure...");
+			//DBG_LOG_DEV("[main]\t\t\t\tRTS pressure...");
 			//sms_ble_send_characteristic(BLE_CHAR_PRESS);
 			ready_to_send[RTS_PRESSURE_POS] = false;
 		}
 		if(ready_to_send[RTS_MPU_POS]) {
-			DBG_LOG_DEV("[main]\t\t\t\tRTS mpu...");
+			//DBG_LOG_DEV("[main]\t\t\t\tRTS mpu...");
 			sms_ble_send_characteristic(BLE_CHAR_MPU);
 			ready_to_send[RTS_MPU_POS] = false;
 		}
         
         
         if(ulp_ready) {
-            DBG_LOG_DEV("[main]\t\t\t\tULP...");
+            //DBG_LOG_DEV("[main]\t\t\t\tULP...");
             ulp_active = true;
             //release_sleep_lock();
             //DBG_LOG_CONT_DEV(" zzzz");
-            DBG_LOG_CONT_DEV(" !!");
+            //DBG_LOG_CONT_DEV(" !!");
         }            
         else {
             ulp_active = false;
