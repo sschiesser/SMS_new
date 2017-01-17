@@ -30,6 +30,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             sms_btn_cnt = 0;
             //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
+			ulp_ready = false;
             break;
             
             case BLE_STATE_PAIRED:
@@ -41,6 +42,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
 			sms_ble_send_characteristic(BLE_CHAR_BTN);
+			ulp_ready = true;
             break;
             
             //case BLE_STATE_INDICATING:
@@ -53,6 +55,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             case BLE_STATE_CONNECTED:
             default:
             DBG_LOG_DEV("[sms_button_fn]\t\t\tNot used states...");
+			ulp_ready = true;
             return -1;
             break;
         }
@@ -68,6 +71,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             sms_btn_cnt = 0;
             //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
+			ulp_ready = false;
             break;
             
             case BLE_STATE_PAIRED:
@@ -79,10 +83,12 @@ int sms_button_fn(enum sms_btn_ids btn)
             timer2_current_mode = TIMER2_MODE_NONE;
             //sms_ble_ind_retry = 0;
             sms_ble_send_characteristic(BLE_CHAR_BTN);
+			ulp_ready = true;
             break;
             
             case BLE_STATE_INDICATING:
             DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
+			ulp_ready = true;
             return -1;
             break;
             
@@ -90,6 +96,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             case BLE_STATE_ADVERTISING:
             case BLE_STATE_CONNECTED:
             default:
+			ulp_ready = true;
             return -1;
             break;
         }
@@ -117,6 +124,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             sms_btn_cnt = 0;
             //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
+			ulp_ready = false;
             //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         }
         break;

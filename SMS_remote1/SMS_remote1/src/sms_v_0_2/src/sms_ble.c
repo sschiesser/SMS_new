@@ -23,7 +23,7 @@ void sms_ble_power_down(void)
         /* If already power off state, then go back sleeping */
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         ulp_ready = true;
-        release_sleep_lock();
+        //release_sleep_lock();
     }
     else {
         /* Disable button interrupts */

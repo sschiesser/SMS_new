@@ -187,7 +187,8 @@ int main(void)
 		
 		/* Sensor interrupt region */
 		if(button_instance.btn0.new_int) {
-			DBG_LOG_DEV("Btn0 int... ");
+			acquire_sleep_lock();
+			DBG_LOG_DEV("Waking up... Btn0 int");
 			if(sms_button_fn(SMS_BTN_0) < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
@@ -196,7 +197,8 @@ int main(void)
 			DBG_LOG_CONT_DEV("done");
 		}
 		if(button_instance.btn1.new_int) {
-			DBG_LOG_DEV("btn1 int... ");
+			acquire_sleep_lock();
+			DBG_LOG_DEV("Waking up... Btn1 int");
 			if(sms_button_fn(SMS_BTN_1) < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
@@ -219,6 +221,16 @@ int main(void)
 			sms_dualtimer2_fn();
 			DBG_LOG_CONT_DEV("done");
 			timer2_instance.new_int = false;
+		}
+		
+		/* ULP management */
+		if(ulp_ready) {
+			DBG_LOG_DEV("Going to sleep...");
+			release_sleep_lock();
+		}
+		else {
+			DBG_LOG_DEV("NOT tired!");
+			acquire_sleep_lock();
 		}
     }
 }
