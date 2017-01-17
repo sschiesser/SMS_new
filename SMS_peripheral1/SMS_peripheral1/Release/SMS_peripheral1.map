@@ -2464,7 +2464,7 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtn.o
                 0x00001800                STACK_SIZE = DEFINED (STACK_SIZE)?STACK_SIZE:DEFINED (__stack_size__)?__stack_size__:0x1800
 
-.text           0x10008000     0xc8a0
+.text           0x10008000     0xc898
                 0x10008000                . = ALIGN (0x4)
                 0x10008000                _sfixed = .
  *(.test.main .text.app_entry)
@@ -3127,1024 +3127,1024 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x1000db84       0x78 src/sms_peripheral1.o
                 0x1000db84                sms_init_variables
  .text.startup.main
-                0x1000dbfc      0x23c src/sms_peripheral1.o
+                0x1000dbfc      0x234 src/sms_peripheral1.o
                 0x1000dbfc                main
  .text.internal_event_post
-                0x1000de38       0x5c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1000de38                internal_event_post
+                0x1000de30       0x5c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1000de30                internal_event_post
  .text.internal_event_init
-                0x1000de94       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1000de94                internal_event_init
+                0x1000de8c       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1000de8c                internal_event_init
  .text.special_events_handler
-                0x1000dec0       0x90 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1000dec0                special_events_handler
+                0x1000deb8       0x90 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1000deb8                special_events_handler
  .text.at_ble_event_get
-                0x1000df50      0x6d8 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1000df50                at_ble_event_get
+                0x1000df48      0x6d8 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1000df48                at_ble_event_get
  .text.internal_event_flush
-                0x1000e628       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1000e628                internal_event_flush
+                0x1000e620       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1000e620                internal_event_flush
  .text.internal_conn_flush
-                0x1000e66c       0x54 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1000e66c                internal_conn_flush
+                0x1000e664       0x54 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1000e664                internal_conn_flush
  .text.at_ble_device_name_set
-                0x1000e6c0       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000e6c0                at_ble_device_name_set
+                0x1000e6b8       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000e6b8                at_ble_device_name_set
  .text.at_ble_addr_get
-                0x1000e6f4       0x24 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000e6f4                at_ble_addr_get
+                0x1000e6ec       0x24 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000e6ec                at_ble_addr_get
  .text.at_ble_set_dev_config
-                0x1000e718       0x90 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000e718                at_ble_set_dev_config
+                0x1000e710       0x90 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000e710                at_ble_set_dev_config
  .text.at_ble_init
-                0x1000e7a8      0x1b4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000e7a8                at_ble_init
+                0x1000e7a0      0x1b4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000e7a0                at_ble_init
  .text.at_ble_addr_set
-                0x1000e95c       0x54 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000e95c                at_ble_addr_set
+                0x1000e954       0x54 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000e954                at_ble_addr_set
  .text.at_ble_adv_data_set
-                0x1000e9b0       0x84 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000e9b0                at_ble_adv_data_set
+                0x1000e9a8       0x84 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000e9a8                at_ble_adv_data_set
  .text.at_ble_adv_start
-                0x1000ea34      0x13c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000ea34                at_ble_adv_start
+                0x1000ea2c      0x13c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000ea2c                at_ble_adv_start
  .text.at_ble_adv_stop
-                0x1000eb70        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000eb70                at_ble_adv_stop
+                0x1000eb68        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000eb68                at_ble_adv_stop
  .text.at_ble_scan_stop
-                0x1000eb7c       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000eb7c                at_ble_scan_stop
+                0x1000eb74       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000eb74                at_ble_scan_stop
  .text.at_ble_disconnect
-                0x1000eb9c       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000eb9c                at_ble_disconnect
+                0x1000eb94       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000eb94                at_ble_disconnect
  .text.at_ble_conn_update_reply
-                0x1000ebbc        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000ebbc                at_ble_conn_update_reply
+                0x1000ebb4        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000ebb4                at_ble_conn_update_reply
  .text.at_ble_random_address_resolve
-                0x1000ebc8       0x28 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000ebc8                at_ble_random_address_resolve
+                0x1000ebc0       0x28 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000ebc0                at_ble_random_address_resolve
  .text.at_ble_uuid_type2len
-                0x1000ebf0       0x14 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000ebf0                at_ble_uuid_type2len
+                0x1000ebe8       0x14 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000ebe8                at_ble_uuid_type2len
  .text.at_ble_uuid_len2type
-                0x1000ec04       0x14 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x1000ec04                at_ble_uuid_len2type
+                0x1000ebfc       0x14 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x1000ebfc                at_ble_uuid_len2type
  .text.init_gatt_client_module
-                0x1000ec18        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_client.o)
-                0x1000ec18                init_gatt_client_module
+                0x1000ec10        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_client.o)
+                0x1000ec10                init_gatt_client_module
  .text.db_searchATT
-                0x1000ec24       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ec1c       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.att_permissions
-                0x1000ec64       0x58 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ec5c       0x58 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.char_permissions
-                0x1000ecbc       0x9c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ecb4       0x9c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.presentation_format_define
-                0x1000ed58       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ed50       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.db_addATT
-                0x1000ed84       0xb8 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ed7c       0xb8 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.user_description_define
-                0x1000ee3c       0x50 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ee34       0x50 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.at_ble_read_authorize_reply.part.1
-                0x1000ee8c       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000ee84       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.internal_at_ble_service_define
-                0x1000eebc      0x3bc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000eeb4      0x3bc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
  .text.initi_gatt_server_module
-                0x1000f278       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f278                initi_gatt_server_module
- .text.db_init  0x1000f2b4       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f2b4                db_init
+                0x1000f270       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f270                initi_gatt_server_module
+ .text.db_init  0x1000f2ac       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f2ac                db_init
  .text.at_ble_primary_service_define
-                0x1000f2f8       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f2f8                at_ble_primary_service_define
+                0x1000f2f0       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f2f0                at_ble_primary_service_define
  .text.at_ble_characteristic_value_set
-                0x1000f318       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f318                at_ble_characteristic_value_set
+                0x1000f310       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f310                at_ble_characteristic_value_set
  .text.at_ble_characteristic_value_get
-                0x1000f354       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f354                at_ble_characteristic_value_get
+                0x1000f34c       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f34c                at_ble_characteristic_value_get
  .text.at_ble_write_authorize_reply
-                0x1000f394       0x88 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f394                at_ble_write_authorize_reply
+                0x1000f38c       0x88 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f38c                at_ble_write_authorize_reply
  .text.gatts_handle_read_req
-                0x1000f41c       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f41c                gatts_handle_read_req
+                0x1000f414       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f414                gatts_handle_read_req
  .text.gatts_handle_att_info_req
-                0x1000f44c       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f44c                gatts_handle_att_info_req
+                0x1000f444       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f444                gatts_handle_att_info_req
  .text.gatts_handle_write_req
-                0x1000f488       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f488                gatts_handle_write_req
+                0x1000f480       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f480                gatts_handle_write_req
  .text.at_ble_notification_send
-                0x1000f4b8       0x74 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1000f4b8                at_ble_notification_send
+                0x1000f4b0       0x74 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1000f4b0                at_ble_notification_send
  .text.init_l2cc_task_module
-                0x1000f52c        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
-                0x1000f52c                init_l2cc_task_module
+                0x1000f524        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
+                0x1000f524                init_l2cc_task_module
  .text.l2cc_data_send_rsp_handler
-                0x1000f538       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
-                0x1000f538                l2cc_data_send_rsp_handler
+                0x1000f530       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
+                0x1000f530                l2cc_data_send_rsp_handler
  .text.l2cc_data_received_handler
-                0x1000f564       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
-                0x1000f564                l2cc_data_received_handler
+                0x1000f55c       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
+                0x1000f55c                l2cc_data_received_handler
  .text.at_ble_authenticate
-                0x1000f594      0x130 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
-                0x1000f594                at_ble_authenticate
+                0x1000f58c      0x130 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
+                0x1000f58c                at_ble_authenticate
  .text.at_ble_pair_key_reply
-                0x1000f6c4       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
-                0x1000f6c4                at_ble_pair_key_reply
+                0x1000f6bc       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
+                0x1000f6bc                at_ble_pair_key_reply
  .text.at_ble_send_slave_sec_request
-                0x1000f740       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
-                0x1000f740                at_ble_send_slave_sec_request
+                0x1000f738       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
+                0x1000f738                at_ble_send_slave_sec_request
  .text.at_ble_encryption_start
-                0x1000f780       0x78 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
-                0x1000f780                at_ble_encryption_start
+                0x1000f778       0x78 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
+                0x1000f778                at_ble_encryption_start
  .text.at_ble_encryption_request_reply
-                0x1000f7f8       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
-                0x1000f7f8                at_ble_encryption_request_reply
+                0x1000f7f0       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(security.o)
+                0x1000f7f0                at_ble_encryption_request_reply
  .text.rx_callback
-                0x1000f82c       0x98 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f82c                rx_callback
+                0x1000f824       0x98 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f824                rx_callback
  .text.interface_send
-                0x1000f8c4       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f8c4                interface_send
+                0x1000f8bc       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f8bc                interface_send
  .text.interface_init
-                0x1000f8d4       0x48 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f8d4                interface_init
+                0x1000f8cc       0x48 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f8cc                interface_init
  .text.platform_cmd_cmpl_signal
-                0x1000f91c        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f91c                platform_cmd_cmpl_signal
+                0x1000f914        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f914                platform_cmd_cmpl_signal
  .text.platform_cmd_cmpl_wait
-                0x1000f928       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f928                platform_cmd_cmpl_wait
+                0x1000f920       0x2c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f920                platform_cmd_cmpl_wait
  .text.start_timer
-                0x1000f954        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f954                start_timer
+                0x1000f94c        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f94c                start_timer
  .text.stop_timer
-                0x1000f956        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1000f956                stop_timer
+                0x1000f94e        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x1000f94e                stop_timer
  .text.dbg_le_set_bd_addr_req_handler
-                0x1000f958       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(dbg_task.o)
-                0x1000f958                dbg_le_set_bd_addr_req_handler
+                0x1000f950       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(dbg_task.o)
+                0x1000f950                dbg_le_set_bd_addr_req_handler
  .text.gapc_get_dev_info_cfm.constprop.1
-                0x1000f9d4       0xc0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000f9cc       0xc0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
  .text.check_ConnData_idx_role
-                0x1000fa94       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fa94                check_ConnData_idx_role
+                0x1000fa8c       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fa8c                check_ConnData_idx_role
  .text.check_ConnData_emptyEntry
-                0x1000fad0       0x28 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fad0                check_ConnData_emptyEntry
+                0x1000fac8       0x28 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fac8                check_ConnData_emptyEntry
  .text.gapc_cmp_evt
-                0x1000faf8       0xd0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000faf8                gapc_cmp_evt
+                0x1000faf0       0xd0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000faf0                gapc_cmp_evt
  .text.gapc_connection_cfm_handler
-                0x1000fbc8       0xc4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fbc8                gapc_connection_cfm_handler
+                0x1000fbc0       0xc4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fbc0                gapc_connection_cfm_handler
  .text.gapc_con_req_ind
-                0x1000fc8c       0xe0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fc8c                gapc_con_req_ind
+                0x1000fc84       0xe0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fc84                gapc_con_req_ind
  .text.gapc_disconnect_cmd_handler
-                0x1000fd6c       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fd6c                gapc_disconnect_cmd_handler
+                0x1000fd64       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fd64                gapc_disconnect_cmd_handler
  .text.gapc_disconnect_ind
-                0x1000fdb0       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fdb0                gapc_disconnect_ind
+                0x1000fda8       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fda8                gapc_disconnect_ind
  .text.gapc_bond_cmd_handler
-                0x1000fde4       0x68 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fde4                gapc_bond_cmd_handler
+                0x1000fddc       0x68 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fddc                gapc_bond_cmd_handler
  .text.gapc_bond_ind
-                0x1000fe4c       0xd8 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000fe4c                gapc_bond_ind
+                0x1000fe44       0xd8 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fe44                gapc_bond_ind
  .text.gapc_bond_req_ind
-                0x1000ff24       0xe0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1000ff24                gapc_bond_req_ind
+                0x1000ff1c       0xe0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000ff1c                gapc_bond_req_ind
  .text.gapc_bond_cfm_handler_pair_resp
-                0x10010004       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010004                gapc_bond_cfm_handler_pair_resp
+                0x1000fffc       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1000fffc                gapc_bond_cfm_handler_pair_resp
  .text.gapc_bond_cfm_handler_key_exch
-                0x10010080       0x50 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010080                gapc_bond_cfm_handler_key_exch
+                0x10010078       0x50 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010078                gapc_bond_cfm_handler_key_exch
  .text.gapc_security_cmd_handler
-                0x100100d0       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x100100d0                gapc_security_cmd_handler
+                0x100100c8       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100100c8                gapc_security_cmd_handler
  .text.gapc_encrypt_cmd_handler
-                0x10010110       0x9c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010110                gapc_encrypt_cmd_handler
+                0x10010108       0x9c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010108                gapc_encrypt_cmd_handler
  .text.gapc_encrypt_req_ind
-                0x100101ac       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x100101ac                gapc_encrypt_req_ind
+                0x100101a4       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100101a4                gapc_encrypt_req_ind
  .text.gapc_encrypt_cfm_handler
-                0x100101cc       0x80 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x100101cc                gapc_encrypt_cfm_handler
+                0x100101c4       0x80 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100101c4                gapc_encrypt_cfm_handler
  .text.gapc_encrypt_ind
-                0x1001024c        0xe ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1001024c                gapc_encrypt_ind
- *fill*         0x1001025a        0x2 
+                0x10010244        0xe ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010244                gapc_encrypt_ind
+ *fill*         0x10010252        0x2 
  .text.gapc_param_update_cfm_handler
-                0x1001025c       0x4c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1001025c                gapc_param_update_cfm_handler
+                0x10010254       0x4c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010254                gapc_param_update_cfm_handler
  .text.gapc_param_updated_ind
-                0x100102a8       0x2a ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x100102a8                gapc_param_updated_ind
+                0x100102a0       0x2a ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100102a0                gapc_param_updated_ind
  .text.gapc_param_updated_req_ind
-                0x100102d2       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x100102d2                gapc_param_updated_req_ind
- *fill*         0x10010302        0x2 
+                0x100102ca       0x30 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100102ca                gapc_param_updated_req_ind
+ *fill*         0x100102fa        0x2 
  .text.gapc_dev_info_req_ind_handler
-                0x10010304       0x28 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010304                gapc_dev_info_req_ind_handler
+                0x100102fc       0x28 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100102fc                gapc_dev_info_req_ind_handler
  .text.gapc_sec_req_ind
-                0x1001032c       0x16 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1001032c                gapc_sec_req_ind
+                0x10010324       0x16 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010324                gapc_sec_req_ind
  .text.gapc_sign_counter_ind_handler
-                0x10010342       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010342                gapc_sign_counter_ind_handler
- *fill*         0x10010376        0x2 
+                0x1001033a       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1001033a                gapc_sign_counter_ind_handler
+ *fill*         0x1001036e        0x2 
  .text.gapc_peer_att_info_ind_handler
-                0x10010378       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010378                gapc_peer_att_info_ind_handler
+                0x10010370       0x7c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010370                gapc_peer_att_info_ind_handler
  .text.gapc_con_channel_map_ind_handler
-                0x100103f4       0x18 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x100103f4                gapc_con_channel_map_ind_handler
+                0x100103ec       0x18 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100103ec                gapc_con_channel_map_ind_handler
  .text.gapc_lecb_connected
-                0x1001040c       0x2e ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1001040c                gapc_lecb_connected
+                0x10010404       0x2e ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010404                gapc_lecb_connected
  .text.gapc_lecb_disconnected
-                0x1001043a       0x16 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1001043a                gapc_lecb_disconnected
+                0x10010432       0x16 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010432                gapc_lecb_disconnected
  .text.gapc_lecb_connect_req_ind
-                0x10010450       0x2a ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x10010450                gapc_lecb_connect_req_ind
+                0x10010448       0x2a ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010448                gapc_lecb_connect_req_ind
  .text.gapc_lecb_add_credit_resp_handler
-                0x1001047a       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
-                0x1001047a                gapc_lecb_add_credit_resp_handler
- *fill*         0x1001049a        0x2 
+                0x10010472       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x10010472                gapc_lecb_add_credit_resp_handler
+ *fill*         0x10010492        0x2 
  .text.gapm_reset_req_handler
-                0x1001049c       0x70 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x1001049c                gapm_reset_req_handler
+                0x10010494       0x70 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x10010494                gapm_reset_req_handler
  .text.gapm_set_dev_config_cmd_handler
-                0x1001050c      0x108 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x1001050c                gapm_set_dev_config_cmd_handler
+                0x10010504      0x108 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x10010504                gapm_set_dev_config_cmd_handler
  .text.gapm_get_dev_config_cmd_handler
-                0x10010614       0xe0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010614                gapm_get_dev_config_cmd_handler
+                0x1001060c       0xe0 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x1001060c                gapm_get_dev_config_cmd_handler
  .text.gapm_cancel_cmd_handler
-                0x100106f4       0x70 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x100106f4                gapm_cancel_cmd_handler
+                0x100106ec       0x70 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x100106ec                gapm_cancel_cmd_handler
  .text.gapm_dev_bdaddr_ind_handler
-                0x10010764       0x1c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010764                gapm_dev_bdaddr_ind_handler
+                0x1001075c       0x1c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x1001075c                gapm_dev_bdaddr_ind_handler
  .text.gapm_cmp_evt
-                0x10010780      0x148 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010780                gapm_cmp_evt
+                0x10010778      0x148 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x10010778                gapm_cmp_evt
  .text.gapm_start_adv_cmd_handler
-                0x100108c8      0x120 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x100108c8                gapm_start_adv_cmd_handler
+                0x100108c0      0x120 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x100108c0                gapm_start_adv_cmd_handler
  .text.get_gap_local_addr_type
-                0x100109e8       0x18 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x100109e8                get_gap_local_addr_type
+                0x100109e0       0x18 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x100109e0                get_gap_local_addr_type
  .text.gapm_adv_report_evt_handler
-                0x10010a00       0x88 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010a00                gapm_adv_report_evt_handler
+                0x100109f8       0x88 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x100109f8                gapm_adv_report_evt_handler
  .text.gapm_resolv_addr_cmd_handler
-                0x10010a88       0x68 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010a88                gapm_resolv_addr_cmd_handler
+                0x10010a80       0x68 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x10010a80                gapm_resolv_addr_cmd_handler
  .text.gapm_addr_solved_ind_handler
-                0x10010af0       0x24 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010af0                gapm_addr_solved_ind_handler
+                0x10010ae8       0x24 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x10010ae8                gapm_addr_solved_ind_handler
  .text.gapm_profile_added_ind_handler
-                0x10010b14       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
-                0x10010b14                gapm_profile_added_ind_handler
+                0x10010b0c       0x20 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapm_task.o)
+                0x10010b0c                gapm_profile_added_ind_handler
  .text.gattc_read_req_ind_parser
-                0x10010b34        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010b34                gattc_read_req_ind_parser
+                0x10010b2c        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010b2c                gattc_read_req_ind_parser
  .text.gattc_write_req_ind_parser
-                0x10010b40       0x38 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010b40                gattc_write_req_ind_parser
+                0x10010b38       0x38 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010b38                gattc_write_req_ind_parser
  .text.gattc_att_info_req_parser
-                0x10010b78        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010b78                gattc_att_info_req_parser
+                0x10010b70        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010b70                gattc_att_info_req_parser
  .text.gattc_read_cfm
-                0x10010b84       0x6c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010b84                gattc_read_cfm
+                0x10010b7c       0x6c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010b7c                gattc_read_cfm
  .text.gattc_write_cfm
-                0x10010bf0       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010bf0                gattc_write_cfm
+                0x10010be8       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010be8                gattc_write_cfm
  .text.gattc_att_info_cfm
-                0x10010c34       0x48 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010c34                gattc_att_info_cfm
+                0x10010c2c       0x48 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010c2c                gattc_att_info_cfm
  .text.gattc_send_evt_cmd_handler
-                0x10010c7c       0x78 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010c7c                gattc_send_evt_cmd_handler
+                0x10010c74       0x78 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010c74                gattc_send_evt_cmd_handler
  .text.gattc_event_cfm_handler
-                0x10010cf4       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010cf4                gattc_event_cfm_handler
+                0x10010cec       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010cec                gattc_event_cfm_handler
  .text.gattc_disc_svc_ind_parser
-                0x10010d34       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010d34                gattc_disc_svc_ind_parser
+                0x10010d2c       0x3c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010d2c                gattc_disc_svc_ind_parser
  .text.gattc_disc_svc_incl_ind_parser
-                0x10010d70       0x48 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010d70                gattc_disc_svc_incl_ind_parser
+                0x10010d68       0x48 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010d68                gattc_disc_svc_incl_ind_parser
  .text.gattc_disc_char_ind_parser
-                0x10010db8       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010db8                gattc_disc_char_ind_parser
+                0x10010db0       0x44 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010db0                gattc_disc_char_ind_parser
  .text.gattc_disc_char_desc_ind_parser
-                0x10010dfc       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010dfc                gattc_disc_char_desc_ind_parser
+                0x10010df4       0x34 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010df4                gattc_disc_char_desc_ind_parser
  .text.gattc_event_ind_and_notification_parser
-                0x10010e30       0x54 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010e30                gattc_event_ind_and_notification_parser
+                0x10010e28       0x54 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010e28                gattc_event_ind_and_notification_parser
  .text.gattc_complete_evt_handler
-                0x10010e84       0x78 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010e84                gattc_complete_evt_handler
+                0x10010e7c       0x78 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010e7c                gattc_complete_evt_handler
  .text.gattc_event_mtu_changed_ind_parser
-                0x10010efc       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010efc                gattc_event_mtu_changed_ind_parser
+                0x10010ef4       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010ef4                gattc_event_mtu_changed_ind_parser
  .text.gattc_read_ind_parser
-                0x10010f0c       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010f0c                gattc_read_ind_parser
+                0x10010f04       0x40 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010f04                gattc_read_ind_parser
  .text.gattc_svc_changed_cfg_ind_parser
-                0x10010f4c       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010f4c                gattc_svc_changed_cfg_ind_parser
+                0x10010f44       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010f44                gattc_svc_changed_cfg_ind_parser
  .text.init_gattc_task_module
-                0x10010f5c       0x14 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x10010f5c                init_gattc_task_module
+                0x10010f54       0x14 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10010f54                init_gattc_task_module
  .text.gattm_add_svc_req_handler
-                0x10010f70      0x10c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
-                0x10010f70                gattm_add_svc_req_handler
+                0x10010f68      0x10c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
+                0x10010f68                gattm_add_svc_req_handler
  .text.gattm_add_attribute_req_handler
-                0x1001107c       0x70 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
-                0x1001107c                gattm_add_attribute_req_handler
+                0x10011074       0x70 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
+                0x10011074                gattm_add_attribute_req_handler
  .text.gattm_att_set_value_req_handler
-                0x100110ec       0x8c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
-                0x100110ec                gattm_att_set_value_req_handler
+                0x100110e4       0x8c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
+                0x100110e4                gattm_att_set_value_req_handler
  .text.gattm_att_get_value_req_handler
-                0x10011178       0x9c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
-                0x10011178                gattm_att_get_value_req_handler
+                0x10011170       0x9c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
+                0x10011170                gattm_att_get_value_req_handler
  .text.htpt_enable_rsp_handler
-                0x10011214        0xa ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
-                0x10011214                htpt_enable_rsp_handler
+                0x1001120c        0xa ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
+                0x1001120c                htpt_enable_rsp_handler
  .text.htpt_temp_send_rsp_handler
-                0x1001121e        0x6 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
-                0x1001121e                htpt_temp_send_rsp_handler
+                0x10011216        0x6 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
+                0x10011216                htpt_temp_send_rsp_handler
  .text.htpt_meas_intv_upd_rsp_handler
-                0x10011224        0x6 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
-                0x10011224                htpt_meas_intv_upd_rsp_handler
+                0x1001121c        0x6 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
+                0x1001121c                htpt_meas_intv_upd_rsp_handler
  .text.htpt_meas_intv_chg_req_ind_handler
-                0x1001122a        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
-                0x1001122a                htpt_meas_intv_chg_req_ind_handler
+                0x10011222        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
+                0x10011222                htpt_meas_intv_chg_req_ind_handler
  .text.htpt_cfg_indntf_ind_handler
-                0x10011236        0xa ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
-                0x10011236                htpt_cfg_indntf_ind_handler
- .text          0x10011240       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_thumb1_case_sqi.o)
-                0x10011240                __gnu_thumb1_case_sqi
- .text          0x10011254       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_thumb1_case_uqi.o)
-                0x10011254                __gnu_thumb1_case_uqi
- .text          0x10011268       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_thumb1_case_uhi.o)
-                0x10011268                __gnu_thumb1_case_uhi
- .text          0x1001127c      0x114 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_udivsi3.o)
-                0x1001127c                __aeabi_uidiv
-                0x1001127c                __udivsi3
-                0x10011388                __aeabi_uidivmod
- .text          0x10011390      0x1d4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_divsi3.o)
-                0x10011390                __divsi3
-                0x10011390                __aeabi_idiv
-                0x1001155c                __aeabi_idivmod
- .text          0x10011564        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_dvmd_tls.o)
-                0x10011564                __aeabi_idiv0
-                0x10011564                __aeabi_ldiv0
- .text          0x10011568       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_arm_cmpdf2.o)
-                0x10011568                __aeabi_cdrcmple
-                0x10011578                __aeabi_cdcmple
-                0x10011578                __aeabi_cdcmpeq
-                0x10011588                __aeabi_dcmpeq
-                0x10011594                __aeabi_dcmplt
-                0x100115a8                __aeabi_dcmple
-                0x100115bc                __aeabi_dcmpgt
-                0x100115d0                __aeabi_dcmpge
- .text          0x100115e4       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_arm_cmpsf2.o)
-                0x100115e4                __aeabi_cfrcmple
-                0x100115ec                __aeabi_cfcmpeq
-                0x100115ec                __aeabi_cfcmple
-                0x100115fc                __aeabi_fcmpeq
-                0x10011608                __aeabi_fcmplt
-                0x1001161c                __aeabi_fcmple
-                0x10011630                __aeabi_fcmpgt
-                0x10011644                __aeabi_fcmpge
- .text          0x10011658       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_muldi3.o)
-                0x10011658                __muldi3
-                0x10011658                __aeabi_lmul
- .text          0x100116b0       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_fixunssfsi.o)
-                0x100116b0                __fixunssfsi
-                0x100116b0                __aeabi_f2uiz
- .text          0x100116e0       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_fixunsdfsi.o)
-                0x100116e0                __aeabi_d2uiz
-                0x100116e0                __fixunsdfsi
- .text          0x1001171c      0x2ec c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(addsf3.o)
-                0x1001171c                __aeabi_fadd
- .text          0x10011a08      0x234 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(divsf3.o)
-                0x10011a08                __aeabi_fdiv
- .text          0x10011c3c       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(eqsf2.o)
-                0x10011c3c                __eqsf2
-                0x10011c3c                __nesf2
- .text          0x10011c8c       0x88 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(gesf2.o)
-                0x10011c8c                __gesf2
-                0x10011c8c                __gtsf2
- .text          0x10011d14       0x88 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(lesf2.o)
-                0x10011d14                __ltsf2
-                0x10011d14                __lesf2
- .text          0x10011d9c      0x228 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(mulsf3.o)
-                0x10011d9c                __aeabi_fmul
- .text          0x10011fc4      0x30c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(subsf3.o)
-                0x10011fc4                __aeabi_fsub
- .text          0x100122d0       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(fixsfsi.o)
-                0x100122d0                __aeabi_f2iz
- .text          0x10012314       0x90 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(floatsisf.o)
-                0x10012314                __aeabi_i2f
- .text          0x100123a4       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(floatunsisf.o)
-                0x100123a4                __aeabi_ui2f
- .text          0x10012420       0x80 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(eqdf2.o)
-                0x10012420                __nedf2
-                0x10012420                __eqdf2
- .text          0x100124a0       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(gedf2.o)
-                0x100124a0                __gedf2
-                0x100124a0                __gtdf2
- .text          0x10012568       0xd4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(ledf2.o)
-                0x10012568                __ledf2
-                0x10012568                __ltdf2
- .text          0x1001263c      0x4f4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(muldf3.o)
-                0x1001263c                __aeabi_dmul
- .text          0x10012b30      0x6a8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(subdf3.o)
-                0x10012b30                __aeabi_dsub
- .text          0x100131d8       0x6c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(fixdfsi.o)
-                0x100131d8                __aeabi_d2iz
- .text          0x10013244       0x70 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(floatunsidf.o)
-                0x10013244                __aeabi_ui2d
- .text          0x100132b4       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_clzsi2.o)
-                0x100132b4                __clzsi2
+                0x1001122e        0xa ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
+                0x1001122e                htpt_cfg_indntf_ind_handler
+ .text          0x10011238       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_thumb1_case_sqi.o)
+                0x10011238                __gnu_thumb1_case_sqi
+ .text          0x1001124c       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_thumb1_case_uqi.o)
+                0x1001124c                __gnu_thumb1_case_uqi
+ .text          0x10011260       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_thumb1_case_uhi.o)
+                0x10011260                __gnu_thumb1_case_uhi
+ .text          0x10011274      0x114 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_udivsi3.o)
+                0x10011274                __aeabi_uidiv
+                0x10011274                __udivsi3
+                0x10011380                __aeabi_uidivmod
+ .text          0x10011388      0x1d4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_divsi3.o)
+                0x10011388                __divsi3
+                0x10011388                __aeabi_idiv
+                0x10011554                __aeabi_idivmod
+ .text          0x1001155c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_dvmd_tls.o)
+                0x1001155c                __aeabi_idiv0
+                0x1001155c                __aeabi_ldiv0
+ .text          0x10011560       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_arm_cmpdf2.o)
+                0x10011560                __aeabi_cdrcmple
+                0x10011570                __aeabi_cdcmple
+                0x10011570                __aeabi_cdcmpeq
+                0x10011580                __aeabi_dcmpeq
+                0x1001158c                __aeabi_dcmplt
+                0x100115a0                __aeabi_dcmple
+                0x100115b4                __aeabi_dcmpgt
+                0x100115c8                __aeabi_dcmpge
+ .text          0x100115dc       0x74 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_arm_cmpsf2.o)
+                0x100115dc                __aeabi_cfrcmple
+                0x100115e4                __aeabi_cfcmpeq
+                0x100115e4                __aeabi_cfcmple
+                0x100115f4                __aeabi_fcmpeq
+                0x10011600                __aeabi_fcmplt
+                0x10011614                __aeabi_fcmple
+                0x10011628                __aeabi_fcmpgt
+                0x1001163c                __aeabi_fcmpge
+ .text          0x10011650       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_muldi3.o)
+                0x10011650                __muldi3
+                0x10011650                __aeabi_lmul
+ .text          0x100116a8       0x30 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_fixunssfsi.o)
+                0x100116a8                __fixunssfsi
+                0x100116a8                __aeabi_f2uiz
+ .text          0x100116d8       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_fixunsdfsi.o)
+                0x100116d8                __aeabi_d2uiz
+                0x100116d8                __fixunsdfsi
+ .text          0x10011714      0x2ec c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(addsf3.o)
+                0x10011714                __aeabi_fadd
+ .text          0x10011a00      0x234 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(divsf3.o)
+                0x10011a00                __aeabi_fdiv
+ .text          0x10011c34       0x50 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(eqsf2.o)
+                0x10011c34                __eqsf2
+                0x10011c34                __nesf2
+ .text          0x10011c84       0x88 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(gesf2.o)
+                0x10011c84                __gesf2
+                0x10011c84                __gtsf2
+ .text          0x10011d0c       0x88 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(lesf2.o)
+                0x10011d0c                __ltsf2
+                0x10011d0c                __lesf2
+ .text          0x10011d94      0x228 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(mulsf3.o)
+                0x10011d94                __aeabi_fmul
+ .text          0x10011fbc      0x30c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(subsf3.o)
+                0x10011fbc                __aeabi_fsub
+ .text          0x100122c8       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(fixsfsi.o)
+                0x100122c8                __aeabi_f2iz
+ .text          0x1001230c       0x90 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(floatsisf.o)
+                0x1001230c                __aeabi_i2f
+ .text          0x1001239c       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(floatunsisf.o)
+                0x1001239c                __aeabi_ui2f
+ .text          0x10012418       0x80 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(eqdf2.o)
+                0x10012418                __nedf2
+                0x10012418                __eqdf2
+ .text          0x10012498       0xc8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(gedf2.o)
+                0x10012498                __gedf2
+                0x10012498                __gtdf2
+ .text          0x10012560       0xd4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(ledf2.o)
+                0x10012560                __ledf2
+                0x10012560                __ltdf2
+ .text          0x10012634      0x4f4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(muldf3.o)
+                0x10012634                __aeabi_dmul
+ .text          0x10012b28      0x6a8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(subdf3.o)
+                0x10012b28                __aeabi_dsub
+ .text          0x100131d0       0x6c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(fixdfsi.o)
+                0x100131d0                __aeabi_d2iz
+ .text          0x1001323c       0x70 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(floatunsidf.o)
+                0x1001323c                __aeabi_ui2d
+ .text          0x100132ac       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(_clzsi2.o)
+                0x100132ac                __clzsi2
  .text.__libc_init_array
-                0x100132f0       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
-                0x100132f0                __libc_init_array
- .text.malloc   0x1001333c       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-malloc.o)
-                0x1001333c                malloc
- .text.memcmp   0x10013350       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcmp.o)
-                0x10013350                memcmp
- .text.memcpy   0x1001336e       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy-stub.o)
-                0x1001336e                memcpy
- .text.memset   0x10013380       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memset.o)
-                0x10013380                memset
- .text._free_r  0x10013390       0x8c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-freer.o)
-                0x10013390                _free_r
+                0x100132e8       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-init.o)
+                0x100132e8                __libc_init_array
+ .text.malloc   0x10013334       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-malloc.o)
+                0x10013334                malloc
+ .text.memcmp   0x10013348       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcmp.o)
+                0x10013348                memcmp
+ .text.memcpy   0x10013366       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memcpy-stub.o)
+                0x10013366                memcpy
+ .text.memset   0x10013378       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memset.o)
+                0x10013378                memset
+ .text._free_r  0x10013388       0x8c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-freer.o)
+                0x10013388                _free_r
  .text._malloc_r
-                0x1001341c       0xac c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-mallocr.o)
-                0x1001341c                _malloc_r
- .text.printf   0x100134c8       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-printf.o)
-                0x100134c8                iprintf
-                0x100134c8                printf
- .text.putchar  0x100134fc       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-putchar.o)
-                0x100134fc                putchar
- .text.rand     0x10013524       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-rand.o)
-                0x10013524                rand
- .text._sbrk_r  0x1001359c       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-sbrkr.o)
-                0x1001359c                _sbrk_r
- .text.setbuf   0x100135c0       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-setbuf.o)
-                0x100135c0                setbuf
- *fill*         0x100135d2        0x2 
- .text.setvbuf  0x100135d4      0x160 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-setvbuf.o)
-                0x100135d4                setvbuf
+                0x10013414       0xac c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-mallocr.o)
+                0x10013414                _malloc_r
+ .text.printf   0x100134c0       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-printf.o)
+                0x100134c0                iprintf
+                0x100134c0                printf
+ .text.putchar  0x100134f4       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-putchar.o)
+                0x100134f4                putchar
+ .text.rand     0x1001351c       0x78 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-rand.o)
+                0x1001351c                rand
+ .text._sbrk_r  0x10013594       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-sbrkr.o)
+                0x10013594                _sbrk_r
+ .text.setbuf   0x100135b8       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-setbuf.o)
+                0x100135b8                setbuf
+ *fill*         0x100135ca        0x2 
+ .text.setvbuf  0x100135cc      0x160 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-setvbuf.o)
+                0x100135cc                setvbuf
  .text.__sflush_r
-                0x10013734      0x10c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fflush.o)
-                0x10013734                __sflush_r
+                0x1001372c      0x10c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fflush.o)
+                0x1001372c                __sflush_r
  .text._fflush_r
-                0x10013840       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fflush.o)
-                0x10013840                _fflush_r
+                0x10013838       0x58 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fflush.o)
+                0x10013838                _fflush_r
  .text._cleanup_r
-                0x10013898       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x10013898                _cleanup_r
+                0x10013890       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x10013890                _cleanup_r
  .text.std.isra.0
-                0x100138a8       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x100138a0       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
  .text.__sfmoreglue
-                0x100138f0       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x100138f0                __sfmoreglue
- .text.__sinit  0x1001391c       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x1001391c                __sinit
- .text.__sfp    0x10013984       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x10013984                __sfp
+                0x100138e8       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x100138e8                __sfmoreglue
+ .text.__sinit  0x10013914       0x68 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x10013914                __sinit
+ .text.__sfp    0x1001397c       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x1001397c                __sfp
  .text._fwalk_reent
-                0x10013a00       0x42 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fwalk.o)
-                0x10013a00                _fwalk_reent
- *fill*         0x10013a42        0x2 
+                0x100139f8       0x42 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fwalk.o)
+                0x100139f8                _fwalk_reent
+ *fill*         0x10013a3a        0x2 
  .text.__swhatbuf_r
-                0x10013a44       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-makebuf.o)
-                0x10013a44                __swhatbuf_r
+                0x10013a3c       0x4c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-makebuf.o)
+                0x10013a3c                __swhatbuf_r
  .text.__smakebuf_r
-                0x10013a90       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-makebuf.o)
-                0x10013a90                __smakebuf_r
+                0x10013a88       0x7c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-makebuf.o)
+                0x10013a88                __smakebuf_r
  .text.__sfputc_r
-                0x10013b0c       0x2a c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
+                0x10013b04       0x2a c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
  .text.__sfputs_r
-                0x10013b36       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
-                0x10013b36                __sfputs_r
- *fill*         0x10013b5a        0x2 
+                0x10013b2e       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
+                0x10013b2e                __sfputs_r
+ *fill*         0x10013b52        0x2 
  .text._vfprintf_r
-                0x10013b5c      0x238 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
-                0x10013b5c                _vfprintf_r
-                0x10013b5c                _vfiprintf_r
+                0x10013b54      0x238 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
+                0x10013b54                _vfprintf_r
+                0x10013b54                _vfiprintf_r
  .text._printf_common
-                0x10013d94       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x10013d94                _printf_common
+                0x10013d8c       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x10013d8c                _printf_common
  .text._printf_i
-                0x10013e70      0x244 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x10013e70                _printf_i
- .text._putc_r  0x100140b4       0x6c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-putc.o)
-                0x100140b4                _putc_r
- .text.__sread  0x10014120       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
-                0x10014120                __sread
+                0x10013e68      0x244 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x10013e68                _printf_i
+ .text._putc_r  0x100140ac       0x6c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-putc.o)
+                0x100140ac                _putc_r
+ .text.__sread  0x10014118       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
+                0x10014118                __sread
  .text.__swrite
-                0x10014148       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
-                0x10014148                __swrite
- .text.__sseek  0x10014180       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
-                0x10014180                __sseek
+                0x10014140       0x38 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
+                0x10014140                __swrite
+ .text.__sseek  0x10014178       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
+                0x10014178                __sseek
  .text.__sclose
-                0x100141ac        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
-                0x100141ac                __sclose
+                0x100141a4        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-stdio.o)
+                0x100141a4                __sclose
  .text.__swbuf_r
-                0x100141b8       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-wbuf.o)
-                0x100141b8                __swbuf_r
+                0x100141b0       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-wbuf.o)
+                0x100141b0                __swbuf_r
  .text._write_r
-                0x10014268       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-writer.o)
-                0x10014268                _write_r
+                0x10014260       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-writer.o)
+                0x10014260                _write_r
  .text.__swsetup_r
-                0x10014290       0xec c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-wsetup.o)
-                0x10014290                __swsetup_r
+                0x10014288       0xec c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-wsetup.o)
+                0x10014288                __swsetup_r
  .text._close_r
-                0x1001437c       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-closer.o)
-                0x1001437c                _close_r
+                0x10014374       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-closer.o)
+                0x10014374                _close_r
  .text._fstat_r
-                0x100143a0       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fstatr.o)
-                0x100143a0                _fstat_r
+                0x10014398       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-fstatr.o)
+                0x10014398                _fstat_r
  .text._isatty_r
-                0x100143c4       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-isattyr.o)
-                0x100143c4                _isatty_r
+                0x100143bc       0x24 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-isattyr.o)
+                0x100143bc                _isatty_r
  .text._lseek_r
-                0x100143e8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-lseekr.o)
-                0x100143e8                _lseek_r
- .text.memchr   0x10014410       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memchr-stub.o)
-                0x10014410                memchr
- *fill*         0x10014426        0x2 
- .text._read_r  0x10014428       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-readr.o)
-                0x10014428                _read_r
+                0x100143e0       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-lseekr.o)
+                0x100143e0                _lseek_r
+ .text.memchr   0x10014408       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-memchr-stub.o)
+                0x10014408                memchr
+ *fill*         0x1001441e        0x2 
+ .text._read_r  0x10014420       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-readr.o)
+                0x10014420                _read_r
  *(.glue_7t)
- .glue_7t       0x10014450        0x0 linker stubs
+ .glue_7t       0x10014448        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x10014450        0x0 linker stubs
+ .glue_7        0x10014448        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata.str1.1
-                0x10014450        0x3 src/ASF/common/services/delay/sam/systick_counter.o
- *fill*         0x10014453        0x1 
- .rodata.test   0x10014454       0x30 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
-                0x10014454                test
- .rodata.hw     0x10014484        0xe src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
-                0x10014484                hw
- .rodata.reg    0x10014492       0x2a src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
-                0x10014492                reg
- .rodata        0x100144bc       0x40 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.o
+                0x10014448        0x3 src/ASF/common/services/delay/sam/systick_counter.o
+ *fill*         0x1001444b        0x1 
+ .rodata.test   0x1001444c       0x30 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
+                0x1001444c                test
+ .rodata.hw     0x1001447c        0xe src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
+                0x1001447c                hw
+ .rodata.reg    0x1001448a       0x2a src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
+                0x1001448a                reg
+ .rodata        0x100144b4       0x40 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.o
  .rodata.CSWTCH.52
-                0x100144fc        0x3 src/sms_v_0_2/src/sms_ble.o
+                0x100144f4        0x3 src/sms_v_0_2/src/sms_ble.o
  .rodata.CSWTCH.53
-                0x100144ff        0x3 src/sms_v_0_2/src/sms_ble.o
+                0x100144f7        0x3 src/sms_v_0_2/src/sms_ble.o
  .rodata.CSWTCH.54
-                0x10014502        0x3 src/sms_v_0_2/src/sms_ble.o
+                0x100144fa        0x3 src/sms_v_0_2/src/sms_ble.o
  .rodata.str1.1
-                0x10014505       0x29 src/sms_v_0_2/src/sms_ble.o
- *fill*         0x1001452e        0x2 
+                0x100144fd       0x29 src/sms_v_0_2/src/sms_ble.o
+ *fill*         0x10014526        0x2 
  .rodata.sms_ble_gap_cb
-                0x10014530       0x4c src/sms_v_0_2/src/sms_ble.o
-                0x10014530                sms_ble_gap_cb
+                0x10014528       0x4c src/sms_v_0_2/src/sms_ble.o
+                0x10014528                sms_ble_gap_cb
  .rodata.sms_ble_gatt_server_cb
-                0x1001457c       0x28 src/sms_v_0_2/src/sms_ble.o
-                0x1001457c                sms_ble_gatt_server_cb
+                0x10014574       0x28 src/sms_v_0_2/src/sms_ble.o
+                0x10014574                sms_ble_gatt_server_cb
  .rodata.str1.1
-                0x100145a4       0x24 src/sms_v_0_2/src/sms_button.o
+                0x1001459c       0x24 src/sms_v_0_2/src/sms_button.o
  .rodata.CSWTCH.47
-                0x100145c8        0xc src/sms_v_0_2/src/sms_timer.o
+                0x100145c0        0xc src/sms_v_0_2/src/sms_timer.o
  .rodata.str1.1
-                0x100145d4       0x28 src/sms_v_0_2/src/sms_timer.o
- .rodata        0x100145fc        0xd src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- *fill*         0x10014609        0x3 
+                0x100145cc       0x28 src/sms_v_0_2/src/sms_timer.o
+ .rodata        0x100145f4        0xd src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ *fill*         0x10014601        0x3 
  .rodata.ble_mgr_gatt_server_handle
-                0x1001460c       0x28 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10014604       0x28 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .rodata.str1.1
-                0x10014634       0x11 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- *fill*         0x10014645        0x3 
+                0x1001462c       0x11 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ *fill*         0x1001463d        0x3 
  .rodata.ble_mgr_gap_handle
-                0x10014648       0x4c src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10014640       0x4c src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .rodata.CSWTCH.94
-                0x10014694        0x7 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- *fill*         0x1001469b        0x1 
+                0x1001468c        0x7 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ *fill*         0x10014693        0x1 
  .rodata.CSWTCH.95
-                0x1001469c       0x1c src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .rodata        0x100146b8        0xb ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x10014694       0x1c src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .rodata        0x100146b0        0xb ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
  .rodata.CSWTCH.45
-                0x100146c3        0x3 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x100146bb        0x3 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
  .rodata.CSWTCH.47
-                0x100146c6        0xf ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x100146be        0xf ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
  .rodata.client_conf_uuid
-                0x100146d5        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146d5                client_conf_uuid
+                0x100146cd        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146cd                client_conf_uuid
  .rodata.presentation_format_uuid
-                0x100146d7        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146d7                presentation_format_uuid
+                0x100146cf        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146cf                presentation_format_uuid
  .rodata.user_desc_uuid
-                0x100146d9        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146d9                user_desc_uuid
+                0x100146d1        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146d1                user_desc_uuid
  .rodata.server_conf_uuid
-                0x100146db        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146db                server_conf_uuid
+                0x100146d3        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146d3                server_conf_uuid
  .rodata.extended_props_uuid
-                0x100146dd        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146dd                extended_props_uuid
+                0x100146d5        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146d5                extended_props_uuid
  .rodata.include_uuid
-                0x100146df        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146df                include_uuid
+                0x100146d7        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146d7                include_uuid
  .rodata.char_uuid
-                0x100146e1        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x100146e1                char_uuid
- *fill*         0x100146e3        0x1 
- .rodata        0x100146e4       0x80 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(divsf3.o)
- .rodata        0x10014764       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(mulsf3.o)
- .rodata        0x100147a4       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(muldf3.o)
+                0x100146d9        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x100146d9                char_uuid
+ *fill*         0x100146db        0x1 
+ .rodata        0x100146dc       0x80 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(divsf3.o)
+ .rodata        0x1001475c       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(mulsf3.o)
+ .rodata        0x1001479c       0x40 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m\libgcc.a(muldf3.o)
  .rodata.str1.1
-                0x100147e4        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
- *fill*         0x100147e6        0x2 
+                0x100147dc        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
+ *fill*         0x100147de        0x2 
  .rodata._global_impure_ptr
-                0x100147e8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
-                0x100147e8                _global_impure_ptr
+                0x100147e0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
+                0x100147e0                _global_impure_ptr
  .rodata.__sf_fake_stdin
-                0x100147ec       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x100147ec                __sf_fake_stdin
+                0x100147e4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x100147e4                __sf_fake_stdin
  .rodata.__sf_fake_stdout
-                0x1001480c       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x1001480c                __sf_fake_stdout
+                0x10014804       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x10014804                __sf_fake_stdout
  .rodata.__sf_fake_stderr
-                0x1001482c       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
-                0x1001482c                __sf_fake_stderr
+                0x10014824       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-findfp.o)
+                0x10014824                __sf_fake_stderr
  .rodata.str1.1
-                0x1001484c       0x11 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
+                0x10014844       0x11 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf.o)
  .rodata.str1.1
-                0x1001485d       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x10014855       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x10014880                . = ALIGN (0x4)
- *fill*         0x1001487f        0x1 
+                0x10014878                . = ALIGN (0x4)
+ *fill*         0x10014877        0x1 
  *(.init)
- .init          0x10014880        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crti.o
-                0x10014880                _init
- .init          0x10014884        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtn.o
-                0x1001488c                . = ALIGN (0x4)
-                0x1001488c                __preinit_array_start = .
+ .init          0x10014878        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crti.o
+                0x10014878                _init
+ .init          0x1001487c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtn.o
+                0x10014884                . = ALIGN (0x4)
+                0x10014884                __preinit_array_start = .
  *(.preinit_array)
-                0x1001488c                __preinit_array_end = .
-                0x1001488c                . = ALIGN (0x4)
-                0x1001488c                __init_array_start = .
+                0x10014884                __preinit_array_end = .
+                0x10014884                . = ALIGN (0x4)
+                0x10014884                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x1001488c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
-                0x10014890                __init_array_end = .
-                0x10014890                . = ALIGN (0x4)
+ .init_array    0x10014884        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+                0x10014888                __init_array_end = .
+                0x10014888                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x10014890                . = ALIGN (0x4)
+                0x10014888                . = ALIGN (0x4)
  *(.fini)
- .fini          0x10014890        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crti.o
-                0x10014890                _fini
- .fini          0x10014894        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtn.o
-                0x1001489c                . = ALIGN (0x4)
-                0x1001489c                __fini_array_start = .
+ .fini          0x10014888        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crti.o
+                0x10014888                _fini
+ .fini          0x1001488c        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtn.o
+                0x10014894                . = ALIGN (0x4)
+                0x10014894                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x1001489c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+ .fini_array    0x10014894        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x100148a0                __fini_array_end = .
+                0x10014898                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x100148a0                . = ALIGN (0x4)
-                0x100148a0                _efixed = .
+                0x10014898                . = ALIGN (0x4)
+                0x10014898                _efixed = .
 
-.vfp11_veneer   0x100148a0        0x0
- .vfp11_veneer  0x100148a0        0x0 linker stubs
+.vfp11_veneer   0x10014898        0x0
+ .vfp11_veneer  0x10014898        0x0 linker stubs
 
-.v4_bx          0x100148a0        0x0
- .v4_bx         0x100148a0        0x0 linker stubs
+.v4_bx          0x10014898        0x0
+ .v4_bx         0x10014898        0x0 linker stubs
 
-.iplt           0x100148a0        0x0
- .iplt          0x100148a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+.iplt           0x10014898        0x0
+ .iplt          0x10014898        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
 
-.eh_frame       0x100148a0        0x0
- .eh_frame      0x100148a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+.eh_frame       0x10014898        0x0
+ .eh_frame      0x10014898        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
 
-.rel.dyn        0x100148a0        0x0
- .rel.iplt      0x100148a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+.rel.dyn        0x10014898        0x0
+ .rel.iplt      0x10014898        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
 
-.jcr            0x100148a0        0x0
- .jcr           0x100148a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+.jcr            0x10014898        0x0
+ .jcr           0x10014898        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
 
-.igot.plt       0x100148a0        0x0
- .igot.plt      0x100148a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
-                0x100148a0                . = ALIGN (0x4)
-                0x100148a0                _etext = .
+.igot.plt       0x10014898        0x0
+ .igot.plt      0x10014898        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+                0x10014898                . = ALIGN (0x4)
+                0x10014898                _etext = .
 
-.relocate       0x100148a0       0xac
-                0x100148a0                . = ALIGN (0x4)
-                0x100148a0                _srelocate = .
+.relocate       0x10014898       0xac
+                0x10014898                . = ALIGN (0x4)
+                0x10014898                _srelocate = .
  *(.ramfunc .ramfunc.*)
  *(.data .data.*)
  .data.cycles_per_us
-                0x100148a0        0x4 src/ASF/common/services/delay/sam/systick_counter.o
+                0x10014898        0x4 src/ASF/common/services/delay/sam/systick_counter.o
  .data.cycles_per_ms
-                0x100148a4        0x4 src/ASF/common/services/delay/sam/systick_counter.o
- .data.st       0x100148a8       0x38 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
+                0x1001489c        0x4 src/ASF/common/services/delay/sam/systick_counter.o
+ .data.st       0x100148a0       0x38 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
  .data.l2cap_avail_buffers
-                0x100148e0        0x1 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
-                0x100148e0                l2cap_avail_buffers
- *fill*         0x100148e1        0x3 
+                0x100148d8        0x1 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(l2cc_task.o)
+                0x100148d8                l2cap_avail_buffers
+ *fill*         0x100148d9        0x3 
  .data.dummy_buffer
-                0x100148e4        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x100148e4                dummy_buffer
+                0x100148dc        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x100148dc                dummy_buffer
  .data.impure_data
-                0x100148e8       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
+                0x100148e0       0x60 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
  .data._impure_ptr
-                0x10014948        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
-                0x10014948                _impure_ptr
-                0x1001494c                . = ALIGN (0x4)
-                0x1001494c                _erelocate = .
+                0x10014940        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-impure.o)
+                0x10014940                _impure_ptr
+                0x10014944                . = ALIGN (0x4)
+                0x10014944                _erelocate = .
 
-.bss            0x1001494c     0x2ea0
-                0x1001494c                . = ALIGN (0x4)
-                0x1001494c                _sbss = .
-                0x1001494c                _szero = .
+.bss            0x10014944     0x2ea0
+                0x10014944                . = ALIGN (0x4)
+                0x10014944                _sbss = .
+                0x10014944                _szero = .
  *(.bss .bss.*)
- .bss           0x1001494c       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
+ .bss           0x10014944       0x1c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtbegin.o
  .bss.aon_sleep_timer_callback
-                0x10014968        0x4 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
- .bss.dmp       0x1001496c       0x10 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.o
+                0x10014960        0x4 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
+ .bss.dmp       0x10014964       0x10 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.o
  .bss.dualtimer_callback_timer1
-                0x1001497c        0x4 src/ASF/sam0/drivers/dualtimer/dualtimer.o
+                0x10014974        0x4 src/ASF/sam0/drivers/dualtimer/dualtimer.o
  .bss.dualtimer_callback_timer2
-                0x10014980        0x4 src/ASF/sam0/drivers/dualtimer/dualtimer.o
+                0x10014978        0x4 src/ASF/sam0/drivers/dualtimer/dualtimer.o
  .bss.heap.5286
-                0x10014984        0x4 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+                0x1001497c        0x4 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .bss.event_pool_memory
-                0x10014988      0x400 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x10014988                event_pool_memory
+                0x10014980      0x400 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10014980                event_pool_memory
  .bss.att_db_data
-                0x10014d88      0x4e0 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x10014d88                att_db_data
+                0x10014d80      0x4e0 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10014d80                att_db_data
  .bss.ble_user_event_cb
-                0x10015268        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x10015268                ble_user_event_cb
+                0x10015260        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10015260                ble_user_event_cb
  .bss.scan_response_count
-                0x1001526c        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x1001526c                scan_response_count
+                0x10015264        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10015264                scan_response_count
  .bss.ble_peripheral_dev_address
-                0x1001526d        0x7 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x10015265        0x7 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
  .bss.event_params_memory
-                0x10015274     0x1000 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x10015274                event_params_memory
+                0x1001526c     0x1000 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x1001526c                event_params_memory
  .bss.ulp_status
-                0x10016274        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x10016274                ulp_status
- *fill*         0x10016275        0x3 
- .bss.tick      0x10016278        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
-                0x10016278                tick
+                0x1001626c        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x1001626c                ulp_status
+ *fill*         0x1001626d        0x3 
+ .bss.tick      0x10016270        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+                0x10016270                tick
  .bss.read_status
-                0x1001627c        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
-                0x1001627c                read_status
+                0x10016274        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+                0x10016274                read_status
  .bss.string_input
-                0x1001627d        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
-                0x1001627d                string_input
- *fill*         0x1001627e        0x2 
+                0x10016275        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+                0x10016275                string_input
+ *fill*         0x10016276        0x2 
  .bss.user_callback_func
-                0x10016280        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
-                0x10016280                user_callback_func
+                0x10016278        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+                0x10016278                user_callback_func
  .bss.platform_event_pending_list
-                0x10016284        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+                0x1001627c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
  .bss.platform_event_free_list
-                0x10016288        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+                0x10016280        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
  .bss.platform_event_pool
-                0x1001628c       0x78 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
- .bss.ke_free   0x10016304        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016284       0x78 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .bss.ke_free   0x100162fc        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.gapm_get_id_from_task
-                0x10016308        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016300        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.gapm_get_task_from_id
-                0x1001630c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016304        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.os_sem_up
-                0x10016310        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016308        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.pwr_wait_BLE_out_of_reset
-                0x10016314        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x1001630c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.platform_initialized
-                0x10016318        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
-                0x10016318                platform_initialized
- *fill*         0x10016319        0x3 
+                0x10016310        0x1 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016310                platform_initialized
+ *fill*         0x10016311        0x3 
  .bss.pwr_disable_arm_wakeup
-                0x1001631c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016314        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.gstrFwSem
-                0x10016320        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016318        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.os_sem_down
-                0x10016324        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x1001631c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.ke_msg_hdr.13330
-                0x10016328        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016320        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.pwr_enable_arm_wakeup
-                0x1001632c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016324        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.NMI_MsgQueueRecv
-                0x10016330        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016328        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.ke_msg_send
-                0x10016334        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x1001632c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.ble_stack_message_handler
-                0x10016338        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016330        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.rcv_msg.13329
-                0x1001633c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016334        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.pwr_arm_wakeup_req
-                0x10016340        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016338        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.ke_msg_alloc
-                0x10016344        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x1001633c        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.InternalAppMsgQHandle
-                0x10016348        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016340        0x4 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
  .bss.spare_event
-                0x1001634c       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x10016344       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
  .bss.spare_event_busy
-                0x1001635c        0x1 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
- *fill*         0x1001635d        0x3 
+                0x10016354        0x1 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+ *fill*         0x10016355        0x3 
  .bss.event_pending_list
-                0x10016360        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x10016358        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
  .bss.event_free_list
-                0x10016364        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x1001635c        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
  .bss.u16GattcSeqNo
-                0x10016368        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_client.o)
- *fill*         0x1001636a        0x2 
+                0x10016360        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_client.o)
+ *fill*         0x10016362        0x2 
  .bss.pu8valuesBuffer
-                0x1001636c        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1001636c                pu8valuesBuffer
- .bss.unNull    0x10016370        0x1 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x10016370                unNull
- *fill*         0x10016371        0x3 
+                0x10016364        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x10016364                pu8valuesBuffer
+ .bss.unNull    0x10016368        0x1 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x10016368                unNull
+ *fill*         0x10016369        0x3 
  .bss.ptstrattDb
-                0x10016374        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x10016374                ptstrattDb
+                0x1001636c        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1001636c                ptstrattDb
  .bss.pu8valuesBufferEnd
-                0x10016378        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x10016378                pu8valuesBufferEnd
+                0x10016370        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x10016370                pu8valuesBufferEnd
  .bss.u32numberOfValues
-                0x1001637c        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x1001637c                u32numberOfValues
+                0x10016374        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x10016374                u32numberOfValues
  .bss.u32dbMemorySize
-                0x10016380        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x10016380                u32dbMemorySize
+                0x10016378        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x10016378                u32dbMemorySize
  .bss.service_setup_buffer
-                0x10016384        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
-                0x10016384                service_setup_buffer
+                0x1001637c        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gatt_server.o)
+                0x1001637c                service_setup_buffer
  .bss.event_param_buff
-                0x10016388        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x10016388                event_param_buff
+                0x10016380        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x10016380                event_param_buff
  .bss.event_param_buff_length
-                0x1001638c        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x1001638c                event_param_buff_length
+                0x10016384        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x10016384                event_param_buff_length
  .bss.cmd_cmpl_flag
-                0x10016390        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x10016388        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
  .bss.dummy_key.7283
-                0x10016394       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1001638c       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
  .bss.dummy_key.7401
-                0x100163a4       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x1001639c       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
  .bss.dummy_key.7419
-                0x100163b4       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100163ac       0x10 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
  .bss.peer_key_info
-                0x100163c4       0x46 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
+                0x100163bc       0x46 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gapc_task.o)
  .bss.g_seq_num_tx
-                0x1001640a        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
- .bss.Seq_NUM   0x1001640c        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
-                0x1001640c                Seq_NUM
- *fill*         0x1001640e        0x2 
+                0x10016402        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+ .bss.Seq_NUM   0x10016404        0x2 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattc_task.o)
+                0x10016404                Seq_NUM
+ *fill*         0x10016406        0x2 
  .bss.u32usedBuffers
-                0x10016410        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
-                0x10016410                u32usedBuffers
+                0x10016408        0x4 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
+                0x10016408                u32usedBuffers
  .bss.__malloc_sbrk_start
-                0x10016414        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-mallocr.o)
-                0x10016414                __malloc_sbrk_start
+                0x1001640c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-mallocr.o)
+                0x1001640c                __malloc_sbrk_start
  .bss.__malloc_free_list
-                0x10016418        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-mallocr.o)
-                0x10016418                __malloc_free_list
+                0x10016410        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-nano-mallocr.o)
+                0x10016410                __malloc_free_list
  *(COMMON)
- COMMON         0x1001641c      0x1d9 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
-                0x1001641c                timer1_current_mode
-                0x1001641d                sms_ble_sending
-                0x10016420                mpu_device
-                0x100164ac                sms_working_mode
-                0x100164ad                ulp_ready
-                0x100164ae                sms_connection_handle
-                0x100164b0                button_instance
-                0x10016510                spi_rdata
-                0x10016520                timer1_instance
-                0x10016523                spi_wdata
-                0x10016534                pressure_device
-                0x100165b8                i2c_rpacket
-                0x100165c0                sensors_active
-                0x100165c1                sms_ble_ind_retry
-                0x100165c2                sms_ble_conn_handle
-                0x100165c4                i2c_master_instance
-                0x100165cc                ble_current_state
-                0x100165cd                timer2_instance
-                0x100165d0                timer2_current_mode
-                0x100165d1                spi_slave_ms58_instance
-                0x100165d4                ulp_active
-                0x100165d8                i2c_wpacket
-                0x100165e0                spi_master_ms58_instance
-                0x100165e8                msp
-                0x100165ec                sms_ble_send_cnt
-                0x100165ee                sms_btn_cnt
-                0x100165f0                psp
-                0x100165f4                sms_led_blink_cnt
- *fill*         0x100165f5        0x3 
- COMMON         0x100165f8       0xd8 src/ASF/sam0/drivers/gpio/gpio.o
-                0x100165f8                _gpio_instances
- COMMON         0x100166d0        0x4 src/ASF/sam0/drivers/system/system_sam_b.o
-                0x100166d0                system_clock_value
- COMMON         0x100166d4        0x8 src/ASF/sam0/drivers/uart/uart.o
-                0x100166d4                _uart_instances
- COMMON         0x100166dc        0x4 src/ASF/sam0/utils/stdio/read.o
-                0x100166dc                ptr_get
- COMMON         0x100166e0        0x8 src/ASF/sam0/utils/stdio/write.o
-                0x100166e0                ptr_put
-                0x100166e4                stdio_base
- COMMON         0x100166e8      0x840 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                0x100166e8                ble_mgr_htpt_event_cb
-                0x100166ec                ble_mgr_gatt_server_event_cb
-                0x10016700                ble_dev_info
-                0x1001696c                ble_device_count
-                0x10016970                ble_mgr_dtm_event_cb
-                0x10016984                ble_mgr_gap_event_cb
-                0x10016998                ble_mgr_gatt_client_event_cb
-                0x100169ac                connected_state_info
-                0x100169c0                pf_cfg
-                0x100169dc                event
-                0x100169e0                ble_mgr_l2cap_event_cb
-                0x100169e4                scan_info
-                0x10016d18                ble_event_params
-                0x10016f24                ble_mgr_custom_event_cb
- COMMON         0x10016f28       0x4c src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
-                0x10016f28                uart_instance
-                0x10016f4c                config_uart
- COMMON         0x10016f74      0x2ea src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
-                0x10016f74                default_samb11_clock_init
-                0x10016f7c                rwip_prevent_sleep_set
-                0x10016f80                platform_unregister_isr
-                0x10016f84                wakeup_event_pending
-                0x10016f88                rwip_prevent_sleep_clear
-                0x10016f8c                actualfreq
-                0x10016f90                port_list
-                0x10016fc2                rx_buffer
-                0x10017244                platform_register_isr
-                0x10017248                handle_ext_wakeup_isr
-                0x1001724c                wakeup_source_active_cb
-                0x10017250                samb11_app_resume_cb
-                0x10017254                updateuartbr_fp
-                0x10017258                apps_resume_cb
-                0x1001725c                plf_event_buff_index
- *fill*         0x1001725e        0x2 
- COMMON         0x10017260        0xc src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
-                0x10017260                wakeup_source_callback
- COMMON         0x1001726c        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
-                0x1001726c                watched_event
- COMMON         0x10017278      0x16a ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
-                0x10017278                app_task_type
-                0x1001727a                gstrConnData
-                0x1001730a                device
- *fill*         0x100173e2        0x2 
- COMMON         0x100173e4      0x404 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
-                0x100173e4                event_param_buff_index
-                0x100173e8                dummy_buffer_buff
-                0x100175e8                interface_send_msg
- COMMON         0x100177e8        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-reent.o)
-                0x100177e8                errno
-                0x100177ec                . = ALIGN (0x4)
-                0x100177ec                _ebss = .
-                0x100177ec                _ezero = .
+ COMMON         0x10016414      0x1d9 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
+                0x10016414                timer1_current_mode
+                0x10016415                sms_ble_sending
+                0x10016418                mpu_device
+                0x100164a4                sms_working_mode
+                0x100164a5                ulp_ready
+                0x100164a6                sms_connection_handle
+                0x100164a8                button_instance
+                0x10016508                spi_rdata
+                0x10016518                timer1_instance
+                0x1001651b                spi_wdata
+                0x1001652c                pressure_device
+                0x100165b0                i2c_rpacket
+                0x100165b8                sensors_active
+                0x100165b9                sms_ble_ind_retry
+                0x100165ba                sms_ble_conn_handle
+                0x100165bc                i2c_master_instance
+                0x100165c4                ble_current_state
+                0x100165c5                timer2_instance
+                0x100165c8                timer2_current_mode
+                0x100165c9                spi_slave_ms58_instance
+                0x100165cc                ulp_active
+                0x100165d0                i2c_wpacket
+                0x100165d8                spi_master_ms58_instance
+                0x100165e0                msp
+                0x100165e4                sms_ble_send_cnt
+                0x100165e6                sms_btn_cnt
+                0x100165e8                psp
+                0x100165ec                sms_led_blink_cnt
+ *fill*         0x100165ed        0x3 
+ COMMON         0x100165f0       0xd8 src/ASF/sam0/drivers/gpio/gpio.o
+                0x100165f0                _gpio_instances
+ COMMON         0x100166c8        0x4 src/ASF/sam0/drivers/system/system_sam_b.o
+                0x100166c8                system_clock_value
+ COMMON         0x100166cc        0x8 src/ASF/sam0/drivers/uart/uart.o
+                0x100166cc                _uart_instances
+ COMMON         0x100166d4        0x4 src/ASF/sam0/utils/stdio/read.o
+                0x100166d4                ptr_get
+ COMMON         0x100166d8        0x8 src/ASF/sam0/utils/stdio/write.o
+                0x100166d8                ptr_put
+                0x100166dc                stdio_base
+ COMMON         0x100166e0      0x840 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                0x100166e0                ble_mgr_htpt_event_cb
+                0x100166e4                ble_mgr_gatt_server_event_cb
+                0x100166f8                ble_dev_info
+                0x10016964                ble_device_count
+                0x10016968                ble_mgr_dtm_event_cb
+                0x1001697c                ble_mgr_gap_event_cb
+                0x10016990                ble_mgr_gatt_client_event_cb
+                0x100169a4                connected_state_info
+                0x100169b8                pf_cfg
+                0x100169d4                event
+                0x100169d8                ble_mgr_l2cap_event_cb
+                0x100169dc                scan_info
+                0x10016d10                ble_event_params
+                0x10016f1c                ble_mgr_custom_event_cb
+ COMMON         0x10016f20       0x4c src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+                0x10016f20                uart_instance
+                0x10016f44                config_uart
+ COMMON         0x10016f6c      0x2ea src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+                0x10016f6c                default_samb11_clock_init
+                0x10016f74                rwip_prevent_sleep_set
+                0x10016f78                platform_unregister_isr
+                0x10016f7c                wakeup_event_pending
+                0x10016f80                rwip_prevent_sleep_clear
+                0x10016f84                actualfreq
+                0x10016f88                port_list
+                0x10016fba                rx_buffer
+                0x1001723c                platform_register_isr
+                0x10017240                handle_ext_wakeup_isr
+                0x10017244                wakeup_source_active_cb
+                0x10017248                samb11_app_resume_cb
+                0x1001724c                updateuartbr_fp
+                0x10017250                apps_resume_cb
+                0x10017254                plf_event_buff_index
+ *fill*         0x10017256        0x2 
+ COMMON         0x10017258        0xc src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+                0x10017258                wakeup_source_callback
+ COMMON         0x10017264        0xc ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(event.o)
+                0x10017264                watched_event
+ COMMON         0x10017270      0x16a ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gap.o)
+                0x10017270                app_task_type
+                0x10017272                gstrConnData
+                0x10017302                device
+ *fill*         0x100173da        0x2 
+ COMMON         0x100173dc      0x404 ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(interface.o)
+                0x100173dc                event_param_buff_index
+                0x100173e0                dummy_buffer_buff
+                0x100175e0                interface_send_msg
+ COMMON         0x100177e0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/5.3.1/../../../../arm-none-eabi/lib/armv6-m\libc_nano.a(lib_a-reent.o)
+                0x100177e0                errno
+                0x100177e4                . = ALIGN (0x4)
+                0x100177e4                _ebss = .
+                0x100177e4                _ezero = .
 
-.stack          0x100177ec     0x1804
-                0x100177f0                . = ALIGN (0x8)
- *fill*         0x100177ec        0x4 
-                0x100177f0                _sstack = .
-                0x10018ff0                . = (. + STACK_SIZE)
- *fill*         0x100177f0     0x1800 
-                0x10018ff0                . = ALIGN (0x8)
-                0x10018ff0                _estack = .
+.stack          0x100177e4     0x1804
+                0x100177e8                . = ALIGN (0x8)
+ *fill*         0x100177e4        0x4 
+                0x100177e8                _sstack = .
+                0x10018fe8                . = (. + STACK_SIZE)
+ *fill*         0x100177e8     0x1800 
+                0x10018fe8                . = ALIGN (0x8)
+                0x10018fe8                _estack = .
                 [!provide]                PROVIDE (__exidx_start, .)
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
                 [!provide]                PROVIDE (__exidx_end, .)
-                0x10018ff0                . = ALIGN (0x4)
-                0x10018ff0                _end = .
+                0x10018fe8                . = ALIGN (0x4)
+                0x10018fe8                _end = .
 OUTPUT(SMS_peripheral1.elf elf32-littlearm)
 
 .ARM.attributes
@@ -6420,7 +6420,6 @@ sms_ble_notification_confirmed_fn                 src/sms_v_0_2/src/sms_ble.o
 sms_ble_pair_request_fn                           src/sms_v_0_2/src/sms_ble.o
 sms_ble_paired_fn                                 src/sms_v_0_2/src/sms_ble.o
 sms_ble_power_down                                src/sms_v_0_2/src/sms_ble.o
-                                                  src/sms_peripheral1.o
                                                   src/sms_v_0_2/src/sms_timer.o
 sms_ble_primary_service_define                    src/sms_v_0_2/src/sms_ble.o
                                                   src/sms_v_0_2/src/sms_pressure.o

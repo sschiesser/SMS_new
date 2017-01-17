@@ -13231,7 +13231,7 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
 
-.debug_info     0x00000000    0x51155
+.debug_info     0x00000000    0x51158
  .debug_info    0x00000000      0xbe8 src/ASF/common/services/delay/sam/systick_counter.o
  .debug_info    0x00000be8     0x1175 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
  .debug_info    0x00001d5d     0x12c6 src/ASF/sam0/drivers/i2c/i2c_master.o
@@ -13241,27 +13241,27 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .debug_info    0x00010cfd     0x3167 src/sms_v_0_2/src/sms_button.o
  .debug_info    0x00013e64     0x2d7a src/sms_v_0_2/src/sms_common.o
  .debug_info    0x00016bde     0x2ec8 src/sms_v_0_2/src/sms_i2c.o
- .debug_info    0x00019aa6     0x30c5 src/sms_v_0_2/src/sms_mpu.o
- .debug_info    0x0001cb6b     0x2e79 src/sms_v_0_2/src/sms_led.o
- .debug_info    0x0001f9e4     0x3243 src/sms_v_0_2/src/sms_pressure.o
- .debug_info    0x00022c27     0x2c4f src/sms_v_0_2/src/sms_sensors.o
- .debug_info    0x00025876     0x2e6d src/sms_v_0_2/src/sms_spi.o
- .debug_info    0x000286e3     0x3565 src/sms_v_0_2/src/sms_timer.o
- .debug_info    0x0002bc48     0x17ae src/ASF/sam0/drivers/spi/spi.o
- .debug_info    0x0002d3f6     0x60cd src/ASF/sam0/drivers/dualtimer/dualtimer.o
- .debug_info    0x000334c3     0x786b src/ASF/sam0/drivers/gpio/gpio.o
- .debug_info    0x0003ad2e     0x63b4 src/ASF/sam0/drivers/system/system_sam_b.o
- .debug_info    0x000410e2     0x1a48 src/ASF/sam0/drivers/uart/uart.o
- .debug_info    0x00042b2a      0x113 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
- .debug_info    0x00042c3d      0x1c4 src/ASF/sam0/utils/stdio/read.o
- .debug_info    0x00042e01      0x1c1 src/ASF/sam0/utils/stdio/write.o
- .debug_info    0x00042fc2      0x40f src/ASF/sam0/utils/syscalls/gcc/syscalls.o
- .debug_info    0x000433d1     0x5f96 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .debug_info    0x00049367     0x18ea src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
- .debug_info    0x0004ac51      0x31b src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
- .debug_info    0x0004af6c     0x1ea5 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_info    0x0004ce11     0x12f1 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
- .debug_info    0x0004e102     0x3053 src/sms_peripheral1.o
+ .debug_info    0x00019aa6     0x30c8 src/sms_v_0_2/src/sms_mpu.o
+ .debug_info    0x0001cb6e     0x2e79 src/sms_v_0_2/src/sms_led.o
+ .debug_info    0x0001f9e7     0x3243 src/sms_v_0_2/src/sms_pressure.o
+ .debug_info    0x00022c2a     0x2c4f src/sms_v_0_2/src/sms_sensors.o
+ .debug_info    0x00025879     0x2e6d src/sms_v_0_2/src/sms_spi.o
+ .debug_info    0x000286e6     0x3565 src/sms_v_0_2/src/sms_timer.o
+ .debug_info    0x0002bc4b     0x17ae src/ASF/sam0/drivers/spi/spi.o
+ .debug_info    0x0002d3f9     0x60cd src/ASF/sam0/drivers/dualtimer/dualtimer.o
+ .debug_info    0x000334c6     0x786b src/ASF/sam0/drivers/gpio/gpio.o
+ .debug_info    0x0003ad31     0x63b4 src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_info    0x000410e5     0x1a48 src/ASF/sam0/drivers/uart/uart.o
+ .debug_info    0x00042b2d      0x113 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
+ .debug_info    0x00042c40      0x1c4 src/ASF/sam0/utils/stdio/read.o
+ .debug_info    0x00042e04      0x1c1 src/ASF/sam0/utils/stdio/write.o
+ .debug_info    0x00042fc5      0x40f src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_info    0x000433d4     0x5f96 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .debug_info    0x0004936a     0x18ea src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_info    0x0004ac54      0x31b src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_info    0x0004af6f     0x1ea5 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_info    0x0004ce14     0x12f1 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+ .debug_info    0x0004e105     0x3053 src/sms_peripheral1.o
 
 .debug_abbrev   0x00000000     0x58c0
  .debug_abbrev  0x00000000      0x256 src/ASF/common/services/delay/sam/systick_counter.o
@@ -13631,67 +13631,67 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .debug_line    0x0001740c      0xa20 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
  .debug_line    0x00017e2c      0xf2d src/sms_peripheral1.o
 
-.debug_str      0x00000000   0x147236
+.debug_str      0x00000000   0x147238
  .debug_str     0x00000000   0x11c549 src/ASF/common/services/delay/sam/systick_counter.o
                              0x11c90d (size before relaxing)
  .debug_str     0x0011c549      0xe52 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
                              0x11b51a (size before relaxing)
  .debug_str     0x0011d39b      0xe6e src/ASF/sam0/drivers/i2c/i2c_master.o
                              0x11b64d (size before relaxing)
- .debug_str     0x0011e209     0x9e35 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
-                             0x126d67 (size before relaxing)
- .debug_str     0x0012803e     0x4d1e src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.o
-                             0x12a7a2 (size before relaxing)
- .debug_str     0x0012cd5c      0x75e src/sms_v_0_2/src/sms_ble.o
-                             0x125920 (size before relaxing)
- .debug_str     0x0012d4ba      0x267 src/sms_v_0_2/src/sms_button.o
-                             0x1256bc (size before relaxing)
- .debug_str     0x0012d721       0x5a src/sms_v_0_2/src/sms_common.o
-                             0x1254e1 (size before relaxing)
- .debug_str     0x0012d77b       0x92 src/sms_v_0_2/src/sms_i2c.o
-                             0x125545 (size before relaxing)
- .debug_str     0x0012d80d      0x108 src/sms_v_0_2/src/sms_mpu.o
-                             0x12564a (size before relaxing)
- .debug_str     0x0012d915       0x91 src/sms_v_0_2/src/sms_led.o
-                             0x125568 (size before relaxing)
- .debug_str     0x0012d9a6      0x155 src/sms_v_0_2/src/sms_pressure.o
-                             0x125633 (size before relaxing)
- .debug_str     0x0012dafb       0x75 src/sms_v_0_2/src/sms_sensors.o
-                             0x125230 (size before relaxing)
- .debug_str     0x0012db70      0x1a3 src/sms_v_0_2/src/sms_spi.o
-                             0x1255c0 (size before relaxing)
- .debug_str     0x0012dd13      0x63e src/sms_v_0_2/src/sms_timer.o
-                             0x12594a (size before relaxing)
- .debug_str     0x0012e351      0x1fc src/ASF/sam0/drivers/spi/spi.o
+ .debug_str     0x0011e209     0x9e37 src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu.o
+                             0x126d69 (size before relaxing)
+ .debug_str     0x00128040     0x4d1e src/ASF/thirdparty/sensor/mpu9250/driver/eMPL/inv_mpu_dmp_motion_driver.o
+                             0x12a7a4 (size before relaxing)
+ .debug_str     0x0012cd5e      0x75e src/sms_v_0_2/src/sms_ble.o
+                             0x125922 (size before relaxing)
+ .debug_str     0x0012d4bc      0x267 src/sms_v_0_2/src/sms_button.o
+                             0x1256be (size before relaxing)
+ .debug_str     0x0012d723       0x5a src/sms_v_0_2/src/sms_common.o
+                             0x1254e3 (size before relaxing)
+ .debug_str     0x0012d77d       0x92 src/sms_v_0_2/src/sms_i2c.o
+                             0x125547 (size before relaxing)
+ .debug_str     0x0012d80f      0x108 src/sms_v_0_2/src/sms_mpu.o
+                             0x12564c (size before relaxing)
+ .debug_str     0x0012d917       0x91 src/sms_v_0_2/src/sms_led.o
+                             0x12556a (size before relaxing)
+ .debug_str     0x0012d9a8      0x155 src/sms_v_0_2/src/sms_pressure.o
+                             0x125635 (size before relaxing)
+ .debug_str     0x0012dafd       0x75 src/sms_v_0_2/src/sms_sensors.o
+                             0x125232 (size before relaxing)
+ .debug_str     0x0012db72      0x1a3 src/sms_v_0_2/src/sms_spi.o
+                             0x1255c2 (size before relaxing)
+ .debug_str     0x0012dd15      0x63e src/sms_v_0_2/src/sms_timer.o
+                             0x12594c (size before relaxing)
+ .debug_str     0x0012e353      0x1fc src/ASF/sam0/drivers/spi/spi.o
                              0x11b899 (size before relaxing)
- .debug_str     0x0012e54d     0x3009 src/ASF/sam0/drivers/dualtimer/dualtimer.o
+ .debug_str     0x0012e54f     0x3009 src/ASF/sam0/drivers/dualtimer/dualtimer.o
                              0x11e578 (size before relaxing)
- .debug_str     0x00131556      0xc84 src/ASF/sam0/drivers/gpio/gpio.o
+ .debug_str     0x00131558      0xc84 src/ASF/sam0/drivers/gpio/gpio.o
                              0x11eea1 (size before relaxing)
- .debug_str     0x001321da      0x9b3 src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_str     0x001321dc      0x9b3 src/ASF/sam0/drivers/system/system_sam_b.o
                              0x11f032 (size before relaxing)
- .debug_str     0x00132b8d      0x618 src/ASF/sam0/drivers/uart/uart.o
+ .debug_str     0x00132b8f      0x618 src/ASF/sam0/drivers/uart/uart.o
                              0x11be6e (size before relaxing)
- .debug_str     0x001331a5       0x94 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
+ .debug_str     0x001331a7       0x94 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
                              0x105cc7 (size before relaxing)
- .debug_str     0x00133239       0x2a src/ASF/sam0/utils/stdio/read.o
+ .debug_str     0x0013323b       0x2a src/ASF/sam0/utils/stdio/read.o
                              0x11a638 (size before relaxing)
- .debug_str     0x00133263       0x24 src/ASF/sam0/utils/stdio/write.o
+ .debug_str     0x00133265       0x24 src/ASF/sam0/utils/stdio/write.o
                              0x11a63a (size before relaxing)
- .debug_str     0x00133287      0x728 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x00133289      0x728 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
                                0x6983 (size before relaxing)
- .debug_str     0x001339af     0x1cd6 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
-                             0x12737e (size before relaxing)
- .debug_str     0x00135685      0x33e src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_str     0x001339b1     0x1cd6 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+                             0x127380 (size before relaxing)
+ .debug_str     0x00135687      0x33e src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
                              0x11d511 (size before relaxing)
- .debug_str     0x001359c3      0x210 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_str     0x001359c5      0x210 src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
                                0x6032 (size before relaxing)
- .debug_str     0x00135bd3    0x1140c src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_str     0x00135bd5    0x1140c src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
                              0x12e432 (size before relaxing)
- .debug_str     0x00146fdf      0x226 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+ .debug_str     0x00146fe1      0x226 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
                              0x11b6fe (size before relaxing)
- .debug_str     0x00147205       0x31 src/sms_peripheral1.o
-                             0x1252ac (size before relaxing)
+ .debug_str     0x00147207       0x31 src/sms_peripheral1.o
+                             0x1252ae (size before relaxing)
 
 .debug_frame    0x00000000     0x2fdc
  .debug_frame   0x00000000       0x68 src/ASF/common/services/delay/sam/systick_counter.o

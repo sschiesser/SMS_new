@@ -195,7 +195,7 @@ int main(void)
     sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
-    
+
     //register int n21 asm("sp");
     //register int n22 asm("lr");
     //register int n23 asm("r15");

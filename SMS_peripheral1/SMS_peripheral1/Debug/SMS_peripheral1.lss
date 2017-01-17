@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      000000b4  00000000  00000000  00018418  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00051155  00000000  00000000  000184cc  2**0
+  6 .debug_info   00051158  00000000  00000000  000184cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000058c0  00000000  00000000  00069621  2**0
+  7 .debug_abbrev 000058c0  00000000  00000000  00069624  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    0000b9ef  00000000  00000000  0006eee1  2**0
+  8 .debug_loc    0000b9ef  00000000  00000000  0006eee4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000d78  00000000  00000000  0007a8d0  2**0
+  9 .debug_aranges 00000d78  00000000  00000000  0007a8d3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000df0  00000000  00000000  0007b648  2**0
+ 10 .debug_ranges 00000df0  00000000  00000000  0007b64b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  000295d9  00000000  00000000  0007c438  2**0
+ 11 .debug_macro  000295d9  00000000  00000000  0007c43b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00018d59  00000000  00000000  000a5a11  2**0
+ 12 .debug_line   00018d59  00000000  00000000  000a5a14  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    00147236  00000000  00000000  000be76a  2**0
+ 13 .debug_str    00147238  00000000  00000000  000be76d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002fdc  00000000  00000000  002059a0  2**2
+ 14 .debug_frame  00002fdc  00000000  00000000  002059a8  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -8663,13 +8663,13 @@ void sms_i2c_master_configure(void)
 1000a9be:	4b12      	ldr	r3, [pc, #72]	; (1000aa08 <sms_i2c_master_configure+0x64>)
 1000a9c0:	4798      	blx	r3
     config_i2c_master.clock_source = SMS_I2C_MASTER_CLK_SRC;
-1000a9c2:	2301      	movs	r3, #1
+1000a9c2:	2300      	movs	r3, #0
 1000a9c4:	7023      	strb	r3, [r4, #0]
     config_i2c_master.clock_divider = SMS_I2C_MASTER_CLK_DIV;
-1000a9c6:	3381      	adds	r3, #129	; 0x81
+1000a9c6:	3341      	adds	r3, #65	; 0x41
 1000a9c8:	8063      	strh	r3, [r4, #2]
     config_i2c_master.pin_number_pad0 = SMS_I2C_MASTER_PIN_SDA;
-1000a9ca:	3b7a      	subs	r3, #122	; 0x7a
+1000a9ca:	3b39      	subs	r3, #57	; 0x39
 1000a9cc:	6063      	str	r3, [r4, #4]
     config_i2c_master.pin_number_pad1 = SMS_I2C_MASTER_PIN_SCL;
 1000a9ce:	3301      	adds	r3, #1
@@ -9151,11 +9151,11 @@ int sms_mpu_initialize(void) {
 1000ac34:	4b23      	ldr	r3, [pc, #140]	; (1000acc4 <sms_mpu_initialize+0xc8>)
 1000ac36:	4798      	blx	r3
     mpu_set_sample_rate(SMS_MPU_SAMPLE_RATE_HZ);
-1000ac38:	2004      	movs	r0, #4
+1000ac38:	2032      	movs	r0, #50	; 0x32
 1000ac3a:	4b23      	ldr	r3, [pc, #140]	; (1000acc8 <sms_mpu_initialize+0xcc>)
 1000ac3c:	4798      	blx	r3
     mpu_set_compass_sample_rate(SMS_MPU_COMPASS_RATE_HZ);
-1000ac3e:	2004      	movs	r0, #4
+1000ac3e:	2032      	movs	r0, #50	; 0x32
 1000ac40:	4b22      	ldr	r3, [pc, #136]	; (1000accc <sms_mpu_initialize+0xd0>)
 1000ac42:	4798      	blx	r3
     mpu_get_sample_rate(&mpu_device.hal.sample_rate);
@@ -9184,7 +9184,7 @@ int sms_mpu_initialize(void) {
 1000ac64:	4b1e      	ldr	r3, [pc, #120]	; (1000ace0 <sms_mpu_initialize+0xe4>)
 1000ac66:	4798      	blx	r3
     dmp_set_fifo_rate(SMS_MPU_SAMPLE_RATE_HZ);
-1000ac68:	2004      	movs	r0, #4
+1000ac68:	2032      	movs	r0, #50	; 0x32
 1000ac6a:	4b1e      	ldr	r3, [pc, #120]	; (1000ace4 <sms_mpu_initialize+0xe8>)
 1000ac6c:	4798      	blx	r3
     mpu_set_dmp_state(1);
@@ -10342,11 +10342,11 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
         mpu_device.state = MPU_STATE_ON;
 1000b328:	2102      	movs	r1, #2
 1000b32a:	232f      	movs	r3, #47	; 0x2f
-1000b32c:	4a16      	ldr	r2, [pc, #88]	; (1000b388 <sms_sensors_interrupt_toggle+0x68>)
+1000b32c:	4a15      	ldr	r2, [pc, #84]	; (1000b384 <sms_sensors_interrupt_toggle+0x64>)
 1000b32e:	54d1      	strb	r1, [r2, r3]
         gpio_enable_callback(SMS_MPU_DRDY_PIN);
 1000b330:	201e      	movs	r0, #30
-1000b332:	4b16      	ldr	r3, [pc, #88]	; (1000b38c <sms_sensors_interrupt_toggle+0x6c>)
+1000b332:	4b15      	ldr	r3, [pc, #84]	; (1000b388 <sms_sensors_interrupt_toggle+0x68>)
 1000b334:	4798      	blx	r3
 1000b336:	e006      	b.n	1000b346 <sms_sensors_interrupt_toggle+0x26>
     }
@@ -10354,11 +10354,11 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
         mpu_device.state = MPU_STATE_OFF;
 1000b338:	2100      	movs	r1, #0
 1000b33a:	232f      	movs	r3, #47	; 0x2f
-1000b33c:	4a12      	ldr	r2, [pc, #72]	; (1000b388 <sms_sensors_interrupt_toggle+0x68>)
+1000b33c:	4a11      	ldr	r2, [pc, #68]	; (1000b384 <sms_sensors_interrupt_toggle+0x64>)
 1000b33e:	54d1      	strb	r1, [r2, r3]
         gpio_disable_callback(SMS_MPU_DRDY_PIN);
 1000b340:	201e      	movs	r0, #30
-1000b342:	4b13      	ldr	r3, [pc, #76]	; (1000b390 <sms_sensors_interrupt_toggle+0x70>)
+1000b342:	4b12      	ldr	r3, [pc, #72]	; (1000b38c <sms_sensors_interrupt_toggle+0x6c>)
 1000b344:	4798      	blx	r3
      * Note: Since there is no direct mechanism to simply enable and disable
      *       the AON sleep timer interruption, we have to initialize it each
@@ -10367,9 +10367,9 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
      */
     if(press_int) {
 1000b346:	2c00      	cmp	r4, #0
-1000b348:	d011      	beq.n	1000b36e <sms_sensors_interrupt_toggle+0x4e>
+1000b348:	d010      	beq.n	1000b36c <sms_sensors_interrupt_toggle+0x4c>
         pressure_device.hal.current_state = MS58_STATE_CONV_PRESSURE;
-1000b34a:	4b12      	ldr	r3, [pc, #72]	; (1000b394 <sms_sensors_interrupt_toggle+0x74>)
+1000b34a:	4b11      	ldr	r3, [pc, #68]	; (1000b390 <sms_sensors_interrupt_toggle+0x70>)
 1000b34c:	2103      	movs	r1, #3
 1000b34e:	2225      	movs	r2, #37	; 0x25
 1000b350:	5499      	strb	r1, [r3, r2]
@@ -10379,43 +10379,42 @@ void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
 1000b356:	5499      	strb	r1, [r3, r2]
         sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
 1000b358:	2100      	movs	r1, #0
-1000b35a:	2080      	movs	r0, #128	; 0x80
-1000b35c:	0200      	lsls	r0, r0, #8
-1000b35e:	4b0e      	ldr	r3, [pc, #56]	; (1000b398 <sms_sensors_interrupt_toggle+0x78>)
-1000b360:	4798      	blx	r3
+1000b35a:	480e      	ldr	r0, [pc, #56]	; (1000b394 <sms_sensors_interrupt_toggle+0x74>)
+1000b35c:	4b0e      	ldr	r3, [pc, #56]	; (1000b398 <sms_sensors_interrupt_toggle+0x78>)
+1000b35e:	4798      	blx	r3
         sms_timer_aon_register_callback();
-1000b362:	4b0e      	ldr	r3, [pc, #56]	; (1000b39c <sms_sensors_interrupt_toggle+0x7c>)
-1000b364:	4798      	blx	r3
+1000b360:	4b0e      	ldr	r3, [pc, #56]	; (1000b39c <sms_sensors_interrupt_toggle+0x7c>)
+1000b362:	4798      	blx	r3
         sensors_active = true;
-1000b366:	2201      	movs	r2, #1
-1000b368:	4b0d      	ldr	r3, [pc, #52]	; (1000b3a0 <sms_sensors_interrupt_toggle+0x80>)
-1000b36a:	701a      	strb	r2, [r3, #0]
-1000b36c:	e00a      	b.n	1000b384 <sms_sensors_interrupt_toggle+0x64>
+1000b364:	2201      	movs	r2, #1
+1000b366:	4b0e      	ldr	r3, [pc, #56]	; (1000b3a0 <sms_sensors_interrupt_toggle+0x80>)
+1000b368:	701a      	strb	r2, [r3, #0]
+1000b36a:	e00a      	b.n	1000b382 <sms_sensors_interrupt_toggle+0x62>
     }
     else {
         pressure_device.hal.current_state = MS58_STATE_READY;
-1000b36e:	2102      	movs	r1, #2
-1000b370:	2325      	movs	r3, #37	; 0x25
-1000b372:	4a08      	ldr	r2, [pc, #32]	; (1000b394 <sms_sensors_interrupt_toggle+0x74>)
-1000b374:	54d1      	strb	r1, [r2, r3]
+1000b36c:	2102      	movs	r1, #2
+1000b36e:	2325      	movs	r3, #37	; 0x25
+1000b370:	4a07      	ldr	r2, [pc, #28]	; (1000b390 <sms_sensors_interrupt_toggle+0x70>)
+1000b372:	54d1      	strb	r1, [r2, r3]
         sms_timer_aon_disable();
-1000b376:	4b0b      	ldr	r3, [pc, #44]	; (1000b3a4 <sms_sensors_interrupt_toggle+0x84>)
-1000b378:	4798      	blx	r3
+1000b374:	4b0b      	ldr	r3, [pc, #44]	; (1000b3a4 <sms_sensors_interrupt_toggle+0x84>)
+1000b376:	4798      	blx	r3
         sms_timer_aon_unregister_callback();
-1000b37a:	4b0b      	ldr	r3, [pc, #44]	; (1000b3a8 <sms_sensors_interrupt_toggle+0x88>)
-1000b37c:	4798      	blx	r3
+1000b378:	4b0b      	ldr	r3, [pc, #44]	; (1000b3a8 <sms_sensors_interrupt_toggle+0x88>)
+1000b37a:	4798      	blx	r3
         sensors_active = false;
-1000b37e:	2200      	movs	r2, #0
-1000b380:	4b07      	ldr	r3, [pc, #28]	; (1000b3a0 <sms_sensors_interrupt_toggle+0x80>)
-1000b382:	701a      	strb	r2, [r3, #0]
+1000b37c:	2200      	movs	r2, #0
+1000b37e:	4b08      	ldr	r3, [pc, #32]	; (1000b3a0 <sms_sensors_interrupt_toggle+0x80>)
+1000b380:	701a      	strb	r2, [r3, #0]
     }
 }
-1000b384:	bd10      	pop	{r4, pc}
-1000b386:	46c0      	nop			; (mov r8, r8)
-1000b388:	10019ec8 	.word	0x10019ec8
-1000b38c:	1000c595 	.word	0x1000c595
-1000b390:	1000c5f1 	.word	0x1000c5f1
-1000b394:	10019fdc 	.word	0x10019fdc
+1000b382:	bd10      	pop	{r4, pc}
+1000b384:	10019ec8 	.word	0x10019ec8
+1000b388:	1000c595 	.word	0x1000c595
+1000b38c:	1000c5f1 	.word	0x1000c5f1
+1000b390:	10019fdc 	.word	0x10019fdc
+1000b394:	000003d5 	.word	0x000003d5
 1000b398:	1000b50d 	.word	0x1000b50d
 1000b39c:	1000b541 	.word	0x1000b541
 1000b3a0:	1001a068 	.word	0x1001a068
