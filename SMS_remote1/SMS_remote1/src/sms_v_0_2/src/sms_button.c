@@ -11,14 +11,16 @@
 /* Callback functions --> doing things                                  */
 /************************************************************************/
 /* BUTTON_0 */
-int sms_button_fn(enum sms_btn_ids btn)
+//int sms_button_fn(enum sms_btn_ids btn)
+int sms_button_fn(void)
 {
     button_instance.previous_state = button_instance.current_state;
     button_instance.current_state = sms_button_get_state();
-    
-    if(btn == SMS_BTN_0) sms_monitor_get_states("[sms_button_fn]-0");
-    else if(btn == SMS_BTN_1) sms_monitor_get_states("[sms_button_fn]-1");
-    else return -1;
+	sms_monitor_get_states("[sms_button_fn]");
+	
+    //if(btn == SMS_BTN_0) sms_monitor_get_states("[sms_button_fn]-0");
+    //else if(btn == SMS_BTN_1) sms_monitor_get_states("[sms_button_fn]-1");
+    //else return -1;
     
     switch(button_instance.current_state) {
         // --- current state ---
@@ -66,25 +68,24 @@ int sms_button_fn(enum sms_btn_ids btn)
             timer1_current_mode = TIMER1_MODE_STARTUP;
             timer2_current_mode = TIMER2_MODE_NONE;
             sms_btn_cnt = 0;
-            //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
 			ulp_ready = false;
             break;
             
             case BLE_STATE_PAIRED:
-			button_instance.btn1.new_char = true;
+            case BLE_STATE_INDICATING:
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
-            //sms_ble_ind_retry = 0;
+			button_instance.btn1.new_char = true;
             sms_ble_send_characteristic(BLE_CHAR_BTN);
 			ulp_ready = true;
             break;
             
-            case BLE_STATE_INDICATING:
-            DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
-			ulp_ready = true;
-            return -1;
-            break;
+            //case BLE_STATE_INDICATING:
+            //DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
+			//ulp_ready = true;
+            //return -1;
+            //break;
             
             case BLE_STATE_DISCONNECTED:
             case BLE_STATE_ADVERTISING:

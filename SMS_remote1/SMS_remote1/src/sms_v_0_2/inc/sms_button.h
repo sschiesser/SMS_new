@@ -66,7 +66,7 @@ struct sms_btn_struct {
     enum sms_btn_ids id;
     uint8_t gpio_pin;
     enum sms_btn_int_tog int_enabled;
-	bool new_int;
+	volatile bool new_int;
 	bool new_char;
     uint8_t char_value;
 };
@@ -98,7 +98,8 @@ void sms_button_disable_callbacks(void);
 void sms_button_toggle_interrupt(enum sms_btn_int_tog tog1, enum sms_btn_int_tog tog2);
 void sms_button_bt0_callback(void);
 void sms_button_bt1_callback(void);
-int sms_button_fn(enum sms_btn_ids btn);
+int sms_button_fn(void);
+//int sms_button_fn(enum sms_btn_ids btn);
 
 enum sms_button_state sms_button_get_state(void);
 

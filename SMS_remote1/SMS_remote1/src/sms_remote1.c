@@ -174,22 +174,22 @@ int main(void)
 		if(button_instance.btn0.new_int) {
 			acquire_sleep_lock();
 			DBG_LOG_DEV("Waking up... Btn0 int");
-			if(sms_button_fn(SMS_BTN_0) < 0) {
+			//if(sms_button_fn(SMS_BTN_0) < 0) {
+			if(sms_button_fn() < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
 			// here
 			button_instance.btn0.new_int = false;
-			DBG_LOG_CONT_DEV("done");
 		}
 		if(button_instance.btn1.new_int) {
 			acquire_sleep_lock();
 			DBG_LOG_DEV("Waking up... Btn1 int");
-			if(sms_button_fn(SMS_BTN_1) < 0) {
+			//if(sms_button_fn(SMS_BTN_1) < 0) {
+			if(sms_button_fn() < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
 			// here
 			button_instance.btn1.new_int = false;
-			DBG_LOG_CONT_DEV("done");
 		}
 
 		/* Timer interrupt region */
@@ -197,14 +197,12 @@ int main(void)
 			DBG_LOG_DEV("Timer1 int... ");
 			sms_dualtimer_stop(DUALTIMER_TIMER1);
 			sms_dualtimer1_fn();
-			DBG_LOG_CONT_DEV("done");
 			timer1_instance.new_int = false;
 		}
 		if(timer2_instance.new_int) {
 			DBG_LOG_DEV("Timer2 int... ");
 			sms_dualtimer_stop(DUALTIMER_TIMER2);
 			sms_dualtimer2_fn();
-			DBG_LOG_CONT_DEV("done");
 			timer2_instance.new_int = false;
 		}
 		
