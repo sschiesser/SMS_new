@@ -35,12 +35,9 @@ int sms_button_fn(enum sms_btn_ids btn)
             
             case BLE_STATE_PAIRED:
             case BLE_STATE_INDICATING:
-            //if(pressure_device.state == PRESSURE_STATE_STDBY) {
-                //DBG_LOG_DEV("[sms_button_fn]\t\tStarting sensors (B0)");
-                //sms_sensors_interrupt_toggle(false, true);
-            //}
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
+			button_instance.btn0.new_char = true;
 			sms_ble_send_characteristic(BLE_CHAR_BTN);
 			ulp_ready = true;
             break;
@@ -75,10 +72,7 @@ int sms_button_fn(enum sms_btn_ids btn)
             break;
             
             case BLE_STATE_PAIRED:
-            //if(pressure_device.state == PRESSURE_STATE_STDBY) {
-                //DBG_LOG_DEV("[sms_button_fn]\t\tStarting sensors (B1)");
-                //sms_sensors_interrupt_toggle(false, true);
-            //}
+			button_instance.btn1.new_char = true;
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
             //sms_ble_ind_retry = 0;

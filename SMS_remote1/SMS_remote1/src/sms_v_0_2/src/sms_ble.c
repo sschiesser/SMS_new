@@ -280,10 +280,12 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         case BLE_CHAR_BTN:
 		send_val[0] = 0x00;
 		if(button_instance.btn0.new_char) {
+			button_instance.btn0.new_char = false;
 			button_instance.btn0.char_value = ((button_instance.btn0.char_value >= 0x7f) ? 0 : (button_instance.btn0.char_value + 1));
 			send_val[0] |= button_instance.btn0.char_value;
 		}
 		if(button_instance.btn1.new_char) {
+			button_instance.btn1.new_char = false;
 	        button_instance.btn1.char_value = ((button_instance.btn1.char_value >= 0xff) ? 0 : (button_instance.btn1.char_value + 1));
 			send_val[0] |= button_instance.btn1.char_value + 0x80;
 		}
@@ -306,24 +308,28 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     //}
     status = at_ble_characteristic_value_set(val_handle, send_val, (length * sizeof(uint8_t)));
     if(status == AT_BLE_SUCCESS) {
-		DBG_LOG_CONT_DEV(" SET! ");
+		DBG_LOG_DEV(" SET: %d at 0x%x  ", send_val[0], val_handle);
 //#   if SMS_SENDING_WITH_ACK == true
         //sms_ble_ind_retry = 0;
         //status = at_ble_indication_send(sms_connection_handle, val_handle);
 //#   else
-        status = at_ble_notification_send(sms_connection_handle, val_handle);
-		DBG_LOG_CONT_DEV(" %d GONE? %d ", sms_ble_send_cnt, status);
+		uint8_t res = 0;
+		for(uint8_t i = 0; i < 2; i++) {
+	        status = at_ble_notification_send(sms_connection_handle, val_handle);
+			if(status == AT_BLE_SUCCESS) res++;
+		}
 //#   endif
-        //if(status == AT_BLE_SUCCESS) {
+        if(res == 2) {
+			DBG_LOG_CONT_DEV("%d GONE? %d ", sms_ble_send_cnt, status);
 //#   if SMS_SENDING_WITH_ACK == true
             //timer2_current_mode = TIMER2_MODE_INDICATION_TOUT;
             //sms_dualtimer_start(TIMER_UNIT_MS, BLE_INDICATION_TOUT_MS, DUALTIMER_TIMER2);
 //#   endif
-        //}
-        //else {
-			//DBG_LOG_DEV(" NOT gone? ");
+        }
+        else {
+	        DBG_LOG_DEV("NOT (completely) gone? ");
             //#pragma TBD: handle sending error...
-        //}
+        }
     }
 	else {
 		DBG_LOG_DEV(" NOT set? ");
