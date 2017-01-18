@@ -188,7 +188,7 @@ at_ble_status_t ble_event_task(uint32_t timeout)
 	
     if (status == AT_BLE_SUCCESS) 
     {		
-            ble_event_manager(event, ble_event_params);
+		ble_event_manager(event, ble_event_params);
     }
     
     return status;

@@ -154,8 +154,17 @@ void sms_button_configure_gpio(void)
     config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
     config_gpio_pin.aon_wakeup = true;
     if(gpio_pin_set_config(button_instance.btn0.gpio_pin, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG_DEV("[sms_button_configure]\tproblem while setting up button0");
+        DBG_LOG_DEV("[sms_button_configure]\t\tproblem while setting up button0");
     }
+	
+	/* Nothing connected to AO_GPIO_1, but pulling down to allow sleep state */
+	gpio_get_config_defaults(&config_gpio_pin);
+	config_gpio_pin.direction = GPIO_PIN_DIR_INPUT;
+	config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
+	config_gpio_pin.aon_wakeup = false;
+	if(gpio_pin_set_config(PIN_AO_GPIO_1, &config_gpio_pin) != STATUS_OK) {
+		DBG_LOG_DEV("[sms_button_configure]\t\tproblem while setting AO_GPIO_1");
+	}
     
     /* Button1 @ PIN_AO_GPIO_2 */
     gpio_get_config_defaults(&config_gpio_pin);
@@ -163,7 +172,7 @@ void sms_button_configure_gpio(void)
     config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
     config_gpio_pin.aon_wakeup = true;
     if(gpio_pin_set_config(button_instance.btn1.gpio_pin, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG("[sms_button_configure]\tProblem while setting up button1");
+        DBG_LOG_DEV("[sms_button_configure]\t\tProblem while setting up button1");
     }
 
     /* Button 0 on SAMB11 XPLAINED */
@@ -171,7 +180,7 @@ void sms_button_configure_gpio(void)
     config_gpio_pin.direction = GPIO_PIN_DIR_INPUT;
     config_gpio_pin.input_pull = GPIO_PIN_PULL_NONE;
     if(gpio_pin_set_config(BUTTON_0_PIN, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG("[sms_button_configure]\tProblem while setting up XPLAINED user button");
+        DBG_LOG_DEV("[sms_button_configure]\t\tProblem while setting up XPLAINED user button");
     }
 }
 

@@ -74,11 +74,10 @@ static void resume_cb(void)
     init_port_list(); // re-initialize all ports
     serial_console_init(); // GPIO (UART) for the console
     sms_dualtimer_init();
-    delay_init();
+    //delay_init();
     sms_button_configure_gpio(); // GPIO (AO_0 & AO_1) for the buttons
-    sms_led_gpio_init();
-    //sms_mpu_configure_gpio();
-    sms_monitor_configure_gpio();
+    //sms_led_gpio_init();
+    //sms_monitor_configure_gpio();
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
 
@@ -102,7 +101,7 @@ int main(void)
     
     /* Disable ULP
      * ----------- */
-	acquire_sleep_lock();
+	//acquire_sleep_lock();
     
 
     /* Initialize SMS flags
@@ -116,16 +115,16 @@ int main(void)
     sms_dualtimer_init();
 	
     // Blocking delay (hacked from other SAM platforms)
-    delay_init();
+    //delay_init();
 
 	// Buttons
     sms_button_configure_gpio();
     
     // LED
-    sms_led_gpio_init();
+    //sms_led_gpio_init();
     
 	// monitoring...
-    sms_monitor_configure_gpio();
+    //sms_monitor_configure_gpio();
     
     /* Initialize the BLE module
      * ------------------------- */
@@ -149,36 +148,22 @@ int main(void)
     sms_button_register_callbacks();
     
     // BLE
-    ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
-    ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_SERVER_EVENT_TYPE, sms_ble_gatt_server_cb);
+    //ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
+    //ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_SERVER_EVENT_TYPE, sms_ble_gatt_server_cb);
     //register_ble_user_event_cb(sms_plf_event_cb);
 
-    //ble_set_ulp_mode(BLE_ULP_MODE_SET);
-    
     /* Enable buttons interrupts
      * ------------------------- */
     sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     
-    //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
-
-    //register int n21 asm("sp");
-    //register int n22 asm("lr");
-    //register int n23 asm("r15");
-    //DBG_LOG("at post-init: sp 0x%x, lr 0x%x", n21, n22);
-    
-    //int res;
-    //res = sms_mpu_initialize();
-    //if(res) {
-        //DBG_LOG("Could not initialize MPU!");
-        //while(1) {}
-    //}
-    //sms_sensors_interrupt_toggle(true, false);
-    //while(1) {}
-    
+	
     /* Goto sleep
      * ---------- */
-    sms_ble_power_down();
-
+    //sms_ble_power_down();
+	ulp_ready = true;
+	release_sleep_lock();
+	
+    //ble_set_ulp_mode(BLE_ULP_MODE_SET);
     
 	while(true)
 	{

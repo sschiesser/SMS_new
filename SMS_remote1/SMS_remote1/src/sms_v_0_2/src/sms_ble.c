@@ -23,7 +23,8 @@ void sms_ble_power_down(void)
         /* If already power off state, then go back sleeping */
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         ulp_ready = true;
-        //release_sleep_lock();
+		DBG_LOG_DEV("Good night");
+        release_sleep_lock();
     }
     else {
         /* Disable button interrupts */
@@ -80,12 +81,14 @@ at_ble_status_t sms_ble_advertise(void)
     if((status = at_ble_adv_start(AT_BLE_ADV_TYPE_UNDIRECTED, AT_BLE_ADV_GEN_DISCOVERABLE, NULL, AT_BLE_ADV_FP_ANY, APP_FAST_ADV, APP_ADV_TIMEOUT, 0)) == AT_BLE_SUCCESS)
     {
         DBG_LOG_DEV("[sms_ble_advertise]\t\tBLE Started Advertisement");
-        return AT_BLE_SUCCESS;
+        status = AT_BLE_SUCCESS;
     } 
     else {
         DBG_LOG("[sms_service_advertise]\tBLE Advertisement start failed: reason 0x%x", status);
+		status = AT_BLE_FAILURE;
     }
-    return AT_BLE_FAILURE;
+	ulp_ready = true;
+    return status;
 }
 
 /* AT_BLE_ADV_REPORT (#3) */
