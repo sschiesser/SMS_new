@@ -10,7 +10,6 @@
 /************************************************************************/
 /* Callback functions --> doing things                                  */
 /************************************************************************/
-/* BUTTON_0 */
 //int sms_button_fn(enum sms_btn_ids btn)
 int sms_button_fn(void)
 {
@@ -32,7 +31,7 @@ int sms_button_fn(void)
             sms_btn_cnt = 0;
             //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
-			ulp_ready = false;
+			//ulp_ready = false;
             break;
             
             case BLE_STATE_PAIRED:
@@ -41,7 +40,7 @@ int sms_button_fn(void)
             timer2_current_mode = TIMER2_MODE_NONE;
 			button_instance.btn0.new_char = true;
 			sms_ble_send_characteristic(BLE_CHAR_BTN);
-			ulp_ready = true;
+			//ulp_ready = true;
             break;
             
             //case BLE_STATE_INDICATING:
@@ -54,7 +53,7 @@ int sms_button_fn(void)
             case BLE_STATE_CONNECTED:
             default:
             DBG_LOG_DEV("[sms_button_fn]\t\t\tNot used states...");
-			ulp_ready = true;
+			//ulp_ready = true;
             return -1;
             break;
         }
@@ -69,7 +68,7 @@ int sms_button_fn(void)
             timer2_current_mode = TIMER2_MODE_NONE;
             sms_btn_cnt = 0;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
-			ulp_ready = false;
+			//ulp_ready = false;
             break;
             
             case BLE_STATE_PAIRED:
@@ -78,7 +77,7 @@ int sms_button_fn(void)
             timer2_current_mode = TIMER2_MODE_NONE;
 			button_instance.btn1.new_char = true;
             sms_ble_send_characteristic(BLE_CHAR_BTN);
-			ulp_ready = true;
+			//ulp_ready = true;
             break;
             
             //case BLE_STATE_INDICATING:
@@ -91,7 +90,7 @@ int sms_button_fn(void)
             case BLE_STATE_ADVERTISING:
             case BLE_STATE_CONNECTED:
             default:
-			ulp_ready = true;
+			//ulp_ready = true;
             return -1;
             break;
         }
@@ -103,7 +102,7 @@ int sms_button_fn(void)
         if(ble_current_state == BLE_STATE_POWEROFF) {
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
-            ulp_ready = true;
+            //ulp_ready = true;
             //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
             //release_sleep_lock();
         }
@@ -119,14 +118,14 @@ int sms_button_fn(void)
             sms_btn_cnt = 0;
             //ulp_ready = false;
             sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
-			ulp_ready = false;
+			//ulp_ready = false;
             //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         }
         break;
         
         // --- current state ---
         case BUTTON_STATE_NONE:
-        ulp_ready = true;
+        //ulp_ready = true;
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
@@ -234,11 +233,13 @@ void sms_button_toggle_interrupt(enum sms_btn_int_tog tog0, enum sms_btn_int_tog
 /* Callbacks --> sending interrupt message to platform */
 void sms_button_bt0_callback(void)
 {
+	DBG_LOG_DEV("BT0 CB");
     button_instance.btn0.new_int = true;
     send_plf_int_msg_ind(button_instance.btn0.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
 }
 void sms_button_bt1_callback(void)
 {
+	DBG_LOG_DEV("BT1 CB");
 	button_instance.btn1.new_int = true;
     send_plf_int_msg_ind(button_instance.btn1.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
 }
