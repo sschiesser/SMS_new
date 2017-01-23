@@ -12,7 +12,7 @@
 at_ble_status_t sms_ble_adv_report_fn(void *params)
 {
     at_ble_adv_report_t *adv_report = (at_ble_adv_report_t *)params;
-    ble_current_state = BLE_STATE_DISCONNECTED;
+    ble_instance.current_state = BLE_STATE_DISCONNECTED;
     DBG_LOG_DEV("[sms_ble_adv_report_fn]\tAdvertisement timeout...");
     //DBG_LOG_DEV("- status: 0x%02x", adv_report->status);
     sms_ble_power_down();
@@ -22,10 +22,10 @@ at_ble_status_t sms_ble_adv_report_fn(void *params)
 /* AT_BLE_CONNECTED (#5) */
 at_ble_status_t sms_ble_connected_fn(void *params)
 {
-    if(ble_current_state == BLE_STATE_ADVERTISING) {
+    if(ble_instance.current_state == BLE_STATE_ADVERTISING) {
         at_ble_connected_t *connected = (at_ble_connected_t *)params;
         sms_ble_conn_handle = connected->handle;
-        ble_current_state = BLE_STATE_CONNECTED;
+        ble_instance.current_state = BLE_STATE_CONNECTED;
         DBG_LOG_DEV("[sms_ble_connected_fn]\t\tDevices connected...");
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- conn interval: %d\r\n- conn latency: %d\r\n- supervision timeout: %d\r\n- peer address: 0x", connected->handle, connected->conn_params.con_interval, connected->conn_params.con_latency, connected->conn_params.sup_to);
         //for(uint8_t i = 0; i < AT_BLE_ADDR_LEN; i++) {
@@ -42,13 +42,13 @@ at_ble_status_t sms_ble_connected_fn(void *params)
 at_ble_status_t sms_ble_disconnected_fn(void *params)
 {
     at_ble_disconnected_t *disconnect = (at_ble_disconnected_t *)params;
-    if(ble_current_state == BLE_STATE_PAIRED) {
+    if(ble_instance.current_state == BLE_STATE_PAIRED) {
         pressure_device.state = PRESSURE_STATE_OFF;
         sms_sensors_interrupt_toggle(false, false);
         sms_sensors_switch(false, false);
     }
-    ble_current_state = BLE_STATE_DISCONNECTED;
-    DBG_LOG_DEV("[sms_ble_disconnected_fn]\tPeer disconnected... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+    ble_instance.current_state = BLE_STATE_DISCONNECTED;
+    DBG_LOG_DEV("[sms_ble_disconnected_fn]\tPeer disconnected... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_instance.current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- reason: 0x%02x", disconnect->handle, disconnect->reason);
     switch(disconnect->reason) {
         case AT_BLE_AUTH_FAILURE: //0x05
@@ -74,8 +74,8 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 /* AT_BLE_PAIR_DONE (#9) */
 at_ble_status_t sms_ble_paired_fn(void *params)
 {
-    if(ble_current_state == BLE_STATE_CONNECTED) {
-        ble_current_state = BLE_STATE_PAIRED;
+    if(ble_instance.current_state == BLE_STATE_CONNECTED) {
+        ble_instance.current_state = BLE_STATE_PAIRED;
         at_ble_pair_done_t *pair_status = (at_ble_pair_done_t *)params;
         sms_monitor_get_states("[sms_ble_paired_fn]");
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
@@ -92,7 +92,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 at_ble_status_t sms_ble_pair_request_fn(void *params)
 {
     at_ble_pair_request_t *request = (at_ble_pair_request_t *)params;
-    DBG_LOG_DEV("[sms_ble_pair_request_fn]\tPairing request... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
+    DBG_LOG_DEV("[sms_ble_pair_request_fn]\tPairing request... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_instance.current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- peer features: 0x%02x", request->handle, request->peer_features);
     return AT_BLE_SUCCESS;
 }
@@ -104,13 +104,13 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
     
     at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
-	sms_ble_sending = false;
+	ble_instance.sending_queue--;
     //button_instance.current_state = sms_button_get_state();
     //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
     sms_dualtimer_stop(DUALTIMER_TIMER2);
     timer2_current_mode = TIMER2_MODE_NONE;
-    ble_current_state = BLE_STATE_PAIRED;
+    ble_instance.current_state = BLE_STATE_PAIRED;
     //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tEnabling button int...");
     //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     //DBG_LOG_CONT_DEV(" done!");
@@ -138,7 +138,7 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- char handle: 0x%04x\r\n- status: 0x%02x", indication_status->conn_handle, indication_status->char_handle, indication_status->status);
     sms_dualtimer_stop(DUALTIMER_TIMER2);
     timer2_current_mode = TIMER2_MODE_NONE;
-    ble_current_state = BLE_STATE_PAIRED;
+    ble_instance.current_state = BLE_STATE_PAIRED;
     //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     //sms_sensors_toggle_interrupt(SMS_EXTINT_ENABLE);
     
@@ -191,7 +191,7 @@ const ble_event_callback_t sms_ble_gatt_server_cb[] = {
 /* Own functions */
 void sms_ble_init_variables(void)
 {
-    ble_current_state = BLE_STATE_POWEROFF;
+    ble_instance.current_state = BLE_STATE_POWEROFF;
     sms_ble_send_cnt = 0;
 }
 
@@ -205,7 +205,7 @@ void sms_ble_startup(void)
 void sms_ble_power_down(void)
 {
 	sms_monitor_get_states("[sms_ble_power_down]");
-	if(ble_current_state == BLE_STATE_POWEROFF) {
+	if(ble_instance.current_state == BLE_STATE_POWEROFF) {
 		/* If already power off state, then go back sleeping */
 		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 		ulp_ready = true;
@@ -215,7 +215,7 @@ void sms_ble_power_down(void)
 		/* Disable button interrupts */
 		//sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
 		/* Disconnect if necessary from BLE network */
-		switch(ble_current_state) {
+		switch(ble_instance.current_state) {
 			case BLE_STATE_ADVERTISING:
 			DBG_LOG_DEV("[sms_ble_power_down]\tStopping command received during advertisement. Stopping... ");
 			if(at_ble_adv_stop() != AT_BLE_SUCCESS) {
@@ -224,7 +224,7 @@ void sms_ble_power_down(void)
 			}
 			else {
 				DBG_LOG_CONT_DEV("done!");
-				ble_current_state = BLE_STATE_DISCONNECTED;
+				ble_instance.current_state = BLE_STATE_DISCONNECTED;
 			}
 			break;
 			
@@ -247,7 +247,7 @@ void sms_ble_power_down(void)
 			break;
 		}
 		
-		ble_current_state = BLE_STATE_DISCONNECTED;
+		ble_instance.current_state = BLE_STATE_DISCONNECTED;
 		timer2_current_mode = TIMER2_MODE_LED_SHUTDOWN;
 		sms_led_blink_start(SMS_LED_0_PIN);
 	}
@@ -256,7 +256,7 @@ void sms_ble_power_down(void)
 at_ble_status_t sms_ble_advertise(void)
 {
 	at_ble_status_t status = AT_BLE_FAILURE;
-	ble_current_state = BLE_STATE_ADVERTISING;
+	ble_instance.current_state = BLE_STATE_ADVERTISING;
 
 	/* Set the advertisement data */
 	if((status = ble_advertisement_data_set()) != AT_BLE_SUCCESS) {
@@ -286,7 +286,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     //ble_current_state = BLE_STATE_INDICATING;
 
     
-	sms_ble_sending = true;
+	ble_instance.sending_queue++;
     sms_ble_send_cnt++;
     
     switch(ch) {

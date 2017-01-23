@@ -74,7 +74,7 @@ void sms_pressure_ms58_reset(void)
 
 void sms_pressure_poll_data(void)
 {
-	if(ble_current_state == BLE_STATE_PAIRED) {
+	if(ble_instance.current_state == BLE_STATE_PAIRED) {
 		//DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
 		if(sms_pressure_ms58_read_data() != STATUS_OK) {
 			DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");

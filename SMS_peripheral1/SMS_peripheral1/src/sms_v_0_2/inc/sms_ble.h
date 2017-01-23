@@ -72,14 +72,19 @@ typedef enum sms_ble_state {
     BLE_STATE_INDICATING,
     BLE_STATE_SHUTTINGDOWN = 0xA0
 }sms_ble_state_t;
-volatile sms_ble_state_t ble_current_state;
+//volatile sms_ble_state_t ble_current_state;
 
+typedef struct ble_device {
+	volatile sms_ble_state_t current_state;
+	volatile uint8_t sending_queue;
+}ble_device_t;
+ble_device_t ble_instance;
 
 uint8_t sms_ble_ind_retry;
 at_ble_handle_t sms_ble_conn_handle;
 
 uint16_t sms_ble_send_cnt;
-volatile bool sms_ble_sending;
+//volatile bool sms_ble_sending;
 
 
 /* ------------

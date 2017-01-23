@@ -137,7 +137,7 @@ void sms_dualtimer1_fn(void)
                 switch(button_instance.current_state) {
                     // --- prev_state = b0: switch current_state ---
                     case BUTTON_STATE_B0:
-                    if(ble_current_state == BLE_STATE_POWEROFF) {
+                    if(ble_instance.current_state == BLE_STATE_POWEROFF) {
                         sms_btn_cnt++;
                         if(sms_btn_cnt >= SMS_BTN_STARTUP_CNT) {
                             timer1_current_mode = TIMER1_MODE_NONE;
@@ -161,7 +161,7 @@ void sms_dualtimer1_fn(void)
                     
                     // --- prev_state = b0: switch current_state ---
                     case BUTTON_STATE_B1:
-                    if(ble_current_state == BLE_STATE_POWEROFF) {
+                    if(ble_instance.current_state == BLE_STATE_POWEROFF) {
                         sms_btn_cnt = 0;
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         timer1_current_mode = TIMER1_MODE_STARTUP;
@@ -195,7 +195,7 @@ void sms_dualtimer1_fn(void)
                 switch(button_instance.current_state) {
                     // --- prev_state = b1: switch current_state ---
                     case BUTTON_STATE_B1:
-                    if(ble_current_state == BLE_STATE_POWEROFF) {
+                    if(ble_instance.current_state == BLE_STATE_POWEROFF) {
                         sms_btn_cnt++;
                         if(sms_btn_cnt >= SMS_BTN_STARTUP_CNT) {
                             timer1_current_mode = TIMER1_MODE_NONE;
@@ -219,7 +219,7 @@ void sms_dualtimer1_fn(void)
                     
                     // --- prev_state = b1: switch current_state ---
                     case BUTTON_STATE_B0:
-                    if(ble_current_state == BLE_STATE_POWEROFF) {
+                    if(ble_instance.current_state == BLE_STATE_POWEROFF) {
                         sms_btn_cnt = 0;
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         timer1_current_mode = TIMER1_MODE_STARTUP;
@@ -314,7 +314,7 @@ void sms_dualtimer2_fn(void)
     switch(timer2_current_mode) {
         case TIMER2_MODE_INDICATION_TOUT:
         timer2_current_mode = TIMER2_MODE_NONE;
-        if(ble_current_state == BLE_STATE_PAIRED) {
+        if(ble_instance.current_state == BLE_STATE_PAIRED) {
             //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             if(timer1_current_mode == TIMER1_MODE_NONE) {
                 //release_sleep_lock();
@@ -327,7 +327,7 @@ void sms_dualtimer2_fn(void)
                 DBG_LOG_CONT_DEV(" ...giving up!");
                 //DBG_LOG_DEV("[sms_dualtimer2_fn]\tTimer1 mode: %d", timer1_current_mode);
                 timer2_current_mode = TIMER2_MODE_NONE;
-                ble_current_state = BLE_STATE_PAIRED;
+                ble_instance.current_state = BLE_STATE_PAIRED;
                 //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                 //DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tStarting sensors...");
                 //sms_sensors_toggle_interrupt(SMS_EXTINT_ENABLE);

@@ -92,7 +92,7 @@ int main(void)
 {
     /* Define current BLE state
      * ------------------------ */
-    ble_current_state = BLE_STATE_STARTING;
+    ble_instance.current_state = BLE_STATE_STARTING;
     
     /* Initialize platform
      * ------------------- */
@@ -201,7 +201,7 @@ int main(void)
 			button_instance.btn1.new_int = false;
 		}
 		if(mpu_device.new_int) {
-			DBG_LOG("MPU int (%d)... ", sms_ble_sending);
+			DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
 			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 			sms_mpu_poll_data();
 			mpu_device.new_int = false;
@@ -210,7 +210,7 @@ int main(void)
 			DBG_LOG_CONT_DEV("done");
 		}
 		if(pressure_device.new_int) {
-			DBG_LOG("Press int (%d)... ", sms_ble_sending);
+			DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
 			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 			sms_pressure_poll_data();
 			pressure_device.new_int = false;
@@ -235,16 +235,20 @@ int main(void)
 		
 		/* Sending region */
 		if(mpu_device.rts) {
-			DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, sms_ble_sending);
+			DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
 			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-			sms_ble_send_characteristic(BLE_CHAR_MPU);
+			if(ble_instance.sending_queue == 0) {
+				sms_ble_send_characteristic(BLE_CHAR_MPU);
+			}
 			mpu_device.rts = false;
 			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 		}
 		if(pressure_device.rts) {
-			DBG_LOG("Press sending (%d/%d)... ", mpu_device.new_int, sms_ble_sending);
+			DBG_LOG("Press sending (%d/%d)... ", mpu_device.new_int, ble_instance.sending_queue);
 			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
-			sms_ble_send_characteristic(BLE_CHAR_PRESS);
+			if(ble_instance.sending_queue == 0) {
+				sms_ble_send_characteristic(BLE_CHAR_PRESS);
+			}
 			pressure_device.rts = false;
 			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 		}

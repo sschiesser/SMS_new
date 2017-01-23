@@ -22,7 +22,7 @@ int sms_button_fn(enum sms_btn_ids btn)
     switch(button_instance.current_state) {
         // --- current state ---
         case BUTTON_STATE_B0:
-        switch(ble_current_state) {
+        switch(ble_instance.current_state) {
             case BLE_STATE_POWEROFF:
             timer1_current_mode = TIMER1_MODE_STARTUP;
             timer2_current_mode = TIMER2_MODE_NONE;
@@ -60,7 +60,7 @@ int sms_button_fn(enum sms_btn_ids btn)
         
         // --- current state ---
         case BUTTON_STATE_B1:
-        switch(ble_current_state) {
+        switch(ble_instance.current_state) {
             case BLE_STATE_POWEROFF:
             timer1_current_mode = TIMER1_MODE_STARTUP;
             timer2_current_mode = TIMER2_MODE_NONE;
@@ -97,7 +97,7 @@ int sms_button_fn(enum sms_btn_ids btn)
         
         // --- current state ---
         case BUTTON_STATE_BOTH:
-        if(ble_current_state == BLE_STATE_POWEROFF) {
+        if(ble_instance.current_state == BLE_STATE_POWEROFF) {
             timer1_current_mode = TIMER1_MODE_NONE;
             timer2_current_mode = TIMER2_MODE_NONE;
             ulp_ready = true;
