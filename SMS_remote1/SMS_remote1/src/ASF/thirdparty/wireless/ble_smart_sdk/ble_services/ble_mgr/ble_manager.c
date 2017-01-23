@@ -178,7 +178,8 @@ at_ble_status_t ble_event_task(uint32_t timeout)
 	if (ble_get_ulp_status() == BLE_ULP_MODE_SET)
 	{
 		release_sleep_lock();
-	}	
+	}
+	
 	status = at_ble_event_get(&event, ble_event_params, timeout);
 	
 	if (ble_get_ulp_status() == BLE_ULP_MODE_SET)

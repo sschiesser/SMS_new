@@ -21,6 +21,7 @@ int sms_button_fn(void)
     //else if(btn == SMS_BTN_1) sms_monitor_get_states("[sms_button_fn]-1");
     //else return -1;
     
+	int retVal = 0;
     switch(button_instance.current_state) {
         // --- current state ---
         case BUTTON_STATE_B0:
@@ -54,7 +55,7 @@ int sms_button_fn(void)
             default:
             DBG_LOG_DEV("[sms_button_fn]\t\t\tNot used states...");
 			//ulp_ready = true;
-            return -1;
+            retVal = -1;
             break;
         }
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
@@ -91,7 +92,7 @@ int sms_button_fn(void)
             case BLE_STATE_CONNECTED:
             default:
 			//ulp_ready = true;
-            return -1;
+            retVal = -1;
             break;
         }
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
@@ -130,7 +131,7 @@ int sms_button_fn(void)
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;
     }
-    return 0;
+    return retVal;
 }
 
 /************************************************************************/
@@ -192,15 +193,6 @@ void sms_button_register_callbacks(void)
     /* User button callback */
 }
 
-/* Disable button input callbacks */
-void sms_button_disable_callbacks(void)
-{
-    /* Button0 callback */
-    gpio_disable_callback(SMS_BTN_0_PIN);
-    /* Button1 callback */
-    gpio_disable_callback(SMS_BTN_1_PIN);
-}
-
 /* Get current buttons state */
 enum sms_button_state sms_button_get_state(void)
 {
@@ -214,22 +206,27 @@ enum sms_button_state sms_button_get_state(void)
 }
 
 /* En- or disable button interrupts */
-void sms_button_toggle_interrupt(enum sms_btn_int_tog tog0, enum sms_btn_int_tog tog1)
+void sms_button_toggle_callback(enum sms_btn_int_tog tog0, enum sms_btn_int_tog tog1)
 {
     if(tog0 == SMS_BTN_INT_ENABLE) {
+		DBG_LOG_DEV("Enable btn0 int");
         gpio_enable_callback(button_instance.btn0.gpio_pin);
     }
     else if(tog0 == SMS_BTN_INT_DISABLE) {
-        gpio_disable_callback(button_instance.btn0.gpio_pin);
+		DBG_LOG_DEV("Disable btn0 int");
+		gpio_disable_callback(button_instance.btn0.gpio_pin);
     }
     
     if(tog1 == SMS_BTN_INT_ENABLE) {
+		DBG_LOG_DEV("Enable btn1 int");
         gpio_enable_callback(button_instance.btn1.gpio_pin);
     }
     else if(tog1 == SMS_BTN_INT_DISABLE) {
-        gpio_disable_callback(button_instance.btn1.gpio_pin);
+		DBG_LOG_DEV("Disable btn1 int");
+		gpio_disable_callback(button_instance.btn1.gpio_pin);
     }
 }
+
 /* Callbacks --> sending interrupt message to platform */
 void sms_button_bt0_callback(void)
 {

@@ -2346,8 +2346,7 @@ at_ble_status_t at_ble_addr_get(at_ble_addr_t *address);
 ///@cond IGNORE_DOXYGEN
 AT_BLE_API
 ///@endcond
-at_ble_status_t at_ble_event_get(at_ble_events_t *event, void *params,
-                                 uint32_t timeout);
+at_ble_status_t at_ble_event_get(at_ble_events_t *event, void *params, uint32_t timeout);
 
 /** @ingroup misc_group
  * @brief Posts a user defined custom event into the event queue, allowing the user code

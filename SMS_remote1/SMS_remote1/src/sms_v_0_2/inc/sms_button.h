@@ -94,8 +94,7 @@ sms_button_struct_t button_instance;
  * ------------ */
 void sms_button_configure_gpio(void);
 void sms_button_register_callbacks(void);
-void sms_button_disable_callbacks(void);
-void sms_button_toggle_interrupt(enum sms_btn_int_tog tog1, enum sms_btn_int_tog tog2);
+void sms_button_toggle_callback(enum sms_btn_int_tog tog1, enum sms_btn_int_tog tog2);
 void sms_button_bt0_callback(void);
 void sms_button_bt1_callback(void);
 int sms_button_fn(void);

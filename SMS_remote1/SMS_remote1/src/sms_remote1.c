@@ -154,7 +154,7 @@ int main(void)
 
     /* Enable buttons interrupts
      * ------------------------- */
-    sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+    sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     
 	
     /* Goto sleep
@@ -170,6 +170,7 @@ int main(void)
 		
 		/* Sensor interrupt region */
 		if(button_instance.btn0.new_int) {
+			//sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
 			DBG_LOG_DEV("Waking up... Btn0 int");
 			//if(sms_button_fn(SMS_BTN_0) < 0) {
 			if(sms_button_fn() < 0) {
@@ -179,6 +180,7 @@ int main(void)
 			button_instance.btn0.new_int = false;
 		}
 		if(button_instance.btn1.new_int) {
+			//sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
 			DBG_LOG_DEV("Waking up... Btn1 int");
 			//if(sms_button_fn(SMS_BTN_1) < 0) {
 			if(sms_button_fn() < 0) {
@@ -211,6 +213,7 @@ int main(void)
 			//DBG_LOG_DEV("NOT tired!");
 			//acquire_sleep_lock();
 		//}
+		//sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
     }
 }
 
