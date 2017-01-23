@@ -35,13 +35,13 @@
           <option id="sam0.drivers.aon_sleep_timer" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam0.drivers.dualtimer" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam0.drivers.gpio" value="Add" config="callback" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.i2c.master" value="Add" config="polled" content-id="Atmel.ASF" />
           <option id="sam0.drivers.spi" value="Add" config="polled" content-id="Atmel.ASF" />
           <option id="sam0.drivers.system" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.wireless.ble_smart_sdk.ble_profiles.pxp_reporter" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.wireless.ble_smart_sdk.ble_services.battery" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.wireless.ble_smart_sdk.ble_services.ble_manager" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.wireless.ble_smart_sdk.ble_services.link_loss" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="sam0.drivers.i2c.master" value="Add" config="polled" content-id="Atmel.ASF" />
           <option id="common.utils" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam0.utils.cmsis.samb11.source.template" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.wireless.ble_smart_sdk.apps.startup_template" value="Add" config="" content-id="Atmel.ASF" />

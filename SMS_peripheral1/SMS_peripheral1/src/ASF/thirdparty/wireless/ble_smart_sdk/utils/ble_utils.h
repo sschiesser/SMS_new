@@ -49,6 +49,8 @@
 
 #include <asf.h>
 
+#define DBG_DEV				(false)
+
     /// Observer role
 #define   BLE_ROLE_OBSERVER   0x01
     /// Broadcaster role
@@ -69,10 +71,13 @@
 
 #define DBG_LOG_ADV	    printf("\r\nBLE-ADV: ");\
 						printf
+#if DBG_DEV == true
 #define DBG_LOG_DEV			DBG_LOG
 #define DBG_LOG_CONT_DEV	DBG_LOG_CONT
-//#define DBG_LOG_DEV			ALL_UNUSED
-//#define DBG_LOG_CONT_DEV	ALL_UNUSED
+#else
+#define DBG_LOG_DEV			ALL_UNUSED
+#define DBG_LOG_CONT_DEV	ALL_UNUSED
+#endif
 
 #elif defined(NDEBUG)
 #define DBG_LOG_CONT    ALL_UNUSED

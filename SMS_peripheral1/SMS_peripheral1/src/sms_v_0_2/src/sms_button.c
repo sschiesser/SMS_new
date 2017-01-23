@@ -5,12 +5,11 @@
 *  Author: Sébastien Schiesser
 */
 
-#include "sms_peripheral1.h"
+#include "sms_button.h"
 
 /************************************************************************/
 /* Callback functions --> doing things                                  */
 /************************************************************************/
-/* BUTTON_0 */
 int sms_button_fn(enum sms_btn_ids btn)
 {
     button_instance.previous_state = button_instance.current_state;
@@ -132,12 +131,24 @@ int sms_button_fn(enum sms_btn_ids btn)
     return 0;
 }
 
-/************************************************************************/
-/* Callback functions --> doing things                                  */
-/************************************************************************/
+/* Initialize all button-related variables */
+void sms_button_init_variables(void)
+{
+	button_instance.current_state = BUTTON_STATE_NONE;
+	button_instance.btn0.id = SMS_BTN_0;
+	button_instance.btn0.gpio_pin = SMS_BTN_0_PIN;
+	button_instance.btn0.int_enabled = true;
+	button_instance.btn0.new_int = false;
+	button_instance.btn0.char_value = 0;
+	button_instance.btn1.id = SMS_BTN_1;
+	button_instance.btn1.gpio_pin = SMS_BTN_1_PIN;
+	button_instance.btn1.int_enabled = true;
+	button_instance.btn1.new_int = false;
+	button_instance.btn1.char_value = 0;
+}
 
 /* Initialize gpio for button inputs */
-void sms_button_configure_gpio(void)
+void sms_button_gpio_init(void)
 {
     struct gpio_config config_gpio_pin;
 
@@ -182,21 +193,12 @@ void sms_button_register_callbacks(void)
     /* User button callback */
 }
 
-/* Disable button input callbacks */
-void sms_button_disable_callbacks(void)
-{
-    /* Button0 callback */
-    gpio_disable_callback(SMS_BTN_0_PIN);
-    /* Button1 callback */
-    gpio_disable_callback(SMS_BTN_1_PIN);
-}
-
 /* Get current buttons state */
 enum sms_button_state sms_button_get_state(void)
 {
     bool b0 = gpio_pin_get_input_level(SMS_BTN_0_PIN);
     bool b1 = gpio_pin_get_input_level(SMS_BTN_1_PIN);
-    DBG_LOG("[sms_button_get_state]\t\tButton state: %d %d", b1, b0);
+    DBG_LOG_DEV("[sms_button_get_state]\t\tButton state: %d %d", b1, b0);
     if(b0 && b1) return BUTTON_STATE_BOTH;
     else if(b0 && !b1) return BUTTON_STATE_B0;
     else if(!b0 && b1) return BUTTON_STATE_B1;
@@ -204,7 +206,7 @@ enum sms_button_state sms_button_get_state(void)
 }
 
 /* En- or disable button interrupts */
-void sms_button_toggle_interrupt(enum sms_btn_int_tog tog0, enum sms_btn_int_tog tog1)
+void sms_button_toggle_callback(enum sms_btn_int_tog tog0, enum sms_btn_int_tog tog1)
 {
     if(tog0 == SMS_BTN_INT_ENABLE) {
         gpio_enable_callback(button_instance.btn0.gpio_pin);

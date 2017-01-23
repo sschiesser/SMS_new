@@ -60,30 +60,10 @@ void sms_init_variables(void)
     timer2_current_mode = TIMER2_MODE_NONE;
     sms_working_mode = SMS_MODE_BUTTON_SOLO;
     ulp_ready = false;
-
-	// BLE
-    ble_current_state = BLE_STATE_POWEROFF;
-    sms_ble_send_cnt = 0;
-
-	// button
-    button_instance.current_state = BUTTON_STATE_NONE;
-    button_instance.btn0.id = SMS_BTN_0;
-    button_instance.btn0.gpio_pin = SMS_BTN_0_PIN;
-    button_instance.btn0.int_enabled = true;
-	button_instance.btn0.new_int = false;
-    button_instance.btn0.char_value = 0;
-    button_instance.btn1.id = SMS_BTN_1;
-    button_instance.btn1.gpio_pin = SMS_BTN_1_PIN;
-    button_instance.btn1.int_enabled = true;
-	button_instance.btn1.new_int = false;
-    button_instance.btn1.char_value = 0;
 	
-	// pressure
-    pressure_device.hal.current_state = MS58_STATE_NONE;
-    pressure_device.state = PRESSURE_STATE_OFF;
-	pressure_device.rts = false;
-	pressure_device.int_enabled = false;
-	pressure_device.new_int = false;
+	sms_ble_init_variables();
+	sms_button_init_variables();
+	sms_pressure_init_variables();
 }
 
 
@@ -93,7 +73,7 @@ static void resume_cb(void)
     serial_console_init(); // GPIO (UART) for the console
     sms_dualtimer_init();
     delay_init();
-    sms_button_configure_gpio(); // GPIO (AO_0 & AO_1) for the buttons
+    sms_button_gpio_init(); // GPIO (AO_0 & AO_1) for the buttons
     sms_led_gpio_init();
     sms_spi_master_configure();
     sms_i2c_master_configure();
@@ -139,7 +119,7 @@ int main(void)
     delay_init();
 
 	// Buttons
-    sms_button_configure_gpio();
+    sms_button_gpio_init();
     
     // LED
     sms_led_gpio_init();
@@ -186,30 +166,13 @@ int main(void)
     // BLE
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
     ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_SERVER_EVENT_TYPE, sms_ble_gatt_server_cb);
-    //register_ble_user_event_cb(sms_plf_event_cb);
 
-    //ble_set_ulp_mode(BLE_ULP_MODE_SET);
-    
+
     /* Enable buttons interrupts
      * ------------------------- */
-    sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-    
-    //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
+    sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 
-    //register int n21 asm("sp");
-    //register int n22 asm("lr");
-    //register int n23 asm("r15");
-    //DBG_LOG("at post-init: sp 0x%x, lr 0x%x", n21, n22);
-    
-    //int res;
-    //res = sms_mpu_initialize();
-    //if(res) {
-        //DBG_LOG("Could not initialize MPU!");
-        //while(1) {}
-    //}
-    //sms_sensors_interrupt_toggle(true, false);
-    //while(1) {}
-    
+	
     /* Goto sleep
      * ---------- */
     sms_ble_power_down();
@@ -222,25 +185,23 @@ int main(void)
 		
 		/* Sensor interrupt region */
 		if(button_instance.btn0.new_int) {
-			DBG_LOG_DEV("Btn0 int... ");
+			DBG_LOG("Btn0 int... ");
 			if(sms_button_fn(SMS_BTN_0) < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
 			// here
 			button_instance.btn0.new_int = false;
-			DBG_LOG_CONT_DEV("done");
 		}
 		if(button_instance.btn1.new_int) {
-			DBG_LOG_DEV("btn1 int... ");
+			DBG_LOG("Btn1 int... ");
 			if(sms_button_fn(SMS_BTN_1) < 0) {
 				DBG_LOG_DEV("Error in sms_button_fn()");
 			}
 			// here
 			button_instance.btn1.new_int = false;
-			DBG_LOG_CONT_DEV("done");
 		}
 		if(mpu_device.new_int) {
-			DBG_LOG_DEV("MPU int (%d)... ", sms_ble_sending);
+			DBG_LOG("MPU int (%d)... ", sms_ble_sending);
 			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 			sms_mpu_poll_data();
 			mpu_device.new_int = false;
@@ -249,7 +210,7 @@ int main(void)
 			DBG_LOG_CONT_DEV("done");
 		}
 		if(pressure_device.new_int) {
-			DBG_LOG_DEV("Press int (%d)... ", sms_ble_sending);
+			DBG_LOG("Press int (%d)... ", sms_ble_sending);
 			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 			sms_pressure_poll_data();
 			pressure_device.new_int = false;
@@ -260,38 +221,33 @@ int main(void)
 		
 		/* Timer interrupt region */
 		if(timer1_instance.new_int) {
-			DBG_LOG_DEV("Timer1 int... ");
+			DBG_LOG("Timer1 int... ");
 			sms_dualtimer_stop(DUALTIMER_TIMER1);
 			sms_dualtimer1_fn();
-			DBG_LOG_CONT_DEV("done");
 			timer1_instance.new_int = false;
 		}
 		if(timer2_instance.new_int) {
-			DBG_LOG_DEV("Timer2 int... ");
+			DBG_LOG("Timer2 int... ");
 			sms_dualtimer_stop(DUALTIMER_TIMER2);
 			sms_dualtimer2_fn();
-			DBG_LOG_CONT_DEV("done");
 			timer2_instance.new_int = false;
 		}
 		
 		/* Sending region */
 		if(mpu_device.rts) {
-			DBG_LOG_DEV("MPU sending (%d/%d)... ", pressure_device.new_int, sms_ble_sending);
+			DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, sms_ble_sending);
 			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 			sms_ble_send_characteristic(BLE_CHAR_MPU);
 			mpu_device.rts = false;
 			gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
-			DBG_LOG_CONT_DEV("done");
 		}
 		if(pressure_device.rts) {
-			DBG_LOG_DEV("Press sending (%d/%d)... ", mpu_device.new_int, sms_ble_sending);
+			DBG_LOG("Press sending (%d/%d)... ", mpu_device.new_int, sms_ble_sending);
 			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 			sms_ble_send_characteristic(BLE_CHAR_PRESS);
 			pressure_device.rts = false;
 			gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
-			DBG_LOG_CONT_DEV("done");
 		}
-
     }
 }
 

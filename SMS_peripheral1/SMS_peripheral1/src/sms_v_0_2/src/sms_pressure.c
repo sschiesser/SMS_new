@@ -7,6 +7,15 @@
 
 #include "sms_pressure.h"
 
+void sms_pressure_init_variables(void)
+{
+	pressure_device.hal.current_state = MS58_STATE_NONE;
+	pressure_device.state = PRESSURE_STATE_OFF;
+	pressure_device.rts = false;
+	pressure_device.int_enabled = false;
+	pressure_device.new_int = false;
+}
+
 void sms_pressure_configure_gpio(void)
 {
     struct gpio_config config_gpio_pin;
@@ -19,13 +28,12 @@ void sms_pressure_configure_gpio(void)
     gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
 }
 
-
 void sms_pressure_startup(void)
 {
     DBG_LOG_DEV("[sms_pressure_startup]\t\tStarting pressure sensor");
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true); // switch on MS58 pressure sensor
     /* Disable buttons for reset time (~3 ms) to avoid conflict with dualtimer1 */
-    sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+    sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
     pressure_device.hal.current_state = MS58_STATE_RESETTING;
     /* Write the reset command to MS58 */
     sms_pressure_ms58_reset();
@@ -62,6 +70,24 @@ void sms_pressure_ms58_reset(void)
     //DBG_LOG_DEV("[sms_pressure_ms58_reset]\twriting reset command");
     spi_wdata[0] = MS58_RESET;
     sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1);
+}
+
+void sms_pressure_poll_data(void)
+{
+	if(ble_current_state == BLE_STATE_PAIRED) {
+		//DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
+		if(sms_pressure_ms58_read_data() != STATUS_OK) {
+			DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
+		}
+		else {
+			if(pressure_device.hal.data_complete) {
+				pressure_device.hal.data_complete = false;
+				sms_pressure_ms58_calculate();
+				pressure_device.rts = true;
+			}
+		}
+		//if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
+	}
 }
 
 enum status_code sms_pressure_ms58_read_prom(void)
@@ -110,24 +136,6 @@ enum status_code sms_pressure_ms58_read_prom(void)
     //}
 
     return STATUS_OK;
-}
-
-void sms_pressure_poll_data(void)
-{
-    if(ble_current_state == BLE_STATE_PAIRED) {
-        //DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
-        if(sms_pressure_ms58_read_data() != STATUS_OK) {
-            DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
-        }
-        else {
-            if(pressure_device.hal.data_complete) {
-                pressure_device.hal.data_complete = false;
-                sms_pressure_ms58_calculate();
-				pressure_device.rts = true;
-        }
-    }
-        //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
-    }        
 }
 
 enum status_code sms_pressure_ms58_read_data(void)
@@ -244,7 +252,6 @@ void sms_pressure_ms58_calculate(void)
 
     DBG_LOG_DEV("[sms_pressure_ms58_calculate] temperature = %ld  pressure = %ld", pressure_device.hal.temperature, pressure_device.hal.pressure);
 }
-
 
 void sms_pressure_define_services(void)
 {

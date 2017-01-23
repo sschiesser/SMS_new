@@ -57,6 +57,7 @@ sms_pressure_struct_t pressure_device;
 /* ------------
  * DECLARATIONS
  * ------------ */
+void sms_pressure_init_variables(void);
 void sms_pressure_configure_gpio(void);
 void sms_pressure_startup(void);
 enum status_code sms_pressure_init(void);
@@ -65,7 +66,6 @@ void sms_pressure_poll_data(void);
 enum status_code sms_pressure_ms58_read_prom(void);
 enum status_code sms_pressure_ms58_read_data(void);
 void sms_pressure_ms58_calculate(void);
-
 void sms_pressure_define_services(void);
 
 #endif /* SMS_PRESSURE_H_ */

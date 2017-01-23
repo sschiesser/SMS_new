@@ -49,12 +49,13 @@ SEARCH_DIR(.)
 /* Memory Spaces Definitions */
 MEMORY
 {
-    ram    (rwx) : ORIGIN = 0x10008000, LENGTH = 0x00016000
-    lram  (rwx) : ORIGIN = 0x1001E000, LENGTH = 0x00000800
+  ram    (rwx) : ORIGIN = 0x10008000, LENGTH = 0x00018000
+/*  lram  (rwx) : ORIGIN = 0x1001F800, LENGTH = 0x00000800 */
+  lram (rwx) : ORIGIN = 0x10020000, LENGTH = 0x00000000
 }
 
 /* The stack size used by the application. NOTE: you need to adjust according to your application. */
-STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : DEFINED(__stack_size__) ? __stack_size__ : 0x1800;
+STACK_SIZE = DEFINED(STACK_SIZE) ? STACK_SIZE : DEFINED(__stack_size__) ? __stack_size__ : 0x800;
 
 /* Section Definitions */
 SECTIONS

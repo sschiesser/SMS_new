@@ -306,7 +306,7 @@ at_ble_status_t ble_set_device_name(uint8_t *name, uint8_t name_len)
 static void ble_init(at_ble_init_config_t * args)
 {
 	/* Initialize the platform */
-	DBG_LOG("[ble_init]\t\t\tInitializing SAMB11");
+	DBG_LOG_DEV("[ble_init]\t\t\tInitializing SAMB11");
 	
 	/* Init BLE device */
 	if(at_ble_init(args) != AT_BLE_SUCCESS)
@@ -337,7 +337,7 @@ static void ble_set_dev_config(at_ble_addr_t *addr)
 		addr = &address;
 	}
 	
-	DBG_LOG("[ble_set_dev_config]\t\tBD Address:0x%02X%02X%02X%02X%02X%02X, Address Type:%d",
+	DBG_LOG_DEV("[ble_set_dev_config]\t\tBD Address:0x%02X%02X%02X%02X%02X%02X, Address Type:%d",
 	addr->addr[5],
 	addr->addr[4],
 	addr->addr[3],

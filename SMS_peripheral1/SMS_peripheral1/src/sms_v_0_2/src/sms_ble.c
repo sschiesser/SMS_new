@@ -5,90 +5,8 @@
  *  Author: Sébastien Schiesser
  */ 
 
-#include <stdio.h>
-//#include <stdlib.h>
-#include "sms_peripheral1.h"
-
-void sms_ble_startup(void)
-{
-    //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-    timer2_current_mode = TIMER2_MODE_LED_STARTUP;
-    sms_led_blink_start(SMS_LED_0_PIN);
-}
-
-void sms_ble_power_down(void)
-{
-    sms_monitor_get_states("[sms_ble_power_down]");
-    if(ble_current_state == BLE_STATE_POWEROFF) {
-        /* If already power off state, then go back sleeping */
-        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-        ulp_ready = true;
-        release_sleep_lock();
-    }
-    else {
-        /* Disable button interrupts */
-        //sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);        
-        /* Disconnect if necessary from BLE network */
-        switch(ble_current_state) {
-            case BLE_STATE_ADVERTISING:
-            DBG_LOG_DEV("[sms_ble_power_down]\tStopping command received during advertisement. Stopping... ");
-            if(at_ble_adv_stop() != AT_BLE_SUCCESS) {
-                DBG_LOG_CONT_DEV("failed!!!");
-                //#pragma TBD: manage adv_stop failure
-            }
-            else {
-                DBG_LOG_CONT_DEV("done!");
-                ble_current_state = BLE_STATE_DISCONNECTED;
-            }
-            break;
-            
-            case BLE_STATE_PAIRED:
-            DBG_LOG_DEV("[sms_ble_power_down]\t\tDevice paired... disabling interrupts & switching down sensors");
-            
-            case BLE_STATE_INDICATING:
-            DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
-            pressure_device.state = PRESSURE_STATE_OFF;
-            sms_sensors_interrupt_toggle(false, false);
-            //#pragma TBD: switch-off sensors to save current
-            //sms_sensors_switch(false);
-            
-            case BLE_STATE_CONNECTED:
-            DBG_LOG_DEV("[sms_ble_power_down]\t\tDevice connected... disconnecting");
-            at_ble_disconnect(sms_connection_handle, AT_BLE_TERMINATED_BY_USER);
-            break;
-            
-            default:
-            break;
-        }
-        
-        ble_current_state = BLE_STATE_DISCONNECTED;
-        timer2_current_mode = TIMER2_MODE_LED_SHUTDOWN;
-        sms_led_blink_start(SMS_LED_0_PIN);
-    }
-}
-
-at_ble_status_t sms_ble_advertise(void)
-{
-    at_ble_status_t status = AT_BLE_FAILURE;
-    ble_current_state = BLE_STATE_ADVERTISING;
-
-    /* Set the advertisement data */
-    if((status = ble_advertisement_data_set()) != AT_BLE_SUCCESS) {
-        DBG_LOG("[sms_ble_advertise]\tAdvertisement data set failed!");
-        return status;
-    }
-
-    /* Start of advertisement */
-    if((status = at_ble_adv_start(AT_BLE_ADV_TYPE_UNDIRECTED, AT_BLE_ADV_GEN_DISCOVERABLE, NULL, AT_BLE_ADV_FP_ANY, APP_FAST_ADV, APP_ADV_TIMEOUT, 0)) == AT_BLE_SUCCESS)
-    {
-        DBG_LOG_DEV("[sms_ble_advertise]\t\tBLE Started Advertisement");
-        return AT_BLE_SUCCESS;
-    } 
-    else {
-        DBG_LOG("[sms_service_advertise]\tBLE Advertisement start failed: reason 0x%x", status);
-    }
-    return AT_BLE_FAILURE;
-}
+//#include <stdio.h>
+#include "sms_ble.h"
 
 /* AT_BLE_ADV_REPORT (#3) */
 at_ble_status_t sms_ble_adv_report_fn(void *params)
@@ -182,6 +100,7 @@ at_ble_status_t sms_ble_pair_request_fn(void *params)
 /* AT_BLE_NOTIFICATION_CONFIRMED (#29) */
 at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 {
+	DBG_LOG_CONT(" done!");
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
     
     at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
@@ -231,6 +150,7 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
     return AT_BLE_SUCCESS;
 }
 
+/* BLE GAP functions list */
 const ble_event_callback_t sms_ble_gap_cb[] = {
     NULL,
     NULL,
@@ -253,6 +173,7 @@ const ble_event_callback_t sms_ble_gap_cb[] = {
     NULL
 };
 
+/* BLE GATT SERVER functions list */
 const ble_event_callback_t sms_ble_gatt_server_cb[] = {
     sms_ble_notification_confirmed_fn,
     sms_ble_indication_confirmed_fn,
@@ -266,6 +187,95 @@ const ble_event_callback_t sms_ble_gatt_server_cb[] = {
     NULL //ble_read_authorize_request_handler
 };
 
+
+/* Own functions */
+void sms_ble_init_variables(void)
+{
+    ble_current_state = BLE_STATE_POWEROFF;
+    sms_ble_send_cnt = 0;
+}
+
+void sms_ble_startup(void)
+{
+	//sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+	timer2_current_mode = TIMER2_MODE_LED_STARTUP;
+	sms_led_blink_start(SMS_LED_0_PIN);
+}
+
+void sms_ble_power_down(void)
+{
+	sms_monitor_get_states("[sms_ble_power_down]");
+	if(ble_current_state == BLE_STATE_POWEROFF) {
+		/* If already power off state, then go back sleeping */
+		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+		ulp_ready = true;
+		release_sleep_lock();
+	}
+	else {
+		/* Disable button interrupts */
+		//sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+		/* Disconnect if necessary from BLE network */
+		switch(ble_current_state) {
+			case BLE_STATE_ADVERTISING:
+			DBG_LOG_DEV("[sms_ble_power_down]\tStopping command received during advertisement. Stopping... ");
+			if(at_ble_adv_stop() != AT_BLE_SUCCESS) {
+				DBG_LOG_CONT_DEV("failed!!!");
+				//#pragma TBD: manage adv_stop failure
+			}
+			else {
+				DBG_LOG_CONT_DEV("done!");
+				ble_current_state = BLE_STATE_DISCONNECTED;
+			}
+			break;
+			
+			case BLE_STATE_PAIRED:
+			DBG_LOG_DEV("[sms_ble_power_down]\t\tDevice paired... disabling interrupts & switching down sensors");
+			
+			case BLE_STATE_INDICATING:
+			DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
+			pressure_device.state = PRESSURE_STATE_OFF;
+			sms_sensors_interrupt_toggle(false, false);
+			//#pragma TBD: switch-off sensors to save current
+			//sms_sensors_switch(false);
+			
+			case BLE_STATE_CONNECTED:
+			DBG_LOG_DEV("[sms_ble_power_down]\t\tDevice connected... disconnecting");
+			at_ble_disconnect(sms_connection_handle, AT_BLE_TERMINATED_BY_USER);
+			break;
+			
+			default:
+			break;
+		}
+		
+		ble_current_state = BLE_STATE_DISCONNECTED;
+		timer2_current_mode = TIMER2_MODE_LED_SHUTDOWN;
+		sms_led_blink_start(SMS_LED_0_PIN);
+	}
+}
+
+at_ble_status_t sms_ble_advertise(void)
+{
+	at_ble_status_t status = AT_BLE_FAILURE;
+	ble_current_state = BLE_STATE_ADVERTISING;
+
+	/* Set the advertisement data */
+	if((status = ble_advertisement_data_set()) != AT_BLE_SUCCESS) {
+		DBG_LOG("[sms_ble_advertise]\tAdvertisement data set failed!");
+		return status;
+	}
+
+	/* Start of advertisement */
+	if((status = at_ble_adv_start(AT_BLE_ADV_TYPE_UNDIRECTED, AT_BLE_ADV_GEN_DISCOVERABLE, NULL, AT_BLE_ADV_FP_ANY, APP_FAST_ADV, APP_ADV_TIMEOUT, 0)) == AT_BLE_SUCCESS)
+	{
+		DBG_LOG_DEV("[sms_ble_advertise]\t\tBLE Started Advertisement");
+		return AT_BLE_SUCCESS;
+	}
+	else {
+		DBG_LOG("[sms_service_advertise]\tBLE Advertisement start failed: reason 0x%x", status);
+	}
+	return AT_BLE_FAILURE;
+}
+
 at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 {
     at_ble_status_t status = AT_BLE_SUCCESS;
@@ -273,7 +283,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     uint8_t length = 0;
     uint8_t char_size = 0;
     uint8_t send_val[BLE_CHAR_SIZE_MAX];
-    ble_current_state = BLE_STATE_INDICATING;
+    //ble_current_state = BLE_STATE_INDICATING;
 
     
 	sms_ble_sending = true;
@@ -384,13 +394,11 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     return status;
 }
 
-
 at_ble_status_t sms_ble_primary_service_define(gatt_service_handler_t *service)
 {
     //DBG_LOG_DEV("[sms_ble_primary_service_define]\n\r  defining primary service\r\n- uuid: 0x%02x\r\n- handle: 0x%02x\r\n- char uuid: 0x%02x%02x\r\n- char init value: %d", (unsigned int)service->serv_uuid.uuid, service->serv_handle, service->serv_chars.uuid.uuid[1], service->serv_chars.uuid.uuid[0], service->serv_chars.value_init_len);
     return(at_ble_primary_service_define(&service->serv_uuid, &service->serv_handle, NULL, 0, &service->serv_chars, 1));
 }
-
 
 void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *service, uint8_t *value)
 {
