@@ -286,9 +286,6 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     //ble_current_state = BLE_STATE_INDICATING;
 
     
-	ble_instance.sending_queue++;
-    sms_ble_send_cnt++;
-    
     switch(ch) {
         case BLE_CHAR_BTN:
 		send_val[0] = 0x00;
@@ -375,7 +372,15 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         //status = at_ble_indication_send(sms_connection_handle, val_handle);
 //#   else
         status = at_ble_notification_send(sms_connection_handle, val_handle);
-		DBG_LOG_CONT_DEV(" %d GONE? %d ", sms_ble_send_cnt, status);
+		if(status == AT_BLE_SUCCESS) {
+			ble_instance.sending_queue++;
+			sms_ble_send_cnt++;
+			DBG_LOG_CONT_DEV(" %d GONE? ", sms_ble_send_cnt);
+		}
+		else {
+			DBG_LOG_CONT_DEV("NOTIFICATION ERROR!!");
+			while(1);;
+		}
 //#   endif
         //if(status == AT_BLE_SUCCESS) {
 //#   if SMS_SENDING_WITH_ACK == true

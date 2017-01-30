@@ -339,8 +339,10 @@
     <ListValues>
       <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
       <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+      <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
       <Value>C:\_code\AS\SABRe\Invensense_lib\liblibmplmpu_m0</Value>
       <Value>C:\_code\AS\SABRe\Invensense_lib\core\mpl</Value>
+      <Value>C:\_code\libs\invensense</Value>
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
@@ -527,7 +529,9 @@
     <ListValues>
       <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
       <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+      <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
       <Value>../../../../../Invensense_lib/liblibmplmpu_m0</Value>
+      <Value>C:\_code\libs\invensense</Value>
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
