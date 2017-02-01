@@ -30,7 +30,9 @@ at_ble_status_t sms_ble_connected_fn(void *params)
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- conn interval: %d\r\n- conn latency: %d\r\n- supervision timeout: %d\r\n- peer address: 0x", connected->handle, connected->conn_params.con_interval, connected->conn_params.con_latency, connected->conn_params.sup_to);
         //for(uint8_t i = 0; i < AT_BLE_ADDR_LEN; i++) {
             //DBG_LOG_CONT_DEV("%02x",connected->peer_addr.addr[AT_BLE_ADDR_LEN - (i+1)]);
-        //}            
+        //}
+		DBG_LOG("T/O: 5000 ms");
+		sms_ble_timeout = BLE_TIMEOUT_PAIR;
     }
     else {
         sms_ble_power_down();
@@ -81,6 +83,8 @@ at_ble_status_t sms_ble_paired_fn(void *params)
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
         sms_sensors_switch(true, true); // ! Release sleep lock & enable buttons interrupt after reset done!
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+		DBG_LOG("T/O: OFF");
+		sms_ble_timeout = BLE_TIMEOUT_OFF;
     }
     else {
         sms_ble_power_down();
@@ -105,6 +109,8 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
     
     at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
 	ble_instance.sending_queue--;
+	DBG_LOG("T/O: OFF");
+	sms_ble_timeout = BLE_TIMEOUT_OFF;
     //button_instance.current_state = sms_button_get_state();
     //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
     //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
@@ -376,6 +382,8 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 			ble_instance.sending_queue++;
 			sms_ble_send_cnt++;
 			DBG_LOG_CONT(" %d GONE? ", sms_ble_send_cnt);
+			DBG_LOG("T/O: 20ms");
+			sms_ble_timeout = BLE_TIMEOUT_NOTIFY;
 		}
 		else {
 			DBG_LOG_CONT("NOTIFICATION ERROR!!");

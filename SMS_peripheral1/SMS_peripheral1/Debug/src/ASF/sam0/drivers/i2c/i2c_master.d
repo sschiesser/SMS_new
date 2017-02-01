@@ -98,7 +98,8 @@ src/ASF/sam0/drivers/i2c/i2c_master.d \
  ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.h \
  ../src/ASF/sam0/drivers/i2c/i2c_common.h \
  ../src/ASF/sam0/drivers/system/system_sam_b.h \
- ../src/ASF/sam0/drivers/gpio/gpio.h
+ ../src/ASF/sam0/drivers/gpio/gpio.h \
+ ../src/ASF/sam0/drivers/i2c/i2c_master_interrupt.h
 
 ../src/ASF/sam0/drivers/i2c/i2c_master.h:
 
@@ -297,3 +298,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/sam0/drivers/system/system_sam_b.h:
 
 ../src/ASF/sam0/drivers/gpio/gpio.h:
+
+../src/ASF/sam0/drivers/i2c/i2c_master_interrupt.h:

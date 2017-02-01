@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type='text/xsl' href='ConversionLog.xslt'?>
-<conversion conversiontitle="Upgrade Report - Atmel Software Framework Upgrade Log" subtitle1="Upgrading Modules From" subtitle2="to" date="Dienstag, 22. November 2016" time="11:51">
+<conversion conversiontitle="Upgrade Report - Atmel Software Framework Upgrade Log" subtitle1="Upgrading Modules From" subtitle2="to" date="Mittwoch, 1. Februar 2017" time="16:41">
   <general>
-    <log timestamp="11-22-2016 11-51-18">
+    <log timestamp="02-01-2017 16-41-20">
       <message>Unloading project</message>
     </log>
-    <log timestamp="11-22-2016 11-51-18">
+    <log timestamp="02-01-2017 16-41-21">
       <message>Project unload complete.</message>
     </log>
-    <log timestamp="11-22-2016 11-51-38">
+    <log timestamp="02-01-2017 16-41-36">
       <message>Reloading project after backup.</message>
     </log>
-    <log timestamp="11-22-2016 11-51-46">
+    <log timestamp="02-01-2017 16-41-45">
       <message>Project reload complete.</message>
     </log>
-    <log timestamp="11-22-2016 11-51-47">
+    <log timestamp="02-01-2017 16-41-45">
       <message>Upgrading of project started.</message>
     </log>
-    <log timestamp="11-22-2016 11-52-39">
+    <log timestamp="02-01-2017 16-43-16">
       <message>Project upgrade complete</message>
     </log>
   </general>
   <revert versiontext="3.32.0" description="Reverting from version">
     <moduleinfo name="SAM B11 Xplained Pro">
-      <action description="Delete framework file 'src\ASF\sam0\boards\samb11_xplained_pro\board_init.c'." result="SUCCESS" resulttext="" />
+      <action description="Delete framework file 'src\ASF\sam0\boards\samb11_xplained_pro\board_init.c'." result="ERROR" resulttext="The Delete operation failed. Could not find the path specified 'src\ASF\sam0\boards\samb11_xplained_pro\board_init.c'. Resolution failed for folder: 'boards'" />
       <action description="Delete framework file 'src\ASF\sam0\boards\samb11_xplained_pro\samb11_xplained_pro.h'." result="SUCCESS" resulttext="" />
       <action description="Remove folder '../src/ASF/sam0/boards/samb11_xplained_pro' from include search path." result="SUCCESS" resulttext="" />
       <action description="Remove folder '../src/ASF/sam0/boards' from include search path." result="SUCCESS" resulttext="" />

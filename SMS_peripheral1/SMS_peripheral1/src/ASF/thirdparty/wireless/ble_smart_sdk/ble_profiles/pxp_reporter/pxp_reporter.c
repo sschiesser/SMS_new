@@ -198,12 +198,12 @@ at_ble_status_t pxp_service_define (void)
 	}
 	#endif
 	
-	DBG_LOG_DEV("The Supported Services in Proximity Reporter are:");
-	DBG_LOG_DEV("  -> Link Loss Service");
+	DBG_LOG("The Supported Services in Proximity Reporter are:");
+	DBG_LOG("  -> Link Loss Service");
 	
 	#if defined PATHLOSS
-	DBG_LOG_DEV("  -> Immediate Alert Service");
-	DBG_LOG_DEV("  -> Tx Power Service");
+	DBG_LOG("  -> Immediate Alert Service");
+	DBG_LOG("  -> Tx Power Service");
 	
 	#endif
 	

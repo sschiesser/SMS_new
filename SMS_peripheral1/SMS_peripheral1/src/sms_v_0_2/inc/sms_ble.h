@@ -48,8 +48,8 @@
 #define BLE_SEND_TIMEOUT								10
 
 #define BLE_TIMEOUT_OFF									(0xFFFFFFFF) // no timeout
-#define BLE_TIMEOUT_PAIR								(0x7D0) // 2000 ms
-#define BLE_TIMEOUT_NOTIFY								(0x14) // 20 ms
+#define BLE_TIMEOUT_PAIR								(0x1F4) // 500 @ 10 ms resolution --> 5000 ms
+#define BLE_TIMEOUT_NOTIFY								(0x2) // 2 @ 10 ms resolution --> 20 ms
 
 /* ---------
 * VARIABLES

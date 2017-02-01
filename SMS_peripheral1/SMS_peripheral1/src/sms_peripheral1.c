@@ -60,7 +60,7 @@ void sms_init_variables(void)
 	timer2_current_mode = TIMER2_MODE_NONE;
 	sms_working_mode = SMS_MODE_BUTTON_SOLO;
 	ulp_ready = false;
-	sms_ble_timeout = BLE_TIMEOUT_PAIR;
+	sms_ble_timeout = BLE_TIMEOUT_OFF;
 	
 	sms_ble_init_variables();
 	sms_button_init_variables();
@@ -176,7 +176,7 @@ int main(void)
 
 	/* Goto sleep
 	* ---------- */
-	//sms_ble_power_down();
+	sms_ble_power_down();
 
 	
 	at_ble_status_t ble_status;
@@ -261,6 +261,12 @@ int main(void)
 				pressure_device.rts = false;
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
+		}
+		else if(ble_status == AT_BLE_GAP_TIMEOUT) {
+			DBG_LOG("GAP timeout");
+		}
+		else if(ble_status == AT_BLE_TIMEOUT) {
+			DBG_LOG("Event get timeout");
 		}
 		else {
 			DBG_LOG("BLE error occurred");

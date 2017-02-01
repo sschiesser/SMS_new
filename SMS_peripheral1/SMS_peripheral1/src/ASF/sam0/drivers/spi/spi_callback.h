@@ -1,9 +1,9 @@
 /**
  * \file
  *
- * \brief SAMB11 UART configuration.
+ * \brief SAM Serial Peripheral Interface Driver
  *
- * Copyright (C) 2016 Atmel Corporation. All rights reserved.
+ * Copyright (C) 2015 Atmel Corporation. All rights reserved.
  *
  * \asf_license_start
  *
@@ -40,28 +40,71 @@
  * \asf_license_stop
  *
  */
-
 /*
  * Support and FAQ: visit <a href="http://www.atmel.com/design-support/">Atmel Support</a>
  */
 
-#ifndef CONF_CONSOLE_SERIAL_H
-#define CONF_CONSOLE_SERIAL_H
+#ifndef SPI_CALLBACK_H_INCLUDED
+#define SPI_CALLBACK_H_INCLUDED
 
-#include <board.h>
-/* ! [conf_console_serial_settings] */
-#define CONF_STDIO_USART_MODULE  EDBG_CDC_MODULE
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#define CONF_STDIO_PIN_PAD0   EDBG_CDC_PIN_PAD0
-#define CONF_STDIO_PIN_PAD1   EDBG_CDC_PIN_PAD1
-#define CONF_STDIO_PIN_PAD2   EDBG_CDC_PIN_PAD2
-#define CONF_STDIO_PIN_PAD3   EDBG_CDC_PIN_PAD3
+/**
+ * \addtogroup asfdoc_samb_drivers_spi_group
+ *
+ * @{
+ */
 
-#define CONF_STDIO_MUX_PAD0   EDBG_CDC_MUX_PAD0
-#define CONF_STDIO_MUX_PAD1   EDBG_CDC_MUX_PAD1
-#define CONF_STDIO_MUX_PAD2   EDBG_CDC_MUX_PAD2
-#define CONF_STDIO_MUX_PAD3   EDBG_CDC_MUX_PAD3
-#define CONF_STDIO_BAUDRATE   115200
+#include "spi.h"
 
-/* ! [conf_console_serial_settings] */
-#endif /* CONF_CONSOLE_SERIAL_H */
+/**
+ * \name Callback Management
+ * @{
+ */
+void spi_register_callback(
+		struct spi_module *const module,
+		spi_callback_t callback_func,
+		enum spi_callback callback_type);
+
+void spi_unregister_callback(
+		struct spi_module *module,
+		enum spi_callback callback_type);
+
+void spi_enable_callback(
+		struct spi_module *const module,
+		enum spi_callback callback_type);
+
+void spi_disable_callback(
+		struct spi_module *const module,
+		enum spi_callback callback_type);
+/** @} */
+
+/**
+ * \name Writing and Reading
+ * @{
+ */
+enum status_code spi_write_buffer_job(
+		struct spi_module *const module,
+		uint8_t *tx_data,
+		uint16_t length);
+enum status_code spi_read_buffer_job(
+		struct spi_module *const module,
+		uint8_t *rx_data,
+		uint16_t length,
+		uint16_t dummy);
+enum status_code spi_transceive_buffer_job(
+		struct spi_module *const module,
+		uint8_t *tx_data,
+		uint8_t *rx_data,
+		uint16_t length);
+/** @} */
+
+/** @} */
+#ifdef __cplusplus
+}
+#endif
+
+#endif	//SPI_H_INCLUDED
+
