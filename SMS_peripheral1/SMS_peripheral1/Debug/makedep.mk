@@ -12,10 +12,6 @@ src\ASF\sam0\drivers\aon_sleep_timer\aon_sleep_timer.c
 
 src\ASF\sam0\drivers\i2c\i2c_master.c
 
-src\ASF\sam0\drivers\i2c\i2c_master_interrupt.c
-
-src\ASF\sam0\drivers\spi\spi_callback.c
-
 src\ASF\sam0\utils\cmsis\samb11\source\gcc\startup_samb11.c
 
 src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.c

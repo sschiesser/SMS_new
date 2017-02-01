@@ -176,7 +176,7 @@ int main(void)
 
 	/* Goto sleep
 	* ---------- */
-	sms_ble_power_down();
+	//sms_ble_power_down();
 
 	
 	at_ble_status_t ble_status;
@@ -213,13 +213,13 @@ int main(void)
 				DBG_LOG_CONT_DEV("done");
 			}
 			if(pressure_device.new_int) {
-				DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
-				sms_pressure_poll_data();
+				//DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
+				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+				//sms_pressure_poll_data();
 				pressure_device.new_int = false;
-				pressure_device.rts = true;
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
-				DBG_LOG_CONT_DEV("done");
+				//pressure_device.rts = true;
+				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+				//DBG_LOG_CONT_DEV("done");
 			}
 			
 			/* Timer interrupt region */
@@ -239,7 +239,7 @@ int main(void)
 			/* Sending region */
 			if(mpu_device.rts) {
 				DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
-				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
+				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
 					sms_ble_send_characteristic(BLE_CHAR_MPU);
 				}
@@ -247,7 +247,7 @@ int main(void)
 					DBG_LOG_CONT("flushing!");
 				}
 				mpu_device.rts = false;
-				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
+				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
 			if(pressure_device.rts) {
 				DBG_LOG("Press sending (%d/%d)... ", mpu_device.new_int, ble_instance.sending_queue);

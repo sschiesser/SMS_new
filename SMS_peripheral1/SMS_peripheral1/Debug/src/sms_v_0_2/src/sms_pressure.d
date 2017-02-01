@@ -103,13 +103,10 @@ src/sms_v_0_2/src/sms_pressure.d src/sms_v_0_2/src/sms_pressure.o: \
  ../src/config/conf_board.h ../src/ASF/sam0/drivers/i2c/i2c_common.h \
  ../src/ASF/sam0/drivers/i2c/i2c_master.h \
  ../src/ASF/sam0/drivers/i2c/i2c_common.h \
- ../src/ASF/sam0/drivers/i2c/i2c_master_interrupt.h \
- ../src/ASF/sam0/drivers/i2c/i2c_master.h \
  ../src/ASF/sam0/drivers/spi/spi.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
- ../src/config/conf_spi.h ../src/ASF/sam0/drivers/spi/spi_callback.h \
- ../src/ASF/sam0/drivers/spi/spi.h \
+ ../src/config/conf_spi.h \
  ../src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h \
  ../src/ASF/common/services/serial/serial.h \
  ../src/ASF/common/services/serial/samb_uart/uart_serial.h \
@@ -349,10 +346,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/sam0/drivers/i2c/i2c_common.h:
 
-../src/ASF/sam0/drivers/i2c/i2c_master_interrupt.h:
-
-../src/ASF/sam0/drivers/i2c/i2c_master.h:
-
 ../src/ASF/sam0/drivers/spi/spi.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
@@ -360,10 +353,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h:
 
 ../src/config/conf_spi.h:
-
-../src/ASF/sam0/drivers/spi/spi_callback.h:
-
-../src/ASF/sam0/drivers/spi/spi.h:
 
 ../src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h:
 
