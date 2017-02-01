@@ -47,6 +47,10 @@
 
 #define BLE_SEND_TIMEOUT								10
 
+#define BLE_TIMEOUT_OFF									(0xFFFFFFFF) // no timeout
+#define BLE_TIMEOUT_PAIR								(0x7D0) // 2000 ms
+#define BLE_TIMEOUT_NOTIFY								(0x14) // 20 ms
+
 /* ---------
 * VARIABLES
 * --------- */
@@ -73,6 +77,9 @@ typedef enum sms_ble_state {
     BLE_STATE_SHUTTINGDOWN = 0xA0
 }sms_ble_state_t;
 //volatile sms_ble_state_t ble_current_state;
+
+
+uint32_t sms_ble_timeout;
 
 typedef struct ble_device {
 	volatile sms_ble_state_t current_state;

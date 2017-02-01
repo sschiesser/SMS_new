@@ -136,7 +136,7 @@ int sms_mpu_poll_data(void)
         mpu_device.new_compass = true;
     }
 	
-	mpu_device.rts = true;
+	//mpu_device.rts = true;
 
     return 0;
 }

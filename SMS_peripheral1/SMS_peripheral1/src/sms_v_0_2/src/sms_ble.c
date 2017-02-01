@@ -375,11 +375,11 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		if(status == AT_BLE_SUCCESS) {
 			ble_instance.sending_queue++;
 			sms_ble_send_cnt++;
-			DBG_LOG_CONT_DEV(" %d GONE? ", sms_ble_send_cnt);
+			DBG_LOG_CONT(" %d GONE? ", sms_ble_send_cnt);
 		}
 		else {
-			DBG_LOG_CONT_DEV("NOTIFICATION ERROR!!");
-			while(1);;
+			DBG_LOG_CONT("NOTIFICATION ERROR!!");
+			//while(1);;
 		}
 //#   endif
         //if(status == AT_BLE_SUCCESS) {
