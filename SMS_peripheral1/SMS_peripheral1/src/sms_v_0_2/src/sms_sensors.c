@@ -46,26 +46,31 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     /* IMU */
     if(mpu_en) {
         if(sms_mpu_initialize()) {
-            DBG_LOG_DEV("[sms_sensors_switch]\t\t\tCouldn't initialize MPU");
+            DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't initialize MPU");
             gpio_pin_set_output_level(SMS_MPU_VCC_PIN, false);
         }
         else {
-            mpu_device.hal.init_ok = true;
-            sms_sensors_interrupt_toggle(true, false);
+			DBG_LOG("[sms_sensors_switch]\t\t\tInit done!");
+            //mpu_device.hal.init_ok = true;
+            //sms_sensors_interrupt_toggle(true, false);
+			gpio_pin_set_output_level(SMS_MPU_VCC_PIN, false);
         }
     }
     else {
+		DBG_LOG("[sms_sensors_switch]\t\t\tMPU not enabled");
         gpio_pin_set_output_level(SMS_MPU_VCC_PIN, false);
     }
     
     /* Pressure */
-    if(press_en) {                
+    if(press_en) {         
+		DBG_LOG("[sms_sensors_switch]\t\t\tEnabling pressure");       
         pressure_device.hal.current_state = MS58_STATE_RESETTING;
         //pressure_device.hal.reset_done = false;
         //pressure_device.hal.init_ok = false;
         sms_pressure_startup();
     }
     else {
+		DBG_LOG("[sms_sensors_switch]\t\t\tPressure not enabled");
         gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
     }
 }

@@ -158,7 +158,7 @@ void sms_button_gpio_init(void)
     config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
     config_gpio_pin.aon_wakeup = true;
     if(gpio_pin_set_config(button_instance.btn0.gpio_pin, &config_gpio_pin) != STATUS_OK) {
-        DBG_LOG_DEV("[sms_button_configure]\tproblem while setting up button0");
+        DBG_LOG("[sms_button_configure]\tproblem while setting up button0");
     }
     
     /* Button1 @ PIN_AO_GPIO_2 */

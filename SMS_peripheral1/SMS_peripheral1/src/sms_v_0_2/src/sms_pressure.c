@@ -75,7 +75,8 @@ void sms_pressure_ms58_reset(void)
 void sms_pressure_poll_data(void)
 {
 	if(ble_instance.current_state == BLE_STATE_PAIRED) {
-		//DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
+		//pressure_device.hal.temperature = 2000 + (rand() % 500);
+		//pressure_device.hal.pressure = 100000 + (rand() % 20000);
 		if(sms_pressure_ms58_read_data() != STATUS_OK) {
 			DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
 		}
@@ -86,7 +87,6 @@ void sms_pressure_poll_data(void)
 				pressure_device.rts = true;
 			}
 		}
-		//if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
 	}
 }
 

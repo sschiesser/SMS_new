@@ -78,15 +78,9 @@ static void resume_cb(void)
 	sms_led_gpio_init();
 	sms_spi_master_configure();
 	sms_i2c_master_configure();
-	//sms_mpu_configure_gpio();
 	sms_monitor_configure_gpio();
-	//gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
 
-//static void sms_plf_event_cb(void)
-//{
-//sms_current_interrupt.int_on = true;
-//}
 
 
 int main(void)
@@ -116,11 +110,8 @@ int main(void)
 	// Dualtimer
 	sms_dualtimer_init();
 	
-	// Blocking delay (hacked from other SAM platforms)
-	delay_init();
-
 	// Buttons
-	sms_button_gpio_init();
+	//sms_button_gpio_init();
 	
 	// LED
 	sms_led_gpio_init();
@@ -174,6 +165,9 @@ int main(void)
 	sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 
 
+	sms_ble_startup();
+	
+
 	/* Goto sleep
 	* ---------- */
 	//sms_ble_power_down();
@@ -204,22 +198,22 @@ int main(void)
 				button_instance.btn1.new_int = false;
 			}
 			if(mpu_device.new_int) {
-				DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
-				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				sms_mpu_poll_data();
+				//DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
+				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
+				//sms_mpu_poll_data();
 				mpu_device.new_int = false;
-				mpu_device.rts = true;
-				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
-				DBG_LOG_CONT_DEV("done");
+				//mpu_device.rts = true;
+				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
+				//DBG_LOG_CONT_DEV("done");
 			}
 			if(pressure_device.new_int) {
-				//DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
-				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
-				//sms_pressure_poll_data();
+				DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
+				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+				sms_pressure_poll_data();
 				pressure_device.new_int = false;
-				//pressure_device.rts = true;
-				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
-				//DBG_LOG_CONT_DEV("done");
+				pressure_device.rts = true;
+				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+				DBG_LOG_CONT_DEV("done");
 			}
 			
 			/* Timer interrupt region */
