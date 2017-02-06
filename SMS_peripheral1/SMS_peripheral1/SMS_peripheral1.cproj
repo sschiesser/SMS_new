@@ -29,188 +29,188 @@
     <eraseonlaunchrule>6</eraseonlaunchrule>
     <AsfFrameworkConfig>
       <framework-data>
-  <options>
-    <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="common.utils.interrupt" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="sam0.drivers.aon_sleep_timer" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="sam0.drivers.dualtimer" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="sam0.drivers.gpio" value="Add" config="callback" content-id="Atmel.ASF" />
-    <option id="sam0.drivers.i2c.master" value="Add" config="polled" content-id="Atmel.ASF" />
-    <option id="sam0.drivers.spi" value="Add" config="polled" content-id="Atmel.ASF" />
-    <option id="sam0.drivers.system" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="thirdparty.wireless.ble_smart_sdk.ble_profiles.pxp_reporter" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="thirdparty.wireless.ble_smart_sdk.ble_services.battery" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="thirdparty.wireless.ble_smart_sdk.ble_services.ble_manager" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="thirdparty.wireless.ble_smart_sdk.ble_services.link_loss" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="sam0.utils.cmsis.samb11.source.template" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="common.utils" value="Add" config="" content-id="Atmel.ASF" />
-  </options>
-  <configurations />
-  <files>
-    <file path="src/ASF/common/services/serial/samb_uart/uart_serial.h" framework="" version="" source="common/services/serial/samb_uart/uart_serial.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/common/services/serial/serial.h" framework="" version="" source="common/services/serial/serial.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/boards/samb11_xplained_pro/board_init.c" framework="" version="3.33.0" source="sam0\boards\samb11_xplained_pro\board_init.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/dualtimer/dualtimer.c" framework="" version="" source="sam0/drivers/dualtimer/dualtimer.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/dualtimer/dualtimer.h" framework="" version="" source="sam0/drivers/dualtimer/dualtimer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/dualtimer/quick_start/qs_dualtimer_basic.h" framework="" version="" source="sam0/drivers/dualtimer/quick_start/qs_dualtimer_basic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/gpio/gpio.c" framework="" version="" source="sam0/drivers/gpio/gpio.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/gpio/gpio.h" framework="" version="" source="sam0/drivers/gpio/gpio.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/gpio/quick_start_callback/qs_gpio_callback.h" framework="" version="" source="sam0/drivers/gpio/quick_start_callback/qs_gpio_callback.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/system/system_sam_b.c" framework="" version="" source="sam0/drivers/system/system_sam_b.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/system/system_sam_b.h" framework="" version="" source="sam0/drivers/system/system_sam_b.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/timer/quick_start/qs_timer_basic.h" framework="" version="" source="sam0/drivers/timer/quick_start/qs_timer_basic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/timer/timer.c" framework="" version="" source="sam0/drivers/timer/timer.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/timer/timer.h" framework="" version="" source="sam0/drivers/timer/timer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/uart/quick_start_basic/qs_uart_basic.h" framework="" version="" source="sam0/drivers/uart/quick_start_basic/qs_uart_basic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/uart/quick_start_dma/qs_uart_dma_use.h" framework="" version="" source="sam0/drivers/uart/quick_start_dma/qs_uart_dma_use.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/uart/uart.c" framework="" version="" source="sam0/drivers/uart/uart.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/uart/uart.h" framework="" version="" source="sam0/drivers/uart/uart.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld" framework="" version="" source="sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/stdio/read.c" framework="" version="" source="sam0/utils/stdio/read.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h" framework="" version="" source="sam0/utils/stdio/stdio_serial/stdio_serial.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/stdio/write.c" framework="" version="" source="sam0/utils/stdio/write.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/license.txt" framework="" version="" source="thirdparty/CMSIS/license.txt" changed="False" content-id="Atmel.ASF" />
-    <file path="src/config/conf_board.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/apps/config/samb11/conf_board.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/Config/conf_console_serial.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\services\uart\module_config\conf_console_serial.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/Config/conf_dualtimer.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\services\dualtimer\module_config\conf_dualtimer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/startup_template_app.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/apps/startup_template/startup_template_app.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/startup_template_app.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/apps/startup_template/startup_template_app.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_trace.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/at_ble_trace.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/common.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/common.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/event_handler.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/event_handler.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/gpio_from_sdk.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/gpio_from_sdk.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/ke_msg.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/ke_msg.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/lpmcu_cortex_misc_regs_c.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/lpmcu_cortex_misc_regs_c.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/platform.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/profiles.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/profiles.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/reg_common.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/reg_common.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc/libblusdk.a" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc/libblusdk.a" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/button.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/button.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/button.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/button.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/led.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/led.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/led.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/led.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/src/event_handler.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/src/platform_drv.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.c" framework="" version="3.33.0" source="sam0\drivers\aon_sleep_timer\aon_sleep_timer.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/aon_sleep_timer/quick_start/qs_aon_sleep_timer_basic.h" framework="" version="3.33.0" source="sam0\drivers\aon_sleep_timer\quick_start\qs_aon_sleep_timer_basic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.h" framework="" version="3.33.0" source="sam0\drivers\aon_sleep_timer\aon_sleep_timer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter/pxp_reporter.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_reporter\pxp_reporter.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter/pxp_reporter.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_reporter\pxp_reporter.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery/battery.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\battery\battery.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery/battery.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\battery\battery.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert/immediate_alert.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\immediate_alert\immediate_alert.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert/immediate_alert.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\immediate_alert\immediate_alert.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss/link_loss.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\link_loss\link_loss.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss/link_loss.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\link_loss\link_loss.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power/tx_power.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\tx_power\tx_power.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power/tx_power.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\tx_power\tx_power.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/spi/spi.c" framework="" version="3.33.0" source="sam0\drivers\spi\spi.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/spi/quick_start_slave/qs_spi_slave_basic.h" framework="" version="3.33.0" source="sam0\drivers\spi\quick_start_slave\qs_spi_slave_basic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/spi/spi.h" framework="" version="3.33.0" source="sam0\drivers\spi\spi.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/spi/quick_start_master/qs_spi_master_basic.h" framework="" version="3.33.0" source="sam0\drivers\spi\quick_start_master\qs_spi_master_basic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/Config/conf_spi.h" framework="" version="3.33.0" source="sam0\drivers\spi\module_config\conf_spi.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/i2c/i2c_master.c" framework="" version="3.33.0" source="sam0\drivers\i2c\i2c_master.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/i2c/quick_start_master/qs_i2c_master_basic_use.h" framework="" version="3.33.0" source="sam0\drivers\i2c\quick_start_master\qs_i2c_master_basic_use.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/i2c/i2c_master.h" framework="" version="3.33.0" source="sam0\drivers\i2c\i2c_master.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/drivers/i2c/i2c_common.h" framework="" version="3.33.0" source="sam0\drivers\i2c\i2c_common.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/boards/samb11_xplained_pro/samb11_xplained_pro.h" framework="" version="3.33.0" source="sam0\boards\samb11_xplained_pro\samb11_xplained_pro.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.c" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\source\system_samb11.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.c" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\source\gcc\startup_samb11.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\source\system_samb11.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/compiler.h" framework="" version="3.33.0" source="sam0\utils\compiler.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/header_files/io.h" framework="" version="3.33.0" source="sam0\utils\header_files\io.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/status_codes.h" framework="" version="3.33.0" source="sam0\utils\status_codes.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/preprocessor/tpaste.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\tpaste.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/preprocessor/mrepeat.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\mrepeat.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/preprocessor/mrecursion.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\mrecursion.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/preprocessor/preprocessor.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\preprocessor.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/preprocessor/stringz.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\stringz.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/make/Makefile.sam.in" framework="" version="3.33.0" source="sam0\utils\make\Makefile.sam.in" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/Include/arm_math.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\arm_math.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/Include/core_cm0.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\core_cm0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/Include/core_cmFunc.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\core_cmFunc.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/Include/core_cmInstr.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\core_cmInstr.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/Lib/GCC/libarm_cortexM0l_math.a" framework="" version="3.33.0" source="thirdparty\CMSIS\Lib\GCC\libarm_cortexM0l_math.a" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/CMSIS_END_USER_LICENCE_AGREEMENT.pdf" framework="" version="3.33.0" source="thirdparty\CMSIS\CMSIS_END_USER_LICENCE_AGREEMENT.pdf" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/README.txt" framework="" version="3.33.0" source="thirdparty\CMSIS\README.txt" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/ATMEL-disclaimer.txt" framework="" version="3.33.0" source="thirdparty\CMSIS\ATMEL-disclaimer.txt" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/thirdparty/CMSIS/Lib/license.txt" framework="" version="3.33.0" source="thirdparty\CMSIS\Lib\license.txt" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/syscalls/gcc/syscalls.c" framework="" version="3.33.0" source="sam0\utils\syscalls\gcc\syscalls.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/common/utils/interrupt/interrupt_sam_nvic.c" framework="" version="3.33.0" source="common\utils\interrupt\interrupt_sam_nvic.c" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/common/utils/interrupt.h" framework="" version="3.33.0" source="common\utils\interrupt.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/common/utils/interrupt/interrupt_sam_nvic.h" framework="" version="3.33.0" source="common\utils\interrupt\interrupt_sam_nvic.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/common/utils/parts.h" framework="" version="3.33.0" source="common\utils\parts.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/samb11zr.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\samb11zr.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/samb11g18a.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\samb11g18a.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/samb11.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\samb11.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/btlc1000wlcsp.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\btlc1000wlcsp.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/spi.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\spi.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/uart.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\uart.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/timer.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\timer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/gpio.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\gpio.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/aon_sleep_timer.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\aon_sleep_timer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_rom.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_rom.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_sysctrl.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_sysctrl.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/aon_pwr_seq.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\aon_pwr_seq.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/i2c.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\i2c.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/lp_clk_cal_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\lp_clk_cal_regs.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/aon_gp_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\aon_gp_regs.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/wdt.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\wdt.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_bpu.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_bpu.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/efuse_misc_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\efuse_misc_regs.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/prov_dma_ctrl.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\prov_dma_ctrl.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_dwt.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_dwt.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/lpmcu_misc_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\lpmcu_misc_regs.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/spi_flash.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\spi_flash.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/dualtimer.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\dualtimer.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/spi0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\spi0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/spi1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\spi1.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/uart0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\uart0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/aon_sleep_timer0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\aon_sleep_timer0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/uart1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\uart1.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/gpio1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\gpio1.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/gpio2.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\gpio2.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/gpio0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\gpio0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/dualtimer0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\dualtimer0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/prov_dma_ctrl0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\prov_dma_ctrl0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/aon_gp_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\aon_gp_regs0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/spi_flash0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\spi_flash0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/wdt0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\wdt0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/wdt1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\wdt1.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/efuse_misc_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\efuse_misc_regs0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_bpu0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_bpu0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/timer0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\timer0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/lp_clk_cal_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\lp_clk_cal_regs0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_dwt0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_dwt0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_rom0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_rom0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/aon_pwr_seq0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\aon_pwr_seq0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/i2c0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\i2c0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/i2c1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\i2c1.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/lpmcu_misc_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\lpmcu_misc_regs0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_sysctrl0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_sysctrl0.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/pio/samb11zr.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\pio\samb11zr.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/pio/btlc1000wlcsp.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\pio\btlc1000wlcsp.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/sam0/utils/cmsis/samb11/include/pio/samb11g18a.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\pio\samb11g18a.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/common/boards/board.h" framework="" version="3.33.0" source="common\boards\board.h" changed="False" content-id="Atmel.ASF" />
-  </files>
-  <documentation help="http://asf.atmel.com/docs/3.33.0/thirdparty.wireless.ble_smart_sdk.apps.startup_template.samb11_xplained_pro/html/index.html" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.33.0" />
-  </dependencies>
-  <project id="thirdparty.wireless.ble_smart_sdk.apps.startup_template.samb11_xplained_pro" value="Add" config="" content-id="Atmel.ASF" />
-  <board id="board.samb11_xplained_pro" value="Add" config="" content-id="Atmel.ASF" />
-</framework-data>
+        <options>
+          <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.utils.interrupt" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.aon_sleep_timer" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.dualtimer" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.gpio" value="Add" config="callback" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.i2c.master" value="Add" config="polled" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.spi" value="Add" config="polled" content-id="Atmel.ASF" />
+          <option id="sam0.drivers.system" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="thirdparty.wireless.ble_smart_sdk.ble_profiles.pxp_reporter" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="thirdparty.wireless.ble_smart_sdk.ble_services.battery" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="thirdparty.wireless.ble_smart_sdk.ble_services.ble_manager" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="thirdparty.wireless.ble_smart_sdk.ble_services.link_loss" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam0.utils.cmsis.samb11.source.template" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.utils" value="Add" config="" content-id="Atmel.ASF" />
+        </options>
+        <configurations />
+        <files>
+          <file path="src/ASF/common/services/serial/samb_uart/uart_serial.h" framework="" version="" source="common/services/serial/samb_uart/uart_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/serial/serial.h" framework="" version="" source="common/services/serial/serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/boards/samb11_xplained_pro/board_init.c" framework="" version="3.33.0" source="sam0\boards\samb11_xplained_pro\board_init.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/dualtimer/dualtimer.c" framework="" version="" source="sam0/drivers/dualtimer/dualtimer.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/dualtimer/dualtimer.h" framework="" version="" source="sam0/drivers/dualtimer/dualtimer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/dualtimer/quick_start/qs_dualtimer_basic.h" framework="" version="" source="sam0/drivers/dualtimer/quick_start/qs_dualtimer_basic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/gpio/gpio.c" framework="" version="" source="sam0/drivers/gpio/gpio.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/gpio/gpio.h" framework="" version="" source="sam0/drivers/gpio/gpio.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/gpio/quick_start_callback/qs_gpio_callback.h" framework="" version="" source="sam0/drivers/gpio/quick_start_callback/qs_gpio_callback.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/system/system_sam_b.c" framework="" version="" source="sam0/drivers/system/system_sam_b.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/system/system_sam_b.h" framework="" version="" source="sam0/drivers/system/system_sam_b.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/timer/quick_start/qs_timer_basic.h" framework="" version="" source="sam0/drivers/timer/quick_start/qs_timer_basic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/timer/timer.c" framework="" version="" source="sam0/drivers/timer/timer.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/timer/timer.h" framework="" version="" source="sam0/drivers/timer/timer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/uart/quick_start_basic/qs_uart_basic.h" framework="" version="" source="sam0/drivers/uart/quick_start_basic/qs_uart_basic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/uart/quick_start_dma/qs_uart_dma_use.h" framework="" version="" source="sam0/drivers/uart/quick_start_dma/qs_uart_dma_use.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/uart/uart.c" framework="" version="" source="sam0/drivers/uart/uart.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/uart/uart.h" framework="" version="" source="sam0/drivers/uart/uart.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld" framework="" version="" source="sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/stdio/read.c" framework="" version="" source="sam0/utils/stdio/read.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h" framework="" version="" source="sam0/utils/stdio/stdio_serial/stdio_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/stdio/write.c" framework="" version="" source="sam0/utils/stdio/write.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/license.txt" framework="" version="" source="thirdparty/CMSIS/license.txt" changed="False" content-id="Atmel.ASF" />
+          <file path="src/config/conf_board.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/apps/config/samb11/conf_board.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_console_serial.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\services\uart\module_config\conf_console_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_dualtimer.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\services\dualtimer\module_config\conf_dualtimer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/startup_template_app.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/apps/startup_template/startup_template_app.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/startup_template_app.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/apps/startup_template/startup_template_app.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/at_ble_api.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/at_ble_errno.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/at_ble_trace.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/at_ble_trace.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/common.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/common.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/event_handler.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/event_handler.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/gpio_from_sdk.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/gpio_from_sdk.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/ke_msg.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/ke_msg.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/lpmcu_cortex_misc_regs_c.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/lpmcu_cortex_misc_regs_c.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/platform.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/platform.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/profiles.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/profiles.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/inc/reg_common.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/inc/reg_common.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc/libblusdk.a" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc/libblusdk.a" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/button.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/button.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/button.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/button.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/led.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/led.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio/led.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/gpio/led.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/src/event_handler.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/src/platform_drv.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.c" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h" framework="" version="" source="thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.c" framework="" version="3.33.0" source="sam0\drivers\aon_sleep_timer\aon_sleep_timer.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/aon_sleep_timer/quick_start/qs_aon_sleep_timer_basic.h" framework="" version="3.33.0" source="sam0\drivers\aon_sleep_timer\quick_start\qs_aon_sleep_timer_basic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.h" framework="" version="3.33.0" source="sam0\drivers\aon_sleep_timer\aon_sleep_timer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter/pxp_reporter.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_reporter\pxp_reporter.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter/pxp_reporter.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_profiles\pxp_reporter\pxp_reporter.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery/battery.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\battery\battery.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery/battery.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\battery\battery.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert/immediate_alert.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\immediate_alert\immediate_alert.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert/immediate_alert.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\immediate_alert\immediate_alert.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss/link_loss.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\link_loss\link_loss.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss/link_loss.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\link_loss\link_loss.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power/tx_power.c" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\tx_power\tx_power.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power/tx_power.h" framework="" version="3.33.0" source="thirdparty\wireless\ble_smart_sdk\ble_services\tx_power\tx_power.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/spi/spi.c" framework="" version="3.33.0" source="sam0\drivers\spi\spi.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/spi/quick_start_slave/qs_spi_slave_basic.h" framework="" version="3.33.0" source="sam0\drivers\spi\quick_start_slave\qs_spi_slave_basic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/spi/spi.h" framework="" version="3.33.0" source="sam0\drivers\spi\spi.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/spi/quick_start_master/qs_spi_master_basic.h" framework="" version="3.33.0" source="sam0\drivers\spi\quick_start_master\qs_spi_master_basic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_spi.h" framework="" version="3.33.0" source="sam0\drivers\spi\module_config\conf_spi.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/i2c/i2c_master.c" framework="" version="3.33.0" source="sam0\drivers\i2c\i2c_master.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/i2c/quick_start_master/qs_i2c_master_basic_use.h" framework="" version="3.33.0" source="sam0\drivers\i2c\quick_start_master\qs_i2c_master_basic_use.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/i2c/i2c_master.h" framework="" version="3.33.0" source="sam0\drivers\i2c\i2c_master.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/drivers/i2c/i2c_common.h" framework="" version="3.33.0" source="sam0\drivers\i2c\i2c_common.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/boards/samb11_xplained_pro/samb11_xplained_pro.h" framework="" version="3.33.0" source="sam0\boards\samb11_xplained_pro\samb11_xplained_pro.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.c" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\source\system_samb11.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.c" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\source\gcc\startup_samb11.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\source\system_samb11.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/compiler.h" framework="" version="3.33.0" source="sam0\utils\compiler.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/header_files/io.h" framework="" version="3.33.0" source="sam0\utils\header_files\io.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/status_codes.h" framework="" version="3.33.0" source="sam0\utils\status_codes.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/preprocessor/tpaste.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\tpaste.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/preprocessor/mrepeat.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\mrepeat.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/preprocessor/mrecursion.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\mrecursion.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/preprocessor/preprocessor.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\preprocessor.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/preprocessor/stringz.h" framework="" version="3.33.0" source="sam0\utils\preprocessor\stringz.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/make/Makefile.sam.in" framework="" version="3.33.0" source="sam0\utils\make\Makefile.sam.in" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/Include/arm_math.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\arm_math.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/Include/core_cm0.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\core_cm0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/Include/core_cmFunc.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\core_cmFunc.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/Include/core_cmInstr.h" framework="" version="3.33.0" source="thirdparty\CMSIS\Include\core_cmInstr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/Lib/GCC/libarm_cortexM0l_math.a" framework="" version="3.33.0" source="thirdparty\CMSIS\Lib\GCC\libarm_cortexM0l_math.a" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/CMSIS_END_USER_LICENCE_AGREEMENT.pdf" framework="" version="3.33.0" source="thirdparty\CMSIS\CMSIS_END_USER_LICENCE_AGREEMENT.pdf" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/README.txt" framework="" version="3.33.0" source="thirdparty\CMSIS\README.txt" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/ATMEL-disclaimer.txt" framework="" version="3.33.0" source="thirdparty\CMSIS\ATMEL-disclaimer.txt" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/CMSIS/Lib/license.txt" framework="" version="3.33.0" source="thirdparty\CMSIS\Lib\license.txt" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/syscalls/gcc/syscalls.c" framework="" version="3.33.0" source="sam0\utils\syscalls\gcc\syscalls.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/interrupt/interrupt_sam_nvic.c" framework="" version="3.33.0" source="common\utils\interrupt\interrupt_sam_nvic.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/interrupt.h" framework="" version="3.33.0" source="common\utils\interrupt.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/interrupt/interrupt_sam_nvic.h" framework="" version="3.33.0" source="common\utils\interrupt\interrupt_sam_nvic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/parts.h" framework="" version="3.33.0" source="common\utils\parts.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/samb11zr.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\samb11zr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/samb11g18a.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\samb11g18a.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/samb11.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\samb11.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/btlc1000wlcsp.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\btlc1000wlcsp.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/spi.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\spi.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/uart.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\uart.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/timer.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\timer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/gpio.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\gpio.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/aon_sleep_timer.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\aon_sleep_timer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_rom.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_rom.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_sysctrl.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_sysctrl.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/aon_pwr_seq.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\aon_pwr_seq.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/i2c.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\i2c.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/lp_clk_cal_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\lp_clk_cal_regs.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/aon_gp_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\aon_gp_regs.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/wdt.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\wdt.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_bpu.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_bpu.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/efuse_misc_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\efuse_misc_regs.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/prov_dma_ctrl.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\prov_dma_ctrl.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/arm_dwt.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\arm_dwt.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/lpmcu_misc_regs.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\lpmcu_misc_regs.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/spi_flash.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\spi_flash.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/component/dualtimer.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\component\dualtimer.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/spi0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\spi0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/spi1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\spi1.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/uart0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\uart0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/aon_sleep_timer0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\aon_sleep_timer0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/uart1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\uart1.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/gpio1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\gpio1.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/gpio2.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\gpio2.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/gpio0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\gpio0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/dualtimer0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\dualtimer0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/prov_dma_ctrl0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\prov_dma_ctrl0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/aon_gp_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\aon_gp_regs0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/spi_flash0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\spi_flash0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/wdt0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\wdt0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/wdt1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\wdt1.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/efuse_misc_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\efuse_misc_regs0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_bpu0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_bpu0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/timer0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\timer0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/lp_clk_cal_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\lp_clk_cal_regs0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_dwt0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_dwt0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_rom0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_rom0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/aon_pwr_seq0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\aon_pwr_seq0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/i2c0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\i2c0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/i2c1.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\i2c1.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/lpmcu_misc_regs0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\lpmcu_misc_regs0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/instance/arm_sysctrl0.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\instance\arm_sysctrl0.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/pio/samb11zr.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\pio\samb11zr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/pio/btlc1000wlcsp.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\pio\btlc1000wlcsp.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam0/utils/cmsis/samb11/include/pio/samb11g18a.h" framework="" version="3.33.0" source="sam0\utils\cmsis\samb11\include\pio\samb11g18a.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/boards/board.h" framework="" version="3.33.0" source="common\boards\board.h" changed="False" content-id="Atmel.ASF" />
+        </files>
+        <documentation help="http://asf.atmel.com/docs/3.33.0/thirdparty.wireless.ble_smart_sdk.apps.startup_template.samb11_xplained_pro/html/index.html" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.33.0" />
+        </dependencies>
+        <project id="thirdparty.wireless.ble_smart_sdk.apps.startup_template.samb11_xplained_pro" value="Add" config="" content-id="Atmel.ASF" />
+        <board id="board.samb11_xplained_pro" value="Add" config="" content-id="Atmel.ASF" />
+      </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
     <avrtoolserialnumber>ATML2534030200000694</avrtoolserialnumber>
@@ -248,182 +248,53 @@
   <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
   <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
   <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
-  <armgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>CHIPVERSION_B0</Value>
-      <Value>OTAU_FEATURE=false</Value>
-      <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
-      <Value>ATT_DB_MEMORY</Value>
-      <Value>LLS_GATT_SERVER</Value>
-      <Value>IAS_GATT_SERVER</Value>
-      <Value>PROXIMITY_REPORTER</Value>
-      <Value>TXPS_GATT_SERVER</Value>
-      <Value>BATTERY_SERVICE</Value>
-      <Value>IMMEDIATE_ALERT_SERVICE</Value>
-      <Value>LINK_LOSS_SERVICE</Value>
-      <Value>TX_POWER_SERVICE</Value>
-      <Value>SPI_CALLBACK_MODE=false</Value>
-      <Value>USE_DMP</Value>
-      <Value>MPU9250</Value>
-      <Value>EMPL_TARGET_SAMB11</Value>
-      <Value>EMPL</Value>
-      <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
-      <Value>NDEBUG</Value>
-      <Value>__SAMB11G18A__</Value>
-      <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
-      <Value>ARM_MATH_CM0PLUS=true</Value>
-    </ListValues>
-  </armgcc.compiler.symbols.DefSymbols>
-  <armgcc.compiler.directories.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/sms_v_0_2/inc</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/common/services/delay/sam</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/mpl</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/mllite</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/eMPL-hal</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/driver/eMPL</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/driver/include</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.symbols.DefSymbols><ListValues>
+  <Value>CHIPVERSION_B0</Value>
+  <Value>OTAU_FEATURE=false</Value>
+  <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
+  <Value>ATT_DB_MEMORY</Value>
+  <Value>LLS_GATT_SERVER</Value>
+  <Value>IAS_GATT_SERVER</Value>
+  <Value>PROXIMITY_REPORTER</Value>
+  <Value>TXPS_GATT_SERVER</Value>
+  <Value>BATTERY_SERVICE</Value>
+  <Value>IMMEDIATE_ALERT_SERVICE</Value>
+  <Value>LINK_LOSS_SERVICE</Value>
+  <Value>TX_POWER_SERVICE</Value>
+  <Value>SPI_CALLBACK_MODE=false</Value>
+  <Value>USE_DMP</Value>
+  <Value>MPU9250</Value>
+  <Value>EMPL_TARGET_SAMB11</Value>
+  <Value>EMPL</Value>
+  <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
+  <Value>__SAMB11G18A__</Value>
+  <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
+  <Value>ARM_MATH_CM0PLUS=true</Value>
+  <Value>NDEBUG</Value>
+</ListValues></armgcc.compiler.symbols.DefSymbols>
+  <armgcc.compiler.directories.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/sms_v_0_2/inc</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/common/services/delay</Value><Value>../src/ASF/common/services/delay/sam</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value><Value>../src/ASF/thirdparty/sensor/mpu9250_kriswiner</Value></ListValues></armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+  <armgcc.compiler.optimization.PrepareDataForGarbageCollection>False</armgcc.compiler.optimization.PrepareDataForGarbageCollection>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
   <armgcc.compiler.miscellaneous.OtherFlags>-pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500</armgcc.compiler.miscellaneous.OtherFlags>
   <armgcc.linker.general.UseNewlibNano>True</armgcc.linker.general.UseNewlibNano>
-  <armgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libarm_cortexM0l_math</Value>
-      <Value>libblusdk</Value>
-      <Value>libm</Value>
-      <Value>liblibmplmpu.a</Value>
-    </ListValues>
-  </armgcc.linker.libraries.Libraries>
-  <armgcc.linker.libraries.LibrarySearchPaths>
-    <ListValues>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
-      <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
-      <Value>C:\_code\AS\SABRe\Invensense_lib\liblibmplmpu_m0</Value>
-      <Value>C:\_code\AS\SABRe\Invensense_lib\core\mpl</Value>
-      <Value>C:\_code\libs\invensense</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-    </ListValues>
-  </armgcc.linker.libraries.LibrarySearchPaths>
+  <armgcc.linker.libraries.Libraries><ListValues><Value>libarm_cortexM0l_math</Value><Value>libblusdk</Value><Value>libm</Value></ListValues></armgcc.linker.libraries.Libraries>
+  <armgcc.linker.libraries.LibrarySearchPaths><ListValues>
+  <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
+  <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
+  <Value>C:\_code\libs\invensense</Value>
+  <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+  <Value>C:\_code\AS\SABRe\Invensense_lib\liblibmplmpu_m0</Value>
+  <Value>C:\_code\AS\SABRe\Invensense_lib\core\mpl</Value>
+</ListValues></armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.memorysettings.ExternalRAM></armgcc.linker.memorysettings.ExternalRAM>
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=app_entry -Wl,--cref -mthumb -T../src/ASF/sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld</armgcc.linker.miscellaneous.LinkerFlags>
-  <armgcc.assembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.assembler.general.IncludePaths>
+  <armgcc.assembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBLE_DEVICE_ROLE=BLE_ROLE_ALL -DCHIPVERSION_B0 -DOTAU_FEATURE=false -DLLS_GATT_SERVER -DIAS_GATT_SERVER -DPROXIMITY_REPORTER -DTXPS_GATT_SERVER -DBATTERY_SERVICE -DIMMEDIATE_ALERT_SERVICE -DLINK_LOSS_SERVICE -DTX_POWER_SERVICE -DSPI_CALLBACK_MODE=false -DI2C_MASTER_CALLBACK_MODE=false -D__SAMB11G18A__ -DBOARD=SAMB11_XPLAINED_PRO</armgcc.preprocessingassembler.general.AssemblerFlags>
-  <armgcc.preprocessingassembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
 </ArmGcc>
     </ToolchainSettings>
     <PostBuildEvent>"$(PROJECT_BLEAPP_ROOT)\tools\samb_makeimage.bat" "$(PROJECT_BLEAPP_ROOT)\patches\patch.img" "$(OutputDirectory)\$(OutputFileName).bin"  app_entry _sstack _estack _sfixed</PostBuildEvent>
@@ -436,184 +307,54 @@
   <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
   <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
   <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
-  <armgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>CHIPVERSION_B0</Value>
-      <Value>OTAU_FEATURE=false</Value>
-      <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
-      <Value>ATT_DB_MEMORY</Value>
-      <Value>LLS_GATT_SERVER</Value>
-      <Value>IAS_GATT_SERVER</Value>
-      <Value>PROXIMITY_REPORTER</Value>
-      <Value>TXPS_GATT_SERVER</Value>
-      <Value>BATTERY_SERVICE</Value>
-      <Value>IMMEDIATE_ALERT_SERVICE</Value>
-      <Value>LINK_LOSS_SERVICE</Value>
-      <Value>TX_POWER_SERVICE</Value>
-      <Value>SPI_CALLBACK_MODE=false</Value>
-      <Value>USE_DMP</Value>
-      <Value>MPU9250</Value>
-      <Value>EMPL_TARGET_SAMB11</Value>
-      <Value>EMPL</Value>
-      <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
-      <Value>DEBUG</Value>
-      <Value>__SAMB11G18A__</Value>
-      <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
-      <Value>ARM_MATH_CM0PLUS=true</Value>
-    </ListValues>
-  </armgcc.compiler.symbols.DefSymbols>
-  <armgcc.compiler.directories.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/sms_v_0_2/inc</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/common/services/delay/sam</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/mpl</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/mllite</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/eMPL-hal</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/driver/eMPL</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250/driver/include</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.symbols.DefSymbols><ListValues>
+  <Value>CHIPVERSION_B0</Value>
+  <Value>OTAU_FEATURE=false</Value>
+  <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
+  <Value>ATT_DB_MEMORY</Value>
+  <Value>LLS_GATT_SERVER</Value>
+  <Value>IAS_GATT_SERVER</Value>
+  <Value>PROXIMITY_REPORTER</Value>
+  <Value>TXPS_GATT_SERVER</Value>
+  <Value>BATTERY_SERVICE</Value>
+  <Value>IMMEDIATE_ALERT_SERVICE</Value>
+  <Value>LINK_LOSS_SERVICE</Value>
+  <Value>TX_POWER_SERVICE</Value>
+  <Value>SPI_CALLBACK_MODE=false</Value>
+  <Value>USE_DMP</Value>
+  <Value>MPU9250</Value>
+  <Value>EMPL_TARGET_SAMB11</Value>
+  <Value>EMPL</Value>
+  <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
+  <Value>__SAMB11G18A__</Value>
+  <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
+  <Value>ARM_MATH_CM0PLUS=true</Value>
+  <Value>DEBUG</Value>
+</ListValues></armgcc.compiler.symbols.DefSymbols>
+  <armgcc.compiler.directories.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/sms_v_0_2/inc</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/common/services/delay</Value><Value>../src/ASF/common/services/delay/sam</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value><Value>../src/ASF/thirdparty/sensor/mpu9250_kriswiner</Value></ListValues></armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
   <armgcc.compiler.optimization.PrepareDataForGarbageCollection>True</armgcc.compiler.optimization.PrepareDataForGarbageCollection>
-  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
   <armgcc.compiler.miscellaneous.OtherFlags>-pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500</armgcc.compiler.miscellaneous.OtherFlags>
   <armgcc.linker.general.UseNewlibNano>True</armgcc.linker.general.UseNewlibNano>
-  <armgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libarm_cortexM0l_math</Value>
-      <Value>libblusdk</Value>
-      <Value>libm</Value>
-      <Value>liblibmplmpu.a</Value>
-    </ListValues>
-  </armgcc.linker.libraries.Libraries>
-  <armgcc.linker.libraries.LibrarySearchPaths>
-    <ListValues>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
-      <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
-      <Value>../../../../../Invensense_lib/liblibmplmpu_m0</Value>
-      <Value>C:\_code\libs\invensense</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-    </ListValues>
-  </armgcc.linker.libraries.LibrarySearchPaths>
+  <armgcc.linker.libraries.Libraries><ListValues><Value>libarm_cortexM0l_math</Value><Value>libblusdk</Value><Value>libm</Value></ListValues></armgcc.linker.libraries.Libraries>
+  <armgcc.linker.libraries.LibrarySearchPaths><ListValues>
+  <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
+  <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
+  <Value>C:\_code\libs\invensense</Value>
+  <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+  <Value>../../../../../Invensense_lib/liblibmplmpu_m0</Value>
+</ListValues></armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.memorysettings.ExternalRAM></armgcc.linker.memorysettings.ExternalRAM>
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=app_entry  -Wl,--cref -mthumb -T../src/ASF/sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld</armgcc.linker.miscellaneous.LinkerFlags>
-  <armgcc.assembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.assembler.general.IncludePaths>
-  <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
+  <armgcc.assembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBLE_DEVICE_ROLE=BLE_ROLE_ALL -DCHIPVERSION_B0 -DOTAU_FEATURE=false -DLLS_GATT_SERVER -DIAS_GATT_SERVER -DPROXIMITY_REPORTER -DTXPS_GATT_SERVER -DBATTERY_SERVICE -DIMMEDIATE_ALERT_SERVICE -DLINK_LOSS_SERVICE -DTX_POWER_SERVICE -DSPI_CALLBACK_MODE=false -DI2C_MASTER_CALLBACK_MODE=false -D__SAMB11G18A__ -DBOARD=SAMB11_XPLAINED_PRO</armgcc.preprocessingassembler.general.AssemblerFlags>
-  <armgcc.preprocessingassembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
+  <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
 </ArmGcc>
     </ToolchainSettings>
@@ -706,13 +447,7 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
     <Folder Include="src\ASF\thirdparty\sensor" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250\driver" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250\driver\include" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250\eMPL-hal" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250\mllite" />
-    <Folder Include="src\ASF\thirdparty\sensor\mpu9250\mpl" />
+    <Folder Include="src\ASF\thirdparty\sensor\mpu9250_kriswiner" />
     <Folder Include="src\ASF\thirdparty\wireless\" />
     <Folder Include="src\ASF\thirdparty\wireless\ble_smart_sdk\" />
     <Folder Include="src\ASF\thirdparty\wireless\ble_smart_sdk\ble_profiles\" />
@@ -985,139 +720,10 @@
     <Compile Include="src\ASF\sam0\utils\syscalls\gcc\syscalls.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\dmpKey.h">
+    <Compile Include="src\ASF\thirdparty\sensor\mpu9250_kriswiner\mpu9250.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\dmpmap.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu_dmp_motion_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu_dmp_motion_driver.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\log.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\mlinclude.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\mlmath.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\mlos.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\mltypes.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\mpu.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\driver\include\stdint_invensense.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\eMPL-hal\eMPL_outputs.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\eMPL-hal\eMPL_outputs.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\data_builder.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\data_builder.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\hal_outputs.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\hal_outputs.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\invensense.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\message_layer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\message_layer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\mlmath.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\ml_math_func.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\ml_math_func.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\mpl.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\mpl.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\results_holder.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\results_holder.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\start_manager.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\start_manager.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\storage_manager.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mllite\storage_manager.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\accel_auto_cal.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\compass_vec_cal.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\fast_no_motion.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\fusion_9axis.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\gyro_tc.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\heading_from_gyro.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\invensense_adv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\inv_math.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\mag_disturb.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\motion_no_motion.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\no_gyro_fusion.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\sensor\mpu9250\mpl\quaternion_supervisor.h">
+    <Compile Include="src\ASF\thirdparty\sensor\mpu9250_kriswiner\quaternion_filter.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\sms_v_0_2\inc\ms58.h">

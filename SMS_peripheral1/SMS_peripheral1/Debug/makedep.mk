@@ -18,29 +18,7 @@ src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.c
 
 src\ASF\sam0\utils\syscalls\gcc\syscalls.c
 
-src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu.c
-
-src\ASF\thirdparty\sensor\mpu9250\driver\eMPL\inv_mpu_dmp_motion_driver.c
-
-src\ASF\thirdparty\sensor\mpu9250\eMPL-hal\eMPL_outputs.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\data_builder.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\hal_outputs.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\message_layer.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\mlmath.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\ml_math_func.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\mpl.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\results_holder.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\start_manager.c
-
-src\ASF\thirdparty\sensor\mpu9250\mllite\storage_manager.c
+src\ASF\thirdparty\sensor\mpu9250_kriswiner\quaternion_filter.c
 
 src\sms_v_0_2\src\sms_ble.c
 

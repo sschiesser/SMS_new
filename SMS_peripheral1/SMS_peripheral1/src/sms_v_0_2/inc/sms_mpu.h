@@ -13,7 +13,6 @@
  * INCLUDE
  * ------- */
 #include "sms_peripheral1.h"
-//#include "mpu9250.h"
 
 
 /* ------
@@ -31,8 +30,6 @@
 #define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1)
 #define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6)
 
-#define SMS_MPU_I2C_SLAVE_ADDR              (0x69)
-
 #define SMS_MPU_SAMPLE_RATE_HZ              (50)
 #define SMS_MPU_TEMP_MULTIPLIER             (1)
 #define SMS_MPU_COMPASS_MULTIPLIER          (1)
@@ -48,18 +45,25 @@
 #define SMS_MPU_MOTION                      (0)
 #define SMS_MPU_NO_MOTION                   (1)
 
+/*
+ * These are the free parameters in the Mahony filter and fusion scheme, 
+ * Kp for proportional feedback, Ki for integral
+ */
+#define Kp									(2.0f * 5.0f) 
+#define Ki									(0.0f)
+
 //#define SMS_IMU_INTERRUPT_PIN PIN_AO_GPIO_2
 //#define SMS_IMU_INIT_DATA_LEN 8
 //#define SMS_IMU_READ_DATA_LEN 12
 //#define SMS_IMU_ACCEL_Z_SENSITIVITY 16384
 //#define SMS_IMU_GYRO_SENSITIVITY 131
 
-
 /* ---------
  * VARIABLES
  * --------- */
 struct mpu9250_hal_s {
     bool init_ok;
+	float self_test[6];
     unsigned char accel_fsr;
     unsigned short gyro_fsr;
     unsigned short compass_fsr;
@@ -75,7 +79,7 @@ struct mpu9250_hal_s {
 };
 
 enum sms_mpu_state {
-    MPU_STATE_OFF,
+    MPU_STATE_OFF = 0,
     MPU_STATE_STDBY,
     MPU_STATE_ON
 };
@@ -93,6 +97,12 @@ typedef struct sms_mpu_struct {
     uint8_t char_values[12];
 }sms_mpu_struct_t;
 sms_mpu_struct_t mpu_device;
+
+
+float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values
+float q[4]; // vector to hold quaternion
+float eInt[3]; // vector to hold integral error for Mahony method
+float beta, deltat;
 
 ///* GATT service handler */
 //gatt_service_handler_t sms_imu_service_handler;
@@ -164,9 +174,18 @@ void sms_mpu_configure_gpio(void);
 void sms_mpu_register_callbacks(void);
 void sms_mpu_unregister_callbacks(void);
 void sms_mpu_interrupt_callback(void);
-int sms_mpu_initialize(void);
+int sms_mpu_check(void);
+int sms_mpu_comp_check(void);
+void sms_mpu_calibrate(float *dest1, float *dest2);
+void sms_mpu_initialize(void);
+void sms_mpu_comp_initialize(float *destination);
 int sms_mpu_poll_data(void);
 void sms_mpu_define_services(void);
+
+void sms_mpu_selftest(float *destination);
+void writeByte(uint8_t address, uint8_t subAddress, uint8_t data);
+uint8_t readByte(uint8_t address, uint8_t subAddress);
+void readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8_t * dest);
 
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);

@@ -53,6 +53,7 @@
  * INCLUDE
  * ------------------------------------------------ */
 #include <asf.h>
+#include <math.h>
 #include "platform.h"
 #include "at_ble_api.h"
 #include "console_serial.h"
@@ -60,10 +61,7 @@
 #include "ble_manager.h"
 #include "ble_utils.h"
 #include "delay.h"
-/* MPU9250 include */
-#include "inv_mpu.h"
-#include "inv_mpu_dmp_motion_driver.h"
-//#include "mpu.h"
+#include "mpu9250.h"
 //#include "log.h"
 /* SMS include */
 #include "sms_common.h"
