@@ -55,7 +55,7 @@ void sms_dualtimer_init(void)
 
     config_dualtimer.timer1.load_value = SMS_DUALTIMER_LOAD_S;
     config_dualtimer.timer1.counter_mode = DUALTIMER_ONE_SHOT_MODE;
-    config_dualtimer.timer2.load_value = SMS_DUALTIMER_LOAD_S;
+    config_dualtimer.timer2.load_value = SMS_DUALTIMER_LOAD_MS;
     config_dualtimer.timer2.counter_mode = DUALTIMER_ONE_SHOT_MODE;
 
     dualtimer_init(&config_dualtimer);
@@ -392,4 +392,11 @@ void sms_dualtimer2_fn(void)
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
         break;
     }
+}
+
+void delay_ms(uint32_t delay) {
+	sms_dualtimer_start(TIMER_UNIT_MS, delay, DUALTIMER_TIMER2);
+	while(dualtimer_get_value(DUALTIMER_TIMER2)) {
+	}
+	sms_dualtimer_stop(DUALTIMER_TIMER2);
 }

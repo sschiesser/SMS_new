@@ -695,6 +695,8 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
   return (0);                                                  /* Function successful */
 }
 
+#else
+#error "Function not implemented for this device"
 #endif
 
 /*@} end of CMSIS_Core_SysTickFunctions */

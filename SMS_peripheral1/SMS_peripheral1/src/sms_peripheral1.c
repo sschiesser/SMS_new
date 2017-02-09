@@ -73,7 +73,6 @@ static void resume_cb(void)
 	init_port_list(); // re-initialize all ports
 	serial_console_init(); // GPIO (UART) for the console
 	sms_dualtimer_init();
-	delay_init();
 	sms_button_gpio_init(); // GPIO (AO_0 & AO_1) for the buttons
 	sms_led_gpio_init();
 	sms_spi_master_configure();
@@ -116,9 +115,6 @@ int main(void)
 	// Dualtimer
 	sms_dualtimer_init();
 	
-	// Blocking delay (hacked from other SAM platforms)
-	delay_init();
-
 	// Buttons
 	sms_button_gpio_init();
 	
@@ -156,7 +152,7 @@ int main(void)
 
 	// Dualtimer (AON timer enables on registration... so do it later)
 	sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
-	sms_dualtimer_register_callback(DUALTIMER_TIMER2, sms_dualtimer2_cb); // LED blinking timer
+	// DUALTIMER_TIMER2 used for blocking delay!! So don't register callback!!
 
 	// Buttons
 	sms_button_register_callbacks();

@@ -248,177 +248,53 @@
   <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
   <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
   <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
-  <armgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>CHIPVERSION_B0</Value>
-      <Value>OTAU_FEATURE=false</Value>
-      <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
-      <Value>ATT_DB_MEMORY</Value>
-      <Value>LLS_GATT_SERVER</Value>
-      <Value>IAS_GATT_SERVER</Value>
-      <Value>PROXIMITY_REPORTER</Value>
-      <Value>TXPS_GATT_SERVER</Value>
-      <Value>BATTERY_SERVICE</Value>
-      <Value>IMMEDIATE_ALERT_SERVICE</Value>
-      <Value>LINK_LOSS_SERVICE</Value>
-      <Value>TX_POWER_SERVICE</Value>
-      <Value>SPI_CALLBACK_MODE=false</Value>
-      <Value>USE_DMP</Value>
-      <Value>MPU9250</Value>
-      <Value>EMPL_TARGET_SAMB11</Value>
-      <Value>EMPL</Value>
-      <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
-      <Value>__SAMB11G18A__</Value>
-      <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
-      <Value>ARM_MATH_CM0PLUS=true</Value>
-      <Value>NDEBUG</Value>
-    </ListValues>
-  </armgcc.compiler.symbols.DefSymbols>
-  <armgcc.compiler.directories.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/sms_v_0_2/inc</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/common/services/delay/sam</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250_kriswiner</Value>
-    </ListValues>
-  </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.symbols.DefSymbols><ListValues>
+  <Value>CHIPVERSION_B0</Value>
+  <Value>OTAU_FEATURE=false</Value>
+  <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
+  <Value>ATT_DB_MEMORY</Value>
+  <Value>LLS_GATT_SERVER</Value>
+  <Value>IAS_GATT_SERVER</Value>
+  <Value>PROXIMITY_REPORTER</Value>
+  <Value>TXPS_GATT_SERVER</Value>
+  <Value>BATTERY_SERVICE</Value>
+  <Value>IMMEDIATE_ALERT_SERVICE</Value>
+  <Value>LINK_LOSS_SERVICE</Value>
+  <Value>TX_POWER_SERVICE</Value>
+  <Value>SPI_CALLBACK_MODE=false</Value>
+  <Value>USE_DMP</Value>
+  <Value>MPU9250</Value>
+  <Value>EMPL_TARGET_SAMB11</Value>
+  <Value>EMPL</Value>
+  <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
+  <Value>__SAMB11G18A__</Value>
+  <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
+  <Value>ARM_MATH_CM0PLUS=true</Value>
+  <Value>NDEBUG</Value>
+</ListValues></armgcc.compiler.symbols.DefSymbols>
+  <armgcc.compiler.directories.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/sms_v_0_2/inc</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value><Value>../src/ASF/thirdparty/sensor/mpu9250_kriswiner</Value></ListValues></armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
+  <armgcc.compiler.optimization.PrepareDataForGarbageCollection>False</armgcc.compiler.optimization.PrepareDataForGarbageCollection>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
   <armgcc.compiler.miscellaneous.OtherFlags>-pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500</armgcc.compiler.miscellaneous.OtherFlags>
   <armgcc.linker.general.UseNewlibNano>True</armgcc.linker.general.UseNewlibNano>
-  <armgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libarm_cortexM0l_math</Value>
-      <Value>libblusdk</Value>
-      <Value>libm</Value>
-    </ListValues>
-  </armgcc.linker.libraries.Libraries>
-  <armgcc.linker.libraries.LibrarySearchPaths>
-    <ListValues>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
-      <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
-      <Value>C:\_code\libs\invensense</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>C:\_code\AS\SABRe\Invensense_lib\liblibmplmpu_m0</Value>
-      <Value>C:\_code\AS\SABRe\Invensense_lib\core\mpl</Value>
-    </ListValues>
-  </armgcc.linker.libraries.LibrarySearchPaths>
+  <armgcc.linker.libraries.Libraries><ListValues><Value>libarm_cortexM0l_math</Value><Value>libblusdk</Value><Value>libm</Value></ListValues></armgcc.linker.libraries.Libraries>
+  <armgcc.linker.libraries.LibrarySearchPaths><ListValues>
+  <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
+  <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
+  <Value>C:\_code\libs\invensense</Value>
+  <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+  <Value>C:\_code\AS\SABRe\Invensense_lib\liblibmplmpu_m0</Value>
+  <Value>C:\_code\AS\SABRe\Invensense_lib\core\mpl</Value>
+</ListValues></armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.memorysettings.ExternalRAM></armgcc.linker.memorysettings.ExternalRAM>
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=app_entry -Wl,--cref -mthumb -T../src/ASF/sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld</armgcc.linker.miscellaneous.LinkerFlags>
-  <armgcc.assembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.assembler.general.IncludePaths>
+  <armgcc.assembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBLE_DEVICE_ROLE=BLE_ROLE_ALL -DCHIPVERSION_B0 -DOTAU_FEATURE=false -DLLS_GATT_SERVER -DIAS_GATT_SERVER -DPROXIMITY_REPORTER -DTXPS_GATT_SERVER -DBATTERY_SERVICE -DIMMEDIATE_ALERT_SERVICE -DLINK_LOSS_SERVICE -DTX_POWER_SERVICE -DSPI_CALLBACK_MODE=false -DI2C_MASTER_CALLBACK_MODE=false -D__SAMB11G18A__ -DBOARD=SAMB11_XPLAINED_PRO</armgcc.preprocessingassembler.general.AssemblerFlags>
-  <armgcc.preprocessingassembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
 </ArmGcc>
     </ToolchainSettings>
     <PostBuildEvent>"$(PROJECT_BLEAPP_ROOT)\tools\samb_makeimage.bat" "$(PROJECT_BLEAPP_ROOT)\patches\patch.img" "$(OutputDirectory)\$(OutputFileName).bin"  app_entry _sstack _estack _sfixed</PostBuildEvent>
@@ -431,179 +307,54 @@
   <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
   <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
   <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
-  <armgcc.compiler.symbols.DefSymbols>
-    <ListValues>
-      <Value>CHIPVERSION_B0</Value>
-      <Value>OTAU_FEATURE=false</Value>
-      <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
-      <Value>ATT_DB_MEMORY</Value>
-      <Value>LLS_GATT_SERVER</Value>
-      <Value>IAS_GATT_SERVER</Value>
-      <Value>PROXIMITY_REPORTER</Value>
-      <Value>TXPS_GATT_SERVER</Value>
-      <Value>BATTERY_SERVICE</Value>
-      <Value>IMMEDIATE_ALERT_SERVICE</Value>
-      <Value>LINK_LOSS_SERVICE</Value>
-      <Value>TX_POWER_SERVICE</Value>
-      <Value>SPI_CALLBACK_MODE=false</Value>
-      <Value>USE_DMP</Value>
-      <Value>MPU9250</Value>
-      <Value>EMPL_TARGET_SAMB11</Value>
-      <Value>EMPL</Value>
-      <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
-      <Value>__SAMB11G18A__</Value>
-      <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
-      <Value>ARM_MATH_CM0PLUS=true</Value>
-      <Value>DEBUG</Value>
-    </ListValues>
-  </armgcc.compiler.symbols.DefSymbols>
-  <armgcc.compiler.directories.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/sms_v_0_2/inc</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/common/services/delay/sam</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-      <Value>../src/ASF/thirdparty/sensor/mpu9250_kriswiner</Value>
-    </ListValues>
-  </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.symbols.DefSymbols><ListValues>
+  <Value>CHIPVERSION_B0</Value>
+  <Value>OTAU_FEATURE=false</Value>
+  <Value>BLE_DEVICE_ROLE=BLE_ROLE_PERIPHERAL</Value>
+  <Value>ATT_DB_MEMORY</Value>
+  <Value>LLS_GATT_SERVER</Value>
+  <Value>IAS_GATT_SERVER</Value>
+  <Value>PROXIMITY_REPORTER</Value>
+  <Value>TXPS_GATT_SERVER</Value>
+  <Value>BATTERY_SERVICE</Value>
+  <Value>IMMEDIATE_ALERT_SERVICE</Value>
+  <Value>LINK_LOSS_SERVICE</Value>
+  <Value>TX_POWER_SERVICE</Value>
+  <Value>SPI_CALLBACK_MODE=false</Value>
+  <Value>USE_DMP</Value>
+  <Value>MPU9250</Value>
+  <Value>EMPL_TARGET_SAMB11</Value>
+  <Value>EMPL</Value>
+  <Value>I2C_MASTER_CALLBACK_MODE=false</Value>
+  <Value>__SAMB11G18A__</Value>
+  <Value>BOARD=SAMB11_XPLAINED_PRO</Value>
+  <Value>ARM_MATH_CM0PLUS=true</Value>
+  <Value>DEBUG</Value>
+</ListValues></armgcc.compiler.symbols.DefSymbols>
+  <armgcc.compiler.directories.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/sms_v_0_2/inc</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value><Value>../src/ASF/thirdparty/sensor/mpu9250_kriswiner</Value></ListValues></armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
   <armgcc.compiler.optimization.PrepareDataForGarbageCollection>True</armgcc.compiler.optimization.PrepareDataForGarbageCollection>
-  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
   <armgcc.compiler.warnings.AllWarnings>True</armgcc.compiler.warnings.AllWarnings>
   <armgcc.compiler.miscellaneous.OtherFlags>-pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500</armgcc.compiler.miscellaneous.OtherFlags>
   <armgcc.linker.general.UseNewlibNano>True</armgcc.linker.general.UseNewlibNano>
-  <armgcc.linker.libraries.Libraries>
-    <ListValues>
-      <Value>libarm_cortexM0l_math</Value>
-      <Value>libblusdk</Value>
-      <Value>libm</Value>
-    </ListValues>
-  </armgcc.linker.libraries.Libraries>
-  <armgcc.linker.libraries.LibrarySearchPaths>
-    <ListValues>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
-      <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
-      <Value>C:\_code\libs\invensense</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../../../../../Invensense_lib/liblibmplmpu_m0</Value>
-    </ListValues>
-  </armgcc.linker.libraries.LibrarySearchPaths>
+  <armgcc.linker.libraries.Libraries><ListValues><Value>libarm_cortexM0l_math</Value><Value>libblusdk</Value><Value>libm</Value></ListValues></armgcc.linker.libraries.Libraries>
+  <armgcc.linker.libraries.LibrarySearchPaths><ListValues>
+  <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc</Value>
+  <Value>C:\_code\libs\motion_driver_6.12\mpl libraries\arm\gcc4.9.3</Value>
+  <Value>C:\_code\libs\invensense</Value>
+  <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
+  <Value>../../../../../Invensense_lib/liblibmplmpu_m0</Value>
+</ListValues></armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.memorysettings.ExternalRAM></armgcc.linker.memorysettings.ExternalRAM>
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=app_entry  -Wl,--cref -mthumb -T../src/ASF/sam0/utils/linker_scripts/samb11/gcc/samb11g18a_sram.ld</armgcc.linker.miscellaneous.LinkerFlags>
-  <armgcc.assembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.assembler.general.IncludePaths>
-  <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
+  <armgcc.assembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM0PLUS=true -DBLE_DEVICE_ROLE=BLE_ROLE_ALL -DCHIPVERSION_B0 -DOTAU_FEATURE=false -DLLS_GATT_SERVER -DIAS_GATT_SERVER -DPROXIMITY_REPORTER -DTXPS_GATT_SERVER -DBATTERY_SERVICE -DIMMEDIATE_ALERT_SERVICE -DLINK_LOSS_SERVICE -DTX_POWER_SERVICE -DSPI_CALLBACK_MODE=false -DI2C_MASTER_CALLBACK_MODE=false -D__SAMB11G18A__ -DBOARD=SAMB11_XPLAINED_PRO</armgcc.preprocessingassembler.general.AssemblerFlags>
-  <armgcc.preprocessingassembler.general.IncludePaths>
-    <ListValues>
-      <Value>../src</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/dualtimer</Value>
-      <Value>../src/ASF/sam0/drivers/system</Value>
-      <Value>../src/ASF/sam0/drivers/timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value>
-      <Value>../src/ASF/sam0/drivers/gpio</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value>
-      <Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value>
-      <Value>../src/ASF/common/services/serial</Value>
-      <Value>../src/ASF/sam0/drivers/uart</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value>
-      <Value>../src/config</Value>
-      <Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value>
-      <Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value>
-      <Value>../src/ASF/sam0/drivers/spi</Value>
-      <Value>../src/ASF/sam0/drivers/i2c</Value>
-      <Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value>
-      <Value>../src/ASF/sam0/boards</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value>
-      <Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value>
-      <Value>../src/ASF/sam0/utils</Value>
-      <Value>../src/ASF/sam0/utils/header_files</Value>
-      <Value>../src/ASF/sam0/utils/preprocessor</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
-      <Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value>
-      <Value>../src/ASF/common/utils</Value>
-      <Value>../src/ASF/common/boards</Value>
-    </ListValues>
-  </armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.preprocessingassembler.general.IncludePaths><ListValues><Value>../src</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/inc</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer</Value><Value>../src/ASF/sam0/drivers/dualtimer</Value><Value>../src/ASF/sam0/drivers/system</Value><Value>../src/ASF/sam0/drivers/timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/gpio</Value><Value>../src/ASF/sam0/drivers/gpio</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart</Value><Value>../src/ASF/sam0/utils/stdio/stdio_serial</Value><Value>../src/ASF/common/services/serial</Value><Value>../src/ASF/sam0/drivers/uart</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/utils</Value><Value>../src/config</Value><Value>../src/ASF/sam0/drivers/aon_sleep_timer</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_profiles/pxp_reporter</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/battery</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/immediate_alert</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/link_loss</Value><Value>../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/tx_power</Value><Value>../src/ASF/sam0/drivers/spi</Value><Value>../src/ASF/sam0/drivers/i2c</Value><Value>../src/ASF/sam0/boards/samb11_xplained_pro</Value><Value>../src/ASF/sam0/boards</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/include</Value><Value>../src/ASF/sam0/utils/cmsis/samb11/source</Value><Value>../src/ASF/sam0/utils</Value><Value>../src/ASF/sam0/utils/header_files</Value><Value>../src/ASF/sam0/utils/preprocessor</Value><Value>../src/ASF/thirdparty/CMSIS/Include</Value><Value>../src/ASF/thirdparty/CMSIS/Lib/GCC</Value><Value>../src/ASF/common/utils</Value><Value>../src/ASF/common/boards</Value></ListValues></armgcc.preprocessingassembler.general.IncludePaths>
+  <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
+  <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
 </ArmGcc>
     </ToolchainSettings>
@@ -644,8 +395,6 @@
     <Folder Include="src\ASF\common\" />
     <Folder Include="src\ASF\common\boards\" />
     <Folder Include="src\ASF\common\services\" />
-    <Folder Include="src\ASF\common\services\delay" />
-    <Folder Include="src\ASF\common\services\delay\sam" />
     <Folder Include="src\ASF\common\services\serial\" />
     <Folder Include="src\ASF\common\services\serial\samb_uart\" />
     <Folder Include="src\ASF\common\utils\" />
@@ -726,15 +475,6 @@
     <None Include="src\ASF\common\boards\board.h">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="src\ASF\common\services\delay\delay.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\common\services\delay\sam\systick_counter.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\common\services\delay\sam\systick_counter.h">
-      <SubType>compile</SubType>
-    </Compile>
     <None Include="src\ASF\common\utils\interrupt.h">
       <SubType>compile</SubType>
     </None>

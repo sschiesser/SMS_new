@@ -144,13 +144,13 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	// At end of sample accumulation, turn off FIFO sensor read
 	DBG_LOG("Turn-off FIFO & read samples...");
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);        // Disable gyro and accelerometer sensors for FIFO
-	readBytes(MPU9250_ADDRESS, FIFO_COUNTH, 2, &data[0]); // read FIFO sample count
+	readBytes(MPU9250_ADDRESS, FIFO_COUNTH, 2, &data); // read FIFO sample count
 	fifo_count = ((uint16_t)data[0] << 8) | data[1];
 	packet_count = fifo_count/12;// How many sets of full gyro and accelerometer data for averaging
 	
 	for (ii = 0; ii < packet_count; ii++) {
 		int16_t accel_temp[3] = {0, 0, 0}, gyro_temp[3] = {0, 0, 0};
-		readBytes(MPU9250_ADDRESS, FIFO_R_W, 12, &data[0]); // read data for averaging
+		readBytes(MPU9250_ADDRESS, FIFO_R_W, 12, &data); // read data for averaging
 		accel_temp[0] = (int16_t) (((int16_t)data[0] << 8) | data[1]  ) ;  // Form signed 16-bit integer for each sample in FIFO
 		accel_temp[1] = (int16_t) (((int16_t)data[2] << 8) | data[3]  ) ;
 		accel_temp[2] = (int16_t) (((int16_t)data[4] << 8) | data[5]  ) ;
@@ -209,11 +209,11 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	// the accelerometer biases calculated above must be divided by 8.
 
 	int32_t accel_bias_reg[3] = {0, 0, 0}; // A place to hold the factory accelerometer trim biases
-	readBytes(MPU9250_ADDRESS, XA_OFFSET_H, 2, &data[0]); // Read factory accelerometer trim values
+	readBytes(MPU9250_ADDRESS, XA_OFFSET_H, 2, &data); // Read factory accelerometer trim values
 	accel_bias_reg[0] = (int32_t) (((int16_t)data[0] << 8) | data[1]);
-	readBytes(MPU9250_ADDRESS, YA_OFFSET_H, 2, &data[0]);
+	readBytes(MPU9250_ADDRESS, YA_OFFSET_H, 2, &data);
 	accel_bias_reg[1] = (int32_t) (((int16_t)data[0] << 8) | data[1]);
-	readBytes(MPU9250_ADDRESS, ZA_OFFSET_H, 2, &data[0]);
+	readBytes(MPU9250_ADDRESS, ZA_OFFSET_H, 2, &data);
 	accel_bias_reg[2] = (int32_t) (((int16_t)data[0] << 8) | data[1]);
 	
 	uint32_t mask = 1uL; // Define mask for temperature compensation bit 0 of lower byte of accelerometer bias registers
@@ -452,7 +452,7 @@ void sms_mpu_selftest(float *destination)
 
 void writeByte(uint8_t address, uint8_t subAddress, uint8_t data)
 {
-	sms_i2c_master_write(address, subAddress, 1, data);
+	sms_i2c_master_write(address, subAddress, 1, &data);
 }
 
 uint8_t readByte(uint8_t address, uint8_t subAddress)
@@ -464,5 +464,5 @@ uint8_t readByte(uint8_t address, uint8_t subAddress)
 
 void readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8_t * dest)
 {
-	sms_i2c_master_read(address, subAddress, count, &dest);
+	sms_i2c_master_read(address, subAddress, count, dest);
 }

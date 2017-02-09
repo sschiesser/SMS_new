@@ -119,8 +119,6 @@ src/sms_peripheral1.d src/sms_peripheral1.o: ../src/sms_peripheral1.c \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h \
- ../src/ASF/common/services/delay/delay.h \
- ../src/ASF/common/services/delay/sam/systick_counter.h \
  ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_peripheral1.h \
  ../src/sms_v_0_2/inc/sms_button.h ../src/sms_v_0_2/inc/sms_common.h \
@@ -377,10 +375,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h:
 
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/utils/ble_utils.h:
-
-../src/ASF/common/services/delay/delay.h:
-
-../src/ASF/common/services/delay/sam/systick_counter.h:
 
 ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h:
 

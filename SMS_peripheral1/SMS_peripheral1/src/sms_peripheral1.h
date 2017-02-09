@@ -60,7 +60,6 @@
 #include "timer_hw.h"
 #include "ble_manager.h"
 #include "ble_utils.h"
-#include "delay.h"
 #include "mpu9250.h"
 //#include "log.h"
 /* SMS include */

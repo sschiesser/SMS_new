@@ -120,5 +120,6 @@ void sms_dualtimer1_cb(void);
 void sms_dualtimer2_cb(void);
 void sms_dualtimer1_fn(void);
 void sms_dualtimer2_fn(void);
+void delay_ms(uint32_t delay);
 
 #endif /* SMS_TIMER_H_ */
