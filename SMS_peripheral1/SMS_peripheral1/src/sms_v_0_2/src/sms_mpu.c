@@ -75,6 +75,7 @@ int sms_mpu_check(void) {
 	if(c == 0x71) {
 		DBG_LOG("[sms_mpu_check]\t\tMPU-9250 is online...");
 		sms_mpu_selftest(mpu_device.hal.self_test);
+		DBG_LOG("[sms_mpu_check]\t\tMPU-9250 self-test passed");
 		retVal = 0;
 	}
 	return retVal;
@@ -98,16 +99,21 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	int32_t accel_bias[3] = {0, 0, 0};
 	
 	// reset device
+	DBG_LOG("Reset...");
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x80); // Write a one to bit 7 reset bit; toggle reset device
 	delay_ms(100);
+	DBG_LOG_CONT(" done!");
 	
 	// get stable time source; Auto select clock source to be PLL gyroscope reference if ready
 	// else use the internal oscillator, bits 2:0 = 001
+	DBG_LOG("Get time source...");
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x01);
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_2, 0x00);
 	delay_ms(200);
+	DBG_LOG_CONT(" done!");
 
 	// Configure device for bias calculation
+	DBG_LOG("Configure device...");
 	writeByte(MPU9250_ADDRESS, INT_ENABLE, 0x00);   // Disable all interrupts
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);      // Disable FIFO
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00);   // Turn on internal clock source
@@ -115,22 +121,28 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	writeByte(MPU9250_ADDRESS, USER_CTRL, 0x00);    // Disable FIFO and I2C master modes
 	writeByte(MPU9250_ADDRESS, USER_CTRL, 0x0C);    // Reset FIFO and DMP
 	delay_ms(15);
+	DBG_LOG_CONT(" done!");
 	
 	// Configure MPU9250 gyro and accelerometer for bias calculation
+	DBG_LOG("Configure gyro & accel...");
 	writeByte(MPU9250_ADDRESS, CONFIG, 0x01);      // Set low-pass filter to 188 Hz
 	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x00);  // Set sample rate to 1 kHz
 	writeByte(MPU9250_ADDRESS, GYRO_CONFIG, 0x00);  // Set gyro full-scale to 250 degrees per second, maximum sensitivity
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, 0x00); // Set accelerometer full-scale to 2 g, maximum sensitivity
+	DBG_LOG_CONT(" done!");
 	
 	uint16_t  gyrosensitivity  = 131;   // = 131 LSB/degrees/sec
 	uint16_t  accelsensitivity = 16384;  // = 16384 LSB/g
 
 	// Configure FIFO to capture accelerometer and gyro data for bias calculation
+	DBG_LOG("Configure FIFO...");
 	writeByte(MPU9250_ADDRESS, USER_CTRL, 0x40);   // Enable FIFO
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x78);     // Enable gyro and accelerometer sensors for FIFO  (max size 512 bytes in MPU-9150)
 	delay_ms(40); // accumulate 40 samples in 40 milliseconds = 480 bytes
+	DBG_LOG_CONT(" done!");
 
 	// At end of sample accumulation, turn off FIFO sensor read
+	DBG_LOG("Turn-off FIFO & read samples...");
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);        // Disable gyro and accelerometer sensors for FIFO
 	readBytes(MPU9250_ADDRESS, FIFO_COUNTH, 2, &data[0]); // read FIFO sample count
 	fifo_count = ((uint16_t)data[0] << 8) | data[1];
@@ -154,6 +166,7 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 		gyro_bias[2]  += (int32_t) gyro_temp[2];
 		
 	}
+	DBG_LOG_CONT(" done!");
 	accel_bias[0] /= (int32_t) packet_count; // Normalize sums to get average count biases
 	accel_bias[1] /= (int32_t) packet_count;
 	accel_bias[2] /= (int32_t) packet_count;

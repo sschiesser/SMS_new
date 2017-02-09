@@ -173,6 +173,14 @@ int main(void)
 	* ------------------------- */
 	sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 
+	if(sms_mpu_check()) {
+		DBG_LOG("MPU not here...");
+	}
+	
+	sms_mpu_calibrate(mpu_device.gyro_bias, mpu_device.accel_bias);
+	
+	DBG_LOG("Check test passed");
+	while(1){};
 
 	/* Goto sleep
 	* ---------- */

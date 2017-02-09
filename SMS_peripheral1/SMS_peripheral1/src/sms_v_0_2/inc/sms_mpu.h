@@ -87,6 +87,8 @@ typedef struct sms_mpu_struct {
     struct mpu9250_hal_s hal; // hardware abstraction layer
 	bool int_enabled;
     volatile bool new_int;
+	float gyro_bias[3];
+	float accel_bias[3];
     uint8_t compass_cnt;
     uint8_t temp_cnt;
     bool new_compass;
