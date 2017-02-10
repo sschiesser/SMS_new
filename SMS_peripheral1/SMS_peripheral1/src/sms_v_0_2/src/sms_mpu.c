@@ -89,6 +89,7 @@ int sms_mpu_comp_check(void)
 		DBG_LOG("[sms_mpu_comp_check]\t\tAK8963 is online...");
 		retVal = 0;
 	}
+	return retVal;
 }
 
 void sms_mpu_calibrate(float *dest1, float *dest2)
@@ -99,21 +100,16 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	int32_t accel_bias[3] = {0, 0, 0};
 	
 	// reset device
-	DBG_LOG("Reset...");
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x80); // Write a one to bit 7 reset bit; toggle reset device
 	delay_ms(100);
-	DBG_LOG_CONT(" done!");
 	
 	// get stable time source; Auto select clock source to be PLL gyroscope reference if ready
 	// else use the internal oscillator, bits 2:0 = 001
-	DBG_LOG("Get time source...");
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x01);
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_2, 0x00);
 	delay_ms(200);
-	DBG_LOG_CONT(" done!");
 
 	// Configure device for bias calculation
-	DBG_LOG("Configure device...");
 	writeByte(MPU9250_ADDRESS, INT_ENABLE, 0x00);   // Disable all interrupts
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);      // Disable FIFO
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00);   // Turn on internal clock source
@@ -121,28 +117,22 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	writeByte(MPU9250_ADDRESS, USER_CTRL, 0x00);    // Disable FIFO and I2C master modes
 	writeByte(MPU9250_ADDRESS, USER_CTRL, 0x0C);    // Reset FIFO and DMP
 	delay_ms(15);
-	DBG_LOG_CONT(" done!");
 	
 	// Configure MPU9250 gyro and accelerometer for bias calculation
-	DBG_LOG("Configure gyro & accel...");
 	writeByte(MPU9250_ADDRESS, CONFIG, 0x01);      // Set low-pass filter to 188 Hz
 	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x00);  // Set sample rate to 1 kHz
 	writeByte(MPU9250_ADDRESS, GYRO_CONFIG, 0x00);  // Set gyro full-scale to 250 degrees per second, maximum sensitivity
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, 0x00); // Set accelerometer full-scale to 2 g, maximum sensitivity
-	DBG_LOG_CONT(" done!");
 	
 	uint16_t  gyrosensitivity  = 131;   // = 131 LSB/degrees/sec
 	uint16_t  accelsensitivity = 16384;  // = 16384 LSB/g
 
 	// Configure FIFO to capture accelerometer and gyro data for bias calculation
-	DBG_LOG("Configure FIFO...");
 	writeByte(MPU9250_ADDRESS, USER_CTRL, 0x40);   // Enable FIFO
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x78);     // Enable gyro and accelerometer sensors for FIFO  (max size 512 bytes in MPU-9150)
 	delay_ms(40); // accumulate 40 samples in 40 milliseconds = 480 bytes
-	DBG_LOG_CONT(" done!");
 
 	// At end of sample accumulation, turn off FIFO sensor read
-	DBG_LOG("Turn-off FIFO & read samples...");
 	writeByte(MPU9250_ADDRESS, FIFO_EN, 0x00);        // Disable gyro and accelerometer sensors for FIFO
 	readBytes(MPU9250_ADDRESS, FIFO_COUNTH, 2, &data); // read FIFO sample count
 	fifo_count = ((uint16_t)data[0] << 8) | data[1];
@@ -166,7 +156,6 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 		gyro_bias[2]  += (int32_t) gyro_temp[2];
 		
 	}
-	DBG_LOG_CONT(" done!");
 	accel_bias[0] /= (int32_t) packet_count; // Normalize sums to get average count biases
 	accel_bias[1] /= (int32_t) packet_count;
 	accel_bias[2] /= (int32_t) packet_count;
@@ -198,9 +187,13 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	writeByte(MPU9250_ADDRESS, ZG_OFFSET_L, data[5]);
 	
 	// Output scaled gyro biases for display in the main program
-	dest1[0] = (float) gyro_bias[0]/(float) gyrosensitivity;
-	dest1[1] = (float) gyro_bias[1]/(float) gyrosensitivity;
-	dest1[2] = (float) gyro_bias[2]/(float) gyrosensitivity;
+	dest1[0] = (float)((float)gyro_bias[0]/(float)gyrosensitivity);
+	dest1[1] = (float)((float)gyro_bias[1]/(float)gyrosensitivity);
+	dest1[2] = (float)((float)gyro_bias[2]/(float)gyrosensitivity);
+	DBG_LOG("x-Sensitivity = %d", gyrosensitivity);
+	DBG_LOG("x-gyro_bias = %d", gyro_bias[0]);
+	DBG_LOG("dest1: %f, %f, %f", dest1[0], dest1[1], dest1[2]);
+	DBG_LOG("Floating point: %f", 3.1415287);
 
 	// Construct the accelerometer biases for push to the hardware accelerometer bias registers. These registers contain
 	// factory trim values which must be added to the calculated accelerometer biases; on boot up these registers will hold
@@ -252,6 +245,7 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	dest2[0] = (float)accel_bias[0]/(float)accelsensitivity;
 	dest2[1] = (float)accel_bias[1]/(float)accelsensitivity;
 	dest2[2] = (float)accel_bias[2]/(float)accelsensitivity;
+	//DBG_LOG("accelsensitivity")
 }
 
 void sms_mpu_initialize(void)
@@ -331,15 +325,15 @@ void sms_mpu_comp_initialize(float *destination)
 	uint8_t m_scale = MFS_16BITS;	// Choose either 14-bit or 16-bit magnetometer resolution
 	uint8_t m_mode = 0x02;	// 2 for 8 Hz, 6 for 100 Hz continuous magnetometer data read
 	// First extract the factory calibration for each magnetometer axis
-	uint8_t rawData[3];  // x/y/z gyro calibration data stored here
+	uint8_t data[3];  // x/y/z gyro calibration data stored here
 	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x00); // Power down magnetometer
 	delay_ms(10);
 	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x0F); // Enter Fuse ROM access mode
 	delay_ms(10);
-	readBytes(AK8963_ADDRESS, AK8963_ASAX, 3, &rawData[0]);  // Read the x-, y-, and z-axis calibration values
-	destination[0] =  (float)(rawData[0] - 128)/256. + 1.;   // Return x-axis sensitivity adjustment values, etc.
-	destination[1] =  (float)(rawData[1] - 128)/256. + 1.;
-	destination[2] =  (float)(rawData[2] - 128)/256. + 1.;
+	readBytes(AK8963_ADDRESS, AK8963_ASAX, 3, &data);  // Read the x-, y-, and z-axis calibration values
+	destination[0] =  (float)(data[0] - 128)/256. + 1.;   // Return x-axis sensitivity adjustment values, etc.
+	destination[1] =  (float)(data[1] - 128)/256. + 1.;
+	destination[2] =  (float)(data[2] - 128)/256. + 1.;
 	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x00); // Power down magnetometer
 	delay_ms(10);
 	// Configure the magnetometer for continuous read and highest resolution

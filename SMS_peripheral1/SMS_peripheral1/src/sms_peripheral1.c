@@ -175,7 +175,18 @@ int main(void)
 	
 	sms_mpu_calibrate(mpu_device.gyro_bias, mpu_device.accel_bias);
 	
-	DBG_LOG("Check test passed");
+	sms_mpu_initialize();
+	DBG_LOG("MPU-9250 initialized...");
+	DBG_LOG("Bias values:\n\rgyroX %d, gyroY %d, gyroZ %d\n\raccelX %d, accelY %d, accelZ %d", mpu_device.gyro_bias[0], mpu_device.gyro_bias[1], mpu_device.gyro_bias[2], mpu_device.accel_bias[0], mpu_device.accel_bias[1], mpu_device.accel_bias[2]);
+	
+	if(sms_mpu_comp_check()) {
+		DBG_LOG("Compass not here...");
+	}
+	
+	sms_mpu_comp_initialize(mpu_device.mag_calibration);
+	DBG_LOG("Compass initialized...");
+	DBG_LOG("Calibration values: x %d, y %d, z %d", mpu_device.mag_calibration[0], mpu_device.mag_calibration[1], mpu_device.mag_calibration[2]);
+	
 	while(1){};
 
 	/* Goto sleep
