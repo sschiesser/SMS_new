@@ -193,7 +193,6 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	DBG_LOG("x-Sensitivity = %d", gyrosensitivity);
 	DBG_LOG("x-gyro_bias = %d", gyro_bias[0]);
 	DBG_LOG("dest1: %f, %f, %f", dest1[0], dest1[1], dest1[2]);
-	DBG_LOG("Floating point: %f", 3.1415287);
 
 	// Construct the accelerometer biases for push to the hardware accelerometer bias registers. These registers contain
 	// factory trim values which must be added to the calculated accelerometer biases; on boot up these registers will hold

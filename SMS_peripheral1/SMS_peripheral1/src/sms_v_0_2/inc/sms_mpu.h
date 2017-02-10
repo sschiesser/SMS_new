@@ -89,6 +89,7 @@ typedef struct sms_mpu_struct {
     volatile bool new_int;
 	float gyro_bias[3];
 	float accel_bias[3];
+	float mag_calibration[3];
     uint8_t compass_cnt;
     uint8_t temp_cnt;
     bool new_compass;
