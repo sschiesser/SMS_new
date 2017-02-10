@@ -73,9 +73,9 @@ int sms_mpu_check(void) {
 	int retVal = -1;
 	uint8_t c = readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
 	if(c == 0x71) {
-		DBG_LOG("[sms_mpu_check]\t\tMPU-9250 is online...");
+		//DBG_LOG("[sms_mpu_check]\t\tMPU-9250 is online...");
 		sms_mpu_selftest(mpu_device.hal.self_test);
-		DBG_LOG("[sms_mpu_check]\t\tMPU-9250 self-test passed");
+		//DBG_LOG("[sms_mpu_check]\t\tMPU-9250 self-test passed");
 		retVal = 0;
 	}
 	return retVal;
@@ -86,7 +86,7 @@ int sms_mpu_comp_check(void)
 	int retVal = -1;
 	uint8_t d = readByte(AK8963_ADDRESS, AK8963_WHO_AM_I);
 	if(d == 0x48) {
-		DBG_LOG("[sms_mpu_comp_check]\t\tAK8963 is online...");
+		//DBG_LOG("[sms_mpu_comp_check]\t\tAK8963 is online...");
 		retVal = 0;
 	}
 	return retVal;
@@ -162,6 +162,7 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	gyro_bias[0]  /= (int32_t) packet_count;
 	gyro_bias[1]  /= (int32_t) packet_count;
 	gyro_bias[2]  /= (int32_t) packet_count;
+	//DBG_LOG("Average biases: %d, %d, %d", gyro_bias[0], gyro_bias[1], gyro_bias[2]);
 	
 	if(accel_bias[2] > 0L) {
 		accel_bias[2] -= (int32_t) accelsensitivity;
@@ -190,9 +191,8 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	dest1[0] = (float)((float)gyro_bias[0]/(float)gyrosensitivity);
 	dest1[1] = (float)((float)gyro_bias[1]/(float)gyrosensitivity);
 	dest1[2] = (float)((float)gyro_bias[2]/(float)gyrosensitivity);
-	DBG_LOG("x-Sensitivity = %d", gyrosensitivity);
-	DBG_LOG("x-gyro_bias = %d", gyro_bias[0]);
-	DBG_LOG("dest1: %f, %f, %f", dest1[0], dest1[1], dest1[2]);
+	//DBG_LOG("gyro_biases: %d, %d, %d", gyro_bias[0], gyro_bias[1], gyro_bias[2]);
+	//DBG_LOG("dest1: %3.3f, %3.3f, %3.3f", dest1[0], dest1[1], dest1[2]);
 
 	// Construct the accelerometer biases for push to the hardware accelerometer bias registers. These registers contain
 	// factory trim values which must be added to the calculated accelerometer biases; on boot up these registers will hold
@@ -244,7 +244,8 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	dest2[0] = (float)accel_bias[0]/(float)accelsensitivity;
 	dest2[1] = (float)accel_bias[1]/(float)accelsensitivity;
 	dest2[2] = (float)accel_bias[2]/(float)accelsensitivity;
-	//DBG_LOG("accelsensitivity")
+	//DBG_LOG("accel_biases: %3.3f, %3.3f, %3.3f", accel_bias[0], accel_bias[1], accel_bias[2]);
+	//DBG_LOG("dest2: %3.3f, %3.3f, %3.3f", dest2[0], dest2[1], dest2[2]);
 }
 
 void sms_mpu_initialize(void)
