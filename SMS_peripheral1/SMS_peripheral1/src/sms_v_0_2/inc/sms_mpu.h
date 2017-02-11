@@ -61,40 +61,41 @@
 /* ---------
  * VARIABLES
  * --------- */
-struct mpu9250_hal_s {
+struct mpu9250_config_s {
     bool init_ok;
 	float self_test[6];
-    unsigned char accel_fsr;
-    unsigned short gyro_fsr;
-    unsigned short compass_fsr;
-    unsigned short sample_rate;
-    short gyro[3];
-    short accel[3];
-    short compass[3];
-    long temperature;
-    bool new_data;
+    float gyro_bias[3];
+    float accel_bias[3];
+    float mag_bias[3];
+    float mag_calibration[3];
     unsigned char sensors;
     unsigned char dmp_on;
     unsigned short dmp_features;
 };
-
+struct mpu9250_output_s {
+	short gyro[3];
+	short accel[3];
+	short compass[3];
+	long temperature;
+};
+struct mpu9250_interrupt_s {
+	bool enabled;
+	volatile bool new_int;
+	volatile bool new_data;
+	volatile bool new_compass;
+	volatile bool new_temp;
+};
 enum sms_mpu_state {
     MPU_STATE_OFF = 0,
     MPU_STATE_STDBY,
     MPU_STATE_ON
 };
 typedef struct sms_mpu_struct {
-    struct mpu9250_hal_s hal; // hardware abstraction layer
-	bool int_enabled;
-    volatile bool new_int;
-	float gyro_bias[3];
-	float accel_bias[3];
-	float mag_bias[3];
-	float mag_calibration[3];
+    struct mpu9250_config_s config; // config struct
+	struct mpu9250_output_s output; // data output (fifo)
+	struct mpu9250_interrupt_s interrupt; // interrupt states & flags
     uint8_t compass_cnt;
     uint8_t temp_cnt;
-    bool new_compass;
-    bool new_temp;
 	volatile bool rts;
     enum sms_mpu_state state;
     gatt_service_handler_t service_handler;

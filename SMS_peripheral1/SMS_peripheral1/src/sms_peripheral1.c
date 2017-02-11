@@ -173,8 +173,8 @@ int main(void)
 		DBG_LOG("MPU not here...");
 	}
 	
-	sms_mpu_calibrate(mpu_device.gyro_bias, mpu_device.accel_bias);
-	DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(mpu_device.gyro_bias[0] * 10000), (uint32_t)(mpu_device.gyro_bias[1] * 10000), (uint32_t)(mpu_device.gyro_bias[2] * 10000), (uint32_t)(mpu_device.accel_bias[0] * 10000), (uint32_t)(mpu_device.accel_bias[1] * 10000), (uint32_t)(mpu_device.accel_bias[2] * 10000));
+	sms_mpu_calibrate(mpu_device.config.gyro_bias, mpu_device.config.accel_bias);
+	//DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(mpu_device.config.gyro_bias[0] * 10000), (uint32_t)(mpu_device.config.gyro_bias[1] * 10000), (uint32_t)(mpu_device.config.gyro_bias[2] * 10000), (uint32_t)(mpu_device.config.accel_bias[0] * 10000), (uint32_t)(mpu_device.config.accel_bias[1] * 10000), (uint32_t)(mpu_device.config.accel_bias[2] * 10000));
 	
 	sms_mpu_initialize();
 	//DBG_LOG("MPU-9250 initialized...");
@@ -184,8 +184,8 @@ int main(void)
 		DBG_LOG("Compass not here...");
 	}
 	
-	sms_mpu_comp_initialize(mpu_device.mag_calibration);
-	DBG_LOG("Compass initialized... calibration values: %ld %ld %ld", (uint32_t)(mpu_device.mag_calibration[0] * 10000), (uint32_t)(mpu_device.mag_calibration[1] * 10000), (uint32_t)(mpu_device.mag_calibration[2] * 10000));
+	sms_mpu_comp_initialize(mpu_device.config.mag_calibration);
+	//DBG_LOG("Compass initialized... calibration values: %ld %ld %ld", (uint32_t)(mpu_device.config.mag_calibration[0] * 10000), (uint32_t)(mpu_device.config.mag_calibration[1] * 10000), (uint32_t)(mpu_device.config.mag_calibration[2] * 10000));
 	
 	while(1){};
 
@@ -218,11 +218,11 @@ int main(void)
 				// here
 				button_instance.btn1.new_int = false;
 			}
-			if(mpu_device.new_int) {
+			if(mpu_device.interrupt.new_int) {
 				DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 				sms_mpu_poll_data();
-				mpu_device.new_int = false;
+				mpu_device.interrupt.new_int = false;
 				mpu_device.rts = true;
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 				DBG_LOG_CONT_DEV("done");
@@ -265,7 +265,7 @@ int main(void)
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
 			if(pressure_device.rts) {
-				DBG_LOG("Press sending (%d/%d)... ", mpu_device.new_int, ble_instance.sending_queue);
+				DBG_LOG("Press sending (%d/%d)... ", mpu_device.interrupt.new_int, ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
 					sms_ble_send_characteristic(BLE_CHAR_PRESS);

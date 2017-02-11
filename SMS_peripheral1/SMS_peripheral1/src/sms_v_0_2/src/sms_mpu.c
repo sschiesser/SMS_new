@@ -50,21 +50,21 @@ void sms_mpu_unregister_callbacks(void)
 void sms_mpu_enable_callback(void)
 {
 	gpio_enable_callback(SMS_MPU_DRDY_PIN);
-	mpu_device.int_enabled = true;
+	mpu_device.interrupt.enabled = true;
 }
 
 /* Disable MPU DRDY interrupt */
 void sms_mpu_disable_callback(void)
 {
 	gpio_disable_callback(SMS_MPU_DRDY_PIN);
-	mpu_device.int_enabled = false;
+	mpu_device.interrupt.enabled = false;
 }
 
 /* Callback --> send interrupt message to platform */
 void sms_mpu_interrupt_callback(void)
 {
-	if(mpu_device.int_enabled) {
-		mpu_device.new_int = true;
+	if(mpu_device.interrupt.enabled) {
+		mpu_device.interrupt.new_int = true;
 		send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
 	}
 }
@@ -74,7 +74,7 @@ int sms_mpu_check(void) {
 	uint8_t c = readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
 	if(c == 0x71) {
 		//DBG_LOG("[sms_mpu_check]\t\tMPU-9250 is online...");
-		sms_mpu_selftest(mpu_device.hal.self_test);
+		sms_mpu_selftest(mpu_device.config.self_test);
 		//DBG_LOG("[sms_mpu_check]\t\tMPU-9250 self-test passed");
 		retVal = 0;
 	}
