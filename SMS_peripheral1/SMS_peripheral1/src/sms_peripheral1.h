@@ -1,3 +1,4 @@
+
 /**
  * \file
  *
@@ -60,7 +61,7 @@
 #include "timer_hw.h"
 #include "ble_manager.h"
 #include "ble_utils.h"
-#include "mpu9250.h"
+//#include "mpu9250.h"
 //#include "log.h"
 /* SMS include */
 #include "sms_common.h"

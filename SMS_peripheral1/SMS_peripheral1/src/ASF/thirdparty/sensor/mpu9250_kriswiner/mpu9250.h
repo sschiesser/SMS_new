@@ -183,4 +183,26 @@ enum Mscale {
 	MFS_16BITS			// 0.15 mG per LSB
 };
 
+struct mpu9250_config_s {
+	//bool init_ok;
+	float self_test[6];
+	float gyro_bias[3];
+	float accel_bias[3];
+	float mag_bias[3];
+	float mag_calibration[3];
+};
+struct mpu9250_output_s {
+	short gyro[3];
+	short accel[3];
+	short compass[3];
+	long temperature;
+};
+struct mpu9250_interrupt_s {
+	bool enabled;
+	volatile bool new_gyro;
+	volatile bool new_compass;
+	volatile bool new_temp;
+	volatile bool rts;
+};
+
 #endif /* MPU9250_H_ */

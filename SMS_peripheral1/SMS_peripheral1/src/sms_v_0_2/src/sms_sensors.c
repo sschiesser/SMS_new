@@ -5,18 +5,18 @@
  *  Author: Sébastien Schiesser
  */ 
 
-#include "sms_sensors.h"
+#include "sms_peripheral1.h"
 
 /* Sensors-related functions */
 void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
     /* IMU --> IMU_DRDY */
     if(mpu_int) {
         mpu_device.state = MPU_STATE_ON;
-        gpio_enable_callback(SMS_MPU_DRDY_PIN);
+        sms_mpu_enable_callback();
     }
     else {
         mpu_device.state = MPU_STATE_OFF;
-        gpio_disable_callback(SMS_MPU_DRDY_PIN);
+        sms_mpu_disable_callback();
     }
     
     /* Pressure --> AON_SLEEP_TIMER

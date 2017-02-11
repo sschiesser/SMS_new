@@ -13,6 +13,7 @@
  * INCLUDE
  * ------- */
 #include "sms_peripheral1.h"
+#include "mpu9250.h"
 
 
 /* ------
@@ -61,47 +62,20 @@
 /* ---------
  * VARIABLES
  * --------- */
-struct mpu9250_config_s {
-    bool init_ok;
-	float self_test[6];
-    float gyro_bias[3];
-    float accel_bias[3];
-    float mag_bias[3];
-    float mag_calibration[3];
-    unsigned char sensors;
-    unsigned char dmp_on;
-    unsigned short dmp_features;
-};
-struct mpu9250_output_s {
-	short gyro[3];
-	short accel[3];
-	short compass[3];
-	long temperature;
-};
-struct mpu9250_interrupt_s {
-	bool enabled;
-	volatile bool new_int;
-	volatile bool new_data;
-	volatile bool new_compass;
-	volatile bool new_temp;
-};
 enum sms_mpu_state {
-    MPU_STATE_OFF = 0,
-    MPU_STATE_STDBY,
-    MPU_STATE_ON
+	MPU_STATE_OFF = 0,
+	MPU_STATE_STDBY,
+	MPU_STATE_ON
 };
-typedef struct sms_mpu_struct {
+struct sms_mpu_struct_s {
     struct mpu9250_config_s config; // config struct
 	struct mpu9250_output_s output; // data output (fifo)
 	struct mpu9250_interrupt_s interrupt; // interrupt states & flags
-    uint8_t compass_cnt;
-    uint8_t temp_cnt;
-	volatile bool rts;
     enum sms_mpu_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[12];
-}sms_mpu_struct_t;
-sms_mpu_struct_t mpu_device;
+};
+struct sms_mpu_struct_s mpu_device;
 
 
 float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values
@@ -176,6 +150,8 @@ float beta, deltat;
  * DECLARATIONS
  * ------------ */
 void sms_mpu_configure_gpio(void);
+void sms_mpu_enable_callback(void);
+void sms_mpu_disable_callback(void);
 void sms_mpu_register_callbacks(void);
 void sms_mpu_unregister_callbacks(void);
 void sms_mpu_interrupt_callback(void);

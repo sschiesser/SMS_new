@@ -124,13 +124,14 @@ src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/services/dualtimer/timer_hw.h \
  ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h \
- ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_button.h \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_spi.h \
  ../src/sms_v_0_2/inc/sms_i2c.h ../src/sms_v_0_2/inc/sms_sensors.h \
  ../src/sms_v_0_2/inc/sms_pressure.h ../src/sms_v_0_2/inc/ms58.h \
- ../src/sms_v_0_2/inc/sms_mpu.h ../src/sms_v_0_2/inc/sms_timer.h \
- ../src/sms_v_0_2/inc/sms_led.h ../src/sms_v_0_2/inc/sms_ble.h
+ ../src/sms_v_0_2/inc/sms_mpu.h \
+ ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h \
+ ../src/sms_v_0_2/inc/sms_timer.h ../src/sms_v_0_2/inc/sms_led.h \
+ ../src/sms_v_0_2/inc/sms_ble.h
 
 ../src/asf.h:
 
@@ -386,8 +387,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.h:
 
-../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h:
-
 ../src/sms_v_0_2/inc/sms_common.h:
 
 ../src/sms_v_0_2/inc/sms_button.h:
@@ -405,6 +404,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/sms_v_0_2/inc/ms58.h:
 
 ../src/sms_v_0_2/inc/sms_mpu.h:
+
+../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h:
 
 ../src/sms_v_0_2/inc/sms_timer.h:
 

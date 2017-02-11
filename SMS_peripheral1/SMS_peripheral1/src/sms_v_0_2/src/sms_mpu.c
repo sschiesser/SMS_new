@@ -64,7 +64,7 @@ void sms_mpu_disable_callback(void)
 void sms_mpu_interrupt_callback(void)
 {
 	if(mpu_device.interrupt.enabled) {
-		mpu_device.interrupt.new_int = true;
+		mpu_device.interrupt.new_gyro = true;
 		send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
 	}
 }
@@ -317,7 +317,8 @@ void sms_mpu_initialize(void)
 	// Set interrupt pin active high, push-pull, hold interrupt pin level HIGH until interrupt cleared,
 	// clear on read of INT_STATUS, and enable I2C_BYPASS_EN so additional chips
 	// can join the I2C bus and all can be controlled by the Arduino as master
-	writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x22);
+	//writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x22);
+	writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x02);
 	writeByte(MPU9250_ADDRESS, INT_ENABLE, 0x01);  // Enable data ready (bit 0) interrupt
 	delay_ms(100);
 }
@@ -348,7 +349,7 @@ void sms_mpu_comp_initialize(float *destination)
 /* Extract available IMU data */
 int sms_mpu_poll_data(void)
 {
-	
+	DBG_LOG("Polling...");
     return 0;
 }
 

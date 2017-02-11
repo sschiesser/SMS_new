@@ -77,7 +77,7 @@ static void resume_cb(void)
 	sms_led_gpio_init();
 	sms_spi_master_configure();
 	sms_i2c_master_configure();
-	//sms_mpu_configure_gpio();
+	sms_mpu_configure_gpio();
 	sms_monitor_configure_gpio();
 	//gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true);
 }
@@ -174,11 +174,10 @@ int main(void)
 	}
 	
 	sms_mpu_calibrate(mpu_device.config.gyro_bias, mpu_device.config.accel_bias);
-	//DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(mpu_device.config.gyro_bias[0] * 10000), (uint32_t)(mpu_device.config.gyro_bias[1] * 10000), (uint32_t)(mpu_device.config.gyro_bias[2] * 10000), (uint32_t)(mpu_device.config.accel_bias[0] * 10000), (uint32_t)(mpu_device.config.accel_bias[1] * 10000), (uint32_t)(mpu_device.config.accel_bias[2] * 10000));
+	DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(mpu_device.config.gyro_bias[0] * 10000), (uint32_t)(mpu_device.config.gyro_bias[1] * 10000), (uint32_t)(mpu_device.config.gyro_bias[2] * 10000), (uint32_t)(mpu_device.config.accel_bias[0] * 10000), (uint32_t)(mpu_device.config.accel_bias[1] * 10000), (uint32_t)(mpu_device.config.accel_bias[2] * 10000));
 	
 	sms_mpu_initialize();
 	//DBG_LOG("MPU-9250 initialized...");
-	//DBG_LOG("Bias values:\n\rgyroX %f, gyroY %f, gyroZ %f\n\raccelX %f, accelY %f, accelZ %f", mpu_device.gyro_bias[0], mpu_device.gyro_bias[1], mpu_device.gyro_bias[2], mpu_device.accel_bias[0], mpu_device.accel_bias[1], mpu_device.accel_bias[2]);
 	
 	if(sms_mpu_comp_check()) {
 		DBG_LOG("Compass not here...");
@@ -187,8 +186,9 @@ int main(void)
 	sms_mpu_comp_initialize(mpu_device.config.mag_calibration);
 	//DBG_LOG("Compass initialized... calibration values: %ld %ld %ld", (uint32_t)(mpu_device.config.mag_calibration[0] * 10000), (uint32_t)(mpu_device.config.mag_calibration[1] * 10000), (uint32_t)(mpu_device.config.mag_calibration[2] * 10000));
 	
-	while(1){};
-
+	sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+	sms_sensors_interrupt_toggle(true, false);
+	
 	/* Goto sleep
 	* ---------- */
 	//sms_ble_power_down();
@@ -218,14 +218,14 @@ int main(void)
 				// here
 				button_instance.btn1.new_int = false;
 			}
-			if(mpu_device.interrupt.new_int) {
-				DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
+			if(mpu_device.interrupt.new_gyro) {
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				sms_mpu_poll_data();
-				mpu_device.interrupt.new_int = false;
-				mpu_device.rts = true;
+				DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
+				//sms_mpu_poll_data();
+				mpu_device.interrupt.new_gyro = false;
+				//mpu_device.interrupt.rts = true;
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
-				DBG_LOG_CONT_DEV("done");
+				//DBG_LOG_CONT_DEV("done");
 			}
 			if(pressure_device.new_int) {
 				//DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
@@ -252,7 +252,7 @@ int main(void)
 			}
 			
 			/* Sending region */
-			if(mpu_device.rts) {
+			if(mpu_device.interrupt.rts) {
 				DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
@@ -261,11 +261,11 @@ int main(void)
 				else {
 					DBG_LOG_CONT("flushing!");
 				}
-				mpu_device.rts = false;
+				mpu_device.interrupt.rts = false;
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
 			if(pressure_device.rts) {
-				DBG_LOG("Press sending (%d/%d)... ", mpu_device.interrupt.new_int, ble_instance.sending_queue);
+				DBG_LOG("Press sending (%d/%d)... ", mpu_device.interrupt.new_gyro, ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
 					sms_ble_send_characteristic(BLE_CHAR_PRESS);
