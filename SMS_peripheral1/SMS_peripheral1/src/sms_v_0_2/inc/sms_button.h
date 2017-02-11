@@ -39,8 +39,8 @@
 ///**  @brief Characteristic presentation format descriptor */
 //#define SMS_BTN_PRESENTATION_FORMAT_DESCRIPTOR 0x1000
 
-#define SMS_BTN_0_PIN                       (PIN_AO_GPIO_0)
-#define SMS_BTN_1_PIN                       (PIN_AO_GPIO_2)
+#define SMS_BTN_0_PIN                       (PIN_AO_GPIO_0) // XPLAINED PRO --> EXT1:9
+#define SMS_BTN_1_PIN                       (PIN_AO_GPIO_2) // XPLAINED PRO --> EXT1:6
 
 #define SMS_BTN_NUMBER                      (2)
 

@@ -29,7 +29,7 @@
  * VARIABLES
  * --------- */
 enum sms_leds {
-    SMS_LED_0_PIN = PIN_LP_GPIO_22
+    SMS_LED_0_PIN = PIN_LP_GPIO_22 // XPLAINED PRO --> already mounted as USR LED
 };
 
 //typedef enum sms_led_blink_modes {

@@ -25,8 +25,8 @@
 
 #define SMS_PRESSURE_BLE_CHAR_LEN               (8)
 
-#define SMS_PRESSURE_VCC_PIN                    (PIN_LP_GPIO_7)
-#define SMS_PRESSURE_SPI_SS_PIN                 (PIN_LP_GPIO_16)
+#define SMS_PRESSURE_VCC_PIN                    (PIN_LP_GPIO_7) // XPLAINED PRO --> EXT3:14
+#define SMS_PRESSURE_SPI_SS_PIN                 (PIN_LP_GPIO_16) // XPLAINED PRO --> EXT3:15
 
 #define SMS_PRESSURE_RESET_MS                   (20 * SMS_TIMER_AON_COUNT_1MS)
 #define SMS_PRESSURE_CONVERT1_MS                (SMS_TIMER_AON_COUNT_10MS)

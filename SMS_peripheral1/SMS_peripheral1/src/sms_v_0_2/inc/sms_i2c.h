@@ -26,8 +26,8 @@
 #define SMS_I2C_MASTER_CLK_SRC			(I2C_CLK_INPUT_3)
 #define SMS_I2C_MASTER_CLK_DIV			(30)
 /* Pins */
-#define SMS_I2C_MASTER_PIN_SDA          (PIN_LP_GPIO_8)
-#define SMS_I2C_MASTER_PIN_SCL          (PIN_LP_GPIO_9)
+#define SMS_I2C_MASTER_PIN_SDA          (PIN_LP_GPIO_8) // XPLAINED PRO --> EXT1:11
+#define SMS_I2C_MASTER_PIN_SCL          (PIN_LP_GPIO_9) // XPLAINED PRO --> EXT1:12
 /* Mux */
 #define SMS_I2C_MASTER_MUX_SDA          (MUX_LP_GPIO_8_I2C0_SDA)
 #define SMS_I2C_MASTER_MUX_SCL          (MUX_LP_GPIO_9_I2C0_SCL)

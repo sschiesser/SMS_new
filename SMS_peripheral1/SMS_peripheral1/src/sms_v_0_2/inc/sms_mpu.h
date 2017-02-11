@@ -27,8 +27,8 @@
 #define SMS_MPU_BLE_CHAR_LEN_G_A_C          (18)
 #define SMS_MPU_BLE_CHAR_LEN_G_A_C_T        (20)
 
-#define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1)
-#define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6)
+#define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1) // XPLAINED PRO --> EXT3:9
+#define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6) // XPLAINED PRO --> EXT3:13
 
 #define SMS_MPU_SAMPLE_RATE_HZ              (50)
 #define SMS_MPU_TEMP_MULTIPLIER             (1)
@@ -89,6 +89,7 @@ typedef struct sms_mpu_struct {
     volatile bool new_int;
 	float gyro_bias[3];
 	float accel_bias[3];
+	float mag_bias[3];
 	float mag_calibration[3];
     uint8_t compass_cnt;
     uint8_t temp_cnt;
