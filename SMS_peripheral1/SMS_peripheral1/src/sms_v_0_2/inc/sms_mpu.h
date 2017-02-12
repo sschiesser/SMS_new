@@ -45,13 +45,6 @@
 #define SMS_MPU_MOTION                      (0)
 #define SMS_MPU_NO_MOTION                   (1)
 
-/*
- * These are the free parameters in the Mahony filter and fusion scheme, 
- * Kp for proportional feedback, Ki for integral
- */
-#define Kp									(2.0f * 5.0f) 
-#define Ki									(0.0f)
-
 #define PI									(3.1415926535898)
 
 //#define SMS_IMU_INTERRUPT_PIN PIN_AO_GPIO_2
@@ -81,8 +74,7 @@ struct sms_mpu_struct_s mpu_device;
 
 //float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values
 //float q[4]; // vector to hold quaternion
-float eInt[3]; // vector to hold integral error for Mahony method
-float beta, deltat;
+
 
 ///* GATT service handler */
 //gatt_service_handler_t sms_imu_service_handler;

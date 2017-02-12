@@ -371,7 +371,7 @@ void sms_mpu_initialize(void)
 	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
 	// writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x08);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
 	// // determined inset in CONFIG above
-	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x10);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
+	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
 	
 	// Set gyroscope full scale range
 	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3
@@ -464,7 +464,8 @@ int sms_mpu_poll_data(void)
 	float my = ( ((float)mpu_device.output.raw_compass[1]) * m_res * mpu_device.config.mag_calibration[1] ) - mpu_device.config.mag_bias[1];
 	float mz = ( ((float)mpu_device.output.raw_compass[2]) * m_res * mpu_device.config.mag_calibration[2] ) - mpu_device.config.mag_bias[2];
 	
-	mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
+	//mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
+	madgwick_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
 	
 	if(mpu_device.config.ahrs) {
 		ahrs_calculation(mpu_device.output.q);
