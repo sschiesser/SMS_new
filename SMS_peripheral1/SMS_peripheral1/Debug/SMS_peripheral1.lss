@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      000000b4  00000000  00000000  00018950  2**0
                   CONTENTS, READONLY
-  6 .debug_info   0004b42f  00000000  00000000  00018a04  2**0
+  6 .debug_info   0004b42e  00000000  00000000  00018a04  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00005331  00000000  00000000  00063e33  2**0
+  7 .debug_abbrev 00005331  00000000  00000000  00063e32  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    0000a20a  00000000  00000000  00069164  2**0
+  8 .debug_loc    0000a20a  00000000  00000000  00069163  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000b78  00000000  00000000  0007336e  2**0
+  9 .debug_aranges 00000b78  00000000  00000000  0007336d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000b38  00000000  00000000  00073ee6  2**0
+ 10 .debug_ranges 00000b38  00000000  00000000  00073ee5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  0000c34a  00000000  00000000  00074a1e  2**0
+ 11 .debug_macro  0000c34a  00000000  00000000  00074a1d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   00016085  00000000  00000000  00080d68  2**0
+ 12 .debug_line   00016085  00000000  00000000  00080d67  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    001418d0  00000000  00000000  00096ded  2**0
+ 13 .debug_str    001418d0  00000000  00000000  00096dec  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002ce8  00000000  00000000  001d86c0  2**2
+ 14 .debug_frame  00002ce8  00000000  00000000  001d86bc  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2398,7 +2398,7 @@ void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy
 10008d0c:	3fe358e1 	.word	0x3fe358e1
 10008d10:	10015ad9 	.word	0x10015ad9
 10008d14:	100163c9 	.word	0x100163c9
-10008d18:	3dcccccd 	.word	0x3dcccccd
+10008d18:	3c343958 	.word	0x3c343958
 10008d1c:	100188b4 	.word	0x100188b4
 10008d20:	1001894c 	.word	0x1001894c
 10008d24:	10018950 	.word	0x10018950
@@ -6202,20 +6202,20 @@ void sms_mpu_initialize(void)
 	// DLPF_CFG = bits 2:0 = 011; this limits the sample rate to 1000 Hz for both
 	// With the MPU9250, it is possible to get gyro sample rates of 32 kHz (!), 8 kHz, or 1 kHz
 	// writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
-	writeByte(MPU9250_ADDRESS, CONFIG, 0x05);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
-10009f76:	2205      	movs	r2, #5
+	writeByte(MPU9250_ADDRESS, CONFIG, 0x03);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
+10009f76:	2203      	movs	r2, #3
 10009f78:	211a      	movs	r1, #26
 10009f7a:	2069      	movs	r0, #105	; 0x69
 10009f7c:	47a0      	blx	r4
 
 	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
-	// writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x08);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
-	// // determined inset in CONFIG above
-	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
-10009f7e:	2263      	movs	r2, #99	; 0x63
+	 writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x0A);  	// Use a 90 Hz rate; a rate consistent with the filter update rate
+10009f7e:	220a      	movs	r2, #10
 10009f80:	2119      	movs	r1, #25
 10009f82:	2069      	movs	r0, #105	; 0x69
 10009f84:	47a0      	blx	r4
+	// // determined inset in CONFIG above
+	//writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
 	
 	// Set gyroscope full scale range
 	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3

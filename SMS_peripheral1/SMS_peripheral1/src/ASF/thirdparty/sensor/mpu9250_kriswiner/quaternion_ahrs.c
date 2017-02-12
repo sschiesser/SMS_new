@@ -33,7 +33,7 @@
 // but is much less computationally intensive---it can be performed on a 3.3 V Pro Mini operating at 8 MHz!
 void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz)
 {
-	float deltat = 0.1; // currently working at 10 Hz -> 100 ms
+	float deltat = 0.011; // currently working at 90 Hz -> 11 ms
 
 	static float q1 = 1.0;
 	static float q2 = 0.0;

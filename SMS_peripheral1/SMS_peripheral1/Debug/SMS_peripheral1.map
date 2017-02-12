@@ -11161,7 +11161,7 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(gattm_task.o)
  .comment       0x000000b4       0x5c ../src/ASF/thirdparty/wireless/ble_smart_sdk/lib/cm0/gcc\libblusdk.a(htpt_task.o)
 
-.debug_info     0x00000000    0x4b42f
+.debug_info     0x00000000    0x4b42e
  .debug_info    0x00000000     0x1175 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
  .debug_info    0x00001175     0x12c0 src/ASF/sam0/drivers/i2c/i2c_master.o
  .debug_info    0x00002435      0x113 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o
@@ -11171,25 +11171,25 @@ OUTPUT(SMS_peripheral1.elf elf32-littlearm)
  .debug_info    0x00009882     0x31ee src/sms_v_0_2/src/sms_button.o
  .debug_info    0x0000ca70     0x2ea2 src/sms_v_0_2/src/sms_common.o
  .debug_info    0x0000f912     0x2fd5 src/sms_v_0_2/src/sms_i2c.o
- .debug_info    0x000128e7     0x47d9 src/sms_v_0_2/src/sms_mpu.o
- .debug_info    0x000170c0     0x2fb8 src/sms_v_0_2/src/sms_led.o
- .debug_info    0x0001a078     0x32e0 src/sms_v_0_2/src/sms_pressure.o
- .debug_info    0x0001d358     0x2d42 src/sms_v_0_2/src/sms_sensors.o
- .debug_info    0x0002009a     0x2fd2 src/sms_v_0_2/src/sms_spi.o
- .debug_info    0x0002306c     0x3682 src/sms_v_0_2/src/sms_timer.o
- .debug_info    0x000266ee     0x17ae src/ASF/sam0/drivers/spi/spi.o
- .debug_info    0x00027e9c     0x60cd src/ASF/sam0/drivers/dualtimer/dualtimer.o
- .debug_info    0x0002df69     0x786b src/ASF/sam0/drivers/gpio/gpio.o
- .debug_info    0x000357d4     0x63b4 src/ASF/sam0/drivers/system/system_sam_b.o
- .debug_info    0x0003bb88     0x1a48 src/ASF/sam0/drivers/uart/uart.o
- .debug_info    0x0003d5d0      0x1c4 src/ASF/sam0/utils/stdio/read.o
- .debug_info    0x0003d794      0x1c1 src/ASF/sam0/utils/stdio/write.o
- .debug_info    0x0003d955     0x5b73 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
- .debug_info    0x000434c8     0x18ea src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
- .debug_info    0x00044db2      0x31b src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
- .debug_info    0x000450cd     0x1ea5 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
- .debug_info    0x00046f72     0x12f1 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
- .debug_info    0x00048263     0x31cc src/sms_peripheral1.o
+ .debug_info    0x000128e7     0x47d8 src/sms_v_0_2/src/sms_mpu.o
+ .debug_info    0x000170bf     0x2fb8 src/sms_v_0_2/src/sms_led.o
+ .debug_info    0x0001a077     0x32e0 src/sms_v_0_2/src/sms_pressure.o
+ .debug_info    0x0001d357     0x2d42 src/sms_v_0_2/src/sms_sensors.o
+ .debug_info    0x00020099     0x2fd2 src/sms_v_0_2/src/sms_spi.o
+ .debug_info    0x0002306b     0x3682 src/sms_v_0_2/src/sms_timer.o
+ .debug_info    0x000266ed     0x17ae src/ASF/sam0/drivers/spi/spi.o
+ .debug_info    0x00027e9b     0x60cd src/ASF/sam0/drivers/dualtimer/dualtimer.o
+ .debug_info    0x0002df68     0x786b src/ASF/sam0/drivers/gpio/gpio.o
+ .debug_info    0x000357d3     0x63b4 src/ASF/sam0/drivers/system/system_sam_b.o
+ .debug_info    0x0003bb87     0x1a48 src/ASF/sam0/drivers/uart/uart.o
+ .debug_info    0x0003d5cf      0x1c4 src/ASF/sam0/utils/stdio/read.o
+ .debug_info    0x0003d793      0x1c1 src/ASF/sam0/utils/stdio/write.o
+ .debug_info    0x0003d954     0x5b73 src/ASF/thirdparty/wireless/ble_smart_sdk/ble_services/ble_mgr/ble_manager.o
+ .debug_info    0x000434c7     0x18ea src/ASF/thirdparty/wireless/ble_smart_sdk/services/uart/console_serial.o
+ .debug_info    0x00044db1      0x31b src/ASF/thirdparty/wireless/ble_smart_sdk/src/event_handler.o
+ .debug_info    0x000450cc     0x1ea5 src/ASF/thirdparty/wireless/ble_smart_sdk/src/platform_drv.o
+ .debug_info    0x00046f71     0x12f1 src/ASF/thirdparty/wireless/ble_smart_sdk/src/port_from_sdk.o
+ .debug_info    0x00048262     0x31cc src/sms_peripheral1.o
 
 .debug_abbrev   0x00000000     0x5331
  .debug_abbrev  0x00000000      0x2b3 src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.o
