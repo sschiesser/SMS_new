@@ -24,9 +24,8 @@
 #define SMS_MPU_SERVICE_UUID_3              (0x00000000)
 #define SMS_MPU_SERVICE_UUID_4              (0x00000000)
 
-#define SMS_MPU_BLE_CHAR_LEN_G_A            (12)
-#define SMS_MPU_BLE_CHAR_LEN_G_A_C          (18)
-#define SMS_MPU_BLE_CHAR_LEN_G_A_C_T        (20)
+#define SMS_MPU_BLE_CHAR_LEN_QUAT           (16) // 4 quaternions of 32 bit each = 16 uint8
+#define SMS_MPU_BLE_CHAR_LEN_AHRS			(12) // yaw/pitch/roll of 32 bit each = 12 uint8
 
 #define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1) // XPLAINED PRO --> EXT3:9
 #define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6) // XPLAINED PRO --> EXT3:13
@@ -178,8 +177,9 @@ float get_Mres(uint8_t m_scale);
 float get_Gres(uint8_t g_scale);
 float get_Ares(uint8_t a_scale);
 
-void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
-void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
+void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
+void mahony_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
+void ahrs_calculation(float *q);
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);
 //int sms_imu_initialize(void);

@@ -36,10 +36,8 @@
 
 #define BLE_CHAR_SIZE_BUTTON                            (SMS_BUTTON_BLE_CHAR_LEN)
 #define BLE_CHAR_SIZE_PRESSURE                          (SMS_PRESSURE_BLE_CHAR_LEN)
-#define BLE_CHAR_SIZE_MPU_G_A                           (SMS_MPU_BLE_CHAR_LEN_G_A)
-#define BLE_CHAR_SIZE_MPU_G_A_C                         (SMS_MPU_BLE_CHAR_LEN_G_A_C)
-#define BLE_CHAR_SIZE_MPU_G_A_C_T                       (SMS_MPU_BLE_CHAR_LEN_G_A_C_T)
-#define BLE_CHAR_SIZE_MAX                               (BLE_CHAR_SIZE_MPU_G_A_C_T)
+#define BLE_CHAR_SIZE_MPU								(SMS_MPU_BLE_CHAR_LEN_QUAT)
+#define BLE_CHAR_SIZE_MAX                               (BLE_CHAR_SIZE_MPU)
 
 #define RTS_BUTTON_POS									0
 #define RTS_PRESSURE_POS								1

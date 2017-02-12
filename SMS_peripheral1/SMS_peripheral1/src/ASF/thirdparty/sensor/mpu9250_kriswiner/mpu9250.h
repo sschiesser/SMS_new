@@ -204,6 +204,7 @@ struct mpu9250_config_s {
 	float accel_bias[3];
 	float mag_bias[3];
 	float mag_calibration[3];
+	bool ahrs;
 };
 struct mpu9250_output_s {
 	int16_t raw_gyro[3];
@@ -211,12 +212,15 @@ struct mpu9250_output_s {
 	int16_t raw_compass[3];
 	int16_t raw_temp;
 	float q[4];
+	float yaw;
+	float pitch;
+	float roll;
 };
 struct mpu9250_interrupt_s {
 	bool enabled;
 	volatile bool new_gyro;
-	volatile bool new_compass;
-	volatile bool new_temp;
+	//volatile bool new_compass;
+	//volatile bool new_temp;
 	volatile bool rts;
 };
 

@@ -347,16 +347,9 @@ void sms_mpu_define_services(void)
 /* MPU */
 void sms_mpu_initialize(void)
 {
-	//// Initialize variables
-	//q[0] = 1.0;
-	//q[1] = 0.0;
-	//q[2] = 0.0;
-	//q[3] = 0.0;
-	//eInt[0] = 0.0;
-	//eInt[1] = 0.0;
-	//eInt[2] = 0.0;
 	mpu_device.config.a_scale = AFS_2G;
 	mpu_device.config.g_scale = GFS_250DPS;
+	mpu_device.config.ahrs = false;
 
 	// wake up device
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
@@ -373,12 +366,12 @@ void sms_mpu_initialize(void)
 	// DLPF_CFG = bits 2:0 = 011; this limits the sample rate to 1000 Hz for both
 	// With the MPU9250, it is possible to get gyro sample rates of 32 kHz (!), 8 kHz, or 1 kHz
 	// writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
-	writeByte(MPU9250_ADDRESS, CONFIG, 0x04);		// gyro bandwidth = 10 Hz
+	writeByte(MPU9250_ADDRESS, CONFIG, 0x05);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
 
 	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
-	// writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x04);  	// Use a 200 Hz rate; a rate consistent with the filter update rate
+	// writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x08);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
 	// // determined inset in CONFIG above
-	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x08);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
+	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x10);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
 	
 	// Set gyroscope full scale range
 	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3
@@ -403,7 +396,7 @@ void sms_mpu_initialize(void)
 	c = readByte(MPU9250_ADDRESS, ACCEL_CONFIG2); // get current ACCEL_CONFIG2 register value
 	c = c & ~0x0F; // Clear accel_fchoice_b (bit 3) and A_DLPFG (bits [2:0])
 	// c = c | 0x03;  // Set accelerometer rate to 1 kHz and bandwidth to 41 Hz
-	c = c | 0x04;  // Set accelerometer rate to 1 kHz and bandwidth to 10 Hz
+	c = c | 0x03;  // Set accelerometer rate to 1 kHz and bandwidth to 41 Hz, delay 11.8 ms
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG2, c); // Write new ACCEL_CONFIG2 register value
 	// The accelerometer, gyro, and thermometer are set to 1 kHz sample rates,
 	// but all these rates are further reduced by a factor of 5 to 200 Hz because of the SMPLRT_DIV setting
@@ -471,7 +464,11 @@ int sms_mpu_poll_data(void)
 	float my = ( ((float)mpu_device.output.raw_compass[1]) * m_res * mpu_device.config.mag_calibration[1] ) - mpu_device.config.mag_bias[1];
 	float mz = ( ((float)mpu_device.output.raw_compass[2]) * m_res * mpu_device.config.mag_calibration[2] ) - mpu_device.config.mag_bias[2];
 	
-	MahonyQuaternionUpdate(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
+	mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
+	
+	if(mpu_device.config.ahrs) {
+		ahrs_calculation(mpu_device.output.q);
+	}
     return 0;
 }
 /* Read accel data */

@@ -31,7 +31,7 @@ at_ble_status_t sms_ble_connected_fn(void *params)
         //for(uint8_t i = 0; i < AT_BLE_ADDR_LEN; i++) {
             //DBG_LOG_CONT_DEV("%02x",connected->peer_addr.addr[AT_BLE_ADDR_LEN - (i+1)]);
         //}
-		DBG_LOG("T/O: 5000 ms");
+		//DBG_LOG("T/O: 5000 ms");
 		sms_ble_timeout = BLE_TIMEOUT_PAIR;
     }
     else {
@@ -83,7 +83,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
         //DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
         sms_sensors_switch(true, true); // ! Release sleep lock & enable buttons interrupt after reset done!
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-		DBG_LOG("T/O: OFF");
+		//DBG_LOG("T/O: OFF");
 		sms_ble_timeout = BLE_TIMEOUT_OFF;
     }
     else {
@@ -104,12 +104,12 @@ at_ble_status_t sms_ble_pair_request_fn(void *params)
 /* AT_BLE_NOTIFICATION_CONFIRMED (#29) */
 at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 {
-	DBG_LOG_CONT(" done!");
+	//DBG_LOG_CONT(" done!");
     //gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
     
     at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
 	ble_instance.sending_queue--;
-	DBG_LOG("T/O: OFF");
+	//DBG_LOG("T/O: OFF");
 	sms_ble_timeout = BLE_TIMEOUT_OFF;
     //button_instance.current_state = sms_button_get_state();
     //DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
@@ -289,6 +289,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
     uint8_t length = 0;
     uint8_t char_size = 0;
     uint8_t send_val[BLE_CHAR_SIZE_MAX];
+	uint32_t calc_val;
     //ble_current_state = BLE_STATE_INDICATING;
 
     
@@ -321,58 +322,69 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
         
         case BLE_CHAR_MPU:
-        send_val[0] = (uint8_t)(mpu_device.output.raw_accel[0] & 0xff);
-        send_val[1] = (uint8_t)((mpu_device.output.raw_accel[0] >> 8) & 0xff);
-        send_val[2] = (uint8_t)(mpu_device.output.raw_accel[1] & 0xff);
-        send_val[3] = (uint8_t)((mpu_device.output.raw_accel[1] >> 8) & 0xff);
-        send_val[4] = (uint8_t)(mpu_device.output.raw_accel[2] & 0xff);
-        send_val[5] = (uint8_t)((mpu_device.output.raw_accel[2] >> 8) & 0xff);
-        send_val[6] = (uint8_t)(mpu_device.output.raw_gyro[0] & 0xff);
-        send_val[7] = (uint8_t)((mpu_device.output.raw_gyro[0] >> 8) & 0xff);
-        send_val[8] = (uint8_t)(mpu_device.output.raw_gyro[1] & 0xff);
-        send_val[9] = (uint8_t)((mpu_device.output.raw_gyro[1] >> 8) & 0xff);
-        send_val[10] = (uint8_t)(mpu_device.output.raw_gyro[2] & 0xff);
-        send_val[11] = (uint8_t)((mpu_device.output.raw_gyro[2] >> 8) & 0xff);
+		calc_val = (uint32_t)(mpu_device.output.q[0] * 1000000);
+		DBG_LOG("q1: %ld ", calc_val);
+        send_val[0] = (uint8_t)(calc_val & 0xff);
+        send_val[1] = (uint8_t)((calc_val >> 8) & 0xff);
+        send_val[2] = (uint8_t)((calc_val >> 16) & 0xff);
+        send_val[3] = (uint8_t)((calc_val >> 24) & 0xff);
+		calc_val = (uint32_t)(mpu_device.output.q[1] * 1000000);
+		DBG_LOG_CONT("q2: %ld ", calc_val);
+        send_val[4] = (uint8_t)(calc_val & 0xff);
+        send_val[5] = (uint8_t)((calc_val >> 8) & 0xff);
+        send_val[6] = (uint8_t)((calc_val >> 16) & 0xff);
+        send_val[7] = (uint8_t)((calc_val >> 24) & 0xff);
+		calc_val = (uint32_t)(mpu_device.output.q[2] * 1000000);
+		DBG_LOG_CONT("q3: %ld ", calc_val);
+		send_val[8] = (uint8_t)(calc_val & 0xff);
+		send_val[9] = (uint8_t)((calc_val >> 8) & 0xff);
+		send_val[10] = (uint8_t)((calc_val >> 16) & 0xff);
+		send_val[11] = (uint8_t)((calc_val >> 24) & 0xff);
+		calc_val = (uint32_t)(mpu_device.output.q[3] * 1000000);
+		DBG_LOG_CONT("q4: %ld ", calc_val);
+		send_val[12] = (uint8_t)(calc_val & 0xff);
+		send_val[13] = (uint8_t)((calc_val >> 8) & 0xff);
+		send_val[14] = (uint8_t)((calc_val >> 16) & 0xff);
+		send_val[15] = (uint8_t)((calc_val >> 24) & 0xff);
         val_handle = mpu_device.service_handler.serv_chars.char_val_handle;
-        length = BLE_CHAR_SIZE_MPU_G_A;
+        length = BLE_CHAR_SIZE_MPU;
         
-        if(mpu_device.interrupt.new_compass) {
-            send_val[12] = (uint8_t)(mpu_device.output.raw_compass[0] & 0xff);
-            send_val[13] = (uint8_t)((mpu_device.output.raw_compass[0] >> 8) & 0xff);
-            send_val[14] = (uint8_t)(mpu_device.output.raw_compass[1] & 0xff);
-            send_val[15] = (uint8_t)((mpu_device.output.raw_compass[1] >> 8) & 0xff);
-            send_val[16] = (uint8_t)(mpu_device.output.raw_compass[2] & 0xff);
-            send_val[17] = (uint8_t)((mpu_device.output.raw_compass[2] >> 8) & 0xff);
-            length = BLE_CHAR_SIZE_MPU_G_A_C;
-            mpu_device.interrupt.new_compass = false;
-        }
-        else {
-            for(uint8_t i = 0; i < 6; i++) {
-                send_val[12+i] = 0;
-            }
-        }
+        //if(mpu_device.interrupt.new_compass) {
+            //send_val[12] = (uint8_t)(mpu_device.output.raw_compass[0] & 0xff);
+            //send_val[13] = (uint8_t)((mpu_device.output.raw_compass[0] >> 8) & 0xff);
+            //send_val[14] = (uint8_t)(mpu_device.output.raw_compass[1] & 0xff);
+            //send_val[15] = (uint8_t)((mpu_device.output.raw_compass[1] >> 8) & 0xff);
+            //send_val[16] = (uint8_t)(mpu_device.output.raw_compass[2] & 0xff);
+            //send_val[17] = (uint8_t)((mpu_device.output.raw_compass[2] >> 8) & 0xff);
+            //length = BLE_CHAR_SIZE_MPU_G_A_C;
+            //mpu_device.interrupt.new_compass = false;
+        //}
+        //else {
+            //for(uint8_t i = 0; i < 6; i++) {
+                //send_val[12+i] = 0;
+            //}
+        //}
         
-        if(mpu_device.interrupt.new_temp) {
-            send_val[18] = (uint8_t)(mpu_device.output.raw_temp & 0xff);
-            send_val[19] = (uint8_t)((mpu_device.output.raw_temp >> 8) & 0xff);
-            length = BLE_CHAR_SIZE_MPU_G_A_C_T;
-            mpu_device.interrupt.new_temp = false;
-        }
-        else {
-            for(uint8_t i = 0; i < 2; i++) {
-                send_val[18+i] = 0;
-            }
-        }
+        //if(mpu_device.interrupt.new_temp) {
+            //send_val[18] = (uint8_t)(mpu_device.output.raw_temp & 0xff);
+            //send_val[19] = (uint8_t)((mpu_device.output.raw_temp >> 8) & 0xff);
+            //length = BLE_CHAR_SIZE_MPU_G_A_C_T;
+            //mpu_device.interrupt.new_temp = false;
+        //}
+        //else {
+            //for(uint8_t i = 0; i < 2; i++) {
+                //send_val[18+i] = 0;
+            //}
+        //}
         break;
     }
     
-    //DBG_LOG_DEV("Sending: ");
-    //for(int i = 0; i < 20; i += 2) {
-        //DBG_LOG_CONT_DEV("0x%02x%02x ", send_val[i], send_val[i+1]);
+    //DBG_LOG("Sending: ");
+    //for(int i = 0; i < length; i += 4) {
+        //DBG_LOG_CONT("0x%02x%02x%02x%02x ", send_val[i], send_val[i+1], send_val[i+2], send_val[i+3]);
     //}
     status = at_ble_characteristic_value_set(val_handle, send_val, (length * sizeof(uint8_t)));
     if(status == AT_BLE_SUCCESS) {
-		DBG_LOG_CONT_DEV(" SET! ");
 //#   if SMS_SENDING_WITH_ACK == true
         //sms_ble_ind_retry = 0;
         //status = at_ble_indication_send(sms_connection_handle, val_handle);
@@ -381,8 +393,8 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		if(status == AT_BLE_SUCCESS) {
 			ble_instance.sending_queue++;
 			sms_ble_send_cnt++;
-			DBG_LOG_CONT(" %d GONE? ", sms_ble_send_cnt);
-			DBG_LOG("T/O: 20ms");
+			//DBG_LOG_CONT(" %d GONE? ", sms_ble_send_cnt);
+			//DBG_LOG("T/O: 20ms");
 			sms_ble_timeout = BLE_TIMEOUT_NOTIFY;
 		}
 		else {

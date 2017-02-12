@@ -16,7 +16,7 @@ src\ASF\sam0\utils\cmsis\samb11\source\system_samb11.c
 
 src\ASF\sam0\utils\syscalls\gcc\syscalls.c
 
-src\ASF\thirdparty\sensor\mpu9250_kriswiner\quaternion_filter.c
+src\ASF\thirdparty\sensor\mpu9250_kriswiner\quaternion_ahrs.c
 
 src\sms_v_0_2\src\sms_ble.c
 

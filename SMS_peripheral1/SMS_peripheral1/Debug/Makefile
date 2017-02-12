@@ -124,7 +124,7 @@ C_SRCS +=  \
 ../src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.c \
 ../src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.c \
 ../src/ASF/sam0/utils/syscalls/gcc/syscalls.c \
-../src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_filter.c \
+../src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_ahrs.c \
 ../src/sms_v_0_2/src/sms_ble.c \
 ../src/sms_v_0_2/src/sms_button.c \
 ../src/sms_v_0_2/src/sms_common.c \
@@ -173,7 +173,7 @@ src/ASF/sam0/drivers/i2c/i2c_master.o \
 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o \
 src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.o \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
-src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_filter.o \
+src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_ahrs.o \
 src/sms_v_0_2/src/sms_ble.o \
 src/sms_v_0_2/src/sms_button.o \
 src/sms_v_0_2/src/sms_common.o \
@@ -215,7 +215,7 @@ src/ASF/sam0/drivers/i2c/i2c_master.o \
 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.o \
 src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.o \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
-src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_filter.o \
+src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_ahrs.o \
 src/sms_v_0_2/src/sms_ble.o \
 src/sms_v_0_2/src/sms_button.o \
 src/sms_v_0_2/src/sms_common.o \
@@ -257,7 +257,7 @@ src/ASF/sam0/drivers/i2c/i2c_master.d \
 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.d \
 src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.d \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.d \
-src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_filter.d \
+src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_ahrs.d \
 src/sms_v_0_2/src/sms_ble.d \
 src/sms_v_0_2/src/sms_button.d \
 src/sms_v_0_2/src/sms_common.d \
@@ -299,7 +299,7 @@ src/ASF/sam0/drivers/i2c/i2c_master.d \
 src/ASF/sam0/utils/cmsis/samb11/source/gcc/startup_samb11.d \
 src/ASF/sam0/utils/cmsis/samb11/source/system_samb11.d \
 src/ASF/sam0/utils/syscalls/gcc/syscalls.d \
-src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_filter.d \
+src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_ahrs.d \
 src/sms_v_0_2/src/sms_ble.d \
 src/sms_v_0_2/src/sms_button.d \
 src/sms_v_0_2/src/sms_common.d \

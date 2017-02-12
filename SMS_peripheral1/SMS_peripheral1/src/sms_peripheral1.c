@@ -221,10 +221,10 @@ int main(void)
 			}
 			if(mpu_device.interrupt.new_gyro) {
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				DBG_LOG("MPU int (%ld)... ", cnt++);
+				//DBG_LOG("MPU int (%ld)... ", cnt++);
 				sms_mpu_poll_data();
 				mpu_device.interrupt.new_gyro = false;
-				//mpu_device.interrupt.rts = true;
+				mpu_device.interrupt.rts = true;
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 				//DBG_LOG_CONT_DEV("done");
 			}
@@ -254,7 +254,7 @@ int main(void)
 			
 			/* Sending region */
 			if(mpu_device.interrupt.rts) {
-				DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
+				//DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
 					sms_ble_send_characteristic(BLE_CHAR_MPU);
