@@ -53,6 +53,8 @@
 #define Kp									(2.0f * 5.0f) 
 #define Ki									(0.0f)
 
+#define PI									(3.1415926535898)
+
 //#define SMS_IMU_INTERRUPT_PIN PIN_AO_GPIO_2
 //#define SMS_IMU_INIT_DATA_LEN 8
 //#define SMS_IMU_READ_DATA_LEN 12
@@ -78,8 +80,8 @@ struct sms_mpu_struct_s {
 struct sms_mpu_struct_s mpu_device;
 
 
-float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values
-float q[4]; // vector to hold quaternion
+//float ax, ay, az, gx, gy, gz, mx, my, mz; // variables to hold latest sensor data values
+//float q[4]; // vector to hold quaternion
 float eInt[3]; // vector to hold integral error for Mahony method
 float beta, deltat;
 
@@ -168,6 +170,16 @@ void writeByte(uint8_t address, uint8_t subAddress, uint8_t data);
 uint8_t readByte(uint8_t address, uint8_t subAddress);
 void readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8_t * dest);
 
+void read_accel_data(int16_t *destination);
+void read_gyro_data(int16_t *destination);
+void read_comp_data(int16_t *destination);
+int16_t read_temp_data(void);
+float get_Mres(uint8_t m_scale);
+float get_Gres(uint8_t g_scale);
+float get_Ares(uint8_t a_scale);
+
+void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
+void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz);
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);
 //int sms_imu_initialize(void);

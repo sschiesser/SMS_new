@@ -5,12 +5,12 @@
 *  Author: Sébastien Schiesser
 */
 
-#include <math.h>
+//#include <math.h>
 #include "sms_peripheral1.h"
 #include "mpu9250.h"
 
-//static struct hal_s hal = {0};
-    
+/* Board setup functions... */
+/* GPIO settings */
 void sms_mpu_configure_gpio(void)
 {
     struct gpio_config config_gpio_pin;
@@ -32,35 +32,30 @@ void sms_mpu_configure_gpio(void)
     //}
     //gpio_pin_set_output_level(SMS_MPU_VCC_PIN, true);
 }
-
-/* Register GPIO interrupt callback */
+/* Register MPU DRDY interrupt callback */
 void sms_mpu_register_callbacks(void)
 {
     /* MPU-9250 interrupt callback */
     gpio_register_callback(SMS_MPU_DRDY_PIN, sms_mpu_interrupt_callback, GPIO_CALLBACK_RISING);
 }
-
-/* Unregister GPIO interrupt callback */
+/* Unregister MPU DRDY interrupt callback */
 void sms_mpu_unregister_callbacks(void)
 {
     gpio_unregister_callback(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING);
 }
-
-/* Enable MPU DRDY interrupt */
+/* Enable MPU DRDY interrupt callback */
 void sms_mpu_enable_callback(void)
 {
 	gpio_enable_callback(SMS_MPU_DRDY_PIN);
 	mpu_device.interrupt.enabled = true;
 }
-
-/* Disable MPU DRDY interrupt */
+/* Disable MPU DRDY interrupt callback */
 void sms_mpu_disable_callback(void)
 {
 	gpio_disable_callback(SMS_MPU_DRDY_PIN);
 	mpu_device.interrupt.enabled = false;
 }
-
-/* Callback --> send interrupt message to platform */
+/* MPU DRDY callback function */
 void sms_mpu_interrupt_callback(void)
 {
 	if(mpu_device.interrupt.enabled) {
@@ -69,6 +64,9 @@ void sms_mpu_interrupt_callback(void)
 	}
 }
 
+
+/* Sensor setup functions... */
+/* Check if MPU responds and make a self test */
 int sms_mpu_check(void) {
 	int retVal = -1;
 	uint8_t c = readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
@@ -80,7 +78,7 @@ int sms_mpu_check(void) {
 	}
 	return retVal;
 }
-
+/* Check if the compass responds */
 int sms_mpu_comp_check(void)
 {
 	int retVal = -1;
@@ -91,7 +89,7 @@ int sms_mpu_comp_check(void)
 	}
 	return retVal;
 }
-
+/* Calculate biases for gyro and accel and write them into MPU registers */
 void sms_mpu_calibrate(float *dest1, float *dest2)
 {
 	uint8_t data[12]; // data array to hold accelerometer and gyro x, y, z, data
@@ -191,6 +189,7 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	dest1[1] = (float)((float)gyro_bias[1]/(float)gyrosensitivity);
 	dest1[2] = (float)((float)gyro_bias[2]/(float)gyrosensitivity);
 
+
 	// Construct the accelerometer biases for push to the hardware accelerometer bias registers. These registers contain
 	// factory trim values which must be added to the calculated accelerometer biases; on boot up these registers will hold
 	// non-zero values. In addition, bit 0 of the lower byte must be preserved since it is used for temperature
@@ -249,123 +248,7 @@ void sms_mpu_calibrate(float *dest1, float *dest2)
 	//uint32_t p5 = dest2[2] * 10000;
 	//DBG_LOG("destX: %ld %ld %ld / %ld %ld %ld", p0, p1, p2, p3, p4, p5);
 }
-
-void sms_mpu_initialize(void)
-{
-	// Initialize variables
-	q[0] = 1.0;
-	q[1] = 0.0;
-	q[2] = 0.0;
-	q[3] = 0.0;
-	eInt[0] = 0.0;
-	eInt[1] = 0.0;
-	eInt[2] = 0.0;
-	uint8_t a_scale = AFS_2G;
-	uint8_t g_scale = GFS_250DPS;
-
-	// wake up device
-	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
-	delay_ms(100); // Wait for all registers to reset
-
-	// get stable time source
-	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x01);  // Auto select clock source to be PLL gyroscope reference if ready else
-	delay_ms(200);
-	
-	// Configure Gyro and Thermometer
-	// Disable FSYNC and set thermometer and gyro bandwidth to 41 and 42 Hz, respectively;
-	// minimum delay time for this setting is 5.9 ms, which means sensor fusion update rates cannot
-	// be higher than 1 / 0.0059 = 170 Hz
-	// DLPF_CFG = bits 2:0 = 011; this limits the sample rate to 1000 Hz for both
-	// With the MPU9250, it is possible to get gyro sample rates of 32 kHz (!), 8 kHz, or 1 kHz
-	// writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
-	writeByte(MPU9250_ADDRESS, CONFIG, 0x06);		// gyro bandwidth = 10 Hz
-
-	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
-	// writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x04);  	// Use a 200 Hz rate; a rate consistent with the filter update rate
-	// // determined inset in CONFIG above
-	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x08);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
-	
-	// Set gyroscope full scale range
-	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3
-	uint8_t c = readByte(MPU9250_ADDRESS, GYRO_CONFIG); // get current GYRO_CONFIG register value
-	// c = c & ~0xE0; // Clear self-test bits [7:5]
-	c = c & ~0x02; // Clear Fchoice bits [1:0]
-	c = c & ~0x18; // Clear AFS bits [4:3]
-	c = c | (g_scale << 3); // Set full scale range for the gyro
-	// c =| 0x00; // Set Fchoice for the gyro to 11 by writing its inverse to bits 1:0 of GYRO_CONFIG
-	writeByte(MPU9250_ADDRESS, GYRO_CONFIG, c ); // Write new GYRO_CONFIG value to register
-	
-	// Set accelerometer full-scale range configuration
-	c = readByte(MPU9250_ADDRESS, ACCEL_CONFIG); // get current ACCEL_CONFIG register value
-	// c = c & ~0xE0; // Clear self-test bits [7:5]
-	c = c & ~0x18;  // Clear AFS bits [4:3]
-	c = c | (a_scale << 3); // Set full scale range for the accelerometer
-	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, c); // Write new ACCEL_CONFIG register value
-
-	// Set accelerometer sample rate configuration
-	// It is possible to get a 4 kHz sample rate from the accelerometer by choosing 1 for
-	// accel_fchoice_b bit [3]; in this case the bandwidth is 1.13 kHz
-	c = readByte(MPU9250_ADDRESS, ACCEL_CONFIG2); // get current ACCEL_CONFIG2 register value
-	c = c & ~0x0F; // Clear accel_fchoice_b (bit 3) and A_DLPFG (bits [2:0])
-	// c = c | 0x03;  // Set accelerometer rate to 1 kHz and bandwidth to 41 Hz
-	c = c | 0x06;  // Set accelerometer rate to 1 kHz and bandwidth to 10 Hz
-	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG2, c); // Write new ACCEL_CONFIG2 register value
-	// The accelerometer, gyro, and thermometer are set to 1 kHz sample rates,
-	// but all these rates are further reduced by a factor of 5 to 200 Hz because of the SMPLRT_DIV setting
-
-	// Configure Interrupts and Bypass Enable
-	// Set interrupt pin active high, push-pull, hold interrupt pin level HIGH until interrupt cleared,
-	// clear on read of INT_STATUS, and enable I2C_BYPASS_EN so additional chips
-	// can join the I2C bus and all can be controlled by the Arduino as master
-	//writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x22);
-	writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x02);
-	writeByte(MPU9250_ADDRESS, INT_ENABLE, 0x01);  // Enable data ready (bit 0) interrupt
-	delay_ms(100);
-}
-
-void sms_mpu_comp_initialize(float *destination)
-{
-	uint8_t m_scale = MFS_16BITS;	// Choose either 14-bit or 16-bit magnetometer resolution
-	uint8_t m_mode = 0x02;	// 2 for 8 Hz, 6 for 100 Hz continuous magnetometer data read
-	// First extract the factory calibration for each magnetometer axis
-	uint8_t data[3];  // x/y/z gyro calibration data stored here
-	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x00); // Power down magnetometer
-	delay_ms(10);
-	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x0F); // Enter Fuse ROM access mode
-	delay_ms(10);
-	readBytes(AK8963_ADDRESS, AK8963_ASAX, 3, &data);  // Read the x-, y-, and z-axis calibration values
-	destination[0] =  (float)(data[0] - 128)/256. + 1.;   // Return x-axis sensitivity adjustment values, etc.
-	destination[1] =  (float)(data[1] - 128)/256. + 1.;
-	destination[2] =  (float)(data[2] - 128)/256. + 1.;
-	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x00); // Power down magnetometer
-	delay_ms(10);
-	// Configure the magnetometer for continuous read and highest resolution
-	// set Mscale bit 4 to 1 (0) to enable 16 (14) bit resolution in CNTL register,
-	// and enable continuous mode data acquisition Mmode (bits [3:0]), 0010 for 8 Hz and 0110 for 100 Hz sample rates
-	writeByte(AK8963_ADDRESS, AK8963_CNTL, m_scale << 4 | m_mode); // Set magnetometer data resolution and sample ODR
-	delay_ms(10);
-}
-
-/* Extract available IMU data */
-int sms_mpu_poll_data(void)
-{
-	DBG_LOG("Polling...");
-    return 0;
-}
-
-void sms_mpu_define_services(void)
-{
-    at_ble_status_t status;
-    uint8_t init_value = 0;
-    sms_ble_service_init(BLE_SERV_MPU, &mpu_device.service_handler, &init_value);
-    if((status = sms_ble_primary_service_define(&mpu_device.service_handler)) != AT_BLE_SUCCESS) {
-        DBG_LOG("[sms_mpu_define_services]\tServices defining failed, reason 0x%x", status);
-    }
-    else {
-        DBG_LOG_DEV("[sms_mpu_define_services]\tServices defined, SMS MPU handle: %d", mpu_device.service_handler.serv_handle);
-    }
-}
-
+/* Self-test */
 void sms_mpu_selftest(float *destination)
 {
 	uint8_t raw_data[6] = {0};
@@ -446,19 +329,277 @@ void sms_mpu_selftest(float *destination)
 	}
 
 }
+/* BLE service definition */
+void sms_mpu_define_services(void)
+{
+	at_ble_status_t status;
+	uint8_t init_value = 0;
+	sms_ble_service_init(BLE_SERV_MPU, &mpu_device.service_handler, &init_value);
+	if((status = sms_ble_primary_service_define(&mpu_device.service_handler)) != AT_BLE_SUCCESS) {
+		DBG_LOG("[sms_mpu_define_services]\tServices defining failed, reason 0x%x", status);
+	}
+	else {
+		DBG_LOG_DEV("[sms_mpu_define_services]\tServices defined, SMS MPU handle: %d", mpu_device.service_handler.serv_handle);
+	}
+}
 
+/* Initialization functions... */
+/* MPU */
+void sms_mpu_initialize(void)
+{
+	//// Initialize variables
+	//q[0] = 1.0;
+	//q[1] = 0.0;
+	//q[2] = 0.0;
+	//q[3] = 0.0;
+	//eInt[0] = 0.0;
+	//eInt[1] = 0.0;
+	//eInt[2] = 0.0;
+	mpu_device.config.a_scale = AFS_2G;
+	mpu_device.config.g_scale = GFS_250DPS;
+
+	// wake up device
+	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
+	delay_ms(100); // Wait for all registers to reset
+
+	// get stable time source
+	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x01);  // Auto select clock source to be PLL gyroscope reference if ready else
+	delay_ms(200);
+	
+	// Configure Gyro and Thermometer
+	// Disable FSYNC and set thermometer and gyro bandwidth to 41 and 42 Hz, respectively;
+	// minimum delay time for this setting is 5.9 ms, which means sensor fusion update rates cannot
+	// be higher than 1 / 0.0059 = 170 Hz
+	// DLPF_CFG = bits 2:0 = 011; this limits the sample rate to 1000 Hz for both
+	// With the MPU9250, it is possible to get gyro sample rates of 32 kHz (!), 8 kHz, or 1 kHz
+	// writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
+	writeByte(MPU9250_ADDRESS, CONFIG, 0x04);		// gyro bandwidth = 10 Hz
+
+	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
+	// writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x04);  	// Use a 200 Hz rate; a rate consistent with the filter update rate
+	// // determined inset in CONFIG above
+	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x08);  	// Use a 111 Hz rate; a rate consistent with the filter update rate
+	
+	// Set gyroscope full scale range
+	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3
+	uint8_t c = readByte(MPU9250_ADDRESS, GYRO_CONFIG); // get current GYRO_CONFIG register value
+	// c = c & ~0xE0; // Clear self-test bits [7:5]
+	c = c & ~0x02; // Clear Fchoice bits [1:0]
+	c = c & ~0x18; // Clear AFS bits [4:3]
+	c = c | (mpu_device.config.g_scale << 3); // Set full scale range for the gyro
+	// c =| 0x00; // Set Fchoice for the gyro to 11 by writing its inverse to bits 1:0 of GYRO_CONFIG
+	writeByte(MPU9250_ADDRESS, GYRO_CONFIG, c ); // Write new GYRO_CONFIG value to register
+	
+	// Set accelerometer full-scale range configuration
+	c = readByte(MPU9250_ADDRESS, ACCEL_CONFIG); // get current ACCEL_CONFIG register value
+	// c = c & ~0xE0; // Clear self-test bits [7:5]
+	c = c & ~0x18;  // Clear AFS bits [4:3]
+	c = c | (mpu_device.config.a_scale << 3); // Set full scale range for the accelerometer
+	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, c); // Write new ACCEL_CONFIG register value
+
+	// Set accelerometer sample rate configuration
+	// It is possible to get a 4 kHz sample rate from the accelerometer by choosing 1 for
+	// accel_fchoice_b bit [3]; in this case the bandwidth is 1.13 kHz
+	c = readByte(MPU9250_ADDRESS, ACCEL_CONFIG2); // get current ACCEL_CONFIG2 register value
+	c = c & ~0x0F; // Clear accel_fchoice_b (bit 3) and A_DLPFG (bits [2:0])
+	// c = c | 0x03;  // Set accelerometer rate to 1 kHz and bandwidth to 41 Hz
+	c = c | 0x04;  // Set accelerometer rate to 1 kHz and bandwidth to 10 Hz
+	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG2, c); // Write new ACCEL_CONFIG2 register value
+	// The accelerometer, gyro, and thermometer are set to 1 kHz sample rates,
+	// but all these rates are further reduced by a factor of 5 to 200 Hz because of the SMPLRT_DIV setting
+
+	// Configure Interrupts and Bypass Enable
+	// Set interrupt pin active high, push-pull, send 50 us interrupt pulses,
+	// clear on ANY read, and enable I2C_BYPASS_EN so additional chips
+	// can join the I2C bus and all can be controlled by the Arduino as master
+	//writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x22);
+	writeByte(MPU9250_ADDRESS, INT_PIN_CFG, 0x12);
+	writeByte(MPU9250_ADDRESS, INT_ENABLE, 0x01);  // Enable data ready (bit 0) interrupt
+	delay_ms(100);
+}
+/* Compass */
+void sms_mpu_comp_initialize(float *destination)
+{
+	mpu_device.config.m_scale = MFS_16BITS;	// Choose either 14-bit or 16-bit magnetometer resolution
+	mpu_device.config.m_mode = MODE_CONT1;	// CONT1 (2) for 8 Hz, CONT2 (6) for 100 Hz continuous magnetometer data read
+
+	/* !!! SET MAGNETOMETER BIAS VALUES !!! SHOULD BE CALCULATED AUTOMATICALLY !!! */
+	mpu_device.config.mag_bias[0] = 470.0;
+	mpu_device.config.mag_bias[1] = 120.0;
+	mpu_device.config.mag_bias[2] = 125.0;
+	/* !!! SET MAGNETOMETER BIAS VALUES !!! SHOULD BE CALCULATED AUTOMATICALLY !!! */
+
+	// First extract the factory calibration for each magnetometer axis
+	uint8_t data[3];  // x/y/z gyro calibration data stored here
+	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x00); // Power down magnetometer
+	delay_ms(10);
+	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x0F); // Enter Fuse ROM access mode
+	delay_ms(10);
+	readBytes(AK8963_ADDRESS, AK8963_ASAX, 3, &data);  // Read the x-, y-, and z-axis calibration values
+	destination[0] =  (float)(data[0] - 128)/256. + 1.;   // Return x-axis sensitivity adjustment values, etc.
+	destination[1] =  (float)(data[1] - 128)/256. + 1.;
+	destination[2] =  (float)(data[2] - 128)/256. + 1.;
+	writeByte(AK8963_ADDRESS, AK8963_CNTL, 0x00); // Power down magnetometer
+	delay_ms(10);
+	// Configure the magnetometer for continuous read and highest resolution
+	// set Mscale bit 4 to 1 (0) to enable 16 (14) bit resolution in CNTL register,
+	// and enable continuous mode data acquisition Mmode (bits [3:0]), 0010 for 8 Hz and 0110 for 100 Hz sample rates
+	writeByte(AK8963_ADDRESS, AK8963_CNTL, mpu_device.config.m_scale << 4 | mpu_device.config.m_mode); // Set magnetometer data resolution and sample ODR
+	delay_ms(10);
+}
+
+
+/* Data reading functions... */
+/* Poll */
+int sms_mpu_poll_data(void)
+{
+	read_accel_data(mpu_device.output.raw_accel);
+	float a_res = get_Ares(mpu_device.config.a_scale);
+	float ax = ((float)mpu_device.output.raw_accel[0]) * a_res;
+	float ay = ((float)mpu_device.output.raw_accel[1]) * a_res;
+	float az = ((float)mpu_device.output.raw_accel[2]) * a_res;
+	
+	read_gyro_data(mpu_device.output.raw_gyro);
+	float g_res = get_Gres(mpu_device.config.g_scale);
+	float gx = ((float)mpu_device.output.raw_gyro[0]) * g_res;
+	float gy = ((float)mpu_device.output.raw_gyro[1]) * g_res;
+	float gz = ((float)mpu_device.output.raw_gyro[2]) * g_res;
+	
+	read_comp_data(mpu_device.output.raw_compass);
+	float m_res = get_Mres(mpu_device.config.m_scale);
+	float mx = ( ((float)mpu_device.output.raw_compass[0]) * m_res * mpu_device.config.mag_calibration[0] ) - mpu_device.config.mag_bias[0];
+	float my = ( ((float)mpu_device.output.raw_compass[1]) * m_res * mpu_device.config.mag_calibration[1] ) - mpu_device.config.mag_bias[1];
+	float mz = ( ((float)mpu_device.output.raw_compass[2]) * m_res * mpu_device.config.mag_calibration[2] ) - mpu_device.config.mag_bias[2];
+	
+	MahonyQuaternionUpdate(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
+    return 0;
+}
+/* Read accel data */
+void read_accel_data(int16_t *destination)
+{
+	uint8_t rawData[6];  // x/y/z accel register data stored here
+	readBytes(MPU9250_ADDRESS, ACCEL_XOUT_H, 6, &rawData[0]);  // Read the six raw data registers into data array
+	destination[0] = ((int16_t)rawData[0] << 8) | rawData[1] ;  // Turn the MSB and LSB into a signed 16-bit value
+	destination[1] = ((int16_t)rawData[2] << 8) | rawData[3] ;
+	destination[2] = ((int16_t)rawData[4] << 8) | rawData[5] ;
+}
+/* Read gyro data */
+void read_gyro_data(int16_t *destination)
+{
+	uint8_t rawData[6];  // x/y/z gyro register data stored here
+	readBytes(MPU9250_ADDRESS, GYRO_XOUT_H, 6, &rawData[0]);  // Read the six raw data registers sequentially into data array
+	destination[0] = ((int16_t)rawData[0] << 8) | rawData[1] ;  // Turn the MSB and LSB into a signed 16-bit value
+	destination[1] = ((int16_t)rawData[2] << 8) | rawData[3] ;
+	destination[2] = ((int16_t)rawData[4] << 8) | rawData[5] ;
+}
+/* Read compass data */
+void read_comp_data(int16_t *destination)
+{
+	uint8_t rawData[7];  // x/y/z gyro register data, ST2 register stored here, must read ST2 at end of data acquisition
+	if(readByte(AK8963_ADDRESS, AK8963_ST1) & 0x01) { // wait for magnetometer data ready bit to be set
+		readBytes(AK8963_ADDRESS, AK8963_XOUT_L, 7, &rawData[0]);  // Read the six raw data and ST2 registers sequentially into data array
+		uint8_t c = rawData[6]; // End data read by reading ST2 register
+		if(!(c & 0x08)) { // Check if magnetic sensor overflow set, if not then report data
+			destination[0] = ((int16_t)rawData[1] << 8) | rawData[0] ;  // Turn the MSB and LSB into a signed 16-bit value
+			destination[1] = ((int16_t)rawData[3] << 8) | rawData[2] ;  // Data stored as little Endian
+			destination[2] = ((int16_t)rawData[5] << 8) | rawData[4] ;
+		}
+	}
+}
+/* Read temperature data */
+int16_t read_temp_data(void)
+{
+	uint8_t rawData[2];  // x/y/z gyro register data stored here
+	readBytes(MPU9250_ADDRESS, TEMP_OUT_H, 2, &rawData[0]);  // Read the two raw data registers sequentially into data array
+	return ((int16_t)rawData[0] << 8) | rawData[1] ;  // Turn the MSB and LSB into a 16-bit value
+}
+
+
+
+
+/* Utility functions */
+float get_Mres(uint8_t m_scale)
+{
+	float retVal = 0;
+	// Possible magnetometer scales (and their register bit settings) are:
+	// 14 bit resolution (0) and 16 bit resolution (1)
+	switch(m_scale) {
+		case MFS_14BITS:
+		retVal = 10.0 * 4912.0 / 8190.0;
+		break;
+		
+		case MFS_16BITS:
+		retVal = 10.0 * 4912.0 / 32760.0;
+		break;
+		
+		default:
+		break;
+	}
+	return retVal;
+}
+float get_Gres(uint8_t g_scale)
+{
+	float retVal = 0;
+	// Possible gyro scales (and their register bit settings) are:
+	// 250 DPS (00), 500 DPS (01), 1000 DPS (10), and 2000 DPS  (11).
+	// Here's a bit of an algorith to calculate DPS/(ADC tick) based on that 2-bit value:
+	switch(g_scale) {
+		case GFS_250DPS:
+		retVal = 250.0 / 32768.0;
+		break;
+		
+		case GFS_500DPS:
+		retVal = 500.0 / 32768.0;
+		break;
+		
+		case GFS_1000DPS:
+		retVal = 1000.0 / 32768.0;
+		break;
+		
+		case GFS_2000DPS:
+		retVal = 2000.0 / 32768.0;
+		break;
+		
+		default:
+		break;
+	}
+	return retVal;
+}
+float get_Ares(uint8_t a_scale)
+{
+	float retVal;
+	switch(a_scale) {
+		// Possible accelerometer scales (and their register bit settings) are:
+		// 2 Gs (00), 4 Gs (01), 8 Gs (10), and 16 Gs  (11).
+		// Here's a bit of an algorith to calculate DPS/(ADC tick) based on that 2-bit value:
+		case AFS_2G:
+		retVal = 2.0/32768.0;
+		break;
+		case AFS_4G:
+		retVal = 4.0/32768.0;
+		break;
+		case AFS_8G:
+		retVal = 8.0/32768.0;
+		break;
+		case AFS_16G:
+		retVal = 16.0/32768.0;
+		break;
+	}
+	return retVal;
+}
+
+
+/* I2C abstractions to simplify the code */
 void writeByte(uint8_t address, uint8_t subAddress, uint8_t data)
 {
 	sms_i2c_master_write(address, subAddress, 1, &data);
 }
-
 uint8_t readByte(uint8_t address, uint8_t subAddress)
 {
 	uint8_t data[1];
 	sms_i2c_master_read(address, subAddress, 1, data);
 	return data[0];
 }
-
 void readBytes(uint8_t address, uint8_t subAddress, uint8_t count, uint8_t * dest)
 {
 	sms_i2c_master_read(address, subAddress, count, dest);

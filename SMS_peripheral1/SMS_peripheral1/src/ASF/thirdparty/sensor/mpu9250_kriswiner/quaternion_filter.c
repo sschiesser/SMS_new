@@ -15,7 +15,10 @@
 // but is much less computationally intensive---it can be performed on a 3.3 V Pro Mini operating at 8 MHz!
 void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz)
 {
-	float q1 = q[0], q2 = q[1], q3 = q[2], q4 = q[3];   // short name local variable for readability
+	float q1 = mpu_device.output.q[0];   // short name local variable for readability
+	float q2 = mpu_device.output.q[1];
+	float q3 = mpu_device.output.q[2];
+	float q4 = mpu_device.output.q[3];
 	float norm;
 	float hx, hy, _2bx, _2bz;
 	float s1, s2, s3, s4;
@@ -98,11 +101,10 @@ void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, 
 	q4 += qDot4 * deltat;
 	norm = sqrtf(q1 * q1 + q2 * q2 + q3 * q3 + q4 * q4);    // normalize quaternion
 	norm = 1.0f/norm;
-	q[0] = q1 * norm;
-	q[1] = q2 * norm;
-	q[2] = q3 * norm;
-	q[3] = q4 * norm;
-
+	mpu_device.output.q[0] = q1 * norm;
+	mpu_device.output.q[1] = q2 * norm;
+	mpu_device.output.q[2] = q3 * norm;
+	mpu_device.output.q[3] = q4 * norm;
 }
 
 
@@ -111,7 +113,10 @@ void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, 
 // measured ones.
 void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz)
 {
-	float q1 = q[0], q2 = q[1], q3 = q[2], q4 = q[3];   // short name local variable for readability
+	float q1 = mpu_device.output.q[0];   // short name local variable for readability
+	float q2 = mpu_device.output.q[1];
+	float q3 = mpu_device.output.q[2];
+	float q4 = mpu_device.output.q[3];
 	float norm;
 	float hx, hy, bx, bz;
 	float vx, vy, vz, wx, wy, wz;
@@ -130,7 +135,7 @@ void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, fl
 	float q3q4 = q3 * q4;
 	float q4q4 = q4 * q4;
 
-	// Normalise accelerometer measurement
+	// Normalize accelerometer measurement
 	norm = sqrtf(ax * ax + ay * ay + az * az);
 	if (norm == 0.0f) return; // handle NaN
 	norm = 1.0f / norm;        // use reciprocal for division
@@ -138,7 +143,7 @@ void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, fl
 	ay *= norm;
 	az *= norm;
 
-	// Normalise magnetometer measurement
+	// Normalize magnetometer measurement
 	norm = sqrtf(mx * mx + my * my + mz * mz);
 	if (norm == 0.0f) return; // handle NaN
 	norm = 1.0f / norm;        // use reciprocal for division
@@ -191,12 +196,11 @@ void MahonyQuaternionUpdate(float ax, float ay, float az, float gx, float gy, fl
 	q3 = pb + (q1 * gy - pa * gz + pc * gx) * (0.5f * deltat);
 	q4 = pc + (q1 * gz + pa * gy - pb * gx) * (0.5f * deltat);
 
-	// Normalise quaternion
+	// Normalize quaternion
 	norm = sqrtf(q1 * q1 + q2 * q2 + q3 * q3 + q4 * q4);
 	norm = 1.0f / norm;
-	q[0] = q1 * norm;
-	q[1] = q2 * norm;
-	q[2] = q3 * norm;
-	q[3] = q4 * norm;
-	
+	mpu_device.output.q[0] = q1 * norm;
+	mpu_device.output.q[1] = q2 * norm;
+	mpu_device.output.q[2] = q3 * norm;
+	mpu_device.output.q[3] = q4 * norm;
 }

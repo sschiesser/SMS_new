@@ -195,6 +195,7 @@ int main(void)
 
 	
 	at_ble_status_t ble_status;
+	static uint32_t cnt = 0;
 	while(true)
 	{
 		/* BLE Event task */
@@ -220,8 +221,8 @@ int main(void)
 			}
 			if(mpu_device.interrupt.new_gyro) {
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				DBG_LOG("MPU int (%d)... ", ble_instance.sending_queue);
-				//sms_mpu_poll_data();
+				DBG_LOG("MPU int (%ld)... ", cnt++);
+				sms_mpu_poll_data();
 				mpu_device.interrupt.new_gyro = false;
 				//mpu_device.interrupt.rts = true;
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);

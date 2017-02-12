@@ -321,28 +321,28 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
         
         case BLE_CHAR_MPU:
-        send_val[0] = (uint8_t)(mpu_device.output.accel[0] & 0xff);
-        send_val[1] = (uint8_t)((mpu_device.output.accel[0] >> 8) & 0xff);
-        send_val[2] = (uint8_t)(mpu_device.output.accel[1] & 0xff);
-        send_val[3] = (uint8_t)((mpu_device.output.accel[1] >> 8) & 0xff);
-        send_val[4] = (uint8_t)(mpu_device.output.accel[2] & 0xff);
-        send_val[5] = (uint8_t)((mpu_device.output.accel[2] >> 8) & 0xff);
-        send_val[6] = (uint8_t)(mpu_device.output.gyro[0] & 0xff);
-        send_val[7] = (uint8_t)((mpu_device.output.gyro[0] >> 8) & 0xff);
-        send_val[8] = (uint8_t)(mpu_device.output.gyro[1] & 0xff);
-        send_val[9] = (uint8_t)((mpu_device.output.gyro[1] >> 8) & 0xff);
-        send_val[10] = (uint8_t)(mpu_device.output.gyro[2] & 0xff);
-        send_val[11] = (uint8_t)((mpu_device.output.gyro[2] >> 8) & 0xff);
+        send_val[0] = (uint8_t)(mpu_device.output.raw_accel[0] & 0xff);
+        send_val[1] = (uint8_t)((mpu_device.output.raw_accel[0] >> 8) & 0xff);
+        send_val[2] = (uint8_t)(mpu_device.output.raw_accel[1] & 0xff);
+        send_val[3] = (uint8_t)((mpu_device.output.raw_accel[1] >> 8) & 0xff);
+        send_val[4] = (uint8_t)(mpu_device.output.raw_accel[2] & 0xff);
+        send_val[5] = (uint8_t)((mpu_device.output.raw_accel[2] >> 8) & 0xff);
+        send_val[6] = (uint8_t)(mpu_device.output.raw_gyro[0] & 0xff);
+        send_val[7] = (uint8_t)((mpu_device.output.raw_gyro[0] >> 8) & 0xff);
+        send_val[8] = (uint8_t)(mpu_device.output.raw_gyro[1] & 0xff);
+        send_val[9] = (uint8_t)((mpu_device.output.raw_gyro[1] >> 8) & 0xff);
+        send_val[10] = (uint8_t)(mpu_device.output.raw_gyro[2] & 0xff);
+        send_val[11] = (uint8_t)((mpu_device.output.raw_gyro[2] >> 8) & 0xff);
         val_handle = mpu_device.service_handler.serv_chars.char_val_handle;
         length = BLE_CHAR_SIZE_MPU_G_A;
         
         if(mpu_device.interrupt.new_compass) {
-            send_val[12] = (uint8_t)(mpu_device.output.compass[0] & 0xff);
-            send_val[13] = (uint8_t)((mpu_device.output.compass[0] >> 8) & 0xff);
-            send_val[14] = (uint8_t)(mpu_device.output.compass[1] & 0xff);
-            send_val[15] = (uint8_t)((mpu_device.output.compass[1] >> 8) & 0xff);
-            send_val[16] = (uint8_t)(mpu_device.output.compass[2] & 0xff);
-            send_val[17] = (uint8_t)((mpu_device.output.compass[2] >> 8) & 0xff);
+            send_val[12] = (uint8_t)(mpu_device.output.raw_compass[0] & 0xff);
+            send_val[13] = (uint8_t)((mpu_device.output.raw_compass[0] >> 8) & 0xff);
+            send_val[14] = (uint8_t)(mpu_device.output.raw_compass[1] & 0xff);
+            send_val[15] = (uint8_t)((mpu_device.output.raw_compass[1] >> 8) & 0xff);
+            send_val[16] = (uint8_t)(mpu_device.output.raw_compass[2] & 0xff);
+            send_val[17] = (uint8_t)((mpu_device.output.raw_compass[2] >> 8) & 0xff);
             length = BLE_CHAR_SIZE_MPU_G_A_C;
             mpu_device.interrupt.new_compass = false;
         }
@@ -353,8 +353,8 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         }
         
         if(mpu_device.interrupt.new_temp) {
-            send_val[18] = (uint8_t)(mpu_device.output.temperature & 0xff);
-            send_val[19] = (uint8_t)((mpu_device.output.temperature >> 8) & 0xff);
+            send_val[18] = (uint8_t)(mpu_device.output.raw_temp & 0xff);
+            send_val[19] = (uint8_t)((mpu_device.output.raw_temp >> 8) & 0xff);
             length = BLE_CHAR_SIZE_MPU_G_A_C_T;
             mpu_device.interrupt.new_temp = false;
         }

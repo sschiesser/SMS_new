@@ -183,7 +183,21 @@ enum Mscale {
 	MFS_16BITS			// 0.15 mG per LSB
 };
 
+enum Mmode {
+	MODE_PDOWN = 0x0,
+	MODE_SINGLE = 0x1,
+	MODE_CONT1 = 0x2,
+	MODE_CONT2 = 0x6,
+	MODE_EXT_TRIG = 0x4,
+	MODE_SELFTEST = 0x8,
+	MODE_FUSE_ROM = 0xF
+};
+
 struct mpu9250_config_s {
+	enum Ascale a_scale;
+	enum Gscale g_scale;
+	enum Mscale m_scale;
+	enum Mmode m_mode;
 	//bool init_ok;
 	float self_test[6];
 	float gyro_bias[3];
@@ -192,10 +206,11 @@ struct mpu9250_config_s {
 	float mag_calibration[3];
 };
 struct mpu9250_output_s {
-	short gyro[3];
-	short accel[3];
-	short compass[3];
-	long temperature;
+	int16_t raw_gyro[3];
+	int16_t raw_accel[3];
+	int16_t raw_compass[3];
+	int16_t raw_temp;
+	float q[4];
 };
 struct mpu9250_interrupt_s {
 	bool enabled;
