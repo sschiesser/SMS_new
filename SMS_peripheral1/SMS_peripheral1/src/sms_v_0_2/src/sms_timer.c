@@ -53,10 +53,21 @@ void sms_dualtimer_init(void)
     struct dualtimer_config config_dualtimer;
     dualtimer_get_config_defaults(&config_dualtimer);
 
-    config_dualtimer.timer1.load_value = SMS_DUALTIMER_LOAD_S;
-    config_dualtimer.timer1.counter_mode = DUALTIMER_ONE_SHOT_MODE;
+	/* Dualtimer1 used for background us counting without interrupts
+	 * (similar to the millis() or micros() functions in Arduino) */
+    //config_dualtimer.timer1.load_value = SMS_DUALTIMER_LOAD_US;
+	config_dualtimer.timer1.load_value = 0xFFFFFFFF;
+    config_dualtimer.timer1.counter_mode = DUALTIMER_FREE_RUNNING_MODE;
+	//config_dualtimer.timer1.clock_prescaler = DUALTIMER_CLOCK_PRESCALER_DIV1;
+	//config_dualtimer.timer1.counter_size = DUALTIMER_COUNTER_SIZE_32BIT;
+	config_dualtimer.timer1.interrup_enable = false;
+	/* Dualtimer1 used first as a blocking ms delay
+	 * (could be changed after device startup and initialization) */
     config_dualtimer.timer2.load_value = SMS_DUALTIMER_LOAD_MS;
     config_dualtimer.timer2.counter_mode = DUALTIMER_ONE_SHOT_MODE;
+	config_dualtimer.timer2.clock_prescaler = DUALTIMER_CLOCK_PRESCALER_DIV1;
+	config_dualtimer.timer2.counter_size = DUALTIMER_COUNTER_SIZE_32BIT;
+	config_dualtimer.timer2.interrup_enable = true;
 
     dualtimer_init(&config_dualtimer);
     dualtimer_disable(DUALTIMER_TIMER1);
@@ -90,8 +101,8 @@ void sms_dualtimer_start(timer_unit_type_t unit, uint32_t delay, enum dualtimer_
     }
     
     if(delay <= 0) {
-        //DBG_LOG("[sms_dualtimer_start]\tWarning! Delay value < 0... setting to 1000");
-        delay = 1000;
+        //DBG_LOG("[sms_dualtimer_start]\tWarning! Delay value < 0... setting to 1");
+        delay = 1;
     }
     
     ulp_ready = false;

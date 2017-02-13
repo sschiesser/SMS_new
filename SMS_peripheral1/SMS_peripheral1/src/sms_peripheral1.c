@@ -167,24 +167,13 @@ int main(void)
 
 	/* Enable buttons interrupts
 	* ------------------------- */
-	sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+	//sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 
 	if(sms_imu_startup()) {
 		DBG_LOG("Cannot start IMU");
 	}
-	//if(sms_imu_mpu_check()) {
-		//DBG_LOG("MPU not here...");
-	//}
-	//sms_imu_mpu_calibrate(imu_device.config.gyro_bias, imu_device.config.accel_bias);
-	//DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(imu_device.config.gyro_bias[0] * 10000), (uint32_t)(imu_device.config.gyro_bias[1] * 10000), (uint32_t)(imu_device.config.gyro_bias[2] * 10000), (uint32_t)(imu_device.config.accel_bias[0] * 10000), (uint32_t)(imu_device.config.accel_bias[1] * 10000), (uint32_t)(imu_device.config.accel_bias[2] * 10000));
-	//sms_imu_mpu_initialize();
-	////DBG_LOG("MPU-9250 initialized...");
-	//if(sms_imu_comp_check()) {
-		//DBG_LOG("Compass not here...");
-	//}
-	//sms_imu_comp_initialize(imu_device.config.mag_calibration);
-	////DBG_LOG("Compass initialized... calibration values: %ld %ld %ld", (uint32_t)(mpu_device.config.mag_calibration[0] * 10000), (uint32_t)(mpu_device.config.mag_calibration[1] * 10000), (uint32_t)(mpu_device.config.mag_calibration[2] * 10000));
-	
+	dualtimer_enable(DUALTIMER_TIMER1);
+
 	sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
 	sms_sensors_interrupt_toggle(true, false);
 	
@@ -222,8 +211,9 @@ int main(void)
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 				//DBG_LOG("MPU int (%ld)... ", cnt++);
 				sms_imu_poll_data();
+				
 				imu_device.interrupt.new_gyro = false;
-				imu_device.interrupt.rts = true;
+				//imu_device.interrupt.rts = true;
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 				//DBG_LOG_CONT_DEV("done");
 			}

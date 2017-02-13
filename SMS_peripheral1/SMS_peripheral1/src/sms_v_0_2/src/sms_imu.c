@@ -480,8 +480,14 @@ int sms_imu_poll_data(void)
 	float my = ( ((float)imu_device.output.raw_compass[1]) * m_res * imu_device.config.mag_calibration[1] ) - imu_device.config.mag_bias[1];
 	float mz = ( ((float)imu_device.output.raw_compass[2]) * m_res * imu_device.config.mag_calibration[2] ) - imu_device.config.mag_bias[2];
 	
-	//mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
-	madgwick_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz);
+	static uint32_t last_time = 0;
+	const uint32_t cnt_max = 0xffffffff/SMS_DUALTIMER_LOAD_US;
+	uint32_t now = (uint32_t)(dualtimer_get_value(DUALTIMER_TIMER1)/SMS_DUALTIMER_LOAD_US);
+	uint32_t deltati = ((now < last_time) ? (last_time - now) : (cnt_max - now + last_time));
+	last_time = now;
+	float deltatf = (float)deltati / 1000000.0;
+	//mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz, deltat);
+	madgwick_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz, deltatf);
 	
 	if(imu_device.config.ahrs) {
 		ahrs_calculation(imu_device.output.q);

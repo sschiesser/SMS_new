@@ -31,10 +31,8 @@
 // device orientation -- which can be converted to yaw, pitch, and roll. Useful for stabilizing quadcopters, etc.
 // The performance of the orientation filter is at least as good as conventional Kalman-based filtering algorithms
 // but is much less computationally intensive---it can be performed on a 3.3 V Pro Mini operating at 8 MHz!
-void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz)
+void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltat)
 {
-	float deltat = 0.011; // currently working at 90 Hz -> 11 ms
-
 	static float q1 = 1.0;
 	static float q2 = 0.0;
 	static float q3 = 0.0;
@@ -125,14 +123,13 @@ void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy
 	imu_device.output.q[1] = q2 * norm;
 	imu_device.output.q[2] = q3 * norm;
 	imu_device.output.q[3] = q4 * norm;
-	DBG_LOG("Quaternions (x 10000): q1 %ld, q2 %ld, q3 %ld, q4 %ld", (uint32_t)(imu_device.output.q[0]*10000), (uint32_t)(imu_device.output.q[1] * 10000), (uint32_t)(imu_device.output.q[2] * 10000), (uint32_t)(imu_device.output.q[3] * 10000));
 }
 
 
 
 // Similar to Madgwick scheme but uses proportional and integral filtering on the error between estimated reference vectors and
 // measured ones.
-//void mahony_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz)
+//void mahony_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltat)
 //{
 //float q1 = mpu_device.output.q[0];   // short name local variable for readability
 //float q2 = mpu_device.output.q[1];
