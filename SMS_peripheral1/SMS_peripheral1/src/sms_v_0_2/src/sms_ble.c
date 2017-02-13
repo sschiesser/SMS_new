@@ -24,17 +24,18 @@ at_ble_status_t sms_ble_connected_fn(void *params)
 {
 	if(ble_instance.current_state == BLE_STATE_ADVERTISING) {
 		at_ble_connected_t *connected = (at_ble_connected_t *)params;
-		sms_ble_conn_handle = connected->handle;
+		ble_instance.conn_handle = connected->handle;
 		ble_instance.current_state = BLE_STATE_CONNECTED;
 		DBG_LOG_DEV("[sms_ble_connected_fn]\t\tDevices connected...");
 		//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- conn interval: %d\r\n- conn latency: %d\r\n- supervision timeout: %d\r\n- peer address: 0x", connected->handle, connected->conn_params.con_interval, connected->conn_params.con_latency, connected->conn_params.sup_to);
 		//for(uint8_t i = 0; i < AT_BLE_ADDR_LEN; i++) {
 		//DBG_LOG_CONT_DEV("%02x",connected->peer_addr.addr[AT_BLE_ADDR_LEN - (i+1)]);
 		//}
-		//DBG_LOG("T/O: 5000 ms");
-		sms_ble_timeout = BLE_TIMEOUT_PAIR;
+		DBG_LOG_DEV("BLE T/O: 5000 ms");
+		sms_ble_timeout = BLE_APP_TIMEOUT_PAIR;
 	}
 	else {
+		DBG_LOG_DEV("[sms_ble_connected_fn]\t\tWrong BLE state... shutting down");
 		sms_ble_power_down();
 	}
 	return AT_BLE_SUCCESS;
@@ -46,7 +47,7 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 	at_ble_disconnected_t *disconnect = (at_ble_disconnected_t *)params;
 	if(ble_instance.current_state == BLE_STATE_PAIRED) {
 		pressure_device.state = PRESSURE_STATE_OFF;
-		sms_sensors_interrupt_enable(false, false);
+		sms_sensors_enable_callback(false, false);
 		sms_sensors_switch(false, false);
 	}
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
@@ -82,15 +83,11 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 		sms_monitor_get_states("[sms_ble_paired_fn]");
 		//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
 		
-		if(sms_imu_startup()) {
-			DBG_LOG("Cannot start IMU");
-		}
-		dualtimer_enable(DUALTIMER_TIMER1);
-		sms_sensors_interrupt_enable(true, false);
-
+		sms_sensors_switch(true, true);
+		
 		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 		//DBG_LOG("T/O: OFF");
-		sms_ble_timeout = BLE_TIMEOUT_OFF;
+		sms_ble_timeout = BLE_APP_TIMEOUT_OFF;
 	}
 	else {
 		sms_ble_power_down();
@@ -102,7 +99,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 at_ble_status_t sms_ble_pair_request_fn(void *params)
 {
 	at_ble_pair_request_t *request = (at_ble_pair_request_t *)params;
-	DBG_LOG_DEV("[sms_ble_pair_request_fn]\tPairing request... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_instance.current_state, timer1_current_mode, timer2_current_mode);
+	DBG_LOG_DEV("[sms_ble_pair_request_fn]\t\tPairing request...");
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- peer features: 0x%02x", request->handle, request->peer_features);
 	return AT_BLE_SUCCESS;
 }
@@ -116,7 +113,7 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 	at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
 	ble_instance.sending_queue--;
 	//DBG_LOG("T/O: OFF");
-	sms_ble_timeout = BLE_TIMEOUT_OFF;
+	sms_ble_timeout = BLE_APP_TIMEOUT_OFF;
 	//button_instance.current_state = sms_button_get_state();
 	//DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
@@ -204,14 +201,21 @@ const ble_event_callback_t sms_ble_gatt_server_cb[] = {
 void sms_ble_init_variables(void)
 {
 	ble_instance.current_state = BLE_STATE_POWEROFF;
-	sms_ble_send_cnt = 0;
+	ble_instance.conn_handle = 0xffff;
+	ble_instance.ind_retries = 0;
+	ble_instance.sending_queue = 0;
+	ble_instance.send_cnt = 0;
 }
 
-void sms_ble_startup(void)
+int sms_ble_startup(void)
 {
-	//sms_button_toggle_interrupt(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-	timer2_current_mode = TIMER2_MODE_LED_STARTUP;
-	sms_led_blink_start(SMS_LED_0_PIN);
+	DBG_LOG_DEV("[sms_ble_startup]\t\tStarting up...");
+	for(uint8_t i = 0; i < SMS_BLINK_STARTUP_CNT; i++) {
+		sms_led_toggle(SMS_LED_0);
+		delay_ms(SMS_BLINK_STARTUP_MS);
+	}
+	if(sms_ble_advertise() != AT_BLE_SUCCESS) return -1;
+	return 0;
 }
 
 void sms_ble_power_down(void)
@@ -246,7 +250,7 @@ void sms_ble_power_down(void)
 			case BLE_STATE_INDICATING:
 			DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
 			pressure_device.state = PRESSURE_STATE_OFF;
-			sms_sensors_interrupt_enable(false, false);
+			sms_sensors_enable_callback(false, false);
 			//#pragma TBD: switch-off sensors to save current
 			//sms_sensors_switch(false);
 			
@@ -261,7 +265,7 @@ void sms_ble_power_down(void)
 		
 		ble_instance.current_state = BLE_STATE_DISCONNECTED;
 		timer2_current_mode = TIMER2_MODE_LED_SHUTDOWN;
-		sms_led_blink_start(SMS_LED_0_PIN);
+		sms_led_blink_start(SMS_LED_0);
 	}
 }
 
@@ -272,18 +276,19 @@ at_ble_status_t sms_ble_advertise(void)
 
 	/* Set the advertisement data */
 	if((status = ble_advertisement_data_set()) != AT_BLE_SUCCESS) {
-		DBG_LOG("[sms_ble_advertise]\tAdvertisement data set failed!");
+		DBG_LOG("[sms_ble_advertise]\t\tAdvertisement data set failed!");
 		return status;
 	}
 
 	/* Start of advertisement */
-	if((status = at_ble_adv_start(AT_BLE_ADV_TYPE_UNDIRECTED, AT_BLE_ADV_GEN_DISCOVERABLE, NULL, AT_BLE_ADV_FP_ANY, APP_FAST_ADV, APP_ADV_TIMEOUT, 0)) == AT_BLE_SUCCESS)
+	if((status = at_ble_adv_start(AT_BLE_ADV_TYPE_UNDIRECTED, AT_BLE_ADV_GEN_DISCOVERABLE, NULL, AT_BLE_ADV_FP_ANY, BLE_ADV_INTERVAL, BLE_ADV_TIMEOUT, 0)) == AT_BLE_SUCCESS)
 	{
-		DBG_LOG_DEV("[sms_ble_advertise]\t\tBLE Started Advertisement");
+		DBG_LOG_DEV("[sms_ble_advertise]\t\tBLE started advertisement");
 		return AT_BLE_SUCCESS;
 	}
 	else {
-		DBG_LOG("[sms_service_advertise]\tBLE Advertisement start failed: reason 0x%x", status);
+		DBG_LOG("[sms_service_advertise]\tBLE advertisement start failed: reason 0x%x", status);
+		return status;
 	}
 	return AT_BLE_FAILURE;
 }
@@ -372,10 +377,10 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		status = at_ble_notification_send(sms_connection_handle, val_handle);
 		if(status == AT_BLE_SUCCESS) {
 			ble_instance.sending_queue++;
-			sms_ble_send_cnt++;
+			ble_instance.send_cnt++;
 			//DBG_LOG_CONT(" %d GONE? ", sms_ble_send_cnt);
 			//DBG_LOG("T/O: 20ms");
-			sms_ble_timeout = BLE_TIMEOUT_NOTIFY;
+			sms_ble_timeout = BLE_APP_TIMEOUT_NOTIFY;
 		}
 		else {
 			DBG_LOG_CONT("NOTIFICATION ERROR!!");

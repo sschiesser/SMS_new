@@ -28,7 +28,7 @@
  * DECLARATIONS
  * ------------ */
 /* Sensors-related functions */
-void sms_sensors_interrupt_enable(bool int_int, bool press_int);
+void sms_sensors_enable_callback(bool imu_cb, bool press_cb);
 void sms_sensors_switch(bool imu_en, bool press_en);
 
 

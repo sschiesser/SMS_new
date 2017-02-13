@@ -21,7 +21,7 @@
 #define SMS_LED_INACTIVE true
 
 #define SMS_BLINK_STARTUP_MS 100
-#define SMS_BLINK_STARTUP_CNT 8
+#define SMS_BLINK_STARTUP_CNT 10
 #define SMS_BLINK_SHTDWN_MS 400
 #define SMS_BLINK_SHTDWN_CNT 4
 
@@ -29,7 +29,7 @@
  * VARIABLES
  * --------- */
 enum sms_leds {
-    SMS_LED_0_PIN = PIN_LP_GPIO_22 // XPLAINED PRO --> already mounted as USR LED
+    SMS_LED_0 = PIN_LP_GPIO_22 // XPLAINED PRO --> already mounted as USR LED
 };
 
 //typedef enum sms_led_blink_modes {

@@ -60,7 +60,7 @@ void sms_init_variables(void)
 	timer2_current_mode = TIMER2_MODE_NONE;
 	sms_working_mode = SMS_MODE_BUTTON_SOLO;
 	ulp_ready = false;
-	sms_ble_timeout = BLE_TIMEOUT_OFF;
+	sms_ble_timeout = BLE_APP_TIMEOUT_OFF;
 	
 	sms_ble_init_variables();
 	sms_button_init_variables();

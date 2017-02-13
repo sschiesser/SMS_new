@@ -45,9 +45,12 @@
 
 #define BLE_SEND_TIMEOUT								10
 
-#define BLE_TIMEOUT_OFF									(0xFFFFFFFF) // no timeout
-#define BLE_TIMEOUT_PAIR								(0x1F4) // 500 @ 10 ms resolution --> 5000 ms
-#define BLE_TIMEOUT_NOTIFY								(0x2) // 2 @ 10 ms resolution --> 20 ms
+#define BLE_ADV_TIMEOUT									(60) // in seconds...
+#define BLE_ADV_INTERVAL								(1600) // in 0.625 ms units (range: 0x0020 - 0x4000)
+
+#define BLE_APP_TIMEOUT_OFF								(0xFFFFFFFF) // no timeout
+#define BLE_APP_TIMEOUT_PAIR							(500) // 500 @ 10 ms resolution --> 5000 ms
+#define BLE_APP_TIMEOUT_NOTIFY							(2) // 2 @ 10 ms resolution --> 20 ms
 
 /* ---------
 * VARIABLES
@@ -79,17 +82,15 @@ typedef enum sms_ble_state {
 
 uint32_t sms_ble_timeout;
 
-typedef struct ble_device {
+struct ble_device_s {
 	volatile sms_ble_state_t current_state;
 	volatile uint8_t sending_queue;
-}ble_device_t;
-ble_device_t ble_instance;
+	at_ble_handle_t conn_handle;
+	uint8_t ind_retries;
+	uint16_t send_cnt;
+};
+struct ble_device_s ble_instance;
 
-uint8_t sms_ble_ind_retry;
-at_ble_handle_t sms_ble_conn_handle;
-
-uint16_t sms_ble_send_cnt;
-//volatile bool sms_ble_sending;
 
 
 /* ------------
@@ -111,7 +112,7 @@ const ble_event_callback_t sms_ble_gatt_server_cb[GATT_SERVER_HANDLER_FUNC_MAX];
 
 /* Own functions */
 void sms_ble_init_variables(void);
-void sms_ble_startup(void);
+int sms_ble_startup(void);
 void sms_ble_power_down(void);
 at_ble_status_t sms_ble_advertise(void);
 at_ble_status_t sms_ble_primary_service_define(gatt_service_handler_t *service);

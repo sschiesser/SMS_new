@@ -38,7 +38,7 @@ int sms_button_fn(enum sms_btn_ids btn)
 				DBG_LOG_CONT_DEV(". ");
 			}
 			if(wait_success) {
-				DBG_LOG("Start up now!");
+				if(sms_ble_startup()) return -1;
 			}
             break;
             

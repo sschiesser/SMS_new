@@ -28,48 +28,39 @@ void sms_pressure_configure_gpio(void)
     gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
 }
 
-void sms_pressure_startup(void)
+int sms_pressure_startup(void)
 {
     DBG_LOG_DEV("[sms_pressure_startup]\t\tStarting pressure sensor");
     //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, true); // switch on MS58 pressure sensor
     /* Disable buttons for reset time (~3 ms) to avoid conflict with dualtimer1 */
-    sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
+    //sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
     //pressure_device.hal.current_state = MS58_STATE_RESETTING;
     /* Write the reset command to MS58 */
-    sms_pressure_ms58_reset();
-    delay_ms(SMS_PRESSURE_RESET_MS);
+    if(sms_pressure_ms58_reset() != STATUS_OK) {
+		DBG_LOG("[sms_pressure_startup]\t\t\tFailed to reset pressure device");
+		return -1;
+	}	
     if(sms_pressure_init() != STATUS_OK) {
-        DBG_LOG_DEV("[sms_pressure_startup]\t\t\tFailed to initialize pressure device");
-        pressure_device.config.init_ok = false;
-        while(1){};
+        DBG_LOG("[sms_pressure_startup]\t\t\tFailed to initialize pressure device");
+        return -1;
     }
-    //pressure_device.hal.current_state = MS58_STATE_READY;
-    pressure_device.config.init_ok = true;
-    sms_working_mode = SMS_MODE_COMPLETE;
-    sms_sensors_interrupt_enable(true, true);
-    
-    ulp_ready = true;
+	return 0;
 }
 
-enum status_code sms_pressure_init(void)
+int sms_pressure_init(void)
 {
     /* Read the PROM values */
-    if(sms_pressure_ms58_read_prom() == STATUS_OK) {
-        pressure_device.config.init_ok = true;
-        //pressure_device.hal.current_state = MS58_STATE_READY;
-		pressure_device.interrupt.enabled = true;
-		pressure_device.interrupt.new_value = false;
-		pressure_device.interrupt.rts = false;
-        return STATUS_OK;
-    }
-    return STATUS_ERR_IO;
+    return sms_pressure_ms58_read_prom();
 }
 
-void sms_pressure_ms58_reset(void)
+enum status_code sms_pressure_ms58_reset(void)
 {
-    //DBG_LOG_DEV("[sms_pressure_ms58_reset]\twriting reset command");
+	enum status_code status;
     spi_wdata[0] = MS58_RESET;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1);
+    if((status = sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1)) != STATUS_OK) return status;
+	
+	delay_ms(SMS_PRESSURE_RESET_MS);
+	return STATUS_OK;
 }
 
 void sms_pressure_poll_data(void)
@@ -90,43 +81,43 @@ void sms_pressure_poll_data(void)
 	}
 }
 
-enum status_code sms_pressure_ms58_read_prom(void)
+int sms_pressure_ms58_read_prom(void)
 {
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] reading bytes... ");
     spi_wdata[0] = MS58_PROM_READ_1;
     spi_wdata[1] = 0x00;
     spi_wdata[2] = 0x00;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[1] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
     spi_wdata[0] = MS58_PROM_READ_2;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[2] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
     spi_wdata[0] = MS58_PROM_READ_3;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[3] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
     spi_wdata[0] = MS58_PROM_READ_4;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[4] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
     spi_wdata[0] = MS58_PROM_READ_5;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[5] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
     spi_wdata[0] = MS58_PROM_READ_6;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[6] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
     spi_wdata[0] = MS58_PROM_READ_7;
-    sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3);
+    if(sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 3) != STATUS_OK) return -1;
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[7] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
@@ -135,7 +126,7 @@ enum status_code sms_pressure_ms58_read_prom(void)
         //DBG_LOG_DEV("  C%d -> %d", (i+1), ms58_device.prom_values[i]);
     //}
 
-    return STATUS_OK;
+    return 0;
 }
 
 enum status_code sms_pressure_ms58_read_data(void)

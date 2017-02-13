@@ -8,9 +8,9 @@
 #include "sms_peripheral1.h"
 
 /* Sensors-related functions */
-void sms_sensors_interrupt_enable(bool mpu_int, bool press_int) {
+void sms_sensors_enable_callback(bool imu_cb, bool press_cb) {
     /* IMU --> IMU_DRDY */
-    if(mpu_int) {
+    if(imu_cb) {
         imu_device.state = IMU_STATE_ON;
         sms_imu_enable_callback();
     }
@@ -25,18 +25,13 @@ void sms_sensors_interrupt_enable(bool mpu_int, bool press_int) {
      *       time (and it starts running) and register the corresponding
      *       callback (and it enables the interrupt)
      */
-    if(press_int) {
-        //pressure_device.hal.current_state = MS58_STATE_CONV_PRESSURE;
+    if(press_cb) {
         pressure_device.state = PRESSURE_STATE_ON;
-        sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
         sms_timer_aon_register_callback();
-        sensors_active = true;
     }
     else {
-        //pressure_device.hal.current_state = MS58_STATE_READY;
-        sms_timer_aon_disable();
+		pressure_device.state = PRESSURE_STATE_OFF;
         sms_timer_aon_unregister_callback();
-        sensors_active = false;
     }
 }
     
@@ -46,26 +41,56 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     /* IMU */
     if(mpu_en) {
         if(sms_imu_startup()) {
-	        DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't initialize IMU");
+	        DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't start IMU");
+			dualtimer_disable(DUALTIMER_TIMER1);
 			imu_device.config.init_ok = false;
         }
         else {
+			dualtimer_enable(DUALTIMER_TIMER1);
 	        imu_device.config.init_ok = true;
         }
     }
     else {
+		dualtimer_disable(DUALTIMER_TIMER1);
 		imu_device.config.init_ok = false;
 		// switch off VCC pin to save current...
     }
     
     /* Pressure */
     if(press_en) {                
-        //pressure_device.hal.current_state = MS58_STATE_RESETTING;
-        //pressure_device.hal.reset_done = false;
-        //pressure_device.hal.init_ok = false;
-        sms_pressure_startup();
+        if(sms_pressure_startup()) {
+			DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't start pressure sensor");
+			sms_timer_aon_disable();
+			pressure_device.config.init_ok = false;
+		}
+		else {
+			sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
+			pressure_device.config.init_ok = true;
+		}
     }
     else {
-        gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
+		sms_timer_aon_disable();
+		pressure_device.config.init_ok = false;
+		// switch off VCC pin to save current...
     }
+	
+	/* Set up SMS working mode & callbacks */
+	if(imu_device.config.init_ok && pressure_device.config.init_ok) {
+		sms_working_mode = SMS_MODE_COMPLETE;
+		sms_sensors_enable_callback(true, true);
+	}
+	else if(imu_device.config.init_ok) {
+		sms_working_mode = SMS_MODE_BUTTON_IMU;
+		sms_sensors_enable_callback(true, false);
+	}
+	else if(pressure_device.config.init_ok) {
+		sms_working_mode = SMS_MODE_BUTTON_PRESSURE;
+		sms_sensors_enable_callback(false, true);
+	}
+	else {
+		sms_working_mode = SMS_MODE_BUTTON_SOLO;
+		sms_sensors_enable_callback(false, false);
+	}
+	
+	DBG_LOG_DEV("[sms_sensors_switch]\t\t\tSMS working mode: %d", sms_working_mode);
 }

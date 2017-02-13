@@ -14,10 +14,10 @@ void sms_led_gpio_init(void)
     /* LED0 @ GPIO_LP_GPIO_22 */
     gpio_get_config_defaults(&config_gpio_pin);
     config_gpio_pin.direction = GPIO_PIN_DIR_OUTPUT;
-    if(gpio_pin_set_config(SMS_LED_0_PIN, &config_gpio_pin) != STATUS_OK) {
+    if(gpio_pin_set_config(SMS_LED_0, &config_gpio_pin) != STATUS_OK) {
         DBG_LOG_DEV("[sms_led_gpio_init]\tproblem while setting up led0");
     }
-    sms_led_switch_off(SMS_LED_0_PIN);
+    sms_led_switch_off(SMS_LED_0);
 }
 
 

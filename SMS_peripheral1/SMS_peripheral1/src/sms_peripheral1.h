@@ -80,11 +80,6 @@
  * MACROS
  * ------------------------------------------------ */
 #define SMS_SENDING_WITH_ACK                (false)
-/** @brief APP_FAST_ADV between 0x0020 and 0x4000 in 0.625 ms units (20ms to 10.24s). */
-#define APP_FAST_ADV						(1600)
-
-/** @brief APP_ADV_TIMEOUT Advertising time-out between 0x0001 and 0x028F in seconds, 0x0000 disables time-out.*/
-#define APP_ADV_TIMEOUT						(655)
 
 #define DBG_PIN_1                           (PIN_LP_GPIO_14) // XPLAINED PRO --> EXT3:11
 #define DBG_PIN_2							(PIN_LP_GPIO_15) // XPLAINED PRO --> EXT3:12

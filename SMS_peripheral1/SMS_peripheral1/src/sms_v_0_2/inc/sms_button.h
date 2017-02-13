@@ -97,7 +97,7 @@ void sms_button_init_variables(void);
 void sms_button_gpio_init(void);
 void sms_button_register_callbacks(void);
 enum sms_button_state sms_button_get_state(void);
-void sms_button_toggle_callback(enum sms_btn_int_tog tog1, enum sms_btn_int_tog tog2);
+void sms_button_toggle_callback(enum sms_btn_int_tog tog0, enum sms_btn_int_tog tog1);
 void sms_button_bt0_callback(void);
 void sms_button_bt1_callback(void);
 void sms_button_define_services(void);
