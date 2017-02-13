@@ -11,7 +11,7 @@
 void sms_timer_aon_callback(void)
 {
     //if(pressure_device.int_enabled) {
-		pressure_device.new_int = true;
+		pressure_device.interrupt.new_value = true;
 	    send_plf_int_msg_ind(AON_SLEEP_TIMER_EXPIRY_CALLBACK, AON_TIMER_EXPIRED, NULL, 0);
 	//}
 }
@@ -296,7 +296,7 @@ void sms_dualtimer1_fn(void)
             else {
                 if(pressure_device.state == PRESSURE_STATE_STDBY) {
                     DBG_LOG_DEV("[sms_dualtimer1_fn]\t\tStarting sensors (shutting down)...");
-                    sms_sensors_interrupt_toggle(false, true);
+                    sms_sensors_interrupt_enable(false, true);
                 }                    
                 timer1_current_mode = TIMER1_MODE_NONE;
                 if(timer2_current_mode == TIMER2_MODE_NONE) {

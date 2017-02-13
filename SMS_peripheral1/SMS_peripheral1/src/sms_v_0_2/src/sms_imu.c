@@ -69,7 +69,7 @@ int sms_imu_startup(void)
 	/* MPU */
 	if(sms_imu_mpu_check()) return -1;
 	sms_imu_mpu_calibrate(imu_device.config.gyro_bias, imu_device.config.accel_bias);
-	DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(imu_device.config.gyro_bias[0] * 10000), (uint32_t)(imu_device.config.gyro_bias[1] * 10000), (uint32_t)(imu_device.config.gyro_bias[2] * 10000), (uint32_t)(imu_device.config.accel_bias[0] * 10000), (uint32_t)(imu_device.config.accel_bias[1] * 10000), (uint32_t)(imu_device.config.accel_bias[2] * 10000));
+	//DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(imu_device.config.gyro_bias[0] * 10000), (uint32_t)(imu_device.config.gyro_bias[1] * 10000), (uint32_t)(imu_device.config.gyro_bias[2] * 10000), (uint32_t)(imu_device.config.accel_bias[0] * 10000), (uint32_t)(imu_device.config.accel_bias[1] * 10000), (uint32_t)(imu_device.config.accel_bias[2] * 10000));
 	sms_imu_mpu_initialize();
 	
 	/* Compass */
@@ -360,13 +360,17 @@ void sms_imu_define_services(void)
 
 
 /* Initialization functions... */
-/* MPU */
-void sms_imu_mpu_initialize(void)
+/* Variables */
+void sms_imu_init_variables(void)
 {
 	imu_device.config.a_scale = AFS_2G;
 	imu_device.config.g_scale = GFS_250DPS;
 	imu_device.config.ahrs = false;
-
+	imu_device.config.init_ok = false;
+}
+/* MPU */
+void sms_imu_mpu_initialize(void)
+{
 	// wake up device
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
 	delay_ms(100); // Wait for all registers to reset
@@ -381,13 +385,13 @@ void sms_imu_mpu_initialize(void)
 	// be higher than 1 / 0.0059 = 170 Hz
 	// DLPF_CFG = bits 2:0 = 011; this limits the sample rate to 1000 Hz for both
 	// With the MPU9250, it is possible to get gyro sample rates of 32 kHz (!), 8 kHz, or 1 kHz
-	 writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
-	//writeByte(MPU9250_ADDRESS, CONFIG, 0x05);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
+	 //writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
+	writeByte(MPU9250_ADDRESS, CONFIG, 0x05);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
 
 	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
-	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x0A);  	// Use a 90 Hz rate; a rate consistent with the filter update rate
+	//writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x0A);  	// Use a 90 Hz rate; a rate consistent with the filter update rate
 	// // determined inset in CONFIG above
-	//writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
+	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
 	
 	// Set gyroscope full scale range
 	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3

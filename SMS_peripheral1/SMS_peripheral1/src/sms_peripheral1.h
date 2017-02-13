@@ -98,11 +98,11 @@
 typedef enum sms_mode {
     SMS_MODE_NONE,
     SMS_MODE_BUTTON_SOLO,
-    SMS_MODE_MPU_SOLO,
+    SMS_MODE_IMU_SOLO,
     SMS_MODE_PRESSURE_SOLO,
-    SMS_MODE_BUTTON_MPU,
+    SMS_MODE_BUTTON_IMU,
     SMS_MODE_BUTTON_PRESSURE,
-    SMS_MODE_MPU_PRESSURE,
+    SMS_MODE_IMU_PRESSURE,
     SMS_MODE_COMPLETE
 }sms_mode_t;
 volatile sms_mode_t sms_working_mode;

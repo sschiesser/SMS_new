@@ -46,7 +46,7 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 	at_ble_disconnected_t *disconnect = (at_ble_disconnected_t *)params;
 	if(ble_instance.current_state == BLE_STATE_PAIRED) {
 		pressure_device.state = PRESSURE_STATE_OFF;
-		sms_sensors_interrupt_toggle(false, false);
+		sms_sensors_interrupt_enable(false, false);
 		sms_sensors_switch(false, false);
 	}
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
@@ -86,7 +86,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 			DBG_LOG("Cannot start IMU");
 		}
 		dualtimer_enable(DUALTIMER_TIMER1);
-		sms_sensors_interrupt_toggle(true, false);
+		sms_sensors_interrupt_enable(true, false);
 
 		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 		//DBG_LOG("T/O: OFF");
@@ -246,7 +246,7 @@ void sms_ble_power_down(void)
 			case BLE_STATE_INDICATING:
 			DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
 			pressure_device.state = PRESSURE_STATE_OFF;
-			sms_sensors_interrupt_toggle(false, false);
+			sms_sensors_interrupt_enable(false, false);
 			//#pragma TBD: switch-off sensors to save current
 			//sms_sensors_switch(false);
 			
@@ -315,14 +315,14 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		break;
 		
 		case BLE_CHAR_PRESS:
-		send_val[0] = (uint8_t)((pressure_device.hal.temperature >>24) & 0xff);
-		send_val[1] = (uint8_t)((pressure_device.hal.temperature >> 16) & 0xff);
-		send_val[2] = (uint8_t)((pressure_device.hal.temperature >> 8) & 0xff);
-		send_val[3] = (uint8_t)((pressure_device.hal.temperature) & 0xff);
-		send_val[4] = (uint8_t)((pressure_device.hal.pressure >> 24) & 0xff);
-		send_val[5] = (uint8_t)((pressure_device.hal.pressure >> 16) & 0xff);
-		send_val[6] = (uint8_t)((pressure_device.hal.pressure >> 8) & 0xff);
-		send_val[7] = (uint8_t)((pressure_device.hal.pressure) & 0xff);
+		send_val[0] = (uint8_t)((pressure_device.output.temperature >>24) & 0xff);
+		send_val[1] = (uint8_t)((pressure_device.output.temperature >> 16) & 0xff);
+		send_val[2] = (uint8_t)((pressure_device.output.temperature >> 8) & 0xff);
+		send_val[3] = (uint8_t)((pressure_device.output.temperature) & 0xff);
+		send_val[4] = (uint8_t)((pressure_device.output.pressure >> 24) & 0xff);
+		send_val[5] = (uint8_t)((pressure_device.output.pressure >> 16) & 0xff);
+		send_val[6] = (uint8_t)((pressure_device.output.pressure >> 8) & 0xff);
+		send_val[7] = (uint8_t)((pressure_device.output.pressure) & 0xff);
 		val_handle = pressure_device.service_handler.serv_chars.char_val_handle;
 		length = BLE_CHAR_SIZE_PRESSURE;
 		break;

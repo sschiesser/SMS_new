@@ -57,27 +57,28 @@ typedef enum ms58_datatype_tag {
     MS58_TYPE_TEMP = 0x01
 }ms58_datatype_t;
 
-typedef enum sms_ms58_state {
+enum ms58_state {
     MS58_STATE_NONE,
     MS58_STATE_RESETTING,
     MS58_STATE_READY,
     MS58_STATE_CONV_PRESSURE,
     MS58_STATE_CONV_TEMPERATURE
-}sms_ms58_state_t;
-
-typedef struct ms58_instance {
-    bool int_active; // external interrupt from this device enabled
-    //bool reset_done; // reset command has been successfully sent
-    bool init_ok; // PROM value have been successfully read
+};
+struct ms58_config_s {
+	bool init_ok; // PROM value have been successfully read
     uint8_t osr;
-    uint16_t prom_values[MS58_PROM_VALUES_MAX];
-    uint32_t adc_values[MS58_ADC_VALUES_MAX];
-    int32_t pressure; // calculated pressure value
-    int32_t temperature; // calculated temperature value
-    bool data_complete;
-    sms_ms58_state_t current_state;
-    //uint8_t init_retry;
-}ms58_instance_t;
-
+};
+struct ms58_output_s {
+	uint16_t prom_values[MS58_PROM_VALUES_MAX];
+	uint32_t adc_values[MS58_ADC_VALUES_MAX];
+	bool complete;
+	int32_t pressure;
+	int32_t temperature;
+};
+struct ms58_interrupt_s {
+	bool enabled;
+	volatile bool new_value;
+	volatile bool rts;
+};
 
 #endif

@@ -84,6 +84,7 @@ void sms_imu_interrupt_callback(void);
 int sms_imu_mpu_check(void);
 int sms_imu_comp_check(void);
 void sms_imu_mpu_calibrate(float *dest1, float *dest2);
+void sms_imu_init_variables(void);
 void sms_imu_mpu_initialize(void);
 void sms_imu_comp_initialize(float *destination);
 int sms_imu_poll_data(void);

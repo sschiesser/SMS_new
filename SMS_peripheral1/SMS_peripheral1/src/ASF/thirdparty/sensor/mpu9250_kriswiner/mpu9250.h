@@ -198,7 +198,7 @@ struct mpu9250_config_s {
 	enum Gscale g_scale;
 	enum Mscale m_scale;
 	enum Mmode m_mode;
-	//bool init_ok;
+	bool init_ok;
 	float self_test[6];
 	float gyro_bias[3];
 	float accel_bias[3];
@@ -219,8 +219,6 @@ struct mpu9250_output_s {
 struct mpu9250_interrupt_s {
 	bool enabled;
 	volatile bool new_gyro;
-	//volatile bool new_compass;
-	//volatile bool new_temp;
 	volatile bool rts;
 };
 

@@ -28,8 +28,8 @@
  * DECLARATIONS
  * ------------ */
 /* Sensors-related functions */
-void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int);
-void sms_sensors_switch(bool mpu_en, bool press_en);
+void sms_sensors_interrupt_enable(bool int_int, bool press_int);
+void sms_sensors_switch(bool imu_en, bool press_en);
 
 
 

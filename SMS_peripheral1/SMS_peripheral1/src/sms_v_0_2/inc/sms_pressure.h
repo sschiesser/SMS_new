@@ -39,16 +39,15 @@ enum sms_pressure_state {
     PRESSURE_STATE_STDBY,
     PRESSURE_STATE_ON
 };
-typedef struct sms_pressure_struct {
-    ms58_instance_t hal;
-	bool int_enabled;
-	volatile bool new_int;
-	volatile bool rts;
-    enum sms_pressure_state state;
+struct sms_pressure_struct_s {
+    struct ms58_config_s config;
+	struct ms58_output_s output;
+	struct ms58_interrupt_s interrupt;
+	enum sms_pressure_state state;
     gatt_service_handler_t service_handler;
     uint8_t char_values[8];
-}sms_pressure_struct_t;
-sms_pressure_struct_t pressure_device;
+};
+struct sms_pressure_struct_s pressure_device;
 
 
 /* ------------
