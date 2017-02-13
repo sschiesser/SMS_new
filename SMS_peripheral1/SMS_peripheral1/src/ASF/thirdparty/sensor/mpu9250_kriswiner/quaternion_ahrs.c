@@ -33,6 +33,7 @@
 // but is much less computationally intensive---it can be performed on a 3.3 V Pro Mini operating at 8 MHz!
 void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltat)
 {
+	//DBG_LOG("Deltatf(i) = %lu", (uint32_t)(deltat * 1000000));
 	static float q1 = 1.0;
 	static float q2 = 0.0;
 	static float q3 = 0.0;
@@ -123,6 +124,7 @@ void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy
 	imu_device.output.q[1] = q2 * norm;
 	imu_device.output.q[2] = q3 * norm;
 	imu_device.output.q[3] = q4 * norm;
+	//DBG_LOG("Quaternions (x 10000): q1 %ld, q2 %ld, q3 %ld, q4 %ld", (uint32_t)(imu_device.output.q[0]*10000), (uint32_t)(imu_device.output.q[1] * 10000), (uint32_t)(imu_device.output.q[2] * 10000), (uint32_t)(imu_device.output.q[3] * 10000));
 }
 
 

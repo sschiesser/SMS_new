@@ -167,15 +167,9 @@ int main(void)
 
 	/* Enable buttons interrupts
 	* ------------------------- */
-	//sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+	sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 
-	if(sms_imu_startup()) {
-		DBG_LOG("Cannot start IMU");
-	}
-	dualtimer_enable(DUALTIMER_TIMER1);
-
-	sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
-	sms_sensors_interrupt_toggle(true, false);
+	//sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
 	
 	/* Goto sleep
 	* ---------- */
@@ -213,7 +207,7 @@ int main(void)
 				sms_imu_poll_data();
 				
 				imu_device.interrupt.new_gyro = false;
-				//imu_device.interrupt.rts = true;
+				imu_device.interrupt.rts = true;
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 				//DBG_LOG_CONT_DEV("done");
 			}

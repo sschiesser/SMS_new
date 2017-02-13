@@ -382,12 +382,12 @@ void sms_imu_mpu_initialize(void)
 	// DLPF_CFG = bits 2:0 = 011; this limits the sample rate to 1000 Hz for both
 	// With the MPU9250, it is possible to get gyro sample rates of 32 kHz (!), 8 kHz, or 1 kHz
 	// writeByte(MPU9250_ADDRESS, CONFIG, 0x03);
-	writeByte(MPU9250_ADDRESS, CONFIG, 0x03);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
+	writeByte(MPU9250_ADDRESS, CONFIG, 0x05);		// gyro bandwidth = 10 Hz, delay = 17.85 ms -> max rate = 56 Hz
 
 	// Set sample rate = gyroscope output rate/(1 + SMPLRT_DIV)
-	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x0A);  	// Use a 90 Hz rate; a rate consistent with the filter update rate
+	//writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x0A);  	// Use a 90 Hz rate; a rate consistent with the filter update rate
 	// // determined inset in CONFIG above
-	//writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
+	writeByte(MPU9250_ADDRESS, SMPLRT_DIV, 0x63);  	// Use a 10 Hz rate; a rate consistent with the filter update rate
 	
 	// Set gyroscope full scale range
 	// Range selects FS_SEL and AFS_SEL are 0 - 3, so 2-bit values are left-shifted into positions 4:3
