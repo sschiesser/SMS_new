@@ -151,7 +151,7 @@ int main(void)
 	register_resume_callback(resume_cb); // register resume callback
 
 	// Dualtimer (AON timer enables on registration... so do it later)
-	sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
+	//sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
 	// DUALTIMER_TIMER2 used for blocking delay!! So don't register callback!!
 
 	// Buttons
@@ -186,20 +186,18 @@ int main(void)
 		if(ble_status == AT_BLE_SUCCESS) {
 			/* Sensor interrupt region */
 			if(button_instance.btn0.new_int) {
+				button_instance.btn0.new_int = false;
 				DBG_LOG("Btn0 int... ");
 				if(sms_button_fn(SMS_BTN_0) < 0) {
 					DBG_LOG_DEV("Error in sms_button_fn()");
 				}
-				// here
-				button_instance.btn0.new_int = false;
 			}
 			if(button_instance.btn1.new_int) {
+				button_instance.btn1.new_int = false;
 				DBG_LOG("Btn1 int... ");
 				if(sms_button_fn(SMS_BTN_1) < 0) {
 					DBG_LOG_DEV("Error in sms_button_fn()");
 				}
-				// here
-				button_instance.btn1.new_int = false;
 			}
 			if(imu_device.interrupt.new_gyro) {
 				gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
@@ -221,19 +219,19 @@ int main(void)
 				//DBG_LOG_CONT_DEV("done");
 			}
 			
-			/* Timer interrupt region */
-			if(timer1_instance.new_int) {
-				DBG_LOG("Timer1 int... ");
-				sms_dualtimer_stop(DUALTIMER_TIMER1);
-				sms_dualtimer1_fn();
-				timer1_instance.new_int = false;
-			}
-			if(timer2_instance.new_int) {
-				DBG_LOG("Timer2 int... ");
-				sms_dualtimer_stop(DUALTIMER_TIMER2);
-				sms_dualtimer2_fn();
-				timer2_instance.new_int = false;
-			}
+			///* Timer interrupt region */
+			//if(timer1_instance.new_int) {
+				//DBG_LOG("Timer1 int... ");
+				//sms_dualtimer_stop(DUALTIMER_TIMER1);
+				//sms_dualtimer1_fn();
+				//timer1_instance.new_int = false;
+			//}
+			//if(timer2_instance.new_int) {
+				//DBG_LOG("Timer2 int... ");
+				//sms_dualtimer_stop(DUALTIMER_TIMER2);
+				//sms_dualtimer2_fn();
+				//timer2_instance.new_int = false;
+			//}
 			
 			/* Sending region */
 			if(imu_device.interrupt.rts) {

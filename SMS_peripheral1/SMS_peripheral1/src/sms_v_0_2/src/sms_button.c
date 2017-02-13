@@ -12,40 +12,40 @@
 /************************************************************************/
 int sms_button_fn(enum sms_btn_ids btn)
 {
+	bool wait_success = true;
     button_instance.previous_state = button_instance.current_state;
     button_instance.current_state = sms_button_get_state();
     
+#if defined(DEBUG)
     if(btn == SMS_BTN_0) sms_monitor_get_states("[sms_button_fn]-0");
     else if(btn == SMS_BTN_1) sms_monitor_get_states("[sms_button_fn]-1");
     else return -1;
+#endif
     
     switch(button_instance.current_state) {
         // --- current state ---
         case BUTTON_STATE_B0:
+		case BUTTON_STATE_B1:
         switch(ble_instance.current_state) {
-            case BLE_STATE_POWEROFF:
-            timer1_current_mode = TIMER1_MODE_STARTUP;
-            timer2_current_mode = TIMER2_MODE_NONE;
-            sms_btn_cnt = 0;
-            //ulp_ready = false;
-            sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
+            case BLE_STATE_POWEROFF: // start-up command?
+			DBG_LOG_DEV("[sms_button_fn]\t\t\tWaking up ");
+			for(uint8_t i = 0; i < 12; i++) {
+				delay_ms(250);
+				if(sms_button_get_state() != button_instance.current_state) {
+					wait_success = false;
+					break;
+				}
+				DBG_LOG_CONT_DEV(". ");
+			}
+			if(wait_success) {
+				DBG_LOG("Start up now!");
+			}
             break;
             
             case BLE_STATE_PAIRED:
             case BLE_STATE_INDICATING:
-            //if(pressure_device.state == PRESSURE_STATE_STDBY) {
-                //DBG_LOG_DEV("[sms_button_fn]\t\tStarting sensors (B0)");
-                //sms_sensors_interrupt_toggle(false, true);
-            //}
-            timer1_current_mode = TIMER1_MODE_NONE;
-            timer2_current_mode = TIMER2_MODE_NONE;
 			sms_ble_send_characteristic(BLE_CHAR_BTN);
             break;
-            
-            //case BLE_STATE_INDICATING:
-            //DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
-            //return -1;
-            //break;
             
             case BLE_STATE_DISCONNECTED:
             case BLE_STATE_ADVERTISING:
@@ -55,74 +55,42 @@ int sms_button_fn(enum sms_btn_ids btn)
             return -1;
             break;
         }
-        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-        break;
-        
-        // --- current state ---
-        case BUTTON_STATE_B1:
-        switch(ble_instance.current_state) {
-            case BLE_STATE_POWEROFF:
-            timer1_current_mode = TIMER1_MODE_STARTUP;
-            timer2_current_mode = TIMER2_MODE_NONE;
-            sms_btn_cnt = 0;
-            //ulp_ready = false;
-            sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
-            break;
-            
-            case BLE_STATE_PAIRED:
-            //if(pressure_device.state == PRESSURE_STATE_STDBY) {
-                //DBG_LOG_DEV("[sms_button_fn]\t\tStarting sensors (B1)");
-                //sms_sensors_interrupt_toggle(false, true);
-            //}
-            timer1_current_mode = TIMER1_MODE_NONE;
-            timer2_current_mode = TIMER2_MODE_NONE;
-            //sms_ble_ind_retry = 0;
-            sms_ble_send_characteristic(BLE_CHAR_BTN);
-            break;
-            
-            case BLE_STATE_INDICATING:
-            DBG_LOG_DEV("[sms_button_fn]\tStill indicating...");
-            return -1;
-            break;
-            
-            case BLE_STATE_DISCONNECTED:
-            case BLE_STATE_ADVERTISING:
-            case BLE_STATE_CONNECTED:
-            default:
-            return -1;
-            break;
-        }
-        //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         break;
         
         // --- current state ---
         case BUTTON_STATE_BOTH:
         if(ble_instance.current_state == BLE_STATE_POWEROFF) {
-            timer1_current_mode = TIMER1_MODE_NONE;
-            timer2_current_mode = TIMER2_MODE_NONE;
+			DBG_LOG_DEV("[sms_button_fn]\t\t\tNot used state...");
             ulp_ready = true;
-            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-            //release_sleep_lock();
         }
         else {
+			DBG_LOG_DEV("[sms_button_fn]\t\t\tShutting down ");
+			for(uint8_t i = 0; i < 12; i++) {
+				delay_ms(250);
+				if(sms_button_get_state() != button_instance.current_state) {
+					wait_success = false;
+					break;
+				}
+				DBG_LOG_CONT_DEV(". ");
+			}
+			if(wait_success) {
+				DBG_LOG_DEV("Shut down now!");
+			}
             //if((ble_current_state == BLE_STATE_PAIRED) || (ble_current_state == BLE_STATE_INDICATING)) {
                 //pressure_device.state = PRESSURE_STATE_STDBY;
             //}
             //else {
                 //pressure_device.state = PRESSURE_STATE_OFF;
             //}
-            sms_sensors_interrupt_toggle(false, false);
-            timer1_current_mode = TIMER1_MODE_SHUTDOWN;
-            timer2_current_mode = TIMER2_MODE_NONE;
-            sms_btn_cnt = 0;
+            //sms_sensors_interrupt_toggle(false, false);
+            //sms_btn_cnt = 0;
             //ulp_ready = false;
-            sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
-            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         }
         break;
         
         // --- current state ---
         case BUTTON_STATE_NONE:
+		DBG_LOG_DEV("[sms_button_fn]\t\t\tNone");
         ulp_ready = true;
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
@@ -198,7 +166,7 @@ enum sms_button_state sms_button_get_state(void)
 {
     bool b0 = gpio_pin_get_input_level(SMS_BTN_0_PIN);
     bool b1 = gpio_pin_get_input_level(SMS_BTN_1_PIN);
-    DBG_LOG_DEV("[sms_button_get_state]\t\tButton state: %d %d", b1, b0);
+    //DBG_LOG_DEV("[sms_button_get_state]\t\tButton state: %d %d", b1, b0);
     if(b0 && b1) return BUTTON_STATE_BOTH;
     else if(b0 && !b1) return BUTTON_STATE_B0;
     else if(!b0 && b1) return BUTTON_STATE_B1;

@@ -49,7 +49,7 @@
 
 #include <asf.h>
 
-#define DBG_DEV				(false)
+#define DBG_DEV				(true)
 
     /// Observer role
 #define   BLE_ROLE_OBSERVER   0x01
