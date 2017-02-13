@@ -10,18 +10,18 @@
 /* AON SLEEP TIMER */
 void sms_timer_aon_callback(void)
 {
-    if(pressure_device.int_enabled) {
+    //if(pressure_device.int_enabled) {
 		pressure_device.new_int = true;
 	    send_plf_int_msg_ind(AON_SLEEP_TIMER_EXPIRY_CALLBACK, AON_TIMER_EXPIRED, NULL, 0);
-	}
+	//}
 }
 
-void sms_timer_aon_init(uint32_t cnt, enum aon_sleep_timer_mode cnt_mode)
+void sms_timer_aon_init(uint32_t cnt_ms, enum aon_sleep_timer_mode cnt_mode)
 {
     struct aon_sleep_timer_config config_aon_sleep_timer;
     aon_sleep_timer_get_config_defaults(&config_aon_sleep_timer);
     config_aon_sleep_timer.mode = cnt_mode;
-    config_aon_sleep_timer.counter = cnt;
+    config_aon_sleep_timer.counter = cnt_ms * SMS_TIMER_AON_LOAD_1MS;
     aon_sleep_timer_init(&config_aon_sleep_timer);
 }
 
@@ -42,10 +42,9 @@ void sms_timer_aon_unregister_callback(void)
     NVIC_DisableIRQ(AON_SLEEP_TIMER0_IRQn);
 }
 
-void sms_timer_aon_get_ms(uint32_t *count)
-{
-    count = (uint32_t *)0;
-}
+//void sms_timer_aon_get_value(void)
+//{
+//}
 
 /* DUALTIMER */
 void sms_dualtimer_init(void)

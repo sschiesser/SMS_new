@@ -17,13 +17,13 @@
 /* ------
  * MACROS
  * ------ */
-#define SMS_TIMER_AON_FREQ              32768
-#define SMS_TIMER_AON_COUNT_10H         (36000 * SMS_TIMER_AON_FREQ)
-#define SMS_TIMER_AON_COUNT_10S         (10 * SMS_TIMER_AON_FREQ)
-#define SMS_TIMER_AON_COUNT_1S          SMS_TIMER_AON_FREQ
-#define SMS_TIMER_AON_COUNT_100MS       (SMS_TIMER_AON_FREQ / 10)
-#define SMS_TIMER_AON_COUNT_10MS        (SMS_TIMER_AON_FREQ / 100)
-#define SMS_TIMER_AON_COUNT_1MS         (SMS_TIMER_AON_FREQ / 1000)
+
+#define SMS_TIMER_AON_LOAD_10S         327680
+#define SMS_TIMER_AON_LOAD_1S          32768
+#define SMS_TIMER_AON_LOAD_100MS       3277
+#define SMS_TIMER_AON_LOAD_10MS        328
+#define SMS_TIMER_AON_LOAD_1MS         33
+#define SMS_TIMER_AON_LOAD_100US		3
 
 #define SMS_DUALTIMER_LOAD_S            26000000
 #define SMS_DUALTIMER_LOAD_MS           26000
@@ -98,7 +98,7 @@ typedef void (*sms_dualtimer_callback_t)(void);
  * ------------ */
 /* Initialize the AON timer with corresponding counting value & mode,
  * AND START IT AUTOMATICALLY! */
-void sms_timer_aon_init(uint32_t cnt, enum aon_sleep_timer_mode cnt_mode);
+void sms_timer_aon_init(uint32_t cnt_ms, enum aon_sleep_timer_mode cnt_mode);
 /* Disable the AON timer (stop counting) */
 void sms_timer_aon_disable(void);
 /* Register the callback corresponding to a AON timer interrupt,
@@ -109,7 +109,7 @@ void sms_timer_aon_unregister_callback(void);
 /* Callback function for the AON timer --> send a platform interruption with
  * corresponding parameters */
 void sms_timer_aon_callback(void);
-void sms_timer_aon_get_ms(uint32_t *count);
+void sms_timer_aon_get_value(void);
 
 
 void sms_dualtimer_init(void);

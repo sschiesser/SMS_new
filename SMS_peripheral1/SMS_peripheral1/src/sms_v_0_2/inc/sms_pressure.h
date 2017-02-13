@@ -28,11 +28,8 @@
 #define SMS_PRESSURE_VCC_PIN                    (PIN_LP_GPIO_7) // XPLAINED PRO --> EXT3:14
 #define SMS_PRESSURE_SPI_SS_PIN                 (PIN_LP_GPIO_16) // XPLAINED PRO --> EXT3:15
 
-#define SMS_PRESSURE_RESET_MS                   (20 * SMS_TIMER_AON_COUNT_1MS)
-#define SMS_PRESSURE_CONVERT1_MS                (SMS_TIMER_AON_COUNT_10MS)
-#define SMS_PRESSURE_CONVERT2_MS                (SMS_TIMER_AON_COUNT_100MS)
-#define SMS_PRESSURE_CONVERT3_MS                (SMS_TIMER_AON_COUNT_1S)
-#define SMS_PRESSURE_CONVERT_MS                 (3*SMS_PRESSURE_CONVERT1_MS)
+#define SMS_PRESSURE_RESET_MS                   (MS58_RESET_WAIT_MS)
+#define SMS_PRESSURE_CONVERT_MS                 (100)
 
 /* ---------
  * VARIABLES

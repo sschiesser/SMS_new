@@ -13,7 +13,7 @@
 #define MS58_RESET_WAIT_US             (2800)
 #define MS58_CONV_WAIT_US              (8220)
 #define MS58_RESET_WAIT_MS             (3)
-#define MS58_CONV_WAIT_MS              (999)
+#define MS58_CONV_WAIT_MS              (9)
 
 #define MS58_INIT_RETRY_MAX            (4)
 
