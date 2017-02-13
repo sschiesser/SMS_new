@@ -11,12 +11,12 @@
 void sms_sensors_interrupt_toggle(bool mpu_int, bool press_int) {
     /* IMU --> IMU_DRDY */
     if(mpu_int) {
-        mpu_device.state = MPU_STATE_ON;
-        sms_mpu_enable_callback();
+        imu_device.state = IMU_STATE_ON;
+        sms_imu_enable_callback();
     }
     else {
-        mpu_device.state = MPU_STATE_OFF;
-        sms_mpu_disable_callback();
+        imu_device.state = IMU_STATE_OFF;
+        sms_imu_disable_callback();
     }
     
     /* Pressure --> AON_SLEEP_TIMER

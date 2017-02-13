@@ -70,7 +70,7 @@
 #include "sms_i2c.h"
 #include "sms_sensors.h"
 #include "sms_pressure.h"
-#include "sms_mpu.h"
+#include "sms_imu.h"
 #include "sms_timer.h"
 #include "sms_led.h"
 #include "sms_ble.h"

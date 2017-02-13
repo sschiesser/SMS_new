@@ -129,7 +129,7 @@ C_SRCS +=  \
 ../src/sms_v_0_2/src/sms_button.c \
 ../src/sms_v_0_2/src/sms_common.c \
 ../src/sms_v_0_2/src/sms_i2c.c \
-../src/sms_v_0_2/src/sms_mpu.c \
+../src/sms_v_0_2/src/sms_imu.c \
 ../src/sms_v_0_2/src/sms_led.c \
 ../src/sms_v_0_2/src/sms_pressure.c \
 ../src/sms_v_0_2/src/sms_sensors.c \
@@ -178,7 +178,7 @@ src/sms_v_0_2/src/sms_ble.o \
 src/sms_v_0_2/src/sms_button.o \
 src/sms_v_0_2/src/sms_common.o \
 src/sms_v_0_2/src/sms_i2c.o \
-src/sms_v_0_2/src/sms_mpu.o \
+src/sms_v_0_2/src/sms_imu.o \
 src/sms_v_0_2/src/sms_led.o \
 src/sms_v_0_2/src/sms_pressure.o \
 src/sms_v_0_2/src/sms_sensors.o \
@@ -220,7 +220,7 @@ src/sms_v_0_2/src/sms_ble.o \
 src/sms_v_0_2/src/sms_button.o \
 src/sms_v_0_2/src/sms_common.o \
 src/sms_v_0_2/src/sms_i2c.o \
-src/sms_v_0_2/src/sms_mpu.o \
+src/sms_v_0_2/src/sms_imu.o \
 src/sms_v_0_2/src/sms_led.o \
 src/sms_v_0_2/src/sms_pressure.o \
 src/sms_v_0_2/src/sms_sensors.o \
@@ -262,7 +262,7 @@ src/sms_v_0_2/src/sms_ble.d \
 src/sms_v_0_2/src/sms_button.d \
 src/sms_v_0_2/src/sms_common.d \
 src/sms_v_0_2/src/sms_i2c.d \
-src/sms_v_0_2/src/sms_mpu.d \
+src/sms_v_0_2/src/sms_imu.d \
 src/sms_v_0_2/src/sms_led.d \
 src/sms_v_0_2/src/sms_pressure.d \
 src/sms_v_0_2/src/sms_sensors.d \
@@ -304,7 +304,7 @@ src/sms_v_0_2/src/sms_ble.d \
 src/sms_v_0_2/src/sms_button.d \
 src/sms_v_0_2/src/sms_common.d \
 src/sms_v_0_2/src/sms_i2c.d \
-src/sms_v_0_2/src/sms_mpu.d \
+src/sms_v_0_2/src/sms_imu.d \
 src/sms_v_0_2/src/sms_led.d \
 src/sms_v_0_2/src/sms_pressure.d \
 src/sms_v_0_2/src/sms_sensors.d \

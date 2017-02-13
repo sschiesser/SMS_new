@@ -975,7 +975,7 @@
     <Compile Include="src\sms_v_0_2\inc\sms_i2c.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\sms_v_0_2\inc\sms_mpu.h">
+    <Compile Include="src\sms_v_0_2\inc\sms_imu.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\sms_v_0_2\inc\sms_led.h">
@@ -1005,7 +1005,7 @@
     <Compile Include="src\sms_v_0_2\src\sms_i2c.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\sms_v_0_2\src\sms_mpu.c">
+    <Compile Include="src\sms_v_0_2\src\sms_imu.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\sms_v_0_2\src\sms_led.c">

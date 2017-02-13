@@ -16,7 +16,7 @@ src/ASF/thirdparty/sensor/mpu9250_kriswiner/quaternion_ahrs.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\lock.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\cdefs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h \
- ../src/sms_v_0_2/inc/sms_mpu.h ../src/sms_peripheral1.h ../src/asf.h \
+ ../src/sms_v_0_2/inc/sms_imu.h ../src/sms_peripheral1.h ../src/asf.h \
  ../src/ASF/sam0/drivers/aon_sleep_timer/aon_sleep_timer.h \
  ../src/ASF/sam0/utils/compiler.h ../src/ASF/common/utils/parts.h \
  ../src/ASF/sam0/utils/status_codes.h \
@@ -159,7 +159,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\_ansi.h:
 
-../src/sms_v_0_2/inc/sms_mpu.h:
+../src/sms_v_0_2/inc/sms_imu.h:
 
 ../src/sms_peripheral1.h:
 

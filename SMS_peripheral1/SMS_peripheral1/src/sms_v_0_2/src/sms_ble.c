@@ -322,31 +322,31 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
         break;
         
         case BLE_CHAR_MPU:
-		calc_val = (uint32_t)(mpu_device.output.q[0] * 1000000);
+		calc_val = (uint32_t)(imu_device.output.q[0] * 1000000);
 		//DBG_LOG("q1: %ld ", calc_val);
         send_val[0] = (uint8_t)(calc_val & 0xff);
         send_val[1] = (uint8_t)((calc_val >> 8) & 0xff);
         send_val[2] = (uint8_t)((calc_val >> 16) & 0xff);
         send_val[3] = (uint8_t)((calc_val >> 24) & 0xff);
-		calc_val = (uint32_t)(mpu_device.output.q[1] * 1000000);
+		calc_val = (uint32_t)(imu_device.output.q[1] * 1000000);
 		//DBG_LOG_CONT("q2: %ld ", calc_val);
         send_val[4] = (uint8_t)(calc_val & 0xff);
         send_val[5] = (uint8_t)((calc_val >> 8) & 0xff);
         send_val[6] = (uint8_t)((calc_val >> 16) & 0xff);
         send_val[7] = (uint8_t)((calc_val >> 24) & 0xff);
-		calc_val = (uint32_t)(mpu_device.output.q[2] * 1000000);
+		calc_val = (uint32_t)(imu_device.output.q[2] * 1000000);
 		//DBG_LOG_CONT("q3: %ld ", calc_val);
 		send_val[8] = (uint8_t)(calc_val & 0xff);
 		send_val[9] = (uint8_t)((calc_val >> 8) & 0xff);
 		send_val[10] = (uint8_t)((calc_val >> 16) & 0xff);
 		send_val[11] = (uint8_t)((calc_val >> 24) & 0xff);
-		calc_val = (uint32_t)(mpu_device.output.q[3] * 1000000);
+		calc_val = (uint32_t)(imu_device.output.q[3] * 1000000);
 		//DBG_LOG_CONT("q4: %ld ", calc_val);
 		send_val[12] = (uint8_t)(calc_val & 0xff);
 		send_val[13] = (uint8_t)((calc_val >> 8) & 0xff);
 		send_val[14] = (uint8_t)((calc_val >> 16) & 0xff);
 		send_val[15] = (uint8_t)((calc_val >> 24) & 0xff);
-        val_handle = mpu_device.service_handler.serv_chars.char_val_handle;
+        val_handle = imu_device.service_handler.serv_chars.char_val_handle;
         length = BLE_CHAR_SIZE_MPU;
         
         //if(mpu_device.interrupt.new_compass) {

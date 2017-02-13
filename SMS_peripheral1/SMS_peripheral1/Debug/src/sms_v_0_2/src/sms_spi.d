@@ -123,7 +123,7 @@ src/sms_v_0_2/src/sms_spi.d src/sms_v_0_2/src/sms_spi.o: \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_button.h \
  ../src/sms_v_0_2/inc/sms_common.h ../src/sms_v_0_2/inc/sms_i2c.h \
  ../src/sms_v_0_2/inc/sms_sensors.h ../src/sms_v_0_2/inc/sms_pressure.h \
- ../src/sms_v_0_2/inc/ms58.h ../src/sms_v_0_2/inc/sms_mpu.h \
+ ../src/sms_v_0_2/inc/ms58.h ../src/sms_v_0_2/inc/sms_imu.h \
  ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h \
  ../src/sms_v_0_2/inc/sms_timer.h ../src/sms_v_0_2/inc/sms_led.h \
  ../src/sms_v_0_2/inc/sms_ble.h
@@ -392,7 +392,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 
 ../src/sms_v_0_2/inc/ms58.h:
 
-../src/sms_v_0_2/inc/sms_mpu.h:
+../src/sms_v_0_2/inc/sms_imu.h:
 
 ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h:
 
