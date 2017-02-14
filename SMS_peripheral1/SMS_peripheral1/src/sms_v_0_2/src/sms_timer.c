@@ -104,7 +104,7 @@ void sms_dualtimer_start(timer_unit_type_t unit, uint32_t delay, enum dualtimer_
         delay = 1;
     }
     
-    ulp_ready = false;
+    //ulp_ready = false;
     //DBG_LOG_DEV("[sms_dualtimer_start]\t\tStarting timer%d... load: %ld, delay: %ld", (tmr+1), timer_load, delay);
     dualtimer_set_counter(tmr, DUALTIMER_SET_CURRUNT_REG, timer_load * delay);
     dualtimer_enable(tmr);
@@ -148,23 +148,23 @@ void sms_dualtimer1_fn(void)
                     // --- prev_state = b0: switch current_state ---
                     case BUTTON_STATE_B0:
                     if(ble_instance.current_state == BLE_STATE_POWEROFF) {
-                        sms_btn_cnt++;
-                        if(sms_btn_cnt >= SMS_BTN_STARTUP_CNT) {
-                            timer1_current_mode = TIMER1_MODE_NONE;
-                            sms_ble_startup();
-                        }
-                        else {
-                            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
-                            timer1_current_mode = TIMER1_MODE_STARTUP;
-                            //ulp_ready = false;
-                            sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
-                        }
+                        //sms_btn_cnt++;
+                        //if(sms_btn_cnt >= SMS_BTN_STARTUP_CNT) {
+                            //timer1_current_mode = TIMER1_MODE_NONE;
+                            //sms_ble_startup();
+                        //}
+                        //else {
+                            ////sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
+                            //timer1_current_mode = TIMER1_MODE_STARTUP;
+                            ////ulp_ready = false;
+                            //sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
+                        //}
                     }
                     else {
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
-                            ulp_ready = true;
+                            //ulp_ready = true;
                         }                            
                     }
                     break;
@@ -172,7 +172,7 @@ void sms_dualtimer1_fn(void)
                     // --- prev_state = b0: switch current_state ---
                     case BUTTON_STATE_B1:
                     if(ble_instance.current_state == BLE_STATE_POWEROFF) {
-                        sms_btn_cnt = 0;
+                        //sms_btn_cnt = 0;
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         timer1_current_mode = TIMER1_MODE_STARTUP;
                         //ulp_ready = false;
@@ -182,7 +182,7 @@ void sms_dualtimer1_fn(void)
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
-                            ulp_ready = true;
+                            //ulp_ready = true;
                         }                            
                     }
                     break;
@@ -194,7 +194,7 @@ void sms_dualtimer1_fn(void)
                     //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
-                        ulp_ready = true;
+                        //ulp_ready = true;
                     }                        
                     break;
                 }
@@ -206,23 +206,23 @@ void sms_dualtimer1_fn(void)
                     // --- prev_state = b1: switch current_state ---
                     case BUTTON_STATE_B1:
                     if(ble_instance.current_state == BLE_STATE_POWEROFF) {
-                        sms_btn_cnt++;
-                        if(sms_btn_cnt >= SMS_BTN_STARTUP_CNT) {
-                            timer1_current_mode = TIMER1_MODE_NONE;
-                            sms_ble_startup();
-                        }
-                        else {
-                            //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
-                            timer1_current_mode = TIMER1_MODE_STARTUP;
-                            //ulp_ready = false;
-                            sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
-                        }
+                        //sms_btn_cnt++;
+                        //if(sms_btn_cnt >= SMS_BTN_STARTUP_CNT) {
+                            //timer1_current_mode = TIMER1_MODE_NONE;
+                            //sms_ble_startup();
+                        //}
+                        //else {
+                            ////sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
+                            //timer1_current_mode = TIMER1_MODE_STARTUP;
+                            ////ulp_ready = false;
+                            //sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_STARTUP_MS, DUALTIMER_TIMER1);
+                        //}
                     }
                     else {
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
-                            ulp_ready = true;
+                            //ulp_ready = true;
                         }                            
                     }
                     break;
@@ -230,7 +230,7 @@ void sms_dualtimer1_fn(void)
                     // --- prev_state = b1: switch current_state ---
                     case BUTTON_STATE_B0:
                     if(ble_instance.current_state == BLE_STATE_POWEROFF) {
-                        sms_btn_cnt = 0;
+                        //sms_btn_cnt = 0;
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         timer1_current_mode = TIMER1_MODE_STARTUP;
                         //ulp_ready = false;
@@ -240,7 +240,7 @@ void sms_dualtimer1_fn(void)
                         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                         if(timer2_current_mode == TIMER2_MODE_NONE) {
                             //release_sleep_lock();
-                            ulp_ready = true;
+                            //ulp_ready = true;
                         }                            
                     }
                     break;
@@ -252,7 +252,7 @@ void sms_dualtimer1_fn(void)
                     //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
-                        ulp_ready = true;
+                        //ulp_ready = true;
                     }                        
                     break;
                 }
@@ -266,7 +266,7 @@ void sms_dualtimer1_fn(void)
                     //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
                     if(timer2_current_mode == TIMER2_MODE_NONE) {
                         //release_sleep_lock();
-                        ulp_ready = true;
+                        //ulp_ready = true;
                     }                        
                     break;
                 }
@@ -283,15 +283,15 @@ void sms_dualtimer1_fn(void)
             sms_monitor_get_states("[sms_dualtimer1_fn]");
             
             if((button_instance.previous_state == BUTTON_STATE_BOTH) && (button_instance.current_state == BUTTON_STATE_BOTH)) {
-                sms_btn_cnt++;
-                if(sms_btn_cnt >= SMS_BTN_SHTDWN_CNT) {
-                    sms_ble_power_down();
-                }
-                else {
-                    //sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
-                    timer1_current_mode = TIMER1_MODE_SHUTDOWN;
-                    sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
-                }
+                //sms_btn_cnt++;
+                //if(sms_btn_cnt >= SMS_BTN_SHTDWN_CNT) {
+                    //sms_ble_power_down();
+                //}
+                //else {
+                    ////sms_sensors_toggle_interrupt(SMS_EXTINT_DISABLE);
+                    //timer1_current_mode = TIMER1_MODE_SHUTDOWN;
+                    //sms_dualtimer_start(TIMER_UNIT_MS, SMS_BTN_SHTDWN_MS, DUALTIMER_TIMER1);
+                //}
             }
             else {
                 if(pressure_device.state == PRESSURE_STATE_STDBY) {
@@ -300,7 +300,7 @@ void sms_dualtimer1_fn(void)
                 }                    
                 timer1_current_mode = TIMER1_MODE_NONE;
                 if(timer2_current_mode == TIMER2_MODE_NONE) {
-                    ulp_ready = true;
+                    //ulp_ready = true;
                 }                    
             }
             break; // Timer1 mode = SHUTDOWN
@@ -311,7 +311,7 @@ void sms_dualtimer1_fn(void)
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
         if(timer2_current_mode == TIMER2_MODE_NONE) {
             //release_sleep_lock();
-            ulp_ready = true;
+            //ulp_ready = true;
         }            
         break;
     } // switch(timer1_current_mode)
@@ -328,7 +328,7 @@ void sms_dualtimer2_fn(void)
             //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             if(timer1_current_mode == TIMER1_MODE_NONE) {
                 //release_sleep_lock();
-                ulp_ready = true;
+                //ulp_ready = true;
             }                
         }
         else {
@@ -364,7 +364,7 @@ void sms_dualtimer2_fn(void)
             /* Blinking done... starting ble advertisement */
             //DBG_LOG_DEV("[sms_dualtimer2_fn]\tSMS awake... starting advertisement");
             sms_ble_advertise();
-            ulp_ready = true;
+            //ulp_ready = true;
         }
         else {
             //DBG_LOG_DEV("[sms_dualtimer2_fn]\tBlinking up... cnt = %d", sms_led_blink_cnt);
@@ -384,7 +384,7 @@ void sms_dualtimer2_fn(void)
             DBG_LOG_DEV("[sms_dualtimer2_fn]\t\tPowering off...");
             //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE)
             sms_init_variables();
-            ulp_ready = true;
+            //ulp_ready = true;
             //release_sleep_lock();
         }
         else {
@@ -405,8 +405,10 @@ void sms_dualtimer2_fn(void)
 }
 
 void delay_ms(uint32_t delay) {
+	//sms_disable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
 	sms_dualtimer_start(TIMER_UNIT_MS, delay, DUALTIMER_TIMER2);
 	while(dualtimer_get_value(DUALTIMER_TIMER2)) {
 	}
 	sms_dualtimer_stop(DUALTIMER_TIMER2);
+	//sms_enable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
 }

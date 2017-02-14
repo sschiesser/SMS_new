@@ -29,14 +29,21 @@ int sms_button_fn(enum sms_btn_ids btn)
         switch(ble_instance.current_state) {
             case BLE_STATE_POWEROFF: // start-up command?
 			DBG_LOG_DEV("[sms_button_fn]\t\t\tWaking up ");
-			for(uint8_t i = 0; i < 12; i++) {
-				delay_ms(250);
+			sms_disable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
+			for(uint8_t i = 0; i < 50; i++) {
+				//gpio_pin_set_output_level(DBG_PIN_1, true);
+				delay_ms(50);
 				if(sms_button_get_state() != button_instance.current_state) {
+					//gpio_pin_set_output_level(DBG_PIN_2, true);
 					wait_success = false;
 					break;
 				}
-				DBG_LOG_CONT_DEV(". ");
+				//gpio_pin_set_output_level(DBG_PIN_1, false);
+				DBG_LOG_CONT_DEV(".");
 			}
+			sms_enable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
+			//gpio_pin_set_output_level(DBG_PIN_2, false);
+			//gpio_pin_set_output_level(DBG_PIN_1, false);
 			if(wait_success) {
 				if(sms_ble_startup()) return -1;
 			}
@@ -61,20 +68,22 @@ int sms_button_fn(enum sms_btn_ids btn)
         case BUTTON_STATE_BOTH:
         if(ble_instance.current_state == BLE_STATE_POWEROFF) {
 			DBG_LOG_DEV("[sms_button_fn]\t\t\tNot used state...");
-            ulp_ready = true;
+            //ulp_ready = true;
         }
         else {
 			DBG_LOG_DEV("[sms_button_fn]\t\t\tShutting down ");
-			for(uint8_t i = 0; i < 12; i++) {
-				delay_ms(250);
+			sms_disable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
+			for(uint8_t i = 0; i < 50; i++) {
+				delay_ms(50);
 				if(sms_button_get_state() != button_instance.current_state) {
 					wait_success = false;
 					break;
 				}
-				DBG_LOG_CONT_DEV(". ");
+				DBG_LOG_CONT_DEV(".");
 			}
+			sms_enable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
 			if(wait_success) {
-				DBG_LOG_DEV("Shut down now!");
+				sms_ble_power_down();
 			}
             //if((ble_current_state == BLE_STATE_PAIRED) || (ble_current_state == BLE_STATE_INDICATING)) {
                 //pressure_device.state = PRESSURE_STATE_STDBY;
@@ -91,7 +100,7 @@ int sms_button_fn(enum sms_btn_ids btn)
         // --- current state ---
         case BUTTON_STATE_NONE:
 		DBG_LOG_DEV("[sms_button_fn]\t\t\tNone");
-        ulp_ready = true;
+        //ulp_ready = true;
         //sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
         //if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
         break;

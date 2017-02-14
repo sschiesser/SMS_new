@@ -35,6 +35,12 @@ typedef enum sms_extint_toggle {
     SMS_EXTINT_DISABLE
 }sms_extint_toggle_t;
 
+enum sms_irq {
+	SMS_IRQ_BTN0 = 1 << 0,
+	SMS_IRQ_BTN1 = 1 << 1,
+	SMS_IRQ_DRDY = 1 << 2,
+	SMS_IRQ_AON_TIMER = 1 << 3
+};
 
 /* ------------
  * DECLARATIONS
@@ -42,5 +48,7 @@ typedef enum sms_extint_toggle {
 /* General functions */
 void sms_monitor_configure_gpio(void);
 void sms_monitor_get_states(const char *label);
+void sms_disable_irq(enum sms_irq irq);
+void sms_enable_irq(enum sms_irq irq);
 
 #endif /* SMS_COMMON_H_ */

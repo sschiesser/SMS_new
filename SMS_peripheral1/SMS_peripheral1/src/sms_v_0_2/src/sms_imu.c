@@ -20,7 +20,7 @@ void sms_imu_configure_gpio(void)
 	config_gpio_pin.direction = GPIO_PIN_DIR_INPUT;
 	config_gpio_pin.input_pull = GPIO_PIN_PULL_DOWN;
 	config_gpio_pin.aon_wakeup = true;
-	if(gpio_pin_set_config(SMS_MPU_DRDY_PIN, &config_gpio_pin) != STATUS_OK) {
+	if(gpio_pin_set_config(SMS_IMU_DRDY_PIN, &config_gpio_pin) != STATUS_OK) {
 		DBG_LOG("[sms_imu_configure_gpio]\tProblem while setting up IMU DRDY pin");
 	}
 
@@ -36,23 +36,23 @@ void sms_imu_configure_gpio(void)
 void sms_imu_register_callbacks(void)
 {
 	/* MPU-9250 interrupt callback */
-	gpio_register_callback(SMS_MPU_DRDY_PIN, sms_imu_interrupt_callback, GPIO_CALLBACK_RISING);
+	gpio_register_callback(SMS_IMU_DRDY_PIN, sms_imu_interrupt_callback, GPIO_CALLBACK_RISING);
 }
 /* Unregister IMU DRDY interrupt callback */
 void sms_imu_unregister_callbacks(void)
 {
-	gpio_unregister_callback(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING);
+	gpio_unregister_callback(SMS_IMU_DRDY_PIN, GPIO_CALLBACK_RISING);
 }
 /* Enable IMU DRDY interrupt callback */
 void sms_imu_enable_callback(void)
 {
-	gpio_enable_callback(SMS_MPU_DRDY_PIN);
+	gpio_enable_callback(SMS_IMU_DRDY_PIN);
 	imu_device.interrupt.enabled = true;
 }
 /* Disable IMU DRDY interrupt callback */
 void sms_imu_disable_callback(void)
 {
-	gpio_disable_callback(SMS_MPU_DRDY_PIN);
+	gpio_disable_callback(SMS_IMU_DRDY_PIN);
 	imu_device.interrupt.enabled = false;
 }
 /* IMU DRDY callback function */
@@ -60,7 +60,7 @@ void sms_imu_interrupt_callback(void)
 {
 	if(imu_device.interrupt.enabled) {
 		imu_device.interrupt.new_gyro = true;
-		send_plf_int_msg_ind(SMS_MPU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
+		send_plf_int_msg_ind(SMS_IMU_DRDY_PIN, GPIO_CALLBACK_RISING, NULL, 0);
 	}
 }
 /* Startup function */

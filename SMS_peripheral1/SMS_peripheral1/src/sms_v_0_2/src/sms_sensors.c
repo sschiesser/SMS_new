@@ -11,11 +11,9 @@
 void sms_sensors_enable_callback(bool imu_cb, bool press_cb) {
     /* IMU --> IMU_DRDY */
     if(imu_cb) {
-        imu_device.state = IMU_STATE_ON;
         sms_imu_enable_callback();
     }
     else {
-        imu_device.state = IMU_STATE_OFF;
         sms_imu_disable_callback();
     }
     
@@ -26,11 +24,9 @@ void sms_sensors_enable_callback(bool imu_cb, bool press_cb) {
      *       callback (and it enables the interrupt)
      */
     if(press_cb) {
-        pressure_device.state = PRESSURE_STATE_ON;
         sms_timer_aon_register_callback();
     }
     else {
-		pressure_device.state = PRESSURE_STATE_OFF;
         sms_timer_aon_unregister_callback();
     }
 }
@@ -41,17 +37,20 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     /* IMU */
     if(mpu_en) {
         if(sms_imu_startup()) {
-	        DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't start IMU");
+	        DBG_LOG("[sms_sensors_switch]\t\tCouldn't start IMU");
 			dualtimer_disable(DUALTIMER_TIMER1);
+			imu_device.state = IMU_STATE_OFF;
 			imu_device.config.init_ok = false;
         }
         else {
 			dualtimer_enable(DUALTIMER_TIMER1);
+			imu_device.state = IMU_STATE_ON;
 	        imu_device.config.init_ok = true;
         }
     }
     else {
 		dualtimer_disable(DUALTIMER_TIMER1);
+        imu_device.state = IMU_STATE_OFF;
 		imu_device.config.init_ok = false;
 		// switch off VCC pin to save current...
     }
@@ -61,29 +60,32 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
         if(sms_pressure_startup()) {
 			DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't start pressure sensor");
 			sms_timer_aon_disable();
+			pressure_device.state = PRESSURE_STATE_OFF;
 			pressure_device.config.init_ok = false;
 		}
 		else {
 			sms_timer_aon_init(SMS_PRESSURE_CONVERT_MS, AON_SLEEP_TIMER_RELOAD_MODE);
+			pressure_device.state = PRESSURE_STATE_ON;
 			pressure_device.config.init_ok = true;
 		}
     }
     else {
 		sms_timer_aon_disable();
+		pressure_device.state = PRESSURE_STATE_OFF;
 		pressure_device.config.init_ok = false;
 		// switch off VCC pin to save current...
     }
 	
 	/* Set up SMS working mode & callbacks */
-	if(imu_device.config.init_ok && pressure_device.config.init_ok) {
+	if((imu_device.state == IMU_STATE_ON) && (pressure_device.state == PRESSURE_STATE_ON)) {
 		sms_working_mode = SMS_MODE_COMPLETE;
 		sms_sensors_enable_callback(true, true);
 	}
-	else if(imu_device.config.init_ok) {
+	else if(imu_device.state == IMU_STATE_ON) {
 		sms_working_mode = SMS_MODE_BUTTON_IMU;
 		sms_sensors_enable_callback(true, false);
 	}
-	else if(pressure_device.config.init_ok) {
+	else if(pressure_device.state == PRESSURE_STATE_ON) {
 		sms_working_mode = SMS_MODE_BUTTON_PRESSURE;
 		sms_sensors_enable_callback(false, true);
 	}
@@ -92,5 +94,5 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 		sms_sensors_enable_callback(false, false);
 	}
 	
-	DBG_LOG_DEV("[sms_sensors_switch]\t\t\tSMS working mode: %d", sms_working_mode);
+	DBG_LOG_DEV("[sms_sensors_switch]\t\tSMS working mode: %d", sms_working_mode);
 }

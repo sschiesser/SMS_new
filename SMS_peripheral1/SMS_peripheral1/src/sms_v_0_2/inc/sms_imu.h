@@ -19,31 +19,32 @@
 /* ------
  * MACROS
  * ------ */
-#define SMS_MPU_SERVICE_UUID_1              (0x1C575ABE)
-#define SMS_MPU_SERVICE_UUID_2              (0x53501111)
-#define SMS_MPU_SERVICE_UUID_3              (0x00000000)
-#define SMS_MPU_SERVICE_UUID_4              (0x00000000)
+#define SMS_IMU_SERVICE_UUID_1              (0x1C575ABE)
+#define SMS_IMU_SERVICE_UUID_2              (0x53501111)
+#define SMS_IMU_SERVICE_UUID_3              (0x00000000)
+#define SMS_IMU_SERVICE_UUID_4              (0x00000000)
 
-#define SMS_MPU_BLE_CHAR_LEN_QUAT           (16) // 4 quaternions of 32 bit each = 16 uint8
-#define SMS_MPU_BLE_CHAR_LEN_AHRS			(12) // yaw/pitch/roll of 32 bit each = 12 uint8
+#define SMS_IMU_BLE_CHAR_LEN_QUAT           (16) // 4 quaternions of 32 bit each = 16 uint8
+#define SMS_IMU_BLE_CHAR_LEN_AHRS			(12) // yaw/pitch/roll of 32 bit each = 12 uint8
 
-#define SMS_MPU_DRDY_PIN                    (PIN_AO_GPIO_1) // XPLAINED PRO --> EXT3:9
-#define SMS_MPU_VCC_PIN                     (PIN_LP_GPIO_6) // XPLAINED PRO --> EXT3:13
+#define SMS_IMU_DRDY_PIN                    (PIN_AO_GPIO_1) // XPLAINED PRO --> EXT3:9
+#define SMS_IMU_DRDY_IRQ					(GPIO1_IRQn)
+#define SMS_IMU_VCC_PIN                     (PIN_LP_GPIO_6) // XPLAINED PRO --> EXT3:13
 
-#define SMS_MPU_SAMPLE_RATE_HZ              (50)
-#define SMS_MPU_TEMP_MULTIPLIER             (1)
-#define SMS_MPU_COMPASS_MULTIPLIER          (1)
-#define SMS_MPU_COMPASS_RATE_HZ             (SMS_MPU_SAMPLE_RATE_HZ / SMS_MPU_COMPASS_MULTIPLIER)
+#define SMS_IMU_SAMPLE_RATE_HZ              (50)
+#define SMS_IMU_TEMP_MULTIPLIER             (1)
+#define SMS_IMU_COMPASS_MULTIPLIER          (1)
+#define SMS_IMU_COMPASS_RATE_HZ             (SMS_IMU_SAMPLE_RATE_HZ / SMS_IMU_COMPASS_MULTIPLIER)
 
-#define SMS_MPU_ACCEL_ON                    (0x01)
-#define SMS_MPU_GYRO_ON                     (0x02)
-#define SMS_MPU_COMPASS_ON                  (0x04)
+#define SMS_IMU_ACCEL_ON                    (0x01)
+#define SMS_IMU_GYRO_ON                     (0x02)
+#define SMS_IMU_COMPASS_ON                  (0x04)
 
-#define SMS_MPU_GYRO_FS						(2000)
-#define SMS_MPU_ACCEL_FS					(2) // 4
+#define SMS_IMU_GYRO_FS						(2000)
+#define SMS_IMU_ACCEL_FS					(2) // 4
 
-#define SMS_MPU_MOTION                      (0)
-#define SMS_MPU_NO_MOTION                   (1)
+#define SMS_IMU_MOTION                      (0)
+#define SMS_IMU_NO_MOTION                   (1)
 
 #define PI									(3.1415926535898)
 

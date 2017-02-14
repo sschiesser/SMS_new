@@ -13,8 +13,7 @@ at_ble_status_t sms_ble_adv_report_fn(void *params)
 {
 	at_ble_adv_report_t *adv_report = (at_ble_adv_report_t *)params;
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
-	DBG_LOG_DEV("[sms_ble_adv_report_fn]\tAdvertisement timeout...");
-	//DBG_LOG_DEV("- status: 0x%02x", adv_report->status);
+	DBG_LOG_DEV("[sms_ble_adv_report_fn]\t\tAdvertisement timeout...");
 	sms_ble_power_down();
 	return AT_BLE_SUCCESS;
 }
@@ -32,7 +31,7 @@ at_ble_status_t sms_ble_connected_fn(void *params)
 		//DBG_LOG_CONT_DEV("%02x",connected->peer_addr.addr[AT_BLE_ADDR_LEN - (i+1)]);
 		//}
 		DBG_LOG_DEV("BLE T/O: 5000 ms");
-		sms_ble_timeout = BLE_APP_TIMEOUT_PAIR;
+		ble_instance.timeout = BLE_APP_TIMEOUT_PAIR;
 	}
 	else {
 		DBG_LOG_DEV("[sms_ble_connected_fn]\t\tWrong BLE state... shutting down");
@@ -51,7 +50,9 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 		sms_sensors_switch(false, false);
 	}
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
-	DBG_LOG_DEV("[sms_ble_disconnected_fn]\tPeer disconnected... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_instance.current_state, timer1_current_mode, timer2_current_mode);
+	ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
+	
+	DBG_LOG_DEV("[sms_ble_disconnected_fn]\tPeer disconnected... handle: 0x%04x, reason: 0x%02x", disconnect->handle, disconnect->reason);
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- reason: 0x%02x", disconnect->handle, disconnect->reason);
 	switch(disconnect->reason) {
 		case AT_BLE_AUTH_FAILURE: //0x05
@@ -59,6 +60,9 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 		case AT_BLE_UNSUPPORTED_REMOTE_FEATURE: // 0x1A
 		case AT_BLE_PAIRING_WITH_UNIT_KEY_NOT_SUP: // 0x29
 		case AT_BLE_UNACCEPTABLE_INTERVAL: // 0x3B
+		// additional error messages from BLE 4.1 specifications
+		case BLE_ERR_UNKNOWN_LMP_PDU: // 0x19
+		case BLE_ERR_CONN_FAILED: // 0x3E
 		sms_ble_advertise();
 		break;
 		
@@ -66,6 +70,8 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 		case AT_BLE_REMOTE_DEV_TERM_LOW_RESOURCES: //0x14
 		case AT_BLE_REMOTE_DEV_POWER_OFF: //0x15
 		case AT_BLE_CON_TERM_BY_LOCAL_HOST: //0x16
+		// additional error messages from BLE 4.1 specifications
+		case BLE_ERR_UNSPECIFIED: // 0x1F
 		default:
 		sms_ble_power_down();
 		break;
@@ -87,7 +93,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 		
 		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 		//DBG_LOG("T/O: OFF");
-		sms_ble_timeout = BLE_APP_TIMEOUT_OFF;
+		ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
 	}
 	else {
 		sms_ble_power_down();
@@ -113,7 +119,7 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 	at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
 	ble_instance.sending_queue--;
 	//DBG_LOG("T/O: OFF");
-	sms_ble_timeout = BLE_APP_TIMEOUT_OFF;
+	ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
 	//button_instance.current_state = sms_button_get_state();
 	//DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
@@ -131,7 +137,7 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 	
 	//DBG_LOG_DEV("Timer1 current mode: %d", timer1_current_mode);
 	if(timer1_current_mode == TIMER1_MODE_NONE) {
-		ulp_ready = true;
+		//ulp_ready = true;
 	}
 	return AT_BLE_SUCCESS;
 }
@@ -154,7 +160,7 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
 	//gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
 	
 	if(timer1_current_mode == TIMER1_MODE_NONE) {
-		ulp_ready = true;
+		//ulp_ready = true;
 	}
 	return AT_BLE_SUCCESS;
 }
@@ -214,6 +220,7 @@ int sms_ble_startup(void)
 		sms_led_toggle(SMS_LED_0);
 		delay_ms(SMS_BLINK_STARTUP_MS);
 	}
+	ulp_ready = false;
 	if(sms_ble_advertise() != AT_BLE_SUCCESS) return -1;
 	return 0;
 }
@@ -223,9 +230,6 @@ void sms_ble_power_down(void)
 	sms_monitor_get_states("[sms_ble_power_down]");
 	if(ble_instance.current_state == BLE_STATE_POWEROFF) {
 		/* If already power off state, then go back sleeping */
-		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-		ulp_ready = true;
-		release_sleep_lock();
 	}
 	else {
 		/* Disable button interrupts */
@@ -246,34 +250,38 @@ void sms_ble_power_down(void)
 			
 			case BLE_STATE_PAIRED:
 			DBG_LOG_DEV("[sms_ble_power_down]\t\tDevice paired... disabling interrupts & switching down sensors");
-			
 			case BLE_STATE_INDICATING:
 			DBG_LOG_DEV("[sms_ble_power_down]\t\tCurrently indicating");
-			pressure_device.state = PRESSURE_STATE_OFF;
-			sms_sensors_enable_callback(false, false);
-			//#pragma TBD: switch-off sensors to save current
-			//sms_sensors_switch(false);
-			
+			sms_sensors_switch(false, false);
 			case BLE_STATE_CONNECTED:
 			DBG_LOG_DEV("[sms_ble_power_down]\t\tDevice connected... disconnecting");
-			at_ble_disconnect(sms_connection_handle, AT_BLE_TERMINATED_BY_USER);
+			at_ble_disconnect(ble_instance.conn_handle, AT_BLE_TERMINATED_BY_USER);
 			break;
 			
 			default:
 			break;
 		}
 		
-		ble_instance.current_state = BLE_STATE_DISCONNECTED;
-		timer2_current_mode = TIMER2_MODE_LED_SHUTDOWN;
-		sms_led_blink_start(SMS_LED_0);
 	}
+	
+	/* Common part:
+	 * - set BLE state to power-off
+	 * - blink LED
+	 * - enable ULP
+	 */
+	ble_instance.current_state = BLE_STATE_POWEROFF;
+	for(uint8_t i = 0; i < SMS_BLINK_SHTDWN_CNT; i++) {
+		sms_led_toggle(SMS_LED_0);
+		delay_ms(SMS_BLINK_SHTDWN_MS);
+	}
+	ulp_ready = true;
 }
 
 at_ble_status_t sms_ble_advertise(void)
 {
 	at_ble_status_t status = AT_BLE_FAILURE;
 	ble_instance.current_state = BLE_STATE_ADVERTISING;
-
+	
 	/* Set the advertisement data */
 	if((status = ble_advertisement_data_set()) != AT_BLE_SUCCESS) {
 		DBG_LOG("[sms_ble_advertise]\t\tAdvertisement data set failed!");
@@ -374,13 +382,13 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		//sms_ble_ind_retry = 0;
 		//status = at_ble_indication_send(sms_connection_handle, val_handle);
 		//#   else
-		status = at_ble_notification_send(sms_connection_handle, val_handle);
+		status = at_ble_notification_send(ble_instance.conn_handle, val_handle);
 		if(status == AT_BLE_SUCCESS) {
 			ble_instance.sending_queue++;
 			ble_instance.send_cnt++;
 			//DBG_LOG_CONT(" %d GONE? ", sms_ble_send_cnt);
 			//DBG_LOG("T/O: 20ms");
-			sms_ble_timeout = BLE_APP_TIMEOUT_NOTIFY;
+			ble_instance.timeout = BLE_APP_TIMEOUT_NOTIFY;
 		}
 		else {
 			DBG_LOG_CONT("NOTIFICATION ERROR!!");
@@ -460,22 +468,22 @@ void sms_ble_service_init(enum sms_ble_serv_type type, gatt_service_handler_t *s
 		
 		case BLE_SERV_MPU:
 		handle = 3;
-		uuid[0] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 24) & 0xFF);
-		uuid[1] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 16) & 0xFF);
-		uuid[2] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1 >> 8) & 0xFF);
-		uuid[3] = (uint8_t) ((SMS_MPU_SERVICE_UUID_1) & 0xFF);
-		uuid[4] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 24) & 0xFF);
-		uuid[5] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 16) & 0xFF);
-		uuid[6] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2 >> 8) & 0xFF);
-		uuid[7] = (uint8_t) ((SMS_MPU_SERVICE_UUID_2) & 0xFF);
-		uuid[8] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 24) & 0xFF);
-		uuid[9] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 16) & 0xFF);
-		uuid[10] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3 >> 8) & 0xFF);
-		uuid[11] = (uint8_t) ((SMS_MPU_SERVICE_UUID_3) & 0xFF);
-		uuid[12] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 24) & 0xFF);
-		uuid[13] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 16) & 0xFF);
-		uuid[14] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4 >> 8) & 0xFF);
-		uuid[15] = (uint8_t) ((SMS_MPU_SERVICE_UUID_4) & 0xFF);
+		uuid[0] = (uint8_t) ((SMS_IMU_SERVICE_UUID_1 >> 24) & 0xFF);
+		uuid[1] = (uint8_t) ((SMS_IMU_SERVICE_UUID_1 >> 16) & 0xFF);
+		uuid[2] = (uint8_t) ((SMS_IMU_SERVICE_UUID_1 >> 8) & 0xFF);
+		uuid[3] = (uint8_t) ((SMS_IMU_SERVICE_UUID_1) & 0xFF);
+		uuid[4] = (uint8_t) ((SMS_IMU_SERVICE_UUID_2 >> 24) & 0xFF);
+		uuid[5] = (uint8_t) ((SMS_IMU_SERVICE_UUID_2 >> 16) & 0xFF);
+		uuid[6] = (uint8_t) ((SMS_IMU_SERVICE_UUID_2 >> 8) & 0xFF);
+		uuid[7] = (uint8_t) ((SMS_IMU_SERVICE_UUID_2) & 0xFF);
+		uuid[8] = (uint8_t) ((SMS_IMU_SERVICE_UUID_3 >> 24) & 0xFF);
+		uuid[9] = (uint8_t) ((SMS_IMU_SERVICE_UUID_3 >> 16) & 0xFF);
+		uuid[10] = (uint8_t) ((SMS_IMU_SERVICE_UUID_3 >> 8) & 0xFF);
+		uuid[11] = (uint8_t) ((SMS_IMU_SERVICE_UUID_3) & 0xFF);
+		uuid[12] = (uint8_t) ((SMS_IMU_SERVICE_UUID_4 >> 24) & 0xFF);
+		uuid[13] = (uint8_t) ((SMS_IMU_SERVICE_UUID_4 >> 16) & 0xFF);
+		uuid[14] = (uint8_t) ((SMS_IMU_SERVICE_UUID_4 >> 8) & 0xFF);
+		uuid[15] = (uint8_t) ((SMS_IMU_SERVICE_UUID_4) & 0xFF);
 		char_size = 20;
 		break;
 		

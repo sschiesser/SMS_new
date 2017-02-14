@@ -60,7 +60,7 @@ void sms_init_variables(void)
 	timer2_current_mode = TIMER2_MODE_NONE;
 	sms_working_mode = SMS_MODE_BUTTON_SOLO;
 	ulp_ready = false;
-	sms_ble_timeout = BLE_APP_TIMEOUT_OFF;
+	ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
 	
 	sms_ble_init_variables();
 	sms_button_init_variables();
@@ -167,22 +167,22 @@ int main(void)
 	
 	/* Goto sleep
 	* ---------- */
-	//sms_ble_power_down();
+	sms_ble_power_down();
 
-	//sms_imu_startup();
-	//sms_sensors_interrupt_toggle(true, false);
-	//sms_timer_aon_init(23, AON_SLEEP_TIMER_RELOAD_MODE);
-	//sms_timer_aon_register_callback();
-	
 	at_ble_status_t ble_status;
 	static uint32_t cnt = 0;
 	while(true)
 	{
-		/* BLE Event task */
-		ble_status = ble_event_task(sms_ble_timeout);
+		/* BLE event task --> BLOCKING FUNCTION! */
+		ble_status = ble_event_task(ble_instance.timeout);
 		
-		if(ble_status == AT_BLE_SUCCESS) {
-			/* Sensor interrupt region */
+		/* Return from BLE event task --> EVERYTHING TAKES PLACE HERE! */
+		acquire_sleep_lock();
+		if(ble_status == AT_BLE_SUCCESS)
+		{
+			/* ******************************************
+			 * SENSOR INTERRUPT REGION
+			 * ****************************************** */
 			if(button_instance.btn0.new_int) {
 				button_instance.btn0.new_int = false;
 				DBG_LOG("Btn0 int... ");
@@ -222,7 +222,9 @@ int main(void)
 				//DBG_LOG_CONT_DEV("done");
 			}
 			
-			///* Timer interrupt region */
+			/* ******************************************
+			 * TIMER INTERRUPT REGION
+			 * ****************************************** */
 			//if(timer1_instance.new_int) {
 			//DBG_LOG("Timer1 int... ");
 			//sms_dualtimer_stop(DUALTIMER_TIMER1);
@@ -236,7 +238,9 @@ int main(void)
 			//timer2_instance.new_int = false;
 			//}
 			
-			/* Sending region */
+			/* ******************************************
+			 * SENDING REGION
+			 * ****************************************** */
 			if(imu_device.interrupt.rts) {
 				//DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
@@ -261,16 +265,27 @@ int main(void)
 				pressure_device.interrupt.rts = false;
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
+			DBG_LOG("BLE event task end");
 		}
-		else if(ble_status == AT_BLE_GAP_TIMEOUT) {
+		else if(ble_status == AT_BLE_GAP_TIMEOUT)
+		{
 			DBG_LOG("GAP timeout");
 		}
-		else if(ble_status == AT_BLE_TIMEOUT) {
+		else if(ble_status == AT_BLE_TIMEOUT)
+		{
 			DBG_LOG("Event get timeout");
 		}
-		else {
+		else
+		{
 			DBG_LOG("BLE error occurred");
 		}
+		
+		/* ******************************************
+		 * ULP MANAGEMENT
+		 * ****************************************** */
+		//if(ulp_ready) {
+			//release_sleep_lock();
+		//}
 	}
 }
 

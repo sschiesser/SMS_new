@@ -36,12 +36,12 @@
 
 #define BLE_CHAR_SIZE_BUTTON                            (SMS_BUTTON_BLE_CHAR_LEN)
 #define BLE_CHAR_SIZE_PRESSURE                          (SMS_PRESSURE_BLE_CHAR_LEN)
-#define BLE_CHAR_SIZE_MPU								(SMS_MPU_BLE_CHAR_LEN_QUAT)
+#define BLE_CHAR_SIZE_MPU								(SMS_IMU_BLE_CHAR_LEN_QUAT)
 #define BLE_CHAR_SIZE_MAX                               (BLE_CHAR_SIZE_MPU)
 
 #define RTS_BUTTON_POS									0
 #define RTS_PRESSURE_POS								1
-#define RTS_MPU_POS										2
+#define RTS_IMU_POS										2
 
 #define BLE_SEND_TIMEOUT								10
 
@@ -52,6 +52,10 @@
 #define BLE_APP_TIMEOUT_PAIR							(500) // 500 @ 10 ms resolution --> 5000 ms
 #define BLE_APP_TIMEOUT_NOTIFY							(2) // 2 @ 10 ms resolution --> 20 ms
 
+/* Additional error messages from BLE v4.1 (vol 2) specifications */
+#define BLE_ERR_UNKNOWN_LMP_PDU							(0x19) // unknown link manager message
+#define BLE_ERR_UNSPECIFIED								(0x1F) // unspecified error
+#define BLE_ERR_CONN_FAILED								(0x3E) // connection failed to establish
 /* ---------
 * VARIABLES
 * --------- */
@@ -80,10 +84,9 @@ typedef enum sms_ble_state {
 //volatile sms_ble_state_t ble_current_state;
 
 
-uint32_t sms_ble_timeout;
-
 struct ble_device_s {
 	volatile sms_ble_state_t current_state;
+	uint32_t timeout;
 	volatile uint8_t sending_queue;
 	at_ble_handle_t conn_handle;
 	uint8_t ind_retries;

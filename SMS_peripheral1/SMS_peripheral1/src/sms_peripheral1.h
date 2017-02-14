@@ -117,9 +117,6 @@ volatile sms_mode_t sms_working_mode;
 //}sms_plf_int_t;
 //volatile sms_plf_int_t sms_current_interrupt;
 
-uint8_t sms_btn_cnt;
-at_ble_handle_t sms_connection_handle;
-
 volatile bool ulp_ready;
 volatile bool ulp_active;
 volatile bool sensors_active;
