@@ -486,7 +486,7 @@ int sms_imu_poll_data(void)
 	
 	static uint32_t last_time = 0;
 	const uint32_t cnt_max = 0xffffffff/SMS_DUALTIMER_LOAD_US;
-	uint32_t now = (uint32_t)(dualtimer_get_value(DUALTIMER_TIMER1)/SMS_DUALTIMER_LOAD_US);
+	uint32_t now = (uint32_t)(dualtimer_get_value(timer1_instance.id)/SMS_DUALTIMER_LOAD_US);
 	uint32_t deltati = ((now < last_time) ? (last_time - now) : (cnt_max - now + last_time));
 	last_time = now;
 	float deltatf = (float)deltati / 1000000.0;

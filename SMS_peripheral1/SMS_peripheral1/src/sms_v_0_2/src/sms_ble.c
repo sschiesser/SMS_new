@@ -14,6 +14,9 @@ at_ble_status_t sms_ble_adv_report_fn(void *params)
 	at_ble_adv_report_t *adv_report = (at_ble_adv_report_t *)params;
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
 	DBG_LOG_DEV("[sms_ble_adv_report_fn]\t\tAdvertisement timeout...");
+
+	sms_led_blink_stop(SMS_LED_0);
+
 	sms_ble_power_down();
 	return AT_BLE_SUCCESS;
 }
@@ -44,11 +47,23 @@ at_ble_status_t sms_ble_connected_fn(void *params)
 at_ble_status_t sms_ble_disconnected_fn(void *params)
 {
 	at_ble_disconnected_t *disconnect = (at_ble_disconnected_t *)params;
-	if(ble_instance.current_state == BLE_STATE_PAIRED) {
+	
+	switch(ble_instance.current_state) {
+		case BLE_STATE_PAIRED:
 		pressure_device.state = PRESSURE_STATE_OFF;
 		sms_sensors_enable_callback(false, false);
 		sms_sensors_switch(false, false);
+		break;
+		
+		case BLE_STATE_ADVERTISING:
+		case BLE_STATE_CONNECTED:
+		sms_led_blink_stop(SMS_LED_0);
+		break;
+		
+		default:
+		break;
 	}
+
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
 	ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
 	
@@ -89,6 +104,9 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 		sms_monitor_get_states("[sms_ble_paired_fn]");
 		//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
 		
+		sms_led_blink_stop(SMS_LED_0);
+		
+		/* Try to switch of both sensors */
 		sms_sensors_switch(true, true);
 		
 		//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
@@ -123,8 +141,8 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 	//button_instance.current_state = sms_button_get_state();
 	//DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tNotification sent... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- operation: 0x%02x\r\n- status: 0x%02x", notification_status->conn_handle, notification_status->operation, notification_status->status);
-	sms_dualtimer_stop(DUALTIMER_TIMER2);
-	timer2_current_mode = TIMER2_MODE_NONE;
+	//sms_dualtimer_stop(DUALTIMER_TIMER2);
+	//timer2_current_mode = TIMER2_MODE_NONE;
 	ble_instance.current_state = BLE_STATE_PAIRED;
 	//DBG_LOG_DEV("[sms_ble_notification_confirmed_fn]\tEnabling button int...");
 	//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
@@ -136,9 +154,9 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 	//gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
 	
 	//DBG_LOG_DEV("Timer1 current mode: %d", timer1_current_mode);
-	if(timer1_current_mode == TIMER1_MODE_NONE) {
-		//ulp_ready = true;
-	}
+	//if(timer1_current_mode == TIMER1_MODE_NONE) {
+	////ulp_ready = true;
+	//}
 	return AT_BLE_SUCCESS;
 }
 
@@ -151,17 +169,17 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
 	//button_instance.current_state = sms_button_get_state();
 	//DBG_LOG_DEV("[sms_ble_indication_confirmed]\tIndication confirmed... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- char handle: 0x%04x\r\n- status: 0x%02x", indication_status->conn_handle, indication_status->char_handle, indication_status->status);
-	sms_dualtimer_stop(DUALTIMER_TIMER2);
-	timer2_current_mode = TIMER2_MODE_NONE;
+	//sms_dualtimer_stop(DUALTIMER_TIMER2);
+	//timer2_current_mode = TIMER2_MODE_NONE;
 	ble_instance.current_state = BLE_STATE_PAIRED;
 	//sms_button_toggle_interrupt(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
 	//sms_sensors_toggle_interrupt(SMS_EXTINT_ENABLE);
 	
 	//gpio_pin_set_output_level(dbg_pin, DBG_PIN_LOW);
 	
-	if(timer1_current_mode == TIMER1_MODE_NONE) {
-		//ulp_ready = true;
-	}
+	//if(timer1_current_mode == TIMER1_MODE_NONE) {
+	////ulp_ready = true;
+	//}
 	return AT_BLE_SUCCESS;
 }
 
@@ -265,10 +283,10 @@ void sms_ble_power_down(void)
 	}
 	
 	/* Common part:
-	 * - set BLE state to power-off
-	 * - blink LED
-	 * - enable ULP
-	 */
+	* - set BLE state to power-off
+	* - blink LED
+	* - enable ULP
+	*/
 	ble_instance.current_state = BLE_STATE_POWEROFF;
 	for(uint8_t i = 0; i < SMS_BLINK_SHTDWN_CNT; i++) {
 		sms_led_toggle(SMS_LED_0);
@@ -292,6 +310,8 @@ at_ble_status_t sms_ble_advertise(void)
 	if((status = at_ble_adv_start(AT_BLE_ADV_TYPE_UNDIRECTED, AT_BLE_ADV_GEN_DISCOVERABLE, NULL, AT_BLE_ADV_FP_ANY, BLE_ADV_INTERVAL, BLE_ADV_TIMEOUT, 0)) == AT_BLE_SUCCESS)
 	{
 		DBG_LOG_DEV("[sms_ble_advertise]\t\tBLE started advertisement");
+		sms_led_blink_start(SMS_LED_0, TIMER_MODE_ADVERTISING);
+		/* */
 		return AT_BLE_SUCCESS;
 	}
 	else {

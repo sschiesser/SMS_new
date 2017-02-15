@@ -28,7 +28,7 @@ void sms_monitor_configure_gpio(void)
 
 void sms_monitor_get_states(const char *label)
 {
-    DBG_LOG_DEV("%s...\t\tB-prev %d, B-cur %d, BLE 0x%02x, T1 %d, T2 %d, SMS %d", label, button_instance.previous_state, button_instance.current_state, ble_instance.current_state, timer1_current_mode, timer2_current_mode, sms_working_mode);
+    DBG_LOG_DEV("%s...\t\tB-prev %d, B-cur %d, BLE 0x%02x, T1 %d, T2 %d, SMS %d", label, button_instance.previous_state, button_instance.current_state, ble_instance.current_state, timer1_instance.current_mode, timer2_instance.current_mode, sms_working_mode);
 }
 
 void sms_disable_irq(enum sms_irq irq)

@@ -52,31 +52,30 @@
 /* ---------
  * VARIABLES
  * --------- */
-typedef enum timer1_modes {
-    TIMER1_MODE_NONE = 0x00,
-    TIMER1_MODE_STARTUP,
-    //TIMER1_MODE_MS58_RESET,
-    TIMER1_MODE_SHUTDOWN
-}timer1_modes_t;
-volatile timer1_modes_t timer1_current_mode;
-
-typedef struct timer_struct {
+enum sms_timer_modes {
+    TIMER_MODE_NONE = 0x00,
+	TIMER_MODE_ADVERTISING,
+	TIMER_MODE_INDICATING,
+	TIMER_MODE_CONN_LOST
+};
+struct timer_struct_s {
 	enum dualtimer_timer id;
+	enum sms_timer_modes current_mode;
 	bool int_enabled;
 	volatile bool new_int;
-}timer_struct_t;
-timer_struct_t timer1_instance;
-timer_struct_t timer2_instance;
+};
+struct timer_struct_s timer1_instance;
+struct timer_struct_s timer2_instance;
 
-typedef enum timer2_modes {
-    TIMER2_MODE_NONE,
-    TIMER2_MODE_INDICATION_TOUT,
-    TIMER2_MODE_LED_STARTUP,
-    TIMER2_MODE_LED_SHUTDOWN,
-    TIMER2_MODE_LED_ADVERTISING,
-    TIMER2_MODE_LED_CONNECTION_LOST
-}timer2_modes_t;
-volatile timer2_modes_t timer2_current_mode;
+//typedef enum timer2_modes {
+    //TIMER2_MODE_NONE,
+    //TIMER2_MODE_INDICATION_TOUT,
+    //TIMER2_MODE_LED_STARTUP,
+    //TIMER2_MODE_LED_SHUTDOWN,
+    //TIMER2_MODE_LED_ADVERTISING,
+    //TIMER2_MODE_LED_CONNECTION_LOST
+//}timer2_modes_t;
+//volatile timer2_modes_t timer2_current_mode;
 
 /** Enum for the possible callback types for the timer module. */
 enum timer_callback_type {
@@ -116,6 +115,7 @@ void sms_timer_aon_get_value(void);
 
 void sms_dualtimer_init(void);
 void sms_dualtimer_register_callback(enum dualtimer_timer tmr, sms_dualtimer_callback_t cb_ptr);
+void sms_dualtimer_unregister_callback(enum dualtimer_timer tmr);
 void sms_dualtimer_start(timer_unit_type_t unit, uint32_t delay, enum dualtimer_timer tmr);
 void sms_dualtimer_stop(enum dualtimer_timer tmr);
 void sms_dualtimer1_cb(void);

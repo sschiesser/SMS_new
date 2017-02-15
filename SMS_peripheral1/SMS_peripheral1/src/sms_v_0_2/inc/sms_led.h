@@ -20,10 +20,11 @@
 #define SMS_LED_ACTIVE false
 #define SMS_LED_INACTIVE true
 
-#define SMS_BLINK_STARTUP_MS 100
-#define SMS_BLINK_STARTUP_CNT 10
-#define SMS_BLINK_SHTDWN_MS 400
-#define SMS_BLINK_SHTDWN_CNT 4
+#define SMS_BLINK_STARTUP_MS				(100)
+#define SMS_BLINK_STARTUP_CNT				(10)
+#define SMS_BLINK_SHTDWN_MS					(400)
+#define SMS_BLINK_SHTDWN_CNT				(4)
+#define SMS_BLINK_ADV_MS					(1000)
 
 /* ---------
  * VARIABLES
@@ -50,7 +51,8 @@ void sms_led_switch_on(enum sms_leds led);
 void sms_led_switch_off(enum sms_leds led);
 void sms_led_toggle(enum sms_leds led);
 bool sms_led_get_state(enum sms_leds led);
-void sms_led_blink_start(enum sms_leds led);
+void sms_led_blink_start(enum sms_leds led, enum sms_timer_modes mode);
+void sms_led_blink_stop(enum sms_leds led);
 void sms_led_blink_fast(enum sms_leds led);
 void sms_led_blink_slow(enum sms_leds led);
 

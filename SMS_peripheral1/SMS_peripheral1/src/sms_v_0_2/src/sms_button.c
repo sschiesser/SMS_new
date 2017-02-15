@@ -30,20 +30,15 @@ int sms_button_fn(enum sms_btn_ids btn)
             case BLE_STATE_POWEROFF: // start-up command?
 			DBG_LOG_DEV("[sms_button_fn]\t\t\tWaking up ");
 			sms_disable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
-			for(uint8_t i = 0; i < 50; i++) {
-				//gpio_pin_set_output_level(DBG_PIN_1, true);
-				delay_ms(50);
+			for(uint8_t i = 0; i < SMS_BTN_STARTUP_CNT; i++) {
+				delay_ms(SMS_BTN_STARTUP_MS);
 				if(sms_button_get_state() != button_instance.current_state) {
-					//gpio_pin_set_output_level(DBG_PIN_2, true);
 					wait_success = false;
 					break;
 				}
-				//gpio_pin_set_output_level(DBG_PIN_1, false);
 				DBG_LOG_CONT_DEV(".");
 			}
 			sms_enable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
-			//gpio_pin_set_output_level(DBG_PIN_2, false);
-			//gpio_pin_set_output_level(DBG_PIN_1, false);
 			if(wait_success) {
 				if(sms_ble_startup()) return -1;
 			}
@@ -73,8 +68,8 @@ int sms_button_fn(enum sms_btn_ids btn)
         else {
 			DBG_LOG_DEV("[sms_button_fn]\t\t\tShutting down ");
 			sms_disable_irq(SMS_BTN_0_IRQ | SMS_BTN_1_IRQ);
-			for(uint8_t i = 0; i < 50; i++) {
-				delay_ms(50);
+			for(uint8_t i = 0; i < SMS_BTN_SHTDWN_CNT; i++) {
+				delay_ms(SMS_BTN_SHTDWN_MS);
 				if(sms_button_get_state() != button_instance.current_state) {
 					wait_success = false;
 					break;
@@ -160,11 +155,11 @@ void sms_button_gpio_init(void)
 void sms_button_register_callbacks(void)
 {
     /* Button0 callback */
-    gpio_register_callback(button_instance.btn0.gpio_pin, sms_button_bt0_callback, GPIO_CALLBACK_RISING);
+    gpio_register_callback(button_instance.btn0.gpio_pin, sms_button_bt0_callback, GPIO_CALLBACK_HIGH);
     //gpio_enable_callback(SMS_BTN_0_PIN);
     
     /* Button1 callback */
-    gpio_register_callback(button_instance.btn1.gpio_pin, sms_button_bt1_callback, GPIO_CALLBACK_RISING);
+    gpio_register_callback(button_instance.btn1.gpio_pin, sms_button_bt1_callback, GPIO_CALLBACK_HIGH);
     //gpio_enable_callback(SMS_BTN_1_PIN);
     
     /* User button callback */
@@ -203,12 +198,12 @@ void sms_button_toggle_callback(enum sms_btn_int_tog tog0, enum sms_btn_int_tog 
 void sms_button_bt0_callback(void)
 {
     button_instance.btn0.new_int = true;
-    send_plf_int_msg_ind(button_instance.btn0.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
+    send_plf_int_msg_ind(button_instance.btn0.gpio_pin, GPIO_CALLBACK_HIGH, NULL, 0);
 }
 void sms_button_bt1_callback(void)
 {
 	button_instance.btn1.new_int = true;
-    send_plf_int_msg_ind(button_instance.btn1.gpio_pin, GPIO_CALLBACK_RISING, NULL, 0);
+    send_plf_int_msg_ind(button_instance.btn1.gpio_pin, GPIO_CALLBACK_HIGH, NULL, 0);
 }
 
 /* Define BLE service for buttons */

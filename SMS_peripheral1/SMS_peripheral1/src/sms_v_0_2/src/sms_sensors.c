@@ -38,18 +38,25 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     if(mpu_en) {
         if(sms_imu_startup()) {
 	        DBG_LOG("[sms_sensors_switch]\t\tCouldn't start IMU");
-			dualtimer_disable(DUALTIMER_TIMER1);
+			dualtimer_disable(timer1_instance.id);
 			imu_device.state = IMU_STATE_OFF;
 			imu_device.config.init_ok = false;
         }
         else {
-			dualtimer_enable(DUALTIMER_TIMER1);
+			/* */
+			struct dualtimer_config config;
+			config.timer1.load_value = 0xffffffff;
+			config.timer1.interrup_enable = false;
+			config.timer1.counter_mode = DUALTIMER_FREE_RUNNING_MODE;
+			dualtimer_init(&config);
+			dualtimer_disable(timer2_instance.id);
+			dualtimer_enable(timer1_instance.id);
 			imu_device.state = IMU_STATE_ON;
 	        imu_device.config.init_ok = true;
         }
     }
     else {
-		dualtimer_disable(DUALTIMER_TIMER1);
+		dualtimer_disable(timer1_instance.id);
         imu_device.state = IMU_STATE_OFF;
 		imu_device.config.init_ok = false;
 		// switch off VCC pin to save current...

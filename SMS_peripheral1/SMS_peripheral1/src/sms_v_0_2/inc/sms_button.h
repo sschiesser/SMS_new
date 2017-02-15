@@ -46,10 +46,10 @@
 
 #define SMS_BTN_NUMBER                      (2)
 
-#define SMS_BTN_SHTDWN_MS                   (250)
-#define SMS_BTN_SHTDWN_CNT                  (10)
-#define SMS_BTN_STARTUP_MS                  (250)
-#define SMS_BTN_STARTUP_CNT                 (16)
+#define SMS_BTN_SHTDWN_MS                   (50)
+#define SMS_BTN_SHTDWN_CNT                  (50)
+#define SMS_BTN_STARTUP_MS                  (50)
+#define SMS_BTN_STARTUP_CNT                 (50)
 
 
 /* ---------

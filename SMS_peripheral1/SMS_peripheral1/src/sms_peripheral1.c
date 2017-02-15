@@ -56,8 +56,6 @@
 
 void sms_init_variables(void)
 {
-	timer1_current_mode = TIMER1_MODE_NONE;
-	timer2_current_mode = TIMER2_MODE_NONE;
 	sms_working_mode = SMS_MODE_BUTTON_SOLO;
 	ulp_ready = false;
 	ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
@@ -162,8 +160,6 @@ int main(void)
 	/* Enable buttons interrupts
 	* ------------------------- */
 	sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
-
-	//sms_button_toggle_callback(SMS_BTN_INT_DISABLE, SMS_BTN_INT_DISABLE);
 	
 	/* Goto sleep
 	* ---------- */
@@ -226,17 +222,19 @@ int main(void)
 			 * TIMER INTERRUPT REGION
 			 * ****************************************** */
 			//if(timer1_instance.new_int) {
-			//DBG_LOG("Timer1 int... ");
-			//sms_dualtimer_stop(DUALTIMER_TIMER1);
-			//sms_dualtimer1_fn();
-			//timer1_instance.new_int = false;
+				//gpio_pin_set_output_level(DBG_PIN_1, true);
+				//DBG_LOG("Timer1 int... ");
+				////sms_dualtimer_stop(DUALTIMER_TIMER1);
+				//sms_dualtimer1_fn();
+				//timer1_instance.new_int = false;
+				//gpio_pin_set_output_level(DBG_PIN_1, false);
 			//}
-			//if(timer2_instance.new_int) {
-			//DBG_LOG("Timer2 int... ");
-			//sms_dualtimer_stop(DUALTIMER_TIMER2);
-			//sms_dualtimer2_fn();
-			//timer2_instance.new_int = false;
-			//}
+			if(timer2_instance.new_int) {
+				DBG_LOG("Timer2 int... ");
+				//sms_dualtimer_stop(DUALTIMER_TIMER2);
+				sms_dualtimer2_fn();
+				timer2_instance.new_int = false;
+			}
 			
 			/* ******************************************
 			 * SENDING REGION
@@ -265,7 +263,7 @@ int main(void)
 				pressure_device.interrupt.rts = false;
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
-			DBG_LOG("BLE event task end");
+			//DBG_LOG("BLE event task end");
 		}
 		else if(ble_status == AT_BLE_GAP_TIMEOUT)
 		{
