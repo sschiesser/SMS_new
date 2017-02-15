@@ -41,15 +41,16 @@
 #define	MS58_PROM_READ_6               (0xAC)
 #define	MS58_PROM_READ_7               (0xAE)
 
-#define MS58_COEFF_256                 (256)
-#define MS58_COEFF_512                 (512)
-#define MS58_COEFF_1024                (1024)
-#define MS58_COEFF_2048                (2048)
-#define MS58_COEFF_4096                (4096)
+#define MS58_COEFF_256					(256)
+#define MS58_COEFF_512					(512)
+#define MS58_COEFF_1024					(1024)
+#define MS58_COEFF_2048					(2048)
+#define MS58_COEFF_4096					(4096)
 
-#define MS58_PROM_VALUES_MAX           (8)
-#define MS58_ADC_VALUES_MAX            (2)
-#define MS58_BUF_SIZE                  (4)
+#define MS58_PROM_VAL_ERR				(65000)
+#define MS58_PROM_VAL_MAX				(8)
+#define MS58_ADC_VAL_MAX				(2)
+#define MS58_BUF_SIZE					(4)
 
 /* === Types ================================================================ */
 typedef enum ms58_datatype_tag {
@@ -69,8 +70,8 @@ struct ms58_config_s {
     uint8_t osr;
 };
 struct ms58_output_s {
-	uint16_t prom_values[MS58_PROM_VALUES_MAX];
-	uint32_t adc_values[MS58_ADC_VALUES_MAX];
+	uint16_t prom_values[MS58_PROM_VAL_MAX];
+	uint32_t adc_values[MS58_ADC_VAL_MAX];
 	bool complete;
 	int32_t pressure;
 	int32_t temperature;

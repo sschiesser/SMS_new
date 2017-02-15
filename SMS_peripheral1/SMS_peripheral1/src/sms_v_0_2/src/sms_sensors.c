@@ -36,6 +36,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 {
     /* IMU */
     if(mpu_en) {
+		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching on MPU");
         if(sms_imu_startup()) {
 	        DBG_LOG("[sms_sensors_switch]\t\tCouldn't start IMU");
 			dualtimer_disable(timer1_instance.id);
@@ -56,6 +57,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
         }
     }
     else {
+		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching off MPU");
 		dualtimer_disable(timer1_instance.id);
         imu_device.state = IMU_STATE_OFF;
 		imu_device.config.init_ok = false;
@@ -63,7 +65,8 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     }
     
     /* Pressure */
-    if(press_en) {                
+    if(press_en) {   
+		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching on pressure");             
         if(sms_pressure_startup()) {
 			DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't start pressure sensor");
 			sms_timer_aon_disable();
@@ -77,6 +80,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 		}
     }
     else {
+		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching off pressure");
 		sms_timer_aon_disable();
 		pressure_device.state = PRESSURE_STATE_OFF;
 		pressure_device.config.init_ok = false;

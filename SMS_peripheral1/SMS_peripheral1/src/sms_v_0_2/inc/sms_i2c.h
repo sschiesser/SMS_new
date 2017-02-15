@@ -33,7 +33,7 @@
 #define SMS_I2C_MASTER_MUX_SCL          (MUX_LP_GPIO_9_I2C0_SCL)
 
 #define I2C_DATA_LENGTH                 (16)
-#define I2C_TIMEOUT                     (1000)
+#define I2C_TIMEOUT                     (50)
 
 /* ---------
  * VARIABLES

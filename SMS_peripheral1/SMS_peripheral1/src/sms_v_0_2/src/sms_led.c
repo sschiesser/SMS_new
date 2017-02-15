@@ -66,26 +66,3 @@ void sms_led_blink_stop(enum sms_leds led)
 	timer2_instance.current_mode = TIMER_MODE_NONE;
 	sms_dualtimer_unregister_callback(timer2_instance.id);
 }
-
-//void sms_led_blink_fast(enum sms_leds led)
-//{
-//uint8_t cnt;
-//for(cnt = 0; cnt < LED_BLINK_FAST_CNT; cnt++) {
-//sms_led_switch_on(led);
-////delay_ms(LED_BLINK_FAST_MS);
-//sms_led_switch_off(led);
-////delay_ms(LED_BLINK_FAST_MS);
-//}
-//}
-//
-//
-//void sms_led_blink_slow(enum sms_leds led)
-//{
-//uint8_t cnt;
-//for(cnt = 0; cnt < LED_BLINK_SLOW_CNT; cnt++) {
-//sms_led_switch_on(led);
-////delay_ms(LED_BLINK_SLOW_MS);
-//sms_led_switch_off(led);
-////delay_ms(LED_BLINK_SLOW_MS);
-//}
-//}

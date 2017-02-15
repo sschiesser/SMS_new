@@ -42,9 +42,6 @@ void sms_timer_aon_unregister_callback(void)
     NVIC_DisableIRQ(AON_SLEEP_TIMER0_IRQn);
 }
 
-//void sms_timer_aon_get_value(void)
-//{
-//}
 
 /* DUALTIMER */
 void sms_dualtimer_init(void)
@@ -61,12 +58,11 @@ void sms_dualtimer_init(void)
 
 	/* Dualtimer1 used for background us counting without interrupts
 	 * (similar to the millis() or micros() functions in Arduino) */
-    //config_dualtimer.timer1.load_value = SMS_DUALTIMER_LOAD_US;
 	config_dualtimer.timer1.load_value = 0xFFFFFFFF;
     config_dualtimer.timer1.counter_mode = DUALTIMER_FREE_RUNNING_MODE;
 	config_dualtimer.timer1.interrup_enable = false;
-	/* Dualtimer1 used first as a blocking ms delay
-	 * (could be changed after device startup and initialization) */
+	/* Dualtimer2 used first as a ms delay... 
+	 * blocking (without cb) or not (with cb) */
     config_dualtimer.timer2.load_value = SMS_DUALTIMER_LOAD_MS;
     config_dualtimer.timer2.counter_mode = DUALTIMER_ONE_SHOT_MODE;
 	config_dualtimer.timer2.interrup_enable = true;
@@ -430,8 +426,8 @@ void sms_dualtimer2_fn(void)
 }
 
 void delay_ms(uint32_t delay) {
-	sms_dualtimer_start(TIMER_UNIT_MS, delay, DUALTIMER_TIMER2);
-	while(dualtimer_get_value(DUALTIMER_TIMER2)) {
+	sms_dualtimer_start(TIMER_UNIT_MS, delay, timer2_instance.id);
+	while(dualtimer_get_value(timer2_instance.id) != 0) {
 	}
-	sms_dualtimer_stop(DUALTIMER_TIMER2);
+	sms_dualtimer_stop(timer2_instance.id);
 }

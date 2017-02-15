@@ -195,7 +195,7 @@ int main(void)
 			}
 			if(imu_device.interrupt.new_gyro) {
 				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				//DBG_LOG("MPU int (%ld)... ", cnt++);
+				DBG_LOG("MPU int (%ld)... ", cnt++);
 				//sms_imu_poll_data();
 				//static uint32_t past = 0;
 				//const uint32_t cnt_max = 23 * SMS_TIMER_AON_LOAD_1MS / SMS_TIMER_AON_LOAD_100US;
@@ -209,7 +209,7 @@ int main(void)
 				//DBG_LOG_CONT_DEV("done");
 			}
 			if(pressure_device.interrupt.new_value) {
-				//DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
+				DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
 				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				//sms_pressure_poll_data();
 				pressure_device.interrupt.new_value = false;
@@ -230,7 +230,7 @@ int main(void)
 				//gpio_pin_set_output_level(DBG_PIN_1, false);
 			//}
 			if(timer2_instance.new_int) {
-				DBG_LOG("Timer2 int... ");
+				DBG_LOG_DEV("Timer2 int... ");
 				//sms_dualtimer_stop(DUALTIMER_TIMER2);
 				sms_dualtimer2_fn();
 				timer2_instance.new_int = false;

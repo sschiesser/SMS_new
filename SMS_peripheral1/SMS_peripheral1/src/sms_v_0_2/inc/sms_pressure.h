@@ -56,7 +56,7 @@ struct sms_pressure_struct_s pressure_device;
 void sms_pressure_init_variables(void);
 void sms_pressure_configure_gpio(void);
 int sms_pressure_startup(void);
-int sms_pressure_init(void);
+enum status_code sms_pressure_init(void);
 enum status_code sms_pressure_ms58_reset(void);
 void sms_pressure_poll_data(void);
 int sms_pressure_ms58_read_prom(void);

@@ -44,13 +44,17 @@ int sms_pressure_startup(void)
         DBG_LOG("[sms_pressure_startup]\t\t\tFailed to initialize pressure device");
         return -1;
     }
+	DBG_LOG_DEV("[sms_pressure_startup]\t\t\tReturning 0...");
 	return 0;
 }
 
-int sms_pressure_init(void)
+enum status_code sms_pressure_init(void)
 {
     /* Read the PROM values */
-    return sms_pressure_ms58_read_prom();
+	DBG_LOG_DEV("Pressure init..");
+    if(sms_pressure_ms58_read_prom()) return STATUS_ERR_IO;
+	
+	return STATUS_OK;
 }
 
 enum status_code sms_pressure_ms58_reset(void)
@@ -59,7 +63,9 @@ enum status_code sms_pressure_ms58_reset(void)
     spi_wdata[0] = MS58_RESET;
     if((status = sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1)) != STATUS_OK) return status;
 	
-	delay_ms(SMS_PRESSURE_RESET_MS);
+	//delay_ms(SMS_PRESSURE_RESET_MS);
+	delay_ms(10);
+	DBG_LOG_CONT_DEV(" done");
 	return STATUS_OK;
 }
 
@@ -83,7 +89,7 @@ void sms_pressure_poll_data(void)
 
 int sms_pressure_ms58_read_prom(void)
 {
-    //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] reading bytes... ");
+    DBG_LOG_DEV("[sms_pressure_ms58_read_prom] reading bytes... ");
     spi_wdata[0] = MS58_PROM_READ_1;
     spi_wdata[1] = 0x00;
     spi_wdata[2] = 0x00;
@@ -121,10 +127,11 @@ int sms_pressure_ms58_read_prom(void)
     //DBG_LOG_DEV("[sms_pressure_ms58_read_prom] wdata[0]: 0x%02x, rdata[0]: 0x%02x\n\r  wdata[1]: 0x%02x, rdata[1]: 0x%02x\n\r  wdata[2]: 0x%02x, rdata[2]: 0x%02x", spi_wdata[0], spi_rdata[0], spi_wdata[1], spi_rdata[1], spi_wdata[2], spi_rdata[2]);
     pressure_device.output.prom_values[7] = (spi_rdata[1] << 8) | (spi_rdata[2]);
 
-    //DBG_LOG_CONT_DEV("done! Results:");
-    //for(uint8_t i = 1; i < MS58_PROM_VALUES_MAX; i++) {
-        //DBG_LOG_DEV("  C%d -> %d", (i+1), ms58_device.prom_values[i]);
-    //}
+    DBG_LOG_CONT_DEV("done! Results:");
+    for(uint8_t i = 1; i < MS58_PROM_VAL_MAX; i++) {
+        DBG_LOG_DEV("  C%d -> %d", (i+1), pressure_device.output.prom_values[i]);
+		if(pressure_device.output.prom_values[i] > MS58_PROM_VAL_ERR) return -1;
+    }
 
     return 0;
 }

@@ -86,9 +86,9 @@ int sms_imu_mpu_check(void) {
 	int retVal = -1;
 	uint8_t c = readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
 	if(c == 0x71) {
-		//DBG_LOG("[sms_mpu_check]\t\tMPU-9250 is online...");
+		DBG_LOG_DEV("[sms_mpu_check]\t\t\tMPU-9250 is online...");
 		sms_imu_selftest(imu_device.config.self_test);
-		//DBG_LOG("[sms_mpu_check]\t\tMPU-9250 self-test passed");
+		DBG_LOG_DEV("[sms_mpu_check]\t\t\tMPU-9250 self-test passed");
 		retVal = 0;
 	}
 	return retVal;
@@ -107,6 +107,7 @@ int sms_imu_comp_check(void)
 /* Calculate biases for gyro and accel and write them into MPU registers */
 void sms_imu_mpu_calibrate(float *dest1, float *dest2)
 {
+	DBG_LOG_DEV("Calibrating MPU");
 	uint8_t data[12]; // data array to hold accelerometer and gyro x, y, z, data
 	uint16_t ii, packet_count, fifo_count;
 	int32_t gyro_bias[3]  = {0, 0, 0};
@@ -371,6 +372,7 @@ void sms_imu_init_variables(void)
 /* MPU */
 void sms_imu_mpu_initialize(void)
 {
+	DBG_LOG_DEV("Initializing MPU");
 	// wake up device
 	writeByte(MPU9250_ADDRESS, PWR_MGMT_1, 0x00); // Clear sleep mode bit (6), enable all sensors
 	delay_ms(100); // Wait for all registers to reset
