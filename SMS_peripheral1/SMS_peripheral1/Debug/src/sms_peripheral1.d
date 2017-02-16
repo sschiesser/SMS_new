@@ -126,7 +126,7 @@ src/sms_peripheral1.d src/sms_peripheral1.o: ../src/sms_peripheral1.c \
  ../src/sms_v_0_2/inc/ms58.h ../src/sms_v_0_2/inc/sms_imu.h \
  ../src/ASF/thirdparty/sensor/mpu9250_kriswiner/mpu9250.h \
  ../src/sms_v_0_2/inc/sms_timer.h ../src/sms_v_0_2/inc/sms_led.h \
- ../src/sms_v_0_2/inc/sms_ble.h
+ ../src/sms_v_0_2/inc/sms_timer.h ../src/sms_v_0_2/inc/sms_ble.h
 
 ../src/sms_peripheral1.h:
 
@@ -401,5 +401,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../src/sms_v_0_2/inc/sms_timer.h:
 
 ../src/sms_v_0_2/inc/sms_led.h:
+
+../src/sms_v_0_2/inc/sms_timer.h:
 
 ../src/sms_v_0_2/inc/sms_ble.h:

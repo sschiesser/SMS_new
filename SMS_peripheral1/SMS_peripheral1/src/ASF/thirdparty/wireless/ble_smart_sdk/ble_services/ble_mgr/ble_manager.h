@@ -66,48 +66,48 @@
 #define OTAU_FEATURE false
 #endif
 
-#if OTAU_FEATURE
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-OTA"
-#endif /* BLE_DEVICE_NAME */
-#endif /* OTA_FEATURE */
+//#if OTAU_FEATURE
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-OTA"
+//#endif /* BLE_DEVICE_NAME */
+//#endif /* OTA_FEATURE */
 
-#if defined HID_DEVICE
-	#ifdef HID_KEYBOARD_DEVICE
-	#ifndef BLE_DEVICE_NAME
-		#define BLE_DEVICE_NAME				"ATMEL-HID"
-	#endif	/* BLE_DEVICE_NAME */
-	#define BLE_AUTHENTICATION_LEVEL	(AT_BLE_NO_SEC)
-	#define BLE_IO_CAPABALITIES			(AT_BLE_IO_CAP_NO_INPUT_NO_OUTPUT)
-	#define BLE_MITM_REQ				(false)
-	#define BLE_BOND_REQ				(false)
-	#define BLE_PAIR_ENABLE				(false)
-	#endif
+//#if defined HID_DEVICE
+	//#ifdef HID_KEYBOARD_DEVICE
+	//#ifndef BLE_DEVICE_NAME
+		//#define BLE_DEVICE_NAME				"ATMEL-HID"
+	//#endif	/* BLE_DEVICE_NAME */
+	//#define BLE_AUTHENTICATION_LEVEL	(AT_BLE_NO_SEC)
+	//#define BLE_IO_CAPABALITIES			(AT_BLE_IO_CAP_NO_INPUT_NO_OUTPUT)
+	//#define BLE_MITM_REQ				(false)
+	//#define BLE_BOND_REQ				(false)
+	//#define BLE_PAIR_ENABLE				(false)
+	//#endif
+//
+//#ifdef HID_MOUSE_DEVICE
+//#ifndef BLE_DEVICE_NAME
+	//#define BLE_DEVICE_NAME				"ATMEL-HID"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif
+//#endif /* HID_DEVICE */
 
-#ifdef HID_MOUSE_DEVICE
-#ifndef BLE_DEVICE_NAME
-	#define BLE_DEVICE_NAME				"ATMEL-HID"
-#endif	/* BLE_DEVICE_NAME */
-#endif
-#endif /* HID_DEVICE */
+//#if defined PROXIMITY_REPORTER
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-PXP"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* PROXIMITY_REPORTER */
 
-#if defined PROXIMITY_REPORTER
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-PXP"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* PROXIMITY_REPORTER */
+//#if defined HR_SENSOR
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-HRP"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* HR_SENSOR */
 
-#if defined HR_SENSOR
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-HRP"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* HR_SENSOR */
-
-#if defined BLP_SENSOR
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-BLP"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* Blood_Pressure_Sensor*/
+//#if defined BLP_SENSOR
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-BLP"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* Blood_Pressure_Sensor*/
 
 #if (BLE_DEVICE_ROLE == BLE_ROLE_OBSERVER)
 #ifndef BLE_DEVICE_NAME
@@ -115,78 +115,78 @@
 #endif	/* BLE_DEVICE_NAME */
 #endif /* BLE_DEVICE_ROLE == BLE_ROLE_OBSERVER) */
 
-#if defined ANP_CLIENT
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-ANCS"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* ANCS_CLIENT */
+//#if defined ANP_CLIENT
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-ANCS"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* ANCS_CLIENT */
 
-#if defined TIP_CLIENT
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-TIP"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* TIP_CLIENT */
+//#if defined TIP_CLIENT
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-TIP"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* TIP_CLIENT */
 
-#if defined FIND_ME_TARGET
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-FMP"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* FIND_ME_TARGET */
+//#if defined FIND_ME_TARGET
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-FMP"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* FIND_ME_TARGET */
 
-#if defined ANP_SIG_CLIENT
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-ANS"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* ANP_SIG_CLIENT */
+//#if defined ANP_SIG_CLIENT
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-ANS"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* ANP_SIG_CLIENT */
 
-#if defined PAS_CLIENT
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-PAS"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* PAS_CLIENT */
-
-
-#if defined CSC_DEVICE
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"AT-CSC"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* CSC_DEVICE */
-
-#if defined	BATTERY_SERVICE
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-BAS"
-#endif	/* BLE_DEVICE_NAME */
-#endif /*BATTERY_SERVICE*/
+//#if defined PAS_CLIENT
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-PAS"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* PAS_CLIENT */
 
 
-#if defined	SCAN_PARAM_SERVICE
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-SCP"
-#endif	/* BLE_DEVICE_NAME */
-#endif	/*SCAN_PARAM_SERVICE*/
+//#if defined CSC_DEVICE
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"AT-CSC"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* CSC_DEVICE */
 
-#if defined HTPT_SERVICE
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME "ATMEL-HTP"
-#endif  
-#endif
+//#if defined	BATTERY_SERVICE
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-BAS"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /*BATTERY_SERVICE*/
 
-#if defined	DEVICE_INFORMATION_SERVICE
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-DIS"
-#endif	/* BLE_DEVICE_NAME */
-#endif	/* DEVICE_INFORMATION_SERVICE */
 
-#if defined PROXIMITY_MONITOR
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-MON"
-#endif	/* BLE_DEVICE_NAME */
-#endif /* PROXIMITY_MONITOR */
+//#if defined	SCAN_PARAM_SERVICE
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-SCP"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif	/*SCAN_PARAM_SERVICE*/
+
+//#if defined HTPT_SERVICE
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME "ATMEL-HTP"
+//#endif  
+//#endif
+
+//#if defined	DEVICE_INFORMATION_SERVICE
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-DIS"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif	/* DEVICE_INFORMATION_SERVICE */
+
+//#if defined PROXIMITY_MONITOR
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-MON"
+//#endif	/* BLE_DEVICE_NAME */
+//#endif /* PROXIMITY_MONITOR */
 
 /** @brief default device name */
-#ifndef BLE_DEVICE_NAME
-#define BLE_DEVICE_NAME				"ATMEL-BLE"
-#endif
+//#ifndef BLE_DEVICE_NAME
+//#define BLE_DEVICE_NAME				"ATMEL-BLE"
+//#endif
 
 #define GAP_HANDLE_FUNC_MAX 19
 #define GATT_CLIENT_HANDLER_FUNC_MAX 10

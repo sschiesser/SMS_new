@@ -6,6 +6,7 @@
 */
 
 #include "sms_led.h"
+#include "sms_timer.h"
 
 void sms_led_gpio_init(void)
 {
@@ -23,16 +24,16 @@ void sms_led_gpio_init(void)
 
 void sms_led_switch_on(enum sms_leds led)
 {
-	gpio_pin_set_output_level(led, SMS_LED_ACTIVE);
+	gpio_pin_set_output_level(led, LED_ON);
 }
 void sms_led_switch_off(enum sms_leds led)
 {
-	gpio_pin_set_output_level(led, SMS_LED_INACTIVE);
+	gpio_pin_set_output_level(led, LED_OFF);
 }
 void sms_led_toggle(enum sms_leds led)
 {
 	bool state = sms_led_get_state(led);
-	if(state == SMS_LED_ACTIVE) sms_led_switch_off(led);
+	if(state == LED_ON) sms_led_switch_off(led);
 	else sms_led_switch_on(led);
 }
 bool sms_led_get_state(enum sms_leds led)
@@ -40,12 +41,12 @@ bool sms_led_get_state(enum sms_leds led)
 	return gpio_pin_get_output_level(led);
 }
 
-void sms_led_blink_start(enum sms_leds led, enum sms_timer_modes mode)
+void sms_led_blink_start(enum sms_leds led, enum sms_timer_modes t_mode)
 {
 	sms_led_switch_on(led);
 	uint32_t delay = 0;
-	timer2_instance.current_mode = mode;
-	switch(mode) {
+	timer2_instance.current_mode = t_mode;
+	switch(t_mode) {
 		case TIMER_MODE_ADVERTISING:
 		delay = SMS_BLINK_ADV_MS;
 		break;

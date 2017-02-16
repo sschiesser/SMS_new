@@ -11,7 +11,7 @@
 /* AT_BLE_ADV_REPORT (#3) */
 at_ble_status_t sms_ble_adv_report_fn(void *params)
 {
-	at_ble_adv_report_t *adv_report = (at_ble_adv_report_t *)params;
+	//at_ble_adv_report_t *adv_report = (at_ble_adv_report_t *)params;
 	ble_instance.current_state = BLE_STATE_DISCONNECTED;
 	DBG_LOG_DEV("[sms_ble_adv_report_fn]\t\tAdvertisement timeout...");
 
@@ -98,9 +98,9 @@ at_ble_status_t sms_ble_disconnected_fn(void *params)
 /* AT_BLE_PAIR_DONE (#9) */
 at_ble_status_t sms_ble_paired_fn(void *params)
 {
+	//at_ble_pair_done_t *pair_status = (at_ble_pair_done_t *)params;
 	if(ble_instance.current_state == BLE_STATE_CONNECTED) {
 		ble_instance.current_state = BLE_STATE_PAIRED;
-		at_ble_pair_done_t *pair_status = (at_ble_pair_done_t *)params;
 		sms_monitor_get_states("[sms_ble_paired_fn]");
 		//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- authorization: 0x%02x\r\n- status: 0x%02x", pair_status->handle, pair_status->auth, pair_status->status);
 		
@@ -122,7 +122,7 @@ at_ble_status_t sms_ble_paired_fn(void *params)
 /* AT_BLE_PAIR_REQUEST (#10) */
 at_ble_status_t sms_ble_pair_request_fn(void *params)
 {
-	at_ble_pair_request_t *request = (at_ble_pair_request_t *)params;
+	//at_ble_pair_request_t *request = (at_ble_pair_request_t *)params;
 	DBG_LOG_DEV("[sms_ble_pair_request_fn]\t\tPairing request...");
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- peer features: 0x%02x", request->handle, request->peer_features);
 	return AT_BLE_SUCCESS;
@@ -134,7 +134,7 @@ at_ble_status_t sms_ble_notification_confirmed_fn(void *params)
 	//DBG_LOG_CONT(" done!");
 	//gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
 	
-	at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
+	//at_ble_cmd_complete_event_t *notification_status = (at_ble_cmd_complete_event_t *)params;
 	ble_instance.sending_queue--;
 	//DBG_LOG("T/O: OFF");
 	ble_instance.timeout = BLE_APP_TIMEOUT_OFF;
@@ -165,7 +165,7 @@ at_ble_status_t sms_ble_indication_confirmed_fn(void *params)
 {
 	//gpio_pin_set_output_level(dbg_pin, DBG_PIN_HIGH);
 	
-	at_ble_indication_confirmed_t *indication_status = (at_ble_indication_confirmed_t *)params;
+	//at_ble_indication_confirmed_t *indication_status = (at_ble_indication_confirmed_t *)params;
 	//button_instance.current_state = sms_button_get_state();
 	//DBG_LOG_DEV("[sms_ble_indication_confirmed]\tIndication confirmed... Bnew %d, BLE 0x%02x, T1 %d, T2 %d", button_instance.current_state, ble_current_state, timer1_current_mode, timer2_current_mode);
 	//DBG_LOG_DEV("- conn handle: 0x%04x\r\n- char handle: 0x%04x\r\n- status: 0x%02x", indication_status->conn_handle, indication_status->char_handle, indication_status->status);
@@ -326,7 +326,6 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 	at_ble_status_t status = AT_BLE_SUCCESS;
 	at_ble_handle_t val_handle = 0;
 	uint8_t length = 0;
-	uint8_t char_size = 0;
 	uint8_t send_val[BLE_CHAR_SIZE_MAX];
 	uint32_t int_val;
 	//ble_current_state = BLE_STATE_INDICATING;
@@ -348,7 +347,7 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		break;
 		
 		case BLE_CHAR_PRESS:
-		send_val[0] = (uint8_t)((pressure_device.output.temperature >>24) & 0xff);
+		send_val[0] = (uint8_t)((pressure_device.output.temperature >> 24) & 0xff);
 		send_val[1] = (uint8_t)((pressure_device.output.temperature >> 16) & 0xff);
 		send_val[2] = (uint8_t)((pressure_device.output.temperature >> 8) & 0xff);
 		send_val[3] = (uint8_t)((pressure_device.output.temperature) & 0xff);
@@ -362,29 +361,29 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		
 		case BLE_CHAR_MPU:
 		int_val = (uint32_t)(imu_device.output.q[0] * 1000000);
-		//DBG_LOG("q1: %ld ", calc_val);
-		send_val[0] = (uint8_t)(int_val & 0xff);
-		send_val[1] = (uint8_t)((int_val >> 8) & 0xff);
-		send_val[2] = (uint8_t)((int_val >> 16) & 0xff);
-		send_val[3] = (uint8_t)((int_val >> 24) & 0xff);
+		DBG_LOG("q1: %ld ", int_val);
+		send_val[0] = (uint8_t)((int_val >> 24) & 0xff);
+		send_val[1] = (uint8_t)((int_val >> 16) & 0xff);
+		send_val[2] = (uint8_t)((int_val >> 8) & 0xff);
+		send_val[3] = (uint8_t)((int_val >> 0) & 0xff);
 		int_val = (uint32_t)(imu_device.output.q[1] * 1000000);
-		//DBG_LOG_CONT("q2: %ld ", calc_val);
-		send_val[4] = (uint8_t)(int_val & 0xff);
-		send_val[5] = (uint8_t)((int_val >> 8) & 0xff);
-		send_val[6] = (uint8_t)((int_val >> 16) & 0xff);
-		send_val[7] = (uint8_t)((int_val >> 24) & 0xff);
+		DBG_LOG_CONT("q2: %ld ", int_val);
+		send_val[4] = (uint8_t)((int_val >> 24) & 0xff);
+		send_val[5] = (uint8_t)((int_val >> 16) & 0xff);
+		send_val[6] = (uint8_t)((int_val >> 8) & 0xff);
+		send_val[7] = (uint8_t)((int_val >> 0) & 0xff);
 		int_val = (uint32_t)(imu_device.output.q[2] * 1000000);
-		//DBG_LOG_CONT("q3: %ld ", calc_val);
-		send_val[8] = (uint8_t)(int_val & 0xff);
-		send_val[9] = (uint8_t)((int_val >> 8) & 0xff);
-		send_val[10] = (uint8_t)((int_val >> 16) & 0xff);
-		send_val[11] = (uint8_t)((int_val >> 24) & 0xff);
+		DBG_LOG_CONT("q3: %ld ", int_val);
+		send_val[8] = (uint8_t)((int_val >> 24) & 0xff);
+		send_val[9] = (uint8_t)((int_val >> 16) & 0xff);
+		send_val[10] = (uint8_t)((int_val >> 8) & 0xff);
+		send_val[11] = (uint8_t)((int_val >> 0) & 0xff);
 		int_val = (uint32_t)(imu_device.output.q[3] * 1000000);
-		//DBG_LOG_CONT("q4: %ld ", calc_val);
-		send_val[12] = (uint8_t)(int_val & 0xff);
-		send_val[13] = (uint8_t)((int_val >> 8) & 0xff);
-		send_val[14] = (uint8_t)((int_val >> 16) & 0xff);
-		send_val[15] = (uint8_t)((int_val >> 24) & 0xff);
+		DBG_LOG_CONT("q4: %ld ", int_val);
+		send_val[12] = (uint8_t)((int_val >> 24) & 0xff);
+		send_val[13] = (uint8_t)((int_val >> 16) & 0xff);
+		send_val[14] = (uint8_t)((int_val >> 8) & 0xff);
+		send_val[15] = (uint8_t)((int_val >> 0) & 0xff);
 		val_handle = imu_device.service_handler.serv_chars.char_val_handle;
 		length = BLE_CHAR_SIZE_MPU;
 		

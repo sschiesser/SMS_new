@@ -13,12 +13,12 @@
  * INCLUDE
  * ------- */
 #include "sms_peripheral1.h"
-
+#include "sms_timer.h"
 /* ------
  * MACROS
  * ------ */
-#define SMS_LED_ACTIVE false
-#define SMS_LED_INACTIVE true
+#define LED_ON false
+#define LED_OFF true
 
 #define SMS_BLINK_STARTUP_MS				(100)
 #define SMS_BLINK_STARTUP_CNT				(10)
@@ -42,7 +42,7 @@ enum sms_leds {
 //sms_led_blink_modes_t led_current_mode;
 
 volatile uint8_t sms_led_blink_cnt;
-
+//enum sms_timer_modes t_mode;
 /* ------------
  * DECLARATIONS
  * ------------ */
@@ -51,7 +51,7 @@ void sms_led_switch_on(enum sms_leds led);
 void sms_led_switch_off(enum sms_leds led);
 void sms_led_toggle(enum sms_leds led);
 bool sms_led_get_state(enum sms_leds led);
-void sms_led_blink_start(enum sms_leds led, enum sms_timer_modes mode);
+void sms_led_blink_start(enum sms_leds led, enum sms_timer_modes t_mode);
 void sms_led_blink_stop(enum sms_leds led);
 void sms_led_blink_fast(enum sms_leds led);
 void sms_led_blink_slow(enum sms_leds led);

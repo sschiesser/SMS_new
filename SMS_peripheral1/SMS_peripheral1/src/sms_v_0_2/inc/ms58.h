@@ -10,15 +10,12 @@
 /* === Includes ============================================================= */
 
 /* === Macros =============================================================== */
-#define MS58_RESET_WAIT_US             (2800)
-#define MS58_CONV_WAIT_US              (8220)
 #define MS58_RESET_WAIT_MS             (10) // actually need 3...
-#define MS58_CONV_WAIT_MS              (9)
 
-#define MS58_INIT_RETRY_MAX            (4)
+//#define MS58_INIT_RETRY_MAX            (4)
 
-#define MS58_ENABLE                    (0)
-#define MS58_DISABLE                   (1)
+//#define MS58_ENABLE                    (0)
+//#define MS58_DISABLE                   (1)
 
 #define MS58_RESET                     (0x1E)
 #define MS58_CONV_D1_256               (0x40)
@@ -41,30 +38,17 @@
 #define	MS58_PROM_READ_6               (0xAC)
 #define	MS58_PROM_READ_7               (0xAE)
 
-#define MS58_COEFF_256					(256)
-#define MS58_COEFF_512					(512)
-#define MS58_COEFF_1024					(1024)
-#define MS58_COEFF_2048					(2048)
-#define MS58_COEFF_4096					(4096)
-
 #define MS58_PROM_VAL_ERR				(65000)
 #define MS58_PROM_VAL_MAX				(8)
 #define MS58_ADC_VAL_MAX				(2)
 #define MS58_BUF_SIZE					(4)
 
 /* === Types ================================================================ */
-typedef enum ms58_datatype_tag {
-    MS58_TYPE_PRESS = 0x00,
-    MS58_TYPE_TEMP = 0x01
-}ms58_datatype_t;
-
-enum ms58_state {
-    MS58_STATE_NONE,
-    MS58_STATE_RESETTING,
-    MS58_STATE_READY,
-    MS58_STATE_CONV_PRESSURE,
-    MS58_STATE_CONV_TEMPERATURE
+enum ms58_datatype_tag {
+	MS58_TYPE_PRESS = 0,
+	MS58_TYPE_TEMP
 };
+
 struct ms58_config_s {
 	bool init_ok; // PROM value have been successfully read
     uint8_t osr;

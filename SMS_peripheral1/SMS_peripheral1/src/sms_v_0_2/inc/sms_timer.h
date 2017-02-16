@@ -53,7 +53,7 @@
  * VARIABLES
  * --------- */
 enum sms_timer_modes {
-    TIMER_MODE_NONE = 0x00,
+    TIMER_MODE_NONE = 0,
 	TIMER_MODE_ADVERTISING,
 	TIMER_MODE_INDICATING,
 	TIMER_MODE_CONN_LOST
