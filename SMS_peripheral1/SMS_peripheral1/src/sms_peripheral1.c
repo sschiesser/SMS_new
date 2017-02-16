@@ -196,23 +196,21 @@ int main(void)
 			}
 			if(imu_device.interrupt.new_gyro) {
 				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				DBG_LOG("MPU int (%lu)... ", mpu_cnt++);
+				//DBG_LOG("MPU int (%lu)... ", mpu_cnt++);
+				gpio_pin_set_output_level(DBG_PIN_1, true);
 				sms_imu_poll_data();
-				//static uint32_t past = 0;
-				//const uint32_t cnt_max = 23 * SMS_TIMER_AON_LOAD_1MS / SMS_TIMER_AON_LOAD_100US;
-				//uint32_t now = aon_sleep_timer_get_current_value()/SMS_TIMER_AON_LOAD_100US;
-				//uint32_t delta = ((now < past) ? (past - now) : (cnt_max - now + past));
-				//DBG_LOG("past: %lu, now: %lu, delta: %lu", past, now, delta);
-				//past = now;
 				imu_device.interrupt.new_gyro = false;
-				//imu_device.interrupt.rts = true;
+				imu_device.interrupt.rts = true;
+				gpio_pin_set_output_level(DBG_PIN_1, false);
 				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_LOW);
 				//DBG_LOG_CONT_DEV("done");
 			}
 			if(pressure_device.interrupt.new_value) {
-				DBG_LOG("Press int (%lu)... ", press_cnt++);
+				//DBG_LOG("Press int (%lu)... ", press_cnt++);
+				gpio_pin_set_output_level(DBG_PIN_1, true);
 				sms_pressure_poll_data();
 				pressure_device.interrupt.new_value = false;
+				gpio_pin_set_output_level(DBG_PIN_1, false);
 			}
 			
 			/* ******************************************
@@ -227,7 +225,7 @@ int main(void)
 				//gpio_pin_set_output_level(DBG_PIN_1, false);
 			//}
 			if(timer2_instance.new_int) {
-				DBG_LOG_DEV("Timer2 int... ");
+				//DBG_LOG_DEV("Timer2 int... ");
 				//sms_dualtimer_stop(DUALTIMER_TIMER2);
 				sms_dualtimer2_fn();
 				timer2_instance.new_int = false;
@@ -240,22 +238,26 @@ int main(void)
 				//DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
 				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
+					gpio_pin_set_output_level(DBG_PIN_2, true);
 					sms_ble_send_characteristic(BLE_CHAR_MPU);
+					gpio_pin_set_output_level(DBG_PIN_2, false);
 				}
 				else {
-					DBG_LOG_CONT("flushing!");
+					//DBG_LOG_CONT("flushing!");
 				}
 				imu_device.interrupt.rts = false;
 				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
 			if(pressure_device.interrupt.rts) {
-				DBG_LOG("Press sending (%d/%d)... ", imu_device.interrupt.new_gyro, ble_instance.sending_queue);
+				//DBG_LOG("Press sending (%d/%d)... ", imu_device.interrupt.new_gyro, ble_instance.sending_queue);
 				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
+					gpio_pin_set_output_level(DBG_PIN_2, true);
 					sms_ble_send_characteristic(BLE_CHAR_PRESS);
+					gpio_pin_set_output_level(DBG_PIN_2, false);
 				}
 				else {
-					DBG_LOG_CONT("flushing!");
+					//DBG_LOG_CONT("flushing!");
 				}
 				pressure_device.interrupt.rts = false;
 				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);

@@ -226,7 +226,7 @@ void mahony_quaternion_update(float ax, float ay, float az, float gx, float gy, 
 	imu_device.output.q[1] = q2 * norm;
 	imu_device.output.q[2] = q3 * norm;
 	imu_device.output.q[3] = q4 * norm;
-	DBG_LOG("Quaternions (x 10000): q1 %ld, q2 %ld, q3 %ld, q4 %ld", (uint32_t)(imu_device.output.q[0]*10000), (uint32_t)(imu_device.output.q[1] * 10000), (uint32_t)(imu_device.output.q[2] * 10000), (uint32_t)(imu_device.output.q[3] * 10000));
+	//DBG_LOG("Quaternions (x 10000): q1 %ld, q2 %ld, q3 %ld, q4 %ld", (uint32_t)(imu_device.output.q[0]*10000), (uint32_t)(imu_device.output.q[1] * 10000), (uint32_t)(imu_device.output.q[2] * 10000), (uint32_t)(imu_device.output.q[3] * 10000));
 }
 
 
