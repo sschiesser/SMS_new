@@ -49,7 +49,7 @@
 #define SMS_BTN_SHTDWN_MS                   (50)
 #define SMS_BTN_SHTDWN_CNT                  (50)
 #define SMS_BTN_STARTUP_MS                  (50)
-#define SMS_BTN_STARTUP_CNT                 (50)
+#define SMS_BTN_STARTUP_CNT                 (2)
 
 
 /* ---------

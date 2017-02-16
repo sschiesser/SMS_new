@@ -426,8 +426,17 @@ void sms_dualtimer2_fn(void)
 }
 
 void delay_ms(uint32_t delay) {
+	uint32_t last = 0xffffffff;
+	volatile uint32_t now;
+	volatile bool quit = false;
+	gpio_pin_set_output_level(DBG_PIN_1, true);
 	sms_dualtimer_start(TIMER_UNIT_MS, delay, timer2_instance.id);
-	while(dualtimer_get_value(timer2_instance.id) != 0) {
+	while(!quit) {
+		now = dualtimer_get_value(timer2_instance.id);
+		DBG_LOG_DEV("now: %lu", now);
+		if((now == 0) || (now > last)) quit = true;
+		else last = now;
 	}
 	sms_dualtimer_stop(timer2_instance.id);
+	gpio_pin_set_output_level(DBG_PIN_1, false);
 }
