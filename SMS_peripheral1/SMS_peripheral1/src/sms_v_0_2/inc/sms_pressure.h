@@ -37,7 +37,9 @@
 enum sms_pressure_state {
     PRESSURE_STATE_OFF,
     PRESSURE_STATE_STDBY,
-    PRESSURE_STATE_ON
+    PRESSURE_STATE_ON,
+	PRESSURE_STATE_CONV_P,
+	PRESSURE_STATE_CONV_T
 };
 struct sms_pressure_struct_s {
     struct ms58_config_s config;

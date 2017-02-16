@@ -166,7 +166,8 @@ int main(void)
 	sms_ble_power_down();
 
 	at_ble_status_t ble_status;
-	static uint32_t cnt = 0;
+	static uint32_t mpu_cnt = 0;
+	static uint32_t press_cnt = 0;
 	while(true)
 	{
 		/* BLE event task --> BLOCKING FUNCTION! */
@@ -195,7 +196,7 @@ int main(void)
 			}
 			if(imu_device.interrupt.new_gyro) {
 				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
-				DBG_LOG("MPU int (%ld)... ", cnt++);
+				DBG_LOG("MPU int (%lu)... ", mpu_cnt++);
 				//sms_imu_poll_data();
 				//static uint32_t past = 0;
 				//const uint32_t cnt_max = 23 * SMS_TIMER_AON_LOAD_1MS / SMS_TIMER_AON_LOAD_100US;
@@ -209,12 +210,10 @@ int main(void)
 				//DBG_LOG_CONT_DEV("done");
 			}
 			if(pressure_device.interrupt.new_value) {
-				DBG_LOG("Press int (%d)... ", ble_instance.sending_queue);
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
-				//sms_pressure_poll_data();
+				DBG_LOG("Press int (%lu)... ", press_cnt++);
+				sms_pressure_poll_data();
 				pressure_device.interrupt.new_value = false;
 				//pressure_device.rts = true;
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 				//DBG_LOG_CONT_DEV("done");
 			}
 			
@@ -241,7 +240,7 @@ int main(void)
 			 * ****************************************** */
 			if(imu_device.interrupt.rts) {
 				//DBG_LOG("MPU sending (%d/%d)... ", pressure_device.new_int, ble_instance.sending_queue);
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
 					sms_ble_send_characteristic(BLE_CHAR_MPU);
 				}
@@ -249,11 +248,11 @@ int main(void)
 					DBG_LOG_CONT("flushing!");
 				}
 				imu_device.interrupt.rts = false;
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
 			if(pressure_device.interrupt.rts) {
 				DBG_LOG("Press sending (%d/%d)... ", imu_device.interrupt.new_gyro, ble_instance.sending_queue);
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
+				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_HIGH);
 				if(ble_instance.sending_queue == 0) {
 					sms_ble_send_characteristic(BLE_CHAR_PRESS);
 				}
@@ -261,7 +260,7 @@ int main(void)
 					DBG_LOG_CONT("flushing!");
 				}
 				pressure_device.interrupt.rts = false;
-				gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
+				//gpio_pin_set_output_level(DBG_PIN_2, DBG_PIN_LOW);
 			}
 			//DBG_LOG("BLE event task end");
 		}

@@ -14,6 +14,11 @@ void sms_pressure_init_variables(void)
 	pressure_device.interrupt.rts = false;
 	pressure_device.interrupt.enabled = false;
 	pressure_device.interrupt.new_value = false;
+	pressure_device.config.init_ok = false;
+	pressure_device.config.osr = 0xff;
+	pressure_device.output.complete = false;
+	pressure_device.output.pressure = 0;
+	pressure_device.output.temperature = 0;
 }
 
 void sms_pressure_configure_gpio(void)
@@ -25,7 +30,7 @@ void sms_pressure_configure_gpio(void)
         DBG_LOG_DEV("[sms_pressure_configure_gpio]\tproblem while setting up Vcc pin");
     }
     /* Disable power supply by default */
-    gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
+    //gpio_pin_set_output_level(SMS_PRESSURE_VCC_PIN, false);
 }
 
 int sms_pressure_startup(void)
@@ -120,65 +125,57 @@ int sms_pressure_ms58_read_prom(void)
 
 void sms_pressure_poll_data(void)
 {
-	if(ble_instance.current_state == BLE_STATE_PAIRED) {
-		//DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
-		if(sms_pressure_ms58_read_data() != STATUS_OK) {
+	//if(ble_instance.current_state == BLE_STATE_PAIRED) {
+		enum status_code status = sms_pressure_ms58_read_data();
+		if(status != STATUS_OK) {
 			DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
 		}
 		else {
 			if(pressure_device.output.complete) {
-				pressure_device.output.complete = false;
 				sms_pressure_ms58_calculate();
-				pressure_device.interrupt.rts = true;
+				//pressure_device.interrupt.rts = true;
 			}
 		}
 		//if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
-	}
+	//}
 }
 
 
 enum status_code sms_pressure_ms58_read_data(void)
 {
-    //switch(pressure_device.hal.current_state) {
-        //case MS58_STATE_CONV_PRESSURE:
-        ////DBG_LOG_DEV("[sms_pressure_ms58_read_data] reading ADC pressure values...");
-        //spi_wdata[0] = MS58_ADC_READ;
-        //spi_wdata[1] = MS58_ADC_READ;
-        //spi_wdata[2] = MS58_ADC_READ;
-        //spi_wdata[3] = MS58_ADC_READ;
-        //sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 4);
-        //pressure_device.output.adc_values[MS58_TYPE_PRESS] = ((spi_rdata[1] << 16) | (spi_rdata[2] << 8) | (spi_rdata[3]));
-        ////DBG_LOG_DEV("[sms_pressure_ms58_read_data] D1 -> %ld", ms58_device.adc_values[MS58_TYPE_PRESS]);
-        //
-        ////DBG_LOG_DEV("[sms_pressure_ms58_read_data] starting D2 conversion");
-        //spi_wdata[0] = MS58_CONV_D2_512;
-        //sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1);
-        //pressure_device.hal.current_state = MS58_STATE_CONV_TEMPERATURE;
-        //break;
-        //
-        //case MS58_STATE_CONV_TEMPERATURE:
-        ////DBG_LOG_DEV("[sms_pressure_ms58_read_data] reading ADC temperature values...");
-        //spi_wdata[0] = MS58_ADC_READ;
-        //spi_wdata[1] = MS58_ADC_READ;
-        //spi_wdata[2] = MS58_ADC_READ;
-        //spi_wdata[3] = MS58_ADC_READ;
-        //sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 4);
-        //pressure_device.output.adc_values[MS58_TYPE_TEMP] = ((spi_rdata[1] << 16) | (spi_rdata[2] << 8) | (spi_rdata[3]));
-        ////DBG_LOG_DEV("[sms_pressure_ms58_read_data] D2 -> %ld", ms58_device.adc_values[MS58_TYPE_TEMP]);
-        //
-        ////DBG_LOG_DEV("[sms_pressure_ms58_read_data] starting D1 conversion");
-        //spi_wdata[0] = MS58_CONV_D1_512;
-        //sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1);
-        //pressure_device.hal.current_state = MS58_STATE_CONV_PRESSURE;
-        //pressure_device.output.complete = true;
-        //break;
-        //
-        //case MS58_STATE_RESETTING:
-        //case MS58_STATE_READY:
-        //case MS58_STATE_NONE:
-        //default:
-        //break;
-    //}
+    if(pressure_device.output.complete) {
+		//gpio_pin_set_output_level(DBG_PIN_1, true);
+        spi_wdata[0] = MS58_ADC_READ;
+        spi_wdata[1] = MS58_ADC_READ;
+        spi_wdata[2] = MS58_ADC_READ;
+        spi_wdata[3] = MS58_ADC_READ;
+        sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 4);
+        pressure_device.output.adc_values[MS58_TYPE_PRESS] = ((spi_rdata[1] << 16) | (spi_rdata[2] << 8) | (spi_rdata[3]));
+        //DBG_LOG_DEV("[sms_pressure_ms58_read_data] D1 -> %ld", ms58_device.adc_values[MS58_TYPE_PRESS]);
+        
+        //DBG_LOG_DEV("[sms_pressure_ms58_read_data] starting D2 conversion");
+        spi_wdata[0] = MS58_CONV_D2_4096;
+        sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1);
+		pressure_device.output.complete = false;
+		//gpio_pin_set_output_level(DBG_PIN_1, false);
+	}
+	else {
+		//gpio_pin_set_output_level(DBG_PIN_2, true);
+        //DBG_LOG_DEV("[sms_pressure_ms58_read_data] reading ADC temperature values...");
+        spi_wdata[0] = MS58_ADC_READ;
+        spi_wdata[1] = MS58_ADC_READ;
+        spi_wdata[2] = MS58_ADC_READ;
+        spi_wdata[3] = MS58_ADC_READ;
+        sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 4);
+        pressure_device.output.adc_values[MS58_TYPE_TEMP] = ((spi_rdata[1] << 16) | (spi_rdata[2] << 8) | (spi_rdata[3]));
+        //DBG_LOG_DEV("[sms_pressure_ms58_read_data] D2 -> %ld", ms58_device.adc_values[MS58_TYPE_TEMP]);
+        
+        //DBG_LOG_DEV("[sms_pressure_ms58_read_data] starting D1 conversion");
+        spi_wdata[0] = MS58_CONV_D1_4096;
+        sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1);
+        pressure_device.output.complete = true;
+		//gpio_pin_set_output_level(DBG_PIN_2, false);
+	}
     return STATUS_OK;
 }
 
@@ -249,7 +246,7 @@ void sms_pressure_ms58_calculate(void)
     /* press: 3277097212 / 2^15 = 100009(.070190) */
     pressure_device.output.pressure = (int32_t)(tv2 >> 15);
 
-    DBG_LOG_DEV("[sms_pressure_ms58_calculate] temperature = %ld  pressure = %ld", pressure_device.output.temperature, pressure_device.output.pressure);
+    DBG_LOG("[sms_pressure_ms58_calculate] temperature = %ld  pressure = %ld", pressure_device.output.temperature, pressure_device.output.pressure);
 }
 
 void sms_pressure_define_services(void)
