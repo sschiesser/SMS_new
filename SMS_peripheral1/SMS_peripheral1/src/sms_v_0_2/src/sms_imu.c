@@ -67,13 +67,15 @@ void sms_imu_interrupt_callback(void)
 int sms_imu_startup(void)
 {
 	/* MPU */
-	if(sms_imu_mpu_check()) return -1;
+	int status = sms_imu_mpu_check();
+	if(status) return -1;
 	sms_imu_mpu_calibrate(imu_device.config.gyro_bias, imu_device.config.accel_bias);
 	//DBG_LOG("MPU calibrated... bias values: %ld %ld %ld / %ld %ld %ld", (uint32_t)(imu_device.config.gyro_bias[0] * 10000), (uint32_t)(imu_device.config.gyro_bias[1] * 10000), (uint32_t)(imu_device.config.gyro_bias[2] * 10000), (uint32_t)(imu_device.config.accel_bias[0] * 10000), (uint32_t)(imu_device.config.accel_bias[1] * 10000), (uint32_t)(imu_device.config.accel_bias[2] * 10000));
 	sms_imu_mpu_initialize();
 	
 	/* Compass */
-	if(sms_imu_comp_check()) return -1;
+	status = sms_imu_comp_check();
+	if(status) return -1;
 	sms_imu_comp_initialize(imu_device.config.mag_calibration);
 	//DBG_LOG("Compass initialized... calibration values: %ld %ld %ld", (uint32_t)(mpu_device.config.mag_calibration[0] * 10000), (uint32_t)(mpu_device.config.mag_calibration[1] * 10000), (uint32_t)(mpu_device.config.mag_calibration[2] * 10000));
 	
@@ -279,7 +281,7 @@ void sms_imu_selftest(float *destination)
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG2, 0x02);	// Set accelerometer rate to 1 kHz and bandwidth to 92 Hz
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, fs<<3);	// Set full scale range for the accelerometer to 2 g
 	
-	for(uint8_t i = 0; i < 200; i++) { // get average current values of gyro and accelerometer
+	for(uint8_t i = 0; i < 150; i++) { // get average current values of gyro and accelerometer
 		readBytes(MPU9250_ADDRESS, ACCEL_XOUT_H, 6, raw_data);
 		a_avg[0] += (int16_t)(((int16_t)raw_data[0] << 8) | raw_data[1]);
 		a_avg[1] += (int16_t)(((int16_t)raw_data[2] << 8) | raw_data[3]);
@@ -298,9 +300,9 @@ void sms_imu_selftest(float *destination)
 	// Configure the accelerometer for self-test
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, 0xE0); // Enable self test on all three axes and set accelerometer range to +/- 2 g
 	writeByte(MPU9250_ADDRESS, ACCEL_CONFIG, 0xE0); // Enable self test on all three axes and set (MPU9250_ADDRESS, GYRO_CONFIG,  0xE0); // Enable self test on all three axes and set gyro range to +/- 250 degrees/s
-	delay_ms(25);  // Delay a while to let the device stabilize
+	delay_ms(50);  // Delay a while to let the device stabilize
 	
-	for(uint8_t i = 0; i < 200; i++) {  // get average self-test values of gyro and accelerometer
+	for(uint8_t i = 0; i < 150; i++) {  // get average self-test values of gyro and accelerometer
 		readBytes(MPU9250_ADDRESS, ACCEL_XOUT_H, 6, raw_data);  // Read the six raw data registers into data array
 		a_stavg[0] += (int16_t)(((int16_t)raw_data[0] << 8) | raw_data[1]) ;  // Turn the MSB and LSB into a signed 16-bit value
 		a_stavg[1] += (int16_t)(((int16_t)raw_data[2] << 8) | raw_data[3]) ;
@@ -368,6 +370,15 @@ void sms_imu_init_variables(void)
 	imu_device.config.g_scale = GFS_250DPS;
 	imu_device.config.ahrs = false;
 	imu_device.config.init_ok = false;
+	
+	for(uint8_t i = 0; i < 3; i++) {
+		imu_device.config.gyro_bias[i] = 0.0;
+		imu_device.config.accel_bias[i] = 0.0;
+		imu_device.config.mag_bias[i] = 0.0;
+		imu_device.config.mag_calibration[i] = 0.0;
+		imu_device.config.self_test[(2*i)] = 0.0;
+		imu_device.config.self_test[(2*i)+1] = 0.0;
+	}
 }
 /* MPU */
 void sms_imu_mpu_initialize(void)

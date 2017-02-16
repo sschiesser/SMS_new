@@ -63,28 +63,10 @@ enum status_code sms_pressure_ms58_reset(void)
     spi_wdata[0] = MS58_RESET;
     if((status = sms_spi_master_transceive(&spi_master_ms58_instance, &spi_slave_ms58_instance, spi_wdata, spi_rdata, 1)) != STATUS_OK) return status;
 	
-	//delay_ms(SMS_PRESSURE_RESET_MS);
-	delay_ms(10);
+	delay_ms(SMS_PRESSURE_RESET_MS);
+	//delay_ms(10);
 	DBG_LOG_CONT_DEV(" done");
 	return STATUS_OK;
-}
-
-void sms_pressure_poll_data(void)
-{
-	if(ble_instance.current_state == BLE_STATE_PAIRED) {
-		//DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
-		if(sms_pressure_ms58_read_data() != STATUS_OK) {
-			DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
-		}
-		else {
-			if(pressure_device.output.complete) {
-				pressure_device.output.complete = false;
-				sms_pressure_ms58_calculate();
-				pressure_device.interrupt.rts = true;
-			}
-		}
-		//if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
-	}
 }
 
 int sms_pressure_ms58_read_prom(void)
@@ -130,11 +112,30 @@ int sms_pressure_ms58_read_prom(void)
     DBG_LOG_CONT_DEV("done! Results:");
     for(uint8_t i = 1; i < MS58_PROM_VAL_MAX; i++) {
         DBG_LOG_DEV("  C%d -> %d", (i+1), pressure_device.output.prom_values[i]);
-		if(pressure_device.output.prom_values[i] > MS58_PROM_VAL_ERR) return -1;
+		if((pressure_device.output.prom_values[i] > MS58_PROM_VAL_ERR) || (pressure_device.output.prom_values[i] == 0)) return -1;
     }
 
     return 0;
 }
+
+void sms_pressure_poll_data(void)
+{
+	if(ble_instance.current_state == BLE_STATE_PAIRED) {
+		//DBG_LOG_DEV("[sms_pressure_poll_data]\tStarting data polling");
+		if(sms_pressure_ms58_read_data() != STATUS_OK) {
+			DBG_LOG_DEV("[sms_pressure_ms58_poll_data] problem reading ms58 data");
+		}
+		else {
+			if(pressure_device.output.complete) {
+				pressure_device.output.complete = false;
+				sms_pressure_ms58_calculate();
+				pressure_device.interrupt.rts = true;
+			}
+		}
+		//if((timer1_current_mode == TIMER1_MODE_NONE) && (timer2_current_mode == TIMER2_MODE_NONE)) release_sleep_lock();
+	}
+}
+
 
 enum status_code sms_pressure_ms58_read_data(void)
 {

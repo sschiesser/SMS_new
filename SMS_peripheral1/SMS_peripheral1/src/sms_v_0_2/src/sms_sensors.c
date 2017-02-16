@@ -37,6 +37,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     /* IMU */
     if(mpu_en) {
 		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching on MPU");
+		gpio_pin_set_output_level(DBG_PIN_1, true);
         if(sms_imu_startup()) {
 	        DBG_LOG("[sms_sensors_switch]\t\tCouldn't start IMU");
 			dualtimer_disable(timer1_instance.id);
@@ -55,6 +56,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 			imu_device.state = IMU_STATE_ON;
 	        imu_device.config.init_ok = true;
         }
+		gpio_pin_set_output_level(DBG_PIN_1, false);
     }
     else {
 		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching off MPU");
@@ -66,7 +68,8 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
     
     /* Pressure */
     if(press_en) {   
-		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching on pressure");             
+		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching on pressure");
+		gpio_pin_set_output_level(DBG_PIN_2, true);          
         if(sms_pressure_startup()) {
 			DBG_LOG("[sms_sensors_switch]\t\t\tCouldn't start pressure sensor");
 			sms_timer_aon_disable();
@@ -78,6 +81,7 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 			pressure_device.state = PRESSURE_STATE_ON;
 			pressure_device.config.init_ok = true;
 		}
+		gpio_pin_set_output_level(DBG_PIN_2, false);
     }
     else {
 		DBG_LOG_DEV("[sms_sensors_switch]\t\tSwitching off pressure");
@@ -105,5 +109,5 @@ void sms_sensors_switch(bool mpu_en, bool press_en)
 		sms_sensors_enable_callback(false, false);
 	}
 	
-	DBG_LOG_DEV("[sms_sensors_switch]\t\tSMS working mode: %d", sms_working_mode);
+	DBG_LOG("[sms_sensors_switch]\t\tSMS working mode: %d", sms_working_mode);
 }
