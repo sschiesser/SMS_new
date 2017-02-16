@@ -197,7 +197,7 @@ int main(void)
 			if(imu_device.interrupt.new_gyro) {
 				//gpio_pin_set_output_level(DBG_PIN_1, DBG_PIN_HIGH);
 				DBG_LOG("MPU int (%lu)... ", mpu_cnt++);
-				//sms_imu_poll_data();
+				sms_imu_poll_data();
 				//static uint32_t past = 0;
 				//const uint32_t cnt_max = 23 * SMS_TIMER_AON_LOAD_1MS / SMS_TIMER_AON_LOAD_100US;
 				//uint32_t now = aon_sleep_timer_get_current_value()/SMS_TIMER_AON_LOAD_100US;

@@ -503,8 +503,8 @@ int sms_imu_poll_data(void)
 	uint32_t deltati = ((now < last_time) ? (last_time - now) : (cnt_max - now + last_time));
 	last_time = now;
 	float deltatf = (float)deltati / 1000000.0;
-	//mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz, deltat);
-	madgwick_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz, deltatf);
+	mahony_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz, deltatf);
+	//madgwick_quaternion_update(ax, ay, az, gx*PI/180.0, gy*PI/180.0, gz*PI/180.0, my, mx, mz, deltatf);
 	
 	if(imu_device.config.ahrs) {
 		ahrs_calculation(imu_device.output.q);

@@ -104,8 +104,8 @@ float get_Mres(uint8_t m_scale);
 float get_Gres(uint8_t g_scale);
 float get_Ares(uint8_t a_scale);
 
-void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltat);
-void mahony_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltat);
+void madgwick_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltatf);
+void mahony_quaternion_update(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz, float deltatf);
 void ahrs_calculation(float *q);
 //void sms_imu_interrupt_callback(void);
 //void sms_imu_startup(void);
