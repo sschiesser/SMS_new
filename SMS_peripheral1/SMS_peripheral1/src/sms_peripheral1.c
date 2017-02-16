@@ -213,8 +213,6 @@ int main(void)
 				DBG_LOG("Press int (%lu)... ", press_cnt++);
 				sms_pressure_poll_data();
 				pressure_device.interrupt.new_value = false;
-				//pressure_device.rts = true;
-				//DBG_LOG_CONT_DEV("done");
 			}
 			
 			/* ******************************************
