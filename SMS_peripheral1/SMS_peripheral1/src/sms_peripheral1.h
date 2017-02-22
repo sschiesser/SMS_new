@@ -121,8 +121,7 @@ volatile bool ulp_ready;
 volatile bool ulp_active;
 volatile bool sensors_active;
 
-volatile uint32_t psp;
-volatile uint32_t msp;
+volatile uint32_t mypsp, mymsp, myctrl;
 
 /* ------------------------------------------------
  * DECLARATIONS

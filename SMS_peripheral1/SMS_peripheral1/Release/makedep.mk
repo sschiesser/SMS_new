@@ -26,7 +26,7 @@ src\sms_v_0_2\src\sms_common.c
 
 src\sms_v_0_2\src\sms_i2c.c
 
-src\sms_v_0_2\src\sms_mpu.c
+src\sms_v_0_2\src\sms_imu.c
 
 src\sms_v_0_2\src\sms_led.c
 

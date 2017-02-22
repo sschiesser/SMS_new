@@ -92,42 +92,54 @@ int main(void)
 	gpio_init(); // GPIO
 	serial_console_init(); // serial console for debugging
 	
+	mypsp = __get_PSP();
+	mymsp = __get_MSP();
+	myctrl = __get_CONTROL();
+	DBG_LOG("PSP: 0x%lx, MSP: 0x%lx, CONTROL: 0x%lx", mypsp, mymsp, myctrl);
+
 	/* Disable ULP
 	* ----------- */
 	acquire_sleep_lock();
-	
 
 	/* Initialize SMS flags
 	* -------------------- */
 	sms_init_variables();
-	
+
 	
 	/* Initialize hardware components
 	* ------------------------------ */
 	// Dualtimer
 	sms_dualtimer_init();
+
 	
 	// Buttons
 	sms_button_gpio_init();
+
 	
 	// LED
 	sms_led_gpio_init();
+
 	
 	// I2C
 	sms_i2c_master_configure();
+
 	
 	// SPI
 	sms_spi_master_configure();
+
 	
 	// MPU
 	sms_imu_configure_gpio();
+
 	
 	// monitoring...
 	sms_monitor_configure_gpio();
+
 	
 	/* Initialize the BLE module
 	* ------------------------- */
 	ble_device_init(NULL); // initialize the BLE chip and set the device address
+
 	
 	
 	/* Define BLE services
@@ -135,12 +147,14 @@ int main(void)
 	sms_button_define_services();
 	sms_pressure_define_services();
 	sms_imu_define_services();
-	
+
+
 	
 	/* Register callbacks
 	* ------------------ */
 	// Recovering from ULP
 	register_resume_callback(resume_cb); // register resume callback
+
 
 	// Dualtimer (AON timer enables on registration... so do it later)
 	//sms_dualtimer_register_callback(DUALTIMER_TIMER1, sms_dualtimer1_cb); // button pressing timer
@@ -148,18 +162,22 @@ int main(void)
 
 	// Buttons
 	sms_button_register_callbacks();
+
 	
 	// MPU
 	sms_imu_register_callbacks();
+
 
 	// BLE
 	ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GAP_EVENT_TYPE, sms_ble_gap_cb);
 	ble_mgr_events_callback_handler(REGISTER_CALL_BACK, BLE_GATT_SERVER_EVENT_TYPE, sms_ble_gatt_server_cb);
 
 
+
 	/* Enable buttons interrupts
 	* ------------------------- */
 	sms_button_toggle_callback(SMS_BTN_INT_ENABLE, SMS_BTN_INT_ENABLE);
+
 	
 	/* Goto sleep
 	* ---------- */

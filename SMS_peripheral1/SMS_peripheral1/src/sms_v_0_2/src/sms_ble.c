@@ -361,25 +361,25 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		
 		case BLE_CHAR_MPU:
 		int_val = (uint32_t)(imu_device.output.q[0] * 1000000);
-		DBG_LOG("q1: %ld ", int_val);
+		//DBG_LOG("q1: %ld ", int_val);
 		send_val[0] = (uint8_t)((int_val >> 24) & 0xff);
 		send_val[1] = (uint8_t)((int_val >> 16) & 0xff);
 		send_val[2] = (uint8_t)((int_val >> 8) & 0xff);
 		send_val[3] = (uint8_t)((int_val >> 0) & 0xff);
 		int_val = (uint32_t)(imu_device.output.q[1] * 1000000);
-		DBG_LOG_CONT("q2: %ld ", int_val);
+		//DBG_LOG_CONT("q2: %ld ", int_val);
 		send_val[4] = (uint8_t)((int_val >> 24) & 0xff);
 		send_val[5] = (uint8_t)((int_val >> 16) & 0xff);
 		send_val[6] = (uint8_t)((int_val >> 8) & 0xff);
 		send_val[7] = (uint8_t)((int_val >> 0) & 0xff);
 		int_val = (uint32_t)(imu_device.output.q[2] * 1000000);
-		DBG_LOG_CONT("q3: %ld ", int_val);
+		//DBG_LOG_CONT("q3: %ld ", int_val);
 		send_val[8] = (uint8_t)((int_val >> 24) & 0xff);
 		send_val[9] = (uint8_t)((int_val >> 16) & 0xff);
 		send_val[10] = (uint8_t)((int_val >> 8) & 0xff);
 		send_val[11] = (uint8_t)((int_val >> 0) & 0xff);
 		int_val = (uint32_t)(imu_device.output.q[3] * 1000000);
-		DBG_LOG_CONT("q4: %ld ", int_val);
+		//DBG_LOG_CONT("q4: %ld ", int_val);
 		send_val[12] = (uint8_t)((int_val >> 24) & 0xff);
 		send_val[13] = (uint8_t)((int_val >> 16) & 0xff);
 		send_val[14] = (uint8_t)((int_val >> 8) & 0xff);
@@ -401,6 +401,9 @@ at_ble_status_t sms_ble_send_characteristic(enum sms_ble_char_type ch)
 		//sms_ble_ind_retry = 0;
 		//status = at_ble_indication_send(sms_connection_handle, val_handle);
 		//#   else
+		mypsp = __get_PSP();
+		mymsp = __get_MSP();
+		DBG_LOG("PSP: 0x%lx, MSP: 0x%lx", mypsp, mymsp);
 		status = at_ble_notification_send(ble_instance.conn_handle, val_handle);
 		if(status == AT_BLE_SUCCESS) {
 			ble_instance.sending_queue++;
