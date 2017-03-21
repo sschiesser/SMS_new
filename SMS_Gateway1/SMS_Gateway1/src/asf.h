@@ -56,6 +56,9 @@
 #include <compiler.h>
 #include <status_codes.h>
 
+// From module: Delay routines
+#include <delay.h>
+
 // From module: Ethernet Physical Transceiver (ksz8051mnl)
 #include <ethernet_phy.h>
 

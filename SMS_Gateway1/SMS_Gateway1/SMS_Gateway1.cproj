@@ -34,8 +34,9 @@
           <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.components.ethernet_phy.ksz8051mnl" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="sam.drivers.uart" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.spi" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam.drivers.uart" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.services.delay" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.utils.cmsis.sam4e.source.template" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.lwip.raw_basic_http_example" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.lwip.version" value="Add" config="1.4.1" content-id="Atmel.ASF" />
@@ -326,6 +327,9 @@
           <file path="src/config/lwipopts.h" framework="" version="" source="thirdparty/lwip/raw_http_basic_example/sam4e16e_sam4e_ek/lwipopts.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/drivers/spi/spi.c" framework="" version="3.33.0" source="sam\drivers\spi\spi.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/drivers/spi/spi.h" framework="" version="3.33.0" source="sam\drivers\spi\spi.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/delay/sam/cycle_counter.c" framework="" version="3.33.0" source="common\services\delay\sam\cycle_counter.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/delay/sam/cycle_counter.h" framework="" version="3.33.0" source="common\services\delay\sam\cycle_counter.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/delay/delay.h" framework="" version="3.33.0" source="common\services\delay\delay.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.33.0/thirdparty.lwip.raw_basic_http_example.sam4e_ek/html/index.html" />
         <offline-documentation help="" />
@@ -409,6 +413,7 @@
       <Value>../src/ASF/thirdparty/lwip/lwip-1.4.1/src/include/ipv4/lwip</Value>
       <Value>../src/ASF/thirdparty/OSC/inc/OSC</Value>
       <Value>../src/ASF/sam/drivers/spi</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -465,6 +470,7 @@
       <Value>../src/ASF/common/boards</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/sam/drivers/spi</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM4=true -DBOARD=SAM4E_EK -D__SAM4E16E__ -Dprintf=iprintf -Dscanf=iscanf</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -503,6 +509,7 @@
       <Value>../src/ASF/common/boards</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/sam/drivers/spi</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -565,6 +572,7 @@
       <Value>../src/ASF/thirdparty/OSC/inc/OSC</Value>
       <Value>../src/ASF/sam/boards/sam4e_xplained_pro</Value>
       <Value>../src/ASF/sam/drivers/spi</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -622,6 +630,7 @@
       <Value>../src/ASF/common/boards</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/sam/drivers/spi</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -661,6 +670,7 @@
       <Value>../src/ASF/common/boards</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/sam/drivers/spi</Value>
+      <Value>../src/ASF/common/services/delay</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -675,6 +685,8 @@
     <Folder Include="src\ASF\common\services\" />
     <Folder Include="src\ASF\common\services\clock\" />
     <Folder Include="src\ASF\common\services\clock\sam4e\" />
+    <Folder Include="src\ASF\common\services\delay\" />
+    <Folder Include="src\ASF\common\services\delay\sam\" />
     <Folder Include="src\ASF\common\services\ioport\" />
     <Folder Include="src\ASF\common\services\ioport\sam\" />
     <Folder Include="src\ASF\common\services\serial\" />
@@ -755,6 +767,15 @@
     <Folder Include="src\network\httpserver\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\ASF\common\services\delay\delay.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\delay\sam\cycle_counter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\delay\sam\cycle_counter.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\sam\boards\sam4e_xplained_pro\init.c">
       <SubType>compile</SubType>
     </Compile>

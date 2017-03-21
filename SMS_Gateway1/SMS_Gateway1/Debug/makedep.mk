@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ASF\common\services\delay\sam\cycle_counter.c
+
 src\ASF\sam\boards\sam4e_xplained_pro\init.c
 
 src\ASF\common\services\clock\sam4e\sysclk.c

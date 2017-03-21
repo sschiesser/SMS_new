@@ -108,6 +108,7 @@
 #include "conf_clock.h"
 #include "conf_board.h"
 #include "conf_spi_example.h"
+#include "delay.h"
 
 #define OSC_HEADER      ("/sabre/pressure\00,ii")
 #define OSC_HEADER_LEN  sizeof(OSC_HEADER)
@@ -195,6 +196,27 @@ bool instance_delete = false;
 //static uint8_t my_spi_buffer[COMM_BUFFER_SIZE];
 
 extern struct netif gs_net_if;
+
+/* READY-TO-GO DUMMY DATA */
+char dummy_data[12][12] = {"button",\
+							"pressure",\
+							"temperature",\
+							"accel"
+							"joystick",\
+							"quaternion",\
+							"ahrs",\
+							"timestamp",\
+							"delta",\
+							"wordclock",\
+							"link",\
+							"battery"};
+
+bool bval1, bval2;
+float flval1, flval2, flval3;
+float flval1_old, flval2_old, flval3_old;
+uint32_t u32val1, u32val2, u32val3, u32val4;
+uint32_t u32val1_old, u32val2_old, u32val3_old, u32val4_old;
+
 
 void osc_write(uint8_t *buf, uint32_t size) {
 	err_t err;
@@ -448,6 +470,8 @@ int main(void)
 	sysclk_init();
 	board_init();
 
+	delay_init();
+	
 	/* Configure debug UART */
 	configure_console();
 
@@ -475,42 +499,67 @@ int main(void)
 	NVIC_SetPriority(SPI_IRQn, 0);
 	NVIC_EnableIRQ(SPI_IRQn);
 
-	spi_slave_initialize();
+	//spi_slave_initialize();
 	
 	/* Program main loop. */
 	while (1) {
 		/* Check for input packet and process it. */
 		ethernet_task();
 		
-		if(data_ready) {
-			if(gs_uc_spi_buffer[0] > 3) {
-				printf("Adding new peripheral! #%d\n\r", gs_uc_spi_buffer[0]);
-				printf("Adding new service! #%d\n\r", gs_uc_spi_buffer[1]);
-				instance_create = true;
-			}
-			else {
-				udp_forward = true;
-			}
-			data_ready = false;
-		}
+		//if(data_ready) {
+			//if(gs_uc_spi_buffer[0] > 3) {
+				//printf("Adding new peripheral! #%d\n\r", gs_uc_spi_buffer[0]);
+				//printf("Adding new service! #%d\n\r", gs_uc_spi_buffer[1]);
+				//instance_create = true;
+			//}
+			//else {
+				//udp_forward = true;
+			//}
+			//data_ready = false;
+		//}
+		//
+		//if(instance_create) {
+			//OSCMessage *osc_msg = OSCMessage_new();
+			//OSCMessage_setAddress(osc_msg, "sabre/create");
+			//OSCMessage_addArgument_int32(osc_msg, gs_uc_spi_buffer[0]);
+			//OSCMessage_sendMessage(osc_msg, &osc_stream);
+			//OSCMessage_delete(osc_msg);
+			//instance_create = false;
+		//}
 		
-		if(instance_create) {
-			OSCMessage *osc_msg = OSCMessage_new();
-			OSCMessage_setAddress(osc_msg, "sabre/create");
-			OSCMessage_addArgument_int32(osc_msg, gs_uc_spi_buffer[0]);
-			OSCMessage_sendMessage(osc_msg, &osc_stream);
-			OSCMessage_delete(osc_msg);
-			instance_create = false;
-		}
+		//if(instance_delete) {
+			//OSCMessage *osc_msg = OSCMessage_new();
+			//OSCMessage_setAddress(osc_msg, "sabre/delete");
+			//OSCMessage_addArgument_int32(osc_msg, gs_uc_spi_buffer[0]);
+			//OSCMessage_sendMessage(osc_msg, &osc_stream);
+			//OSCMessage_delete(osc_msg);
+			//instance_delete = false;
+		//}
 		
-		if(instance_delete) {
-			OSCMessage *osc_msg = OSCMessage_new();
-			OSCMessage_setAddress(osc_msg, "sabre/delete");
-			OSCMessage_addArgument_int32(osc_msg, gs_uc_spi_buffer[0]);
-			OSCMessage_sendMessage(osc_msg, &osc_stream);
-			OSCMessage_delete(osc_msg);
-			instance_delete = false;
+		// Fill-up buffer with dummy data
+		for(uint8_t i = 0; i < 12; i++) {
+			flval1 = ((float)rand() / (float)RAND_MAX) - 0.5;
+			flval1_old = flval1;
+			flval2 = ((float)rand() / (float)RAND_MAX) - 0.5;
+			flval2_old = flval2;
+			flval3 = ((float)rand() / (float)RAND_MAX) - 0.5;
+			flval3_old = flval3;
+			u32val1 = rand();
+			u32val1_old = u32val1;
+			u32val2 = rand();
+			u32val2_old = u32val2;
+			u32val3 = rand();
+			u32val3_old = u32val3;
+			u32val4 = rand();
+			u32val4_old = u32val4;
+			bval1 = (u32val1 % 2 == 0) ? true : false;
+			bval2 = (u32val2 % 2 == 0) ? true : false;
+			if(i == 0)
+			//printf("Values: %ld %ld %ld, %ld %ld %ld %ld\n\r", (int32_t)(flval1*1000000), (int32_t)(flval2*1000000), (int32_t)(flval3*1000000), u32val1, u32val2, u32val3, u32val4);
 		}
+		printf("\n\r");
+		
+		delay_ms(500);
 		
 		if(udp_forward) {
 			OSCMessage *osc_msg = OSCMessage_new();
